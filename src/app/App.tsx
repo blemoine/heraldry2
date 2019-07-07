@@ -6,7 +6,9 @@ export const App = () => {
   return (
     <>
       <Header />
-      <FromBlason />
+      <div className="mt-3">
+        <FromBlason />
+      </div>
     </>
   );
 };

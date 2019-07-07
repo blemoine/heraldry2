@@ -4,6 +4,7 @@
   "description": "Heraldry creator and parser",
   "main": "",
   "scripts": {
+    "clean": "rm -rf dist .cache node_modules",
     "start": "parcel src/index.html",
     "test": "jest"
   },
@@ -16,6 +17,7 @@
     "typescript": "^3.5.2"
   },
   "dependencies": {
+    "bootstrap": "^4.3.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   }
