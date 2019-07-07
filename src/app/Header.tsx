@@ -1,7 +1,9 @@
 import * as React from 'react';
 
 export const Header = () => {
-  return <header>
-
-  </header>
-}
+  return (
+    <header>
+      <h1>Heraldry</h1>
+    </header>
+  );
+};
