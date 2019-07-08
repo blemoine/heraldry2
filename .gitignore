@@ -3,3 +3,5 @@ dist
 .idea
 .cache
 *.iml
+.DS_Store
+src/assets
