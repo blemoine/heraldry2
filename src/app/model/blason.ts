@@ -47,7 +47,7 @@ export const tinctures: Array<Tincture> = [
   vert,
   purpure,
   murrey,
-  sable,
+  sanguine,
   tenne,
   ermine,
   vair,
