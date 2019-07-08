@@ -6,7 +6,7 @@ export const App = () => {
   return (
     <>
       <Header />
-      <div className="mt-3">
+      <div className="mt-3 ml-2">
         <FromBlason />
       </div>
     </>

@@ -3,7 +3,34 @@ import { useState } from 'react';
 import { uuid } from '../../utils/uuid';
 import { BlasonDisplay } from './BlasonDisplay';
 import { azure, Blason, Tincture, tinctures } from '../model/blason';
-import Select from 'react-select';
+import Select, { components } from 'react-select';
+import { OptionProps } from 'react-select/src/components/Option';
+
+const Option = (props: OptionProps<Tincture>) => {
+  console.log(props);
+  return (
+    <components.Option {...props}>
+      <span
+        style={{
+          verticalAlign: 'middle',
+        }}
+      >
+        {props.label}
+      </span>
+      <span
+        style={{
+          marginLeft: '5px',
+          verticalAlign: 'middle',
+          display: 'inline-block',
+          border: '1px solid #333',
+          backgroundColor: props.data.color,
+          width: '15px',
+          height: '15px',
+        }}
+      ></span>
+    </components.Option>
+  );
+};
 
 export const FromBlason = () => {
   const id = uuid();
@@ -16,7 +43,7 @@ export const FromBlason = () => {
     if (field) {
       setBlason({ ...blason, field });
     } else {
-      console.warn('A field is mandatory')
+      console.warn('A field is mandatory');
     }
   }
 
@@ -27,6 +54,7 @@ export const FromBlason = () => {
           <label htmlFor={id}>Select your field</label>
           <Select
             options={tinctures}
+            components={{ Option }}
             getOptionLabel={(t) => t.name}
             getOptionValue={(t) => t.name}
             value={blason.field}
