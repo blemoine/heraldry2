@@ -36,7 +36,11 @@ export const OrdinaryDisplay = ({ ordinary, fill, width, height }: Props) => {
       </g>
     );
   } else if (ordinary === 'cross') {
-    return <></>;
+    return <g>
+      <rect x={2 * width / 5} y={0} width={width / 5} height={height} fill={fill} />
+      <rect x={0} y={2 * height / 5} width={width} height={height / 5} fill={fill} />
+      <path d={`M${width / 3} 0 L${2 * width / 3} 0`} stroke="#333" fill="transparent" />
+    </g>;
   } else if (ordinary === 'chevron') {
     return <></>;
   } else if (ordinary === 'saltire') {
