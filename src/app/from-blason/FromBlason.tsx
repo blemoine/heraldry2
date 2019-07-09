@@ -9,7 +9,7 @@ export const FromBlason = () => {
   const [blason, setBlason] = useState<Blason>({
     field: gules,
     ordinary: {
-      name: 'bend',
+      name: 'chevron',
       tincture: ermine,
     },
   });
