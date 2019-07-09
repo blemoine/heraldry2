@@ -67,13 +67,14 @@ export const CoatsOfArmsDisplay = (props: Props) => {
         <Plain fill={fillFromTincture(props.blason.field)} />
 
         {props.blason.ordinary && (
-          <OrdinaryDisplay
-            clipPath="url(#plain-field-clip-path)"
-            height={height}
-            width={width}
-            ordinary={props.blason.ordinary.name}
-            fill={fillFromTincture(props.blason.ordinary.tincture)}
-          />
+          <g clipPath="url(#plain-field-clip-path)">
+            <OrdinaryDisplay
+              height={height}
+              width={width}
+              ordinary={props.blason.ordinary.name}
+              fill={fillFromTincture(props.blason.ordinary.tincture)}
+            />
+          </g>
         )}
       </svg>
 

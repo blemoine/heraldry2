@@ -2,9 +2,9 @@ import * as React from 'react';
 import { Ordinary } from '../../../model/blason';
 import { cannotHappen } from '../../../../utils/cannot-happen';
 
-type Props = { ordinary: Ordinary['name']; fill: string; width: number; height: number; clipPath: string };
+type Props = { ordinary: Ordinary['name']; fill: string; width: number; height: number };
 
-export const OrdinaryDisplay = ({ ordinary, fill, width, height, clipPath }: Props) => {
+export const OrdinaryDisplay = ({ ordinary, fill, width, height }: Props) => {
   if (ordinary === 'chief') {
     const chiefHeight = height / 5;
     return (
@@ -14,15 +14,27 @@ export const OrdinaryDisplay = ({ ordinary, fill, width, height, clipPath }: Pro
       </g>
     );
   } else if (ordinary === 'fess') {
+    return <rect x={0} y={height / 3} width={width} height={height / 3} fill={fill} />;
+  } else if (ordinary === 'bend') {
+    const basePoint = height / (8 * Math.sqrt(2));
+    const length = Math.sqrt(width ** 2 + height ** 2);
     return (
       <g>
-        <rect x={0} y={height / 3} width={width} height={height / 3} fill={fill} clipPath={clipPath} />
+        <path
+          d={`M${basePoint} ${-basePoint} L${-basePoint} ${basePoint} L${length - basePoint} ${length +
+            basePoint} L${length + basePoint} ${length - basePoint} Z`}
+          fill={fill}
+        />
+        <path d={`M0 ${basePoint * 2} L0 0 L${basePoint * 2} 0`} stroke="#333" fill="transparent" />
       </g>
     );
-  } else if (ordinary === 'bend') {
-    return <></>;
   } else if (ordinary === 'pale') {
-    return <></>;
+    return (
+      <g>
+        <rect x={width / 3} y={0} width={width / 3} height={height} fill={fill} />
+        <path d={`M${width / 3} 0 L${2 * width / 3} 0`} stroke="#333" fill="transparent" />
+      </g>
+    );
   } else if (ordinary === 'cross') {
     return <></>;
   } else if (ordinary === 'chevron') {
