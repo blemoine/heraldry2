@@ -1,7 +1,6 @@
 import * as React from 'react';
 
-type Props = {};
-export const Ermine = (_props: Props) => {
+export const Ermine = () => {
   // thanks to wikipedia https://upload.wikimedia.org/wikipedia/commons/2/21/Fourrure_h%C3%A9raldique_Hermine.svg
   return (
     <symbol viewBox="0 0 200 240" id="ermine" >
