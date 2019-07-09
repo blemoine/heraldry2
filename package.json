@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rm -rf dist .cache node_modules",
     "start": "parcel src/index.html",
-    "test": "jest",
+    "test": "npm run typecheck && jest",
     "typecheck": "tsc --noEmit"
   },
   "author": "",

@@ -63,6 +63,8 @@ export type Saltire = { name: 'saltire'; tincture: Tincture };
 
 export type Ordinary = Chief | Bend | Pale | Fess | Chevron | Cross | Saltire;
 
+export const ordinaries: Array<Ordinary['name']> = ['chief', 'bend', 'pale', 'fess', 'chevron', 'cross', 'saltire'];
+
 export type Blason = {
   field: Tincture;
   ordinary?: Ordinary;
