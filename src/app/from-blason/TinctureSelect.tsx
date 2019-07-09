@@ -25,7 +25,7 @@ const Option = (props: OptionProps<Tincture>) => {
           width: '15px',
           height: '15px',
         }}
-      ></span>
+      />
     </components.Option>
   );
 };

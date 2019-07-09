@@ -2,14 +2,14 @@ import * as React from 'react';
 import { useState } from 'react';
 import { uuid } from '../../utils/uuid';
 import { BlasonDisplay } from './BlasonDisplay';
-import { azure, Blason, Tincture } from '../model/blason';
+import { Blason, ermine, Tincture } from '../model/blason';
 import { TinctureSelect } from './TinctureSelect';
 
 export const FromBlason = () => {
   const id = uuid();
 
   const [blason, setBlason] = useState<Blason>({
-    field: azure,
+    field: ermine,
   });
 
   function fieldChange(field: Tincture) {

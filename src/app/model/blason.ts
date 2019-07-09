@@ -25,9 +25,9 @@ export type Metals = Argent | Or;
 export type Colours = Gules | Sable | Azure | Vert | Purpure;
 export type Stains = Murrey | Sanguine | Tenne;
 
-export const ermine = { kind: 'ermine', name: 'ermine' } as const;
+export const ermine = {  name: 'ermine' } as const;
 export type Ermine = typeof ermine;
-export const vair = { kind: 'vair', name: 'vair' } as const;
+export const vair = { name: 'vair' } as const;
 export type Vair = typeof vair;
 
 export type Furs = Ermine | Vair;
@@ -35,7 +35,7 @@ export type Furs = Ermine | Vair;
 export type Tincture = Metals | Colours | Stains | Furs;
 
 export function isFur(tincture: Tincture): tincture is Furs {
-  return 'kind' in tincture && (tincture.kind === 'ermine' ||tincture.kind === 'vair' )
+  return (tincture.name === 'ermine' ||tincture.name === 'vair' )
 }
 
 export const tinctures: Array<Tincture> = [
