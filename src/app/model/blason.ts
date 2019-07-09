@@ -25,7 +25,7 @@ export type Metals = Argent | Or;
 export type Colours = Gules | Sable | Azure | Vert | Purpure;
 export type Stains = Murrey | Sanguine | Tenne;
 
-export const ermine = {  name: 'ermine' } as const;
+export const ermine = { name: 'ermine' } as const;
 export type Ermine = typeof ermine;
 export const vair = { name: 'vair' } as const;
 export type Vair = typeof vair;
@@ -35,7 +35,7 @@ export type Furs = Ermine | Vair;
 export type Tincture = Metals | Colours | Stains | Furs;
 
 export function isFur(tincture: Tincture): tincture is Furs {
-  return (tincture.name === 'ermine' ||tincture.name === 'vair' )
+  return tincture.name === 'ermine' || tincture.name === 'vair';
 }
 
 export const tinctures: Array<Tincture> = [
@@ -53,6 +53,17 @@ export const tinctures: Array<Tincture> = [
   vair,
 ];
 
+export type Chief = { name: 'chief'; tincture: Tincture };
+export type Bend = { name: 'bend'; tincture: Tincture };
+export type Pale = { name: 'pale'; tincture: Tincture };
+export type Fess = { name: 'fess'; tincture: Tincture };
+export type Chevron = { name: 'chevron'; tincture: Tincture };
+export type Cross = { name: 'cross'; tincture: Tincture };
+export type Saltire = { name: 'saltire'; tincture: Tincture };
+
+export type Ordinary = Chief | Bend | Pale | Fess | Chevron | Cross | Saltire;
+
 export type Blason = {
   field: Tincture;
+  ordinary?: Ordinary;
 };

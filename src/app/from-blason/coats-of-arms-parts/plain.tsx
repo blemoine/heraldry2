@@ -5,7 +5,7 @@ import { Ermine } from './ermine';
 import { Vair } from './vair';
 
 type Props = { width: number; tincture: Tincture };
-export const Plain = (props: Props) => {
+export const Plain: React.FunctionComponent<Props> = (props) => {
   const height = (props.width * 6) / 5;
 
   const tincture = props.tincture;
@@ -38,6 +38,8 @@ export const Plain = (props: Props) => {
         fill={isFur(tincture) ? 'url(#' + patternId + ')' : tincture.color}
         stroke="#333"
       />
+
+      {props.children}
     </svg>
   );
 };
