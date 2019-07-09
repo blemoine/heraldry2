@@ -44,7 +44,23 @@ export const OrdinaryDisplay = ({ ordinary, fill, width, height }: Props) => {
   } else if (ordinary === 'chevron') {
     return <></>;
   } else if (ordinary === 'saltire') {
-    return <></>;
+    const basePoint = height / (10 * Math.sqrt(2));
+    const length = Math.sqrt(width ** 2 + height ** 2);
+    return (
+      <g>
+        <path
+          d={`M${basePoint} ${-basePoint} L${-basePoint} ${basePoint} L${length - basePoint} ${length +
+          basePoint} L${length + basePoint} ${length - basePoint} Z`}
+          fill={fill}
+        />
+        <path
+          d={`M${width - basePoint} ${-basePoint} L${width + basePoint} ${basePoint} L${width - length + basePoint} ${length +
+          basePoint} L${width - length - basePoint} ${length - basePoint} Z`}
+          fill={fill}
+        />
+        <path d={`M0 ${basePoint * 2} L0 0 L${width} 0 L${width} ${basePoint * 2}`} stroke="#333" fill="transparent" />
+      </g>
+    );
   } else {
     return cannotHappen(ordinary);
   }
