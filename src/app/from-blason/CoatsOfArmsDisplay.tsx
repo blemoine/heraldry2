@@ -30,7 +30,7 @@ export const CoatsOfArmsDisplay = (props: Props) => {
           {isThereFur(props.blason, 'ermine') && (
             <>
               <symbol viewBox="0 0 200 240" id="ermine">
-                <Ermine width={200} height={240}/>
+                <Ermine width={200} height={240} />
               </symbol>
 
               <pattern
@@ -61,11 +61,11 @@ export const CoatsOfArmsDisplay = (props: Props) => {
           )}
 
           <clipPath id="plain-field-clip-path">
-            <Plain fill={fillFromTincture(props.blason.field)} />
+            <Plain fill={fillFromTincture(props.blason.field)} height={height} width={width} />
           </clipPath>
         </defs>
 
-        <Plain fill={fillFromTincture(props.blason.field)} />
+        <Plain fill={fillFromTincture(props.blason.field)} height={height} width={width} />
 
         {props.blason.ordinary && (
           <g clipPath="url(#plain-field-clip-path)">
