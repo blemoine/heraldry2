@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { CoatsOfArmsDisplay } from './CoatsOfArmsDisplay';
-import { TinctureSelect } from './TinctureSelect';
 import { OrdinaryForm } from './OrdinaryForm';
-import { ermine, gules, Tincture } from '../model/tincture';
-import { Blason } from '../model/blason';
+import { ermine, gules } from '../model/tincture';
+import { Blason, Field } from '../model/blason';
 import { Ordinary } from '../model/ordinary';
+import { FieldForm } from './FieldForm';
 
 const baseDefaultBlason: Blason = {
   field: { kind: 'plain', tincture: gules },
@@ -25,8 +25,8 @@ export const FromBlason = () => {
     localStorage.setItem(localStorageKey, JSON.stringify(blason));
   }, [blason]);
 
-  function fieldChange(tincture: Tincture) {
-    setBlason({ ...blason, field: { kind: 'plain', tincture } });
+  function fieldChange(field: Field) {
+    setBlason({ ...blason, field });
   }
 
   function ordinaryChange(ordinary: Ordinary | null) {
@@ -42,12 +42,7 @@ export const FromBlason = () => {
   return (
     <div className="row">
       <div className="col-md-12 col-lg-6">
-        {blason.field.kind === 'plain' && (
-          <div className="form-group">
-            <label>Select your field</label>
-            <TinctureSelect tincture={blason.field.tincture} tinctureChange={fieldChange} />
-          </div>
-        )}
+        <FieldForm field={blason.field} fieldChange={fieldChange} />
 
         <OrdinaryForm ordinary={blason.ordinary || null} ordinaryChange={ordinaryChange} />
       </div>
