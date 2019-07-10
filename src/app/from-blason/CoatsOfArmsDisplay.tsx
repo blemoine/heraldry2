@@ -30,7 +30,7 @@ export const CoatsOfArmsDisplay = (props: Props) => {
           {isThereFur(props.blason, 'ermine') && (
             <>
               <symbol viewBox="0 0 200 240" id="ermine">
-                <Ermine />
+                <Ermine width={200} height={240}/>
               </symbol>
 
               <pattern
@@ -49,7 +49,7 @@ export const CoatsOfArmsDisplay = (props: Props) => {
           {isThereFur(props.blason, 'vair') && (
             <>
               <symbol viewBox="0 0 200 200" id="vair">
-                <Vair />
+                <Vair width={200} height={200} />
               </symbol>
               <pattern id={vairPatternId} width={40} height={80} patternUnits="userSpaceOnUse" viewBox="0 0 100 200">
                 <rect width="100%" height="100%" fill="white" />
