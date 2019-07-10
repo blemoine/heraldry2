@@ -60,12 +60,16 @@ export const CoatsOfArmsDisplay = (props: Props) => {
             </>
           )}
 
-          <clipPath id="plain-field-clip-path">
-            <Plain fill={fillFromTincture(props.blason.field)} height={height} width={width} />
-          </clipPath>
+          {props.blason.field.kind === 'plain' && (
+            <clipPath id="plain-field-clip-path">
+              <Plain fill={fillFromTincture(props.blason.field.tincture)} height={height} width={width} />
+            </clipPath>
+          )}
         </defs>
 
-        <Plain fill={fillFromTincture(props.blason.field)} height={height} width={width} />
+        {props.blason.field.kind === 'plain' && (
+          <Plain fill={fillFromTincture(props.blason.field.tincture)} height={height} width={width} />
+        )}
 
         {props.blason.ordinary && (
           <g clipPath="url(#plain-field-clip-path)">

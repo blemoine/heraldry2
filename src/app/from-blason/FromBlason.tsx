@@ -7,15 +7,15 @@ import { ermine, gules, Tincture } from '../model/tincture';
 import { Blason } from '../model/blason';
 import { Ordinary } from '../model/ordinary';
 
-const baseDefaultBlason = {
-  field: gules,
+const baseDefaultBlason: Blason = {
+  field: { kind: 'plain', tincture: gules },
   ordinary: {
     name: 'chevron',
     tincture: ermine,
   },
 } as const;
 export const FromBlason = () => {
-  const localStorageKey = 'default-blason';
+  const localStorageKey = 'default-blason#2';
   const defaultBlasonStr = localStorage.getItem(localStorageKey);
   const defaultBlason = defaultBlasonStr ? JSON.parse(defaultBlasonStr) : baseDefaultBlason;
 
@@ -25,8 +25,8 @@ export const FromBlason = () => {
     localStorage.setItem(localStorageKey, JSON.stringify(blason));
   }, [blason]);
 
-  function fieldChange(field: Tincture) {
-    setBlason({ ...blason, field });
+  function fieldChange(tincture: Tincture) {
+    setBlason({ ...blason, field: { kind: 'plain', tincture } });
   }
 
   function ordinaryChange(ordinary: Ordinary | null) {
@@ -42,10 +42,12 @@ export const FromBlason = () => {
   return (
     <div className="row">
       <div className="col-md-12 col-lg-6">
-        <div className="form-group">
-          <label>Select your field</label>
-          <TinctureSelect tincture={blason.field} tinctureChange={fieldChange} />
-        </div>
+        {blason.field.kind === 'plain' && (
+          <div className="form-group">
+            <label>Select your field</label>
+            <TinctureSelect tincture={blason.field.tincture} tinctureChange={fieldChange} />
+          </div>
+        )}
 
         <OrdinaryForm ordinary={blason.ordinary || null} ordinaryChange={ordinaryChange} />
       </div>
