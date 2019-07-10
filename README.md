@@ -9,3 +9,4 @@ Furs dans les ordinary ->  les centrer correctement
 
 State storage in localStorage
 Add some tests
+Nommer et reorganiser le code
