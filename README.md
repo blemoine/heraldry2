@@ -10,3 +10,4 @@ Furs dans les ordinary ->  les centrer correctement
 Add some tests
 Nommer et reorganiser le code
 Valider la sortie du localstorage (sinon ca provoque des soucis de retrocompatibilité)
+Cross et Saltire avec une bordure noire
