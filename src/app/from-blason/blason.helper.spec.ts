@@ -1,5 +1,5 @@
 import { isThereFur, stringifyBlason } from './blason.helpers';
-import { argent, azure, ermine, gules, or, sable, vair } from '../model/tincture';
+import { argent, azure, ermine, gules, or, purpure, sable, vair, vert } from '../model/tincture';
 
 describe('stringifyBlason', () => {
   it('should write a plain field first', () => {
@@ -17,6 +17,27 @@ describe('stringifyBlason', () => {
     expect(
       stringifyBlason({ field: { kind: 'plain', tincture: or }, ordinary: { name: 'chief', tincture: argent } })
     ).toBe('Or, a chief argent');
+  });
+
+  it('should write a party field with the colors after', () => {
+    expect(stringifyBlason({ field: { kind: 'party', per: { name: 'fess', tinctures: [gules, or] } } })).toBe(
+      'Per fess gules and or'
+    );
+    expect(stringifyBlason({ field: { kind: 'party', per: { name: 'chevron', tinctures: [argent, vert] } } })).toBe(
+      'Per chevron argent and vert'
+    );
+    expect(stringifyBlason({ field: { kind: 'party', per: { name: 'pale', tinctures: [ermine, azure] } } })).toBe(
+      'Per pale ermine and azure'
+    );
+  });
+
+  it('should write a party field with the colors after and the ordinary', () => {
+    expect(
+      stringifyBlason({
+        field: { kind: 'party', per: { name: 'pale', tinctures: [sable, argent] } },
+        ordinary: { name: 'pale', tincture: purpure },
+      })
+    ).toBe('Per pale sable and argent, a pale purpure');
   });
 });
 
