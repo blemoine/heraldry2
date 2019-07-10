@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { azure } from '../../model/blason';
+import { azure } from '../../model/tincture';
 
 export const Vair = () => {
   return (

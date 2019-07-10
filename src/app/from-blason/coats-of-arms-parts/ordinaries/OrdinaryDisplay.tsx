@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Ordinary } from '../../../model/blason';
+import { Ordinary } from '../../../model/ordinary';
 import { cannotHappen } from '../../../../utils/cannot-happen';
 
 type Props = { ordinary: Ordinary['name']; fill: string; width: number; height: number };

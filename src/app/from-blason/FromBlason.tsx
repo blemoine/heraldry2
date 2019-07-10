@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { CoatsOfArmsDisplay } from './CoatsOfArmsDisplay';
-import { Blason, ermine, gules, Ordinary, Tincture } from '../model/blason';
 import { TinctureSelect } from './TinctureSelect';
 import { OrdinaryForm } from './OrdinaryForm';
+import { ermine, gules, Tincture } from '../model/tincture';
+import { Blason } from '../model/blason';
+import { Ordinary } from '../model/ordinary';
 
 export const FromBlason = () => {
   const [blason, setBlason] = useState<Blason>({

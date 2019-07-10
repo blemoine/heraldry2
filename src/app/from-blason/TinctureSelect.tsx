@@ -1,7 +1,7 @@
 import Select, { components } from 'react-select';
-import { Tincture, tinctures } from '../model/blason';
 import * as React from 'react';
 import { OptionProps } from 'react-select/src/components/Option';
+import { Tincture, tinctures } from '../model/tincture';
 
 type Props = { tincture: Tincture; tinctureChange: (t: Tincture) => void };
 

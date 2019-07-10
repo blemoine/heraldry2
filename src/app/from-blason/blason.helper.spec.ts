@@ -1,5 +1,5 @@
 import { stringifyBlason } from './blason.helpers';
-import { argent, azure, ermine, gules, or, sable, vair } from '../model/blason';
+import { argent, azure, ermine, gules, or, sable, vair } from '../model/tincture';
 
 describe('stringifyBlason', () => {
   it('should write a plain field first', () => {

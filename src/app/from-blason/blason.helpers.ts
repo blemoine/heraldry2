@@ -1,4 +1,5 @@
-import { Blason, Furs } from '../model/blason';
+import { Blason } from '../model/blason';
+import { Furs } from '../model/tincture';
 
 export function stringifyBlason(blason: Blason): string {
   const field = capitalizeFirstLetter(blason.field.name);

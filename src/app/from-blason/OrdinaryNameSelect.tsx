@@ -1,6 +1,6 @@
 import Select from 'react-select';
-import { ordinaries, Ordinary } from '../model/blason';
 import * as React from 'react';
+import { ordinaries, Ordinary } from '../model/ordinary';
 
 type Props = { ordinary: Ordinary['name'] | null; ordinaryChange: (t: Ordinary['name'] | null) => void };
 
@@ -14,7 +14,7 @@ export const OrdinaryNameSelect = ({ ordinary, ordinaryChange }: Props) => {
     }
   };
 
-  const value = ordinariesWithNone.find(({value}) => value === ordinary);
+  const value = ordinariesWithNone.find(({ value }) => value === ordinary);
 
   return (
     <Select

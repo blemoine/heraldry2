@@ -1,7 +1,8 @@
 import { OrdinaryNameSelect } from './OrdinaryNameSelect';
 import { TinctureSelect } from './TinctureSelect';
 import * as React from 'react';
-import { argent, Ordinary, Tincture } from '../model/blason';
+import { Ordinary } from '../model/ordinary';
+import { argent, Tincture } from '../model/tincture';
 
 type Props = { ordinary: Ordinary | null; ordinaryChange: (ordinary: Ordinary | null) => void };
 export const OrdinaryForm = ({ ordinary, ordinaryChange }: Props) => {

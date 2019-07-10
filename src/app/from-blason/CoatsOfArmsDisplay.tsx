@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { Blason, Tincture } from '../model/blason';
+import { Blason } from '../model/blason';
 import { Plain } from './coats-of-arms-parts/plain';
 import { isThereFur, stringifyBlason } from './blason.helpers';
 import { OrdinaryDisplay } from './coats-of-arms-parts/ordinaries/OrdinaryDisplay';
 import { Ermine } from './coats-of-arms-parts/ermine';
 import { Vair } from './coats-of-arms-parts/vair';
 import { uuid } from '../../utils/uuid';
+import { Tincture } from '../model/tincture';
 
 type Props = { blason: Blason };
 export const CoatsOfArmsDisplay = (props: Props) => {
