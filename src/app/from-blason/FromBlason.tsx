@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CoatsOfArmsDisplay } from './CoatsOfArmsDisplay';
 import { TinctureSelect } from './TinctureSelect';
 import { OrdinaryForm } from './OrdinaryForm';
@@ -7,14 +7,23 @@ import { ermine, gules, Tincture } from '../model/tincture';
 import { Blason } from '../model/blason';
 import { Ordinary } from '../model/ordinary';
 
+const baseDefaultBlason = {
+  field: gules,
+  ordinary: {
+    name: 'chevron',
+    tincture: ermine,
+  },
+} as const;
 export const FromBlason = () => {
-  const [blason, setBlason] = useState<Blason>({
-    field: gules,
-    ordinary: {
-      name: 'chevron',
-      tincture: ermine,
-    },
-  });
+  const localStorageKey = 'default-blason';
+  const defaultBlasonStr = localStorage.getItem(localStorageKey);
+  const defaultBlason = defaultBlasonStr ? JSON.parse(defaultBlasonStr) : baseDefaultBlason;
+
+  const [blason, setBlason] = useState<Blason>(defaultBlason);
+
+  useEffect(() => {
+    localStorage.setItem(localStorageKey, JSON.stringify(blason));
+  }, [blason]);
 
   function fieldChange(field: Tincture) {
     setBlason({ ...blason, field });
