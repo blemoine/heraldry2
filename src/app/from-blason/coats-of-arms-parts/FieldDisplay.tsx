@@ -4,6 +4,7 @@ import { Plain } from './fields/Plain';
 import * as React from 'react';
 import { Tincture } from '../../model/tincture';
 import { PaleDisplay } from './fields/PaleDisplay';
+import { FessDisplay } from './fields/FessDisplay';
 
 type Props = { height: number; width: number; field: Field; fillFromTincture: (tincture: Tincture) => string };
 export const FieldDisplay = ({ field, height, width, fillFromTincture }: Props) => {
@@ -18,7 +19,7 @@ export const FieldDisplay = ({ field, height, width, fillFromTincture }: Props) 
     } else if (partyName === 'chevron') {
       return <Plain fill={'pink'} height={height} width={width} />;
     } else if (partyName === 'fess') {
-      return <Plain fill={'pink'} height={height} width={width} />;
+      return <FessDisplay fill={fill} height={height} width={width} />;
     } else if (partyName === 'pale') {
       return <PaleDisplay fill={fill} height={height} width={width} />;
     } else {

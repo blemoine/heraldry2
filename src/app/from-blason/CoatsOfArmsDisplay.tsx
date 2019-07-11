@@ -66,7 +66,9 @@ export const CoatsOfArmsDisplay = (props: Props) => {
           </clipPath>
         </defs>
 
-        <FieldDisplay height={height} width={width} field={props.blason.field} fillFromTincture={fillFromTincture} />
+        <g clipPath="url(#plain-field-clip-path)">
+          <FieldDisplay height={height} width={width} field={props.blason.field} fillFromTincture={fillFromTincture} />
+        </g>
 
         {props.blason.ordinary && (
           <g clipPath="url(#plain-field-clip-path)">
