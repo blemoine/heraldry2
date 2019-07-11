@@ -14,43 +14,46 @@ export const OrdinaryDisplay = ({ ordinary, fill, width, height }: Props) => {
     const basePoint = height / (8 * Math.sqrt(2));
     const length = Math.sqrt(width ** 2 + height ** 2);
     return (
-      <g>
-        <path
-          d={`M${basePoint} ${-basePoint} L${-basePoint} ${basePoint} L${length - basePoint} ${length +
-            basePoint} L${length + basePoint} ${length - basePoint} Z`}
-          fill={fill}
-          stroke="#333"
-        />
-        <path d={`M0 ${basePoint * 2} L0 0 L${basePoint * 2} 0`} stroke="#333" fill="transparent" />
-      </g>
+      <path
+        d={`M${basePoint} ${-basePoint} L${-basePoint} ${basePoint} L${length - basePoint} ${length +
+          basePoint} L${length + basePoint} ${length - basePoint} Z`}
+        fill={fill}
+        stroke="#333"
+      />
     );
   } else if (ordinary === 'pale') {
     return <rect x={width / 3} y={0} width={width / 3} height={height} fill={fill} stroke="#333" />;
   } else if (ordinary === 'cross') {
     return (
-      <g>
-        <rect x={(2 * width) / 5} y={0} width={width / 5} height={height} fill={fill} />
-        <rect x={0} y={(2 * height) / 5} width={width} height={height / 5} fill={fill} />
-        <path d={`M${width / 3} 0 L${(2 * width) / 3} 0`} stroke="#333" fill="transparent" />
-      </g>
+      <path
+        d={`M ${(2 * width) / 5} 0 H ${(3 * width) / 5} V ${(2 * height) / 5} H ${width} V ${(3 * height) / 5} H ${(3 *
+          width) /
+          5} V ${height} H ${(2 * width) / 5} V ${(3 * height) / 5} H 0 V ${(2 * height) / 5} H ${(2 * width) / 5} Z`}
+        fill={fill}
+        stroke="#333"
+      />
     );
   } else if (ordinary === 'saltire') {
-    const basePoint = height / (10 * Math.sqrt(2));
-    const length = Math.sqrt(width ** 2 + height ** 2);
+    const basePointW = width / (10 * Math.sqrt(2));
+    const basePointH = height / (10 * Math.sqrt(2));
+
+    const w = width / 2;
+    const h = height / 2;
     return (
       <g>
         <path
-          d={`M${basePoint} ${-basePoint} L${-basePoint} ${basePoint} L${length - basePoint} ${length +
-            basePoint} L${length + basePoint} ${length - basePoint} Z`}
+          d={`M${w} ${h - basePointH} L ${2 * w} ${-basePointH} L ${2 * w + basePointW} ${h -
+            (w * basePointH) / basePointW} L${w + basePointW} ${h} L ${2 * w + basePointW} ${h +
+            (w * basePointH) / basePointW} L ${2 * w} ${2 * h + basePointH} L${w} ${h + basePointH} L ${(h *
+            basePointW) /
+            basePointH -
+            w} ${2 * h + basePointH} L ${-basePointW} ${h + (w * basePointH) / basePointW} L ${w -
+            basePointW} ${h} L ${-basePointW} ${h - (w * basePointH) / basePointW} L ${(h * basePointW) / basePointH -
+            w} ${-basePointH} Z`}
           fill={fill}
+          stroke="#333"
         />
-        <path
-          d={`M${width - basePoint} ${-basePoint} L${width + basePoint} ${basePoint} L${width -
-            length +
-            basePoint} ${length + basePoint} L${width - length - basePoint} ${length - basePoint} Z`}
-          fill={fill}
-        />
-        <path d={`M0 ${basePoint * 2} L0 0 L${width} 0 L${width} ${basePoint * 2}`} stroke="#333" fill="transparent" />
+        <circle cx={2 * w} cy={2 * h - basePointH} r={5} />
       </g>
     );
   } else if (ordinary === 'chevron') {

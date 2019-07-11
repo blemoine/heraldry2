@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Blason } from '../model/blason';
-import { Plain } from './coats-of-arms-parts/fields/Plain';
 import { isThereFur, stringifyBlason } from './blason.helpers';
 import { OrdinaryDisplay } from './coats-of-arms-parts/ordinaries/OrdinaryDisplay';
 import { ErmineDisplay } from './coats-of-arms-parts/ErmineDisplay';
@@ -8,10 +7,11 @@ import { VairDisplay } from './coats-of-arms-parts/VairDisplay';
 import { uuid } from '../../utils/uuid';
 import { Tincture } from '../model/tincture';
 import { FieldDisplay } from './coats-of-arms-parts/FieldDisplay';
+import { HeaterDisplay } from './coats-of-arms-parts/escutcheon/HeaterDisplay';
 
 type Props = { blason: Blason };
 export const CoatsOfArmsDisplay = (props: Props) => {
-  const width = 200;
+  const width = 400;
   const height = (width * 6) / 5;
 
   const erminePatternId = 'field-pattern-' + uuid();
@@ -26,7 +26,7 @@ export const CoatsOfArmsDisplay = (props: Props) => {
   }
   return (
     <div>
-      <svg width={width} height={height} viewBox="0 0 200 240">
+      <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
         <defs>
           {isThereFur(props.blason, 'ermine') && (
             <>
@@ -62,7 +62,7 @@ export const CoatsOfArmsDisplay = (props: Props) => {
           )}
 
           <clipPath id="plain-field-clip-path">
-            <Plain fill="transparent" height={height} width={width} />
+            <HeaterDisplay height={height} width={width} />
           </clipPath>
         </defs>
 
@@ -80,6 +80,7 @@ export const CoatsOfArmsDisplay = (props: Props) => {
             />
           </g>
         )}
+        <HeaterDisplay height={height} width={width} />
       </svg>
 
       <p style={{ border: '1px solid #CCC', padding: '5px 10px', marginTop: '10px' }}>
