@@ -3,32 +3,12 @@ import { TinctureSelect } from './TinctureSelect';
 import * as React from 'react';
 import { argent, Tincture } from '../model/tincture';
 import { uuid } from '../../utils/uuid';
-import Select from 'react-select';
-import { parties, Party } from '../model/party';
-
-const partiesOptions = parties.map((partyName) => ({ value: partyName, label: partyName }));
+import { PartyForm } from './PartyForm';
 
 type Props = { field: Field; fieldChange: (field: Field) => void };
 export const FieldForm = ({ field, fieldChange }: Props) => {
   function plainTinctureChange(tincture: Tincture) {
     fieldChange({ kind: 'plain', tincture });
-  }
-
-  // TODO abstract Party form, should remove throw Error
-  function firstTinctureChange(tincture: Tincture) {
-    if (field.kind === 'party') {
-      fieldChange({ kind: 'party', per: { ...field.per, tinctures: [tincture, field.per.tinctures[1]] } });
-    } else {
-      throw new Error(`Changing second tincture is impossible for field kind ${field.kind}`);
-    }
-  }
-
-  function secondTinctureChange(tincture: Tincture) {
-    if (field.kind === 'party') {
-      fieldChange({ kind: 'party', per: { ...field.per, tinctures: [field.per.tinctures[0], tincture] } });
-    } else {
-      throw new Error(`Changing second tincture is impossible for field kind ${field.kind}`);
-    }
   }
 
   function plainChange(isPlain: boolean) {
@@ -38,14 +18,6 @@ export const FieldForm = ({ field, fieldChange }: Props) => {
       fieldChange({ kind: 'party', per: { name: 'fess', tinctures: [field.tincture, argent] } });
     } else {
       throw new Error(`Changing plain to ${isPlain} is impossible for field kind ${field.kind}`);
-    }
-  }
-
-  function partyChange(partyName: Party['name']) {
-    if (field.kind === 'party') {
-      fieldChange({ kind: 'party', per: { ...field.per, name: partyName } });
-    } else {
-      throw new Error(`Changing party name is impossible for field kind ${field.kind}`);
     }
   }
 
@@ -72,30 +44,7 @@ export const FieldForm = ({ field, fieldChange }: Props) => {
           <TinctureSelect tincture={field.tincture} tinctureChange={plainTinctureChange} />
         </div>
       ) : (
-        <div className="row">
-          <div className="col">
-            <div className="form-group">
-              <label>Select your party</label>
-              <Select
-                options={partiesOptions}
-                value={partiesOptions.find(({ value }) => value === field.per.name)}
-                onChange={(t: any) => partyChange(t.value)}
-              />
-            </div>
-          </div>
-          <div className="col">
-            <div className="form-group">
-              <label>Select your first tincture</label>
-              <TinctureSelect tincture={field.per.tinctures[0]} tinctureChange={firstTinctureChange} />
-            </div>
-          </div>
-          <div className="col">
-            <div className="form-group">
-              <label>Select your second tincture</label>
-              <TinctureSelect tincture={field.per.tinctures[1]} tinctureChange={secondTinctureChange} />
-            </div>
-          </div>
-        </div>
+        <PartyForm field={field} fieldChange={fieldChange} />
       )}
     </>
   );
