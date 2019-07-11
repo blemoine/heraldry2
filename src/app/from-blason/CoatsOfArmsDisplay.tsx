@@ -11,8 +11,8 @@ import { HeaterDisplay } from './coats-of-arms-parts/escutcheon/HeaterDisplay';
 
 type Props = { blason: Blason };
 export const CoatsOfArmsDisplay = (props: Props) => {
-  const width = 400;
-  const height = (width * 6) / 5;
+  const width = 200;
+  const height = (width * 4) / 3;
 
   const erminePatternId = 'field-pattern-' + uuid();
   const vairPatternId = 'field-pattern-' + uuid();
