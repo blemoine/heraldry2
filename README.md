@@ -11,3 +11,4 @@ Add some tests
 Nommer et reorganiser le code
 Valider la sortie du localstorage (sinon ca provoque des soucis de retrocompatibilité)
 Cross et Saltire avec une bordure noire
+Renomer les components file avec des majsucule

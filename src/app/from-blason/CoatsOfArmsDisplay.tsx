@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { Blason } from '../model/blason';
-import { Plain } from './coats-of-arms-parts/plain';
+import { Plain } from './coats-of-arms-parts/fields/Plain';
 import { isThereFur, stringifyBlason } from './blason.helpers';
 import { OrdinaryDisplay } from './coats-of-arms-parts/ordinaries/OrdinaryDisplay';
 import { Ermine } from './coats-of-arms-parts/ermine';
 import { Vair } from './coats-of-arms-parts/vair';
 import { uuid } from '../../utils/uuid';
 import { Tincture } from '../model/tincture';
+import { FieldDisplay } from './coats-of-arms-parts/FieldDisplay';
 
 type Props = { blason: Blason };
 export const CoatsOfArmsDisplay = (props: Props) => {
@@ -65,9 +66,7 @@ export const CoatsOfArmsDisplay = (props: Props) => {
           </clipPath>
         </defs>
 
-        {props.blason.field.kind === 'plain' && (
-          <Plain fill={fillFromTincture(props.blason.field.tincture)} height={height} width={width} />
-        )}
+        <FieldDisplay height={height} width={width} field={props.blason.field} fillFromTincture={fillFromTincture} />
 
         {props.blason.ordinary && (
           <g clipPath="url(#plain-field-clip-path)">
