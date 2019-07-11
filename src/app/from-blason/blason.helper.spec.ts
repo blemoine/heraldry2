@@ -30,6 +30,11 @@ describe('stringifyBlason', () => {
       'Per pale ermine and azure'
     );
   });
+  it('should write the party field for a bend sinister', () => {
+    expect(stringifyBlason({ field: { kind: 'party', per: { name: 'bendSinister', tinctures: [gules, or] } } })).toBe(
+      'Per bend sinister gules and or'
+    );
+  });
 
   it('should write a party field with the colors after and the ordinary', () => {
     expect(

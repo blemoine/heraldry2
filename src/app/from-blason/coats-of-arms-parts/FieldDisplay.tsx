@@ -7,6 +7,7 @@ import { PaleDisplay } from './fields/PaleDisplay';
 import { FessDisplay } from './fields/FessDisplay';
 import { BendDisplay } from './fields/BendDisplay';
 import { ChevronDisplay } from './fields/ChevronDisplay';
+import { BendSinisterDisplay } from './fields/BendSinisterDisplay';
 
 type Props = { height: number; width: number; field: Field; fillFromTincture: (tincture: Tincture) => string };
 export const FieldDisplay = ({ field, height, width, fillFromTincture }: Props) => {
@@ -18,6 +19,8 @@ export const FieldDisplay = ({ field, height, width, fillFromTincture }: Props) 
     const fill: [string, string] = [fillFromTincture(tinctures[0]), fillFromTincture(tinctures[1])];
     if (partyName === 'bend') {
       return <BendDisplay fill={fill} height={height} width={width} />;
+    } else if (partyName === 'bendSinister') {
+      return <BendSinisterDisplay fill={fill} height={height} width={width} />;
     } else if (partyName === 'chevron') {
       return <ChevronDisplay fill={fill} height={height} width={width} />;
     } else if (partyName === 'fess') {

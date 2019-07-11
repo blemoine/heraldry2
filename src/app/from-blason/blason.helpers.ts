@@ -1,5 +1,7 @@
 import { Blason, Field } from '../model/blason';
 import { Furs } from '../model/tincture';
+import { Party } from '../model/party';
+import { cannotHappen } from '../../utils/cannot-happen';
 
 export function stringifyBlason(blason: Blason): string {
   const field = stringifyField(blason.field);
@@ -16,12 +18,21 @@ function stringifyField(field: Field): string {
   if (field.kind === 'plain') {
     return capitalizeFirstLetter(field.tincture.name);
   } else {
-    const perName = field.per.name;
+    const perName = stringifyParty(field.per.name);
     const tinctures = field.per.tinctures.map((t) => t.name).join(' and ');
     return `Per ${perName} ${tinctures}`;
   }
 }
 
+export function stringifyParty(partyName: Party['name']): string {
+  if (partyName === 'bendSinister') {
+    return 'bend sinister';
+  } else if (partyName === 'bend' || partyName === 'fess' || partyName === 'pale' || partyName === 'chevron') {
+    return partyName;
+  } else {
+    return cannotHappen(partyName);
+  }
+}
 function capitalizeFirstLetter(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }

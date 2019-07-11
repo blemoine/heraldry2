@@ -4,8 +4,9 @@ import { TinctureSelect } from './TinctureSelect';
 import { parties, Party } from '../model/party';
 import { PartyField } from '../model/blason';
 import { Tincture } from '../model/tincture';
+import { stringifyParty } from './blason.helpers';
 
-const partiesOptions = parties.map((partyName) => ({ value: partyName, label: partyName }));
+const partiesOptions = parties.map((partyName) => ({ value: partyName, label: stringifyParty(partyName) }));
 
 type Props = { field: PartyField; fieldChange: (field: PartyField) => void };
 export const PartyForm = ({ field, fieldChange }: Props) => {
