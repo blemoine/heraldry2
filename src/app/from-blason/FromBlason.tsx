@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { CoatsOfArmsDisplay } from './CoatsOfArmsDisplay';
 import { OrdinaryForm } from './OrdinaryForm';
 import { ermine, gules } from '../model/tincture';
 import { Blason, Field } from '../model/blason';
 import { Ordinary } from '../model/ordinary';
 import { FieldForm } from './FieldForm';
+import { CoatsOfArmsDetail } from './CoatsOfArmsDetail';
 
 const baseDefaultBlason: Blason = {
   field: { kind: 'plain', tincture: gules },
@@ -47,7 +47,7 @@ export const FromBlason = () => {
         <OrdinaryForm ordinary={blason.ordinary || null} ordinaryChange={ordinaryChange} />
       </div>
       <div className="col-md-12 col-lg-6">
-        <CoatsOfArmsDisplay blason={blason} />
+        <CoatsOfArmsDetail blason={blason} />
       </div>
     </div>
   );

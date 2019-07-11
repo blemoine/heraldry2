@@ -1,0 +1,323 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CoatsOfArms should render a fur blason 1`] = `
+<svg
+  height={266.6666666666667}
+  viewBox="0 0 200 266.6666666666667"
+  width={200}
+>
+  <defs>
+    <symbol
+      id="ermine"
+      viewBox="0 0 200 240"
+    >
+      <rect
+        fill="white"
+        height="100%"
+        width="100%"
+      />
+      <g
+        transform="translate(100, 240)"
+      >
+        <path
+          d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
+        />
+        <circle
+          cy={-226}
+          r="14"
+        />
+        <circle
+          cx={-32}
+          cy={-194}
+          r={14}
+        />
+        <circle
+          cx={32}
+          cy={-194}
+          r={14}
+        />
+      </g>
+    </symbol>
+    <pattern
+      height={64.9}
+      id="field-pattern-3"
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 70 125"
+      width={36.36}
+    >
+      <rect
+        fill="white"
+        height="100%"
+        width="100%"
+      />
+      <use
+        height={60}
+        href="#ermine"
+        width={35}
+        x="0"
+        y="0"
+      />
+      <use
+        height={60}
+        href="#ermine"
+        width={35}
+        x="35"
+        y="65"
+      />
+    </pattern>
+    <clipPath
+      id="plain-field-clip-path"
+    >
+      <path
+        d="M 0 0 H200 V88.8888888888889 A200 200 90 0 1 100 266.6666666666667 A200 200 -90 0 1 0 88.8888888888889 Z"
+        fill="transparent"
+        stroke="#333"
+      />
+    </clipPath>
+  </defs>
+  <g
+    clipPath="url(#plain-field-clip-path)"
+  >
+    <rect
+      fill="url(#field-pattern-3)"
+      height={266.6666666666667}
+      stroke="#333"
+      width={200}
+      x={0}
+      y={0}
+    />
+  </g>
+  <path
+    d="M 0 0 H200 V88.8888888888889 A200 200 90 0 1 100 266.6666666666667 A200 200 -90 0 1 0 88.8888888888889 Z"
+    fill="transparent"
+    stroke="#333"
+  />
+</svg>
+`;
+
+exports[`CoatsOfArms should render a party blason 1`] = `
+<svg
+  height={266.6666666666667}
+  viewBox="0 0 200 266.6666666666667"
+  width={200}
+>
+  <defs>
+    <symbol
+      id="vair"
+      viewBox="0 0 200 200"
+    >
+      <rect
+        fill="white"
+        height="100%"
+        width="100%"
+      />
+      <path
+        d="M0 200 L200 200 L150 150 L150 50 L100 0 L50 50 L50 150 Z"
+        fill="#0000FF"
+      />
+    </symbol>
+    <pattern
+      height={80}
+      id="field-pattern-6"
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 100 200"
+      width={40}
+    >
+      <rect
+        fill="white"
+        height="100%"
+        width="100%"
+      />
+      <use
+        height={100}
+        href="#vair"
+        width={100}
+        x="0"
+        y="0"
+      />
+      <use
+        height={100}
+        href="#vair"
+        width={100}
+        x="-50"
+        y="100"
+      />
+      <use
+        height={100}
+        href="#vair"
+        width={100}
+        x="50"
+        y="100"
+      />
+    </pattern>
+    <clipPath
+      id="plain-field-clip-path"
+    >
+      <path
+        d="M 0 0 H200 V88.8888888888889 A200 200 90 0 1 100 266.6666666666667 A200 200 -90 0 1 0 88.8888888888889 Z"
+        fill="transparent"
+        stroke="#333"
+      />
+    </clipPath>
+  </defs>
+  <g
+    clipPath="url(#plain-field-clip-path)"
+  >
+    <g>
+      <path
+        d="M 0 0 H 200 V 266.6666666666667 Z"
+        fill="url(#field-pattern-6)"
+        stroke="#333"
+      />
+      <path
+        d="M 0 0 V 266.6666666666667 H 200  Z"
+        fill="#0000FF"
+        stroke="#333"
+      />
+    </g>
+  </g>
+  <path
+    d="M 0 0 H200 V88.8888888888889 A200 200 90 0 1 100 266.6666666666667 A200 200 -90 0 1 0 88.8888888888889 Z"
+    fill="transparent"
+    stroke="#333"
+  />
+</svg>
+`;
+
+exports[`CoatsOfArms should render a party blason with some ordinary 1`] = `
+<svg
+  height={266.6666666666667}
+  viewBox="0 0 200 266.6666666666667"
+  width={200}
+>
+  <defs>
+    <symbol
+      id="vair"
+      viewBox="0 0 200 200"
+    >
+      <rect
+        fill="white"
+        height="100%"
+        width="100%"
+      />
+      <path
+        d="M0 200 L200 200 L150 150 L150 50 L100 0 L50 50 L50 150 Z"
+        fill="#0000FF"
+      />
+    </symbol>
+    <pattern
+      height={80}
+      id="field-pattern-8"
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 100 200"
+      width={40}
+    >
+      <rect
+        fill="white"
+        height="100%"
+        width="100%"
+      />
+      <use
+        height={100}
+        href="#vair"
+        width={100}
+        x="0"
+        y="0"
+      />
+      <use
+        height={100}
+        href="#vair"
+        width={100}
+        x="-50"
+        y="100"
+      />
+      <use
+        height={100}
+        href="#vair"
+        width={100}
+        x="50"
+        y="100"
+      />
+    </pattern>
+    <clipPath
+      id="plain-field-clip-path"
+    >
+      <path
+        d="M 0 0 H200 V88.8888888888889 A200 200 90 0 1 100 266.6666666666667 A200 200 -90 0 1 0 88.8888888888889 Z"
+        fill="transparent"
+        stroke="#333"
+      />
+    </clipPath>
+  </defs>
+  <g
+    clipPath="url(#plain-field-clip-path)"
+  >
+    <g>
+      <path
+        d="M 0 0 H 200 V 266.6666666666667 Z"
+        fill="url(#field-pattern-8)"
+        stroke="#333"
+      />
+      <path
+        d="M 0 0 V 266.6666666666667 H 200  Z"
+        fill="#0000FF"
+        stroke="#333"
+      />
+    </g>
+  </g>
+  <g
+    clipPath="url(#plain-field-clip-path)"
+  >
+    <rect
+      fill="#800080"
+      height={53.333333333333336}
+      stroke="#333"
+      width={200}
+      x={0}
+      y={0}
+    />
+  </g>
+  <path
+    d="M 0 0 H200 V88.8888888888889 A200 200 90 0 1 100 266.6666666666667 A200 200 -90 0 1 0 88.8888888888889 Z"
+    fill="transparent"
+    stroke="#333"
+  />
+</svg>
+`;
+
+exports[`CoatsOfArms should render a plain blason 1`] = `
+<svg
+  height={266.6666666666667}
+  viewBox="0 0 200 266.6666666666667"
+  width={200}
+>
+  <defs>
+    <clipPath
+      id="plain-field-clip-path"
+    >
+      <path
+        d="M 0 0 H200 V88.8888888888889 A200 200 90 0 1 100 266.6666666666667 A200 200 -90 0 1 0 88.8888888888889 Z"
+        fill="transparent"
+        stroke="#333"
+      />
+    </clipPath>
+  </defs>
+  <g
+    clipPath="url(#plain-field-clip-path)"
+  >
+    <rect
+      fill="#FF0000"
+      height={266.6666666666667}
+      stroke="#333"
+      width={200}
+      x={0}
+      y={0}
+    />
+  </g>
+  <path
+    d="M 0 0 H200 V88.8888888888889 A200 200 90 0 1 100 266.6666666666667 A200 200 -90 0 1 0 88.8888888888889 Z"
+    fill="transparent"
+    stroke="#333"
+  />
+</svg>
+`;
