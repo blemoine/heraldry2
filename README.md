@@ -11,4 +11,5 @@ Add some tests
 Nommer et reorganiser le code
 Valider la sortie du localstorage (sinon ca provoque des soucis de retrocompatibilité)
 Cross et Saltire avec une bordure noire
-Renomer les components file avec des majsucule
+Split notion of Plain ( -> become a rect) and Shield ( -> no fill) (probablement enlever les rectangles fermant le bouclier)
+

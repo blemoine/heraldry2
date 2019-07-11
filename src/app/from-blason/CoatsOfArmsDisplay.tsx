@@ -3,8 +3,8 @@ import { Blason } from '../model/blason';
 import { Plain } from './coats-of-arms-parts/fields/Plain';
 import { isThereFur, stringifyBlason } from './blason.helpers';
 import { OrdinaryDisplay } from './coats-of-arms-parts/ordinaries/OrdinaryDisplay';
-import { Ermine } from './coats-of-arms-parts/ermine';
-import { Vair } from './coats-of-arms-parts/vair';
+import { ErmineDisplay } from './coats-of-arms-parts/ErmineDisplay';
+import { VairDisplay } from './coats-of-arms-parts/VairDisplay';
 import { uuid } from '../../utils/uuid';
 import { Tincture } from '../model/tincture';
 import { FieldDisplay } from './coats-of-arms-parts/FieldDisplay';
@@ -31,7 +31,7 @@ export const CoatsOfArmsDisplay = (props: Props) => {
           {isThereFur(props.blason, 'ermine') && (
             <>
               <symbol viewBox="0 0 200 240" id="ermine">
-                <Ermine width={200} height={240} />
+                <ErmineDisplay width={200} height={240} />
               </symbol>
 
               <pattern
@@ -50,7 +50,7 @@ export const CoatsOfArmsDisplay = (props: Props) => {
           {isThereFur(props.blason, 'vair') && (
             <>
               <symbol viewBox="0 0 200 200" id="vair">
-                <Vair width={200} height={200} />
+                <VairDisplay width={200} height={200} />
               </symbol>
               <pattern id={vairPatternId} width={40} height={80} patternUnits="userSpaceOnUse" viewBox="0 0 100 200">
                 <rect width="100%" height="100%" fill="white" />

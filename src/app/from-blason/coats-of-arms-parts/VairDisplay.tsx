@@ -2,7 +2,7 @@ import * as React from 'react';
 import { azure } from '../../model/tincture';
 
 type Props = { width: number; height: number };
-export const Vair = ({ width, height }: Props) => {
+export const VairDisplay = ({ width, height }: Props) => {
   return (
     <>
       <rect width="100%" height="100%" fill="white" />

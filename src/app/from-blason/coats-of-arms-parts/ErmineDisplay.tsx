@@ -1,6 +1,6 @@
 import * as React from 'react';
 type Props = { width: number; height: number };
-export const Ermine = ({ width, height }: Props) => {
+export const ErmineDisplay = ({ width, height }: Props) => {
   // thanks to wikipedia https://upload.wikimedia.org/wikipedia/commons/2/21/Fourrure_h%C3%A9raldique_Hermine.svg
   return (
     <>
