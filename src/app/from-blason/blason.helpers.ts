@@ -27,7 +27,14 @@ function stringifyField(field: Field): string {
 export function stringifyParty(partyName: Party['name']): string {
   if (partyName === 'bendSinister') {
     return 'bend sinister';
-  } else if (partyName === 'bend' || partyName === 'fess' || partyName === 'pale' || partyName === 'chevron') {
+  } else if (
+    partyName === 'bend' ||
+    partyName === 'fess' ||
+    partyName === 'pale' ||
+    partyName === 'chevron' ||
+    partyName === 'cross' ||
+    partyName === 'saltire'
+  ) {
     return partyName;
   } else {
     return cannotHappen(partyName);

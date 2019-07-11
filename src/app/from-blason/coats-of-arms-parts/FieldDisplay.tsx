@@ -8,6 +8,8 @@ import { FessDisplay } from './fields/FessDisplay';
 import { BendDisplay } from './fields/BendDisplay';
 import { ChevronDisplay } from './fields/ChevronDisplay';
 import { BendSinisterDisplay } from './fields/BendSinisterDisplay';
+import { CrossDisplay } from './fields/CrossDisplay';
+import { SaltireDisplay } from './fields/SaltireDisplay';
 
 type Props = { height: number; width: number; field: Field; fillFromTincture: (tincture: Tincture) => string };
 export const FieldDisplay = ({ field, height, width, fillFromTincture }: Props) => {
@@ -27,6 +29,10 @@ export const FieldDisplay = ({ field, height, width, fillFromTincture }: Props) 
       return <FessDisplay fill={fill} height={height} width={width} />;
     } else if (partyName === 'pale') {
       return <PaleDisplay fill={fill} height={height} width={width} />;
+    } else if (partyName === 'cross') {
+      return <CrossDisplay fill={fill} height={height} width={width} />;
+    } else if (partyName === 'saltire') {
+      return <SaltireDisplay fill={fill} height={height} width={width} />;
     } else {
       return cannotHappen(partyName);
     }
