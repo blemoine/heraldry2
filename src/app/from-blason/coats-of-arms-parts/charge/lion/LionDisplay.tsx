@@ -13,7 +13,8 @@ type Props = { charge: Lion; width: number; height: number; fillFromTincture: (t
 export const LionDisplay = ({ charge, width, height, fillFromTincture }: Props) => {
   const armedAndLanguedFill = fillFromTincture(charge.armedAndLangued);
   const mainFill = fillFromTincture(charge.tincture);
-  const head = lionHead(charge.head, armedAndLanguedFill, mainFill);
+  const stroke = charge.tincture.name === 'sable' ? '#777' : '#000';
+  const head = lionHead(charge.head, armedAndLanguedFill, mainFill, stroke);
   if (charge.attitude === 'rampant') {
     return (
       <SvgLionRampant
@@ -24,6 +25,7 @@ export const LionDisplay = ({ charge, width, height, fillFromTincture }: Props) 
         mainFill={mainFill}
         head={head}
         clawFill={armedAndLanguedFill}
+        stroke={stroke}
       />
     );
   } else if (charge.attitude === 'passant') {
@@ -36,6 +38,7 @@ export const LionDisplay = ({ charge, width, height, fillFromTincture }: Props) 
         mainFill={mainFill}
         head={head}
         clawFill={armedAndLanguedFill}
+        stroke={stroke}
       />
     );
   } else if (charge.attitude === 'statant') {
@@ -55,13 +58,13 @@ export const LionDisplay = ({ charge, width, height, fillFromTincture }: Props) 
   }
 };
 
-function lionHead(head: LionHead | null, armedAndLanguedFill: string, mainFill: string): ReactNode {
+function lionHead(head: LionHead | null, armedAndLanguedFill: string, mainFill: string, stroke: string): ReactNode {
   if (head === null) {
-    return <DefaultLionHead tongueFill={armedAndLanguedFill} mainFill={mainFill} />;
+    return <DefaultLionHead tongueFill={armedAndLanguedFill} mainFill={mainFill} stroke={stroke} />;
   } else if (head === 'guardant') {
-    return <SvgGuardantLionHead tongueFill={armedAndLanguedFill} mainFill={mainFill} />;
+    return <SvgGuardantLionHead tongueFill={armedAndLanguedFill} mainFill={mainFill} stroke={stroke} />;
   } else if (head === 'regardant') {
-    return <SvgRegardantLionHead tongueFill={armedAndLanguedFill} mainFill={mainFill} />;
+    return <SvgRegardantLionHead tongueFill={armedAndLanguedFill} mainFill={mainFill} stroke={stroke} />;
   } else {
     return cannotHappen(head);
   }
