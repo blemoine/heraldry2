@@ -42,35 +42,43 @@ export const LionForm = ({ charge, chargeChange }: Props) => {
   }
 
   return (
-    <div className="row">
-      <div className="col">
-        <div className="form-group">
-          <label>Select the tincture of the charge</label>
-          <TinctureSelect tincture={charge.tincture} tinctureChange={chargeTinctureChange} />
+    <>
+      <div className="row">
+        <div className="col">
+          <div className="form-group">
+            <label>Select the tincture of the charge</label>
+            <TinctureSelect tincture={charge.tincture} tinctureChange={chargeTinctureChange} />
+          </div>
+        </div>
+        <div className="col">
+          <div className="form-group">
+            <label>Select the tincture of the claws and tongue</label>
+            <TinctureSelect tincture={charge.armedAndLangued} tinctureChange={armedLanguedTinctureChange} />
+          </div>
         </div>
       </div>
-      <div className="col">
-        <div className="form-group">
-          <label>Select the attitude</label>
-          <Select options={attitudes} value={selectedAttitude} onChange={(t: any) => attitudeChange(t.value)} />
+      <div className="row">
+        <div className="col">
+          <div className="form-group">
+            <label>Select the attitude</label>
+            <Select options={attitudes} value={selectedAttitude} onChange={(t: any) => attitudeChange(t.value)} />
+          </div>
         </div>
       </div>
-      <div className="col">
-        <div className="form-group">
-          <label>Select the tincture of the claws and tongue</label>
-          <TinctureSelect tincture={charge.armedAndLangued} tinctureChange={armedLanguedTinctureChange} />
-        </div>
+      <div className="row">
+        {charge.attitude !== 'dormant' && (
+          <div className="col">
+            <div className="form-group">
+              <label>Select the head posture</label>
+              <Select
+                options={headPostures}
+                value={selectedHead}
+                onChange={(t: any) => headPostureChange(t.value === 'None' ? null : t.value)}
+              />
+            </div>
+          </div>
+        )}
       </div>
-      <div className="col">
-        <div className="form-group">
-          <label>Select the head posture</label>
-          <Select
-            options={headPostures}
-            value={selectedHead}
-            onChange={(t: any) => headPostureChange(t.value === 'None' ? null : t.value)}
-          />
-        </div>
-      </div>
-    </div>
+    </>
   );
 };
