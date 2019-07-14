@@ -5,15 +5,13 @@ import * as React from 'react';
 const SvgLionPassant = (props: {
   width: number;
   height: number;
-  x: number;
-  y: number;
   head: React.ReactNode;
 
   stroke: string;
   mainFill: string;
   clawFill: string;
 }) => (
-  <svg width={props.width} height={props.height} x={props.x} y={props.y} viewBox="0 0 420 350">
+  <svg width={props.width} height={props.height} viewBox="0 0 420 350">
     <g stroke={props.stroke}>
       <path
         d="M51.98 109.802s3.666-11.743 7.829-14.321c1.267-.785 2.989.442 4.965-.191 2.124-.681 6.858-1.858 7.447-4.01.602-2.202-2.292-7.256-2.292-7.256s-6.606-5.628-10.12-6.11c-3.828-.526-12.412 3.437-12.412 3.437l-2.482 10.31 7.065 18.141zM229.423 283.749s-14.092 2.145-17.397-1.218c-1.027-1.045-.276-2.662-.87-4.001-.704-1.586-1.756-2.938-3.48-3.132-2.733-.307-5.362 3.214-6.785 5.567-1.9 3.142-2.088 11.309-2.088 11.309l5.568 7.307 17.065-1.197 7.987-14.635z"

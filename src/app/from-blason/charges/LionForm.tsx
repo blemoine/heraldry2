@@ -41,6 +41,15 @@ export const LionForm = ({ charge, chargeChange }: Props) => {
     });
   }
 
+  const countOptions = [1, 2, 3].map((i) => ({ label: i, value: i }));
+  const selectedCount = countOptions.find(({ value }) => value === charge.countAndDisposition.count);
+  function countChange(count: 1 | 2 | 3) {
+    chargeChange({
+      ...charge,
+      countAndDisposition: count === 1 ? { count } : { count, disposition: 'pale' },
+    });
+  }
+
   return (
     <>
       <div className="row">
@@ -54,6 +63,12 @@ export const LionForm = ({ charge, chargeChange }: Props) => {
           <div className="form-group">
             <label>Select the tincture of the claws and tongue</label>
             <TinctureSelect tincture={charge.armedAndLangued} tinctureChange={armedLanguedTinctureChange} />
+          </div>
+        </div>
+        <div className="col">
+          <div className="form-group">
+            <label>Select the number of lion</label>
+            <Select options={countOptions} value={selectedCount} onChange={(t: any) => countChange(t.value)} />
           </div>
         </div>
       </div>

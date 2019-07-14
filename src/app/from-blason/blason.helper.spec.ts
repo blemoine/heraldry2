@@ -49,7 +49,15 @@ describe('stringifyBlason', () => {
     expect(
       stringifyBlason({
         field: { kind: 'plain', tincture: azure },
-        charge: { name: 'lion', tincture: or, armedAndLangued: gules, attitude: 'rampant', tail: null, head: null },
+        charge: {
+          name: 'lion',
+          tincture: or,
+          armedAndLangued: gules,
+          attitude: 'rampant',
+          tail: null,
+          head: null,
+          countAndDisposition: { count: 1 },
+        },
       })
     ).toBe('Azure, a lion rampant or');
   });
@@ -58,7 +66,15 @@ describe('stringifyBlason', () => {
     expect(
       stringifyBlason({
         field: { kind: 'plain', tincture: gules },
-        charge: { name: 'lion', tincture: sable, armedAndLangued: azure, attitude: 'rampant', tail: null, head: null },
+        charge: {
+          name: 'lion',
+          tincture: sable,
+          armedAndLangued: azure,
+          attitude: 'rampant',
+          tail: null,
+          head: null,
+          countAndDisposition: { count: 1 },
+        },
       })
     ).toBe('Gules, a lion rampant sable armed and langued azure');
   });
@@ -75,11 +91,29 @@ describe('stringifyBlason', () => {
           attitude: 'passant',
           tail: 'nowed',
           head: 'guardant',
+          countAndDisposition: { count: 1 },
         },
       })
     ).toBe(
       'Per pale ermine and azure, a chief ermine, a lion passant guardant tail nowed gules armed and langued sable'
     );
+  });
+
+  it('should write multiple lion', () => {
+    expect(
+      stringifyBlason({
+        field: { kind: 'plain', tincture: gules },
+        charge: {
+          name: 'lion',
+          tincture: or,
+          armedAndLangued: azure,
+          attitude: 'passant',
+          tail: null,
+          head: 'guardant',
+          countAndDisposition: { count: 3, disposition: 'pale' },
+        },
+      })
+    ).toBe('Gules, three lions passant guardant in pale or armed and langued azure');
   });
 });
 
@@ -122,6 +156,7 @@ describe('isThereFur', () => {
             tincture: azure,
             attitude: 'rampant',
             tail: null,
+            countAndDisposition: { count: 1 },
           },
         },
         'ermine'
@@ -142,6 +177,7 @@ describe('isThereFur', () => {
             tincture: vair,
             attitude: 'rampant',
             tail: null,
+            countAndDisposition: { count: 1 },
           },
         },
         'vair'

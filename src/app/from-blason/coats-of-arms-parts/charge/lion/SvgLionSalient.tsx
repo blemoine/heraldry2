@@ -5,15 +5,13 @@ import React from 'react';
 const SvgLionSalient = (props: {
   width: number;
   height: number;
-  x: number;
-  y: number;
   head: React.ReactNode;
 
   stroke: string;
   mainFill: string;
   clawFill: string;
 }) => (
-  <svg width={props.width} height={props.height} x={props.x} y={props.y} viewBox="0 0 380 420">
+  <svg width={props.width} height={props.height} viewBox="0 0 380 420">
     <g stroke={props.stroke}>
       <path
         d="M63.895 84.852s.046-12.303 3.265-15.992c.98-1.123 2.987-.457 4.689-1.644 1.83-1.276 6.007-3.795 5.936-6.025-.072-2.282-4.326-6.26-4.326-6.26s-7.97-3.433-11.47-2.86c-3.814.625-10.85 6.94-10.85 6.94l.663 10.585 12.093 15.256z"
@@ -150,4 +148,3 @@ const SvgLionSalient = (props: {
 );
 
 export default SvgLionSalient;
-

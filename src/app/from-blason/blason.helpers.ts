@@ -49,12 +49,29 @@ export function stringifyParty(partyName: Party['name']): string {
 
 function stringifyCharge(charge: Charge): string {
   if (charge.name === 'lion') {
-    let result = 'a lion ' + charge.attitude;
+    let result = '';
+    if (charge.countAndDisposition.count === 1) {
+      result += 'a lion';
+    } else {
+      if (charge.countAndDisposition.count === 2) {
+        result += 'two lions';
+      } else if (charge.countAndDisposition.count === 3) {
+        result += 'three lions';
+      } else {
+        cannotHappen(charge.countAndDisposition.count);
+      }
+    }
+
+    result += ' ' + charge.attitude;
+
     if (charge.head !== null) {
       result += ' ' + charge.head;
     }
     if (charge.tail !== null) {
       result += ' tail ' + charge.tail;
+    }
+    if (charge.countAndDisposition.count !== 1) {
+      result += ' in ' + charge.countAndDisposition.disposition;
     }
 
     result += ' ' + charge.tincture.name;

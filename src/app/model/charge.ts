@@ -23,7 +23,8 @@ export type Lion = {
   tail: LionTail | null;
 
   tincture: Tincture;
-  armedAndLangued: Tincture; //If not specified, gules, or if the field is gules, azure
+  armedAndLangued: Tincture;
+  countAndDisposition: { count: 1 } | { count: 2 | 3; disposition: 'pale' };
 };
 
 export type Charge = Lion;

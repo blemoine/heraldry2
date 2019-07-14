@@ -17,6 +17,7 @@ export const ChargeForm = ({ charge, chargeChange }: Props) => {
           head: null,
           tail: null,
           tincture: or,
+          countAndDisposition: { count: 1 },
         });
       } else {
         cannotHappen(chargeName);
