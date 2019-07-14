@@ -8,6 +8,7 @@ import { uuid } from '../../utils/uuid';
 import { Tincture } from '../model/tincture';
 import { FieldDisplay } from './coats-of-arms-parts/FieldDisplay';
 import { HeaterDisplay } from './coats-of-arms-parts/escutcheon/HeaterDisplay';
+import { ChargeDisplay } from './coats-of-arms-parts/ChargeDisplay';
 
 type Props = { blason: Blason };
 export const CoatsOfArmsDisplay = (props: Props) => {
@@ -79,6 +80,18 @@ export const CoatsOfArmsDisplay = (props: Props) => {
           />
         </g>
       )}
+
+      {props.blason.charge && (
+        <g clipPath="url(#plain-field-clip-path)">
+          <ChargeDisplay
+            width={width}
+            height={height}
+            charge={props.blason.charge}
+            fillFromTincture={fillFromTincture}
+          />
+        </g>
+      )}
+
       <HeaterDisplay height={height} width={width} />
     </svg>
   );

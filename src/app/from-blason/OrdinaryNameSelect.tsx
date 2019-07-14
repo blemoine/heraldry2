@@ -14,7 +14,8 @@ export const OrdinaryNameSelect = ({ ordinary, ordinaryChange }: Props) => {
     }
   };
 
-  const value = ordinariesWithNone.find(({ value }) => value === ordinary);
+  const searchedOrdinary = ordinary || 'None';
+  const value = ordinariesWithNone.find(({ value }) => value === searchedOrdinary);
 
   return (
     <Select

@@ -1,6 +1,7 @@
 import { Tincture } from './tincture';
 import { Ordinary } from './ordinary';
 import { Party } from './party';
+import { Charge } from './charge';
 
 export type PartyField = {
   kind: 'party';
@@ -15,4 +16,5 @@ export type Field = PlainField | PartyField;
 export type Blason = {
   field: Field;
   ordinary?: Ordinary;
+  charge?: Charge;
 };

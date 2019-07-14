@@ -44,6 +44,43 @@ describe('stringifyBlason', () => {
       })
     ).toBe('Per pale sable and argent, a pale purpure');
   });
+
+  it('should write a default lion correctly', () => {
+    expect(
+      stringifyBlason({
+        field: { kind: 'plain', tincture: azure },
+        charge: { name: 'lion', tincture: or, armedAndLangued: gules, attitude: 'rampant', tail: null, head: null },
+      })
+    ).toBe('Azure, a lion rampant or');
+  });
+
+  it('should write a lion armed and langued correctly', () => {
+    expect(
+      stringifyBlason({
+        field: { kind: 'plain', tincture: gules },
+        charge: { name: 'lion', tincture: sable, armedAndLangued: azure, attitude: 'rampant', tail: null, head: null },
+      })
+    ).toBe('Gules, a lion rampant sable armed and langued azure');
+  });
+
+  it('should write a lion over an ordinary correctly', () => {
+    expect(
+      stringifyBlason({
+        field: { kind: 'party', per: { name: 'pale', tinctures: [ermine, azure] } },
+        ordinary: { name: 'chief', tincture: ermine },
+        charge: {
+          name: 'lion',
+          tincture: gules,
+          armedAndLangued: sable,
+          attitude: 'passant',
+          tail: 'nowed',
+          head: 'guardant',
+        },
+      })
+    ).toBe(
+      'Per pale ermine and azure, a chief ermine, a lion passant guardant tail nowed gules armed and langued sable'
+    );
+  });
 });
 
 describe('isThereFur', () => {
@@ -70,5 +107,45 @@ describe('isThereFur', () => {
     expect(
       isThereFur({ field: { kind: 'plain', tincture: azure }, ordinary: { name: 'bend', tincture: argent } }, 'ermine')
     ).toBe(false);
+  });
+
+  it('should return true if the charge  armed is ermine', () => {
+    expect(
+      isThereFur(
+        {
+          field: { kind: 'plain', tincture: gules },
+          ordinary: { name: 'bend', tincture: azure },
+          charge: {
+            name: 'lion',
+            head: null,
+            armedAndLangued: ermine,
+            tincture: azure,
+            attitude: 'rampant',
+            tail: null,
+          },
+        },
+        'ermine'
+      )
+    ).toBe(true);
+  });
+
+  it('should return true if the charge  is vair', () => {
+    expect(
+      isThereFur(
+        {
+          field: { kind: 'plain', tincture: gules },
+          ordinary: { name: 'bend', tincture: azure },
+          charge: {
+            name: 'lion',
+            head: null,
+            armedAndLangued: azure,
+            tincture: vair,
+            attitude: 'rampant',
+            tail: null,
+          },
+        },
+        'vair'
+      )
+    ).toBe(true);
   });
 });

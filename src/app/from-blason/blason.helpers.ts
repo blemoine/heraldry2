@@ -1,14 +1,20 @@
 import { Blason, Field } from '../model/blason';
-import { Furs } from '../model/tincture';
+import { Furs, gules } from '../model/tincture';
 import { Party } from '../model/party';
 import { cannotHappen } from '../../utils/cannot-happen';
+import { Charge } from '../model/charge';
+import { isNotNull } from '../../utils/isNotNull';
 
 export function stringifyBlason(blason: Blason): string {
   const field = stringifyField(blason.field);
 
-  if (blason.ordinary) {
-    const ordinary = 'a ' + blason.ordinary.name + ' ' + blason.ordinary.tincture.name;
-    return field + ', ' + ordinary;
+  const addendum = [
+    blason.ordinary ? 'a ' + blason.ordinary.name + ' ' + blason.ordinary.tincture.name : null,
+    blason.charge ? stringifyCharge(blason.charge) : null,
+  ].filter(isNotNull);
+
+  if (addendum.length > 0) {
+    return field + ', ' + addendum.join(', ');
   } else {
     return field;
   }
@@ -40,6 +46,28 @@ export function stringifyParty(partyName: Party['name']): string {
     return cannotHappen(partyName);
   }
 }
+
+function stringifyCharge(charge: Charge): string {
+  if (charge.name === 'lion') {
+    let result = 'a lion ' + charge.attitude;
+    if (charge.head !== null) {
+      result += ' ' + charge.head;
+    }
+    if (charge.tail !== null) {
+      result += ' tail ' + charge.tail;
+    }
+
+    result += ' ' + charge.tincture.name;
+    if (charge.armedAndLangued.name !== gules.name) {
+      result += ' armed and langued ' + charge.armedAndLangued.name;
+    }
+
+    return result;
+  } else {
+    return cannotHappen(charge.name);
+  }
+}
+
 function capitalizeFirstLetter(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
@@ -55,5 +83,26 @@ export function isThereFur(blason: Blason, fur: Furs['name']): boolean {
     }
   }
 
-  return !!blason.ordinary && blason.ordinary.tincture.name === fur;
+  const ordinary = blason.ordinary;
+  if (!!ordinary) {
+    if (ordinary.tincture.name === fur) {
+      return true;
+    }
+  }
+
+  const charge = blason.charge;
+  if (!!charge) {
+    if (charge.name === 'lion') {
+      if (charge.tincture.name === fur) {
+        return true;
+      }
+      if (charge.armedAndLangued.name === fur) {
+        return true;
+      }
+    } else {
+      return cannotHappen(charge.name);
+    }
+  }
+
+  return false;
 }
