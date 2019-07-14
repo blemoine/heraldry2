@@ -9,6 +9,7 @@ import SvgGuardantLionHead from './SvgGuardantLionHead';
 import SvgRegardantLionHead from './SvgRegardantLionHead';
 import SvgLionPassant from './SvgLionPassant';
 import SvgLionDormant from './SvgLionDormant';
+import SvgLionCouchant from './SvgLionCouchant';
 
 type Props = { charge: Lion; width: number; height: number; fillFromTincture: (tincture: Tincture) => string };
 export const LionDisplay = ({ charge, width, height, fillFromTincture }: Props) => {
@@ -51,7 +52,19 @@ export const LionDisplay = ({ charge, width, height, fillFromTincture }: Props) 
   } else if (charge.attitude === 'sejant-erect') {
     throw new Error('TODO unsupported' + charge.attitude);
   } else if (charge.attitude === 'couchant') {
-    throw new Error('TODO unsupported' + charge.attitude);
+    return (
+      <SvgLionCouchant
+        width={width * 0.8}
+        height={height * 0.8}
+        x={width * 0.1}
+        y={0}
+        mainFill={mainFill}
+        head={head}
+        clawFill={armedAndLanguedFill}
+        stroke={stroke}
+      />
+    );
+
   } else if (charge.attitude === 'dormant') {
     return (
       <SvgLionDormant

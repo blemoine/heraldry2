@@ -1,5 +1,7 @@
 import React from 'react';
 
+// Thanks to https://en.wikipedia.org/wiki/File:Lion_Dormant.svg
+
 const SvgLionDormant = (props: {
   width: number;
   height: number;
