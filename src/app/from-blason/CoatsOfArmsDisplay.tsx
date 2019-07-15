@@ -10,10 +10,10 @@ import { FieldDisplay } from './coats-of-arms-parts/FieldDisplay';
 import { HeaterDisplay } from './coats-of-arms-parts/escutcheon/HeaterDisplay';
 import { ChargeDisplay } from './coats-of-arms-parts/ChargeDisplay';
 
-type Props = { blason: Blason };
+type Props = { blason: Blason; width: number; height: number };
 export const CoatsOfArmsDisplay = (props: Props) => {
-  const width = 200;
-  const height = (width * 4) / 3;
+  const width = props.width;
+  const height = props.height;
 
   const erminePatternId = 'field-pattern-' + uuid();
   const vairPatternId = 'field-pattern-' + uuid();

@@ -1,18 +1,18 @@
 {
-    "compilerOptions": {
-        "target": "es2017",
-        "module": "commonjs",
-        "outDir": "./dist/",
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "outDir": "./dist/",
 
-        "strict": true,
+    "strict": true,
 
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "noImplicitReturns": true,
-        "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
 
-        "esModuleInterop": true,
-        "jsx": "react",
-        "lib": ["esnext", "dom"]
-    }
+    "esModuleInterop": true,
+    "jsx": "react",
+    "lib": ["esnext", "dom"]
+  }
 }
