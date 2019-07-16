@@ -8,22 +8,20 @@ import { ChargeDetailForm } from './ChargeDetailForm';
 type Props = { charge: Charge | null; chargeChange: (charge: Charge | null) => void };
 export const ChargeForm = ({ charge, chargeChange }: Props) => {
   function changeChargeType(chargeName: Charge['name'] | null) {
-    if (chargeName) {
-      if (chargeName === 'lion') {
-        chargeChange({
-          name: chargeName,
-          armedAndLangued: gules,
-          attitude: 'rampant',
-          head: null,
-          tail: null,
-          tincture: or,
-          countAndDisposition: { count: 1 },
-        });
-      } else {
-        cannotHappen(chargeName);
-      }
-    } else {
+    if (chargeName === 'lion') {
+      chargeChange({
+        name: chargeName,
+        armedAndLangued: gules,
+        attitude: 'rampant',
+        head: null,
+        tail: null,
+        tincture: or,
+        countAndDisposition: { count: 1 },
+      });
+    } else if (!chargeName) {
       chargeChange(null);
+    } else {
+      cannotHappen(chargeName);
     }
   }
 

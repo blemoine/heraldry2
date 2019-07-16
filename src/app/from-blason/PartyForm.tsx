@@ -1,12 +1,12 @@
 import * as React from 'react';
-import Select from 'react-select';
 import { TinctureSelect } from './TinctureSelect';
 import { parties, Party } from '../model/party';
 import { PartyField } from '../model/blason';
 import { Tincture } from '../model/tincture';
 import { stringifyParty } from './blason.helpers';
+import { SelectScalar } from '../common/SelectScalar';
 
-const partiesOptions = parties.map((partyName) => ({ value: partyName, label: stringifyParty(partyName) }));
+const partiesOptions = parties;
 
 type Props = { field: PartyField; fieldChange: (field: PartyField) => void };
 export const PartyForm = ({ field, fieldChange }: Props) => {
@@ -26,10 +26,11 @@ export const PartyForm = ({ field, fieldChange }: Props) => {
       <div className="col">
         <div className="form-group">
           <label>Select your party</label>
-          <Select
+          <SelectScalar
             options={partiesOptions}
-            value={partiesOptions.find(({ value }) => value === field.per.name)}
-            onChange={(t: any) => partyChange(t.value)}
+            formatValue={stringifyParty}
+            value={field.per.name}
+            valueChange={(t) => partyChange(t)}
           />
         </div>
       </div>
