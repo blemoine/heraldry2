@@ -99,7 +99,7 @@ describe('stringifyBlason', () => {
     );
   });
 
-  it('should write multiple lion', () => {
+  it('should stringify correctly the England Royal Arms', () => {
     expect(
       stringifyBlason({
         field: { kind: 'plain', tincture: gules },
