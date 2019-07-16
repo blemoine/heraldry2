@@ -2,8 +2,12 @@ import * as React from 'react';
 import { Lion, LionAttitude, lionAttitudes, LionHead, lionHeads } from '../../model/charge';
 import { TinctureSelect } from '../TinctureSelect';
 import { Tincture } from '../../model/tincture';
-import Select from 'react-select';
+import { SelectScalar } from '../../common/SelectScalar';
+
 type Props = { charge: Lion; chargeChange: (lion: Lion) => void };
+
+const headPostures = ['None', ...lionHeads] as const;
+const countOptions = [1, 2, 3] as const;
 
 export const LionForm = ({ charge, chargeChange }: Props) => {
   function chargeTinctureChange(tincture: Tincture) {
@@ -20,19 +24,14 @@ export const LionForm = ({ charge, chargeChange }: Props) => {
     });
   }
 
-  const defaultHeadValue = { value: null, label: 'None' };
-  const headPostures = [defaultHeadValue, ...lionHeads.map((head) => ({ value: head, label: head }))];
-  const selectedHead = headPostures.find(({ value }) => value === charge.head) || headPostures;
+  const selectedHead = charge.head || 'None';
 
-  function headPostureChange(head: LionHead | null) {
+  function headPostureChange(head: LionHead | 'None') {
     chargeChange({
       ...charge,
-      head,
+      head: head === 'None' ? null : head,
     });
   }
-
-  const attitudes = lionAttitudes.map((value) => ({ value, label: value }));
-  const selectedAttitude = attitudes.find(({ value }) => value === charge.attitude);
 
   function attitudeChange(attitude: LionAttitude) {
     chargeChange({
@@ -41,8 +40,6 @@ export const LionForm = ({ charge, chargeChange }: Props) => {
     });
   }
 
-  const countOptions = [1, 2, 3].map((i) => ({ label: i, value: i }));
-  const selectedCount = countOptions.find(({ value }) => value === charge.countAndDisposition.count);
   function countChange(count: 1 | 2 | 3) {
     chargeChange({
       ...charge,
@@ -68,7 +65,7 @@ export const LionForm = ({ charge, chargeChange }: Props) => {
         <div className="col">
           <div className="form-group">
             <label>Select the number of lion</label>
-            <Select options={countOptions} value={selectedCount} onChange={(t: any) => countChange(t.value)} />
+            <SelectScalar options={countOptions} value={charge.countAndDisposition.count} valueChange={countChange} />
           </div>
         </div>
       </div>
@@ -76,7 +73,7 @@ export const LionForm = ({ charge, chargeChange }: Props) => {
         <div className="col">
           <div className="form-group">
             <label>Select the attitude</label>
-            <Select options={attitudes} value={selectedAttitude} onChange={(t: any) => attitudeChange(t.value)} />
+            <SelectScalar options={lionAttitudes} value={charge.attitude} valueChange={attitudeChange} />
           </div>
         </div>
       </div>
@@ -85,11 +82,7 @@ export const LionForm = ({ charge, chargeChange }: Props) => {
           <div className="col">
             <div className="form-group">
               <label>Select the head posture</label>
-              <Select
-                options={headPostures}
-                value={selectedHead}
-                onChange={(t: any) => headPostureChange(t.value === 'None' ? null : t.value)}
-              />
+              <SelectScalar options={headPostures} value={selectedHead} valueChange={headPostureChange} />
             </div>
           </div>
         )}

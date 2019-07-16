@@ -1,10 +1,10 @@
-import Select from 'react-select';
 import * as React from 'react';
 import { ordinaries, Ordinary } from '../model/ordinary';
+import { SelectScalar } from '../common/SelectScalar';
 
 type Props = { ordinary: Ordinary['name'] | null; ordinaryChange: (t: Ordinary['name'] | null) => void };
 
-const ordinariesWithNone = ['None', ...ordinaries].map((t) => ({ value: t, label: t }));
+const ordinariesWithNone = ['None', ...ordinaries] as const;
 export const OrdinaryNameSelect = ({ ordinary, ordinaryChange }: Props) => {
   const ordinaryTypeChange = (name: Ordinary['name'] | 'None') => {
     if (name === 'None') {
@@ -15,13 +15,6 @@ export const OrdinaryNameSelect = ({ ordinary, ordinaryChange }: Props) => {
   };
 
   const searchedOrdinary = ordinary || 'None';
-  const value = ordinariesWithNone.find(({ value }) => value === searchedOrdinary);
 
-  return (
-    <Select
-      options={ordinariesWithNone}
-      value={value}
-      onChange={(t: any) => ordinaryTypeChange(t.value === 'None' ? null : t.value)}
-    />
-  );
+  return <SelectScalar options={ordinariesWithNone} value={searchedOrdinary} valueChange={ordinaryTypeChange} />;
 };
