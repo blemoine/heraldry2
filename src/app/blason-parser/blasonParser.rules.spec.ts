@@ -10,23 +10,14 @@ import { parseBlason } from './blasonParser';
 
 const tinctureArb: Arbitrary<Tincture> = fc.constantFrom(...tinctures);
 const plainFieldArb: Arbitrary<PlainField> = tinctureArb.map((tincture) => ({ kind: 'plain', tincture }));
-const partiesArb: Arbitrary<Party['name']> = fc.constantFrom(...parties);
-const partyFieldArb: Arbitrary<PartyField> = fc.tuple(partiesArb, tinctureArb, tinctureArb).map(
-  ([name, tincture1, tincture2]): PartyField => {
-    const party: Party = {
-      name,
-      tinctures: [tincture1, tincture2],
-    };
-    return {
-      kind: 'party',
-      per: party,
-    };
-  }
-);
+
+const partyArb: Arbitrary<Party> = fc.record({
+  name: fc.constantFrom(...parties),
+  tinctures: fc.tuple(tinctureArb, tinctureArb),
+});
+const partyFieldArb: Arbitrary<PartyField> = partyArb.map((party): PartyField => ({ kind: 'party', per: party }));
 const fieldArb: Arbitrary<Field> = fc.oneof<Field>(plainFieldArb, partyFieldArb);
-const ordinaryArb: Arbitrary<Ordinary> = fc
-  .tuple(fc.constantFrom(...ordinaries), tinctureArb)
-  .map(([name, tincture]) => ({ name, tincture }));
+const ordinaryArb: Arbitrary<Ordinary> = fc.record({ name: fc.constantFrom(...ordinaries), tincture: tinctureArb });
 
 const chargeArb: Arbitrary<Charge> = fc.constantFrom(...charges).chain((chargeName) => {
   if (chargeName === 'lion') {
