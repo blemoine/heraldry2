@@ -14,6 +14,7 @@
   "devDependencies": {
     "@svgr/cli": "^4.3.1",
     "@types/jest": "^24.0.15",
+    "@types/parsimmon": "^1.10.0",
     "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.4",
     "@types/react-resizable": "^1.7.0",
@@ -28,6 +29,7 @@
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
+    "parsimmon": "^1.12.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-resizable": "^1.8.0",
