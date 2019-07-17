@@ -1,41 +1,41 @@
-import { parse } from './blasonParser';
+import { parseBlason } from './blasonParser';
 import { argent, azure, ermine, gules, or, sable, vair, vert } from '../model/tincture';
 import { Blason } from '../model/blason';
 
-describe('parse', () => {
-  it('should parse a plain blason', () => {
-    const result = parse('Gules');
+describe('parseBlason', () => {
+  it('should parseBlason a plain blason', () => {
+    const result = parseBlason('Gules');
 
     const expected: Blason = { field: { kind: 'plain', tincture: gules } };
     expect(result).toEqual(expected);
   });
-  it('should parse a fur blason', () => {
-    const result = parse('Ermine');
+  it('should parseBlason a fur blason', () => {
+    const result = parseBlason('Ermine');
 
     const expected: Blason = { field: { kind: 'plain', tincture: ermine } };
     expect(result).toEqual(expected);
   });
-  it('should parse a party division', () => {
-    const result = parse('Per pale vair and azure');
+  it('should parseBlason a party division', () => {
+    const result = parseBlason('Per pale vair and azure');
 
     const expected: Blason = { field: { kind: 'party', per: { name: 'pale', tinctures: [vair, azure] } } };
     expect(result).toEqual(expected);
   });
-  it('should parse a party division by bend sinister', () => {
-    const result = parse('Per bend sinister ermine and vert');
+  it('should parseBlason a party division by bend sinister', () => {
+    const result = parseBlason('Per bend sinister ermine and vert');
 
     const expected: Blason = { field: { kind: 'party', per: { name: 'bendSinister', tinctures: [ermine, vert] } } };
     expect(result).toEqual(expected);
   });
-  it('should parse a blason with an ordinary', () => {
-    const result = parse('Or, a chief argent');
+  it('should parseBlason a blason with an ordinary', () => {
+    const result = parseBlason('Or, a chief argent');
 
     const expected: Blason = { field: { kind: 'plain', tincture: or }, ordinary: { name: 'chief', tincture: argent } };
     expect(result).toEqual(expected);
   });
 
-  it('should parse a simple lion correctly', () => {
-    const result = parse('Gules, a lion rampant sable armed and langued azure');
+  it('should parseBlason a simple lion correctly', () => {
+    const result = parseBlason('Gules, a lion rampant sable armed and langued azure');
     const expected: Blason = {
       field: { kind: 'plain', tincture: gules },
       charge: {
@@ -52,8 +52,8 @@ describe('parse', () => {
     expect(result).toEqual(expected);
   });
 
-  it('should parse correctly the England Royal Arms', () => {
-    const result = parse('Gules, three lions passant guardant in pale or armed and langued azure');
+  it('should parseBlason correctly the England Royal Arms', () => {
+    const result = parseBlason('Gules, three lions passant guardant in pale or armed and langued azure');
     const expected: Blason = {
       field: { kind: 'plain', tincture: gules },
       charge: {

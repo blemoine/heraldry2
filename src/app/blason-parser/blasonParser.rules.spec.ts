@@ -6,7 +6,7 @@ import { ordinaries, Ordinary } from '../model/ordinary';
 import { Charge, charges, CountAndDisposition, Lion, lionAttitudes, lionHeads, lionTails } from '../model/charge';
 import { cannotHappen } from '../../utils/cannot-happen';
 import { stringifyBlason } from '../from-blason/blason.helpers';
-import { parse } from './blasonParser';
+import { parseBlason } from './blasonParser';
 
 const tinctureArb: Arbitrary<Tincture> = fc.constantFrom(...tinctures);
 const plainFieldArb: Arbitrary<PlainField> = tinctureArb.map((tincture) => ({ kind: 'plain', tincture }));
@@ -71,11 +71,11 @@ const blasonArb: Arbitrary<Blason> = fc.tuple(fieldArb, ordinaryArb, chargeArb).
   }
 );
 
-describe('parse and stringify', () => {
+describe('parseBlason and stringify', () => {
   it('should be invert of each other', () => {
     fc.assert(
       fc.property(blasonArb, (blason) => {
-        expect(parse(stringifyBlason(blason))).toEqual(blason);
+        expect(parseBlason(stringifyBlason(blason))).toEqual(blason);
       })
     );
   });

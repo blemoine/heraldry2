@@ -164,6 +164,6 @@ const language: Language = {
 
 const lexer = P.createLanguage(language);
 
-export function parse(program: string): Blason {
+export function parseBlason(program: string): Blason {
   return lexer.Blason.tryParse(program);
 }
