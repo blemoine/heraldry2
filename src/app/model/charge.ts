@@ -16,6 +16,7 @@ export const lionTails = ['coward', 'forked', 'crossed', 'nowed'] as const;
 export type LionAttitude = typeof lionAttitudes[number];
 export type LionHead = typeof lionHeads[number];
 export type LionTail = typeof lionTails[number];
+export type CountAndDisposition = { count: 1 } | { count: 2 | 3; disposition: 'pale' };
 export type Lion = {
   name: 'lion';
   attitude: LionAttitude;
@@ -24,7 +25,7 @@ export type Lion = {
 
   tincture: Tincture;
   armedAndLangued: Tincture;
-  countAndDisposition: { count: 1 } | { count: 2 | 3; disposition: 'pale' };
+  countAndDisposition: CountAndDisposition;
 };
 
 export type Charge = Lion;

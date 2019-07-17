@@ -4,7 +4,17 @@ import { gules, Tincture, tinctures } from '../model/tincture';
 import { parties, Party } from '../model/party';
 import { ordinaries, Ordinary } from '../model/ordinary';
 import { stringifyParty } from '../from-blason/blason.helpers';
-import { Charge, charges, Lion, LionAttitude, lionAttitudes, LionHead, lionHeads } from '../model/charge';
+import {
+  Charge,
+  charges,
+  Lion,
+  LionAttitude,
+  lionAttitudes,
+  LionHead,
+  lionHeads,
+  LionTail,
+  lionTails,
+} from '../model/charge';
 import { cannotHappen } from '../../utils/cannot-happen';
 import { identity } from '../../utils/identity';
 
@@ -80,11 +90,17 @@ const language: Language = {
           if (charge === 'lion') {
             const attitudeParser: P.Parser<LionAttitude> = buildAltParser(lionAttitudes, identity);
             const headParser: P.Parser<LionHead> = buildAltParser(lionHeads, identity);
+            const tailParser: P.Parser<LionTail> = buildAltParser(lionTails, identity);
 
             const lionNameParser = count === 1 ? P.regex(/lion/i) : P.regex(/lions/i);
             const lionParser: P.Parser<Lion> = P.seq(
               lionNameParser.skip(P.whitespace).then(attitudeParser),
               P.whitespace.then(headParser).fallback(null),
+              P.whitespace
+                .then(P.regex(/tail/i))
+                .then(P.whitespace)
+                .then(tailParser)
+                .fallback(null),
               count === 1
                 ? P.of({ count })
                 : P.whitespace
@@ -96,13 +112,13 @@ const language: Language = {
                 .then(P.whitespace)
                 .then(r.Tincture)
                 .fallback(null)
-            ).map(([attitude, head, countAndDisposition, tincture, armedAndLangued]) => {
+            ).map(([attitude, head, tail, countAndDisposition, tincture, armedAndLangued]) => {
               return {
                 name: 'lion',
                 attitude,
                 tincture,
                 armedAndLangued: armedAndLangued || gules,
-                tail: null,
+                tail,
                 head,
                 countAndDisposition,
               };
@@ -131,7 +147,13 @@ const language: Language = {
         .trim(P.optWhitespace)
         .chain((_) =>
           P.seq(
-            r.Ordinary.map((ordinary) => ({ ordinary })).fallback({}),
+            r.Ordinary.map((ordinary) => ({ ordinary }))
+              .skip(
+                P.string(',')
+                  .trim(P.optWhitespace)
+                  .or(P.string(''))
+              )
+              .fallback({}),
             r.Charge.map((charge) => ({ charge })).fallback({})
           ).map(([ordinary, charge]) => ({ ...ordinary, ...charge }))
         )
