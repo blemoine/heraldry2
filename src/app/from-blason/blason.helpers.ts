@@ -1,9 +1,10 @@
-import { Blason, Field } from '../model/blason';
+import { Blason } from '../model/blason';
 import { Furs, gules } from '../model/tincture';
 import { Party } from '../model/party';
 import { cannotHappen } from '../../utils/cannot-happen';
 import { Charge } from '../model/charge';
 import { isNotNull } from '../../utils/isNotNull';
+import { Field } from '../model/field';
 
 export function stringifyBlason(blason: Blason): string {
   const field = stringifyField(blason.field);

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { TinctureSelect } from './TinctureSelect';
 import { parties, Party } from '../model/party';
-import { PartyField } from '../model/blason';
+import { PartyField } from '../model/field';
 import { Tincture } from '../model/tincture';
 import { stringifyParty } from './blason.helpers';
 import { SelectScalar } from '../common/SelectScalar';

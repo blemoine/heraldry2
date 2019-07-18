@@ -1,5 +1,5 @@
 import * as P from 'parsimmon';
-import { Blason, Field } from '../model/blason';
+import { Blason } from '../model/blason';
 import { gules, Tincture, tinctures } from '../model/tincture';
 import { parties, Party } from '../model/party';
 import { ordinaries, Ordinary } from '../model/ordinary';
@@ -17,6 +17,7 @@ import {
 } from '../model/charge';
 import { cannotHappen } from '../../utils/cannot-happen';
 import { identity } from '../../utils/identity';
+import { Field } from '../model/field';
 
 type Language = {
   Tincture: (r: AppliedLanguage) => P.Parser<Tincture>;

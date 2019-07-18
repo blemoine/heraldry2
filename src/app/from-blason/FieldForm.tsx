@@ -1,4 +1,4 @@
-import { Field } from '../model/blason';
+import { Field } from '../model/field';
 import { TinctureSelect } from './TinctureSelect';
 import * as React from 'react';
 import { argent, Tincture } from '../model/tincture';

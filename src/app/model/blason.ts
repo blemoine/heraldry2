@@ -1,17 +1,6 @@
-import { Tincture } from './tincture';
 import { Ordinary } from './ordinary';
-import { Party } from './party';
 import { Charge } from './charge';
-
-export type PartyField = {
-  kind: 'party';
-  per: Party;
-};
-export type PlainField = {
-  kind: 'plain';
-  tincture: Tincture;
-};
-export type Field = PlainField | PartyField;
+import { Field } from './field';
 
 export type Blason = {
   field: Field;

@@ -1,5 +1,5 @@
 import fc, { Arbitrary } from 'fast-check';
-import { Blason, Field, PartyField, PlainField } from '../model/blason';
+import { Blason } from '../model/blason';
 import { Tincture, tinctures } from '../model/tincture';
 import { parties, Party } from '../model/party';
 import { ordinaries, Ordinary } from '../model/ordinary';
@@ -7,6 +7,7 @@ import { Charge, charges, CountAndDisposition, Lion, lionAttitudes, lionHeads, l
 import { cannotHappen } from '../../utils/cannot-happen';
 import { stringifyBlason } from '../from-blason/blason.helpers';
 import { parseBlason } from './blasonParser';
+import { Field, PartyField, PlainField } from '../model/field';
 
 const tinctureArb: Arbitrary<Tincture> = fc.constantFrom(...tinctures);
 const plainFieldArb: Arbitrary<PlainField> = tinctureArb.map((tincture) => ({ kind: 'plain', tincture }));

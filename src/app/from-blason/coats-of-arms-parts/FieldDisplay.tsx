@@ -1,4 +1,4 @@
-import { Field } from '../../model/blason';
+import { Field } from '../../model/field';
 import { cannotHappen } from '../../../utils/cannot-happen';
 import { Plain } from './fields/Plain';
 import * as React from 'react';

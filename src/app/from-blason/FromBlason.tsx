@@ -2,12 +2,13 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { OrdinaryForm } from './OrdinaryForm';
 import { ermine, gules } from '../model/tincture';
-import { Blason, Field } from '../model/blason';
+import { Blason } from '../model/blason';
 import { Ordinary } from '../model/ordinary';
 import { FieldForm } from './FieldForm';
 import { CoatsOfArmsDetail } from './CoatsOfArmsDetail';
 import { Charge } from '../model/charge';
 import { ChargeForm } from './ChargeForm';
+import { Field } from '../model/field';
 
 const baseDefaultBlason: Blason = {
   field: { kind: 'plain', tincture: gules },
