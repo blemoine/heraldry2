@@ -15,12 +15,15 @@ import { PalyDisplay } from './fields/PalyDisplay';
 
 type Props = { height: number; width: number; field: Field; fillFromTincture: (tincture: Tincture) => string };
 export const FieldDisplay = ({ field, height, width, fillFromTincture }: Props) => {
+  function fillFromTincturePair(arr: [Tincture, Tincture]): [string, string] {
+    return [fillFromTincture(arr[0]), fillFromTincture(arr[1])];
+  }
+
   if (field.kind === 'plain') {
     return <Plain fill={fillFromTincture(field.tincture)} height={height} width={width} />;
   } else if (field.kind === 'party') {
     const partyName = field.per.name;
-    const tinctures = field.per.tinctures;
-    const fill: [string, string] = [fillFromTincture(tinctures[0]), fillFromTincture(tinctures[1])];
+    const fill: [string, string] = fillFromTincturePair(field.per.tinctures);
     if (partyName === 'bend') {
       return <BendDisplay fill={fill} height={height} width={width} />;
     } else if (partyName === 'bendSinister') {
@@ -39,10 +42,10 @@ export const FieldDisplay = ({ field, height, width, fillFromTincture }: Props) 
       return cannotHappen(partyName);
     }
   } else if (field.kind === 'bendy') {
-    const fill: [string, string] = [fillFromTincture(field.tinctures[0]), fillFromTincture(field.tinctures[1])];
+    const fill: [string, string] = fillFromTincturePair(field.tinctures);
     return <BendyDisplay fill={fill} width={width} height={height} />;
   } else if (field.kind === 'paly') {
-    const fill: [string, string] = [fillFromTincture(field.tinctures[0]), fillFromTincture(field.tinctures[1])];
+    const fill: [string, string] = fillFromTincturePair(field.tinctures);
     return <PalyDisplay fill={fill} width={width} height={height} />;
   } else {
     return cannotHappen(field);
