@@ -115,6 +115,21 @@ describe('stringifyBlason', () => {
       })
     ).toBe('Gules, three lions passant guardant in pale or armed and langued azure');
   });
+
+  it('should stringify paly field', () => {
+    expect(
+      stringifyBlason({
+        field: { kind: 'paly', tinctures: [argent, gules] },
+      })
+    ).toBe('Paly argent and gules');
+  });
+  it('should stringify bendy field', () => {
+    expect(
+      stringifyBlason({
+        field: { kind: 'bendy', tinctures: [ermine, vert] },
+      })
+    ).toBe('Bendy ermine and vert');
+  });
 });
 
 describe('isThereFur', () => {
@@ -183,5 +198,9 @@ describe('isThereFur', () => {
         'vair'
       )
     ).toBe(true);
+  });
+
+  it('should return true if the field  is bendy vair', () => {
+    expect(isThereFur({ field: { kind: 'bendy', tinctures: [gules, vair] } }, 'vair')).toBe(true);
   });
 });

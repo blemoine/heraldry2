@@ -80,7 +80,14 @@ const language: Language = {
   Field(r: AppliedLanguage): P.Parser<Field> {
     return P.alt(
       r.Tincture.map((tincture) => ({ kind: 'plain', tincture })),
-      r.Party.map((party) => ({ kind: 'party', per: party }))
+      r.Party.map((party) => ({ kind: 'party', per: party })),
+      P.seq(
+        P.alt(P.regex(/Paly/i).result('paly'), P.regex(/Bendy/i).result('bendy')),
+        P.whitespace.then(r.Tincture).skip(P.whitespace),
+        P.regex(/and/i)
+          .skip(P.whitespace)
+          .then(r.Tincture)
+      ).map(([kind, tincture1, tincture2]) => ({ kind, tinctures: [tincture1, tincture2] }))
     );
   },
 

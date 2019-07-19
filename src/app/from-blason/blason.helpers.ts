@@ -24,10 +24,16 @@ export function stringifyBlason(blason: Blason): string {
 function stringifyField(field: Field): string {
   if (field.kind === 'plain') {
     return capitalizeFirstLetter(field.tincture.name);
-  } else {
+  } else if (field.kind === 'party') {
     const perName = stringifyParty(field.per.name);
     const tinctures = field.per.tinctures.map((t) => t.name).join(' and ');
     return `Per ${perName} ${tinctures}`;
+  } else if (field.kind === 'bendy') {
+    return `Bendy ${field.tinctures[0].name} and ${field.tinctures[1].name}`;
+  } else if (field.kind === 'paly') {
+    return `Paly ${field.tinctures[0].name} and ${field.tinctures[1].name}`;
+  } else {
+    return cannotHappen(field);
   }
 }
 
@@ -91,14 +97,25 @@ function capitalizeFirstLetter(str: string): string {
 }
 
 export function isThereFur(blason: Blason, fur: Furs['name']): boolean {
-  if (blason.field.kind === 'plain') {
-    if (blason.field.tincture.name === fur) {
+  const field = blason.field;
+  if (field.kind === 'plain') {
+    if (field.tincture.name === fur) {
+      return true;
+    }
+  } else if (field.kind === 'party') {
+    if (field.per.tinctures.some((t) => t.name === fur)) {
+      return true;
+    }
+  } else if (field.kind === 'paly') {
+    if (field.tinctures.some((t) => t.name === fur)) {
+      return true;
+    }
+  } else if (field.kind === 'bendy') {
+    if (field.tinctures.some((t) => t.name === fur)) {
       return true;
     }
   } else {
-    if (blason.field.per.tinctures.some((t) => t.name === fur)) {
-      return true;
-    }
+    return cannotHappen(field);
   }
 
   const ordinary = blason.ordinary;

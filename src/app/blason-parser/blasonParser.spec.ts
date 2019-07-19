@@ -69,4 +69,13 @@ describe('parseBlason', () => {
 
     expect(result).toEqual(expected);
   });
+
+  it('should parseBlason correctly a bendy field', () => {
+    const result = parseBlason('Bendy argent and sable');
+    const expected: Blason = {
+      field: { kind: 'bendy', tinctures: [argent, sable] },
+    };
+
+    expect(result).toEqual(expected);
+  });
 });

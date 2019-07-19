@@ -10,6 +10,8 @@ import { ChevronDisplay } from './fields/ChevronDisplay';
 import { BendSinisterDisplay } from './fields/BendSinisterDisplay';
 import { CrossDisplay } from './fields/CrossDisplay';
 import { SaltireDisplay } from './fields/SaltireDisplay';
+import { BendyDisplay } from './fields/BendyDisplay';
+import { PalyDisplay } from './fields/PalyDisplay';
 
 type Props = { height: number; width: number; field: Field; fillFromTincture: (tincture: Tincture) => string };
 export const FieldDisplay = ({ field, height, width, fillFromTincture }: Props) => {
@@ -36,6 +38,12 @@ export const FieldDisplay = ({ field, height, width, fillFromTincture }: Props) 
     } else {
       return cannotHappen(partyName);
     }
+  } else if (field.kind === 'bendy') {
+    const fill: [string, string] = [fillFromTincture(field.tinctures[0]), fillFromTincture(field.tinctures[1])];
+    return <BendyDisplay fill={fill} width={width} height={height} />;
+  } else if (field.kind === 'paly') {
+    const fill: [string, string] = [fillFromTincture(field.tinctures[0]), fillFromTincture(field.tinctures[1])];
+    return <PalyDisplay fill={fill} width={width} height={height} />;
   } else {
     return cannotHappen(field);
   }
