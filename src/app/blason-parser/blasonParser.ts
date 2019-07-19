@@ -3,7 +3,7 @@ import { Blason } from '../model/blason';
 import { gules, Tincture, tinctures } from '../model/tincture';
 import { parties, Party } from '../model/party';
 import { ordinaries, Ordinary } from '../model/ordinary';
-import { stringifyParty } from '../from-blason/blason.helpers';
+import { stringifyNumber, stringifyParty } from '../from-blason/blason.helpers';
 import {
   Charge,
   charges,
@@ -17,7 +17,7 @@ import {
 } from '../model/charge';
 import { cannotHappen } from '../../utils/cannot-happen';
 import { identity } from '../../utils/identity';
-import { Field } from '../model/field';
+import { BarryField, Field } from '../model/field';
 
 type Language = {
   Tincture: (r: AppliedLanguage) => P.Parser<Tincture>;
@@ -87,7 +87,18 @@ const language: Language = {
         P.regex(/and/i)
           .skip(P.whitespace)
           .then(r.Tincture)
-      ).map(([kind, tincture1, tincture2]) => ({ kind, tinctures: [tincture1, tincture2] }))
+      ).map(([kind, tincture1, tincture2]) => ({ kind, tinctures: [tincture1, tincture2] })),
+      P.seq(
+        P.regex(/Barry of/i)
+          .skip(P.whitespace)
+          .then(buildAltParser([6, 8, 10] as const, stringifyNumber)),
+        P.whitespace.then(r.Tincture).skip(P.whitespace),
+        P.regex(/and/i)
+          .skip(P.whitespace)
+          .then(r.Tincture)
+      ).map(
+        ([number, tincture1, tincture2]): BarryField => ({ kind: 'barry', number, tinctures: [tincture1, tincture2] })
+      )
     );
   },
 

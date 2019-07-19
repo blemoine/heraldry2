@@ -7,7 +7,7 @@ import { Charge, charges, CountAndDisposition, Lion, lionAttitudes, lionHeads, l
 import { cannotHappen } from '../../utils/cannot-happen';
 import { stringifyBlason } from '../from-blason/blason.helpers';
 import { parseBlason } from './blasonParser';
-import { BendyField, Field, PalyField, PartyField, PlainField } from '../model/field';
+import { BarryField, BendyField, Field, PalyField, PartyField, PlainField } from '../model/field';
 
 const tinctureArb: Arbitrary<Tincture> = fc.constantFrom(...tinctures);
 const plainFieldArb: Arbitrary<PlainField> = tinctureArb.map((tincture) => ({ kind: 'plain', tincture }));
@@ -23,7 +23,16 @@ const bendyFieldArb: Arbitrary<BendyField> = fc
   .tuple(tinctureArb, tinctureArb)
   .map((tinctures) => ({ kind: 'bendy', tinctures }));
 const partyFieldArb: Arbitrary<PartyField> = partyArb.map((party): PartyField => ({ kind: 'party', per: party }));
-const fieldArb: Arbitrary<Field> = fc.oneof<Field>(plainFieldArb, partyFieldArb, palyFieldArb, bendyFieldArb);
+const barryFieldArb: Arbitrary<BarryField> = fc
+  .tuple(fc.constantFrom(6 as const, 8 as const, 10 as const), tinctureArb, tinctureArb)
+  .map(([number, ...tinctures]) => ({ kind: 'barry', number, tinctures }));
+const fieldArb: Arbitrary<Field> = fc.oneof<Field>(
+  plainFieldArb,
+  partyFieldArb,
+  palyFieldArb,
+  bendyFieldArb,
+  barryFieldArb
+);
 const ordinaryArb: Arbitrary<Ordinary> = fc.record({ name: fc.constantFrom(...ordinaries), tincture: tinctureArb });
 
 const chargeArb: Arbitrary<Charge> = fc.constantFrom(...charges).chain((chargeName) => {

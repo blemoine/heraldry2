@@ -32,6 +32,8 @@ function stringifyField(field: Field): string {
     return `Bendy ${field.tinctures[0].name} and ${field.tinctures[1].name}`;
   } else if (field.kind === 'paly') {
     return `Paly ${field.tinctures[0].name} and ${field.tinctures[1].name}`;
+  } else if (field.kind === 'barry') {
+    return `Barry of ${stringifyNumber(field.number)} ${field.tinctures[0].name} and ${field.tinctures[1].name}`;
   } else {
     return cannotHappen(field);
   }
@@ -56,16 +58,16 @@ export function stringifyParty(partyName: Party['name']): string {
 
 function stringifyCharge(charge: Charge): string {
   if (charge.name === 'lion') {
+    const count = charge.countAndDisposition.count;
+
     let result = '';
-    if (charge.countAndDisposition.count === 1) {
+    if (count === 1) {
       result += 'a lion';
     } else {
-      if (charge.countAndDisposition.count === 2) {
-        result += 'two lions';
-      } else if (charge.countAndDisposition.count === 3) {
-        result += 'three lions';
+      if (count === 2 || count === 3) {
+        result += stringifyNumber(count) + ' lions';
       } else {
-        cannotHappen(charge.countAndDisposition.count);
+        cannotHappen(count);
       }
     }
 
@@ -92,6 +94,32 @@ function stringifyCharge(charge: Charge): string {
   }
 }
 
+export function stringifyNumber(n: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10): string {
+  if (n === 1) {
+    return 'one';
+  } else if (n === 2) {
+    return 'two';
+  } else if (n === 3) {
+    return 'three';
+  } else if (n === 4) {
+    return 'four';
+  } else if (n === 5) {
+    return 'five';
+  } else if (n === 6) {
+    return 'six';
+  } else if (n === 7) {
+    return 'seven';
+  } else if (n === 8) {
+    return 'eight';
+  } else if (n === 9) {
+    return 'nine';
+  } else if (n === 10) {
+    return 'ten';
+  } else {
+    return cannotHappen(n);
+  }
+}
+
 function capitalizeFirstLetter(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
@@ -106,11 +134,7 @@ export function isThereFur(blason: Blason, fur: Furs['name']): boolean {
     if (field.per.tinctures.some((t) => t.name === fur)) {
       return true;
     }
-  } else if (field.kind === 'paly') {
-    if (field.tinctures.some((t) => t.name === fur)) {
-      return true;
-    }
-  } else if (field.kind === 'bendy') {
+  } else if (field.kind === 'paly' || field.kind === 'bendy' || field.kind === 'barry') {
     if (field.tinctures.some((t) => t.name === fur)) {
       return true;
     }

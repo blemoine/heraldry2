@@ -130,6 +130,29 @@ describe('stringifyBlason', () => {
       })
     ).toBe('Bendy ermine and vert');
   });
+
+  it('should stringify 10 barry field', () => {
+    expect(
+      stringifyBlason({
+        field: { kind: 'barry', number: 10, tinctures: [vert, purpure] },
+      })
+    ).toBe('Barry of ten vert and purpure');
+  });
+
+  it('should stringify 6 barry field', () => {
+    expect(
+      stringifyBlason({
+        field: { kind: 'barry', number: 6, tinctures: [vert, purpure] },
+      })
+    ).toBe('Barry of six vert and purpure');
+  });
+  it('should stringify 8 barry field', () => {
+    expect(
+      stringifyBlason({
+        field: { kind: 'barry', number: 8, tinctures: [vert, ermine] },
+      })
+    ).toBe('Barry of eight vert and ermine');
+  });
 });
 
 describe('isThereFur', () => {
