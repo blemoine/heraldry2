@@ -15,15 +15,11 @@ export const OrdinaryForm = ({ ordinary, ordinaryChange }: Props) => {
     }
   }
 
-  function ordinaryTinctureChange(ordinaryTincture: Tincture) {
-    if (ordinary) {
-      ordinaryChange({
-        ...ordinary,
-        tincture: ordinaryTincture,
-      });
-    } else {
-      throw new Error('This function should not be called if there is no ordinary');
-    }
+  function ordinaryTinctureChange(ordinary: Ordinary, ordinaryTincture: Tincture) {
+    ordinaryChange({
+      ...ordinary,
+      tincture: ordinaryTincture,
+    });
   }
 
   return (
@@ -38,7 +34,7 @@ export const OrdinaryForm = ({ ordinary, ordinaryChange }: Props) => {
         {ordinary && (
           <div className="form-group">
             <label>Select the tincture of the ordinary</label>
-            <TinctureSelect tincture={ordinary.tincture} tinctureChange={ordinaryTinctureChange} />
+            <TinctureSelect tincture={ordinary.tincture} tinctureChange={(t) => ordinaryTinctureChange(ordinary, t)} />
           </div>
         )}
       </div>
