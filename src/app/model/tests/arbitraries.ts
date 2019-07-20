@@ -1,6 +1,6 @@
 import fc, { Arbitrary } from 'fast-check';
 import { Tincture, tinctures } from '../tincture';
-import { BarryField, BendyField, Field, PalyField, PartyField, PlainField } from '../field';
+import { BarryField, BendyField, BendySinisterField, Field, PalyField, PartyField, PlainField } from '../field';
 import { parties, Party } from '../party';
 import { ordinaries, Ordinary } from '../ordinary';
 import { Charge, charges, CountAndDisposition, Lion, lionAttitudes, lionHeads, lionTails } from '../charge';
@@ -20,6 +20,9 @@ const palyFieldArb: Arbitrary<PalyField> = fc
 const bendyFieldArb: Arbitrary<BendyField> = fc
   .tuple(tinctureArb, tinctureArb)
   .map((tinctures) => ({ kind: 'bendy', tinctures }));
+const bendySinisterFieldArb: Arbitrary<BendySinisterField> = fc
+  .tuple(tinctureArb, tinctureArb)
+  .map((tinctures) => ({ kind: 'bendySinister', tinctures }));
 const partyFieldArb: Arbitrary<PartyField> = partyArb.map((party): PartyField => ({ kind: 'party', per: party }));
 const barryFieldArb: Arbitrary<BarryField> = fc
   .tuple(fc.constantFrom(6 as const, 8 as const, 10 as const), tinctureArb, tinctureArb)
@@ -29,6 +32,7 @@ const fieldArb: Arbitrary<Field> = fc.oneof<Field>(
   partyFieldArb,
   palyFieldArb,
   bendyFieldArb,
+  bendySinisterFieldArb,
   barryFieldArb
 );
 const ordinaryArb: Arbitrary<Ordinary> = fc.record({ name: fc.constantFrom(...ordinaries), tincture: tinctureArb });

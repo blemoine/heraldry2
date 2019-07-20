@@ -30,6 +30,8 @@ function stringifyField(field: Field): string {
     return `Per ${perName} ${tinctures}`;
   } else if (field.kind === 'bendy') {
     return `Bendy ${field.tinctures[0].name} and ${field.tinctures[1].name}`;
+  } else if (field.kind === 'bendySinister') {
+    return `Bendy Sinister ${field.tinctures[0].name} and ${field.tinctures[1].name}`;
   } else if (field.kind === 'paly') {
     return `Paly ${field.tinctures[0].name} and ${field.tinctures[1].name}`;
   } else if (field.kind === 'barry') {
@@ -134,7 +136,7 @@ export function isThereFur(blason: Blason, fur: Furs['name']): boolean {
     if (field.per.tinctures.some((t) => t.name === fur)) {
       return true;
     }
-  } else if (field.kind === 'paly' || field.kind === 'bendy' || field.kind === 'barry') {
+  } else if (field.kind === 'paly' || field.kind === 'bendy' || field.kind === 'bendySinister' ||  field.kind === 'barry') {
     if (field.tinctures.some((t) => t.name === fur)) {
       return true;
     }

@@ -17,7 +17,7 @@ import {
 } from '../model/charge';
 import { cannotHappen } from '../../utils/cannot-happen';
 import { identity } from '../../utils/identity';
-import { BarryField, BendyField, Field, PalyField } from '../model/field';
+import { BarryField, BendyField, BendySinisterField, Field, PalyField } from '../model/field';
 
 type Language = {
   Tincture: (r: AppliedLanguage) => P.Parser<Tincture>;
@@ -89,13 +89,20 @@ const language: Language = {
     ).map(
       ([number, tincture1, tincture2]): BarryField => ({ kind: 'barry', number, tinctures: [tincture1, tincture2] })
     );
-    const palyBendyParser: P.Parser<PalyField | BendyField> = P.seq(
-      P.alt(P.regex(/Paly/i).result('paly' as const), P.regex(/Bendy/i).result('bendy' as const)),
+    const palyBendyParser: P.Parser<PalyField | BendyField | BendySinisterField> = P.seq(
+      P.alt(
+        P.regex(/Paly/i).result('paly' as const),
+        P.regex(/Bendy Sinister/i).result('bendySinister' as const),
+        P.regex(/Bendy/i).result('bendy' as const),
+      ),
       P.whitespace.then(r.Tincture).skip(P.whitespace),
       P.regex(/and/i)
         .skip(P.whitespace)
         .then(r.Tincture)
-    ).map(([kind, tincture1, tincture2]): PalyField | BendyField => ({ kind, tinctures: [tincture1, tincture2] }));
+    ).map(([kind, tincture1, tincture2]): PalyField | BendyField | BendySinisterField => ({
+      kind,
+      tinctures: [tincture1, tincture2],
+    }));
     return P.alt(
       r.Tincture.map((tincture) => ({ kind: 'plain', tincture })),
       r.Party.map((party) => ({ kind: 'party', per: party })),

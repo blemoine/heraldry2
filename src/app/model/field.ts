@@ -17,6 +17,10 @@ export type BendyField = {
   kind: 'bendy';
   tinctures: [Tincture, Tincture];
 };
+export type BendySinisterField = {
+  kind: 'bendySinister';
+  tinctures: [Tincture, Tincture];
+};
 
 export type BarryField = {
   kind: 'barry';
@@ -24,4 +28,4 @@ export type BarryField = {
   tinctures: [Tincture, Tincture];
 };
 
-export type Field = PlainField | PartyField | PalyField | BendyField | BarryField;
+export type Field = PlainField | PartyField | PalyField | BendyField | BendySinisterField | BarryField;

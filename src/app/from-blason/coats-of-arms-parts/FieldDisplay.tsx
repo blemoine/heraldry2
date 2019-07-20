@@ -13,6 +13,7 @@ import { SaltireDisplay } from './fields/SaltireDisplay';
 import { BendyDisplay } from './fields/BendyDisplay';
 import { PalyDisplay } from './fields/PalyDisplay';
 import { BarryDisplay } from './fields/BarryDisplay';
+import { BendySinisterDisplay } from './fields/BendySinisterDisplay';
 
 type Props = { height: number; width: number; field: Field; fillFromTincture: (tincture: Tincture) => string };
 export const FieldDisplay = ({ field, height, width, fillFromTincture }: Props) => {
@@ -45,6 +46,9 @@ export const FieldDisplay = ({ field, height, width, fillFromTincture }: Props) 
   } else if (field.kind === 'bendy') {
     const fill: [string, string] = fillFromTincturePair(field.tinctures);
     return <BendyDisplay fill={fill} width={width} height={height} />;
+  } else if (field.kind === 'bendySinister') {
+    const fill: [string, string] = fillFromTincturePair(field.tinctures);
+    return <BendySinisterDisplay fill={fill} width={width} height={height} />;
   } else if (field.kind === 'paly') {
     const fill: [string, string] = fillFromTincturePair(field.tinctures);
     return <PalyDisplay fill={fill} width={width} height={height} />;

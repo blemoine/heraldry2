@@ -1,4 +1,4 @@
-import { BarryField, BendyField, Field, PalyField } from '../model/field';
+import { BarryField, BendyField, BendySinisterField, Field, PalyField } from '../model/field';
 import { TinctureSelect } from './TinctureSelect';
 import * as React from 'react';
 import { argent, sable, Tincture } from '../model/tincture';
@@ -12,7 +12,24 @@ export const FieldForm = ({ field, fieldChange }: Props) => {
     fieldChange({ kind: 'plain', tincture });
   }
 
-  const fieldKinds: Array<Field['kind']> = ['plain', 'bendy', 'paly', 'party', 'barry'];
+  const fieldKinds: Array<Field['kind']> = ['plain', 'bendy', 'bendySinister', 'paly', 'party', 'barry'];
+  function formatFieldKind(field: Field['kind']): string {
+    if (field === 'plain') {
+      return 'plain';
+    } else if (field === 'bendy') {
+      return 'bendy';
+    } else if (field === 'bendySinister') {
+      return 'bendy sinister';
+    } else if (field === 'paly') {
+      return 'paly';
+    } else if (field === 'barry') {
+      return 'barry';
+    } else if (field === 'party') {
+      return 'party';
+    } else {
+      return cannotHappen(field);
+    }
+  }
 
   function changeFieldKind(newKind: Field['kind']) {
     if (field.kind !== newKind) {
@@ -20,6 +37,8 @@ export const FieldForm = ({ field, fieldChange }: Props) => {
         fieldChange({ kind: 'party', per: { name: 'fess', tinctures: [argent, sable] } });
       } else if (newKind === 'bendy') {
         fieldChange({ kind: 'bendy', tinctures: [argent, sable] });
+      } else if (newKind === 'bendySinister') {
+        fieldChange({ kind: 'bendySinister', tinctures: [argent, sable] });
       } else if (newKind === 'paly') {
         fieldChange({ kind: 'paly', tinctures: [argent, sable] });
       } else if (newKind === 'plain') {
@@ -32,11 +51,11 @@ export const FieldForm = ({ field, fieldChange }: Props) => {
     }
   }
 
-  function firstTinctureChange(field: PalyField | BendyField | BarryField, tincture: Tincture) {
+  function firstTinctureChange(field: PalyField | BendyField | BendySinisterField | BarryField, tincture: Tincture) {
     fieldChange({ ...field, tinctures: [tincture, field.tinctures[1]] });
   }
 
-  function secondTinctureChange(field: PalyField | BendyField | BarryField, tincture: Tincture) {
+  function secondTinctureChange(field: PalyField | BendyField | BendySinisterField | BarryField, tincture: Tincture) {
     fieldChange({ ...field, tinctures: [field.tinctures[0], tincture] });
   }
 
@@ -45,7 +64,12 @@ export const FieldForm = ({ field, fieldChange }: Props) => {
     <>
       <div className="form-group form-check">
         <label>Select the field type</label>
-        <SelectScalar options={fieldKinds} value={field.kind} valueChange={changeFieldKind} />
+        <SelectScalar
+          options={fieldKinds}
+          value={field.kind}
+          valueChange={changeFieldKind}
+          formatValue={formatFieldKind}
+        />
       </div>
 
       {field.kind === 'barry' && (
@@ -66,7 +90,10 @@ export const FieldForm = ({ field, fieldChange }: Props) => {
         </div>
       ) : field.kind === 'party' ? (
         <PartyForm field={field} fieldChange={fieldChange} />
-      ) : field.kind === 'bendy' || field.kind === 'paly' || field.kind === 'barry' ? (
+      ) : field.kind === 'bendy' ||
+        field.kind === 'bendySinister' ||
+        field.kind === 'paly' ||
+        field.kind === 'barry' ? (
         <div className="row">
           <div className="col">
             <div className="form-group">
