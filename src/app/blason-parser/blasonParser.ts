@@ -185,6 +185,11 @@ const language: Language = {
 
 const lexer = P.createLanguage(language);
 
-export function parseBlason(program: string): Blason {
-  return lexer.Blason.tryParse(program);
+export function parseBlason(program: string): Blason | { error: string } {
+  const result = lexer.Blason.parse(program);
+  if (result.status) {
+    return result.value;
+  } else {
+    return { error: P.formatError(program, result) };
+  }
 }
