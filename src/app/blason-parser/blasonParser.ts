@@ -17,7 +17,7 @@ import {
 } from '../model/charge';
 import { cannotHappen } from '../../utils/cannot-happen';
 import { identity } from '../../utils/identity';
-import { BarryField, Field } from '../model/field';
+import { BarryField, BendyField, Field, PalyField } from '../model/field';
 
 type Language = {
   Tincture: (r: AppliedLanguage) => P.Parser<Tincture>;
@@ -78,27 +78,29 @@ const language: Language = {
   },
 
   Field(r: AppliedLanguage): P.Parser<Field> {
+    const barryParser: P.Parser<BarryField> = P.seq(
+      P.regex(/Barry of/i)
+        .skip(P.whitespace)
+        .then(buildAltParser([6, 8, 10] as const, stringifyNumber)),
+      P.whitespace.then(r.Tincture).skip(P.whitespace),
+      P.regex(/and/i)
+        .skip(P.whitespace)
+        .then(r.Tincture)
+    ).map(
+      ([number, tincture1, tincture2]): BarryField => ({ kind: 'barry', number, tinctures: [tincture1, tincture2] })
+    );
+    const palyBendyParser: P.Parser<PalyField | BendyField> = P.seq(
+      P.alt(P.regex(/Paly/i).result('paly' as const), P.regex(/Bendy/i).result('bendy' as const)),
+      P.whitespace.then(r.Tincture).skip(P.whitespace),
+      P.regex(/and/i)
+        .skip(P.whitespace)
+        .then(r.Tincture)
+    ).map(([kind, tincture1, tincture2]): PalyField | BendyField => ({ kind, tinctures: [tincture1, tincture2] }));
     return P.alt(
       r.Tincture.map((tincture) => ({ kind: 'plain', tincture })),
       r.Party.map((party) => ({ kind: 'party', per: party })),
-      P.seq(
-        P.alt(P.regex(/Paly/i).result('paly'), P.regex(/Bendy/i).result('bendy')),
-        P.whitespace.then(r.Tincture).skip(P.whitespace),
-        P.regex(/and/i)
-          .skip(P.whitespace)
-          .then(r.Tincture)
-      ).map(([kind, tincture1, tincture2]) => ({ kind, tinctures: [tincture1, tincture2] })),
-      P.seq(
-        P.regex(/Barry of/i)
-          .skip(P.whitespace)
-          .then(buildAltParser([6, 8, 10] as const, stringifyNumber)),
-        P.whitespace.then(r.Tincture).skip(P.whitespace),
-        P.regex(/and/i)
-          .skip(P.whitespace)
-          .then(r.Tincture)
-      ).map(
-        ([number, tincture1, tincture2]): BarryField => ({ kind: 'barry', number, tinctures: [tincture1, tincture2] })
-      )
+      palyBendyParser,
+      barryParser
     );
   },
 
