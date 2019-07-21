@@ -1,7 +1,7 @@
 import { BarryField, BendyField, BendySinisterField, Field, PalyField } from '../model/field';
 import { TinctureSelect } from './TinctureSelect';
 import * as React from 'react';
-import { argent, sable, Tincture } from '../model/tincture';
+import { argent, gules, isMetal, Tincture } from '../model/tincture';
 import { PartyForm } from './PartyForm';
 import { SelectScalar } from '../common/SelectScalar';
 import { cannotHappen } from '../../utils/cannot-happen';
@@ -33,21 +33,39 @@ export const FieldForm = ({ field, fieldChange }: Props) => {
 
   function changeFieldKind(newKind: Field['kind']) {
     if (field.kind !== newKind) {
+      const newColors = extractColors(field);
       if (newKind === 'party') {
-        fieldChange({ kind: 'party', per: { name: 'fess', tinctures: [argent, sable] } });
+        fieldChange({ kind: 'party', per: { name: 'fess', tinctures: newColors } });
       } else if (newKind === 'bendy') {
-        fieldChange({ kind: 'bendy', tinctures: [argent, sable] });
+        fieldChange({ kind: 'bendy', tinctures: newColors });
       } else if (newKind === 'bendySinister') {
-        fieldChange({ kind: 'bendySinister', tinctures: [argent, sable] });
+        fieldChange({ kind: 'bendySinister', tinctures: newColors });
       } else if (newKind === 'paly') {
-        fieldChange({ kind: 'paly', tinctures: [argent, sable] });
+        fieldChange({ kind: 'paly', tinctures: newColors });
       } else if (newKind === 'plain') {
-        fieldChange({ kind: 'plain', tincture: argent });
+        fieldChange({ kind: 'plain', tincture: newColors[0] });
       } else if (newKind === 'barry') {
-        fieldChange({ kind: 'barry', number: 10, tinctures: [argent, sable] });
+        fieldChange({ kind: 'barry', number: 10, tinctures: newColors });
       } else {
         cannotHappen(newKind);
       }
+    }
+  }
+
+  function extractColors(field: Field): [Tincture, Tincture] {
+    if (field.kind === 'plain') {
+      return [field.tincture, isMetal(field.tincture) ? gules : argent];
+    } else if (field.kind === 'party') {
+      return field.per.tinctures;
+    } else if (
+      field.kind === 'barry' ||
+      field.kind === 'paly' ||
+      field.kind === 'bendySinister' ||
+      field.kind === 'bendy'
+    ) {
+      return field.tinctures;
+    } else {
+      return cannotHappen(field);
     }
   }
 

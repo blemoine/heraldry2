@@ -21,7 +21,7 @@ export type Sanguine = typeof sanguine;
 export const tenne = { color: '#C67000', tricking: [], name: 'tenné' } as const;
 export type Tenne = typeof tenne;
 
-export type Metals = Argent | Or;
+export type Metal = Argent | Or;
 export type Colours = Gules | Sable | Azure | Vert | Purpure;
 export type Stains = Murrey | Sanguine | Tenne;
 
@@ -32,10 +32,14 @@ export type Vair = typeof vair;
 
 export type Furs = Ermine | Vair;
 
-export type Tincture = Metals | Colours | Stains | Furs;
+export type Tincture = Metal | Colours | Stains | Furs;
 
 export function isFur(tincture: Tincture): tincture is Furs {
   return tincture.name === 'ermine' || tincture.name === 'vair';
+}
+
+export function isMetal(tincture: Tincture): tincture is Metal {
+  return tincture.name === 'argent' || tincture.name === 'or';
 }
 
 export const tinctures: Array<Tincture> = [
