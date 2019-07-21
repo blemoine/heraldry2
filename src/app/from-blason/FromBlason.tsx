@@ -62,7 +62,7 @@ export const FromBlason = () => {
         <ChargeForm charge={blason.charge || null} chargeChange={chargeChange} />
       </div>
       <div className="col-md-12 col-lg-6">
-        <CoatsOfArmsDetail blason={blason} blasonChange={blason => setBlason(blason)}/>
+        <CoatsOfArmsDetail blason={blason} blasonChange={(blason) => setBlason(blason)} />
       </div>
     </div>
   );

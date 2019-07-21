@@ -1,6 +1,15 @@
 import fc, { Arbitrary } from 'fast-check';
 import { Tincture, tinctures } from '../tincture';
-import { BarryField, BendyField, BendySinisterField, Field, PalyField, PartyField, PlainField } from '../field';
+import {
+  BarryField,
+  BendyField,
+  BendySinisterField,
+  ChequyField,
+  Field,
+  PalyField,
+  PartyField,
+  PlainField,
+} from '../field';
 import { parties, Party } from '../party';
 import { ordinaries, Ordinary } from '../ordinary';
 import { Charge, charges, CountAndDisposition, Lion, lionAttitudes, lionHeads, lionTails } from '../charge';
@@ -27,13 +36,18 @@ const partyFieldArb: Arbitrary<PartyField> = partyArb.map((party): PartyField =>
 const barryFieldArb: Arbitrary<BarryField> = fc
   .tuple(fc.constantFrom(6 as const, 8 as const, 10 as const), tinctureArb, tinctureArb)
   .map(([number, ...tinctures]) => ({ kind: 'barry', number, tinctures }));
+const chequyFieldArb: Arbitrary<ChequyField> = fc
+  .tuple(tinctureArb, tinctureArb)
+  .map((tinctures) => ({ kind: 'chequy', tinctures }));
+
 const fieldArb: Arbitrary<Field> = fc.oneof<Field>(
   plainFieldArb,
   partyFieldArb,
   palyFieldArb,
   bendyFieldArb,
   bendySinisterFieldArb,
-  barryFieldArb
+  barryFieldArb,
+  chequyFieldArb
 );
 const ordinaryArb: Arbitrary<Ordinary> = fc.record({ name: fc.constantFrom(...ordinaries), tincture: tinctureArb });
 
