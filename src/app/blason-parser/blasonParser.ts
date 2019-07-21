@@ -42,6 +42,12 @@ function buildAltParser<A>(arr: ReadonlyArray<A>, stringifyFn: (a: A) => string)
   );
 }
 
+function constStr<S extends string>(str: S, asStr?: string): P.Parser<S> {
+  return P.regex(new RegExp(asStr || str, 'i'))
+    .result(str)
+    .desc(asStr || str);
+}
+
 const partyUnit: P.Parser<Party['name']> = buildAltParser(parties, stringifyParty);
 
 const language: Language = {
@@ -50,7 +56,7 @@ const language: Language = {
   },
 
   Party(r: AppliedLanguage): P.Parser<Party> {
-    return P.regex(/per/i)
+    return constStr('per')
       .skip(P.whitespace)
       .then(partyUnit)
       .skip(P.whitespace)
@@ -79,7 +85,7 @@ const language: Language = {
 
   Field(r: AppliedLanguage): P.Parser<Field> {
     const barryParser: P.Parser<BarryField> = P.seq(
-      P.regex(/Barry of/i)
+      constStr('Barry of')
         .skip(P.whitespace)
         .then(buildAltParser([6, 8, 10] as const, stringifyNumber)),
       P.whitespace.then(r.Tincture).skip(P.whitespace),
@@ -90,12 +96,7 @@ const language: Language = {
       ([number, tincture1, tincture2]): BarryField => ({ kind: 'barry', number, tinctures: [tincture1, tincture2] })
     );
     const palyBendyParser: P.Parser<PalyField | BendyField | BendySinisterField | ChequyField> = P.seq(
-      P.alt(
-        P.regex(/Paly/i).result('paly' as const),
-        P.regex(/Bendy Sinister/i).result('bendySinister' as const),
-        P.regex(/Bendy/i).result('bendy' as const),
-        P.regex(/Chequy/i).result('chequy' as const)
-      ),
+      P.alt(constStr('bendySinister', 'Bendy Sinister'), constStr('paly'), constStr('bendy'), constStr('chequy')),
       P.whitespace.then(r.Tincture).skip(P.whitespace),
       P.regex(/and/i)
         .skip(P.whitespace)
@@ -162,8 +163,8 @@ const language: Language = {
 
     return P.alt(
       P.regex(/an?/i).result(1 as const),
-      P.regex(/two?/i).result(2 as const),
-      P.regex(/three?/i).result(3 as const)
+      P.regex(/two/i).result(2 as const),
+      P.regex(/three/i).result(3 as const)
     )
       .trim(P.optWhitespace)
       .chain((count) => chargesParser(count));
