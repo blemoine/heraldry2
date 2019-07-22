@@ -5,6 +5,7 @@ import { cannotHappen } from '../../utils/cannot-happen';
 import { Charge } from '../model/charge';
 import { isNotNull } from '../../utils/isNotNull';
 import { Field } from '../model/field';
+import { capitalizeFirstLetter } from '../../utils/strings';
 
 export function stringifyBlason(blason: Blason): string {
   const field = stringifyField(blason.field);
@@ -122,10 +123,6 @@ export function stringifyNumber(n: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10): stri
   } else {
     return cannotHappen(n);
   }
-}
-
-function capitalizeFirstLetter(str: string): string {
-  return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 export function isThereFur(blason: Blason, fur: Furs['name']): boolean {

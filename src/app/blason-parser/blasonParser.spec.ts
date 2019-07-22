@@ -78,4 +78,19 @@ describe('parseBlason', () => {
 
     expect(result).toEqual(expected);
   });
+
+  it('should return error in human readable way', () => {
+    const result = parseBlason('Bandy argent and sable');
+
+    expect(result).toEqual({error: `
+-- PARSING FAILED --------------------------------------------------
+
+> 1 | Bandy argent and sable
+    | ^
+
+Expected one of the following: 
+
+Argent, Azure, Barry of, Bendy, Bendy Sinister, Chequy, Ermine, Gules, Murrey, Or, Paly, Per, Purpure, Sable, Sanguine, Tenné, Vair, Vert
+`});
+  })
 });

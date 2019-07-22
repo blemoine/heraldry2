@@ -18,6 +18,7 @@ import {
 import { cannotHappen } from '../../utils/cannot-happen';
 import { identity } from '../../utils/identity';
 import { BarryField, BendyField, BendySinisterField, ChequyField, Field, PalyField } from '../model/field';
+import { capitalizeFirstLetter } from '../../utils/strings';
 
 type Language = {
   Tincture: (r: AppliedLanguage) => P.Parser<Tincture>;
@@ -45,14 +46,16 @@ function buildAltParser<A>(arr: ReadonlyArray<A>, stringifyFn: (a: A) => string)
 function constStr<S extends string>(str: S, asStr?: string): P.Parser<S> {
   return P.regex(new RegExp(asStr || str, 'i'))
     .result(str)
-    .desc(asStr || str);
+    .desc(asStr || capitalizeFirstLetter(str));
 }
 
 const partyUnit: P.Parser<Party['name']> = buildAltParser(parties, stringifyParty);
 
+const Tincture = (stringifier: (a: Tincture) => string) => buildAltParser(tinctures, stringifier);
+
 const language: Language = {
   Tincture(_r: AppliedLanguage): P.Parser<Tincture> {
-    return buildAltParser(tinctures, (x) => x.name);
+    return Tincture((x) => x.name);
   },
 
   Party(r: AppliedLanguage): P.Parser<Party> {
@@ -106,7 +109,10 @@ const language: Language = {
       tinctures: [tincture1, tincture2],
     }));
     return P.alt(
-      r.Tincture.map((tincture) => ({ kind: 'plain', tincture })),
+      Tincture((x) => capitalizeFirstLetter(x.name)).map((tincture) => ({
+        kind: 'plain',
+        tincture,
+      })),
       r.Party.map((party) => ({ kind: 'party', per: party })),
       palyBendyParser,
       barryParser
