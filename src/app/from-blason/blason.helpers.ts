@@ -94,8 +94,20 @@ function stringifyCharge(charge: Charge): string {
     }
 
     return result;
+  } else if (charge.name === 'eagle') {
+    let result = '';
+    result += 'an eagle';
+
+    result += ' ' + charge.attitude;
+
+    result += ' ' + charge.tincture.name;
+
+    if (charge.beakedAndArmed.name != charge.tincture.name) {
+      result += ' beaked and armed ' + charge.beakedAndArmed.name;
+    }
+    return result;
   } else {
-    return cannotHappen(charge.name);
+    return cannotHappen(charge);
   }
 }
 
@@ -165,8 +177,15 @@ export function isThereFur(blason: Blason, fur: Furs['name']): boolean {
       if (charge.armedAndLangued.name === fur) {
         return true;
       }
+    } else if (charge.name === 'eagle') {
+      if (charge.tincture.name === fur) {
+        return true;
+      }
+      if (charge.beakedAndArmed.name === fur) {
+        return true;
+      }
     } else {
-      return cannotHappen(charge.name);
+      return cannotHappen(charge);
     }
   }
 

@@ -12,7 +12,17 @@ import {
 } from '../field';
 import { parties, Party } from '../party';
 import { ordinaries, Ordinary } from '../ordinary';
-import { Charge, charges, CountAndDisposition, Lion, lionAttitudes, lionHeads, lionTails } from '../charge';
+import {
+  Charge,
+  charges,
+  CountAndDisposition,
+  Eagle,
+  eagleAttitudes,
+  Lion,
+  lionAttitudes,
+  lionHeads,
+  lionTails,
+} from '../charge';
 import { cannotHappen } from '../../../utils/cannot-happen';
 import { Blason } from '../blason';
 
@@ -78,7 +88,22 @@ const chargeArb: Arbitrary<Charge> = fc.constantFrom(...charges).chain((chargeNa
             countAndDisposition,
           };
         }
-      );
+      )
+      .map((i): Charge => i);
+  } else if (chargeName === 'eagle') {
+    return fc
+      .tuple(fc.constantFrom(...eagleAttitudes), tinctureArb, tinctureArb)
+      .map(
+        ([attitude, tincture, beakedAndArmed]): Eagle => {
+          return {
+            name: 'eagle',
+            attitude,
+            tincture,
+            beakedAndArmed,
+          };
+        }
+      )
+      .map((i): Charge => i);
   } else {
     return cannotHappen(chargeName);
   }

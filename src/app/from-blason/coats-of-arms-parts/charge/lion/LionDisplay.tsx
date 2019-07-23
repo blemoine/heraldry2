@@ -1,5 +1,5 @@
-import { Lion } from '../../../../model/charge';
 import * as React from 'react';
+import { Lion } from '../../../../model/charge';
 import { Tincture } from '../../../../model/tincture';
 import { UnitLionDisplay } from './UnitLionDisplay';
 import { range } from '../../../../../utils/range';

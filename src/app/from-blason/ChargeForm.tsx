@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { gules, or } from '../model/tincture';
+import { gules, or, sable } from '../model/tincture';
 import { Charge } from '../model/charge';
 import { cannotHappen } from '../../utils/cannot-happen';
 import { ChargeNameSelect } from './ChargeNameSelect';
@@ -17,6 +17,13 @@ export const ChargeForm = ({ charge, chargeChange }: Props) => {
         tail: null,
         tincture: or,
         countAndDisposition: { count: 1 },
+      });
+    } else if (chargeName === 'eagle') {
+      chargeChange({
+        name: chargeName,
+        attitude: 'displayed',
+        tincture: sable,
+        beakedAndArmed: or,
       });
     } else if (!chargeName) {
       chargeChange(null);

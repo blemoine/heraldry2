@@ -153,6 +153,20 @@ describe('stringifyBlason', () => {
       })
     ).toBe('Barry of eight vert and ermine');
   });
+
+  it('should stringify an eagle charge', () => {
+    expect(
+      stringifyBlason({
+        field: { kind: 'plain', tincture: or },
+        charge: {
+          name: 'eagle',
+          attitude: 'displayed',
+          tincture: sable,
+          beakedAndArmed: sable,
+        },
+      })
+    ).toBe('Or, an eagle displayed sable');
+  });
 });
 
 describe('isThereFur', () => {

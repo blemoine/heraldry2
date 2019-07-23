@@ -7,6 +7,9 @@ import { stringifyNumber, stringifyParty } from '../from-blason/blason.helpers';
 import {
   Charge,
   charges,
+  Eagle,
+  EagleAttitude,
+  eagleAttitudes,
   Lion,
   LionAttitude,
   lionAttitudes,
@@ -161,6 +164,28 @@ const language: Language = {
             });
 
             return lionParser;
+          } else if (charge === 'eagle') {
+            const eagleNameParser = count === 1 ? P.regex(/eagle/i) : P.regex(/eagles/i);
+            const eagleAttitudeParser: P.Parser<EagleAttitude> = buildAltParser(eagleAttitudes, identity);
+
+            return P.seq(
+              eagleNameParser.skip(P.whitespace).then(eagleAttitudeParser),
+              P.whitespace.then(r.Tincture),
+              P.whitespace
+                .then(P.regex(/beaked and armed/i))
+                .then(P.whitespace)
+                .then(r.Tincture)
+                .fallback(null)
+            ).map(
+              ([attitude, tincture, beakedAndArmed]): Eagle => {
+                return {
+                  name: 'eagle',
+                  attitude,
+                  tincture,
+                  beakedAndArmed: beakedAndArmed || tincture,
+                };
+              }
+            );
           } else {
             return cannotHappen(charge);
           }

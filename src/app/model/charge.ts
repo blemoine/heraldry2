@@ -28,6 +28,15 @@ export type Lion = {
   countAndDisposition: CountAndDisposition;
 };
 
-export type Charge = Lion;
+export const eagleAttitudes = ['displayed'] as const;
+export type EagleAttitude = typeof eagleAttitudes[number];
+export type Eagle = {
+  name: 'eagle';
+  attitude: EagleAttitude;
+  tincture: Tincture;
+  beakedAndArmed: Tincture;
+};
 
-export const charges: Array<Charge['name']> = ['lion'];
+export type Charge = Lion | Eagle;
+
+export const charges: Array<Charge['name']> = ['lion', 'eagle'];
