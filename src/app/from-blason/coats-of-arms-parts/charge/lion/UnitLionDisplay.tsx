@@ -14,14 +14,14 @@ import SvgLionStatant from './SvgLionStatant';
 import SvgLionSalient from './SvgLionSalient';
 import SvgLionSejant from './SvgLionSejant';
 import SvgLionSejantErect from './SvgLionSejantErect';
+import { Dimension } from '../../../../model/dimension';
 
 type Props = {
   charge: Lion;
-  width: number;
-  height: number;
+  dimension: Dimension;
   fillFromTincture: (tincture: Tincture) => string;
 };
-export const UnitLionDisplay = ({ charge, width, height, fillFromTincture }: Props) => {
+export const UnitLionDisplay = ({ charge, dimension, fillFromTincture }: Props) => {
   const armedAndLanguedFill = fillFromTincture(charge.armedAndLangued);
   const mainFill = fillFromTincture(charge.tincture);
   const stroke = charge.tincture.name === 'sable' ? '#777' : '#000';
@@ -29,8 +29,7 @@ export const UnitLionDisplay = ({ charge, width, height, fillFromTincture }: Pro
   if (charge.attitude === 'rampant') {
     return (
       <SvgLionRampant
-        width={width}
-        height={height}
+        dimension={dimension}
         mainFill={mainFill}
         head={head}
         clawFill={armedAndLanguedFill}
@@ -40,8 +39,7 @@ export const UnitLionDisplay = ({ charge, width, height, fillFromTincture }: Pro
   } else if (charge.attitude === 'passant') {
     return (
       <SvgLionPassant
-        width={width}
-        height={height}
+        dimension={dimension}
         mainFill={mainFill}
         head={head}
         clawFill={armedAndLanguedFill}
@@ -51,8 +49,7 @@ export const UnitLionDisplay = ({ charge, width, height, fillFromTincture }: Pro
   } else if (charge.attitude === 'statant') {
     return (
       <SvgLionStatant
-        width={width}
-        height={height}
+        dimension={dimension}
         mainFill={mainFill}
         head={head}
         clawFill={armedAndLanguedFill}
@@ -62,8 +59,7 @@ export const UnitLionDisplay = ({ charge, width, height, fillFromTincture }: Pro
   } else if (charge.attitude === 'salient') {
     return (
       <SvgLionSalient
-        width={width}
-        height={height}
+        dimension={dimension}
         mainFill={mainFill}
         head={head}
         clawFill={armedAndLanguedFill}
@@ -73,8 +69,7 @@ export const UnitLionDisplay = ({ charge, width, height, fillFromTincture }: Pro
   } else if (charge.attitude === 'sejant') {
     return (
       <SvgLionSejant
-        width={width}
-        height={height}
+        dimension={dimension}
         mainFill={mainFill}
         head={head}
         clawFill={armedAndLanguedFill}
@@ -84,8 +79,7 @@ export const UnitLionDisplay = ({ charge, width, height, fillFromTincture }: Pro
   } else if (charge.attitude === 'sejant-erect') {
     return (
       <SvgLionSejantErect
-        width={width}
-        height={height}
+        dimension={dimension}
         mainFill={mainFill}
         head={head}
         clawFill={armedAndLanguedFill}
@@ -95,8 +89,7 @@ export const UnitLionDisplay = ({ charge, width, height, fillFromTincture }: Pro
   } else if (charge.attitude === 'couchant') {
     return (
       <SvgLionCouchant
-        width={width}
-        height={height}
+        dimension={dimension}
         mainFill={mainFill}
         head={head}
         clawFill={armedAndLanguedFill}
@@ -104,15 +97,7 @@ export const UnitLionDisplay = ({ charge, width, height, fillFromTincture }: Pro
       />
     );
   } else if (charge.attitude === 'dormant') {
-    return (
-      <SvgLionDormant
-        width={width}
-        height={height}
-        stroke={stroke}
-        mainFill={mainFill}
-        clawFill={armedAndLanguedFill}
-      />
-    );
+    return <SvgLionDormant dimension={dimension} stroke={stroke} mainFill={mainFill} clawFill={armedAndLanguedFill} />;
   } else {
     return cannotHappen(charge.attitude);
   }

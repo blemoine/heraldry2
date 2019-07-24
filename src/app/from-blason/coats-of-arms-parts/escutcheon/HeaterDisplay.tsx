@@ -1,7 +1,9 @@
 import * as React from 'react';
+import { Dimension } from '../../../model/dimension';
 
-type Props = { width: number; height: number };
-export const HeaterDisplay: React.FunctionComponent<Props> = ({ width, height }) => {
+type Props = { dimension: Dimension };
+export const HeaterDisplay: React.FunctionComponent<Props> = ({ dimension }) => {
+  const { width, height } = dimension;
   return (
     <path
       d={`M 0 0 H${width} V${height / 3} A${width} ${width} 90 0 1 ${width /

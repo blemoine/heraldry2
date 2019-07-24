@@ -355,12 +355,12 @@ exports[`CoatsOfArms should render a the england royal arms 1`] = `
     clipPath="url(#plain-field-clip-path)"
   >
     <g
-      transform="translate(66.66666666666666 -8.88888888888889)"
+      transform="translate(66.66666666666667 -8.88888888888889)"
     >
       <svg
-        height={88.8888888888889}
+        height={88.88888888888889}
         viewBox="0 0 420 350"
-        width={66.66666666666667}
+        width={66.66666666666666}
       >
         <g
           stroke="#000"
@@ -548,12 +548,12 @@ exports[`CoatsOfArms should render a the england royal arms 1`] = `
       </svg>
     </g>
     <g
-      transform="translate(66.66666666666666 80.00000000000001)"
+      transform="translate(66.66666666666667 80)"
     >
       <svg
-        height={88.8888888888889}
+        height={88.88888888888889}
         viewBox="0 0 420 350"
-        width={66.66666666666667}
+        width={66.66666666666666}
       >
         <g
           stroke="#000"
@@ -741,12 +741,12 @@ exports[`CoatsOfArms should render a the england royal arms 1`] = `
       </svg>
     </g>
     <g
-      transform="translate(66.66666666666666 168.8888888888889)"
+      transform="translate(66.66666666666667 168.88888888888889)"
     >
       <svg
-        height={88.8888888888889}
+        height={88.88888888888889}
         viewBox="0 0 420 350"
-        width={66.66666666666667}
+        width={66.66666666666666}
       >
         <g
           stroke="#000"

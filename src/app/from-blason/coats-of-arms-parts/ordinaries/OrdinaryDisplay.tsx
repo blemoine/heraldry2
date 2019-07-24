@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { Ordinary } from '../../../model/ordinary';
 import { cannotHappen } from '../../../../utils/cannot-happen';
+import { Dimension } from '../../../model/dimension';
 
-type Props = { ordinary: Ordinary['name']; fill: string; width: number; height: number };
+type Props = { ordinary: Ordinary['name']; fill: string; dimension: Dimension };
 
-export const OrdinaryDisplay = ({ ordinary, fill, width, height }: Props) => {
+export const OrdinaryDisplay = ({ ordinary, fill, dimension: { width, height } }: Props) => {
   if (ordinary === 'chief') {
     const chiefHeight = height / 5;
     return <rect x={0} y={0} width={width} height={chiefHeight} fill={fill} stroke="#333" />;

@@ -1,17 +1,17 @@
 import React from 'react';
+import { Dimension } from '../../../../model/dimension';
 
 //Thanks to https://en.wikipedia.org/wiki/File:Lion_Sejant_Erect.svg
 
 const SvgLionSejantErect = (props: {
-  width: number;
-  height: number;
+  dimension: Dimension;
   head: React.ReactNode;
 
   stroke: string;
   mainFill: string;
   clawFill: string;
 }) => (
-  <svg width={props.width} height={props.height} viewBox="0 0 390 380">
+  <svg width={props.dimension.width} height={props.dimension.height} viewBox="0 0 390 380">
     <g stroke={props.stroke}>
       <g fill={props.mainFill} fillRule="evenodd" strokeWidth={3.335}>
         <path d="M214.938 137.187s35.123 37.22 47.003 55.528c6.588 10.153 12.634 25.269 17.501 36.35 4.497 10.236 11.109 23.77 13.792 34.623 1.806 7.302.354 17.768 2.645 24.933 2.594 8.114 8.524 17.373 9.46 25.47.789 6.822-.58 13.585-2.098 21.416-.773 3.99-.636 9.747-2.223 12.864-2.899 5.694-9.358 12.894-15.52 14.585-2.31.635-7.8-1.733-7.8-1.733l-1.929 4.08-99.994-16.144-13.448-6.402 2.396-9.323 11.405-2.345s-2.521-2.512 16.024 6.118c18.546 8.63 29.633-1.81 29.633-1.81s-10.039-11.544-13.054-18.188c-3.552-7.826-3.598-19.894-3.129-28.476.317-5.8 2.298-13.414 4.2-18.903 1.811-5.22 4.196-12.581 7.995-16.594 3.57-3.77 10.018-7.616 15.157-8.354 2.67-.383 6.827-.305 9.343.666 5.851 2.258 17.596 11.633 17.596 11.633s-14.837-12.366-22.657-13.15c-5.577-.56-13.068 3.67-13.068 3.67s-12.814-15.422-22.003-22.094c-3.629-2.635-17.137-5.875-17.137-5.875l-37.619-75.305 67.529-7.24z" />

@@ -1,15 +1,15 @@
 import React from 'react';
+import { Dimension } from '../../../../model/dimension';
 
 const SvgEagleDisplayed = (props: {
-  width: number;
-  height: number;
+  dimension: Dimension;
 
   stroke: string;
   tongueFill: string;
   mainFill: string;
   talonFill: string;
 }) => (
-  <svg viewBox="0 0 309 381" width={props.width} height={props.height}>
+  <svg viewBox="0 0 309 381" width={props.dimension.width} height={props.dimension.height}>
     <g stroke={props.stroke}>
       <g strokeLinecap="round" strokeLinejoin="round">
         <path

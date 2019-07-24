@@ -7,11 +7,13 @@ import 'react-resizable/css/styles.css';
 import { useEffect, useState } from 'react';
 import { parseBlason } from '../blason-parser/blasonParser';
 import { isEqual } from 'lodash';
+import { scale } from '../model/dimension';
 
 type Props = { blason: Blason; blasonChange: (blason: Blason) => void };
 export const CoatsOfArmsDetail = ({ blason, blasonChange }: Props) => {
   const [width, setWidth] = useState(200);
   const height = (width * 4) / 3;
+  const dimension = { height, width };
   function onResize(_e: React.SyntheticEvent, { size }: ResizeCallbackData) {
     setWidth(size.width);
   }
@@ -55,7 +57,7 @@ export const CoatsOfArmsDetail = ({ blason, blasonChange }: Props) => {
         resizeHandles={['e']}
         onResize={onResize}
       >
-        <CoatsOfArmsDisplay blason={blason} width={width * 0.9} height={height * 0.9} />
+        <CoatsOfArmsDisplay blason={blason} dimension={scale(dimension, 0.9)} />
       </ResizableBox>
     </div>
   );

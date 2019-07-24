@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { range } from '../../../../utils/range';
+import { Dimension } from '../../../model/dimension';
 
-type Props = { fill: [string, string]; width: number; height: number };
-export const ChequyDisplay: React.FunctionComponent<Props> = ({ height, fill, width }) => {
+type Props = { fill: [string, string]; dimension: Dimension };
+export const ChequyDisplay: React.FunctionComponent<Props> = ({ dimension: { width, height }, fill }) => {
   const number = 6;
   return (
     <g>

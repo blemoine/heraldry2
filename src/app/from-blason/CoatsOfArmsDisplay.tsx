@@ -9,11 +9,11 @@ import { Tincture } from '../model/tincture';
 import { FieldDisplay } from './coats-of-arms-parts/FieldDisplay';
 import { HeaterDisplay } from './coats-of-arms-parts/escutcheon/HeaterDisplay';
 import { ChargeDisplay } from './coats-of-arms-parts/ChargeDisplay';
+import { Dimension } from '../model/dimension';
 
-type Props = { blason: Blason; width: number; height: number };
+type Props = { blason: Blason; dimension: Dimension };
 export const CoatsOfArmsDisplay = (props: Props) => {
-  const width = props.width;
-  const height = props.height;
+  const { width, height } = props.dimension;
 
   const erminePatternId = 'field-pattern-' + uuid();
   const vairPatternId = 'field-pattern-' + uuid();
@@ -62,19 +62,18 @@ export const CoatsOfArmsDisplay = (props: Props) => {
         )}
 
         <clipPath id="plain-field-clip-path">
-          <HeaterDisplay height={height} width={width} />
+          <HeaterDisplay dimension={props.dimension} />
         </clipPath>
       </defs>
 
       <g clipPath="url(#plain-field-clip-path)">
-        <FieldDisplay height={height} width={width} field={props.blason.field} fillFromTincture={fillFromTincture} />
+        <FieldDisplay dimension={props.dimension} field={props.blason.field} fillFromTincture={fillFromTincture} />
       </g>
 
       {props.blason.ordinary && (
         <g clipPath="url(#plain-field-clip-path)">
           <OrdinaryDisplay
-            height={height}
-            width={width}
+            dimension={props.dimension}
             ordinary={props.blason.ordinary.name}
             fill={fillFromTincture(props.blason.ordinary.tincture)}
           />
@@ -83,16 +82,11 @@ export const CoatsOfArmsDisplay = (props: Props) => {
 
       {props.blason.charge && (
         <g clipPath="url(#plain-field-clip-path)">
-          <ChargeDisplay
-            width={width}
-            height={height}
-            charge={props.blason.charge}
-            fillFromTincture={fillFromTincture}
-          />
+          <ChargeDisplay dimension={props.dimension} charge={props.blason.charge} fillFromTincture={fillFromTincture} />
         </g>
       )}
 
-      <HeaterDisplay height={height} width={width} />
+      <HeaterDisplay dimension={props.dimension} />
     </svg>
   );
 };

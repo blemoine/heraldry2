@@ -2,8 +2,9 @@ import * as React from 'react';
 import { Eagle } from '../../../../model/charge';
 import { Tincture } from '../../../../model/tincture';
 import SvgEagleDisplayed from './SvgEagleDisplayed';
+import { Dimension, scale } from '../../../../model/dimension';
 
-type Props = { charge: Eagle; width: number; height: number; fillFromTincture: (tincture: Tincture) => string };
+type Props = { charge: Eagle; dimension: Dimension; fillFromTincture: (tincture: Tincture) => string };
 export const EagleDisplay = (props: Props) => {
   const charge = props.charge;
   const stroke = charge.tincture.name === 'sable' ? '#777' : '#000';
@@ -13,14 +14,13 @@ export const EagleDisplay = (props: Props) => {
   const talonFill = props.fillFromTincture(charge.beakedAndArmed);
 
   const sizeFactor = 0.85;
-  const computedWidth = props.width * sizeFactor;
-  const computedHeight = props.height * sizeFactor;
+
+  const computedDimension = scale(props.dimension, sizeFactor);
 
   return (
-    <g transform={`translate(${(props.width * (1 - sizeFactor)) / 2} 0)`}>
+    <g transform={`translate(${(props.dimension.width * (1 - sizeFactor)) / 2} 0)`}>
       <SvgEagleDisplayed
-        width={computedWidth}
-        height={computedHeight}
+        dimension={computedDimension}
         stroke={stroke}
         mainFill={mainFill}
         tongueFill={tongueFill}

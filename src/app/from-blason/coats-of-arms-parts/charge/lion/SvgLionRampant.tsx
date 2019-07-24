@@ -1,17 +1,17 @@
 import React from 'react';
+import { Dimension } from '../../../../model/dimension';
 
 // Thanks to https://en.wikipedia.org/wiki/File:Lion_Rampant.svg
 
 const SvgLionRampant = (props: {
-  width: number;
-  height: number;
+  dimension: Dimension;
   head: React.ReactNode;
 
   stroke: string;
   mainFill: string;
   clawFill: string;
 }) => (
-  <svg width={props.width} height={props.height} viewBox="0 0 400 420">
+  <svg width={props.dimension.width} height={props.dimension.height} viewBox="0 0 400 420">
     <g stroke={props.stroke}>
       <path
         d="M128.244 283.892s-11.32-8.663-11.19-13.377c.04-1.465 1.727-2.045 2.28-3.402.653-1.607.898-3.302-.159-4.679-1.674-2.182-6.034-1.633-8.716-1.026-3.581.811-9.594 6.34-9.594 6.34l-1.402 9.079 12.699 11.463 16.082-4.398z"

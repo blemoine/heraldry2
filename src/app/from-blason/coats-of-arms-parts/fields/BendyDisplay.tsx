@@ -1,9 +1,11 @@
 import * as React from 'react';
+import { Dimension } from '../../../model/dimension';
 
-type Props = { fill: [string, string]; width: number; height: number };
+type Props = { fill: [string, string]; dimension: Dimension };
 export const BendyDisplay: React.FunctionComponent<Props> = (props) => {
-  const { height, fill } = props;
-  const width = props.width * 1.5;
+  const { dimension, fill } = props;
+  const height = dimension.height;
+  const width = props.dimension.width * 1.5;
 
   const firstPoint = 1 / 4;
   const secondPoint = 1 / 2;

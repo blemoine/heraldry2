@@ -1,15 +1,15 @@
 import React from 'react';
+import { Dimension } from '../../../../model/dimension';
 
 const SvgLionStatant = (props: {
-  width: number;
-  height: number;
+  dimension: Dimension;
   head: React.ReactNode;
 
   stroke: string;
   mainFill: string;
   clawFill: string;
 }) => (
-  <svg width={props.width} height={props.height} viewBox="0 0 420 350">
+  <svg width={props.dimension.width} height={props.dimension.height} viewBox="0 0 420 350">
     <g fillRule="evenodd" stroke={props.stroke}>
       <path
         d="M24.224 274.57c.79-1.045 2.228-2.232 3.469-2.652.986-.334 2.472-.298 3.469 0 2.667.799 5.16 4.088 7.753 5.1 4.218 1.649 14.894 2.45 14.894 2.45l-11.324 13.261-17.954 1.633-3.265-5.611s-.447-4.53-.102-6.427c.448-2.46 1.553-5.758 3.06-7.754z"
