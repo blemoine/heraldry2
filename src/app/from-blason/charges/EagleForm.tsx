@@ -8,24 +8,15 @@ type Props = { charge: Eagle; chargeChange: (eagle: Eagle) => void };
 
 export const EagleForm = ({ charge, chargeChange }: Props) => {
   function chargeTinctureChange(tincture: Tincture) {
-    chargeChange({
-      ...charge,
-      tincture: tincture,
-    });
+    chargeChange({ ...charge, tincture });
   }
 
-  function beakedArmedTinctureChange(tincture: Tincture) {
-    chargeChange({
-      ...charge,
-      beakedAndArmed: tincture,
-    });
+  function beakedArmedTinctureChange(beakedAndArmed: Tincture) {
+    chargeChange({ ...charge, beakedAndArmed });
   }
 
   function attitudeChange(attitude: EagleAttitude) {
-    chargeChange({
-      ...charge,
-      attitude,
-    });
+    chargeChange({ ...charge, attitude });
   }
 
   return (
