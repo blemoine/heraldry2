@@ -56,7 +56,7 @@ describe('CoatsOfArms', () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it('should render an eagle balson with a saltire', () => {
+  it('should render an eagle blason with a saltire', () => {
     const maybeBlason = parseBlason(
       'Chequy gules and or, a saltire argent, an eagle displayed sable beaked and armed or'
     );

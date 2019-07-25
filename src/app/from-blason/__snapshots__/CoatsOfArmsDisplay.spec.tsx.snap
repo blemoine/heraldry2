@@ -942,7 +942,7 @@ exports[`CoatsOfArms should render a the england royal arms 1`] = `
 </svg>
 `;
 
-exports[`CoatsOfArms should render an eagle balson with a saltire 1`] = `
+exports[`CoatsOfArms should render an eagle blason with a saltire 1`] = `
 <svg
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
