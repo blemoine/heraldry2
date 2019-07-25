@@ -6,12 +6,13 @@ import { Charge } from '../model/charge';
 import { isNotNull } from '../../utils/isNotNull';
 import { Field } from '../model/field';
 import { capitalizeFirstLetter } from '../../utils/strings';
+import { Ordinary } from '../model/ordinary';
 
 export function stringifyBlason(blason: Blason): string {
   const field = stringifyField(blason.field);
 
   const addendum = [
-    blason.ordinary ? 'a ' + blason.ordinary.name + ' ' + blason.ordinary.tincture.name : null,
+    blason.ordinary ? stringifyOrdinary(blason.ordinary) : null,
     blason.charge ? stringifyCharge(blason.charge) : null,
   ].filter(isNotNull);
 
@@ -19,6 +20,21 @@ export function stringifyBlason(blason: Blason): string {
     return field + ', ' + addendum.join(', ');
   } else {
     return field;
+  }
+}
+
+function stringifyOrdinary(ordinary: Ordinary): string {
+  if (ordinary.name === 'pale') {
+    let result = '';
+    if (ordinary.count === 1) {
+      result += 'a pale ';
+    } else {
+      result += stringifyNumber(ordinary.count) + ' pallets ';
+    }
+    result += ordinary.tincture.name;
+    return result;
+  } else {
+    return 'a ' + ordinary.name + ' ' + ordinary.tincture.name;
   }
 }
 

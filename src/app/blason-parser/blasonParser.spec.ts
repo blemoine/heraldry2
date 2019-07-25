@@ -113,4 +113,14 @@ Argent, Azure, Barry of, Bendy, Bendy Sinister, Chequy, Ermine, Gules, Murrey, O
 
     expect(result).toEqual(expected);
   });
+
+  it('should parse the blason of Battenberg', () => {
+    const result = parseBlason('Argent, two pallets Sable ');
+    const expected: Blason = {
+      field: { kind: 'plain', tincture: argent },
+      ordinary: { name: 'pale', tincture: sable, count: 2 },
+    };
+
+    expect(result).toEqual(expected);
+  });
 });

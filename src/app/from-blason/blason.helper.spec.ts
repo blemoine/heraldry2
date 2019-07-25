@@ -40,9 +40,18 @@ describe('stringifyBlason', () => {
     expect(
       stringifyBlason({
         field: { kind: 'party', per: { name: 'pale', tinctures: [sable, argent] } },
-        ordinary: { name: 'pale', tincture: purpure },
+        ordinary: { name: 'pale', tincture: purpure, count: 1 },
       })
     ).toBe('Per pale sable and argent, a pale purpure');
+  });
+
+  it('should write multiple pale as pallets', () => {
+    expect(
+      stringifyBlason({
+        field: { kind: 'plain', tincture: vair },
+        ordinary: { name: 'pale', tincture: purpure, count: 2 },
+      })
+    ).toBe('Vair, two pallets purpure');
   });
 
   it('should write a default lion correctly', () => {

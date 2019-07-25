@@ -2,16 +2,17 @@ import * as React from 'react';
 import { Ordinary } from '../../../model/ordinary';
 import { cannotHappen } from '../../../../utils/cannot-happen';
 import { Dimension } from '../../../model/dimension';
+import { range } from '../../../../utils/range';
 
-type Props = { ordinary: Ordinary['name']; fill: string; dimension: Dimension };
+type Props = { ordinary: Ordinary; fill: string; dimension: Dimension };
 
 export const OrdinaryDisplay = ({ ordinary, fill, dimension: { width, height } }: Props) => {
-  if (ordinary === 'chief') {
+  if (ordinary.name === 'chief') {
     const chiefHeight = height / 5;
     return <rect x={0} y={0} width={width} height={chiefHeight} fill={fill} stroke="#333" />;
-  } else if (ordinary === 'fess') {
+  } else if (ordinary.name === 'fess') {
     return <rect x={0} y={height / 3} width={width} height={height / 3} fill={fill} stroke="#333" />;
-  } else if (ordinary === 'bend') {
+  } else if (ordinary.name === 'bend') {
     const basePoint = height / (8 * Math.sqrt(2));
     const length = Math.sqrt(width ** 2 + height ** 2);
     return (
@@ -22,9 +23,25 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension: { width, height } }
         stroke="#333"
       />
     );
-  } else if (ordinary === 'pale') {
-    return <rect x={width / 3} y={0} width={width / 3} height={height} fill={fill} stroke="#333" />;
-  } else if (ordinary === 'cross') {
+  } else if (ordinary.name === 'pale') {
+    return (
+      <g>
+        {range(0, ordinary.count).map((i) => {
+          return (
+            <rect
+              key={i}
+              x={((i * 2 + 1) * width) / (2 * ordinary.count + 1)}
+              y={0}
+              width={width / (2 * ordinary.count + 1)}
+              height={height}
+              fill={fill}
+              stroke="#333"
+            />
+          );
+        })}
+      </g>
+    );
+  } else if (ordinary.name === 'cross') {
     return (
       <path
         d={`M ${(2 * width) / 5} 0 H ${(3 * width) / 5} V ${(2 * height) / 5} H ${width} V ${(3 * height) / 5} H ${(3 *
@@ -34,7 +51,7 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension: { width, height } }
         stroke="#333"
       />
     );
-  } else if (ordinary === 'saltire') {
+  } else if (ordinary.name === 'saltire') {
     const basePointW = width / (10 * Math.sqrt(2));
     const basePointH = height / (10 * Math.sqrt(2));
 
@@ -57,7 +74,7 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension: { width, height } }
         <circle cx={2 * w} cy={2 * h - basePointH} r={5} />
       </g>
     );
-  } else if (ordinary === 'chevron') {
+  } else if (ordinary.name === 'chevron') {
     const basePoint = height / 5;
 
     return (

@@ -51,6 +51,8 @@ function constStr<S extends string>(str: S, asStr?: string): P.Parser<S> {
     .result(str)
     .desc(asStr || capitalizeFirstLetter(str));
 }
+const twoParser = P.regex(/two/i).result(2 as const);
+const threeParser = P.regex(/three/i).result(3 as const);
 
 const partyUnit: P.Parser<Party['name']> = buildAltParser(parties, stringifyParty);
 
@@ -79,14 +81,33 @@ const language: Language = {
   Ordinary(r: AppliedLanguage): P.Parser<Ordinary> {
     const ordinaryParser: P.Parser<Ordinary['name']> = buildAltParser(ordinaries, identity);
 
-    return P.seqMap(
+    const simpleOrdinaries = P.seqMap(
       P.regex(/an?/i)
         .then(P.optWhitespace)
         .then(ordinaryParser)
         .skip(P.whitespace),
       r.Tincture,
-      (name, tincture): Ordinary => ({ name, tincture })
+      (name, tincture): Ordinary => {
+        if (name === 'pale') {
+          return { name, tincture, count: 1 };
+        } else {
+          return { name, tincture };
+        }
+      }
     );
+
+    const pallets = P.seqMap(
+      twoParser.skip(P.whitespace),
+      P.regex(/pallets/i)
+        .result('pale' as const)
+        .skip(P.whitespace),
+      r.Tincture,
+      (count, name, tincture): Ordinary => {
+        return { name, tincture, count };
+      }
+    );
+
+    return P.alt(simpleOrdinaries, pallets);
   },
 
   Field(r: AppliedLanguage): P.Parser<Field> {
@@ -192,11 +213,7 @@ const language: Language = {
         })
       );
 
-    return P.alt(
-      P.regex(/an?/i).result(1 as const),
-      P.regex(/two/i).result(2 as const),
-      P.regex(/three/i).result(3 as const)
-    )
+    return P.alt(P.regex(/an?/i).result(1 as const), twoParser, threeParser)
       .trim(P.optWhitespace)
       .chain((count) => chargesParser(count));
   },
@@ -219,7 +236,9 @@ const language: Language = {
           ).map(([ordinary, charge]) => ({ ...ordinary, ...charge }))
         )
         .fallback({})
-    ).map(([field, rest]) => ({ field, ...rest })).trim(P.optWhitespace);
+    )
+      .map(([field, rest]) => ({ field, ...rest }))
+      .trim(P.optWhitespace);
   },
 };
 

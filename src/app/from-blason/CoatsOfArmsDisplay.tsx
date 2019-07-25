@@ -74,7 +74,7 @@ export const CoatsOfArmsDisplay = (props: Props) => {
         <g clipPath="url(#plain-field-clip-path)">
           <OrdinaryDisplay
             dimension={props.dimension}
-            ordinary={props.blason.ordinary.name}
+            ordinary={props.blason.ordinary}
             fill={fillFromTincture(props.blason.ordinary.tincture)}
           />
         </g>

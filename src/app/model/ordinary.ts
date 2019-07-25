@@ -2,7 +2,7 @@ import { Tincture } from './tincture';
 
 export type Chief = { name: 'chief'; tincture: Tincture };
 export type Bend = { name: 'bend'; tincture: Tincture };
-export type Pale = { name: 'pale'; tincture: Tincture };
+export type Pale = { name: 'pale'; tincture: Tincture; count: 1 | 2 };
 export type Fess = { name: 'fess'; tincture: Tincture };
 export type Chevron = { name: 'chevron'; tincture: Tincture };
 export type Cross = { name: 'cross'; tincture: Tincture };
