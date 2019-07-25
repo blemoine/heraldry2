@@ -1,11 +1,14 @@
 import * as P from 'parsimmon';
-import { ordinaries, Ordinary } from '../model/ordinary';
+import { ordinaries, Ordinary, Pale } from '../model/ordinary';
 import { buildAltParser, twoParser } from './parser.helper';
 import { identity } from '../../utils/identity';
 import { tinctureParserFromName } from './tinctureParser';
 
 export function ordinaryParser(): P.Parser<Ordinary> {
-  const ordinaryParser: P.Parser<Ordinary['name']> = buildAltParser(ordinaries, identity);
+  const ordinaryParser: P.Parser<Exclude<Ordinary['name'], 'pale'>> = buildAltParser(
+    ordinaries.filter(isNotPale),
+    identity
+  );
 
   const simpleOrdinaries = P.seqMap(
     P.regex(/an?/i)
@@ -13,25 +16,29 @@ export function ordinaryParser(): P.Parser<Ordinary> {
       .then(ordinaryParser)
       .skip(P.whitespace),
     tinctureParserFromName,
-    (name, tincture): Ordinary => {
-      if (name === 'pale') {
-        return { name, tincture, count: 1 };
-      } else {
-        return { name, tincture };
-      }
-    }
+    (name, tincture): Ordinary => ({ name, tincture })
   );
 
-  const pallets = P.seqMap(
-    twoParser.skip(P.whitespace),
-    P.regex(/pallets/i)
-      .result('pale' as const)
+  const paleParser: P.Parser<Pale> = P.alt(
+    P.regex(/an?/i)
+      .then(P.optWhitespace)
+      .skip(P.regex(/pale/))
+      .result({ name: 'pale', count: 1 } as const)
       .skip(P.whitespace),
-    tinctureParserFromName,
-    (count, name, tincture): Ordinary => {
-      return { name, tincture, count };
+    twoParser
+      .skip(P.optWhitespace)
+      .skip(P.regexp(/pallets/))
+      .map((count) => ({ name: 'pale', count } as const))
+      .skip(P.whitespace)
+  ).chain(
+    ({ name, count }): P.Parser<Pale> => {
+      return tinctureParserFromName.map((tincture) => ({ name, count, tincture }));
     }
   );
 
-  return P.alt(simpleOrdinaries, pallets);
+  return P.alt(simpleOrdinaries, paleParser);
+}
+
+function isNotPale(o: Ordinary['name']): o is Exclude<Ordinary['name'], 'pale'> {
+  return o !== 'pale';
 }
