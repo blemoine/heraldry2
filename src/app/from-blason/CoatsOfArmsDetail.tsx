@@ -43,13 +43,13 @@ export const CoatsOfArmsDetail = ({ blason, blasonChange }: Props) => {
       <div className="form-group" style={{ padding: '5px 10px', marginTop: '10px' }}>
         <textarea value={blasonStr} onChange={(e) => updateBlason(e.target.value)} className="form-control" />
       </div>
-        <pre>
-      <div className="invalid-feedback" style={{ display: 'block' }}>
-        {blasonErr.map((err, i) => (
-          <p key={i}>{err}</p>
-        ))}
-      </div>
-        </pre>
+      <pre>
+        <div className="invalid-feedback" style={{ display: 'block' }}>
+          {blasonErr.map((err, i) => (
+            <p key={i}>{err}</p>
+          ))}
+        </div>
+      </pre>
 
       <ResizableBox
         width={width}
