@@ -19,5 +19,6 @@ export function constStr<S extends string>(str: S, asStr?: string): P.Parser<S> 
     .result(str)
     .desc(asStr || capitalizeFirstLetter(str));
 }
+
 export const twoParser = P.regex(/two/i).result(2 as const);
 export const threeParser = P.regex(/three/i).result(3 as const);

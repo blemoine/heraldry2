@@ -1,6 +1,6 @@
 import * as P from 'parsimmon';
 import { Blason } from '../model/blason';
-import { gules, Tincture, tinctures } from '../model/tincture';
+import { gules, Tincture } from '../model/tincture';
 import { parties, Party } from '../model/party';
 import { ordinaries, Ordinary } from '../model/ordinary';
 import { stringifyNumber, stringifyParty } from '../from-blason/blason.helpers';
@@ -21,8 +21,8 @@ import {
 import { cannotHappen } from '../../utils/cannot-happen';
 import { identity } from '../../utils/identity';
 import { BarryField, BendyField, BendySinisterField, ChequyField, Field, PalyField } from '../model/field';
-import { capitalizeFirstLetter } from '../../utils/strings';
 import { buildAltParser, constStr, threeParser, twoParser } from './parser.helper';
+import { tinctureParserFromCapitalizedName, tinctureParserFromName } from './tinctureParser';
 
 type Language = {
   Tincture: (r: AppliedLanguage) => P.Parser<Tincture>;
@@ -36,11 +36,9 @@ type AppliedLanguage = { [K in keyof Language]: ReturnType<Language[K]> };
 
 const partyUnit: P.Parser<Party['name']> = buildAltParser(parties, stringifyParty);
 
-const Tincture = (stringifier: (a: Tincture) => string) => buildAltParser(tinctures, stringifier);
-
 const language: Language = {
   Tincture(_r: AppliedLanguage): P.Parser<Tincture> {
-    return Tincture((x) => x.name);
+    return tinctureParserFromName;
   },
 
   Party(r: AppliedLanguage): P.Parser<Party> {
@@ -113,7 +111,7 @@ const language: Language = {
       tinctures: [tincture1, tincture2],
     }));
     return P.alt(
-      Tincture((x) => capitalizeFirstLetter(x.name)).map((tincture) => ({
+      tinctureParserFromCapitalizedName.map((tincture) => ({
         kind: 'plain',
         tincture,
       })),
