@@ -22,6 +22,7 @@ import { cannotHappen } from '../../utils/cannot-happen';
 import { identity } from '../../utils/identity';
 import { BarryField, BendyField, BendySinisterField, ChequyField, Field, PalyField } from '../model/field';
 import { capitalizeFirstLetter } from '../../utils/strings';
+import { buildAltParser, constStr, threeParser, twoParser } from './parser.helper';
 
 type Language = {
   Tincture: (r: AppliedLanguage) => P.Parser<Tincture>;
@@ -32,27 +33,6 @@ type Language = {
   Charge: (r: AppliedLanguage) => P.Parser<Charge>;
 };
 type AppliedLanguage = { [K in keyof Language]: ReturnType<Language[K]> };
-
-function buildAltParser<A>(arr: ReadonlyArray<A>, stringifyFn: (a: A) => string): P.Parser<A> {
-  return P.alt(
-    ...arr
-      .map((a) => [a, stringifyFn(a)] as const)
-      .sort(([, a1], [, a2]) => a2.length - a1.length)
-      .map(([a, aStr]) =>
-        P.regex(new RegExp(aStr, 'i'))
-          .result(a)
-          .desc(aStr)
-      )
-  );
-}
-
-function constStr<S extends string>(str: S, asStr?: string): P.Parser<S> {
-  return P.regex(new RegExp(asStr || str, 'i'))
-    .result(str)
-    .desc(asStr || capitalizeFirstLetter(str));
-}
-const twoParser = P.regex(/two/i).result(2 as const);
-const threeParser = P.regex(/three/i).result(3 as const);
 
 const partyUnit: P.Parser<Party['name']> = buildAltParser(parties, stringifyParty);
 
