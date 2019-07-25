@@ -3,10 +3,19 @@ import { argent, azure, ermine, gules, or, sable, vair, vert } from '../model/ti
 import { Blason } from '../model/blason';
 
 describe('parseBlason', () => {
-  it('should parseBlason a plain blason', () => {
+
+  it('should parse a plain blason', () => {
     const result = parseBlason('Gules');
 
     const expected: Blason = { field: { kind: 'plain', tincture: gules } };
+    expect(result).toEqual(expected);
+  });
+  it('should parse a plain blason ignoring the whitespaces', () => {
+    const result = parseBlason(` 
+     Argent   
+      `);
+
+    const expected: Blason = { field: { kind: 'plain', tincture: argent } };
     expect(result).toEqual(expected);
   });
   it('should parseBlason a fur blason', () => {

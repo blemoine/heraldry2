@@ -3,6 +3,7 @@ import React from 'react';
 import { CoatsOfArmsDisplay } from './CoatsOfArmsDisplay';
 import { Blason } from '../model/blason';
 import { azure, ermine, gules, or, purpure, vair } from '../model/tincture';
+import { parseBlason } from '../blason-parser/blasonParser';
 jest.mock('../../utils/uuid');
 
 const dimension = {
@@ -52,6 +53,19 @@ describe('CoatsOfArms', () => {
       },
     };
     const component = renderer.create(<CoatsOfArmsDisplay blason={blason} dimension={dimension} />);
+    expect(component.toJSON()).toMatchSnapshot();
+  });
+
+  it('should render an eagle balson with a saltire', () => {
+    const maybeBlason = parseBlason(
+      'Chequy gules and or, a saltire argent, an eagle displayed sable beaked and armed or'
+    );
+    if ('error' in maybeBlason) {
+      fail(maybeBlason.error);
+      return;
+    }
+
+    const component = renderer.create(<CoatsOfArmsDisplay blason={maybeBlason} dimension={dimension} />);
     expect(component.toJSON()).toMatchSnapshot();
   });
 });

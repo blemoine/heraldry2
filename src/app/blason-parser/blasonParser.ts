@@ -219,7 +219,7 @@ const language: Language = {
           ).map(([ordinary, charge]) => ({ ...ordinary, ...charge }))
         )
         .fallback({})
-    ).map(([field, rest]) => ({ field, ...rest }));
+    ).map(([field, rest]) => ({ field, ...rest })).trim(P.optWhitespace);
   },
 };
 
