@@ -17,7 +17,7 @@ export const LionDisplay = ({ charge, dimension, fillFromTincture }: Props) => {
         <g
           key={idx}
           transform={`translate(${(dimension.width - computedDimension.width) / 2} ${idx * computedDimension.height -
-            computedDimension.height / 10})`}
+            computedDimension.height / 15})`}
         >
           <UnitLionDisplay charge={charge} dimension={computedDimension} fillFromTincture={fillFromTincture} />
         </g>

@@ -33,6 +33,11 @@ function stringifyOrdinary(ordinary: Ordinary): string {
     }
     result += ordinary.tincture.name;
     return result;
+  } else if (ordinary.name === 'bordure') {
+    let result = 'a bordure ';
+    result += ordinary.line + ' ';
+    result += ordinary.tincture.name;
+    return result;
   } else {
     return 'a ' + ordinary.name + ' ' + ordinary.tincture.name;
   }
@@ -211,7 +216,7 @@ export function isThereFur(blason: Blason, fur: Furs['name']): boolean {
       if (charge.tincture.name === fur) {
         return true;
       }
-    }else {
+    } else {
       return cannotHappen(charge);
     }
   }

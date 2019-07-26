@@ -86,6 +86,19 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension: { width, height } }
         stroke="#333"
       />
     );
+  } else if (ordinary.name === 'bordure') {
+    const bordureWidth = width / 10;
+    return (
+        <path
+          d={`M 0 0 H${width} V${height / 3} A${width} ${width} 90 0 1 ${width /
+            2} ${height} A${width} ${width} -90 0 1 0 ${height / 3} V 0 0 L ${bordureWidth} ${bordureWidth} H ${width -
+            bordureWidth} V ${height / 3}  A${width} ${width} 90 0 1 ${width /
+          2} ${height - bordureWidth}  A${width} ${width} -90 0 1 ${bordureWidth} ${height / 3} V ${bordureWidth} Z`}
+          fill={fill}
+          stroke="transparent"
+          fillRule={'evenodd'}
+        />
+    );
   } else {
     return cannotHappen(ordinary);
   }

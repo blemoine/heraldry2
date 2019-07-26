@@ -1,4 +1,5 @@
 import { Tincture } from './tincture';
+import { Line } from './line';
 
 export type Chief = { name: 'chief'; tincture: Tincture };
 export type Bend = { name: 'bend'; tincture: Tincture };
@@ -8,6 +9,17 @@ export type Chevron = { name: 'chevron'; tincture: Tincture };
 export type Cross = { name: 'cross'; tincture: Tincture };
 export type Saltire = { name: 'saltire'; tincture: Tincture };
 
-export type Ordinary = Chief | Bend | Pale | Fess | Chevron | Cross | Saltire;
+export type Bordure = { name: 'bordure'; tincture: Tincture; line: Line };
 
-export const ordinaries: Array<Ordinary['name']> = ['chief', 'bend', 'pale', 'fess', 'chevron', 'cross', 'saltire'];
+export type Ordinary = Chief | Bend | Pale | Fess | Chevron | Cross | Saltire | Bordure;
+
+export const ordinaries: Array<Ordinary['name']> = [
+  'chief',
+  'bend',
+  'pale',
+  'fess',
+  'chevron',
+  'cross',
+  'saltire',
+  'bordure',
+];

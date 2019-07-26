@@ -355,7 +355,7 @@ exports[`CoatsOfArms should render a the england royal arms 1`] = `
     clipPath="url(#plain-field-clip-path)"
   >
     <g
-      transform="translate(66.66666666666667 -8.88888888888889)"
+      transform="translate(66.66666666666667 -5.925925925925926)"
     >
       <svg
         height={88.88888888888889}
@@ -548,7 +548,7 @@ exports[`CoatsOfArms should render a the england royal arms 1`] = `
       </svg>
     </g>
     <g
-      transform="translate(66.66666666666667 80)"
+      transform="translate(66.66666666666667 82.96296296296296)"
     >
       <svg
         height={88.88888888888889}
@@ -741,7 +741,7 @@ exports[`CoatsOfArms should render a the england royal arms 1`] = `
       </svg>
     </g>
     <g
-      transform="translate(66.66666666666667 168.88888888888889)"
+      transform="translate(66.66666666666667 171.85185185185185)"
     >
       <svg
         height={88.88888888888889}

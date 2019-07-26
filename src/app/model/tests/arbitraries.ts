@@ -11,7 +11,7 @@ import {
   PlainField,
 } from '../field';
 import { parties, Party } from '../party';
-import { ordinaries, Ordinary, Pale } from '../ordinary';
+import { Bordure, ordinaries, Ordinary, Pale } from '../ordinary';
 import {
   Charge,
   charges,
@@ -25,6 +25,7 @@ import {
 } from '../charge';
 import { cannotHappen } from '../../../utils/cannot-happen';
 import { Blason } from '../blason';
+import { Line, lines } from '../line';
 
 const tinctureArb: Arbitrary<Tincture> = fc.constantFrom(...tinctures);
 const plainFieldArb: Arbitrary<PlainField> = tinctureArb.map((tincture) => ({ kind: 'plain', tincture }));
@@ -59,6 +60,8 @@ const fieldArb: Arbitrary<Field> = fc.oneof<Field>(
   barryFieldArb,
   chequyFieldArb
 );
+
+const lineArb: Arbitrary<Line> = fc.constantFrom(...lines);
 const ordinaryArb: Arbitrary<Ordinary> = fc
   .record({ name: fc.constantFrom(...ordinaries), tincture: tinctureArb })
   .chain(
@@ -66,6 +69,9 @@ const ordinaryArb: Arbitrary<Ordinary> = fc
       if (obj.name === 'pale') {
         const pale: { name: 'pale'; tincture: Tincture } = { name: obj.name, tincture: obj.tincture };
         return fc.constantFrom(1 as const, 2 as const).map((count): Pale => ({ ...pale, count }));
+      }
+      if (obj.name === 'bordure') {
+        return lineArb.map((line): Bordure => ({ name: 'bordure', tincture: obj.tincture, line }));
       } else {
         const otherOrdinary: Exclude<Ordinary, Pale> = { name: obj.name, tincture: obj.tincture };
         return fc.constant(otherOrdinary);

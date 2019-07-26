@@ -38,10 +38,10 @@ export type Eagle = {
 };
 
 export type FleurDeLys = {
-  name: 'fleurdelys',
-  count: 3,
-  tincture: Tincture
-}
+  name: 'fleurdelys';
+  count: 3;
+  tincture: Tincture;
+};
 
 export type Charge = Lion | Eagle | FleurDeLys;
 

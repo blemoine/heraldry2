@@ -133,4 +133,28 @@ Argent, Azure, Barry of, Bendy, Bendy Sinister, Chequy, Ermine, Gules, Murrey, O
 
     expect(result).toEqual(expected);
   });
+
+  it('should parse the arms of Dinefwr modified', () => {
+    const result = parseBlason('Gules, a Lion rampant Or, a bordure engrailed azure');
+
+    const expected: Blason = {
+      field: { kind: 'plain', tincture: gules },
+      charge: {
+        name: 'lion',
+        attitude: 'rampant',
+        tincture: or,
+        head: null,
+        tail: null,
+        armedAndLangued: gules,
+        countAndDisposition: { count: 1 },
+      },
+      ordinary: {
+        line: 'engrailed',
+        name: 'bordure',
+        tincture: azure,
+      },
+    };
+
+    expect(result).toEqual(expected);
+  });
 });
