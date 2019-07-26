@@ -5,6 +5,7 @@ import {
   Eagle,
   EagleAttitude,
   eagleAttitudes,
+  FleurDeLys,
   Lion,
   LionAttitude,
   lionAttitudes,
@@ -81,6 +82,20 @@ const eagleParser = () => {
   );
 };
 
+const fleurDeLysParser = (): P.Parser<FleurDeLys> => {
+  return P.seq(
+    threeParser.skip(P.whitespace),
+    P.regexp(/Fleurs[- ]de[- ]l[yi]s/i).skip(P.whitespace),
+    tinctureParserFromName
+  ).map(([count, , tincture]) => {
+    return {
+      name: 'fleurdelys',
+      count,
+      tincture,
+    };
+  });
+};
+
 export function chargeParser(): P.Parser<Charge> {
   return P.alt(
     ...charges.map((charge) => {
@@ -92,6 +107,8 @@ export function chargeParser(): P.Parser<Charge> {
         return P.alt(aParser)
           .trim(P.optWhitespace)
           .chain((): P.Parser<Charge> => eagleParser());
+      } else if (charge === 'fleurdelys') {
+        return fleurDeLysParser();
       } else {
         return cannotHappen(charge);
       }

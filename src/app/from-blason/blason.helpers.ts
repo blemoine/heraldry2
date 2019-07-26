@@ -122,6 +122,13 @@ function stringifyCharge(charge: Charge): string {
       result += ' beaked and armed ' + charge.beakedAndArmed.name;
     }
     return result;
+  } else if (charge.name === 'fleurdelys') {
+    let result = stringifyNumber(charge.count);
+    result += ' fleurs de lys ';
+
+    result += charge.tincture.name;
+
+    return result;
   } else {
     return cannotHappen(charge);
   }
@@ -200,7 +207,11 @@ export function isThereFur(blason: Blason, fur: Furs['name']): boolean {
       if (charge.beakedAndArmed.name === fur) {
         return true;
       }
-    } else {
+    } else if (charge.name === 'fleurdelys') {
+      if (charge.tincture.name === fur) {
+        return true;
+      }
+    }else {
       return cannotHappen(charge);
     }
   }

@@ -123,4 +123,14 @@ Argent, Azure, Barry of, Bendy, Bendy Sinister, Chequy, Ermine, Gules, Murrey, O
 
     expect(result).toEqual(expected);
   });
+
+  it('should parse the arms of Gwent', () => {
+    const result = parseBlason('Per pale Azure and Sable, three Fleurs-de-Lis Or');
+    const expected: Blason = {
+      field: { kind: 'party', per: { name: 'pale', tinctures: [azure, sable] } },
+      charge: { name: 'fleurdelys', count: 3, tincture: or },
+    };
+
+    expect(result).toEqual(expected);
+  });
 });

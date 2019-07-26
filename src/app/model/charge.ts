@@ -37,6 +37,12 @@ export type Eagle = {
   beakedAndArmed: Tincture;
 };
 
-export type Charge = Lion | Eagle;
+export type FleurDeLys = {
+  name: 'fleurdelys',
+  count: 3,
+  tincture: Tincture
+}
 
-export const charges: Array<Charge['name']> = ['lion', 'eagle'];
+export type Charge = Lion | Eagle | FleurDeLys;
+
+export const charges: Array<Charge['name']> = ['lion', 'eagle', 'fleurdelys'];

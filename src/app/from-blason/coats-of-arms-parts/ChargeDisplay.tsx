@@ -5,6 +5,7 @@ import { cannotHappen } from '../../../utils/cannot-happen';
 import { LionDisplay } from './charge/lion/LionDisplay';
 import { EagleDisplay } from './charge/eagle/EagleDisplay';
 import { Dimension } from '../../model/dimension';
+import { FleurDeLysDisplay } from './charge/fleurdelys/FleurDeLysDisplay';
 
 type Props = { charge: Charge; dimension: Dimension; fillFromTincture: (tincture: Tincture) => string };
 export const ChargeDisplay = ({ charge, dimension, fillFromTincture }: Props) => {
@@ -12,6 +13,8 @@ export const ChargeDisplay = ({ charge, dimension, fillFromTincture }: Props) =>
     return <LionDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} />;
   } else if (charge.name === 'eagle') {
     return <EagleDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} />;
+  } else if (charge.name === 'fleurdelys') {
+    return <FleurDeLysDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} />;
   } else {
     return cannotHappen(charge);
   }
