@@ -13,7 +13,7 @@ import {
   LionTail,
   lionTails,
 } from '../model/charge';
-import { buildAltParser, threeParser, twoParser } from './parser.helper';
+import { aParser, buildAltParser, threeParser, twoParser } from './parser.helper';
 import { identity } from '../../utils/identity';
 import { gules } from '../model/tincture';
 import { cannotHappen } from '../../utils/cannot-happen';
@@ -57,8 +57,8 @@ const lionParser = (count: 1 | 2 | 3): P.Parser<Lion> => {
   return lionParser;
 };
 
-const eagleParser = (count: 1 | 2 | 3) => {
-  const eagleNameParser = count === 1 ? P.regex(/eagle/i) : P.regex(/eagles/i);
+const eagleParser = () => {
+  const eagleNameParser = P.regex(/eagle/i);
   const eagleAttitudeParser: P.Parser<EagleAttitude> = buildAltParser(eagleAttitudes, identity);
 
   return P.seq(
@@ -82,20 +82,19 @@ const eagleParser = (count: 1 | 2 | 3) => {
 };
 
 export function chargeParser(): P.Parser<Charge> {
-  const chargesParser = (count: 1 | 2 | 3): P.Parser<Charge> =>
-    P.alt(
-      ...charges.map((charge) => {
-        if (charge === 'lion') {
-          return lionParser(count);
-        } else if (charge === 'eagle') {
-          return eagleParser(count);
-        } else {
-          return cannotHappen(charge);
-        }
-      })
-    );
-
-  return P.alt(P.regex(/an?/i).result(1 as const), twoParser, threeParser)
-    .trim(P.optWhitespace)
-    .chain((count) => chargesParser(count));
+  return P.alt(
+    ...charges.map((charge) => {
+      if (charge === 'lion') {
+        return P.alt(aParser, twoParser, threeParser)
+          .trim(P.optWhitespace)
+          .chain((count) => lionParser(count));
+      } else if (charge === 'eagle') {
+        return P.alt(aParser)
+          .trim(P.optWhitespace)
+          .chain((): P.Parser<Charge> => eagleParser());
+      } else {
+        return cannotHappen(charge);
+      }
+    })
+  );
 }
