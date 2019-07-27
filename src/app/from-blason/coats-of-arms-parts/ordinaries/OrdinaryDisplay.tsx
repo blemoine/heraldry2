@@ -3,7 +3,7 @@ import { Ordinary } from '../../../model/ordinary';
 import { cannotHappen } from '../../../../utils/cannot-happen';
 import { Dimension } from '../../../model/dimension';
 import { range } from '../../../../utils/range';
-import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
+import { LineOptions, SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { PathFromBuilder } from '../../../common/PathFromBuilder';
 
 type Props = { ordinary: Ordinary; fill: string; dimension: Dimension };
@@ -96,6 +96,15 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension: { width, height } }
   } else if (ordinary.name === 'bordure') {
     const bordureWidth = width / 10;
 
+    let options: LineOptions;
+    if (ordinary.line === 'engrailed') {
+      options = { line: 'engrailed', radius: bordureWidth };
+    } else if (ordinary.line === 'straight') {
+      options = null;
+    } else {
+      return cannotHappen(ordinary.line);
+    }
+
     const pathBuilder = SvgPathBuilder.start([0, 0])
       .goTo([width, 0])
       .goTo([width, height / 3])
@@ -103,11 +112,11 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension: { width, height } }
       .arcTo([0, height / 3], { radius: width, xAxisRotation: -90, sweep: 1 })
       .goTo([0, 0])
       .goTo([bordureWidth, bordureWidth])
-      .goTo([width - bordureWidth, bordureWidth])
-      .goTo([width - bordureWidth, height / 3])
+      .goTo([width - bordureWidth, bordureWidth], options)
+      .goTo([width - bordureWidth, height / 3], options)
       .arcTo([width / 2, height - bordureWidth], { radius: width, xAxisRotation: 90, sweep: 1 })
       .arcTo([bordureWidth, height / 3], { radius: width, xAxisRotation: -90, sweep: 1 })
-      .goTo([bordureWidth, bordureWidth])
+      .goTo([bordureWidth, bordureWidth], options)
       .close();
 
     return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke="transparent" fillRule={'evenodd'} />;

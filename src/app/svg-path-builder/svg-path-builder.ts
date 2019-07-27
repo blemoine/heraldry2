@@ -1,4 +1,5 @@
 import { cannotHappen } from '../../utils/cannot-happen';
+import { range } from '../../utils/range';
 
 type PathAbsolutePoint = [number, number];
 
@@ -17,6 +18,8 @@ type Arc = {
 type Close = { command: 'Z' };
 
 type PathCommand = Start | GoToPoint | Arc | Vertical | Horizontal | Close;
+
+export type LineOptions = { line: 'engrailed'; radius: number } | null;
 
 export class SvgPathBuilder {
   static start(startingPoint: PathAbsolutePoint): SvgPathBuilder {
@@ -58,13 +61,48 @@ export class SvgPathBuilder {
       .join(' ');
   }
 
-  goTo(point: PathAbsolutePoint): SvgPathBuilder {
-    if (getX(this.commands) === point[0]) {
-      return this.addCommand({ command: 'V', coordinate: point[1] });
-    } else if (getY(this.commands) === point[1]) {
-      return this.addCommand({ command: 'H', coordinate: point[0] });
+  goTo(point: PathAbsolutePoint, options: LineOptions = null): SvgPathBuilder {
+    if (options) {
+      if (options.line === 'engrailed') {
+        const previousX = getX(this.commands);
+        const previousY = getY(this.commands);
+
+        if (previousX === null || previousY === null) {
+          return this.addCommand({ command: 'L', point });
+        } else {
+          const distance = distanceBetween([previousX, previousY], point);
+
+          const circleCount = Math.floor(distance / options.radius);
+          const radius = distance / circleCount;
+
+          const distanceX = point[0] - previousX;
+          const distanceY = point[1] - previousY;
+
+          const c: PathAbsolutePoint = [(point[0] + previousX) / 2, (point[1] + previousY) / 2];
+
+          const cb: PathAbsolutePoint = [c[0] - point[0], c[1] - point[1]];
+          const cb1: PathAbsolutePoint = [c[0] + distance, 0];
+          const theta = angleBetween(cb, cb1);
+          const xAxisRotation = (-theta * 360) / (2 * Math.PI);
+
+          return range(0, circleCount).reduce((pathBuilder: SvgPathBuilder, i): SvgPathBuilder => {
+            return pathBuilder.arcTo(
+              [previousX + ((i + 1) / circleCount) * distanceX, previousY + ((i + 1) / circleCount) * distanceY],
+              { radius: [radius, 3 * radius], sweep: 1, xAxisRotation }
+            );
+          }, this);
+        }
+      } else {
+        return cannotHappen(options.line);
+      }
     } else {
-      return this.addCommand({ command: 'L', point });
+      if (getX(this.commands) === point[0]) {
+        return this.addCommand({ command: 'V', coordinate: point[1] });
+      } else if (getY(this.commands) === point[1]) {
+        return this.addCommand({ command: 'H', coordinate: point[0] });
+      } else {
+        return this.addCommand({ command: 'L', point });
+      }
     }
   }
 
@@ -90,6 +128,14 @@ export class SvgPathBuilder {
   private addCommand(command: PathCommand): SvgPathBuilder {
     return new SvgPathBuilder([...this.commands, command]);
   }
+}
+
+function distanceBetween(pointA: PathAbsolutePoint, pointB: PathAbsolutePoint): number {
+  return Math.sqrt((pointA[0] - pointB[0]) ** 2 + (pointA[1] - pointB[1]) ** 2);
+}
+
+function angleBetween([x1, y1]: PathAbsolutePoint, [x2, y2]: PathAbsolutePoint): number {
+  return Math.atan2(x1 * y2 - y1 * x2, x1 * x2 + y1 * y2);
 }
 
 function getX(commands: Array<PathCommand>): number | null {
