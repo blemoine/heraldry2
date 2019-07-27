@@ -1,9 +1,7 @@
 import { cannotHappen } from '../../utils/cannot-happen';
 import { range } from '../../utils/range';
-import { toDegree } from './geometrical.helper';
+import { PathAbsolutePoint, toDegree } from './geometrical.helper';
 import { pointOnEllipticalArc } from './point-on-elliptical-arc';
-
-type PathAbsolutePoint = [number, number];
 
 type Start = { command: 'M'; point: PathAbsolutePoint };
 type GoToPoint = { command: 'L'; point: PathAbsolutePoint };
@@ -138,19 +136,18 @@ export class SvgPathBuilder {
 
           const nextPointFn = (t: number) =>
             pointOnEllipticalArc(
-              { x: previousPoint[0], y: previousPoint[1] },
+              previousPoint,
               radius[0],
               radius[1],
               options.xAxisRotation || 0,
               options.largeArc === 1,
               options.sweep === 1,
-              { x: point[0], y: point[1] },
+              point,
               t
             );
 
           return range(0, circleCount).reduce((pathBuilder: SvgPathBuilder, i): SvgPathBuilder => {
-            const nextPointRaw = nextPointFn((i + 1) / circleCount);
-            const nextPoint: PathAbsolutePoint = [nextPointRaw.x, nextPointRaw.y];
+            const nextPoint = nextPointFn((i + 1) / circleCount);
 
             const c: PathAbsolutePoint = [(nextPoint[0] + previousX) / 2, (nextPoint[1] + previousY) / 2];
 

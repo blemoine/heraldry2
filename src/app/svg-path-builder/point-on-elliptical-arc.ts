@@ -1,27 +1,25 @@
 // thanks https://ericeastwood.com/blog/25/curves-and-arcs-quadratic-cubic-elliptical-svg-implementations
 
-import { toRadians } from './geometrical.helper';
-
-type Point = { x: number; y: number };
+import { angleBetween, PathAbsolutePoint, toRadians } from './geometrical.helper';
 
 // t: [0,1]
 export function pointOnEllipticalArc(
-  p0: Point,
+  p0: PathAbsolutePoint,
   rx0: number,
   ry0: number,
   xAxisRotationRaw: number,
   largeArcFlag: boolean,
   sweepFlag: boolean,
-  p1: Point,
+  p1: PathAbsolutePoint,
   t: number
-): Point {
+): PathAbsolutePoint {
   // In accordance to: http://www.w3.org/TR/SVG/implnote.html#ArcOutOfRangeParameters
   let rx = Math.abs(rx0);
   let ry = Math.abs(ry0);
   const xAxisRotation = mod(xAxisRotationRaw, 360);
   const xAxisRotationRadians = toRadians(xAxisRotation);
   // If the endpoints are identical, then this is equivalent to omitting the elliptical arc segment entirely.
-  if (p0.x === p1.x && p0.y === p1.y) {
+  if (p0[0] === p1[0] && p0[1] === p1[1]) {
     return p0;
   }
 
@@ -34,8 +32,8 @@ export function pointOnEllipticalArc(
   // http://www.w3.org/TR/SVG/implnote.html#ArcConversionEndpointToCenter
 
   // Step #1: Compute transformedPoint
-  const dx = (p0.x - p1.x) / 2;
-  const dy = (p0.y - p1.y) / 2;
+  const dx = (p0[0] - p1[0]) / 2;
+  const dy = (p0[1] - p1[1]) / 2;
   const transformedPoint = {
     x: Math.cos(xAxisRotationRadians) * dx + Math.sin(xAxisRotationRadians) * dy,
     y: -Math.sin(xAxisRotationRadians) * dx + Math.cos(xAxisRotationRadians) * dy,
@@ -69,32 +67,26 @@ export function pointOnEllipticalArc(
     x:
       Math.cos(xAxisRotationRadians) * transformedCenter.x -
       Math.sin(xAxisRotationRadians) * transformedCenter.y +
-      (p0.x + p1.x) / 2,
+      (p0[0] + p1[0]) / 2,
     y:
       Math.sin(xAxisRotationRadians) * transformedCenter.x +
       Math.cos(xAxisRotationRadians) * transformedCenter.y +
-      (p0.y + p1.y) / 2,
+      (p0[1] + p1[1]) / 2,
   };
 
   // Step #4: Compute start/sweep angles
   // Start angle of the elliptical arc prior to the stretch and rotate operations.
   // Difference between the start and end angles
-  const startVector = {
-    x: (transformedPoint.x - transformedCenter.x) / rx,
-    y: (transformedPoint.y - transformedCenter.y) / ry,
-  };
-  const startAngle = angleBetween(
-    {
-      x: 1,
-      y: 0,
-    },
-    startVector
-  );
+  const startVector: PathAbsolutePoint = [
+    (transformedPoint.x - transformedCenter.x) / rx,
+    (transformedPoint.y - transformedCenter.y) / ry,
+  ];
+  const startAngle = angleBetween([1, 0], startVector);
 
-  const endVector = {
-    x: (-transformedPoint.x - transformedCenter.x) / rx,
-    y: (-transformedPoint.y - transformedCenter.y) / ry,
-  };
+  const endVector: PathAbsolutePoint = [
+    (-transformedPoint.x - transformedCenter.x) / rx,
+    (-transformedPoint.y - transformedCenter.y) / ry,
+  ];
   let sweepAngle = angleBetween(startVector, endVector);
 
   if (!sweepFlag && sweepAngle > 0) {
@@ -110,35 +102,20 @@ export function pointOnEllipticalArc(
   const ellipseComponentX = rx * Math.cos(angle);
   const ellipseComponentY = ry * Math.sin(angle);
 
-  return {
-    x:
-      Math.cos(xAxisRotationRadians) * ellipseComponentX -
-      Math.sin(xAxisRotationRadians) * ellipseComponentY +
-      center.x,
-    y:
-      Math.sin(xAxisRotationRadians) * ellipseComponentX +
-      Math.cos(xAxisRotationRadians) * ellipseComponentY +
-      center.y,
-  };
+  return [
+    Math.cos(xAxisRotationRadians) * ellipseComponentX - Math.sin(xAxisRotationRadians) * ellipseComponentY + center.x,
+    Math.sin(xAxisRotationRadians) * ellipseComponentX + Math.cos(xAxisRotationRadians) * ellipseComponentY + center.y,
+  ];
 }
 
-function pointOnLine(p0: Point, p1: Point, t: number) {
+function pointOnLine(p0: PathAbsolutePoint, p1: PathAbsolutePoint, t: number): PathAbsolutePoint {
   function calculateLineParameter(x0: number, x1: number, t: number) {
     return x0 + (x1 - x0) * t;
   }
 
-  return {
-    x: calculateLineParameter(p0.x, p1.x, t),
-    y: calculateLineParameter(p0.y, p1.y, t),
-  };
+  return [calculateLineParameter(p0[0], p1[0], t), calculateLineParameter(p0[1], p1[1], t)];
 }
 
 function mod(x: number, m: number): number {
   return ((x % m) + m) % m;
-}
-function angleBetween(v0: Point, v1: Point) {
-  const p = v0.x * v1.x + v0.y * v1.y;
-  const n = Math.sqrt((Math.pow(v0.x, 2) + Math.pow(v0.y, 2)) * (Math.pow(v1.x, 2) + Math.pow(v1.y, 2)));
-  const sign = v0.x * v1.y - v0.y * v1.x < 0 ? -1 : 1;
-  return sign * Math.acos(p / n);
 }
