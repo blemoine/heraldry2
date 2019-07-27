@@ -36,8 +36,8 @@ export const CoatsOfArmsDisplay = (props: Props) => {
 
             <pattern
               id={erminePatternId}
-              width={36.36}
-              height={64.9}
+              width={width / 5.5 }
+              height={height/3.7}
               patternUnits="userSpaceOnUse"
               viewBox="0 0 70 125"
             >
@@ -52,7 +52,7 @@ export const CoatsOfArmsDisplay = (props: Props) => {
             <symbol viewBox="0 0 200 200" id="vair">
               <VairDisplay width={200} height={200} />
             </symbol>
-            <pattern id={vairPatternId} width={40} height={80} patternUnits="userSpaceOnUse" viewBox="0 0 100 200">
+            <pattern id={vairPatternId} width={width / 5} height={width / 2.5} patternUnits="userSpaceOnUse" viewBox="0 0 100 200">
               <rect width="100%" height="100%" fill="white" />
               <use href="#vair" x="0" y="0" width={100} height={100} />
               <use href="#vair" x="-50" y="100" width={100} height={100} />
