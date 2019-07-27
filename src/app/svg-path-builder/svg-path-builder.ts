@@ -1,6 +1,6 @@
 import { cannotHappen } from '../../utils/cannot-happen';
 import { range } from '../../utils/range';
-import { PathAbsolutePoint, toDegree } from './geometrical.helper';
+import { angleBetween, PathAbsolutePoint, toDegree } from './geometrical.helper';
 import { pointOnEllipticalArc } from './point-on-elliptical-arc';
 
 type Start = { command: 'M'; point: PathAbsolutePoint };
@@ -191,9 +191,6 @@ function distanceBetween(pointA: PathAbsolutePoint, pointB: PathAbsolutePoint): 
   return Math.sqrt((pointA[0] - pointB[0]) ** 2 + (pointA[1] - pointB[1]) ** 2);
 }
 
-function angleBetween([x1, y1]: PathAbsolutePoint, [x2, y2]: PathAbsolutePoint): number {
-  return Math.atan2(x1 * y2 - y1 * x2, x1 * x2 + y1 * y2);
-}
 
 function getX(commands: Array<PathCommand>): number | null {
   if (commands.length === 0) {
