@@ -1,5 +1,7 @@
 import { cannotHappen } from '../../utils/cannot-happen';
 import { range } from '../../utils/range';
+import { toDegree } from './geometrical.helper';
+import { pointOnEllipticalArc } from './point-on-elliptical-arc';
 
 type PathAbsolutePoint = [number, number];
 
@@ -19,7 +21,7 @@ type Close = { command: 'Z' };
 
 type PathCommand = Start | GoToPoint | Arc | Vertical | Horizontal | Close;
 
-export type LineOptions = { line: 'engrailed'; radius: number } | null;
+export type LineOptions = { line: 'engrailed'; radius: number };
 
 export class SvgPathBuilder {
   static start(startingPoint: PathAbsolutePoint): SvgPathBuilder {
@@ -61,9 +63,9 @@ export class SvgPathBuilder {
       .join(' ');
   }
 
-  goTo(point: PathAbsolutePoint, options: LineOptions = null): SvgPathBuilder {
-    if (options) {
-      if (options.line === 'engrailed') {
+  goTo(point: PathAbsolutePoint, lineOptions: LineOptions | null = null): SvgPathBuilder {
+    if (lineOptions) {
+      if (lineOptions.line === 'engrailed') {
         const previousX = getX(this.commands);
         const previousY = getY(this.commands);
 
@@ -72,8 +74,8 @@ export class SvgPathBuilder {
         } else {
           const distance = distanceBetween([previousX, previousY], point);
 
-          const circleCount = Math.floor(distance / options.radius);
-          const radius = distance / circleCount;
+          const circleCount = Math.floor(distance / lineOptions.radius);
+          const circleRradius = distance / circleCount;
 
           const distanceX = point[0] - previousX;
           const distanceY = point[1] - previousY;
@@ -83,17 +85,17 @@ export class SvgPathBuilder {
           const cb: PathAbsolutePoint = [c[0] - point[0], c[1] - point[1]];
           const cb1: PathAbsolutePoint = [c[0] + distance, 0];
           const theta = angleBetween(cb, cb1);
-          const xAxisRotation = (-theta * 360) / (2 * Math.PI);
+          const xAxisRotation = toDegree(-theta);
 
           return range(0, circleCount).reduce((pathBuilder: SvgPathBuilder, i): SvgPathBuilder => {
             return pathBuilder.arcTo(
               [previousX + ((i + 1) / circleCount) * distanceX, previousY + ((i + 1) / circleCount) * distanceY],
-              { radius: [radius, 3 * radius], sweep: 1, xAxisRotation }
+              { radius: [circleRradius, 3 * circleRradius], sweep: 1, xAxisRotation }
             );
           }, this);
         }
       } else {
-        return cannotHappen(options.line);
+        return cannotHappen(lineOptions.line);
       }
     } else {
       if (getX(this.commands) === point[0]) {
@@ -108,17 +110,75 @@ export class SvgPathBuilder {
 
   arcTo(
     point: PathAbsolutePoint,
-    options: { radius: number | [number, number]; xAxisRotation?: number; largeArc?: 0 | 1; sweep?: 0 | 1 }
-  ) {
+    options: { radius: number | [number, number]; xAxisRotation?: number; largeArc?: 0 | 1; sweep?: 0 | 1 },
+    lineOptions: LineOptions | null = null
+  ): SvgPathBuilder {
     const radius: [number, number] = Array.isArray(options.radius) ? options.radius : [options.radius, options.radius];
-    return this.addCommand({
-      command: 'A',
-      point,
-      sweepFlag: options.sweep || 0,
-      largeArcFlag: options.largeArc || 0,
-      xAxisRotation: options.xAxisRotation || 0,
-      radius,
-    });
+
+    if (lineOptions) {
+      if (lineOptions.line === 'engrailed') {
+        const previousX = getX(this.commands);
+        const previousY = getY(this.commands);
+
+        if (previousX === null || previousY === null) {
+          return this.addCommand({
+            command: 'A',
+            point,
+            sweepFlag: options.sweep || 0,
+            largeArcFlag: options.largeArc || 0,
+            xAxisRotation: options.xAxisRotation || 0,
+            radius,
+          });
+        } else {
+          const previousPoint: PathAbsolutePoint = [previousX, previousY];
+          const distance = distanceBetween(previousPoint, point);
+
+          const circleCount = Math.floor(distance / lineOptions.radius);
+          const circleRradius = distance / circleCount;
+
+          const nextPointFn = (t: number) =>
+            pointOnEllipticalArc(
+              { x: previousPoint[0], y: previousPoint[1] },
+              radius[0],
+              radius[1],
+              options.xAxisRotation || 0,
+              options.largeArc === 1,
+              options.sweep === 1,
+              { x: point[0], y: point[1] },
+              t
+            );
+
+          return range(0, circleCount).reduce((pathBuilder: SvgPathBuilder, i): SvgPathBuilder => {
+            const nextPointRaw = nextPointFn((i + 1) / circleCount);
+            const nextPoint: PathAbsolutePoint = [nextPointRaw.x, nextPointRaw.y];
+
+            const c: PathAbsolutePoint = [(nextPoint[0] + previousX) / 2, (nextPoint[1] + previousY) / 2];
+
+            const cb: PathAbsolutePoint = [c[0] - nextPoint[0], c[1] - nextPoint[1]];
+            const cb1: PathAbsolutePoint = [c[0] + distance, 0];
+            const theta = angleBetween(cb, cb1);
+            const xAxisRotation = toDegree(-theta);
+
+            return pathBuilder.arcTo(nextPoint, {
+              radius: [circleRradius, 3 * circleRradius],
+              sweep: 1,
+              xAxisRotation,
+            });
+          }, this);
+        }
+      } else {
+        return cannotHappen(lineOptions.line);
+      }
+    } else {
+      return this.addCommand({
+        command: 'A',
+        point,
+        sweepFlag: options.sweep || 0,
+        largeArcFlag: options.largeArc || 0,
+        xAxisRotation: options.xAxisRotation || 0,
+        radius,
+      });
+    }
   }
 
   close(): SvgPathBuilder {

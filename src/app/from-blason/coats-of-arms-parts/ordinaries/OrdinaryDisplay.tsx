@@ -96,11 +96,11 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension: { width, height } }
   } else if (ordinary.name === 'bordure') {
     const bordureWidth = width / 10;
 
-    let options: LineOptions;
+    let lineOptions: LineOptions | null;
     if (ordinary.line === 'engrailed') {
-      options = { line: 'engrailed', radius: bordureWidth };
+      lineOptions = { line: 'engrailed', radius: bordureWidth };
     } else if (ordinary.line === 'straight') {
-      options = null;
+      lineOptions = null;
     } else {
       return cannotHappen(ordinary.line);
     }
@@ -112,11 +112,11 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension: { width, height } }
       .arcTo([0, height / 3], { radius: width, xAxisRotation: -90, sweep: 1 })
       .goTo([0, 0])
       .goTo([bordureWidth, bordureWidth])
-      .goTo([width - bordureWidth, bordureWidth], options)
-      .goTo([width - bordureWidth, height / 3], options)
-      .arcTo([width / 2, height - bordureWidth], { radius: width, xAxisRotation: 90, sweep: 1 })
-      .arcTo([bordureWidth, height / 3], { radius: width, xAxisRotation: -90, sweep: 1 })
-      .goTo([bordureWidth, bordureWidth], options)
+      .goTo([width - bordureWidth, bordureWidth], lineOptions)
+      .goTo([width - bordureWidth, height / 3], lineOptions)
+      .arcTo([width / 2, height - bordureWidth], { radius: width, xAxisRotation: 90, sweep: 1 }, lineOptions)
+      .arcTo([bordureWidth, height / 3], { radius: width, xAxisRotation: -90, sweep: 1 }, lineOptions)
+      .goTo([bordureWidth, bordureWidth], lineOptions)
       .close();
 
     return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke="transparent" fillRule={'evenodd'} />;
