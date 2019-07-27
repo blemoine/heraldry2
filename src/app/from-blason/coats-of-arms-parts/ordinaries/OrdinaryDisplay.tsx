@@ -84,28 +84,33 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension: { width, height } }
   } else if (ordinary.name === 'chevron') {
     const basePoint = height / 5;
 
-    return (
-      <path
-        d={`M${width / 2} ${height / 3} L0 ${height / 3 + width / 2} L0 ${height / 3 + width / 2 - basePoint} L${width /
-          2} ${height / 3 - basePoint} L${width} ${height / 3 + width / 2 - basePoint} L${width}  ${height / 3 +
-          width / 2} Z`}
-        fill={fill}
-        stroke="#333"
-      />
-    );
+    const pathBuilder = SvgPathBuilder.start([width / 2, height / 3])
+      .goTo([0, height / 3 + width / 2])
+      .goTo([0, height / 3 + width / 2 - basePoint])
+      .goTo([width / 2, height / 3 - basePoint])
+      .goTo([width, height / 3 + width / 2 - basePoint])
+      .goTo([width, height / 3 + width / 2])
+      .close();
+
+    return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke="#333" />;
   } else if (ordinary.name === 'bordure') {
     const bordureWidth = width / 10;
-    return (
-      <path
-        d={`M 0 0 H${width} V${height / 3} A${width} ${width} 90 0 1 ${width /
-          2} ${height} A${width} ${width} -90 0 1 0 ${height / 3} V 0 0 L ${bordureWidth} ${bordureWidth} H ${width -
-          bordureWidth} V ${height / 3}  A${width} ${width} 90 0 1 ${width / 2} ${height -
-          bordureWidth}  A${width} ${width} -90 0 1 ${bordureWidth} ${height / 3} V ${bordureWidth} Z`}
-        fill={fill}
-        stroke="transparent"
-        fillRule={'evenodd'}
-      />
-    );
+
+    const pathBuilder = SvgPathBuilder.start([0, 0])
+      .goTo([width, 0])
+      .goTo([width, height / 3])
+      .arcTo([width / 2, height], { radius: width, xAxisRotation: 90, sweep: 1 })
+      .arcTo([0, height / 3], { radius: width, xAxisRotation: -90, sweep: 1 })
+      .goTo([0, 0])
+      .goTo([bordureWidth, bordureWidth])
+      .goTo([width - bordureWidth, bordureWidth])
+      .goTo([width - bordureWidth, height / 3])
+      .arcTo([width / 2, height - bordureWidth], { radius: width, xAxisRotation: 90, sweep: 1 })
+      .arcTo([bordureWidth, height / 3], { radius: width, xAxisRotation: -90, sweep: 1 })
+      .goTo([bordureWidth, bordureWidth])
+      .close();
+
+    return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke="transparent" fillRule={'evenodd'} />;
   } else {
     return cannotHappen(ordinary);
   }
