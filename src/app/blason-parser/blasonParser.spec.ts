@@ -157,4 +157,21 @@ Argent, Azure, Barry of, Bendy, Bendy Sinister, Chequy, Ermine, Gules, Murrey, O
 
     expect(result).toEqual(expected);
   });
+
+  it('should accept a lion without explicit attitude', () => {
+    const result = parseBlason('Or, a lion Gules armed and langued Azure');
+    const expected: Blason = {
+      field: { kind: 'plain', tincture: or },
+      charge: {
+        name: 'lion',
+        attitude: 'rampant',
+        tincture: gules,
+        head: null,
+        tail: null,
+        armedAndLangued: azure,
+        countAndDisposition: { count: 1 },
+      },
+    };
+    expect(result).toEqual(expected);
+  });
 });

@@ -39,11 +39,11 @@ exports[`CoatsOfArms should render a fur blason 1`] = `
       </g>
     </symbol>
     <pattern
-      height={64.9}
+      height={65.04065040650407}
       id="field-pattern-3"
       patternUnits="userSpaceOnUse"
       viewBox="0 0 70 125"
-      width={36.36}
+      width={36.36363636363637}
     >
       <rect
         fill="white"

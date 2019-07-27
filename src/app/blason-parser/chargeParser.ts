@@ -25,9 +25,10 @@ const lionParser = (count: 1 | 2 | 3): P.Parser<Lion> => {
   const headParser: P.Parser<LionHead> = buildAltParser(lionHeads, identity);
   const tailParser: P.Parser<LionTail> = buildAltParser(lionTails, identity);
 
-  const lionNameParser = count === 1 ? P.regex(/lion/i) : P.regex(/lions/i);
+  const lionNameParser = (count === 1 ? P.regex(/lion/i) : P.regex(/lions/i)).result('lion' as const);
   const lionParser: P.Parser<Lion> = P.seq(
-    lionNameParser.skip(P.whitespace).then(attitudeParser),
+    lionNameParser,
+    P.whitespace.then(attitudeParser).fallback('rampant'),
     P.whitespace.then(headParser).fallback(null),
     P.whitespace
       .then(P.regex(/tail/i))
@@ -43,17 +44,19 @@ const lionParser = (count: 1 | 2 | 3): P.Parser<Lion> => {
       .then(P.whitespace)
       .then(tinctureParserFromName)
       .fallback(null)
-  ).map(([attitude, head, tail, countAndDisposition, tincture, armedAndLangued]) => {
-    return {
-      name: 'lion',
-      attitude,
-      tincture,
-      armedAndLangued: armedAndLangued || gules,
-      tail,
-      head,
-      countAndDisposition,
-    };
-  });
+  ).map(
+    ([name, attitude, head, tail, countAndDisposition, tincture, armedAndLangued]): Lion => {
+      return {
+        name,
+        attitude,
+        tincture,
+        armedAndLangued: armedAndLangued || gules,
+        tail,
+        head,
+        countAndDisposition,
+      };
+    }
+  );
 
   return lionParser;
 };

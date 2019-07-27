@@ -37,7 +37,7 @@ export const CoatsOfArmsDisplay = (props: Props) => {
             <pattern
               id={erminePatternId}
               width={width / 5.5 }
-              height={height/3.7}
+              height={height/ 4.1}
               patternUnits="userSpaceOnUse"
               viewBox="0 0 70 125"
             >
