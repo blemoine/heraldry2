@@ -14,3 +14,7 @@ export function angleBetween(v0: PathAbsolutePoint, v1: PathAbsolutePoint): numb
   const sign = v0[0] * v1[1] - v0[1] * v1[0] < 0 ? -1 : 1;
   return sign * Math.acos(p / n);
 }
+
+export function distanceBetween(pointA: PathAbsolutePoint, pointB: PathAbsolutePoint): number {
+  return Math.sqrt((pointA[0] - pointB[0]) ** 2 + (pointA[1] - pointB[1]) ** 2);
+}

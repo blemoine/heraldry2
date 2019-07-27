@@ -73,7 +73,9 @@ describe('SvgPathBuilder', () => {
   it('should draw line engrailed horizontally', () => {
     const result = SvgPathBuilder.start([10, 10]).goTo([70, 10], { line: 'engrailed', radius: 20 });
 
-    expect(result.toPathAttribute()).toEqual('M 10 10 A20 60 180 0 1 30 10 A20 60 180 0 1 50 10 A20 60 180 0 1 70 10');
+    expect(result.toPathAttribute()).toEqual(
+      'M 10 10 A20 60 -180 0 1 30 10 A20 60 -180 0 1 50 10 A20 60 -180 0 1 70 10'
+    );
   });
 
   it('should draw line engrailed vertically', () => {

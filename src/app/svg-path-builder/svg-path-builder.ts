@@ -1,6 +1,6 @@
 import { cannotHappen } from '../../utils/cannot-happen';
 import { range } from '../../utils/range';
-import { angleBetween, PathAbsolutePoint, toDegree } from './geometrical.helper';
+import { angleBetween, distanceBetween, PathAbsolutePoint, toDegree } from './geometrical.helper';
 import { pointOnEllipticalArc } from './point-on-elliptical-arc';
 
 type Start = { command: 'M'; point: PathAbsolutePoint };
@@ -19,7 +19,8 @@ type Close = { command: 'Z' };
 
 type PathCommand = Start | GoToPoint | Arc | Vertical | Horizontal | Close;
 
-export type LineOptions = { line: 'engrailed'; radius: number };
+export type EngrailedLineOptions = { line: 'engrailed'; radius: number };
+export type LineOptions = EngrailedLineOptions;
 
 export class SvgPathBuilder {
   static start(startingPoint: PathAbsolutePoint): SvgPathBuilder {
@@ -64,33 +65,17 @@ export class SvgPathBuilder {
   goTo(point: PathAbsolutePoint, lineOptions: LineOptions | null = null): SvgPathBuilder {
     if (lineOptions) {
       if (lineOptions.line === 'engrailed') {
-        const previousX = getX(this.commands);
-        const previousY = getY(this.commands);
+        const previous = this.currentPoint();
 
-        if (previousX === null || previousY === null) {
+        if (previous === null) {
           return this.addCommand({ command: 'L', point });
         } else {
-          const distance = distanceBetween([previousX, previousY], point);
+          const nextPointFn = (step: number): PathAbsolutePoint => [
+            previous[0] + step * (point[0] - previous[0]),
+            previous[1] + step * (point[1] - previous[1]),
+          ];
 
-          const circleCount = Math.floor(distance / lineOptions.radius);
-          const circleRradius = distance / circleCount;
-
-          const distanceX = point[0] - previousX;
-          const distanceY = point[1] - previousY;
-
-          const c: PathAbsolutePoint = [(point[0] + previousX) / 2, (point[1] + previousY) / 2];
-
-          const cb: PathAbsolutePoint = [c[0] - point[0], c[1] - point[1]];
-          const cb1: PathAbsolutePoint = [c[0] + distance, 0];
-          const theta = angleBetween(cb, cb1);
-          const xAxisRotation = toDegree(-theta);
-
-          return range(0, circleCount).reduce((pathBuilder: SvgPathBuilder, i): SvgPathBuilder => {
-            return pathBuilder.arcTo(
-              [previousX + ((i + 1) / circleCount) * distanceX, previousY + ((i + 1) / circleCount) * distanceY],
-              { radius: [circleRradius, 3 * circleRradius], sweep: 1, xAxisRotation }
-            );
-          }, this);
+          return engrailedBetweenPoints(this, point, lineOptions, nextPointFn);
         }
       } else {
         return cannotHappen(lineOptions.line);
@@ -112,56 +97,37 @@ export class SvgPathBuilder {
     lineOptions: LineOptions | null = null
   ): SvgPathBuilder {
     const radius: [number, number] = Array.isArray(options.radius) ? options.radius : [options.radius, options.radius];
+    const xAxisRotation = options.xAxisRotation || 0;
+    const sweepFlag = options.sweep || 0;
+    const largeArcFlag = options.largeArc || 0;
 
     if (lineOptions) {
       if (lineOptions.line === 'engrailed') {
-        const previousX = getX(this.commands);
-        const previousY = getY(this.commands);
+        const previousPoint = this.currentPoint();
 
-        if (previousX === null || previousY === null) {
+        if (previousPoint === null) {
           return this.addCommand({
             command: 'A',
             point,
-            sweepFlag: options.sweep || 0,
-            largeArcFlag: options.largeArc || 0,
-            xAxisRotation: options.xAxisRotation || 0,
+            sweepFlag,
+            largeArcFlag,
+            xAxisRotation,
             radius,
           });
         } else {
-          const previousPoint: PathAbsolutePoint = [previousX, previousY];
-          const distance = distanceBetween(previousPoint, point);
-
-          const circleCount = Math.floor(distance / lineOptions.radius);
-          const circleRradius = distance / circleCount;
-
           const nextPointFn = (t: number) =>
             pointOnEllipticalArc(
               previousPoint,
               radius[0],
               radius[1],
-              options.xAxisRotation || 0,
+              xAxisRotation,
               options.largeArc === 1,
               options.sweep === 1,
               point,
               t
             );
 
-          return range(0, circleCount).reduce((pathBuilder: SvgPathBuilder, i): SvgPathBuilder => {
-            const nextPoint = nextPointFn((i + 1) / circleCount);
-
-            const c: PathAbsolutePoint = [(nextPoint[0] + previousX) / 2, (nextPoint[1] + previousY) / 2];
-
-            const cb: PathAbsolutePoint = [c[0] - nextPoint[0], c[1] - nextPoint[1]];
-            const cb1: PathAbsolutePoint = [c[0] + distance, 0];
-            const theta = angleBetween(cb, cb1);
-            const xAxisRotation = toDegree(-theta);
-
-            return pathBuilder.arcTo(nextPoint, {
-              radius: [circleRradius, 3 * circleRradius],
-              sweep: 1,
-              xAxisRotation,
-            });
-          }, this);
+          return engrailedBetweenPoints(this, point, lineOptions, nextPointFn);
         }
       } else {
         return cannotHappen(lineOptions.line);
@@ -170,9 +136,9 @@ export class SvgPathBuilder {
       return this.addCommand({
         command: 'A',
         point,
-        sweepFlag: options.sweep || 0,
-        largeArcFlag: options.largeArc || 0,
-        xAxisRotation: options.xAxisRotation || 0,
+        sweepFlag,
+        largeArcFlag,
+        xAxisRotation,
         radius,
       });
     }
@@ -182,15 +148,20 @@ export class SvgPathBuilder {
     return this.addCommand({ command: 'Z' });
   }
 
+  currentPoint(): PathAbsolutePoint | null {
+    const x = getX(this.commands);
+    const y = getY(this.commands);
+    if (x === null || y === null) {
+      return null;
+    } else {
+      return [x, y];
+    }
+  }
+
   private addCommand(command: PathCommand): SvgPathBuilder {
     return new SvgPathBuilder([...this.commands, command]);
   }
 }
-
-function distanceBetween(pointA: PathAbsolutePoint, pointB: PathAbsolutePoint): number {
-  return Math.sqrt((pointA[0] - pointB[0]) ** 2 + (pointA[1] - pointB[1]) ** 2);
-}
-
 
 function getX(commands: Array<PathCommand>): number | null {
   if (commands.length === 0) {
@@ -230,4 +201,40 @@ function getY(commands: Array<PathCommand>): number | null {
       return cannotHappen(previousCommand);
     }
   }
+}
+
+function engrailedBetweenPoints(
+  basePathBuilder: SvgPathBuilder,
+  pointTo: PathAbsolutePoint,
+  lineOptions: EngrailedLineOptions,
+  nextPointFn: (step: number) => PathAbsolutePoint
+): SvgPathBuilder {
+  const previousPoint = basePathBuilder.currentPoint();
+  if (previousPoint === null) {
+    return basePathBuilder;
+  }
+  const distance = distanceBetween(previousPoint, pointTo);
+
+  const circleCount = Math.floor(distance / lineOptions.radius);
+  const circleRadius = distance / circleCount;
+
+  return range(0, circleCount).reduce((pathBuilder: SvgPathBuilder, i): SvgPathBuilder => {
+    const nextPoint = nextPointFn((i + 1) / circleCount);
+
+    return pathBuilder.arcTo(nextPoint, {
+      radius: [circleRadius, 3 * circleRadius],
+      sweep: 1,
+      xAxisRotation: engrailedXAxisRotation(previousPoint, nextPoint),
+    });
+  }, basePathBuilder);
+}
+
+function engrailedXAxisRotation(start: PathAbsolutePoint, end: PathAbsolutePoint): number {
+  const distance = distanceBetween(start, end);
+  const c: PathAbsolutePoint = [(end[0] + start[0]) / 2, (end[1] + start[1]) / 2];
+
+  const cb: PathAbsolutePoint = [c[0] - end[0], c[1] - end[1]];
+  const cb1: PathAbsolutePoint = [c[0] + distance, 0];
+  const theta = angleBetween(cb, cb1);
+  return toDegree(-theta);
 }
