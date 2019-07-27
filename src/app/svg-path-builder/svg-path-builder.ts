@@ -59,24 +59,9 @@ export class SvgPathBuilder {
   }
 
   goTo(point: PathAbsolutePoint): SvgPathBuilder {
-    const previousCommand = this.commands[this.commands.length - 1];
-
-    const previousX =
-      previousCommand.command === 'L' || previousCommand.command === 'M'
-        ? previousCommand.point[0]
-        : previousCommand.command === 'H'
-        ? previousCommand.coordinate
-        : null;
-    const previousY =
-      previousCommand.command === 'L' || previousCommand.command === 'M'
-        ? previousCommand.point[1]
-        : previousCommand.command === 'V'
-        ? previousCommand.coordinate
-        : null;
-
-    if (previousX === point[0]) {
+    if (getX(this.commands) === point[0]) {
       return this.addCommand({ command: 'V', coordinate: point[1] });
-    } else if (previousY === point[1]) {
+    } else if (getY(this.commands) === point[1]) {
       return this.addCommand({ command: 'H', coordinate: point[0] });
     } else {
       return this.addCommand({ command: 'L', point });
@@ -104,5 +89,45 @@ export class SvgPathBuilder {
 
   private addCommand(command: PathCommand): SvgPathBuilder {
     return new SvgPathBuilder([...this.commands, command]);
+  }
+}
+
+function getX(commands: Array<PathCommand>): number | null {
+  if (commands.length === 0) {
+    return null;
+  } else {
+    const previousCommand = commands[commands.length - 1];
+
+    if (previousCommand.command === 'M' || previousCommand.command === 'L' || previousCommand.command === 'A') {
+      return previousCommand.point[0];
+    } else if (previousCommand.command === 'H') {
+      return previousCommand.coordinate;
+    } else if (previousCommand.command === 'V') {
+      return getX(commands.slice(0, commands.length - 1));
+    } else if (previousCommand.command === 'Z') {
+      return getX([commands[0]]);
+    } else {
+      return cannotHappen(previousCommand);
+    }
+  }
+}
+
+function getY(commands: Array<PathCommand>): number | null {
+  if (commands.length === 0) {
+    return null;
+  } else {
+    const previousCommand = commands[commands.length - 1];
+
+    if (previousCommand.command === 'M' || previousCommand.command === 'L' || previousCommand.command === 'A') {
+      return previousCommand.point[1];
+    } else if (previousCommand.command === 'V') {
+      return previousCommand.coordinate;
+    } else if (previousCommand.command === 'H') {
+      return getX(commands.slice(0, commands.length - 1));
+    } else if (previousCommand.command === 'Z') {
+      return getX([commands[0]]);
+    } else {
+      return cannotHappen(previousCommand);
+    }
   }
 }
