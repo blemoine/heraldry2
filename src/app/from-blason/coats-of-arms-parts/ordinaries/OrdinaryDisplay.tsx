@@ -3,6 +3,8 @@ import { Ordinary } from '../../../model/ordinary';
 import { cannotHappen } from '../../../../utils/cannot-happen';
 import { Dimension } from '../../../model/dimension';
 import { range } from '../../../../utils/range';
+import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
+import { PathFromBuilder } from '../../../common/PathFromBuilder';
 
 type Props = { ordinary: Ordinary; fill: string; dimension: Dimension };
 
@@ -15,14 +17,14 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension: { width, height } }
   } else if (ordinary.name === 'bend') {
     const basePoint = height / (8 * Math.sqrt(2));
     const length = Math.sqrt(width ** 2 + height ** 2);
-    return (
-      <path
-        d={`M${basePoint} ${-basePoint} L${-basePoint} ${basePoint} L${length - basePoint} ${length +
-          basePoint} L${length + basePoint} ${length - basePoint} Z`}
-        fill={fill}
-        stroke="#333"
-      />
-    );
+
+    const pathBuilder = SvgPathBuilder.start([basePoint, -basePoint])
+      .goTo([-basePoint, basePoint])
+      .goTo([length - basePoint, length + basePoint])
+      .goTo([length + basePoint, length - basePoint])
+      .close();
+
+    return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke="#333" />;
   } else if (ordinary.name === 'pale') {
     return (
       <g>
@@ -42,38 +44,43 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension: { width, height } }
       </g>
     );
   } else if (ordinary.name === 'cross') {
-    return (
-      <path
-        d={`M ${(2 * width) / 5} 0 H ${(3 * width) / 5} V ${(2 * height) / 5} H ${width} V ${(3 * height) / 5} H ${(3 *
-          width) /
-          5} V ${height} H ${(2 * width) / 5} V ${(3 * height) / 5} H 0 V ${(2 * height) / 5} H ${(2 * width) / 5} Z`}
-        fill={fill}
-        stroke="#333"
-      />
-    );
+    const pathBuilder = SvgPathBuilder.start([(2 * width) / 5, 0])
+      .goTo([(3 * width) / 5, 0])
+      .goTo([(3 * width) / 5, (2 * height) / 5])
+      .goTo([width, (2 * height) / 5])
+      .goTo([width, (3 * height) / 5])
+      .goTo([(3 * width) / 5, (3 * height) / 5])
+      .goTo([(3 * width) / 5, height])
+      .goTo([(2 * width) / 5, height])
+      .goTo([(2 * width) / 5, (3 * height) / 5])
+      .goTo([0, (3 * height) / 5])
+      .goTo([0, (2 * height) / 5])
+      .goTo([(2 * width) / 5, (2 * height) / 5])
+      .close();
+
+    return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke="#333" />;
   } else if (ordinary.name === 'saltire') {
     const basePointW = width / (10 * Math.sqrt(2));
     const basePointH = height / (10 * Math.sqrt(2));
 
     const w = width / 2;
     const h = height / 2;
-    return (
-      <g>
-        <path
-          d={`M${w} ${h - basePointH} L ${2 * w} ${-basePointH} L ${2 * w + basePointW} ${h -
-            (w * basePointH) / basePointW} L${w + basePointW} ${h} L ${2 * w + basePointW} ${h +
-            (w * basePointH) / basePointW} L ${2 * w} ${2 * h + basePointH} L${w} ${h + basePointH} L ${(h *
-            basePointW) /
-            basePointH -
-            w} ${2 * h + basePointH} L ${-basePointW} ${h + (w * basePointH) / basePointW} L ${w -
-            basePointW} ${h} L ${-basePointW} ${h - (w * basePointH) / basePointW} L ${(h * basePointW) / basePointH -
-            w} ${-basePointH} Z`}
-          fill={fill}
-          stroke="#333"
-        />
-        <circle cx={2 * w} cy={2 * h - basePointH} r={5} />
-      </g>
-    );
+
+    const pathBuilder = SvgPathBuilder.start([w, h - basePointH])
+      .goTo([2 * w, -basePointH])
+      .goTo([2 * w + basePointW, h - (w * basePointH) / basePointW])
+      .goTo([w + basePointW, h])
+      .goTo([2 * w + basePointW, h + (w * basePointH) / basePointW])
+      .goTo([2 * w, 2 * h + basePointH])
+      .goTo([w, h + basePointH])
+      .goTo([(h * basePointW) / basePointH - w, 2 * h + basePointH])
+      .goTo([-basePointW, h + (w * basePointH) / basePointW])
+      .goTo([w - basePointW, h])
+      .goTo([-basePointW, h - (w * basePointH) / basePointW])
+      .goTo([(h * basePointW) / basePointH - w, -basePointH])
+      .close();
+
+    return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke="#333" />;
   } else if (ordinary.name === 'chevron') {
     const basePoint = height / 5;
 
@@ -89,15 +96,15 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension: { width, height } }
   } else if (ordinary.name === 'bordure') {
     const bordureWidth = width / 10;
     return (
-        <path
-          d={`M 0 0 H${width} V${height / 3} A${width} ${width} 90 0 1 ${width /
-            2} ${height} A${width} ${width} -90 0 1 0 ${height / 3} V 0 0 L ${bordureWidth} ${bordureWidth} H ${width -
-            bordureWidth} V ${height / 3}  A${width} ${width} 90 0 1 ${width /
-          2} ${height - bordureWidth}  A${width} ${width} -90 0 1 ${bordureWidth} ${height / 3} V ${bordureWidth} Z`}
-          fill={fill}
-          stroke="transparent"
-          fillRule={'evenodd'}
-        />
+      <path
+        d={`M 0 0 H${width} V${height / 3} A${width} ${width} 90 0 1 ${width /
+          2} ${height} A${width} ${width} -90 0 1 0 ${height / 3} V 0 0 L ${bordureWidth} ${bordureWidth} H ${width -
+          bordureWidth} V ${height / 3}  A${width} ${width} 90 0 1 ${width / 2} ${height -
+          bordureWidth}  A${width} ${width} -90 0 1 ${bordureWidth} ${height / 3} V ${bordureWidth} Z`}
+        fill={fill}
+        stroke="transparent"
+        fillRule={'evenodd'}
+      />
     );
   } else {
     return cannotHappen(ordinary);
