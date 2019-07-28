@@ -9,7 +9,10 @@ describe('stringifyBlason', () => {
 
   it('should write the ordinary after the field', () => {
     expect(
-      stringifyBlason({ field: { kind: 'plain', tincture: vair }, ordinary: { name: 'bend', tincture: azure } })
+      stringifyBlason({
+        field: { kind: 'plain', tincture: vair },
+        ordinary: { name: 'bend', tincture: azure, line: 'straight' },
+      })
     ).toBe('Vair, a bend azure');
     expect(
       stringifyBlason({
@@ -206,20 +209,32 @@ describe('isThereFur', () => {
   });
   it('should return true if the field is ermine, and the ordinary is vair and the fur search is vair', () => {
     expect(
-      isThereFur({ field: { kind: 'plain', tincture: ermine }, ordinary: { name: 'bend', tincture: vair } }, 'vair')
+      isThereFur(
+        { field: { kind: 'plain', tincture: ermine }, ordinary: { name: 'bend', tincture: vair, line: 'straight' } },
+        'vair'
+      )
     ).toBe(true);
   });
   it('should return false if the field is ermine, and the ordinary is ermine and the fur search is vair', () => {
     expect(
-      isThereFur({ field: { kind: 'plain', tincture: ermine }, ordinary: { name: 'bend', tincture: ermine } }, 'vair')
+      isThereFur(
+        { field: { kind: 'plain', tincture: ermine }, ordinary: { name: 'bend', tincture: ermine, line: 'straight' } },
+        'vair'
+      )
     ).toBe(false);
   });
   it('should return false if nothing is a fur', () => {
     expect(
-      isThereFur({ field: { kind: 'plain', tincture: azure }, ordinary: { name: 'bend', tincture: argent } }, 'vair')
+      isThereFur(
+        { field: { kind: 'plain', tincture: azure }, ordinary: { name: 'bend', tincture: argent, line: 'straight' } },
+        'vair'
+      )
     ).toBe(false);
     expect(
-      isThereFur({ field: { kind: 'plain', tincture: azure }, ordinary: { name: 'bend', tincture: argent } }, 'ermine')
+      isThereFur(
+        { field: { kind: 'plain', tincture: azure }, ordinary: { name: 'bend', tincture: argent, line: 'straight' } },
+        'ermine'
+      )
     ).toBe(false);
   });
 
@@ -228,7 +243,7 @@ describe('isThereFur', () => {
       isThereFur(
         {
           field: { kind: 'plain', tincture: gules },
-          ordinary: { name: 'bend', tincture: azure },
+          ordinary: { name: 'bend', tincture: azure, line: 'straight' },
           charge: {
             name: 'lion',
             head: null,
@@ -249,7 +264,7 @@ describe('isThereFur', () => {
       isThereFur(
         {
           field: { kind: 'plain', tincture: gules },
-          ordinary: { name: 'bend', tincture: azure },
+          ordinary: { name: 'bend', tincture: azure, line: 'straight' },
           charge: {
             name: 'lion',
             head: null,

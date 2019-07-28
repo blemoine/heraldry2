@@ -47,11 +47,13 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension }: Props) => {
     const basePoint = height / (8 * Math.sqrt(2));
     const length = Math.sqrt(width ** 2 + height ** 2);
 
+    const lineOptions = computeLineOptions(ordinary.line, dimension);
+
     const pathBuilder = SvgPathBuilder.start([basePoint, -basePoint])
       .goTo([-basePoint, basePoint])
-      .goTo([length - basePoint, length + basePoint])
+      .goTo([length - basePoint, length + basePoint], lineOptions)
       .goTo([length + basePoint, length - basePoint])
-      .close();
+      .goTo([basePoint, -basePoint], lineOptions);
 
     return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke="#333" />;
   } else if (ordinary.name === 'pale') {

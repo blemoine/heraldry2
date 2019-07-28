@@ -11,7 +11,7 @@ import {
   PlainField,
 } from '../field';
 import { parties, Party } from '../party';
-import { Base, Bordure, Chief, Fess, ordinaries, Ordinary, Pale } from '../ordinary';
+import { Base, Bend, Bordure, Chief, Fess, ordinaries, Ordinary, Pale } from '../ordinary';
 import {
   Charge,
   charges,
@@ -70,9 +70,9 @@ const ordinaryArb: Arbitrary<Ordinary> = fc
         const pale: { name: 'pale'; tincture: Tincture } = { name: obj.name, tincture: obj.tincture };
         return fc.constantFrom(1 as const, 2 as const).map((count): Pale => ({ ...pale, count }));
       }
-      if (obj.name === 'bordure' || obj.name === 'chief' || obj.name === 'fess' || obj.name === 'base') {
+      if (obj.name === 'bordure' || obj.name === 'chief' || obj.name === 'fess' || obj.name === 'base' || obj.name === 'bend' ) {
         const name = obj.name;
-        return lineArb.map((line): Bordure | Chief | Fess | Base => ({ name, tincture: obj.tincture, line }));
+        return lineArb.map((line): Bordure | Chief | Fess | Base | Bend => ({ name, tincture: obj.tincture, line }));
       } else {
         const otherOrdinary: Exclude<Ordinary, Pale> = { name: obj.name, tincture: obj.tincture };
         return fc.constant(otherOrdinary);
