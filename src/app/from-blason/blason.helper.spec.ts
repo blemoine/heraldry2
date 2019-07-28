@@ -15,7 +15,10 @@ describe('stringifyBlason', () => {
       stringifyBlason({ field: { kind: 'plain', tincture: sable }, ordinary: { name: 'fess', tincture: gules } })
     ).toBe('Sable, a fess gules');
     expect(
-      stringifyBlason({ field: { kind: 'plain', tincture: or }, ordinary: { name: 'chief', tincture: argent } })
+      stringifyBlason({
+        field: { kind: 'plain', tincture: or },
+        ordinary: { name: 'chief', tincture: argent, line: 'straight' },
+      })
     ).toBe('Or, a chief argent');
   });
 
@@ -92,7 +95,7 @@ describe('stringifyBlason', () => {
     expect(
       stringifyBlason({
         field: { kind: 'party', per: { name: 'pale', tinctures: [ermine, azure] } },
-        ordinary: { name: 'chief', tincture: ermine },
+        ordinary: { name: 'chief', tincture: ermine, line: 'straight' },
         charge: {
           name: 'lion',
           tincture: gules,

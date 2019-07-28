@@ -71,7 +71,7 @@ describe('SvgPathBuilder', () => {
   });
 
   it('should draw line engrailed horizontally', () => {
-    const result = SvgPathBuilder.start([10, 10]).goTo([70, 10], { line: 'engrailed', radius: 20 });
+    const result = SvgPathBuilder.start([10, 10]).goTo([70, 10], { line: 'engrailed', radius: 20, sweep: true });
 
     expect(result.toPathAttribute()).toEqual(
       'M 10 10 A20 60 -180 0 1 30 10 A20 60 -180 0 1 50 10 A20 60 -180 0 1 70 10'
@@ -79,13 +79,13 @@ describe('SvgPathBuilder', () => {
   });
 
   it('should draw line engrailed vertically', () => {
-    const result = SvgPathBuilder.start([10, 10]).goTo([10, 70], { line: 'engrailed', radius: 20 });
+    const result = SvgPathBuilder.start([10, 10]).goTo([10, 70], { line: 'engrailed', radius: 20, sweep: true });
 
     expect(result.toPathAttribute()).toEqual('M 10 10 A20 60 -90 0 1 10 30 A20 60 -90 0 1 10 50 A20 60 -90 0 1 10 70');
   });
 
   it('should draw line engrailed diagonally', () => {
-    const result = SvgPathBuilder.start([10, 10]).goTo([70, 70], { line: 'engrailed', radius: 20 });
+    const result = SvgPathBuilder.start([10, 10]).goTo([70, 70], { line: 'engrailed', radius: 20, sweep: true });
 
     expect(result.toPathAttribute()).toEqual(
       'M 10 10 A21.213203435596427 63.63961030678928 -135 0 1 25 25 A21.213203435596427 63.63961030678928 -135 0 1 40 40 A21.213203435596427 63.63961030678928 -135 0 1 55 55 A21.213203435596427 63.63961030678928 -135 0 1 70 70'

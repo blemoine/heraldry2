@@ -5,13 +5,24 @@ import { Dimension } from '../../../model/dimension';
 import { range } from '../../../../utils/range';
 import { LineOptions, SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { PathFromBuilder } from '../../../common/PathFromBuilder';
+import { Line } from '../../../model/line';
 
 type Props = { ordinary: Ordinary; fill: string; dimension: Dimension };
 
-export const OrdinaryDisplay = ({ ordinary, fill, dimension: { width, height } }: Props) => {
+export const OrdinaryDisplay = ({ ordinary, fill, dimension }: Props) => {
+  const { width, height } = dimension;
   if (ordinary.name === 'chief') {
     const chiefHeight = height / 5;
-    return <rect x={0} y={0} width={width} height={chiefHeight} fill={fill} stroke="#333" />;
+    const baseLineOptions = computeLineOptions(ordinary.line, dimension);
+    const lineOptions =
+      baseLineOptions && baseLineOptions.line === 'engrailed' ? { ...baseLineOptions, sweep: false } : baseLineOptions;
+    const pathBuilder = SvgPathBuilder.start([0, 0])
+      .goTo([width, 0])
+      .goTo([width, chiefHeight])
+      .goTo([0, chiefHeight], lineOptions)
+      .close();
+
+    return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke="#333" />;
   } else if (ordinary.name === 'fess') {
     return <rect x={0} y={height / 3} width={width} height={height / 3} fill={fill} stroke="#333" />;
   } else if (ordinary.name === 'bend') {
@@ -96,14 +107,7 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension: { width, height } }
   } else if (ordinary.name === 'bordure') {
     const bordureWidth = width / 10;
 
-    let lineOptions: LineOptions | null;
-    if (ordinary.line === 'engrailed') {
-      lineOptions = { line: 'engrailed', radius: bordureWidth };
-    } else if (ordinary.line === 'straight') {
-      lineOptions = null;
-    } else {
-      return cannotHappen(ordinary.line);
-    }
+    const lineOptions = computeLineOptions(ordinary.line, dimension);
 
     const pathBuilder = SvgPathBuilder.start([0, 0])
       .goTo([width, 0])
@@ -124,3 +128,14 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension: { width, height } }
     return cannotHappen(ordinary);
   }
 };
+
+function computeLineOptions(line: Line, { width }: Dimension): LineOptions | null {
+  if (line === 'engrailed') {
+    const radius = width / 10;
+    return { line: 'engrailed', radius, sweep: true };
+  } else if (line === 'straight') {
+    return null;
+  } else {
+    return cannotHappen(line);
+  }
+}

@@ -33,7 +33,7 @@ describe('CoatsOfArms', () => {
   it('should render a party blason with some ordinary', () => {
     const blason: Blason = {
       field: { kind: 'party', per: { name: 'bend', tinctures: [vair, azure] } },
-      ordinary: { name: 'chief', tincture: purpure },
+      ordinary: { name: 'chief', tincture: purpure, line: 'straight' },
     };
     const component = renderer.create(<CoatsOfArmsDisplay blason={blason} dimension={dimension} />);
     expect(component.toJSON()).toMatchSnapshot();
@@ -59,6 +59,19 @@ describe('CoatsOfArms', () => {
   it('should render an eagle blason with a saltire', () => {
     const maybeBlason = parseBlason(
       'Chequy gules and or, a saltire argent, an eagle displayed sable beaked and armed or'
+    );
+    if ('error' in maybeBlason) {
+      fail(maybeBlason.error);
+      return;
+    }
+
+    const component = renderer.create(<CoatsOfArmsDisplay blason={maybeBlason} dimension={dimension} />);
+    expect(component.toJSON()).toMatchSnapshot();
+  });
+
+  it('should render a chief engrailed', () => {
+    const maybeBlason = parseBlason(
+      'Chequy gules and or, a chief engrailed ermine'
     );
     if ('error' in maybeBlason) {
       fail(maybeBlason.error);
