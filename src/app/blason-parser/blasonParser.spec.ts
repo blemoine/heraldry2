@@ -204,4 +204,13 @@ Argent, Azure, Barry of, Bendy, Bendy Sinister, Chequy, Ermine, Gules, Murrey, O
     };
     expect(result).toEqual(expected);
   });
+
+  it('should parse a bend sinister engrailed', () => {
+    const result = parseBlason('Or, a bend sinister engrailed gules');
+    const expected: Blason = {
+      field: { kind: 'plain', tincture: or },
+      ordinary: { name: 'bendSinister', line: 'engrailed', tincture: gules },
+    };
+    expect(result).toEqual(expected);
+  });
 });

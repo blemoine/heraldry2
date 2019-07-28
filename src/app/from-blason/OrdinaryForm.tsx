@@ -16,7 +16,8 @@ export const OrdinaryForm = ({ ordinary, ordinaryChange }: Props) => {
         ordinaryName === 'chief' ||
         ordinaryName === 'fess' ||
         ordinaryName === 'base' ||
-        ordinaryName === 'bend'
+        ordinaryName === 'bend' ||
+        ordinaryName === 'bendSinister'
       ) {
         ordinaryChange({ name: ordinaryName, tincture, line: 'straight' });
       } else {

@@ -27,21 +27,36 @@ function stringifyOrdinary(ordinary: Ordinary): string {
   if (ordinary.name === 'pale') {
     let result = '';
     if (ordinary.count === 1) {
-      result += 'a pale ';
+      result += 'a ' + stringifyOrdinaryName(ordinary.name) + ' ';
     } else {
       result += stringifyNumber(ordinary.count) + ' pallets ';
     }
     result += ordinary.tincture.name;
     return result;
-  } else if (ordinary.name === 'bordure' || ordinary.name === 'chief' || ordinary.name === 'fess' || ordinary.name === 'base' || ordinary.name === 'bend') {
-    let result = 'a ' + ordinary.name + ' ';
+  } else if (
+    ordinary.name === 'bordure' ||
+    ordinary.name === 'chief' ||
+    ordinary.name === 'fess' ||
+    ordinary.name === 'base' ||
+    ordinary.name === 'bend' ||
+    ordinary.name === 'bendSinister'
+  ) {
+    let result = 'a ' + stringifyOrdinaryName(ordinary.name) + ' ';
     if (ordinary.line !== 'straight') {
       result += ordinary.line + ' ';
     }
     result += ordinary.tincture.name;
     return result;
   } else {
-    return 'a ' + ordinary.name + ' ' + ordinary.tincture.name;
+    return 'a ' + stringifyOrdinaryName(ordinary.name) + ' ' + ordinary.tincture.name;
+  }
+}
+
+function stringifyOrdinaryName(name: Ordinary['name']): string {
+  if (name === 'bendSinister') {
+    return 'bend sinister';
+  } else {
+    return name;
   }
 }
 

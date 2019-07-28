@@ -115,6 +115,9 @@ describe('CoatsOfArms', () => {
   it('should render a lion rampant', () => {
     snapshotTest('Bendy or and argent, a lion rampant ermine');
   });
+  it('should render a bend sinister invected', () => {
+    snapshotTest('Or, a bend sinister invected ermine');
+  });
 });
 
 function snapshotTest(blason: string) {

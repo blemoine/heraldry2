@@ -56,6 +56,12 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension }: Props) => {
       .goTo([basePoint, -basePoint], lineOptions);
 
     return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke="#333" />;
+  } else if (ordinary.name === 'bendSinister') {
+    return (
+      <g transform={`scale(-1,1) translate(-${width} 0)`}>
+        <OrdinaryDisplay ordinary={{ ...ordinary, name: 'bend' }} fill={fill} dimension={dimension} />
+      </g>
+    );
   } else if (ordinary.name === 'pale') {
     return (
       <g>
