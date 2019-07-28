@@ -153,8 +153,7 @@ function computeLineOptions(line: Line, { width }: Dimension): LineOptions | nul
   if (line === 'engrailed') {
     const radius = width / 10;
     return { line: 'with-arc', radius, sweep: true };
-  }
-  if (line === 'invected') {
+  } else if (line === 'invected') {
     const radius = width / 10;
     return { line: 'with-arc', radius, sweep: false };
   } else if (line === 'straight') {

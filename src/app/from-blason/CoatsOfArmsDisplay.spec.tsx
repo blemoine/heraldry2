@@ -57,41 +57,73 @@ describe('CoatsOfArms', () => {
   });
 
   it('should render an eagle blason with a saltire', () => {
-    const maybeBlason = parseBlason(
-      'Chequy gules and or, a saltire argent, an eagle displayed sable beaked and armed or'
-    );
-    if ('error' in maybeBlason) {
-      fail(maybeBlason.error);
-      return;
-    }
-
-    const component = renderer.create(<CoatsOfArmsDisplay blason={maybeBlason} dimension={dimension} />);
-    expect(component.toJSON()).toMatchSnapshot();
+    snapshotTest('Chequy gules and or, a saltire argent, an eagle displayed sable beaked and armed or');
   });
 
   it('should render a chief engrailed', () => {
-    const maybeBlason = parseBlason(
-      'Chequy gules and or, a chief engrailed ermine'
-    );
-    if ('error' in maybeBlason) {
-      fail(maybeBlason.error);
-      return;
-    }
-
-    const component = renderer.create(<CoatsOfArmsDisplay blason={maybeBlason} dimension={dimension} />);
-    expect(component.toJSON()).toMatchSnapshot();
+    snapshotTest('Chequy gules and or, a chief engrailed ermine');
   });
 
   it('should render a chief invected', () => {
-    const maybeBlason = parseBlason(
-      'Chequy gules and or, a chief engrailed azure'
-    );
-    if ('error' in maybeBlason) {
-      fail(maybeBlason.error);
-      return;
-    }
+    snapshotTest('Chequy gules and or, a chief engrailed azure');
+  });
 
-    const component = renderer.create(<CoatsOfArmsDisplay blason={maybeBlason} dimension={dimension} />);
-    expect(component.toJSON()).toMatchSnapshot();
+  it('should render a bordure invected', () => {
+    snapshotTest('Per fess or and ermine, a bordure engrailed azure');
+  });
+
+  it('should render a base engrailed', () => {
+    snapshotTest('Or, a base engrailed vair');
+  });
+
+  it('should render a fess straight', () => {
+    snapshotTest('Or, a fess murrey');
+  });
+
+  it('should render a cross', () => {
+    snapshotTest('Argent, a cross gules');
+  });
+
+  it('should render a chevron', () => {
+    snapshotTest('Argent, a chevron sable');
+  });
+
+  it('should render a bend invected', () => {
+    snapshotTest('Ermine, a bend invected vair');
+  });
+
+  it('should render 2 pallets', () => {
+    snapshotTest('Ermine, two pallets sable');
+  });
+
+  it('should render 3 fleurs de lys', () => {
+    snapshotTest('Per chevron Sable and Or, three fleurs de lys argent');
+  });
+
+  it('should render a field splitted per saltire', () => {
+    snapshotTest('Per saltire or and argent');
+  });
+  it('should render a field splitted per cross', () => {
+    snapshotTest('Per cross or and argent');
+  });
+  it('should render a lion sejant', () => {
+    snapshotTest('Bendy sinister or and argent, a lion sejant regardant gules');
+  });
+  it('should render a lion dormant', () => {
+    snapshotTest('Bendy or and argent, a lion dormant gules');
+  });
+  it('should render a lion rampant', () => {
+    snapshotTest('Bendy or and argent, a lion rampant ermine');
   });
 });
+
+function snapshotTest(blason: string) {
+  const maybeBlason = parseBlason(blason);
+  if ('error' in maybeBlason) {
+    fail(maybeBlason.error);
+    return;
+  }
+
+  const component = renderer.create(<CoatsOfArmsDisplay blason={maybeBlason} dimension={dimension} />);
+  expect(component.toJSON()).toMatchSnapshot();
+}

@@ -3,7 +3,6 @@ import { FleurDeLys } from '../../../../model/charge';
 import { Tincture } from '../../../../model/tincture';
 import { Dimension, scale } from '../../../../model/dimension';
 import SvgFleurDeLys from './SvgFleurDeLys';
-import { range } from '../../../../../utils/range';
 import { cannotHappen } from '../../../../../utils/cannot-happen';
 
 type Props = { charge: FleurDeLys; dimension: Dimension; fillFromTincture: (tincture: Tincture) => string };
@@ -39,18 +38,4 @@ export const FleurDeLysDisplay = (props: Props) => {
   } else {
     return cannotHappen(charge.count);
   }
-
-  return (
-    <>
-      {range(0, charge.count).map((idx) => (
-        <g
-          key={idx}
-          transform={`translate(${(dimension.width - computedDimension.width) / 2} ${idx * computedDimension.height -
-            computedDimension.height / 10})`}
-        >
-          <SvgFleurDeLys dimension={props.dimension} stroke={stroke} mainFill={mainFill} />
-        </g>
-      ))}
-    </>
-  );
 };
