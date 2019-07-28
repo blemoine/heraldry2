@@ -33,7 +33,7 @@ function stringifyOrdinary(ordinary: Ordinary): string {
     }
     result += ordinary.tincture.name;
     return result;
-  } else if (ordinary.name === 'bordure' || ordinary.name === 'chief') {
+  } else if (ordinary.name === 'bordure' || ordinary.name === 'chief' || ordinary.name === 'fess') {
     let result = 'a ' + ordinary.name + ' ';
     if (ordinary.line !== 'straight') {
       result += ordinary.line + ' ';

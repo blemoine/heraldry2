@@ -12,7 +12,10 @@ describe('stringifyBlason', () => {
       stringifyBlason({ field: { kind: 'plain', tincture: vair }, ordinary: { name: 'bend', tincture: azure } })
     ).toBe('Vair, a bend azure');
     expect(
-      stringifyBlason({ field: { kind: 'plain', tincture: sable }, ordinary: { name: 'fess', tincture: gules } })
+      stringifyBlason({
+        field: { kind: 'plain', tincture: sable },
+        ordinary: { name: 'fess', tincture: gules, line: 'straight' },
+      })
     ).toBe('Sable, a fess gules');
     expect(
       stringifyBlason({

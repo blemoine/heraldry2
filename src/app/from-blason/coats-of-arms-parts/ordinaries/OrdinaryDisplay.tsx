@@ -14,22 +14,24 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension }: Props) => {
   if (ordinary.name === 'chief') {
     const chiefHeight = height / 5;
     const lineOptions = computeLineOptions(ordinary.line, dimension);
-    /*
-    const lineOptions =
-      baseLineOptions && baseLineOptions.line === 'with-arc'
-        ? { ...baseLineOptions, sweep: !baseLineOptions.sweep }
-        : baseLineOptions;
 
-     */
     const pathBuilder = SvgPathBuilder.start([0, 0])
+      .goTo([0, chiefHeight])
+      .goTo([width, chiefHeight], lineOptions)
       .goTo([width, 0])
-      .goTo([width, chiefHeight])
-      .goTo([0, chiefHeight], lineOptions)
       .close();
 
     return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke="#333" />;
   } else if (ordinary.name === 'fess') {
-    return <rect x={0} y={height / 3} width={width} height={height / 3} fill={fill} stroke="#333" />;
+    const lineOptions = computeLineOptions(ordinary.line, dimension);
+
+    const pathBuilder = SvgPathBuilder.start([0, height / 3])
+      .goTo([0, (2 * height) / 3])
+      .goTo([width, (2 * height) / 3], lineOptions)
+      .goTo([width, height / 3])
+      .goTo([0, height / 3], lineOptions);
+
+    return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke="#333" />;
   } else if (ordinary.name === 'bend') {
     const basePoint = height / (8 * Math.sqrt(2));
     const length = Math.sqrt(width ** 2 + height ** 2);
