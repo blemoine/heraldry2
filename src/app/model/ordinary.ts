@@ -10,12 +10,13 @@ export type Cross = { name: 'cross'; tincture: Tincture };
 export type Saltire = { name: 'saltire'; tincture: Tincture };
 
 export type Bordure = { name: 'bordure'; tincture: Tincture; line: Line };
+export type Base = { name: 'base'; tincture: Tincture; line: Line };
 
-export type SubOrdinary = Bordure;
+export type SubOrdinary = Bordure | Base;
 export type Ordinary = Chief | Bend | Pale | Fess | Chevron | Cross | Saltire | SubOrdinary;
 
-export function isSubOrdinary(o: Ordinary['name']): o is 'bordure' {
-  return o === 'bordure';
+export function isSubOrdinary(o: Ordinary['name']): o is SubOrdinary['name']  {
+  return o === 'bordure' || o === 'base';
 }
 
 export const ordinaries: Array<Ordinary['name']> = [
@@ -27,4 +28,5 @@ export const ordinaries: Array<Ordinary['name']> = [
   'cross',
   'saltire',
   'bordure',
+  'base'
 ];

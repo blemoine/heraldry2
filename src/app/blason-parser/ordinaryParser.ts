@@ -1,11 +1,11 @@
 import * as P from 'parsimmon';
-import { Bordure, Chief, Fess, ordinaries, Ordinary, Pale } from '../model/ordinary';
+import { Base, Bordure, Chief, Fess, ordinaries, Ordinary, Pale } from '../model/ordinary';
 import { buildAltParser, constStr, twoParser } from './parser.helper';
 import { identity } from '../../utils/identity';
 import { tinctureParserFromName } from './tinctureParser';
 import { Line, lines } from '../model/line';
 
-type OrdinaryWithLine = Bordure | Chief | Fess;
+type OrdinaryWithLine = Bordure | Chief | Fess | Base;
 type NonStandardOrdinary = 'pale' | OrdinaryWithLine['name'];
 
 export function ordinaryParser(): P.Parser<Ordinary> {
@@ -45,7 +45,7 @@ export function ordinaryParser(): P.Parser<Ordinary> {
   const ordinaryWithLineParser: P.Parser<OrdinaryWithLine> = P.seq(
     P.regex(/an?/i)
       .then(P.whitespace)
-      .then(P.alt(constStr('bordure' as const), constStr('chief' as const), constStr('fess' as const)))
+      .then(P.alt(constStr('bordure' as const), constStr('chief' as const), constStr('fess' as const), constStr('base' as const)))
       .skip(P.whitespace),
     lineParser.skip(P.whitespace).fallback('straight' as const),
     tinctureParserFromName
@@ -55,5 +55,5 @@ export function ordinaryParser(): P.Parser<Ordinary> {
 }
 
 function isNotPaleOrBordureOrChief(o: Ordinary['name']): o is Exclude<Ordinary['name'], NonStandardOrdinary> {
-  return !['pale', 'bordure', 'chief', 'fess'].includes(o);
+  return !['pale', 'bordure', 'chief', 'fess', 'base'].includes(o);
 }

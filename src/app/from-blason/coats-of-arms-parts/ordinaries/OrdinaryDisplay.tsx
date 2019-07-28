@@ -22,6 +22,17 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension }: Props) => {
       .close();
 
     return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke="#333" />;
+  } else if (ordinary.name === 'base') {
+    const baseHeight = height / 4;
+    const lineOptions = computeLineOptions(ordinary.line, dimension);
+
+    const pathBuilder = SvgPathBuilder.start([0, height])
+      .goTo([width, height])
+      .goTo([width, height - baseHeight])
+      .goTo([0, height - baseHeight], lineOptions)
+      .close();
+
+    return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke="#333" />;
   } else if (ordinary.name === 'fess') {
     const lineOptions = computeLineOptions(ordinary.line, dimension);
 

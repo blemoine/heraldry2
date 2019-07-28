@@ -182,6 +182,19 @@ describe('stringifyBlason', () => {
       })
     ).toBe('Or, an eagle displayed sable');
   });
+
+  it('should stringify a straight base', () => {
+    expect(
+      stringifyBlason({
+        field: { kind: 'plain', tincture: or },
+        ordinary: {
+          name: 'base',
+          tincture: sable,
+          line: 'straight',
+        },
+      })
+    ).toBe('Or, a base sable');
+  });
 });
 
 describe('isThereFur', () => {

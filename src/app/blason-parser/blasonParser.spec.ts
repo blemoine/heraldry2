@@ -38,7 +38,10 @@ describe('parseBlason', () => {
   it('should parse a blason with an ordinary', () => {
     const result = parseBlason('Or, a chief argent');
 
-    const expected: Blason = { field: { kind: 'plain', tincture: or }, ordinary: { name: 'chief', tincture: argent, line: 'straight' } };
+    const expected: Blason = {
+      field: { kind: 'plain', tincture: or },
+      ordinary: { name: 'chief', tincture: argent, line: 'straight' },
+    };
     expect(result).toEqual(expected);
   });
 
@@ -180,6 +183,24 @@ Argent, Azure, Barry of, Bendy, Bendy Sinister, Chequy, Ermine, Gules, Murrey, O
     const expected: Blason = {
       field: { kind: 'plain', tincture: azure },
       ordinary: { name: 'chief', line: 'engrailed', tincture: or },
+    };
+    expect(result).toEqual(expected);
+  });
+
+  it('should parse a base invected', () => {
+    const result = parseBlason('Azure, a base invected ermine');
+    const expected: Blason = {
+      field: { kind: 'plain', tincture: azure },
+      ordinary: { name: 'base', line: 'invected', tincture: ermine },
+    };
+    expect(result).toEqual(expected);
+  });
+
+  it('should parse a base straight', () => {
+    const result = parseBlason('Or, a base vair');
+    const expected: Blason = {
+      field: { kind: 'plain', tincture: or },
+      ordinary: { name: 'base', line: 'straight', tincture: vair },
     };
     expect(result).toEqual(expected);
   });
