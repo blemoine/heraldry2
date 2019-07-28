@@ -19,7 +19,7 @@ type Close = { command: 'Z' };
 
 type PathCommand = Start | GoToPoint | Arc | Vertical | Horizontal | Close;
 
-export type EngrailedLineOptions = { line: 'with-arc'; radius: number, sweep: boolean };
+export type EngrailedLineOptions = { line: 'with-arc'; radius: number; sweep: boolean };
 export type LineOptions = EngrailedLineOptions;
 
 export class SvgPathBuilder {
@@ -194,9 +194,9 @@ function getY(commands: Array<PathCommand>): number | null {
     } else if (previousCommand.command === 'V') {
       return previousCommand.coordinate;
     } else if (previousCommand.command === 'H') {
-      return getX(commands.slice(0, commands.length - 1));
+      return getY(commands.slice(0, commands.length - 1));
     } else if (previousCommand.command === 'Z') {
-      return getX([commands[0]]);
+      return getY([commands[0]]);
     } else {
       return cannotHappen(previousCommand);
     }
@@ -223,7 +223,7 @@ function engrailedBetweenPoints(
 
     return pathBuilder.arcTo(nextPoint, {
       radius: [circleRadius, 3 * circleRadius],
-      sweep: lineOptions.sweep?1:0,
+      sweep: lineOptions.sweep ? 1 : 0,
       xAxisRotation: engrailedXAxisRotation(previousPoint, nextPoint),
     });
   }, basePathBuilder);

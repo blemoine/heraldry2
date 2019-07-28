@@ -33,26 +33,17 @@ function stringifyOrdinary(ordinary: Ordinary): string {
     }
     result += ordinary.tincture.name;
     return result;
-  } else if (
-    ordinary.name === 'bordure' ||
-    ordinary.name === 'chief' ||
-    ordinary.name === 'fess' ||
-    ordinary.name === 'base' ||
-    ordinary.name === 'bend' ||
-    ordinary.name === 'bendSinister'
-  ) {
+  } else {
     let result = 'a ' + stringifyOrdinaryName(ordinary.name) + ' ';
     if (ordinary.line !== 'straight') {
       result += ordinary.line + ' ';
     }
     result += ordinary.tincture.name;
     return result;
-  } else {
-    return 'a ' + stringifyOrdinaryName(ordinary.name) + ' ' + ordinary.tincture.name;
   }
 }
 
-function stringifyOrdinaryName(name: Ordinary['name']): string {
+export function stringifyOrdinaryName(name: Ordinary['name']): string {
   if (name === 'bendSinister') {
     return 'bend sinister';
   } else {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { OrdinaryForm } from './OrdinaryForm';
-import { ermine, gules } from '../model/tincture';
+import { gules } from '../model/tincture';
 import { Blason } from '../model/blason';
 import { Ordinary } from '../model/ordinary';
 import { FieldForm } from './FieldForm';
@@ -12,10 +12,6 @@ import { Field } from '../model/field';
 
 const baseDefaultBlason: Blason = {
   field: { kind: 'plain', tincture: gules },
-  ordinary: {
-    name: 'chevron',
-    tincture: ermine,
-  },
 } as const;
 export const FromBlason = () => {
   const localStorageKey = 'default-blason#2';

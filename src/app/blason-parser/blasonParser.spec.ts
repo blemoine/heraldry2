@@ -111,7 +111,7 @@ Argent, Azure, Barry of, Bendy, Bendy Sinister, Chequy, Ermine, Gules, Murrey, O
     const result = parseBlason('Azure, a cross Argent ');
     const expected: Blason = {
       field: { kind: 'plain', tincture: azure },
-      ordinary: { name: 'cross', tincture: argent },
+      ordinary: { name: 'cross', tincture: argent, line: 'straight' },
     };
 
     expect(result).toEqual(expected);

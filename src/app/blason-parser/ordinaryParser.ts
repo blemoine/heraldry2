@@ -1,28 +1,12 @@
 import * as P from 'parsimmon';
-import { Base, Bend, BendSinister, Bordure, Chief, Fess, ordinaries, Ordinary, Pale } from '../model/ordinary';
-import { buildAltParser, constStr, twoParser } from './parser.helper';
+import { ordinaries, Ordinary, Pale } from '../model/ordinary';
+import { buildAltParser, twoParser } from './parser.helper';
 import { identity } from '../../utils/identity';
 import { tinctureParserFromName } from './tinctureParser';
 import { Line, lines } from '../model/line';
-
-type OrdinaryWithLine = Bordure | Chief | Fess | Base | Bend | BendSinister;
-type NonStandardOrdinary = 'pale' | OrdinaryWithLine['name'];
+import { stringifyOrdinaryName } from '../from-blason/blason.helpers';
 
 export function ordinaryParser(): P.Parser<Ordinary> {
-  const ordinaryParser: P.Parser<Exclude<Ordinary['name'], NonStandardOrdinary>> = buildAltParser(
-    ordinaries.filter(isNotPaleOrBordureOrChief),
-    identity
-  );
-
-  const simpleOrdinaries = P.seqMap(
-    P.regex(/an?/i)
-      .then(P.whitespace)
-      .then(ordinaryParser)
-      .skip(P.whitespace),
-    tinctureParserFromName,
-    (name, tincture): Ordinary => ({ name, tincture })
-  );
-
   const paleParser: P.Parser<Pale> = P.alt(
     P.regex(/an?/i)
       .then(P.whitespace)
@@ -42,27 +26,18 @@ export function ordinaryParser(): P.Parser<Ordinary> {
 
   const lineParser: P.Parser<Line> = buildAltParser(lines, identity);
 
-  const ordinaryWithLineParser: P.Parser<OrdinaryWithLine> = P.seq(
+  const ordinaryWithLineParser: P.Parser<Exclude<Ordinary, Pale>> = P.seq(
     P.regex(/an?/i)
       .then(P.whitespace)
-      .then(
-        P.alt(
-          constStr('bendSinister' as const, 'bend sinister'),
-          constStr('bordure' as const),
-          constStr('chief' as const),
-          constStr('fess' as const),
-          constStr('base' as const),
-          constStr('bend' as const),
-        )
-      )
+      .then(buildAltParser(ordinaries.filter(isNotPale), stringifyOrdinaryName))
       .skip(P.whitespace),
     lineParser.skip(P.whitespace).fallback('straight' as const),
     tinctureParserFromName
-  ).map(([name, line, tincture]): OrdinaryWithLine => ({ name, line, tincture }));
+  ).map(([name, line, tincture]): Exclude<Ordinary, Pale> => ({ name, line, tincture }));
 
-  return P.alt(simpleOrdinaries, paleParser, ordinaryWithLineParser);
+  return P.alt(paleParser, ordinaryWithLineParser);
 }
 
-function isNotPaleOrBordureOrChief(o: Ordinary['name']): o is Exclude<Ordinary['name'], NonStandardOrdinary> {
-  return !['pale', 'bordure', 'chief', 'fess', 'base', 'bend', 'bendSinister'].includes(o);
+function isNotPale(o: Ordinary['name']): o is Exclude<Ordinary['name'], 'pale'> {
+  return !['pale'].includes(o);
 }

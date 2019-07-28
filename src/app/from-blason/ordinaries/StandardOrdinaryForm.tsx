@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Base, Bend, BendSinister, Bordure, Chief, Fess, Ordinary, Pale } from '../../model/ordinary';
+import { Ordinary, Pale } from '../../model/ordinary';
 import { TinctureSelect } from '../TinctureSelect';
 import { Tincture } from '../../model/tincture';
 import { LineSelect } from '../LineSelect';
@@ -12,7 +12,7 @@ export const StandardOrdinaryForm = ({ ordinary, ordinaryChange }: Props) => {
     ordinaryChange({ ...ordinary, tincture });
   }
 
-  function lineChange(ordinary: Chief | Bordure | Fess | Base | Bend | BendSinister, line: Line) {
+  function lineChange(ordinary: Exclude<Ordinary, Pale>, line: Line) {
     ordinaryChange({ ...ordinary, line });
   }
 

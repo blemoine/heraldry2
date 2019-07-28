@@ -81,22 +81,25 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension }: Props) => {
       </g>
     );
   } else if (ordinary.name === 'cross') {
+    const lineOptions = computeLineOptions(ordinary.line, dimension);
+
     const pathBuilder = SvgPathBuilder.start([(2 * width) / 5, 0])
-      .goTo([(3 * width) / 5, 0])
-      .goTo([(3 * width) / 5, (2 * height) / 5])
-      .goTo([width, (2 * height) / 5])
-      .goTo([width, (3 * height) / 5])
-      .goTo([(3 * width) / 5, (3 * height) / 5])
-      .goTo([(3 * width) / 5, height])
-      .goTo([(2 * width) / 5, height])
-      .goTo([(2 * width) / 5, (3 * height) / 5])
+      .goTo([(2 * width) / 5, (2 * height) / 5], lineOptions)
+      .goTo([0, (2 * height) / 5], lineOptions)
       .goTo([0, (3 * height) / 5])
-      .goTo([0, (2 * height) / 5])
-      .goTo([(2 * width) / 5, (2 * height) / 5])
-      .close();
+      .goTo([(2 * width) / 5, (3 * height) / 5], lineOptions)
+      .goTo([(2 * width) / 5, height], lineOptions)
+      .goTo([(3 * width) / 5, height])
+      .goTo([(3 * width) / 5, (3 * height) / 5], lineOptions)
+      .goTo([width, (3 * height) / 5], lineOptions)
+      .goTo([width, (2 * height) / 5])
+      .goTo([(3 * width) / 5, (2 * height) / 5], lineOptions)
+      .goTo([(3 * width) / 5, 0], lineOptions)
+      .goTo([(2 * width) / 5, 0]);
 
     return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke="#333" />;
   } else if (ordinary.name === 'saltire') {
+    const lineOptions = computeLineOptions(ordinary.line, dimension);
     const basePointW = width / (10 * Math.sqrt(2));
     const basePointH = height / (10 * Math.sqrt(2));
 
@@ -104,30 +107,31 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension }: Props) => {
     const h = height / 2;
 
     const pathBuilder = SvgPathBuilder.start([w, h - basePointH])
-      .goTo([2 * w, -basePointH])
-      .goTo([2 * w + basePointW, h - (w * basePointH) / basePointW])
-      .goTo([w + basePointW, h])
-      .goTo([2 * w + basePointW, h + (w * basePointH) / basePointW])
-      .goTo([2 * w, 2 * h + basePointH])
-      .goTo([w, h + basePointH])
-      .goTo([(h * basePointW) / basePointH - w, 2 * h + basePointH])
-      .goTo([-basePointW, h + (w * basePointH) / basePointW])
-      .goTo([w - basePointW, h])
+      .goTo([(h * basePointW) / basePointH - w, -basePointH], lineOptions)
       .goTo([-basePointW, h - (w * basePointH) / basePointW])
-      .goTo([(h * basePointW) / basePointH - w, -basePointH])
-      .close();
+      .goTo([w - basePointW, h], lineOptions)
+      .goTo([-basePointW, h + (w * basePointH) / basePointW], lineOptions)
+      .goTo([(h * basePointW) / basePointH - w, 2 * h + basePointH])
+      .goTo([w, h + basePointH], lineOptions)
+      .goTo([2 * w, 2 * h + basePointH], lineOptions)
+      .goTo([2 * w + basePointW, h + (w * basePointH) / basePointW])
+      .goTo([w + basePointW, h], lineOptions)
+      .goTo([2 * w + basePointW, h - (w * basePointH) / basePointW], lineOptions)
+      .goTo([2 * w, -basePointH])
+      .goTo([w, h - basePointH], lineOptions);
 
     return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke="#333" />;
   } else if (ordinary.name === 'chevron') {
+    const lineOptions = computeLineOptions(ordinary.line, dimension);
     const basePoint = height / 5;
 
     const pathBuilder = SvgPathBuilder.start([width / 2, height / 3])
-      .goTo([0, height / 3 + width / 2])
-      .goTo([0, height / 3 + width / 2 - basePoint])
-      .goTo([width / 2, height / 3 - basePoint])
+      .goTo([width, height / 3 + width / 2], lineOptions)
       .goTo([width, height / 3 + width / 2 - basePoint])
-      .goTo([width, height / 3 + width / 2])
-      .close();
+      .goTo([width / 2, height / 3 - basePoint], lineOptions)
+      .goTo([0, height / 3 + width / 2 - basePoint], lineOptions)
+      .goTo([0, height / 3 + width / 2])
+      .goTo([width / 2, height / 3], lineOptions);
 
     return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke="#333" />;
   } else if (ordinary.name === 'bordure') {

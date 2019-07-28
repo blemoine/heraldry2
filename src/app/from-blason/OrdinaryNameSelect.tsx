@@ -2,6 +2,7 @@ import * as React from 'react';
 import { isSubOrdinary, ordinaries, Ordinary } from '../model/ordinary';
 import Select from 'react-select';
 import { GroupedOptionsType } from 'react-select/src/types';
+import { stringifyOrdinaryName } from './blason.helpers';
 
 type Props = { ordinary: Ordinary['name'] | null; ordinaryChange: (t: Ordinary['name'] | null) => void };
 
@@ -25,7 +26,10 @@ export const OrdinaryNameSelect = ({ ordinary, ordinaryChange }: Props) => {
     subOrdinary: [],
   };
   const NoneOption = { label: 'None', value: 'None' as const };
-  const ordinariesOptions = ordinaries.map((ordinaryName) => ({ label: ordinaryName, value: ordinaryName }));
+  const ordinariesOptions = ordinaries.map((ordinaryName) => ({
+    label: stringifyOrdinaryName(ordinaryName),
+    value: ordinaryName,
+  }));
   const groupedOrdinary = ordinariesOptions.reduce((acc, ordinary) => {
     if (isSubOrdinary(ordinary.value)) {
       return { ...acc, subOrdinary: [...acc.subOrdinary, ordinary] as const };
