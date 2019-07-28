@@ -13,9 +13,14 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension }: Props) => {
   const { width, height } = dimension;
   if (ordinary.name === 'chief') {
     const chiefHeight = height / 5;
-    const baseLineOptions = computeLineOptions(ordinary.line, dimension);
+    const lineOptions = computeLineOptions(ordinary.line, dimension);
+    /*
     const lineOptions =
-      baseLineOptions && baseLineOptions.line === 'engrailed' ? { ...baseLineOptions, sweep: false } : baseLineOptions;
+      baseLineOptions && baseLineOptions.line === 'with-arc'
+        ? { ...baseLineOptions, sweep: !baseLineOptions.sweep }
+        : baseLineOptions;
+
+     */
     const pathBuilder = SvgPathBuilder.start([0, 0])
       .goTo([width, 0])
       .goTo([width, chiefHeight])
@@ -132,7 +137,11 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension }: Props) => {
 function computeLineOptions(line: Line, { width }: Dimension): LineOptions | null {
   if (line === 'engrailed') {
     const radius = width / 10;
-    return { line: 'engrailed', radius, sweep: true };
+    return { line: 'with-arc', radius, sweep: true };
+  }
+  if (line === 'invected') {
+    const radius = width / 10;
+    return { line: 'with-arc', radius, sweep: false };
   } else if (line === 'straight') {
     return null;
   } else {

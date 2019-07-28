@@ -19,7 +19,7 @@ type Close = { command: 'Z' };
 
 type PathCommand = Start | GoToPoint | Arc | Vertical | Horizontal | Close;
 
-export type EngrailedLineOptions = { line: 'engrailed'; radius: number, sweep: boolean };
+export type EngrailedLineOptions = { line: 'with-arc'; radius: number, sweep: boolean };
 export type LineOptions = EngrailedLineOptions;
 
 export class SvgPathBuilder {
@@ -64,7 +64,7 @@ export class SvgPathBuilder {
 
   goTo(point: PathAbsolutePoint, lineOptions: LineOptions | null = null): SvgPathBuilder {
     if (lineOptions) {
-      if (lineOptions.line === 'engrailed') {
+      if (lineOptions.line === 'with-arc') {
         const previous = this.currentPoint();
 
         if (previous === null) {
@@ -102,7 +102,7 @@ export class SvgPathBuilder {
     const largeArcFlag = options.largeArc || 0;
 
     if (lineOptions) {
-      if (lineOptions.line === 'engrailed') {
+      if (lineOptions.line === 'with-arc') {
         const previousPoint = this.currentPoint();
 
         if (previousPoint === null) {

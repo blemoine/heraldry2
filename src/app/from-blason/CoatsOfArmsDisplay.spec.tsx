@@ -81,4 +81,17 @@ describe('CoatsOfArms', () => {
     const component = renderer.create(<CoatsOfArmsDisplay blason={maybeBlason} dimension={dimension} />);
     expect(component.toJSON()).toMatchSnapshot();
   });
+
+  it('should render a chief invected', () => {
+    const maybeBlason = parseBlason(
+      'Chequy gules and or, a chief engrailed azure'
+    );
+    if ('error' in maybeBlason) {
+      fail(maybeBlason.error);
+      return;
+    }
+
+    const component = renderer.create(<CoatsOfArmsDisplay blason={maybeBlason} dimension={dimension} />);
+    expect(component.toJSON()).toMatchSnapshot();
+  });
 });
