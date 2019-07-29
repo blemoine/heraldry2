@@ -29,26 +29,30 @@ describe('stringifyBlason', () => {
   });
 
   it('should write a party field with the colors after', () => {
-    expect(stringifyBlason({ field: { kind: 'party', per: { name: 'fess', tinctures: [gules, or] } } })).toBe(
-      'Per fess gules and or'
-    );
-    expect(stringifyBlason({ field: { kind: 'party', per: { name: 'chevron', tinctures: [argent, vert] } } })).toBe(
-      'Per chevron argent and vert'
-    );
-    expect(stringifyBlason({ field: { kind: 'party', per: { name: 'pale', tinctures: [ermine, azure] } } })).toBe(
-      'Per pale ermine and azure'
-    );
+    expect(
+      stringifyBlason({ field: { kind: 'party', per: { name: 'fess', tinctures: [gules, or], line: 'straight' } } })
+    ).toBe('Per fess gules and or');
+    expect(
+      stringifyBlason({
+        field: { kind: 'party', per: { name: 'chevron', tinctures: [argent, vert], line: 'straight' } },
+      })
+    ).toBe('Per chevron argent and vert');
+    expect(
+      stringifyBlason({ field: { kind: 'party', per: { name: 'pale', tinctures: [ermine, azure], line: 'straight' } } })
+    ).toBe('Per pale ermine and azure');
   });
   it('should write the party field for a bend sinister', () => {
-    expect(stringifyBlason({ field: { kind: 'party', per: { name: 'bendSinister', tinctures: [gules, or] } } })).toBe(
-      'Per bend sinister gules and or'
-    );
+    expect(
+      stringifyBlason({
+        field: { kind: 'party', per: { name: 'bendSinister', tinctures: [gules, or], line: 'straight' } },
+      })
+    ).toBe('Per bend sinister gules and or');
   });
 
   it('should write a party field with the colors after and the ordinary', () => {
     expect(
       stringifyBlason({
-        field: { kind: 'party', per: { name: 'pale', tinctures: [sable, argent] } },
+        field: { kind: 'party', per: { name: 'pale', tinctures: [sable, argent], line: 'straight' } },
         ordinary: { name: 'pale', tincture: purpure, count: 1, line: 'straight' },
       })
     ).toBe('Per pale sable and argent, a pale purpure');
@@ -100,7 +104,7 @@ describe('stringifyBlason', () => {
   it('should write a lion over an ordinary correctly', () => {
     expect(
       stringifyBlason({
-        field: { kind: 'party', per: { name: 'pale', tinctures: [ermine, azure] } },
+        field: { kind: 'party', per: { name: 'pale', tinctures: [ermine, azure], line: 'straight' } },
         ordinary: { name: 'chief', tincture: ermine, line: 'straight' },
         charge: {
           name: 'lion',

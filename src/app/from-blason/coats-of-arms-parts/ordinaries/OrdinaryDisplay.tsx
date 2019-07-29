@@ -3,9 +3,9 @@ import { Ordinary } from '../../../model/ordinary';
 import { cannotHappen } from '../../../../utils/cannot-happen';
 import { Dimension } from '../../../model/dimension';
 import { range } from '../../../../utils/range';
-import { LineOptions, SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
+import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { PathFromBuilder } from '../../../common/PathFromBuilder';
-import { Line } from '../../../model/line';
+import { computeLineOptions } from '../blasonDisplay.helper';
 
 type Props = { ordinary: Ordinary; fill: string; dimension: Dimension };
 
@@ -157,17 +157,3 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension }: Props) => {
     return cannotHappen(ordinary);
   }
 };
-
-function computeLineOptions(line: Line, { width }: Dimension): LineOptions | null {
-  if (line === 'engrailed') {
-    const radius = width / 10;
-    return { line: 'with-arc', radius, sweep: true };
-  } else if (line === 'invected') {
-    const radius = width / 10;
-    return { line: 'with-arc', radius, sweep: false };
-  } else if (line === 'straight') {
-    return null;
-  } else {
-    return cannotHappen(line);
-  }
-}

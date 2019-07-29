@@ -29,19 +29,19 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture }: Props) => {
     const partyName = field.per.name;
     const fill: [string, string] = fillFromTincturePair(field.per.tinctures);
     if (partyName === 'bend') {
-      return <BendDisplay fill={fill} dimension={dimension} />;
+      return <BendDisplay fill={fill} dimension={dimension} line={field.per.line} />;
     } else if (partyName === 'bendSinister') {
-      return <BendSinisterDisplay fill={fill} dimension={dimension} />;
+      return <BendSinisterDisplay fill={fill} dimension={dimension} line={field.per.line} />;
     } else if (partyName === 'chevron') {
-      return <ChevronDisplay fill={fill} dimension={dimension} />;
+      return <ChevronDisplay fill={fill} dimension={dimension} line={field.per.line} />;
     } else if (partyName === 'fess') {
-      return <FessDisplay fill={fill} dimension={dimension} />;
+      return <FessDisplay fill={fill} dimension={dimension} line={field.per.line} />;
     } else if (partyName === 'pale') {
-      return <PaleDisplay fill={fill} dimension={dimension} />;
+      return <PaleDisplay fill={fill} dimension={dimension} line={field.per.line} />;
     } else if (partyName === 'cross') {
-      return <CrossDisplay fill={fill} dimension={dimension} />;
+      return <CrossDisplay fill={fill} dimension={dimension} line={field.per.line} />;
     } else if (partyName === 'saltire') {
-      return <SaltireDisplay fill={fill} dimension={dimension} />;
+      return <SaltireDisplay fill={fill} dimension={dimension} line={field.per.line} />;
     } else {
       return cannotHappen(partyName);
     }

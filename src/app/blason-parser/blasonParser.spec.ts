@@ -26,13 +26,17 @@ describe('parseBlason', () => {
   it('should parse a party division', () => {
     const result = parseBlason('Per pale vair and azure');
 
-    const expected: Blason = { field: { kind: 'party', per: { name: 'pale', tinctures: [vair, azure] } } };
+    const expected: Blason = {
+      field: { kind: 'party', per: { name: 'pale', tinctures: [vair, azure], line: 'straight' } },
+    };
     expect(result).toEqual(expected);
   });
   it('should parse a party division by bend sinister', () => {
     const result = parseBlason('Per bend sinister ermine and vert');
 
-    const expected: Blason = { field: { kind: 'party', per: { name: 'bendSinister', tinctures: [ermine, vert] } } };
+    const expected: Blason = {
+      field: { kind: 'party', per: { name: 'bendSinister', tinctures: [ermine, vert], line: 'straight' } },
+    };
     expect(result).toEqual(expected);
   });
   it('should parse a blason with an ordinary', () => {
@@ -130,7 +134,7 @@ Argent, Azure, Barry of, Bendy, Bendy Sinister, Chequy, Ermine, Gules, Murrey, O
   it('should parse the arms of Gwent', () => {
     const result = parseBlason('Per pale Azure and Sable, three Fleurs-de-Lis Or');
     const expected: Blason = {
-      field: { kind: 'party', per: { name: 'pale', tinctures: [azure, sable] } },
+      field: { kind: 'party', per: { name: 'pale', tinctures: [azure, sable], line: 'straight' } },
       charge: { name: 'fleurdelys', count: 3, tincture: or },
     };
 

@@ -37,7 +37,7 @@ export const FieldForm = ({ field, fieldChange }: Props) => {
     if (field.kind !== newKind) {
       const newColors = extractColors(field);
       if (newKind === 'party') {
-        fieldChange({ kind: 'party', per: { name: 'fess', tinctures: newColors } });
+        fieldChange({ kind: 'party', per: { name: 'fess', tinctures: newColors, line: 'straight' } });
       } else if (newKind === 'bendy') {
         fieldChange({ kind: 'bendy', tinctures: newColors });
       } else if (newKind === 'bendySinister') {

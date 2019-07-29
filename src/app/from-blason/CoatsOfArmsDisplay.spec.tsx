@@ -25,14 +25,16 @@ describe('CoatsOfArms', () => {
   });
 
   it('should render a party blason', () => {
-    const blason: Blason = { field: { kind: 'party', per: { name: 'bend', tinctures: [vair, azure] } } };
+    const blason: Blason = {
+      field: { kind: 'party', per: { name: 'bend', tinctures: [vair, azure], line: 'straight' } },
+    };
     const component = renderer.create(<CoatsOfArmsDisplay blason={blason} dimension={dimension} />);
     expect(component.toJSON()).toMatchSnapshot();
   });
 
   it('should render a party blason with some ordinary', () => {
     const blason: Blason = {
-      field: { kind: 'party', per: { name: 'bend', tinctures: [vair, azure] } },
+      field: { kind: 'party', per: { name: 'bend', tinctures: [vair, azure], line: 'straight' } },
       ordinary: { name: 'chief', tincture: purpure, line: 'straight' },
     };
     const component = renderer.create(<CoatsOfArmsDisplay blason={blason} dimension={dimension} />);

@@ -5,6 +5,8 @@ import { PartyField } from '../model/field';
 import { Tincture } from '../model/tincture';
 import { stringifyParty } from './blason.helpers';
 import { SelectScalar } from '../common/SelectScalar';
+import { LineSelect } from './LineSelect';
+import { Line } from '../model/line';
 
 const partiesOptions = parties;
 
@@ -19,6 +21,9 @@ export const PartyForm = ({ field, fieldChange }: Props) => {
   }
   function partyChange(partyName: Party['name']) {
     fieldChange({ kind: 'party', per: { ...field.per, name: partyName } });
+  }
+  function lineChange(line: Line) {
+    fieldChange({ kind: 'party', per: { ...field.per, line } });
   }
 
   return (
@@ -45,6 +50,10 @@ export const PartyForm = ({ field, fieldChange }: Props) => {
           <label>Select your second tincture</label>
           <TinctureSelect tincture={field.per.tinctures[1]} tinctureChange={secondTinctureChange} />
         </div>
+      </div>
+      <div className="form-group">
+        <label>Select the line style</label>
+        <LineSelect line={field.per.line} lineChange={lineChange} />
       </div>
     </div>
   );

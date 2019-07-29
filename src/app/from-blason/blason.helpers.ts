@@ -60,7 +60,12 @@ function stringifyField(field: Field): string {
   } else if (field.kind === 'party') {
     const perName = stringifyParty(field.per.name);
     const tinctures = field.per.tinctures.map((t) => t.name).join(' and ');
-    return `Per ${perName} ${tinctures}`;
+    let result = 'Per ' + perName + ' ';
+    if (field.per.line !== 'straight') {
+      result += field.per.line + ' ';
+    }
+    result += tinctures;
+    return result;
   } else if (field.kind === 'bendy') {
     return `Bendy ${field.tinctures[0].name} and ${field.tinctures[1].name}`;
   } else if (field.kind === 'bendySinister') {

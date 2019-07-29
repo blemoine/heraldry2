@@ -29,10 +29,11 @@ import { Line, lines } from '../line';
 
 const tinctureArb: Arbitrary<Tincture> = fc.constantFrom(...tinctures);
 const plainFieldArb: Arbitrary<PlainField> = tinctureArb.map((tincture) => ({ kind: 'plain', tincture }));
-
+const lineArb: Arbitrary<Line> = fc.constantFrom(...lines);
 const partyArb: Arbitrary<Party> = fc.record({
   name: fc.constantFrom(...parties),
   tinctures: fc.tuple(tinctureArb, tinctureArb),
+  line: lineArb,
 });
 const palyFieldArb: Arbitrary<PalyField> = fc
   .tuple(tinctureArb, tinctureArb)
@@ -61,7 +62,6 @@ const fieldArb: Arbitrary<Field> = fc.oneof<Field>(
   chequyFieldArb
 );
 
-const lineArb: Arbitrary<Line> = fc.constantFrom(...lines);
 const ordinaryArb: Arbitrary<Ordinary> = fc
   .record({ name: fc.constantFrom(...ordinaries), tincture: tinctureArb, line: lineArb })
   .chain(

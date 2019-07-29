@@ -1,14 +1,10 @@
 import * as P from 'parsimmon';
 import { ordinaries, Ordinary, Pale } from '../model/ordinary';
-import { buildAltParser, twoParser } from './parser.helper';
-import { identity } from '../../utils/identity';
+import { buildAltParser, lineParser, twoParser } from './parser.helper';
 import { tinctureParserFromName } from './tinctureParser';
-import { Line, lines } from '../model/line';
 import { stringifyOrdinaryName } from '../from-blason/blason.helpers';
 
 export function ordinaryParser(): P.Parser<Ordinary> {
-  const lineParser: P.Parser<Line> = buildAltParser(lines, identity);
-
   const paleParser: P.Parser<Pale> = P.seq(
     P.alt(
       P.regex(/an?/i)

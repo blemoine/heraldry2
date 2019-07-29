@@ -141,7 +141,7 @@ exports[`CoatsOfArms should render 3 fleurs de lys 1`] = `
         y={0}
       />
       <path
-        d="M -66.66666666666667 266.6666666666667 L 100 88.8888888888889 L 266.6666666666667 266.6666666666667 Z"
+        d="M -66.66666666666667 266.6666666666667 H266.6666666666667 L 100 88.8888888888889 L -66.66666666666667 266.6666666666667"
         fill="#FFD700"
         stroke="#333"
       />
@@ -823,21 +823,15 @@ exports[`CoatsOfArms should render a bordure invected 1`] = `
     clipPath="url(#plain-field-clip-path)"
   >
     <g>
-      <rect
+      <path
+        d="M 0 0 H200 V133.33333333333334 H0 Z"
         fill="#FFD700"
-        height={133.33333333333334}
         stroke="#333"
-        width={200}
-        x={0}
-        y={0}
       />
-      <rect
+      <path
+        d="M 0 133.33333333333334 V266.6666666666667 H200 V133.33333333333334 H0"
         fill="url(#field-pattern-17)"
-        height={133.33333333333334}
         stroke="#333"
-        width={200}
-        x={0}
-        y={133.33333333333334}
       />
     </g>
   </g>
@@ -1732,37 +1726,25 @@ exports[`CoatsOfArms should render a field splitted per cross 1`] = `
     clipPath="url(#plain-field-clip-path)"
   >
     <g>
-      <rect
+      <path
+        d="M 0 0 H100 V133.33333333333334 H0 V0"
         fill="#FFD700"
-        height={133.33333333333334}
         stroke="#333"
-        width={100}
-        x="0"
-        y="0"
       />
-      <rect
+      <path
+        d="M 100 0 H200 V133.33333333333334 H100 V0"
+        fill="#FFFFFF"
+        stroke="#333"
+      />
+      <path
+        d="M 0 133.33333333333334 H100 V266.6666666666667 H0 Z"
+        fill="#FFFFFF"
+        stroke="#333"
+      />
+      <path
+        d="M 100 133.33333333333334 V266.6666666666667 H200 V133.33333333333334 H100"
         fill="#FFD700"
-        height={133.33333333333334}
         stroke="#333"
-        width={100}
-        x={100}
-        y={133.33333333333334}
-      />
-      <rect
-        fill="#FFFFFF"
-        height={133.33333333333334}
-        stroke="#333"
-        width={100}
-        x="0"
-        y={133.33333333333334}
-      />
-      <rect
-        fill="#FFFFFF"
-        height={133.33333333333334}
-        stroke="#333"
-        width={100}
-        x={100}
-        y="0"
       />
     </g>
   </g>
@@ -1796,22 +1778,22 @@ exports[`CoatsOfArms should render a field splitted per saltire 1`] = `
   >
     <g>
       <path
-        d="M 0 0 H 200 L 100 133.33333333333334 Z"
+        d="M 0 0 H200 L 100 133.33333333333334 L 0 0"
         fill="#FFD700"
         stroke="#333"
       />
       <path
-        d="M 0 266.6666666666667 H 200 L 100 133.33333333333334 Z"
+        d="M 0 266.6666666666667 H200 L 100 133.33333333333334 L 0 266.6666666666667"
         fill="#FFD700"
         stroke="#333"
       />
       <path
-        d="M 0 0 V 266.6666666666667 L 100 133.33333333333334 Z"
+        d="M 0 0 L 100 133.33333333333334 L 0 266.6666666666667 Z"
         fill="#FFFFFF"
         stroke="#333"
       />
       <path
-        d="M 200 0 V 266.6666666666667 L 100 133.33333333333334 Z"
+        d="M 200 0 V266.6666666666667 L 100 133.33333333333334 L 200 0"
         fill="#FFFFFF"
         stroke="#333"
       />
@@ -2822,12 +2804,12 @@ exports[`CoatsOfArms should render a party blason 1`] = `
   >
     <g>
       <path
-        d="M 0 0 H 200 V 266.6666666666667 Z"
+        d="M 0 0 H200 V266.6666666666667 L 0 0"
         fill="url(#field-pattern-6)"
         stroke="#333"
       />
       <path
-        d="M 0 0 V 266.6666666666667 H 200  Z"
+        d="M 0 0 V266.6666666666667 H200 L 0 0"
         fill="#0000FF"
         stroke="#333"
       />
@@ -2911,12 +2893,12 @@ exports[`CoatsOfArms should render a party blason with some ordinary 1`] = `
   >
     <g>
       <path
-        d="M 0 0 H 200 V 266.6666666666667 Z"
+        d="M 0 0 H200 V266.6666666666667 L 0 0"
         fill="url(#field-pattern-8)"
         stroke="#333"
       />
       <path
-        d="M 0 0 V 266.6666666666667 H 200  Z"
+        d="M 0 0 V266.6666666666667 H200 L 0 0"
         fill="#0000FF"
         stroke="#333"
       />

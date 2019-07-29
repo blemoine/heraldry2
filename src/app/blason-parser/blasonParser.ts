@@ -5,7 +5,7 @@ import { Ordinary } from '../model/ordinary';
 import { stringifyNumber, stringifyParty } from '../from-blason/blason.helpers';
 import { Charge } from '../model/charge';
 import { BarryField, BendyField, BendySinisterField, ChequyField, Field, PalyField } from '../model/field';
-import { buildAltParser, constStr } from './parser.helper';
+import { buildAltParser, constStr, lineParser } from './parser.helper';
 import { tinctureParserFromCapitalizedName, tinctureParserFromName } from './tinctureParser';
 import { ordinaryParser } from './ordinaryParser';
 import { chargeParser } from './chargeParser';
@@ -21,18 +21,20 @@ const partyUnit: P.Parser<Party['name']> = buildAltParser(parties, stringifyPart
 
 const language: Language = {
   Party(): P.Parser<Party> {
-    return constStr('per')
-      .skip(P.whitespace)
-      .then(partyUnit)
-      .skip(P.whitespace)
-      .chain((name) => {
-        return P.seq(
-          tinctureParserFromName,
-          P.regex(/and/i)
-            .trim(P.whitespace)
-            .then(tinctureParserFromName)
-        ).map((tinctures): Party => ({ name, tinctures }));
-      });
+    return P.seq(
+      constStr('per')
+        .skip(P.whitespace)
+        .then(partyUnit)
+        .skip(P.whitespace),
+      lineParser.skip(P.whitespace).fallback('straight' as const),
+
+      P.seq(
+        tinctureParserFromName,
+        P.regex(/and/i)
+          .trim(P.whitespace)
+          .then(tinctureParserFromName)
+      )
+    ).map(([name, line, tinctures]): Party => ({ name, tinctures, line }));
   },
 
   Field(r: AppliedLanguage): P.Parser<Field> {
