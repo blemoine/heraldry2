@@ -120,6 +120,9 @@ describe('CoatsOfArms', () => {
   it('should render a bend sinister invected', () => {
     snapshotTest('Or, a bend sinister invected ermine');
   });
+  it('should render a party per pale invected', () => {
+    snapshotTest('Per pale invected ermine and or');
+  });
 });
 
 function snapshotTest(blason: string) {
