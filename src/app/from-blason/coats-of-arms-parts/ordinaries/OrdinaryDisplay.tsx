@@ -67,14 +67,13 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension }: Props) => {
     return (
       <g>
         {range(0, ordinary.count).map((i) => {
-          const pathBuilder = SvgPathBuilder.start([((i * 2 + 1) * width) / (2 * ordinary.count + 1), 0])
-            .goTo([((i * 2 + 1) * width) / (2 * ordinary.count + 1), 0])
-            .goTo([((i * 2 + 1) * width) / (2 * ordinary.count + 1), height], lineOptions)
-            .goTo([((i * 2 + 1) * width) / (2 * ordinary.count + 1) + width / (2 * ordinary.count + 1), height])
-            .goTo(
-              [((i * 2 + 1) * width) / (2 * ordinary.count + 1) + width / (2 * ordinary.count + 1), 0],
-              lineOptions
-            );
+          const startX = ((i * 2 + 1) * width) / (2 * ordinary.count + 1);
+          const paleWidth = width / (2 * ordinary.count + 1);
+          const pathBuilder = SvgPathBuilder.start([startX, 0])
+            .goTo([startX, 0])
+            .goTo([startX, height], lineOptions)
+            .goTo([startX + paleWidth, height])
+            .goTo([startX + paleWidth, 0], lineOptions);
 
           return <PathFromBuilder key={i} pathBuilder={pathBuilder} fill={fill} stroke="#333" />;
         })}
