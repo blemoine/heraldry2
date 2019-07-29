@@ -16,7 +16,6 @@ Furs dans les ordinary ->  les centrer correctement
 Add some tests
 ReNommer et réorganiser le code
 Valider la sortie du localstorage (sinon ca provoque des soucis de retrocompatibilité)
-Support bend sinister (ordinary)
 Support chevrony field
 Add a rule validateur (no 2 metals/furs/colour over each other)
 

@@ -41,7 +41,7 @@ export const CoatsOfArmsDetail = ({ blason, blasonChange }: Props) => {
   return (
     <div>
       <div className="form-group" style={{ padding: '5px 10px', marginTop: '10px' }}>
-        <textarea value={blasonStr} onChange={(e) => updateBlason(e.target.value)} className="form-control" />
+        <textarea value={blasonStr} onChange={(e) => updateBlason(e.target.value)} placeholder="Enter the blason here" className="form-control" />
       </div>
       <pre>
         <div className="invalid-feedback" style={{ display: 'block' }}>

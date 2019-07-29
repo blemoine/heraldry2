@@ -113,7 +113,7 @@ export const FieldForm = ({ field, fieldChange }: Props) => {
       )}
 
       {field.kind === 'plain' ? (
-        <div className="form-group">
+        <div className="form-group field-tincture-select">
           <label>Select your field</label>
           <TinctureSelect tincture={field.tincture} tinctureChange={plainTinctureChange} />
         </div>

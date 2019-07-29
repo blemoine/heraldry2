@@ -1,5 +1,5 @@
 import renderer from 'react-test-renderer';
-import React from 'react';
+import * as React from 'react';
 import { CoatsOfArmsDisplay } from './CoatsOfArmsDisplay';
 import { Blason } from '../model/blason';
 import { azure, ermine, gules, or, purpure, vair } from '../model/tincture';

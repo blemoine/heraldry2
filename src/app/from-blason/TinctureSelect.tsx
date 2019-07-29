@@ -11,6 +11,7 @@ const Option = (props: OptionProps<Tincture>) => {
   return (
     <components.Option {...props}>
       <span
+        className="tincture-option"
         style={{
           verticalAlign: 'middle',
         }}
@@ -53,6 +54,7 @@ const Option = (props: OptionProps<Tincture>) => {
 export const TinctureSelect = ({ tincture, tinctureChange }: Props) => {
   return (
     <Select
+      classNamePrefix="tincture-select"
       options={tinctures}
       components={{ Option }}
       getOptionLabel={(t) => t.name}
