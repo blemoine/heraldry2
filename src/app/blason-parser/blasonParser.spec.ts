@@ -121,7 +121,7 @@ Argent, Azure, Barry of, Bendy, Bendy Sinister, Chequy, Ermine, Gules, Murrey, O
     const result = parseBlason('Argent, two pallets Sable ');
     const expected: Blason = {
       field: { kind: 'plain', tincture: argent },
-      ordinary: { name: 'pale', tincture: sable, count: 2 },
+      ordinary: { name: 'pale', tincture: sable, count: 2, line: 'straight' },
     };
 
     expect(result).toEqual(expected);

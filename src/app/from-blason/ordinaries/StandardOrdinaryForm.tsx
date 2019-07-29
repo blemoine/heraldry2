@@ -12,7 +12,7 @@ export const StandardOrdinaryForm = ({ ordinary, ordinaryChange }: Props) => {
     ordinaryChange({ ...ordinary, tincture });
   }
 
-  function lineChange(ordinary: Exclude<Ordinary, Pale>, line: Line) {
+  function lineChange(line: Line) {
     ordinaryChange({ ...ordinary, line });
   }
 
@@ -23,7 +23,10 @@ export const StandardOrdinaryForm = ({ ordinary, ordinaryChange }: Props) => {
         <TinctureSelect tincture={ordinary.tincture} tinctureChange={ordinaryTinctureChange} />
       </div>
 
-      {'line' in ordinary && <LineSelect line={ordinary.line} lineChange={(line) => lineChange(ordinary, line)} />}
+      <div className="form-group">
+        <label>Select the line style</label>
+        <LineSelect line={ordinary.line} lineChange={lineChange} />
+      </div>
     </>
   );
 };

@@ -4,7 +4,7 @@ import { Line } from './line';
 export type Chief = { name: 'chief'; tincture: Tincture; line: Line };
 export type Bend = { name: 'bend'; tincture: Tincture; line: Line };
 export type BendSinister = { name: 'bendSinister'; tincture: Tincture; line: Line };
-export type Pale = { name: 'pale'; tincture: Tincture; count: 1 | 2 };
+export type Pale = { name: 'pale'; tincture: Tincture; line: Line; count: 1 | 2 };
 export type Fess = { name: 'fess'; tincture: Tincture; line: Line };
 export type Chevron = { name: 'chevron'; tincture: Tincture; line: Line };
 export type Cross = { name: 'cross'; tincture: Tincture; line: Line };
@@ -16,7 +16,7 @@ export type Base = { name: 'base'; tincture: Tincture; line: Line };
 export type SubOrdinary = Bordure | Base;
 export type Ordinary = Chief | Bend | BendSinister | Pale | Fess | Chevron | Cross | Saltire | SubOrdinary;
 
-export function isSubOrdinary(o: Ordinary['name']): o is SubOrdinary['name']  {
+export function isSubOrdinary(o: Ordinary['name']): o is SubOrdinary['name'] {
   return o === 'bordure' || o === 'base';
 }
 
@@ -30,5 +30,5 @@ export const ordinaries: Array<Ordinary['name']> = [
   'cross',
   'saltire',
   'bordure',
-  'base'
+  'base',
 ];

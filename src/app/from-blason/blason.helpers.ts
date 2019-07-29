@@ -31,6 +31,9 @@ function stringifyOrdinary(ordinary: Ordinary): string {
     } else {
       result += stringifyNumber(ordinary.count) + ' pallets ';
     }
+    if (ordinary.line !== 'straight') {
+      result += ordinary.line + ' ';
+    }
     result += ordinary.tincture.name;
     return result;
   } else {

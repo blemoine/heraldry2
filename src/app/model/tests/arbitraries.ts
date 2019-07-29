@@ -63,15 +63,19 @@ const fieldArb: Arbitrary<Field> = fc.oneof<Field>(
 
 const lineArb: Arbitrary<Line> = fc.constantFrom(...lines);
 const ordinaryArb: Arbitrary<Ordinary> = fc
-  .record({ name: fc.constantFrom(...ordinaries), tincture: tinctureArb })
+  .record({ name: fc.constantFrom(...ordinaries), tincture: tinctureArb, line: lineArb })
   .chain(
     (obj): Arbitrary<Ordinary> => {
       if (obj.name === 'pale') {
-        const pale: { name: 'pale'; tincture: Tincture } = { name: obj.name, tincture: obj.tincture };
+        const pale: { name: 'pale'; tincture: Tincture; line: Line } = {
+          name: obj.name,
+          tincture: obj.tincture,
+          line: obj.line,
+        };
         return fc.constantFrom(1 as const, 2 as const).map((count): Pale => ({ ...pale, count }));
       } else {
         const name = obj.name;
-        return lineArb.map((line) => ({ name, tincture: obj.tincture, line }));
+        return fc.constant({ name, tincture: obj.tincture, line: obj.line });
       }
     }
   );
