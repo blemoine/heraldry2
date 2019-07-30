@@ -5,14 +5,14 @@ import { Dimension } from '../../../model/dimension';
 import { range } from '../../../../utils/range';
 import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { PathFromBuilder } from '../../../common/PathFromBuilder';
-import { computeLineOptions } from '../blasonDisplay.helper';
+import { chiefHeightRatio, computeLineOptions } from '../blasonDisplay.helper';
 
 type Props = { ordinary: Ordinary; fill: string; dimension: Dimension };
 
 export const OrdinaryDisplay = ({ ordinary, fill, dimension }: Props) => {
   const { width, height } = dimension;
   if (ordinary.name === 'chief') {
-    const chiefHeight = height / 5;
+    const chiefHeight = height * chiefHeightRatio;
     const lineOptions = computeLineOptions(ordinary.line, dimension);
 
     const pathBuilder = SvgPathBuilder.start([0, 0])
