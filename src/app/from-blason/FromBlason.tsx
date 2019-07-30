@@ -1,14 +1,9 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { OrdinaryForm } from './OrdinaryForm';
 import { gules } from '../model/tincture';
 import { Blason } from '../model/blason';
-import { Ordinary } from '../model/ordinary';
-import { FieldForm } from './FieldForm';
 import { CoatsOfArmsDetail } from './CoatsOfArmsDetail';
-import { Charge } from '../model/charge';
-import { ChargeForm } from './ChargeForm';
-import { Field } from '../model/field';
+import { BlasonForm } from './form/BlasonForm';
 
 const baseDefaultBlason: Blason = {
   field: { kind: 'plain', tincture: gules },
@@ -24,38 +19,10 @@ export const FromBlason = () => {
     localStorage.setItem(localStorageKey, JSON.stringify(blason));
   }, [blason]);
 
-  function fieldChange(field: Field) {
-    setBlason({ ...blason, field });
-  }
-
-  function ordinaryChange(ordinary: Ordinary | null) {
-    if (ordinary) {
-      setBlason({ ...blason, ordinary });
-    } else {
-      const newBlason = { ...blason };
-      delete newBlason.ordinary;
-      setBlason(newBlason);
-    }
-  }
-
-  function chargeChange(charge: Charge | null) {
-    if (charge) {
-      setBlason({ ...blason, charge });
-    } else {
-      const newBlason = { ...blason };
-      delete newBlason.charge;
-      setBlason(newBlason);
-    }
-  }
-
   return (
     <div className="row">
       <div className="col-md-12 col-lg-6">
-        <FieldForm field={blason.field} fieldChange={fieldChange} />
-
-        <OrdinaryForm ordinary={blason.ordinary || null} ordinaryChange={ordinaryChange} />
-
-        <ChargeForm charge={blason.charge || null} chargeChange={chargeChange} />
+        <BlasonForm blason={blason} blasonChange={setBlason} />
       </div>
       <div className="col-md-12 col-lg-6">
         <CoatsOfArmsDetail blason={blason} blasonChange={(blason) => setBlason(blason)} />
