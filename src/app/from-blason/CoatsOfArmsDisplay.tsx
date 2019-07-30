@@ -13,7 +13,8 @@ import { Dimension } from '../model/dimension';
 
 type Props = { blason: Blason; dimension: Dimension };
 export const CoatsOfArmsDisplay = (props: Props) => {
-  const { width, height } = props.dimension;
+  const dimension = props.dimension;
+  const { width, height } = dimension;
 
   const erminePatternId = 'field-pattern-' + uuid();
   const vairPatternId = 'field-pattern-' + uuid();
@@ -25,10 +26,13 @@ export const CoatsOfArmsDisplay = (props: Props) => {
       ? 'url(#' + erminePatternId + ')'
       : tincture.color;
   }
+
+  const blason = props.blason;
+  const ordinary = blason.ordinary;
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
       <defs>
-        {isThereFur(props.blason, 'ermine') && (
+        {isThereFur(blason, 'ermine') && (
           <>
             <symbol viewBox="0 0 200 240" id="ermine">
               <ErmineDisplay width={200} height={240} />
@@ -36,8 +40,8 @@ export const CoatsOfArmsDisplay = (props: Props) => {
 
             <pattern
               id={erminePatternId}
-              width={width / 5.5 }
-              height={height/ 4.1}
+              width={width / 5.5}
+              height={height / 4.1}
               patternUnits="userSpaceOnUse"
               viewBox="0 0 70 125"
             >
@@ -47,12 +51,18 @@ export const CoatsOfArmsDisplay = (props: Props) => {
             </pattern>
           </>
         )}
-        {isThereFur(props.blason, 'vair') && (
+        {isThereFur(blason, 'vair') && (
           <>
             <symbol viewBox="0 0 200 200" id="vair">
               <VairDisplay width={200} height={200} />
             </symbol>
-            <pattern id={vairPatternId} width={width / 5} height={width / 2.5} patternUnits="userSpaceOnUse" viewBox="0 0 100 200">
+            <pattern
+              id={vairPatternId}
+              width={width / 5}
+              height={width / 2.5}
+              patternUnits="userSpaceOnUse"
+              viewBox="0 0 100 200"
+            >
               <rect width="100%" height="100%" fill="white" />
               <use href="#vair" x="0" y="0" width={100} height={100} />
               <use href="#vair" x="-50" y="100" width={100} height={100} />
@@ -62,31 +72,27 @@ export const CoatsOfArmsDisplay = (props: Props) => {
         )}
 
         <clipPath id="plain-field-clip-path">
-          <HeaterDisplay dimension={props.dimension} />
+          <HeaterDisplay dimension={dimension} />
         </clipPath>
       </defs>
 
       <g clipPath="url(#plain-field-clip-path)">
-        <FieldDisplay dimension={props.dimension} field={props.blason.field} fillFromTincture={fillFromTincture} />
+        <FieldDisplay dimension={dimension} field={blason.field} fillFromTincture={fillFromTincture} />
       </g>
 
-      {props.blason.ordinary && (
+      {ordinary && (
         <g clipPath="url(#plain-field-clip-path)">
-          <OrdinaryDisplay
-            dimension={props.dimension}
-            ordinary={props.blason.ordinary}
-            fill={fillFromTincture(props.blason.ordinary.tincture)}
-          />
+          <OrdinaryDisplay dimension={dimension} ordinary={ordinary} fill={fillFromTincture(ordinary.tincture)} />
         </g>
       )}
 
-      {props.blason.charge && (
+      {blason.charge && (
         <g clipPath="url(#plain-field-clip-path)">
-          <ChargeDisplay dimension={props.dimension} charge={props.blason.charge} fillFromTincture={fillFromTincture} />
+          <ChargeDisplay dimension={dimension} charge={blason.charge} fillFromTincture={fillFromTincture} />
         </g>
       )}
 
-      <HeaterDisplay dimension={props.dimension} />
+      <HeaterDisplay dimension={dimension} />
     </svg>
   );
 };
