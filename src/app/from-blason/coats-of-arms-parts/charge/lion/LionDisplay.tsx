@@ -8,16 +8,19 @@ import { Dimension, scale } from '../../../../model/dimension';
 type Props = { charge: Lion; dimension: Dimension; fillFromTincture: (tincture: Tincture) => string };
 export const LionDisplay = ({ charge, dimension, fillFromTincture }: Props) => {
   const count = charge.countAndDisposition.count;
-  const sizeFactor = count === 1 ? 0.85 : 1;
+  const sizeFactor = 0.85;
 
-  const computedDimension = scale(dimension, sizeFactor / charge.countAndDisposition.count);
+  const computedDimension = scale(dimension, sizeFactor / count);
+  computedDimension.width = 0.95 * computedDimension.width;
+
   return (
     <>
-      {range(0, charge.countAndDisposition.count).map((idx) => (
+      {range(0, count).map((idx) => (
         <g
           key={idx}
-          transform={`translate(${(dimension.width - computedDimension.width) / 2} ${idx * computedDimension.height -
-            computedDimension.height / 15})`}
+          transform={`translate(${(dimension.width - computedDimension.width) / 2} ${idx * computedDimension.height +
+            (dimension.height - count * computedDimension.height) / 2 -
+            computedDimension.height / 15} )`}
         >
           <UnitLionDisplay charge={charge} dimension={computedDimension} fillFromTincture={fillFromTincture} />
         </g>

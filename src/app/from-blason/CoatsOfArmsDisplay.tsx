@@ -29,6 +29,11 @@ export const CoatsOfArmsDisplay = (props: Props) => {
 
   const blason = props.blason;
   const ordinary = blason.ordinary;
+
+  const [verticalOffset, heightScale] = ordinary && ordinary.name === 'chief' ? [1 / 5, 4 / 5] : [0, 1];
+
+  const computedDimension = { width, height: height * heightScale };
+
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
       <defs>
@@ -77,7 +82,9 @@ export const CoatsOfArmsDisplay = (props: Props) => {
       </defs>
 
       <g clipPath="url(#plain-field-clip-path)">
-        <FieldDisplay dimension={dimension} field={blason.field} fillFromTincture={fillFromTincture} />
+        <GWrapper translate={[0, verticalOffset * height]}>
+          <FieldDisplay dimension={computedDimension} field={blason.field} fillFromTincture={fillFromTincture} />
+        </GWrapper>
       </g>
 
       {ordinary && (
@@ -88,11 +95,23 @@ export const CoatsOfArmsDisplay = (props: Props) => {
 
       {blason.charge && (
         <g clipPath="url(#plain-field-clip-path)">
-          <ChargeDisplay dimension={dimension} charge={blason.charge} fillFromTincture={fillFromTincture} />
+          <GWrapper translate={[0, verticalOffset * height]}>
+            <ChargeDisplay dimension={computedDimension} charge={blason.charge} fillFromTincture={fillFromTincture} />
+          </GWrapper>
         </g>
       )}
 
       <HeaterDisplay dimension={dimension} />
     </svg>
   );
+};
+
+type GWrapperProps = { translate: [number, number] };
+const GWrapper: React.FunctionComponent<GWrapperProps> = (props) => {
+  const translate = props.translate;
+  if (translate[0] !== 0 || translate[1] !== 0) {
+    return <g transform={`translate(${translate[0]} ${translate[1]})`}>{props.children}</g>;
+  } else {
+    return <>{props.children}</>;
+  }
 };

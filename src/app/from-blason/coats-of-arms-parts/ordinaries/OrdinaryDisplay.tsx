@@ -14,10 +14,10 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension }: Props) => {
   if (ordinary.name === 'chief') {
     const chiefHeight = height * chiefHeightRatio;
     const lineOptions = computeLineOptions(ordinary.line, dimension);
-
+    const computedHeight = chiefHeight + (lineOptions && lineOptions.radius ? lineOptions.radius : 0);
     const pathBuilder = SvgPathBuilder.start([0, 0])
-      .goTo([0, chiefHeight])
-      .goTo([width, chiefHeight], lineOptions)
+      .goTo([0, computedHeight])
+      .goTo([width, computedHeight], lineOptions)
       .goTo([width, 0])
       .close();
 
