@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { FleurDeLys } from '../../model/charge';
+import { FleurDeLys } from '../../../model/charge';
 import { TinctureSelect } from '../TinctureSelect';
-import { Tincture } from '../../model/tincture';
+import { Tincture } from '../../../model/tincture';
 
 type Props = { charge: FleurDeLys; chargeChange: (fleurDeLys: FleurDeLys) => void };
 

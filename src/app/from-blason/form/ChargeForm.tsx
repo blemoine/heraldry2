@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { gules, or, sable } from '../model/tincture';
-import { Charge } from '../model/charge';
-import { cannotHappen } from '../../utils/cannot-happen';
+import { gules, or, sable } from '../../model/tincture';
+import { Charge } from '../../model/charge';
+import { cannotHappen } from '../../../utils/cannot-happen';
 import { ChargeNameSelect } from './ChargeNameSelect';
 import { ChargeDetailForm } from './ChargeDetailForm';
 

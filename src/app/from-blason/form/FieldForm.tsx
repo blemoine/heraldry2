@@ -1,10 +1,10 @@
-import { BarryField, BendyField, BendySinisterField, ChequyField, Field, PalyField } from '../model/field';
+import { BarryField, BendyField, BendySinisterField, ChequyField, Field, PalyField } from '../../model/field';
 import { TinctureSelect } from './TinctureSelect';
 import * as React from 'react';
-import { argent, gules, isMetal, Tincture } from '../model/tincture';
+import { argent, gules, isMetal, Tincture } from '../../model/tincture';
 import { PartyForm } from './PartyForm';
-import { SelectScalar } from '../common/SelectScalar';
-import { cannotHappen } from '../../utils/cannot-happen';
+import { SelectScalar } from '../../common/SelectScalar';
+import { cannotHappen } from '../../../utils/cannot-happen';
 
 type Props = { field: Field; fieldChange: (field: Field) => void };
 export const FieldForm = ({ field, fieldChange }: Props) => {

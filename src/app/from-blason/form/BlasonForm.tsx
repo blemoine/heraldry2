@@ -1,6 +1,6 @@
-import { FieldForm } from '../FieldForm';
-import { OrdinaryForm } from '../OrdinaryForm';
-import { ChargeForm } from '../ChargeForm';
+import { FieldForm } from './FieldForm';
+import { OrdinaryForm } from './OrdinaryForm';
+import { ChargeForm } from './ChargeForm';
 import * as React from 'react';
 import { Blason } from '../../model/blason';
 import { Field } from '../../model/field';

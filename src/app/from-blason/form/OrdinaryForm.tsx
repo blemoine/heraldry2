@@ -1,7 +1,7 @@
 import { OrdinaryNameSelect } from './OrdinaryNameSelect';
 import * as React from 'react';
-import { Ordinary } from '../model/ordinary';
-import { argent } from '../model/tincture';
+import { Ordinary } from '../../model/ordinary';
+import { argent } from '../../model/tincture';
 import { OrdinaryDispatcherForm } from './ordinaries/OrdinaryDispatcherForm';
 
 type Props = { ordinary: Ordinary | null; ordinaryChange: (ordinary: Ordinary | null) => void };

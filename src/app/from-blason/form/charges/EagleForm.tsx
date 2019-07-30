@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Eagle, EagleAttitude, eagleAttitudes } from '../../model/charge';
+import { Eagle, EagleAttitude, eagleAttitudes } from '../../../model/charge';
 import { TinctureSelect } from '../TinctureSelect';
-import { Tincture } from '../../model/tincture';
-import { SelectScalar } from '../../common/SelectScalar';
+import { Tincture } from '../../../model/tincture';
+import { SelectScalar } from '../../../common/SelectScalar';
 
 type Props = { charge: Eagle; chargeChange: (eagle: Eagle) => void };
 

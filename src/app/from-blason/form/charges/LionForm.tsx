@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Lion, LionAttitude, lionAttitudes, LionHead, lionHeads } from '../../model/charge';
+import { Lion, LionAttitude, lionAttitudes, LionHead, lionHeads } from '../../../model/charge';
 import { TinctureSelect } from '../TinctureSelect';
-import { Tincture } from '../../model/tincture';
-import { SelectScalar } from '../../common/SelectScalar';
+import { Tincture } from '../../../model/tincture';
+import { SelectScalar } from '../../../common/SelectScalar';
 
 type Props = { charge: Lion; chargeChange: (lion: Lion) => void };
 

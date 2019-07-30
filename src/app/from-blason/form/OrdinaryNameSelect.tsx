@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { isSubOrdinary, ordinaries, Ordinary } from '../model/ordinary';
+import { isSubOrdinary, ordinaries, Ordinary } from '../../model/ordinary';
 import Select from 'react-select';
 import { GroupedOptionsType } from 'react-select/src/types';
-import { stringifyOrdinaryName } from './blason.helpers';
+import { stringifyOrdinaryName } from '../blason.helpers';
 
 type Props = { ordinary: Ordinary['name'] | null; ordinaryChange: (t: Ordinary['name'] | null) => void };
 

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Charge, charges } from '../model/charge';
-import { SelectScalar } from '../common/SelectScalar';
+import { Charge, charges } from '../../model/charge';
+import { SelectScalar } from '../../common/SelectScalar';
 
 type Props = { charge: Charge['name'] | null; chargeChange: (t: Charge['name'] | null) => void };
 

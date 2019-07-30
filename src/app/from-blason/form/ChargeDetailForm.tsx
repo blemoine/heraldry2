@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Charge } from '../model/charge';
-import { cannotHappen } from '../../utils/cannot-happen';
+import { Charge } from '../../model/charge';
+import { cannotHappen } from '../../../utils/cannot-happen';
 import { LionForm } from './charges/LionForm';
 import { EagleForm } from './charges/EagleForm';
 import { FleurDeLysForm } from './charges/FleurDeLysForm';

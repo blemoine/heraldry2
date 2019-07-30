@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Ordinary } from '../../model/ordinary';
+import { Ordinary } from '../../../model/ordinary';
 import { PaleForm } from './PaleForm';
 import { StandardOrdinaryForm } from './StandardOrdinaryForm';
 

@@ -1,9 +1,9 @@
 import Select, { components } from 'react-select';
 import * as React from 'react';
 import { OptionProps } from 'react-select/src/components/Option';
-import { Tincture, tinctures } from '../model/tincture';
-import { ErmineDisplay } from './coats-of-arms-parts/ErmineDisplay';
-import { VairDisplay } from './coats-of-arms-parts/VairDisplay';
+import { Tincture, tinctures } from '../../model/tincture';
+import { ErmineDisplay } from '../coats-of-arms-parts/ErmineDisplay';
+import { VairDisplay } from '../coats-of-arms-parts/VairDisplay';
 
 type Props = { tincture: Tincture; tinctureChange: (t: Tincture) => void };
 
