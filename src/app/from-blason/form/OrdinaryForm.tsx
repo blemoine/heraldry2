@@ -9,7 +9,7 @@ export const OrdinaryForm = ({ ordinary, ordinaryChange }: Props) => {
   function changeOrdinary(ordinaryName: Ordinary['name'] | null) {
     if (ordinaryName) {
       const tincture = ordinary ? ordinary.tincture : argent;
-      if (ordinaryName === 'pale') {
+      if (ordinaryName === 'pale' || ordinaryName === 'chevron') {
         ordinaryChange({ name: ordinaryName, tincture, count: 1, line: 'straight' });
       } else {
         ordinaryChange({ name: ordinaryName, tincture, line: 'straight' });

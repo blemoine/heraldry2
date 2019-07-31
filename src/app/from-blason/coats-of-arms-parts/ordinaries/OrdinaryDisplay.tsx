@@ -122,17 +122,25 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension }: Props) => {
     return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke="#333" />;
   } else if (ordinary.name === 'chevron') {
     const lineOptions = computeLineOptions(ordinary.line, dimension);
-    const basePoint = height / 5;
+    const basePoint = height / (5 + ordinary.count);
 
-    const pathBuilder = SvgPathBuilder.start([width / 2, height / 3])
-      .goTo([width, height / 3 + width / 2], lineOptions)
-      .goTo([width, height / 3 + width / 2 - basePoint])
-      .goTo([width / 2, height / 3 - basePoint], lineOptions)
-      .goTo([0, height / 3 + width / 2 - basePoint], lineOptions)
-      .goTo([0, height / 3 + width / 2])
-      .goTo([width / 2, height / 3], lineOptions);
+    return (
+      <>
+        {range(0, ordinary.count).map((i) => {
+          const topPoint = ((i * 2 + 1) * height) / (ordinary.count * 2);
+          const chevronHeight = width / 2;
+          const pathBuilder = SvgPathBuilder.start([chevronHeight, topPoint])
+            .goTo([width, topPoint + chevronHeight], lineOptions)
+            .goTo([width, topPoint + chevronHeight - basePoint])
+            .goTo([chevronHeight, topPoint - basePoint], lineOptions)
+            .goTo([0, topPoint + chevronHeight - basePoint], lineOptions)
+            .goTo([0, topPoint + chevronHeight])
+            .goTo([chevronHeight, topPoint], lineOptions);
 
-    return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke="#333" />;
+          return <PathFromBuilder key={i} pathBuilder={pathBuilder} fill={fill} stroke="#333" />;
+        })}
+      </>
+    );
   } else if (ordinary.name === 'bordure') {
     const bordureWidth = width / 10;
 

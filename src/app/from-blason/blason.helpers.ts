@@ -24,12 +24,20 @@ export function stringifyBlason(blason: Blason): string {
 }
 
 function stringifyOrdinary(ordinary: Ordinary): string {
-  if (ordinary.name === 'pale') {
+  if (ordinary.name === 'pale' || ordinary.name === 'chevron') {
     let result = '';
     if (ordinary.count === 1) {
       result += 'a ' + stringifyOrdinaryName(ordinary.name) + ' ';
     } else {
-      result += stringifyNumber(ordinary.count) + ' pallets ';
+      result += stringifyNumber(ordinary.count);
+
+      if (ordinary.name === 'pale') {
+        result += ' pallets ';
+      } else if (ordinary.name === 'chevron') {
+        result += ' chevronels ';
+      } else {
+        return cannotHappen(ordinary);
+      }
     }
     if (ordinary.line !== 'straight') {
       result += ordinary.line + ' ';

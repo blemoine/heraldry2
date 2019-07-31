@@ -1,6 +1,6 @@
 import * as P from 'parsimmon';
-import { ordinaries, Ordinary, Pale } from '../model/ordinary';
-import { buildAltParser, lineParser, twoParser } from './parser.helper';
+import { Chevron, ordinaries, Ordinary, Pale } from '../model/ordinary';
+import { buildAltParser, lineParser, threeParser, twoParser } from './parser.helper';
 import { tinctureParserFromName } from './tinctureParser';
 import { stringifyOrdinaryName } from '../from-blason/blason.helpers';
 
@@ -22,18 +22,35 @@ export function ordinaryParser(): P.Parser<Ordinary> {
     tinctureParserFromName
   ).map(([{ name, count }, line, tincture]): Pale => ({ name, count, line, tincture }));
 
-  const ordinaryWithLineParser: P.Parser<Exclude<Ordinary, Pale>> = P.seq(
+  const chevronParser: P.Parser<Chevron> = P.seq(
+    P.alt(
+      P.regex(/an?/i)
+        .then(P.whitespace)
+        .skip(P.regex(/chevron/i))
+        .result({ name: 'chevron', count: 1 } as const)
+        .skip(P.whitespace),
+      P.alt(twoParser,threeParser)
+        .skip(P.optWhitespace)
+        .skip(P.regexp(/chevronels/i))
+        .map((count) => ({ name: 'chevron', count } as const))
+        .skip(P.whitespace)
+    ),
+    lineParser.skip(P.whitespace).fallback('straight' as const),
+    tinctureParserFromName
+  ).map(([{ name, count }, line, tincture]): Chevron => ({ name, count, line, tincture }));
+
+  const ordinaryWithLineParser: P.Parser<Exclude<Ordinary, Pale | Chevron>> = P.seq(
     P.regex(/an?/i)
       .then(P.whitespace)
-      .then(buildAltParser(ordinaries.filter(isNotPale), stringifyOrdinaryName))
+      .then(buildAltParser(ordinaries.filter(isNotPaleOrChevron), stringifyOrdinaryName))
       .skip(P.whitespace),
     lineParser.skip(P.whitespace).fallback('straight' as const),
     tinctureParserFromName
-  ).map(([name, line, tincture]): Exclude<Ordinary, Pale> => ({ name, line, tincture }));
+  ).map(([name, line, tincture]): Exclude<Ordinary, Pale | Chevron> => ({ name, line, tincture }));
 
-  return P.alt(paleParser, ordinaryWithLineParser);
+  return P.alt(paleParser, chevronParser, ordinaryWithLineParser);
 }
 
-function isNotPale(o: Ordinary['name']): o is Exclude<Ordinary['name'], 'pale'> {
-  return !['pale'].includes(o);
+function isNotPaleOrChevron(o: Ordinary['name']): o is Exclude<Ordinary['name'], 'pale' | 'chevron'> {
+  return !['pale', 'chevron'].includes(o);
 }

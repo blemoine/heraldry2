@@ -6,7 +6,7 @@ export type Bend = { name: 'bend'; tincture: Tincture; line: Line };
 export type BendSinister = { name: 'bendSinister'; tincture: Tincture; line: Line };
 export type Pale = { name: 'pale'; tincture: Tincture; line: Line; count: 1 | 2 };
 export type Fess = { name: 'fess'; tincture: Tincture; line: Line };
-export type Chevron = { name: 'chevron'; tincture: Tincture; line: Line };
+export type Chevron = { name: 'chevron'; tincture: Tincture; line: Line; count: 1 | 2 | 3 };
 export type Cross = { name: 'cross'; tincture: Tincture; line: Line };
 export type Saltire = { name: 'saltire'; tincture: Tincture; line: Line };
 

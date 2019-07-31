@@ -11,7 +11,7 @@ import {
   PlainField,
 } from '../field';
 import { parties, Party } from '../party';
-import { ordinaries, Ordinary, Pale } from '../ordinary';
+import { ordinaries, Ordinary } from '../ordinary';
 import {
   Charge,
   charges,
@@ -66,13 +66,13 @@ const ordinaryArb: Arbitrary<Ordinary> = fc
   .record({ name: fc.constantFrom(...ordinaries), tincture: tinctureArb, line: lineArb })
   .chain(
     (obj): Arbitrary<Ordinary> => {
-      if (obj.name === 'pale') {
-        const pale: { name: 'pale'; tincture: Tincture; line: Line } = {
+      if (obj.name === 'pale' || obj.name === 'chevron') {
+        const pale = {
           name: obj.name,
           tincture: obj.tincture,
           line: obj.line,
-        };
-        return fc.constantFrom(1 as const, 2 as const).map((count): Pale => ({ ...pale, count }));
+        } as const;
+        return fc.constantFrom(1 as const, 2 as const).map((count) => ({ ...pale, count }));
       } else {
         const name = obj.name;
         return fc.constant({ name, tincture: obj.tincture, line: obj.line });
