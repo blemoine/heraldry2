@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { Chevron } from '../../../model/ordinary';
+import { Chevron, Chevronel } from '../../../model/ordinary';
 import { TinctureSelect } from '../TinctureSelect';
 import { Tincture } from '../../../model/tincture';
 import { SelectScalar } from '../../../common/SelectScalar';
 import { LineSelect } from '../LineSelect';
 import { Line } from '../../../model/line';
 
-type Props = { ordinary: Chevron; ordinaryChange: (chevron: Chevron) => void };
+type Props = { ordinary: Chevron | Chevronel; ordinaryChange: (chevron: Chevron | Chevronel) => void };
 const countOptions = [1, 2, 3] as const;
 export const ChevronForm = ({ ordinary, ordinaryChange }: Props) => {
   function ordinaryTinctureChange(tincture: Tincture) {

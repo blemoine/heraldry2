@@ -66,13 +66,13 @@ const ordinaryArb: Arbitrary<Ordinary> = fc
   .record({ name: fc.constantFrom(...ordinaries), tincture: tinctureArb, line: lineArb })
   .chain(
     (obj): Arbitrary<Ordinary> => {
-      if (obj.name === 'pale' || obj.name === 'chevron') {
-        const pale = {
+      if (obj.name === 'pale' || obj.name === 'chevron' || obj.name === 'chevronel') {
+        const countableOrdinary = {
           name: obj.name,
           tincture: obj.tincture,
           line: obj.line,
         } as const;
-        return fc.constantFrom(1 as const, 2 as const).map((count) => ({ ...pale, count }));
+        return fc.constantFrom(1 as const, 2 as const).map((count) => ({ ...countableOrdinary, count }));
       } else {
         const name = obj.name;
         return fc.constant({ name, tincture: obj.tincture, line: obj.line });

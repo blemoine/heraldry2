@@ -24,7 +24,7 @@ export function stringifyBlason(blason: Blason): string {
 }
 
 function stringifyOrdinary(ordinary: Ordinary): string {
-  if (ordinary.name === 'pale' || ordinary.name === 'chevron') {
+  if (ordinary.name === 'pale' || ordinary.name === 'chevron' || ordinary.name === 'chevronel') {
     let result = '';
     if (ordinary.count === 1) {
       result += 'a ' + stringifyOrdinaryName(ordinary.name) + ' ';
@@ -34,6 +34,8 @@ function stringifyOrdinary(ordinary: Ordinary): string {
       if (ordinary.name === 'pale') {
         result += ' pallets ';
       } else if (ordinary.name === 'chevron') {
+        result += ' chevrons ';
+      } else if (ordinary.name === 'chevronel') {
         result += ' chevronels ';
       } else {
         return cannotHappen(ordinary);

@@ -120,22 +120,24 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension }: Props) => {
       .goTo([w, h - basePointH], lineOptions);
 
     return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke="#333" />;
-  } else if (ordinary.name === 'chevron') {
+  } else if (ordinary.name === 'chevron' || ordinary.name === 'chevronel') {
     const lineOptions = computeLineOptions(ordinary.line, dimension);
-    const basePoint = height / (5 + ordinary.count);
+    const chevronHeight =
+      ordinary.name === 'chevron' ? height / 6 : ordinary.name === 'chevronel' ? height / 12 : cannotHappen(ordinary);
 
     return (
       <>
         {range(0, ordinary.count).map((i) => {
-          const topPoint = ((i * 2 + 1) * height) / (ordinary.count * 2);
-          const chevronHeight = width / 2;
-          const pathBuilder = SvgPathBuilder.start([chevronHeight, topPoint])
-            .goTo([width, topPoint + chevronHeight], lineOptions)
-            .goTo([width, topPoint + chevronHeight - basePoint])
-            .goTo([chevronHeight, topPoint - basePoint], lineOptions)
-            .goTo([0, topPoint + chevronHeight - basePoint], lineOptions)
-            .goTo([0, topPoint + chevronHeight])
-            .goTo([chevronHeight, topPoint], lineOptions);
+          const topPoint = ((i * 2 + 1) * height) / (ordinary.count * 2 + 1);
+          const bottomPoint = (((i + 1) * 2 + 1) * height) / (ordinary.count * 2 + 1);
+
+          const pathBuilder = SvgPathBuilder.start([width / 2, topPoint])
+            .goTo([width, bottomPoint - chevronHeight], lineOptions)
+            .goTo([width, bottomPoint])
+            .goTo([width / 2, topPoint + chevronHeight], lineOptions)
+            .goTo([0, bottomPoint], lineOptions)
+            .goTo([0, bottomPoint - chevronHeight])
+            .goTo([width / 2, topPoint], lineOptions);
 
           return <PathFromBuilder key={i} pathBuilder={pathBuilder} fill={fill} stroke="#333" />;
         })}
