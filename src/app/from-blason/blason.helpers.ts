@@ -154,9 +154,7 @@ function stringifyCharge(charge: Charge): string {
     }
     return result;
   } else if (charge.name === 'fleurdelys') {
-    let result = stringifyNumber(charge.count);
-    result += ' fleurs de lys ';
-
+    let result = charge.count === 1 ? 'a fleur de lys ' : stringifyNumber(charge.count) + ' fleurs de lys ';
     result += charge.tincture.name;
 
     return result;
@@ -165,10 +163,8 @@ function stringifyCharge(charge: Charge): string {
   }
 }
 
-export function stringifyNumber(n: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10): string {
-  if (n === 1) {
-    return 'one';
-  } else if (n === 2) {
+export function stringifyNumber(n: 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10): string {
+  if (n === 2) {
     return 'two';
   } else if (n === 3) {
     return 'three';

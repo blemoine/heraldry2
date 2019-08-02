@@ -151,19 +151,19 @@ exports[`CoatsOfArms should render 3 fleurs de lys 1`] = `
     clipPath="url(#plain-field-clip-path)"
   >
     <g
-      transform="translate(33.33333333333333 22.222222222222225)"
+      transform="translate(30 22.222222222222225)"
     >
       <svg
         colorInterpolationFilters="sRGB"
         fill="none"
         fillRule="evenodd"
         fontSize={12}
-        height={71.11111111111111}
+        height={80}
         overflow="visible"
         strokeLinecap="square"
         strokeMiterlimit={3}
         viewBox="0 0 152.407 191.07"
-        width={53.333333333333336}
+        width={60}
         xmlSpace="preserve"
       >
         <style
@@ -228,19 +228,19 @@ exports[`CoatsOfArms should render 3 fleurs de lys 1`] = `
       </svg>
     </g>
     <g
-      transform="translate(113.33333333333333 22.222222222222225)"
+      transform="translate(110 22.222222222222225)"
     >
       <svg
         colorInterpolationFilters="sRGB"
         fill="none"
         fillRule="evenodd"
         fontSize={12}
-        height={71.11111111111111}
+        height={80}
         overflow="visible"
         strokeLinecap="square"
         strokeMiterlimit={3}
         viewBox="0 0 152.407 191.07"
-        width={53.333333333333336}
+        width={60}
         xmlSpace="preserve"
       >
         <style
@@ -305,19 +305,19 @@ exports[`CoatsOfArms should render 3 fleurs de lys 1`] = `
       </svg>
     </g>
     <g
-      transform="translate(73.33333333333333 155.55555555555557)"
+      transform="translate(70 155.55555555555557)"
     >
       <svg
         colorInterpolationFilters="sRGB"
         fill="none"
         fillRule="evenodd"
         fontSize={12}
-        height={71.11111111111111}
+        height={80}
         overflow="visible"
         strokeLinecap="square"
         strokeMiterlimit={3}
         viewBox="0 0 152.407 191.07"
-        width={53.333333333333336}
+        width={60}
         xmlSpace="preserve"
       >
         <style

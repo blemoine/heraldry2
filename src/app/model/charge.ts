@@ -39,7 +39,7 @@ export type Eagle = {
 
 export type FleurDeLys = {
   name: 'fleurdelys';
-  count: 3;
+  count: 1 | 2 | 3;
   tincture: Tincture;
 };
 

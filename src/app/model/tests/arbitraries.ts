@@ -124,7 +124,11 @@ const chargeArb: Arbitrary<Charge> = fc.constantFrom(...charges).chain((chargeNa
       )
       .map((i): Charge => i);
   } else if (chargeName === 'fleurdelys') {
-    return tinctureArb.map((tincture) => ({ name: 'fleurdelys', count: 3, tincture }));
+    return fc.record({
+      name: fc.constant('fleurdelys' as const),
+      tincture: tinctureArb,
+      count: fc.constantFrom(1 as const, 2 as const, 3 as const),
+    });
   } else {
     return cannotHappen(chargeName);
   }

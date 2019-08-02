@@ -12,23 +12,47 @@ export const FleurDeLysDisplay = (props: Props) => {
 
   const mainFill = props.fillFromTincture(charge.tincture);
   const dimension = props.dimension;
-  const sizeFactor = 0.8;
-  const computedDimension = scale(dimension, sizeFactor / charge.count);
 
-  const heightOffset = dimension.height / 12;
-  const widthOffset = (computedDimension.width - (1 / 5) * dimension.width) / 2;
+  if (charge.count === 1) {
+    const computedDimension = scale(dimension, 0.5);
+    const translateX = dimension.width / 2 - computedDimension.width / 2;
+    const heightOffset = dimension.height / 2 - computedDimension.height / 2;
 
-  if (charge.count === 3) {
+    return (
+      <g transform={`translate(${translateX} ${heightOffset})`}>
+        <SvgFleurDeLys dimension={computedDimension} stroke={stroke} mainFill={mainFill} />
+      </g>
+    );
+  } else if (charge.count === 2) {
+    const computedDimension = scale(dimension, 0.3);
+    const baseTranslate = dimension.width / 5;
+    const heightOffset = dimension.height / 2 - computedDimension.height / 2;
+
     return (
       <>
-        <g transform={`translate(${(1 / 5) * dimension.width - widthOffset} ${heightOffset})`}>
+        <g transform={`translate(${(3 / 2) * baseTranslate - computedDimension.width / 2} ${heightOffset})`}>
           <SvgFleurDeLys dimension={computedDimension} stroke={stroke} mainFill={mainFill} />
         </g>
-        <g transform={`translate(${(3 / 5) * dimension.width - widthOffset} ${heightOffset})`}>
+        <g transform={`translate(${(7 / 2) * baseTranslate - computedDimension.width / 2} ${heightOffset})`}>
+          <SvgFleurDeLys dimension={computedDimension} stroke={stroke} mainFill={mainFill} />
+        </g>
+      </>
+    );
+  } else if (charge.count === 3) {
+    const computedDimension = scale(dimension, 0.3);
+    const baseTranslate = dimension.width / 5;
+    const heightOffset = dimension.height / 12;
+
+    return (
+      <>
+        <g transform={`translate(${(3 / 2) * baseTranslate - computedDimension.width / 2} ${heightOffset})`}>
+          <SvgFleurDeLys dimension={computedDimension} stroke={stroke} mainFill={mainFill} />
+        </g>
+        <g transform={`translate(${(7 / 2) * baseTranslate - computedDimension.width / 2} ${heightOffset})`}>
           <SvgFleurDeLys dimension={computedDimension} stroke={stroke} mainFill={mainFill} />
         </g>
         <g
-          transform={`translate(${(2 / 5) * dimension.width - widthOffset} ${heightOffset +
+          transform={`translate(${(5 / 2) * baseTranslate - computedDimension.width / 2} ${heightOffset +
             (1 / 2) * dimension.height})`}
         >
           <SvgFleurDeLys dimension={computedDimension} stroke={stroke} mainFill={mainFill} />

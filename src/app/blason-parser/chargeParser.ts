@@ -87,8 +87,8 @@ const eagleParser = () => {
 
 const fleurDeLysParser = (): P.Parser<FleurDeLys> => {
   return P.seq(
-    threeParser.skip(P.whitespace),
-    P.regexp(/Fleurs[- ]de[- ]l[yi]s/i).skip(P.whitespace),
+    P.alt(aParser, twoParser, threeParser).skip(P.whitespace),
+    P.regexp(/Fleurs?[- ]de[- ]l[yi]s/i).skip(P.whitespace),
     tinctureParserFromName
   ).map(([count, , tincture]) => {
     return {
