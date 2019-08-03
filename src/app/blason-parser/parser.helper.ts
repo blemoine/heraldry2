@@ -2,7 +2,7 @@ import * as P from 'parsimmon';
 import { capitalizeFirstLetter } from '../../utils/strings';
 import { Line, lines } from '../model/line';
 import { identity } from '../../utils/identity';
-import { numberToNameMap, StringifiableNumber } from '../from-blason/blason.helpers';
+import { numberToNameMap, StringifiableNumber } from '../model/countAndDisposition';
 
 export function buildAltParser<A>(arr: ReadonlyArray<A>, stringifyFn: (a: A) => string): P.Parser<A> {
   return P.alt(
@@ -24,7 +24,9 @@ export function constStr<S extends string>(str: S, asStr?: string): P.Parser<S> 
 }
 
 export function numberParser<N extends StringifiableNumber>(n: N): P.Parser<N> {
-  return P.regex(new RegExp(numberToNameMap[n], 'i')).result(n).skip(P.whitespace);
+  return P.regex(new RegExp(numberToNameMap[n], 'i'))
+    .result(n)
+    .skip(P.whitespace);
 }
 
 export const aParser = P.regex(/an?/i).result(1 as const);

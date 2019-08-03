@@ -2,13 +2,14 @@ import * as P from 'parsimmon';
 import { Blason } from '../model/blason';
 import { parties, Party } from '../model/party';
 import { Ordinary } from '../model/ordinary';
-import { stringifyNumber, stringifyParty } from '../from-blason/blason.helpers';
+import { stringifyParty } from '../from-blason/blason.helpers';
 import { Charge } from '../model/charge';
 import { BarryField, BendyField, BendySinisterField, ChequyField, Field, PalyField } from '../model/field';
 import { buildAltParser, constStr, lineParser } from './parser.helper';
 import { tinctureParserFromCapitalizedName, tinctureParserFromName } from './tinctureParser';
 import { ordinaryParser } from './ordinaryParser';
 import { chargeParser } from './chargeParser';
+import { stringifyNumber } from '../model/countAndDisposition';
 
 type Language = {
   Party: (r: AppliedLanguage) => P.Parser<Party>;

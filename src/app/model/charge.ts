@@ -1,4 +1,5 @@
 import { Tincture } from './tincture';
+import { CountAndDisposition } from './countAndDisposition';
 
 export const lionAttitudes = [
   'rampant',
@@ -16,7 +17,7 @@ export const lionTails = ['coward', 'forked', 'crossed', 'nowed'] as const;
 export type LionAttitude = typeof lionAttitudes[number];
 export type LionHead = typeof lionHeads[number];
 export type LionTail = typeof lionTails[number];
-export type CountAndDisposition = { count: 1 } | { count: 2 | 3; disposition: 'pale' };
+
 export type Lion = {
   name: 'lion';
   attitude: LionAttitude;

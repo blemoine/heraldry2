@@ -12,20 +12,11 @@ import {
 } from '../field';
 import { parties, Party } from '../party';
 import { ordinaries, Ordinary } from '../ordinary';
-import {
-  Charge,
-  charges,
-  CountAndDisposition,
-  Eagle,
-  eagleAttitudes,
-  Lion,
-  lionAttitudes,
-  lionHeads,
-  lionTails,
-} from '../charge';
+import { Charge, charges, Eagle, eagleAttitudes, Lion, lionAttitudes, lionHeads, lionTails } from '../charge';
 import { cannotHappen } from '../../../utils/cannot-happen';
 import { Blason } from '../blason';
 import { Line, lines } from '../line';
+import { CountAndDisposition } from '../countAndDisposition';
 
 const tinctureArb: Arbitrary<Tincture> = fc.constantFrom(...tinctures);
 const plainFieldArb: Arbitrary<PlainField> = tinctureArb.map((tincture) => ({ kind: 'plain', tincture }));
