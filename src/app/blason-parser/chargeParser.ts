@@ -20,6 +20,7 @@ import { identity } from '../../utils/identity';
 import { gules } from '../model/tincture';
 import { cannotHappen } from '../../utils/cannot-happen';
 import { tinctureParserFromName } from './tinctureParser';
+import { isNotOne, stringifyNumber, supportedNumbers } from '../model/countAndDisposition';
 
 const lionParser = (count: 1 | 2 | 3): P.Parser<Lion> => {
   const attitudeParser: P.Parser<LionAttitude> = buildAltParser(lionAttitudes, identity);
@@ -104,25 +105,7 @@ const roundelParser = (): P.Parser<Roundel> => {
   return P.seq(
     P.alt(
       aParser.skip(P.whitespace),
-      numberParser(2),
-      numberParser(3),
-      numberParser(4),
-      numberParser(5),
-      numberParser(6),
-      numberParser(7),
-      numberParser(8),
-      numberParser(9),
-      numberParser(10),
-      numberParser(11),
-      numberParser(12),
-      numberParser(13),
-      numberParser(14),
-      numberParser(15),
-      numberParser(16),
-      numberParser(17),
-      numberParser(18),
-      numberParser(19),
-      numberParser(20)
+      buildAltParser(supportedNumbers.filter(isNotOne), stringifyNumber).skip(P.whitespace)
     ),
     P.regexp(/roundels?/i).skip(P.whitespace),
     tinctureParserFromName

@@ -3,17 +3,15 @@ import { Roundel } from '../../../model/charge';
 import { TinctureSelect } from '../TinctureSelect';
 import { Tincture } from '../../../model/tincture';
 import { SelectScalar } from '../../../common/SelectScalar';
+import { SupportedNumber, supportedNumbers } from '../../../model/countAndDisposition';
 
 type Props = { charge: Roundel; chargeChange: (roundel: Roundel) => void };
-const countOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20] as const;
 export const RoundelForm = ({ charge, chargeChange }: Props) => {
   function chargeTinctureChange(tincture: Tincture) {
     chargeChange({ ...charge, tincture });
   }
 
-  function countChange(
-    count: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20
-  ) {
+  function countChange(count: SupportedNumber) {
     chargeChange({ ...charge, count });
   }
 
@@ -28,7 +26,7 @@ export const RoundelForm = ({ charge, chargeChange }: Props) => {
       <div className="col">
         <div className="form-group">
           <label>Select the number of charge</label>
-          <SelectScalar options={countOptions} value={charge.count} valueChange={countChange} />
+          <SelectScalar options={supportedNumbers} value={charge.count} valueChange={countChange} />
         </div>
       </div>
     </div>

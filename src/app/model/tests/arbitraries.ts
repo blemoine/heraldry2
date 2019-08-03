@@ -16,7 +16,7 @@ import { Charge, charges, Eagle, eagleAttitudes, Lion, lionAttitudes, lionHeads,
 import { cannotHappen } from '../../../utils/cannot-happen';
 import { Blason } from '../blason';
 import { Line, lines } from '../line';
-import { CountAndDisposition } from '../countAndDisposition';
+import { CountAndDisposition, supportedNumbers } from '../countAndDisposition';
 
 const tinctureArb: Arbitrary<Tincture> = fc.constantFrom(...tinctures);
 const plainFieldArb: Arbitrary<PlainField> = tinctureArb.map((tincture) => ({ kind: 'plain', tincture }));
@@ -124,7 +124,7 @@ const chargeArb: Arbitrary<Charge> = fc.constantFrom(...charges).chain((chargeNa
     return fc.record({
       name: fc.constant(chargeName),
       tincture: tinctureArb,
-      count: fc.constantFrom(...([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20] as const)),
+      count: fc.constantFrom(...supportedNumbers),
     });
   } else {
     return cannotHappen(chargeName);

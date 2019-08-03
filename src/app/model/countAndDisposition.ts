@@ -1,4 +1,3 @@
-
 export const numberToNameMap = {
   2: 'two',
   3: 'three',
@@ -25,5 +24,30 @@ export function stringifyNumber(n: StringifiableNumber): string {
   return numberToNameMap[n];
 }
 
-
+export type SupportedNumber = 1 | StringifiableNumber;
+export const supportedNumbers: ReadonlyArray<SupportedNumber> = [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+] as const;
+export function isNotOne(i: SupportedNumber):i is Exclude<SupportedNumber, 1> {
+  return i !== 1
+}
 export type CountAndDisposition = { count: 1 } | { count: 2 | 3; disposition: 'pale' };
