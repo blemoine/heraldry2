@@ -3,15 +3,15 @@ import { FleurDeLys } from '../../../model/charge';
 import { TinctureSelect } from '../TinctureSelect';
 import { Tincture } from '../../../model/tincture';
 import { SelectScalar } from '../../../common/SelectScalar';
+import { SupportedNumber, supportedNumbers } from '../../../model/countAndDisposition';
 
 type Props = { charge: FleurDeLys; chargeChange: (fleurDeLys: FleurDeLys) => void };
-const countOptions = [1, 2, 3] as const;
 export const FleurDeLysForm = ({ charge, chargeChange }: Props) => {
   function chargeTinctureChange(tincture: Tincture) {
     chargeChange({ ...charge, tincture });
   }
 
-  function countChange(count: 1 | 2 | 3) {
+  function countChange(count: SupportedNumber) {
     chargeChange({ ...charge, count });
   }
 
@@ -26,7 +26,7 @@ export const FleurDeLysForm = ({ charge, chargeChange }: Props) => {
       <div className="col">
         <div className="form-group">
           <label>Select the number of charge</label>
-          <SelectScalar options={countOptions} value={charge.count} valueChange={countChange} />
+          <SelectScalar options={supportedNumbers} value={charge.count} valueChange={countChange} />
         </div>
       </div>
     </div>

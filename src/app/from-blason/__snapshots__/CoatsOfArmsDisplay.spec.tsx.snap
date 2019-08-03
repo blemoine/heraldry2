@@ -151,19 +151,19 @@ exports[`CoatsOfArms should render 3 fleurs de lys 1`] = `
     clipPath="url(#plain-field-clip-path)"
   >
     <g
-      transform="translate(30 22.222222222222225)"
+      transform="translate(29.999999999999996 26.666666666666664)"
     >
       <svg
         colorInterpolationFilters="sRGB"
         fill="none"
         fillRule="evenodd"
         fontSize={12}
-        height={80}
+        height={80.00000000000001}
         overflow="visible"
         strokeLinecap="square"
         strokeMiterlimit={3}
         viewBox="0 0 152.407 191.07"
-        width={60}
+        width={60.00000000000001}
         xmlSpace="preserve"
       >
         <style
@@ -226,21 +226,22 @@ exports[`CoatsOfArms should render 3 fleurs de lys 1`] = `
           </g>
         </g>
       </svg>
+      ;
     </g>
     <g
-      transform="translate(110 22.222222222222225)"
+      transform="translate(110 26.666666666666664)"
     >
       <svg
         colorInterpolationFilters="sRGB"
         fill="none"
         fillRule="evenodd"
         fontSize={12}
-        height={80}
+        height={80.00000000000001}
         overflow="visible"
         strokeLinecap="square"
         strokeMiterlimit={3}
         viewBox="0 0 152.407 191.07"
-        width={60}
+        width={60.00000000000001}
         xmlSpace="preserve"
       >
         <style
@@ -303,21 +304,22 @@ exports[`CoatsOfArms should render 3 fleurs de lys 1`] = `
           </g>
         </g>
       </svg>
+      ;
     </g>
     <g
-      transform="translate(70 155.55555555555557)"
+      transform="translate(70 126.66666666666669)"
     >
       <svg
         colorInterpolationFilters="sRGB"
         fill="none"
         fillRule="evenodd"
         fontSize={12}
-        height={80}
+        height={80.00000000000001}
         overflow="visible"
         strokeLinecap="square"
         strokeMiterlimit={3}
         viewBox="0 0 152.407 191.07"
-        width={60}
+        width={60.00000000000001}
         xmlSpace="preserve"
       >
         <style
@@ -380,6 +382,7 @@ exports[`CoatsOfArms should render 3 fleurs de lys 1`] = `
           </g>
         </g>
       </svg>
+      ;
     </g>
   </g>
   <path

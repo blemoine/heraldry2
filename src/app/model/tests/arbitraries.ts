@@ -118,7 +118,7 @@ const chargeArb: Arbitrary<Charge> = fc.constantFrom(...charges).chain((chargeNa
     return fc.record({
       name: fc.constant(chargeName),
       tincture: tinctureArb,
-      count: fc.constantFrom(1 as const, 2 as const, 3 as const),
+      count: fc.constantFrom(...supportedNumbers),
     });
   } else if (chargeName === 'roundel') {
     return fc.record({

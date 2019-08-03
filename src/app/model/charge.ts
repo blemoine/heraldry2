@@ -40,7 +40,7 @@ export type Eagle = {
 
 export type FleurDeLys = {
   name: 'fleurdelys';
-  count: 1 | 2 | 3;
+  count: SupportedNumber;
   tincture: Tincture;
 };
 
