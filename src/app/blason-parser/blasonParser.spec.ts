@@ -217,4 +217,11 @@ Argent, Azure, Barry of, Bendy, Bendy Sinister, Chequy, Ermine, Gules, Murrey, O
     };
     expect(result).toEqual(expected);
   });
+
+  it('should parse 18 roundels', () => {
+    expect(parseBlason('Argent, eighteen roundels argent')).toEqual({
+      field: { kind: 'plain', tincture: argent },
+      charge: { name: 'roundel', tincture: argent, count: 18 },
+    });
+  });
 });

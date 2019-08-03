@@ -158,33 +158,40 @@ function stringifyCharge(charge: Charge): string {
     result += charge.tincture.name;
 
     return result;
+  } else if (charge.name === 'roundel') {
+    let result = charge.count === 1 ? 'a roundel ' : stringifyNumber(charge.count) + ' roundels ';
+    result += charge.tincture.name;
+
+    return result;
   } else {
     return cannotHappen(charge);
   }
 }
 
-export function stringifyNumber(n: 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10): string {
-  if (n === 2) {
-    return 'two';
-  } else if (n === 3) {
-    return 'three';
-  } else if (n === 4) {
-    return 'four';
-  } else if (n === 5) {
-    return 'five';
-  } else if (n === 6) {
-    return 'six';
-  } else if (n === 7) {
-    return 'seven';
-  } else if (n === 8) {
-    return 'eight';
-  } else if (n === 9) {
-    return 'nine';
-  } else if (n === 10) {
-    return 'ten';
-  } else {
-    return cannotHappen(n);
-  }
+export const numberToNameMap = {
+  2: 'two',
+  3: 'three',
+  4: 'four',
+  5: 'five',
+  6: 'six',
+  7: 'seven',
+  8: 'eight',
+  9: 'nine',
+  10: 'ten',
+  11: 'eleven',
+  12: 'twelve',
+  13: 'thirteen',
+  14: 'fourteen',
+  15: 'fifteen',
+  16: 'sixteen',
+  17: 'seventeen',
+  18: 'eighteen',
+  19: 'nineteen',
+  20: 'twenty',
+} as const;
+export type StringifiableNumber = keyof typeof numberToNameMap;
+export function stringifyNumber(n: StringifiableNumber): string {
+  return numberToNameMap[n];
 }
 
 export function isThereFur(blason: Blason, fur: Furs['name']): boolean {
@@ -234,7 +241,7 @@ export function isThereFur(blason: Blason, fur: Furs['name']): boolean {
       if (charge.beakedAndArmed.name === fur) {
         return true;
       }
-    } else if (charge.name === 'fleurdelys') {
+    } else if (charge.name === 'fleurdelys' || charge.name === 'roundel') {
       if (charge.tincture.name === fur) {
         return true;
       }

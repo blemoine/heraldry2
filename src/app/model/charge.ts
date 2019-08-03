@@ -43,6 +43,12 @@ export type FleurDeLys = {
   tincture: Tincture;
 };
 
-export type Charge = Lion | Eagle | FleurDeLys;
+export type Roundel = {
+  name: 'roundel';
+  count: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20;
+  tincture: Tincture
+};
 
-export const charges: Array<Charge['name']> = ['lion', 'eagle', 'fleurdelys'];
+export type Charge = Lion | Eagle | FleurDeLys | Roundel;
+
+export const charges: Array<Charge['name']> = ['lion', 'eagle', 'fleurdelys', 'roundel'];

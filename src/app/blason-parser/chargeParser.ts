@@ -13,8 +13,9 @@ import {
   lionHeads,
   LionTail,
   lionTails,
+  Roundel,
 } from '../model/charge';
-import { aParser, buildAltParser, threeParser, twoParser } from './parser.helper';
+import { aParser, buildAltParser, numberParser } from './parser.helper';
 import { identity } from '../../utils/identity';
 import { gules } from '../model/tincture';
 import { cannotHappen } from '../../utils/cannot-happen';
@@ -87,7 +88,7 @@ const eagleParser = () => {
 
 const fleurDeLysParser = (): P.Parser<FleurDeLys> => {
   return P.seq(
-    P.alt(aParser, twoParser, threeParser).skip(P.whitespace),
+    P.alt(aParser.skip(P.whitespace), numberParser(2), numberParser(3)),
     P.regexp(/Fleurs?[- ]de[- ]l[yi]s/i).skip(P.whitespace),
     tinctureParserFromName
   ).map(([count, , tincture]) => {
@@ -99,11 +100,46 @@ const fleurDeLysParser = (): P.Parser<FleurDeLys> => {
   });
 };
 
+const roundelParser = (): P.Parser<Roundel> => {
+  return P.seq(
+    P.alt(
+      aParser.skip(P.whitespace),
+      numberParser(2),
+      numberParser(3),
+      numberParser(4),
+      numberParser(5),
+      numberParser(6),
+      numberParser(7),
+      numberParser(8),
+      numberParser(9),
+      numberParser(10),
+      numberParser(11),
+      numberParser(12),
+      numberParser(13),
+      numberParser(14),
+      numberParser(15),
+      numberParser(16),
+      numberParser(17),
+      numberParser(18),
+      numberParser(19),
+      numberParser(20)
+    ),
+    P.regexp(/roundels?/i).skip(P.whitespace),
+    tinctureParserFromName
+  ).map(([count, , tincture]) => {
+    return {
+      name: 'roundel',
+      count,
+      tincture,
+    };
+  });
+};
+
 export function chargeParser(): P.Parser<Charge> {
   return P.alt(
     ...charges.map((charge) => {
       if (charge === 'lion') {
-        return P.alt(aParser, twoParser, threeParser)
+        return P.alt(aParser.skip(P.whitespace), numberParser(2), numberParser(3))
           .trim(P.optWhitespace)
           .chain((count) => lionParser(count));
       } else if (charge === 'eagle') {
@@ -112,6 +148,8 @@ export function chargeParser(): P.Parser<Charge> {
           .chain((): P.Parser<Charge> => eagleParser());
       } else if (charge === 'fleurdelys') {
         return fleurDeLysParser();
+      } else if (charge === 'roundel') {
+        return roundelParser();
       } else {
         return cannotHappen(charge);
       }

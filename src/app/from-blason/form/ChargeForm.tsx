@@ -31,6 +31,12 @@ export const ChargeForm = ({ charge, chargeChange }: Props) => {
         count: 3,
         tincture: or,
       });
+    } else if (chargeName === 'roundel') {
+      chargeChange({
+        name: chargeName,
+        count: 3,
+        tincture: or,
+      });
     } else if (!chargeName) {
       chargeChange(null);
     } else {

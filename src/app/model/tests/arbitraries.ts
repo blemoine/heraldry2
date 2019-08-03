@@ -98,7 +98,7 @@ const chargeArb: Arbitrary<Charge> = fc.constantFrom(...charges).chain((chargeNa
       .map(
         ([attitude, head, tail, tincture, armedAndLangued, countAndDisposition]): Lion => {
           return {
-            name: 'lion',
+            name: chargeName,
             attitude,
             head,
             tail,
@@ -115,7 +115,7 @@ const chargeArb: Arbitrary<Charge> = fc.constantFrom(...charges).chain((chargeNa
       .map(
         ([attitude, tincture, beakedAndArmed]): Eagle => {
           return {
-            name: 'eagle',
+            name: chargeName,
             attitude,
             tincture,
             beakedAndArmed,
@@ -125,9 +125,15 @@ const chargeArb: Arbitrary<Charge> = fc.constantFrom(...charges).chain((chargeNa
       .map((i): Charge => i);
   } else if (chargeName === 'fleurdelys') {
     return fc.record({
-      name: fc.constant('fleurdelys' as const),
+      name: fc.constant(chargeName),
       tincture: tinctureArb,
       count: fc.constantFrom(1 as const, 2 as const, 3 as const),
+    });
+  } else if (chargeName === 'roundel') {
+    return fc.record({
+      name: fc.constant(chargeName),
+      tincture: tinctureArb,
+      count: fc.constantFrom(...([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20] as const)),
     });
   } else {
     return cannotHappen(chargeName);

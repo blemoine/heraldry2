@@ -1,6 +1,6 @@
 import * as P from 'parsimmon';
 import { Chevron, Chevronel, ordinaries, Ordinary, Pale } from '../model/ordinary';
-import { buildAltParser, lineParser, threeParser, twoParser } from './parser.helper';
+import { aParser, buildAltParser, lineParser, numberParser } from './parser.helper';
 import { tinctureParserFromName } from './tinctureParser';
 import { stringifyOrdinaryName } from '../from-blason/blason.helpers';
 
@@ -12,8 +12,7 @@ export function ordinaryParser(): P.Parser<Ordinary> {
         .skip(P.regex(/pale/i))
         .result({ name: 'pale', count: 1 } as const)
         .skip(P.whitespace),
-      twoParser
-        .skip(P.optWhitespace)
+      numberParser(2)
         .skip(P.regexp(/pallets/i))
         .map((count) => ({ name: 'pale', count } as const))
         .skip(P.whitespace)
@@ -24,13 +23,11 @@ export function ordinaryParser(): P.Parser<Ordinary> {
 
   const chevronParser: P.Parser<Chevron> = P.seq(
     P.alt(
-      P.alt(P.regex(/an?/i).result(1 as const), twoParser, threeParser)
-        .skip(P.whitespace)
+      P.alt(aParser.skip(P.whitespace), numberParser(2), numberParser(3))
         .skip(P.regex(/chevrons?/i))
         .map((count) => ({ name: 'chevron', count } as const))
         .skip(P.whitespace),
-      P.alt(P.regex(/an?/i).result(1 as const), twoParser, threeParser)
-        .skip(P.optWhitespace)
+      P.alt(aParser.skip(P.whitespace), numberParser(2), numberParser(3))
         .skip(P.regexp(/chevronels?/i))
         .map((count) => ({ name: 'chevronel', count } as const))
         .skip(P.whitespace)

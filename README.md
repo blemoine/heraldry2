@@ -23,5 +23,7 @@ Look at https://books.google.ca/books?id=TvNfAAAAcAAJ&pg=PA32&lpg=PA32&dq=lion+w
 Faire un mode de representation "Sans couleur"
 Faire le "of the last"
 Add roundel
+* Factorise positionning of charge (see fleurs de lys and roundel, add to lion)
+* extract stringify functions
 
 
