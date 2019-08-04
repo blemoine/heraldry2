@@ -17,7 +17,7 @@ import {
 } from '../model/charge';
 import { aParser, buildAltParser, numberParser } from './parser.helper';
 import { identity } from '../../utils/identity';
-import { gules } from '../model/tincture';
+import { gules, or } from '../model/tincture';
 import { cannotHappen } from '../../utils/cannot-happen';
 import { tinctureParserFromName } from './tinctureParser';
 import { isNotOne, stringifyNumber, supportedNumbers } from '../model/countAndDisposition';
@@ -110,15 +110,16 @@ const roundelParser = (): P.Parser<Roundel> => {
       aParser.skip(P.whitespace),
       buildAltParser(supportedNumbers.filter(isNotOne), stringifyNumber).skip(P.whitespace)
     ),
-    P.regexp(/roundels?/i).skip(P.whitespace),
-    tinctureParserFromName
-  ).map(([count, , tincture]) => {
-    return {
-      name: 'roundel',
-      count,
-      tincture,
-    };
-  });
+    P.alt(
+      P.seq(
+        P.regexp(/roundels?/i)
+          .skip(P.whitespace)
+          .result('roundel' as const),
+        tinctureParserFromName
+      ),
+      P.regex(/bezants?/i).result(['roundel' as const, or])
+    )
+  ).map(([count, [name, tincture]]) => ({ name, count, tincture }));
 };
 
 export function chargeParser(): P.Parser<Charge> {

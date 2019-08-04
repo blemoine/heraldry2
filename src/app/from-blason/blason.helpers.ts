@@ -1,5 +1,5 @@
 import { Blason } from '../model/blason';
-import { Furs, gules } from '../model/tincture';
+import { Furs, gules, or } from '../model/tincture';
 import { Party } from '../model/party';
 import { cannotHappen } from '../../utils/cannot-happen';
 import { Charge } from '../model/charge';
@@ -156,8 +156,13 @@ function stringifyCharge(charge: Charge): string {
 
     return result;
   } else if (charge.name === 'roundel') {
-    let result = charge.count === 1 ? 'a roundel ' : stringifyNumber(charge.count) + ' roundels ';
-    result += charge.tincture.name;
+    let result = '';
+    if (charge.tincture.name === or.name) {
+      result += charge.count === 1 ? 'a bezant ' : stringifyNumber(charge.count) + ' bezants';
+    } else {
+      result += charge.count === 1 ? 'a roundel ' : stringifyNumber(charge.count) + ' roundels ';
+      result += charge.tincture.name;
+    }
 
     return result;
   } else {

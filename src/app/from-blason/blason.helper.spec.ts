@@ -202,6 +202,19 @@ describe('stringifyBlason', () => {
       })
     ).toBe('Or, a base sable');
   });
+
+  it('should stringify a roundel or as bezant', () => {
+    expect(
+      stringifyBlason({
+        field: { kind: 'plain', tincture: purpure },
+        charge: {
+          name: 'roundel',
+          tincture: or,
+          count: 3
+        },
+      })
+    ).toBe('Purpure, three bezants');
+  });
 });
 
 describe('isThereFur', () => {
