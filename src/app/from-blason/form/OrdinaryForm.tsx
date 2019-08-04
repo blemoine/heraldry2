@@ -22,7 +22,7 @@ export const OrdinaryForm = ({ ordinary, ordinaryChange }: Props) => {
   return (
     <div className="row">
       <div className="col">
-        <div className="form-group">
+        <div className="form-group ordinary-type-select">
           <label>Select your ordinary</label>
           <OrdinaryNameSelect ordinary={ordinary ? ordinary.name : null} ordinaryChange={changeOrdinary} />
         </div>

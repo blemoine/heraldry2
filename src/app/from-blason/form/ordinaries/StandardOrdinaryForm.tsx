@@ -18,7 +18,7 @@ export const StandardOrdinaryForm = ({ ordinary, ordinaryChange }: Props) => {
 
   return (
     <>
-      <div className="form-group">
+      <div className="form-group ordinary-tincture-select">
         <label>Select the tincture of the ordinary</label>
         <TinctureSelect tincture={ordinary.tincture} tinctureChange={ordinaryTinctureChange} />
       </div>

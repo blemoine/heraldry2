@@ -48,6 +48,7 @@ export const OrdinaryNameSelect = ({ ordinary, ordinaryChange }: Props) => {
 
   return (
     <Select<OrdinaryNameSelectOption>
+      classNamePrefix="ordinary-name"
       options={ordinariesWithNone}
       value={value}
       onChange={(t: any) => ordinaryTypeChange(t.value)}
