@@ -46,7 +46,7 @@ export const ChargeForm = ({ charge, chargeChange }: Props) => {
 
   return (
     <>
-      <div className="form-group">
+      <div className="form-group charge-type-select">
         <label>Select your charge</label>
         <ChargeNameSelect charge={charge ? charge.name : null} chargeChange={changeChargeType} />
       </div>

@@ -10,14 +10,14 @@ export function selectInReactSelect(topSelector: string, classNamePrefix: string
   fireEvent.mouseDown(selectElement(`${topSelector} .${classNamePrefix}__control`));
 
   const tinctures = Array.from(document.querySelectorAll(`.${classNamePrefix}__option`));
-  const selectedTincture = tinctures.find((e) => e.innerHTML.includes(value));
-  if (!selectedTincture) {
+  const selectedOption = tinctures.find((e) => e.innerHTML.includes(value));
+  if (!selectedOption) {
     const msg = `There should be an option named ${value}`;
     fail(msg);
     return Promise.reject(msg);
   }
 
-  fireEvent.click(selectedTincture);
+  fireEvent.click(selectedOption);
 
   return new Promise<void>((resolve) => {
     setTimeout(() => {

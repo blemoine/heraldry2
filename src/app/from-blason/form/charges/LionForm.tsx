@@ -51,7 +51,7 @@ export const LionForm = ({ charge, chargeChange }: Props) => {
     <>
       <div className="row">
         <div className="col">
-          <div className="form-group">
+          <div className="form-group charge-lion-tincture-select">
             <label>Select the tincture of the charge</label>
             <TinctureSelect tincture={charge.tincture} tinctureChange={chargeTinctureChange} />
           </div>

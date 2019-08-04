@@ -16,5 +16,5 @@ export const ChargeNameSelect = ({ charge, chargeChange }: Props) => {
 
   const searchedCharge = charge || 'None';
 
-  return <SelectScalar options={chargesWithNone} value={searchedCharge} valueChange={chargeTypeChange} />;
+  return <SelectScalar classNamePrefix="charge-name" options={chargesWithNone} value={searchedCharge} valueChange={chargeTypeChange} />;
 };
