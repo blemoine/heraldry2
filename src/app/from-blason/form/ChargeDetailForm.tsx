@@ -5,6 +5,7 @@ import { LionForm } from './charges/LionForm';
 import { EagleForm } from './charges/EagleForm';
 import { FleurDeLysForm } from './charges/FleurDeLysForm';
 import { RoundelForm } from './charges/RoundelForm';
+import { LozengeForm } from './charges/LozengeForm';
 
 type Props = { charge: Charge; chargeChange: (charge: Charge) => void };
 export const ChargeDetailForm = ({ charge, chargeChange }: Props) => {
@@ -16,6 +17,8 @@ export const ChargeDetailForm = ({ charge, chargeChange }: Props) => {
     return <FleurDeLysForm charge={charge} chargeChange={chargeChange} />;
   } else if (charge.name === 'roundel') {
     return <RoundelForm charge={charge} chargeChange={chargeChange} />;
+  } else if (charge.name === 'lozenge') {
+    return <LozengeForm charge={charge} chargeChange={chargeChange} />;
   } else {
     return cannotHappen(charge);
   }

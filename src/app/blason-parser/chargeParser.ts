@@ -13,6 +13,7 @@ import {
   lionHeads,
   LionTail,
   lionTails,
+  Lozenge,
   Roundel,
 } from '../model/charge';
 import { aParser, buildAltParser, numberParser } from './parser.helper';
@@ -122,6 +123,19 @@ const roundelParser = (): P.Parser<Roundel> => {
   ).map(([count, [name, tincture]]) => ({ name, count, tincture }));
 };
 
+const lozengeParser = (): P.Parser<Lozenge> => {
+  return P.seq(
+    P.alt(
+      aParser.skip(P.whitespace),
+      buildAltParser(supportedNumbers.filter(isNotOne), stringifyNumber).skip(P.whitespace)
+    ),
+    P.regexp(/lozenges?/i)
+      .skip(P.whitespace)
+      .result('lozenge' as const),
+    tinctureParserFromName
+  ).map(([count, name, tincture]) => ({ name, count, tincture }));
+};
+
 export function chargeParser(): P.Parser<Charge> {
   return P.alt(
     ...charges.map((charge) => {
@@ -137,6 +151,8 @@ export function chargeParser(): P.Parser<Charge> {
         return fleurDeLysParser();
       } else if (charge === 'roundel') {
         return roundelParser();
+      } else if (charge === 'lozenge') {
+        return lozengeParser();
       } else {
         return cannotHappen(charge);
       }

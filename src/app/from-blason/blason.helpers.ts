@@ -165,6 +165,12 @@ function stringifyCharge(charge: Charge): string {
     }
 
     return result;
+  } else if (charge.name === 'lozenge') {
+    let result = '';
+    result += charge.count === 1 ? 'a lozenge ' : stringifyNumber(charge.count) + ' lozenges ';
+    result += charge.tincture.name;
+
+    return result;
   } else {
     return cannotHappen(charge);
   }
@@ -217,7 +223,7 @@ export function isThereFur(blason: Blason, fur: Furs['name']): boolean {
       if (charge.beakedAndArmed.name === fur) {
         return true;
       }
-    } else if (charge.name === 'fleurdelys' || charge.name === 'roundel') {
+    } else if (charge.name === 'fleurdelys' || charge.name === 'roundel' || charge.name === 'lozenge') {
       if (charge.tincture.name === fur) {
         return true;
       }
