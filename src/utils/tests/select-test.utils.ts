@@ -2,15 +2,19 @@ import { fireEvent } from '@testing-library/dom';
 import { Tincture } from '../../app/model/tincture';
 
 export function selectTincture(topSelector: string, tincture: Tincture): Promise<void> {
-  fireEvent.focus(selectElement(`${topSelector} .tincture-select__input input`));
-  fireEvent.mouseDown(selectElement(`${topSelector} .tincture-select__control`));
+  return selectInReactSelect(topSelector, 'tincture-select', tincture.name);
+}
 
-  const tinctures = Array.from(document.querySelectorAll('.tincture-select__option'));
-  const selectedTincture = tinctures.find((e) =>
-    (e.querySelector('.tincture-option') as HTMLSpanElement).innerHTML.includes(tincture.name)
-  );
+export function selectInReactSelect(topSelector: string, classNamePrefix: string, value: string): Promise<void> {
+  fireEvent.focus(selectElement(`${topSelector} .${classNamePrefix}__input input`));
+  fireEvent.mouseDown(selectElement(`${topSelector} .${classNamePrefix}__control`));
+
+  const tinctures = Array.from(document.querySelectorAll(`.${classNamePrefix}__option`));
+  const selectedTincture = tinctures.find((e) => e.innerHTML.includes(value));
   if (!selectedTincture) {
-    return Promise.reject(`There should be an option named ${tincture.name}`);
+    const msg = `There should be an option named ${value}`;
+    fail(msg);
+    return Promise.reject(msg);
   }
 
   fireEvent.click(selectedTincture);

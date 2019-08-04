@@ -91,9 +91,10 @@ export const FieldForm = ({ field, fieldChange }: Props) => {
   const numberOfBars = [6, 8, 10] as const;
   return (
     <>
-      <div className="form-group form-check">
+      <div className="form-group form-check field-type-select">
         <label>Select the field type</label>
         <SelectScalar
+          classNamePrefix="field-type"
           options={fieldKinds}
           value={field.kind}
           valueChange={changeFieldKind}
@@ -126,13 +127,13 @@ export const FieldForm = ({ field, fieldChange }: Props) => {
         field.kind === 'barry' ? (
         <div className="row">
           <div className="col">
-            <div className="form-group">
+            <div className="form-group field-first-tincture-select">
               <label>Select your first tincture</label>
               <TinctureSelect tincture={field.tinctures[0]} tinctureChange={(t) => firstTinctureChange(field, t)} />
             </div>
           </div>
           <div className="col">
-            <div className="form-group">
+            <div className="form-group field-second-tincture-select">
               <label>Select your second tincture</label>
               <TinctureSelect tincture={field.tinctures[1]} tinctureChange={(t) => secondTinctureChange(field, t)} />
             </div>
