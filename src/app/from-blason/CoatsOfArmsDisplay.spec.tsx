@@ -123,6 +123,9 @@ describe('CoatsOfArms', () => {
   it('should render a party per pale invected', () => {
     snapshotTest('Per pale invected ermine and or');
   });
+  it('should render multiple roundels', () => {
+    snapshotTest('Azure, twelve roundels or');
+  });
 });
 
 function snapshotTest(blason: string) {

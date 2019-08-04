@@ -4143,3 +4143,128 @@ exports[`CoatsOfArms should render an eagle blason with a saltire 1`] = `
   />
 </svg>
 `;
+
+exports[`CoatsOfArms should render multiple roundels 1`] = `
+<svg
+  height={266.6666666666667}
+  viewBox="0 0 200 266.6666666666667"
+  width={200}
+>
+  <defs>
+    <clipPath
+      id="plain-field-clip-path"
+    >
+      <path
+        d="M 0 0 H200 V88.8888888888889 A200 200 90 0 1 100 266.6666666666667 A200 200 -90 0 1 0 88.8888888888889 Z"
+        fill="transparent"
+        stroke="#333"
+      />
+    </clipPath>
+  </defs>
+  <g
+    clipPath="url(#plain-field-clip-path)"
+  >
+    <rect
+      fill="#0000FF"
+      height={266.6666666666667}
+      stroke="#333"
+      width={200}
+      x={0}
+      y={0}
+    />
+  </g>
+  <g
+    clipPath="url(#plain-field-clip-path)"
+  >
+    <circle
+      cx={33.33333333333333}
+      cy={33.333333333333336}
+      fill="#FFD700"
+      r={16.666666666666664}
+      stroke="#000"
+    />
+    <circle
+      cx={77.77777777777779}
+      cy={33.333333333333336}
+      fill="#FFD700"
+      r={16.666666666666664}
+      stroke="#000"
+    />
+    <circle
+      cx={122.22222222222223}
+      cy={33.333333333333336}
+      fill="#FFD700"
+      r={16.666666666666664}
+      stroke="#000"
+    />
+    <circle
+      cx={166.66666666666669}
+      cy={33.333333333333336}
+      fill="#FFD700"
+      r={16.666666666666664}
+      stroke="#000"
+    />
+    <circle
+      cx={55.55555555555556}
+      cy={83.33333333333334}
+      fill="#FFD700"
+      r={16.666666666666664}
+      stroke="#000"
+    />
+    <circle
+      cx={100}
+      cy={83.33333333333334}
+      fill="#FFD700"
+      r={16.666666666666664}
+      stroke="#000"
+    />
+    <circle
+      cx={144.44444444444443}
+      cy={83.33333333333334}
+      fill="#FFD700"
+      r={16.666666666666664}
+      stroke="#000"
+    />
+    <circle
+      cx={55.55555555555556}
+      cy={133.33333333333334}
+      fill="#FFD700"
+      r={16.666666666666664}
+      stroke="#000"
+    />
+    <circle
+      cx={100}
+      cy={133.33333333333334}
+      fill="#FFD700"
+      r={16.666666666666664}
+      stroke="#000"
+    />
+    <circle
+      cx={144.44444444444443}
+      cy={133.33333333333334}
+      fill="#FFD700"
+      r={16.666666666666664}
+      stroke="#000"
+    />
+    <circle
+      cx={77.77777777777779}
+      cy={183.33333333333334}
+      fill="#FFD700"
+      r={16.666666666666664}
+      stroke="#000"
+    />
+    <circle
+      cx={122.22222222222223}
+      cy={183.33333333333334}
+      fill="#FFD700"
+      r={16.666666666666664}
+      stroke="#000"
+    />
+  </g>
+  <path
+    d="M 0 0 H200 V88.8888888888889 A200 200 90 0 1 100 266.6666666666667 A200 200 -90 0 1 0 88.8888888888889 Z"
+    fill="transparent"
+    stroke="#333"
+  />
+</svg>
+`;
