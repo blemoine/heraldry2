@@ -7,7 +7,7 @@ import { isNotNull } from '../../utils/isNotNull';
 import { Field } from '../model/field';
 import { capitalizeFirstLetter } from '../../utils/strings';
 import { Ordinary } from '../model/ordinary';
-import { stringifyNumber } from '../model/countAndDisposition';
+import { stringifyNumber, SupportedNumber } from '../model/countAndDisposition';
 
 export function stringifyBlason(blason: Blason): string {
   const field = stringifyField(blason.field);
@@ -28,7 +28,7 @@ function stringifyOrdinary(ordinary: Ordinary): string {
   if (ordinary.name === 'pale' || ordinary.name === 'chevron' || ordinary.name === 'chevronel') {
     let result = ordinary.count === 1 ? 'a' : stringifyNumber(ordinary.count);
     if (ordinary.count === 1) {
-      result += ' ' +stringifyOrdinaryName(ordinary.name) + ' ';
+      result += ' ' + stringifyOrdinaryName(ordinary.name) + ' ';
     } else {
       if (ordinary.name === 'pale') {
         result += ' pallets ';
@@ -132,8 +132,8 @@ function stringifyCharge(charge: Charge): string {
     } else if (charge.name === 'lion') {
       const count = charge.countAndDisposition.count;
 
-      let result = counterStr + ' ';
-      result += count === 1 ? 'lion' : 'lions';
+      let result = counterStr;
+      result += ' ' + pluralize('lion', count);
 
       result += ' ' + charge.attitude;
 
@@ -156,12 +156,12 @@ function stringifyCharge(charge: Charge): string {
     } else if (charge.name === 'roundel') {
       let result = counterStr;
       if (charge.voided) {
-        result += charge.count === 1 ? ' annulet ' : ' annulets ';
+        result += ' ' + pluralize('annulet', charge.count) + ' ';
         result += charge.tincture.name;
       } else if (charge.tincture.name === or.name) {
-        result += charge.count === 1 ? ' bezant ' : ' bezants';
+        result += ' ' + pluralize('bezant', charge.count);
       } else {
-        result += charge.count === 1 ? ' roundel ' : ' roundels ';
+        result += ' ' + pluralize('roundel', charge.count) + ' ';
         result += charge.tincture.name;
       }
 
@@ -169,15 +169,27 @@ function stringifyCharge(charge: Charge): string {
     } else if (charge.name === 'lozenge') {
       let result = counterStr;
       if (charge.voided) {
-        result += charge.count === 1 ? ' mascle ' : ' mascles ';
+        result += ' ' + pluralize('mascle', charge.count) + ' ';
       } else {
-        result += charge.count === 1 ? ' lozenge ' : ' lozenges ';
+        result += ' ' + pluralize('lozenge', charge.count) + ' ';
       }
       result += charge.tincture.name;
 
       return result;
     } else {
       return cannotHappen(charge);
+    }
+  }
+}
+
+function pluralize(str: string, count: SupportedNumber): string {
+  if (count === 1) {
+    return str;
+  } else {
+    if (str === 'fleur de lys') {
+      return 'fleurs de lys';
+    } else {
+      return str + 's';
     }
   }
 }

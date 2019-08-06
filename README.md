@@ -25,5 +25,5 @@ Faire le "of the last"
 * Factorise positionning of charge (add to lion / to eagle)
 * extract stringify functions
 * Update bordure to user multiple MoveTo
-* pour le stringify => créer une fonction pluralize
+* Faire des fonctions dans le pathBuilder pour les formes simples (rectangle? losange? cercle? )
 
