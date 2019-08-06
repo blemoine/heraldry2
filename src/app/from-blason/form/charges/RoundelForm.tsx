@@ -5,6 +5,8 @@ import { Tincture } from '../../../model/tincture';
 import { SelectScalar } from '../../../common/SelectScalar';
 import { SupportedNumber, supportedNumbers } from '../../../model/countAndDisposition';
 
+const voidedOptions = ['true', 'false'] as const;
+
 type Props = { charge: Roundel; chargeChange: (roundel: Roundel) => void };
 export const RoundelForm = ({ charge, chargeChange }: Props) => {
   function chargeTinctureChange(tincture: Tincture) {
@@ -14,6 +16,12 @@ export const RoundelForm = ({ charge, chargeChange }: Props) => {
   function countChange(count: SupportedNumber) {
     chargeChange({ ...charge, count });
   }
+
+  function voidedChange(voided: 'true' | 'false') {
+    chargeChange({ ...charge, voided: voided === 'true' });
+  }
+
+  const voided: 'true' | 'false' = charge.voided ? 'true' : 'false';
 
   return (
     <div className="row">
@@ -27,6 +35,12 @@ export const RoundelForm = ({ charge, chargeChange }: Props) => {
         <div className="form-group">
           <label>Select the number of charge</label>
           <SelectScalar options={supportedNumbers} value={charge.count} valueChange={countChange} />
+        </div>
+      </div>
+      <div className="col">
+        <div className="form-group">
+          <label>isVoided</label>
+          <SelectScalar options={voidedOptions} value={voided} valueChange={voidedChange} />
         </div>
       </div>
     </div>
