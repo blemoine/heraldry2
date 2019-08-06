@@ -55,6 +55,7 @@ export type Lozenge = {
   name: 'lozenge';
   count: SupportedNumber;
   tincture: Tincture
+  voided: boolean
 };
 
 export type Charge = Lion | Eagle | FleurDeLys | Roundel | Lozenge;

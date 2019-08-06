@@ -135,11 +135,21 @@ const lozengeParser = (): P.Parser<Lozenge> => {
       aParser.skip(P.whitespace),
       buildAltParser(supportedNumbers.filter(isNotOne), stringifyNumber).skip(P.whitespace)
     ),
-    P.regexp(/lozenges?/i)
-      .skip(P.whitespace)
-      .result('lozenge' as const),
-    tinctureParserFromName
-  ).map(([count, name, tincture]) => ({ name, count, tincture }));
+    P.alt(
+      P.seq(
+        P.regexp(/lozenges?/i)
+          .skip(P.whitespace)
+          .result('lozenge' as const),
+        tinctureParserFromName
+      ).map(([name, tincture]) => [name, tincture, false] as const),
+      P.seq(
+        P.regexp(/mascles?/i)
+          .skip(P.whitespace)
+          .result('lozenge' as const),
+        tinctureParserFromName
+      ).map(([name, tincture]) => [name, tincture, true] as const)
+    )
+  ).map(([count, [name, tincture, voided]]) => ({ name, count, tincture, voided }));
 };
 
 export function chargeParser(): P.Parser<Charge> {

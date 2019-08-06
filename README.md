@@ -25,4 +25,6 @@ Faire le "of the last"
 * Factorise positionning of charge (add to lion / to eagle)
 * extract stringify functions
 * Update bordure to user multiple MoveTo
+* Voided? form roundel and lozenge
+* pour le stringify => créer une fonction pluralize
 

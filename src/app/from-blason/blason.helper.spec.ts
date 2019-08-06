@@ -230,6 +230,20 @@ describe('stringifyBlason', () => {
       })
     ).toBe('Purpure, three annulets or');
   });
+
+  it('should stringify a lozenge voided as mascles', () => {
+    expect(
+      stringifyBlason({
+        field: { kind: 'plain', tincture: purpure },
+        charge: {
+          name: 'lozenge',
+          tincture: or,
+          count: 3,
+          voided: true,
+        },
+      })
+    ).toBe('Purpure, three mascles or');
+  });
 });
 
 describe('isThereFur', () => {

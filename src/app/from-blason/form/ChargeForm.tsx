@@ -25,13 +25,13 @@ export const ChargeForm = ({ charge, chargeChange }: Props) => {
         tincture: sable,
         beakedAndArmed: or,
       });
-    } else if (chargeName === 'fleurdelys' || chargeName === 'lozenge') {
+    } else if (chargeName === 'fleurdelys' ) {
       chargeChange({
         name: chargeName,
         count: 3,
         tincture: or,
       });
-    } else if (chargeName === 'roundel') {
+    } else if (chargeName === 'roundel' || chargeName === 'lozenge') {
       chargeChange({
         name: chargeName,
         count: 3,

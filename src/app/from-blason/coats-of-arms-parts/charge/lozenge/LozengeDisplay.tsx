@@ -13,15 +13,36 @@ export const LozengeDisplay = ({ charge, dimension: { width, height }, fillFromT
 
   const { cellWidth, positions } = getChargePositions(charge.count);
   const radius = 0.75 * width * cellWidth;
+
+  // TODO handle voided
+
+  const acuteness = 1.2;
   return (
     <>
       {positions.map(([cx, cy], i) => {
-        const pathBuilder = SvgPathBuilder.start([cx * width, cy * height - radius])
-          .goTo([cx * width + radius, cy * height])
-          .goTo([cx * width, cy * height + radius])
-          .goTo([cx * width - radius, cy * height])
+        const centerX = cx * width;
+        const centerY = cy * height;
+
+        const pathBuilder = SvgPathBuilder.start([centerX, centerY - radius * acuteness])
+          .goTo([centerX + radius, centerY])
+          .goTo([centerX, centerY + radius * acuteness])
+          .goTo([centerX - radius, centerY])
           .close();
-        return <PathFromBuilder  key={i} pathBuilder={pathBuilder} stroke={stroke} fill={fill} />;
+        if (charge.voided) {
+          const innerRadius = radius * 0.65;
+          const voidedPathBuilder = pathBuilder
+            .moveTo([centerX, centerY - innerRadius * acuteness])
+            .goTo([centerX + innerRadius, centerY])
+            .goTo([centerX, centerY + innerRadius * acuteness])
+            .goTo([centerX - innerRadius, centerY])
+            .close();
+
+          return (
+            <PathFromBuilder key={i} pathBuilder={voidedPathBuilder} stroke={stroke} fill={fill} fillRule="evenodd" />
+          );
+        } else {
+          return <PathFromBuilder key={i} pathBuilder={pathBuilder} stroke={stroke} fill={fill} />;
+        }
       })}
     </>
   );

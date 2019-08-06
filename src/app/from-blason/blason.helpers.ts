@@ -170,7 +170,11 @@ function stringifyCharge(charge: Charge): string {
     return result;
   } else if (charge.name === 'lozenge') {
     let result = '';
-    result += charge.count === 1 ? 'a lozenge ' : stringifyNumber(charge.count) + ' lozenges ';
+    if(charge.voided) {
+      result += charge.count === 1 ? 'a mascle ' : stringifyNumber(charge.count) + ' mascles ';
+    } else {
+      result += charge.count === 1 ? 'a lozenge ' : stringifyNumber(charge.count) + ' lozenges ';
+    }
     result += charge.tincture.name;
 
     return result;
