@@ -26,12 +26,10 @@ export function stringifyBlason(blason: Blason): string {
 
 function stringifyOrdinary(ordinary: Ordinary): string {
   if (ordinary.name === 'pale' || ordinary.name === 'chevron' || ordinary.name === 'chevronel') {
-    let result = '';
+    let result = ordinary.count === 1 ? 'a' : stringifyNumber(ordinary.count);
     if (ordinary.count === 1) {
-      result += 'a ' + stringifyOrdinaryName(ordinary.name) + ' ';
+      result += ' ' +stringifyOrdinaryName(ordinary.name) + ' ';
     } else {
-      result += stringifyNumber(ordinary.count);
-
       if (ordinary.name === 'pale') {
         result += ' pallets ';
       } else if (ordinary.name === 'chevron') {
@@ -126,19 +124,16 @@ function stringifyCharge(charge: Charge): string {
     const count = charge.name === 'lion' ? charge.countAndDisposition.count : charge.count;
     const counterStr = count === 1 ? 'a' : stringifyNumber(count);
     if (charge.name === 'fleurdelys') {
-      let result = charge.count === 1 ? 'a fleur de lys ' : stringifyNumber(charge.count) + ' fleurs de lys ';
+      let result = counterStr;
+      result += charge.count === 1 ? ' fleur de lys ' : ' fleurs de lys ';
       result += charge.tincture.name;
 
       return result;
     } else if (charge.name === 'lion') {
       const count = charge.countAndDisposition.count;
 
-      let result = counterStr;
-      if (count === 1) {
-        result += ' lion';
-      } else {
-        result += ' lions';
-      }
+      let result = counterStr + ' ';
+      result += count === 1 ? 'lion' : 'lions';
 
       result += ' ' + charge.attitude;
 
