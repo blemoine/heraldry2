@@ -110,35 +110,7 @@ export function stringifyParty(partyName: Party['name']): string {
 }
 
 function stringifyCharge(charge: Charge): string {
-  if (charge.name === 'lion') {
-    const count = charge.countAndDisposition.count;
-
-    let result = '';
-    if (count === 1) {
-      result += 'a lion';
-    } else {
-      result += stringifyNumber(count) + ' lions';
-    }
-
-    result += ' ' + charge.attitude;
-
-    if (charge.head !== null) {
-      result += ' ' + charge.head;
-    }
-    if (charge.tail !== null) {
-      result += ' tail ' + charge.tail;
-    }
-    if (charge.countAndDisposition.count !== 1) {
-      result += ' in ' + charge.countAndDisposition.disposition;
-    }
-
-    result += ' ' + charge.tincture.name;
-    if (charge.armedAndLangued.name !== gules.name) {
-      result += ' armed and langued ' + charge.armedAndLangued.name;
-    }
-
-    return result;
-  } else if (charge.name === 'eagle') {
+  if (charge.name === 'eagle') {
     let result = '';
     result += 'an eagle';
 
@@ -150,36 +122,68 @@ function stringifyCharge(charge: Charge): string {
       result += ' beaked and armed ' + charge.beakedAndArmed.name;
     }
     return result;
-  } else if (charge.name === 'fleurdelys') {
-    let result = charge.count === 1 ? 'a fleur de lys ' : stringifyNumber(charge.count) + ' fleurs de lys ';
-    result += charge.tincture.name;
-
-    return result;
-  } else if (charge.name === 'roundel') {
-    let result = '';
-    if(charge.voided) {
-      result += charge.count === 1 ? 'a annulet ' : stringifyNumber(charge.count) + ' annulets ';
-      result += charge.tincture.name;
-    }else  if (charge.tincture.name === or.name) {
-      result += charge.count === 1 ? 'a bezant ' : stringifyNumber(charge.count) + ' bezants';
-    } else {
-      result += charge.count === 1 ? 'a roundel ' : stringifyNumber(charge.count) + ' roundels ';
-      result += charge.tincture.name;
-    }
-
-    return result;
-  } else if (charge.name === 'lozenge') {
-    let result = '';
-    if(charge.voided) {
-      result += charge.count === 1 ? 'a mascle ' : stringifyNumber(charge.count) + ' mascles ';
-    } else {
-      result += charge.count === 1 ? 'a lozenge ' : stringifyNumber(charge.count) + ' lozenges ';
-    }
-    result += charge.tincture.name;
-
-    return result;
   } else {
-    return cannotHappen(charge);
+    const count = charge.name === 'lion' ? charge.countAndDisposition.count : charge.count;
+    const counterStr = count === 1 ? 'a' : stringifyNumber(count);
+    if (charge.name === 'fleurdelys') {
+      let result = charge.count === 1 ? 'a fleur de lys ' : stringifyNumber(charge.count) + ' fleurs de lys ';
+      result += charge.tincture.name;
+
+      return result;
+    } else if (charge.name === 'lion') {
+      const count = charge.countAndDisposition.count;
+
+      let result = counterStr;
+      if (count === 1) {
+        result += ' lion';
+      } else {
+        result += ' lions';
+      }
+
+      result += ' ' + charge.attitude;
+
+      if (charge.head !== null) {
+        result += ' ' + charge.head;
+      }
+      if (charge.tail !== null) {
+        result += ' tail ' + charge.tail;
+      }
+      if (charge.countAndDisposition.count !== 1) {
+        result += ' in ' + charge.countAndDisposition.disposition;
+      }
+
+      result += ' ' + charge.tincture.name;
+      if (charge.armedAndLangued.name !== gules.name) {
+        result += ' armed and langued ' + charge.armedAndLangued.name;
+      }
+
+      return result;
+    } else if (charge.name === 'roundel') {
+      let result = counterStr;
+      if (charge.voided) {
+        result += charge.count === 1 ? ' annulet ' : ' annulets ';
+        result += charge.tincture.name;
+      } else if (charge.tincture.name === or.name) {
+        result += charge.count === 1 ? ' bezant ' : ' bezants';
+      } else {
+        result += charge.count === 1 ? ' roundel ' : ' roundels ';
+        result += charge.tincture.name;
+      }
+
+      return result;
+    } else if (charge.name === 'lozenge') {
+      let result = counterStr;
+      if (charge.voided) {
+        result += charge.count === 1 ? ' mascle ' : ' mascles ';
+      } else {
+        result += charge.count === 1 ? ' lozenge ' : ' lozenges ';
+      }
+      result += charge.tincture.name;
+
+      return result;
+    } else {
+      return cannotHappen(charge);
+    }
   }
 }
 
