@@ -117,10 +117,16 @@ const roundelParser = (): P.Parser<Roundel> => {
           .skip(P.whitespace)
           .result('roundel' as const),
         tinctureParserFromName
-      ),
-      P.regex(/bezants?/i).result(['roundel' as const, or])
+      ).map((arr) => [arr[0], arr[1], false] as const),
+      P.regex(/bezants?/i).result(['roundel' as const, or, false]),
+      P.seq(
+        P.regexp(/annulets?/i)
+          .skip(P.whitespace)
+          .result('roundel' as const),
+        tinctureParserFromName
+      ).map((arr) => [arr[0], arr[1], true] as const)
     )
-  ).map(([count, [name, tincture]]) => ({ name, count, tincture }));
+  ).map(([count, [name, tincture, voided]]) => ({ name, count, tincture, voided }));
 };
 
 const lozengeParser = (): P.Parser<Lozenge> => {

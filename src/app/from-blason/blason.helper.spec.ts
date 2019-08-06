@@ -210,10 +210,25 @@ describe('stringifyBlason', () => {
         charge: {
           name: 'roundel',
           tincture: or,
-          count: 3
+          count: 3,
+          voided: false,
         },
       })
     ).toBe('Purpure, three bezants');
+  });
+
+  it('should stringify a roundel voided as annulet', () => {
+    expect(
+      stringifyBlason({
+        field: { kind: 'plain', tincture: purpure },
+        charge: {
+          name: 'roundel',
+          tincture: or,
+          count: 3,
+          voided: true,
+        },
+      })
+    ).toBe('Purpure, three annulets or');
   });
 });
 

@@ -91,4 +91,10 @@ describe('SvgPathBuilder', () => {
       'M 10 10 A21.213203435596427 63.63961030678928 -135 0 1 25 25 A21.213203435596427 63.63961030678928 -135 0 1 40 40 A21.213203435596427 63.63961030678928 -135 0 1 55 55 A21.213203435596427 63.63961030678928 -135 0 1 70 70'
     );
   });
+
+  it('should do multiple moveTo', () => {
+    const result = SvgPathBuilder.start([10, 10]).goTo([10, 70]).moveTo([5,5]);
+
+    expect(result.toPathAttribute()).toEqual('M 10 10 V70 M 5 5');
+  })
 });

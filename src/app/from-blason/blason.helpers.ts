@@ -157,7 +157,10 @@ function stringifyCharge(charge: Charge): string {
     return result;
   } else if (charge.name === 'roundel') {
     let result = '';
-    if (charge.tincture.name === or.name) {
+    if(charge.voided) {
+      result += charge.count === 1 ? 'a annulet ' : stringifyNumber(charge.count) + ' annulets ';
+      result += charge.tincture.name;
+    }else  if (charge.tincture.name === or.name) {
       result += charge.count === 1 ? 'a bezant ' : stringifyNumber(charge.count) + ' bezants';
     } else {
       result += charge.count === 1 ? 'a roundel ' : stringifyNumber(charge.count) + ' roundels ';

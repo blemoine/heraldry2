@@ -114,11 +114,18 @@ const chargeArb: Arbitrary<Charge> = fc.constantFrom(...charges).chain((chargeNa
         }
       )
       .map((i): Charge => i);
-  } else if (chargeName === 'roundel' || chargeName === 'lozenge' || chargeName === 'fleurdelys') {
+  } else if (chargeName === 'lozenge' || chargeName === 'fleurdelys') {
     return fc.record({
       name: fc.constant(chargeName),
       tincture: tinctureArb,
       count: fc.constantFrom(...supportedNumbers),
+    });
+  }else if (chargeName === 'roundel') {
+    return fc.record({
+      name: fc.constant(chargeName),
+      tincture: tinctureArb,
+      count: fc.constantFrom(...supportedNumbers),
+      voided: fc.boolean()
     });
   } else {
     return cannotHappen(chargeName);

@@ -3,7 +3,7 @@ import { range } from '../../utils/range';
 import { angleBetween, distanceBetween, PathAbsolutePoint, toDegree } from './geometrical.helper';
 import { pointOnEllipticalArc } from './point-on-elliptical-arc';
 
-type Start = { command: 'M'; point: PathAbsolutePoint };
+type MoveTo = { command: 'M'; point: PathAbsolutePoint };
 type GoToPoint = { command: 'L'; point: PathAbsolutePoint };
 type Vertical = { command: 'V'; coordinate: number };
 type Horizontal = { command: 'H'; coordinate: number };
@@ -17,7 +17,7 @@ type Arc = {
 };
 type Close = { command: 'Z' };
 
-type PathCommand = Start | GoToPoint | Arc | Vertical | Horizontal | Close;
+type PathCommand = MoveTo | GoToPoint | Arc | Vertical | Horizontal | Close;
 
 export type EngrailedLineOptions = { line: 'with-arc'; radius: number; sweep: boolean };
 export type LineOptions = EngrailedLineOptions;
@@ -60,6 +60,10 @@ export class SvgPathBuilder {
         }
       })
       .join(' ');
+  }
+
+  moveTo(point: PathAbsolutePoint): SvgPathBuilder {
+    return this.addCommand({ command: 'M', point });
   }
 
   goTo(point: PathAbsolutePoint, lineOptions: LineOptions | null = null): SvgPathBuilder {

@@ -47,7 +47,8 @@ export type FleurDeLys = {
 export type Roundel = {
   name: 'roundel';
   count: SupportedNumber;
-  tincture: Tincture
+  tincture: Tincture,
+  voided: boolean
 };
 
 export type Lozenge = {
