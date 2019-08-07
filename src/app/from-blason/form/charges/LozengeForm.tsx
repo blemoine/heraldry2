@@ -1,11 +1,9 @@
 import * as React from 'react';
-import { Lozenge } from '../../../model/charge';
+import { Lozenge, LozengeInside, lozengeInsides } from '../../../model/charge';
 import { TinctureSelect } from '../TinctureSelect';
 import { Tincture } from '../../../model/tincture';
 import { SelectScalar } from '../../../common/SelectScalar';
 import { SupportedNumber, supportedNumbers } from '../../../model/countAndDisposition';
-
-const voidedOptions = ['true', 'false'] as const;
 
 type Props = { charge: Lozenge; chargeChange: (lozenge: Lozenge) => void };
 export const LozengeForm = ({ charge, chargeChange }: Props) => {
@@ -16,11 +14,9 @@ export const LozengeForm = ({ charge, chargeChange }: Props) => {
   function countChange(count: SupportedNumber) {
     chargeChange({ ...charge, count });
   }
-  function voidedChange(voided: 'true' | 'false') {
-    chargeChange({ ...charge, voided: voided === 'true' });
+  function voidedChange(inside: LozengeInside) {
+    chargeChange({ ...charge, inside });
   }
-
-  const voided: 'true' | 'false' = charge.voided ? 'true' : 'false';
 
   return (
     <div className="row">
@@ -39,7 +35,7 @@ export const LozengeForm = ({ charge, chargeChange }: Props) => {
       <div className="col">
         <div className="form-group">
           <label>isVoided</label>
-          <SelectScalar options={voidedOptions} value={voided} valueChange={voidedChange} />
+          <SelectScalar options={lozengeInsides} value={charge.inside} valueChange={voidedChange} />
         </div>
       </div>
     </div>

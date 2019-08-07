@@ -44,18 +44,22 @@ export type FleurDeLys = {
   tincture: Tincture;
 };
 
+export const roundelInsides = ['nothing', 'voided'] as const;
+export type RoundelInside = typeof roundelInsides[number];
 export type Roundel = {
   name: 'roundel';
   count: SupportedNumber;
-  tincture: Tincture,
-  voided: boolean
+  tincture: Tincture;
+  inside: RoundelInside;
 };
 
+export const lozengeInsides = ['nothing', 'voided', 'pierced'] as const;
+export type LozengeInside = typeof lozengeInsides[number];
 export type Lozenge = {
   name: 'lozenge';
   count: SupportedNumber;
-  tincture: Tincture
-  voided: boolean
+  tincture: Tincture;
+  inside: LozengeInside;
 };
 
 export type Charge = Lion | Eagle | FleurDeLys | Roundel | Lozenge;

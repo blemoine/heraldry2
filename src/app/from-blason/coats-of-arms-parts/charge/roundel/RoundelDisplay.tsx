@@ -5,6 +5,7 @@ import { Tincture } from '../../../../model/tincture';
 import { getChargePositions } from '../charge.helper';
 import { PathFromBuilder } from '../../../../common/PathFromBuilder';
 import { SvgPathBuilder } from '../../../../svg-path-builder/svg-path-builder';
+import { cannotHappen } from '../../../../../utils/cannot-happen';
 
 type Props = { charge: Roundel; dimension: Dimension; fillFromTincture: (tincture: Tincture) => string };
 export const RoundelDisplay = ({ charge, dimension: { width, height }, fillFromTincture }: Props) => {
@@ -18,7 +19,7 @@ export const RoundelDisplay = ({ charge, dimension: { width, height }, fillFromT
       {positions.map(([cx, cy], i) => {
         const centerX = cx * width;
         const centerY = cy * height;
-        if (charge.voided) {
+        if (charge.inside === 'voided') {
           const innerRadius = radius * 0.65;
 
           const pathBuilder = SvgPathBuilder.start([centerX, centerY - radius])
@@ -29,8 +30,10 @@ export const RoundelDisplay = ({ charge, dimension: { width, height }, fillFromT
             .arcTo([centerX, centerY - innerRadius], { radius: innerRadius });
 
           return <PathFromBuilder key={i} pathBuilder={pathBuilder} stroke={stroke} fill={fill} fillRule="evenodd" />;
-        } else {
+        } else if (charge.inside === 'nothing') {
           return <circle key={i} cx={centerX} cy={centerY} r={radius} stroke={stroke} fill={fill} />;
+        } else {
+          return cannotHappen(charge.inside);
         }
       })}
     </>

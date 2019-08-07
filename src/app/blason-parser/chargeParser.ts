@@ -117,16 +117,16 @@ const roundelParser = (): P.Parser<Roundel> => {
           .skip(P.whitespace)
           .result('roundel' as const),
         tinctureParserFromName
-      ).map((arr) => [arr[0], arr[1], false] as const),
+      ).map((arr) => [arr[0], arr[1], 'nothing'] as const),
       P.regex(/bezants?/i).result(['roundel' as const, or, false]),
       P.seq(
         P.regexp(/annulets?/i)
           .skip(P.whitespace)
           .result('roundel' as const),
         tinctureParserFromName
-      ).map((arr) => [arr[0], arr[1], true] as const)
+      ).map((arr) => [arr[0], arr[1], 'voided'] as const)
     )
-  ).map(([count, [name, tincture, voided]]) => ({ name, count, tincture, voided }));
+  ).map(([count, [name, tincture, inside]]) => ({ name, count, tincture, inside }));
 };
 
 const lozengeParser = (): P.Parser<Lozenge> => {
@@ -141,15 +141,21 @@ const lozengeParser = (): P.Parser<Lozenge> => {
           .skip(P.whitespace)
           .result('lozenge' as const),
         tinctureParserFromName
-      ).map(([name, tincture]) => [name, tincture, false] as const),
+      ).map(([name, tincture]) => [name, tincture, 'nothing'] as const),
       P.seq(
         P.regexp(/mascles?/i)
           .skip(P.whitespace)
           .result('lozenge' as const),
         tinctureParserFromName
-      ).map(([name, tincture]) => [name, tincture, true] as const)
+      ).map(([name, tincture]) => [name, tincture, 'voided'] as const),
+      P.seq(
+        P.regexp(/rustres?/i)
+          .skip(P.whitespace)
+          .result('lozenge' as const),
+        tinctureParserFromName
+      ).map(([name, tincture]) => [name, tincture, 'pierced'] as const)
     )
-  ).map(([count, [name, tincture, voided]]) => ({ name, count, tincture, voided }));
+  ).map(([count, [name, tincture, inside]]) => ({ name, count, tincture, inside }));
 };
 
 export function chargeParser(): P.Parser<Charge> {

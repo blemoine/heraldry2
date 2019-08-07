@@ -12,7 +12,18 @@ import {
 } from '../field';
 import { parties, Party } from '../party';
 import { ordinaries, Ordinary } from '../ordinary';
-import { Charge, charges, Eagle, eagleAttitudes, Lion, lionAttitudes, lionHeads, lionTails } from '../charge';
+import {
+  Charge,
+  charges,
+  Eagle,
+  eagleAttitudes,
+  Lion,
+  lionAttitudes,
+  lionHeads,
+  lionTails,
+  Lozenge, lozengeInsides,
+  Roundel, roundelInsides
+} from '../charge';
 import { cannotHappen } from '../../../utils/cannot-happen';
 import { Blason } from '../blason';
 import { Line, lines } from '../line';
@@ -120,12 +131,19 @@ const chargeArb: Arbitrary<Charge> = fc.constantFrom(...charges).chain((chargeNa
       tincture: tinctureArb,
       count: fc.constantFrom(...supportedNumbers),
     });
-  } else if (chargeName === 'lozenge' || chargeName === 'roundel') {
-    return fc.record({
+  } else if (chargeName === 'lozenge') {
+    return fc.record<Lozenge>({
       name: fc.constant(chargeName),
       tincture: tinctureArb,
       count: fc.constantFrom(...supportedNumbers),
-      voided: fc.boolean(),
+      inside: fc.constantFrom(...lozengeInsides),
+    });
+  } else if (chargeName === 'roundel') {
+    return fc.record<Roundel>({
+      name: fc.constant(chargeName),
+      tincture: tinctureArb,
+      count: fc.constantFrom(...supportedNumbers),
+      inside: fc.constantFrom(...roundelInsides),
     });
   } else {
     return cannotHappen(chargeName);

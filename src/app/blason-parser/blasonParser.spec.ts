@@ -221,14 +221,14 @@ Argent, Azure, Barry of, Bendy, Bendy Sinister, Chequy, Ermine, Gules, Murrey, O
   it('should parse 18 roundels', () => {
     expect(parseBlason('Argent, eighteen roundels argent')).toEqual({
       field: { kind: 'plain', tincture: argent },
-      charge: { name: 'roundel', tincture: argent, count: 18, voided: false },
+      charge: { name: 'roundel', tincture: argent, count: 18, inside: 'nothing' },
     });
   });
 
   it('should parse 17 annulets', () => {
     expect(parseBlason('Azure, seventeen annulets sable')).toEqual({
       field: { kind: 'plain', tincture: azure },
-      charge: { name: 'roundel', tincture: sable, count: 17, voided: true },
+      charge: { name: 'roundel', tincture: sable, count: 17, inside: 'voided' },
     });
   });
 });

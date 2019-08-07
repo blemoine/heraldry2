@@ -155,23 +155,31 @@ function stringifyCharge(charge: Charge): string {
       return result;
     } else if (charge.name === 'roundel') {
       let result = counterStr;
-      if (charge.voided) {
+      if (charge.inside === 'voided') {
         result += ' ' + pluralize('annulet', charge.count) + ' ';
         result += charge.tincture.name;
-      } else if (charge.tincture.name === or.name) {
-        result += ' ' + pluralize('bezant', charge.count);
+      } else if (charge.inside === 'nothing') {
+        if (charge.tincture.name === or.name) {
+          result += ' ' + pluralize('bezant', charge.count);
+        } else {
+          result += ' ' + pluralize('roundel', charge.count) + ' ';
+          result += charge.tincture.name;
+        }
       } else {
-        result += ' ' + pluralize('roundel', charge.count) + ' ';
-        result += charge.tincture.name;
+        return cannotHappen(charge.inside);
       }
 
       return result;
     } else if (charge.name === 'lozenge') {
       let result = counterStr;
-      if (charge.voided) {
+      if (charge.inside === 'voided') {
         result += ' ' + pluralize('mascle', charge.count) + ' ';
-      } else {
+      } else if (charge.inside === 'pierced') {
+        result += ' ' + pluralize('rustre', charge.count) + ' ';
+      } else if (charge.inside === 'nothing') {
         result += ' ' + pluralize('lozenge', charge.count) + ' ';
+      } else {
+        return cannotHappen(charge.inside);
       }
       result += charge.tincture.name;
 

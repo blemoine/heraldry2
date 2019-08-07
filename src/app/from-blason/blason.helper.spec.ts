@@ -211,7 +211,7 @@ describe('stringifyBlason', () => {
           name: 'roundel',
           tincture: or,
           count: 3,
-          voided: false,
+          inside: 'nothing',
         },
       })
     ).toBe('Purpure, three bezants');
@@ -225,7 +225,7 @@ describe('stringifyBlason', () => {
           name: 'roundel',
           tincture: or,
           count: 3,
-          voided: true,
+          inside: 'voided',
         },
       })
     ).toBe('Purpure, three annulets or');
@@ -239,7 +239,7 @@ describe('stringifyBlason', () => {
           name: 'lozenge',
           tincture: or,
           count: 3,
-          voided: true,
+          inside: 'voided',
         },
       })
     ).toBe('Purpure, three mascles or');
