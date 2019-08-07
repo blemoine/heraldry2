@@ -31,7 +31,7 @@ const lionParser = (count: 1 | 2 | 3): P.Parser<Lion> => {
   const tailParser: P.Parser<LionTail> = buildAltParser(lionTails, identity);
 
   const lionNameParser = (count === 1 ? P.regex(/lion/i) : P.regex(/lions/i)).result('lion' as const);
-  const lionParser: P.Parser<Lion> = P.seq(
+  return P.seq(
     lionNameParser,
     P.whitespace.then(attitudeParser).fallback('rampant'),
     P.whitespace.then(headParser).fallback(null),
@@ -48,22 +48,20 @@ const lionParser = (count: 1 | 2 | 3): P.Parser<Lion> => {
       .then(P.regex(/armed and langued/i))
       .then(P.whitespace)
       .then(tinctureParserFromName)
-      .fallback(null)
+      .fallback(gules)
   ).map(
     ([name, attitude, head, tail, countAndDisposition, tincture, armedAndLangued]): Lion => {
       return {
         name,
         attitude,
         tincture,
-        armedAndLangued: armedAndLangued || gules,
+        armedAndLangued,
         tail,
         head,
         countAndDisposition,
       };
     }
   );
-
-  return lionParser;
 };
 
 const eagleParser = () => {
