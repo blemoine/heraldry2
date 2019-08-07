@@ -21,7 +21,7 @@ import { identity } from '../../utils/identity';
 import { gules, or } from '../model/tincture';
 import { cannotHappen } from '../../utils/cannot-happen';
 import { tinctureParserFromName } from './tinctureParser';
-import { isNotOne, stringifyNumber, SupportedNumber, supportedNumbers } from '../model/countAndDisposition';
+import { isNotOne, SupportedNumber, supportedNumbers } from '../model/countAndDisposition';
 
 const countParser: P.Parser<SupportedNumber> = P.alt(aParser, ...supportedNumbers.filter(isNotOne).map(numberParser));
 
@@ -91,15 +91,13 @@ const eagleParser = () => {
 };
 
 const fleurDeLysParser = (): P.Parser<FleurDeLys> => {
-  return P.seq(countParser, P.regexp(/Fleurs?[- ]de[- ]l[yi]s/i).skip(P.whitespace), tinctureParserFromName).map(
-    ([count, , tincture]) => {
-      return {
-        name: 'fleurdelys',
-        count,
-        tincture,
-      };
-    }
-  );
+  return P.seq(
+    countParser,
+    P.regexp(/Fleurs?[- ]de[- ]l[yi]s/i)
+      .skip(P.whitespace)
+      .result('fleurdelys' as const),
+    tinctureParserFromName
+  ).map(([count, name, tincture]) => ({ name, count, tincture }));
 };
 
 const roundelParser = (): P.Parser<Roundel> => {
@@ -111,21 +109,21 @@ const roundelParser = (): P.Parser<Roundel> => {
           .skip(P.whitespace)
           .result('roundel' as const),
         tinctureParserFromName
-      ).map((arr) => [arr[0], arr[1], 'nothing'] as const),
+      ).map(([name, tincture]) => [name, tincture, 'nothing'] as const),
       P.regex(/bezants?/i).result(['roundel' as const, or, 'nothing'] as const),
       P.seq(
         P.regexp(/annulets?/i)
           .skip(P.whitespace)
           .result('roundel' as const),
         tinctureParserFromName
-      ).map((arr) => [arr[0], arr[1], 'voided'] as const)
+      ).map(([name, tincture]) => [name, tincture, 'voided'] as const)
     )
   ).map(([count, [name, tincture, inside]]) => ({ name, count, tincture, inside }));
 };
 
 const lozengeParser = (): P.Parser<Lozenge> => {
   return P.seq(
-    P.alt(aParser, buildAltParser(supportedNumbers.filter(isNotOne), stringifyNumber).skip(P.whitespace)),
+    countParser,
     P.alt(
       P.regexp(/lozenges?/i)
         .skip(P.whitespace)
