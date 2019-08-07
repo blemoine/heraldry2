@@ -21,7 +21,9 @@ import { identity } from '../../utils/identity';
 import { gules, or } from '../model/tincture';
 import { cannotHappen } from '../../utils/cannot-happen';
 import { tinctureParserFromName } from './tinctureParser';
-import { isNotOne, stringifyNumber, supportedNumbers } from '../model/countAndDisposition';
+import { isNotOne, stringifyNumber, SupportedNumber, supportedNumbers } from '../model/countAndDisposition';
+
+const countParser: P.Parser<SupportedNumber> = P.alt(aParser, ...supportedNumbers.filter(isNotOne).map(numberParser));
 
 const lionParser = (count: 1 | 2 | 3): P.Parser<Lion> => {
   const attitudeParser: P.Parser<LionAttitude> = buildAltParser(lionAttitudes, identity);
@@ -89,28 +91,20 @@ const eagleParser = () => {
 };
 
 const fleurDeLysParser = (): P.Parser<FleurDeLys> => {
-  return P.seq(
-    P.alt(
-      aParser,
-      buildAltParser(supportedNumbers.filter(isNotOne), stringifyNumber).skip(P.whitespace)
-    ),
-    P.regexp(/Fleurs?[- ]de[- ]l[yi]s/i).skip(P.whitespace),
-    tinctureParserFromName
-  ).map(([count, , tincture]) => {
-    return {
-      name: 'fleurdelys',
-      count,
-      tincture,
-    };
-  });
+  return P.seq(countParser, P.regexp(/Fleurs?[- ]de[- ]l[yi]s/i).skip(P.whitespace), tinctureParserFromName).map(
+    ([count, , tincture]) => {
+      return {
+        name: 'fleurdelys',
+        count,
+        tincture,
+      };
+    }
+  );
 };
 
 const roundelParser = (): P.Parser<Roundel> => {
   return P.seq(
-    P.alt(
-      aParser,
-      buildAltParser(supportedNumbers.filter(isNotOne), stringifyNumber).skip(P.whitespace)
-    ),
+    countParser,
     P.alt(
       P.seq(
         P.regexp(/roundels?/i)
@@ -131,31 +125,20 @@ const roundelParser = (): P.Parser<Roundel> => {
 
 const lozengeParser = (): P.Parser<Lozenge> => {
   return P.seq(
+    P.alt(aParser, buildAltParser(supportedNumbers.filter(isNotOne), stringifyNumber).skip(P.whitespace)),
     P.alt(
-      aParser,
-      buildAltParser(supportedNumbers.filter(isNotOne), stringifyNumber).skip(P.whitespace)
+      P.regexp(/lozenges?/i)
+        .skip(P.whitespace)
+        .result(['lozenge', 'nothing'] as const),
+      P.regexp(/mascles?/i)
+        .skip(P.whitespace)
+        .result(['lozenge', 'voided'] as const),
+      P.regexp(/rustres?/i)
+        .skip(P.whitespace)
+        .result(['lozenge', 'pierced'] as const)
     ),
-    P.alt(
-      P.seq(
-        P.regexp(/lozenges?/i)
-          .skip(P.whitespace)
-          .result('lozenge' as const),
-        tinctureParserFromName
-      ).map(([name, tincture]) => [name, tincture, 'nothing'] as const),
-      P.seq(
-        P.regexp(/mascles?/i)
-          .skip(P.whitespace)
-          .result('lozenge' as const),
-        tinctureParserFromName
-      ).map(([name, tincture]) => [name, tincture, 'voided'] as const),
-      P.seq(
-        P.regexp(/rustres?/i)
-          .skip(P.whitespace)
-          .result('lozenge' as const),
-        tinctureParserFromName
-      ).map(([name, tincture]) => [name, tincture, 'pierced'] as const)
-    )
-  ).map(([count, [name, tincture, inside]]) => ({ name, count, tincture, inside }));
+    tinctureParserFromName
+  ).map(([count, [name, inside], tincture]) => ({ name, count, tincture, inside }));
 };
 
 export function chargeParser(): P.Parser<Charge> {
