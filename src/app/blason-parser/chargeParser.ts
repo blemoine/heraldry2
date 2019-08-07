@@ -118,7 +118,7 @@ const roundelParser = (): P.Parser<Roundel> => {
           .result('roundel' as const),
         tinctureParserFromName
       ).map((arr) => [arr[0], arr[1], 'nothing'] as const),
-      P.regex(/bezants?/i).result(['roundel' as const, or, false]),
+      P.regex(/bezants?/i).result(['roundel' as const, or, 'nothing'] as const),
       P.seq(
         P.regexp(/annulets?/i)
           .skip(P.whitespace)

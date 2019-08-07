@@ -21,23 +21,18 @@ export function ordinaryParser(): P.Parser<Ordinary> {
     tinctureParserFromName
   ).map(([{ name, count }, line, tincture]): Pale => ({ name, count, line, tincture }));
 
-  const chevronParser: P.Parser<Chevron> = P.seq(
+  const chevronParser: P.Parser<Chevron | Chevronel> = P.seq(
+    P.alt(aParser.skip(P.whitespace), numberParser(2), numberParser(3)),
     P.alt(
-      P.alt(aParser.skip(P.whitespace), numberParser(2), numberParser(3))
-        .skip(P.regex(/chevrons?/i))
-        .map((count) => ({ name: 'chevron', count } as const))
-        .skip(P.whitespace),
-      P.alt(aParser.skip(P.whitespace), numberParser(2), numberParser(3))
-        .skip(P.regexp(/chevronels?/i))
-        .map((count) => ({ name: 'chevronel', count } as const))
-        .skip(P.whitespace)
+      P.regexp(/chevrons?/i).result('chevron' as const).skip(P.whitespace),
+      P.regexp(/chevronels?/i).result('chevronel' as const).skip(P.whitespace)
     ),
     lineParser.skip(P.whitespace).fallback('straight' as const),
     tinctureParserFromName
-  ).map(([{ name, count }, line, tincture]): Chevron => ({ name, count, line, tincture }));
+  ).map(([count, name, line, tincture]): Chevron | Chevronel => ({ name, count, line, tincture }));
 
   const ordinaryWithLineParser: P.Parser<Exclude<Ordinary, Pale | Chevron>> = P.seq(
-    P.regex(/an?/i)
+    P.regexp(/an?/i)
       .then(P.whitespace)
       .then(buildAltParser(ordinaries.filter(isNotPaleOrChevron), stringifyOrdinaryName))
       .skip(P.whitespace),

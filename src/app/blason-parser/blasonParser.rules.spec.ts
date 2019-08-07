@@ -8,7 +8,8 @@ describe('parseBlason and stringify', () => {
     fc.assert(
       fc.property(blasonArb, (blason) => {
         expect(parseBlason(stringifyBlason(blason))).toEqual(blason);
-      })
+      }),
+      {numRuns: 500}
     );
   });
 });
