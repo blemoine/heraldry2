@@ -93,8 +93,10 @@ describe('SvgPathBuilder', () => {
   });
 
   it('should do multiple moveTo', () => {
-    const result = SvgPathBuilder.start([10, 10]).goTo([10, 70]).moveTo([5,5]);
+    const result = SvgPathBuilder.start([10, 10])
+      .goTo([10, 70])
+      .moveTo([5, 5]);
 
     expect(result.toPathAttribute()).toEqual('M 10 10 V70 M 5 5');
-  })
+  });
 });

@@ -120,12 +120,12 @@ const chargeArb: Arbitrary<Charge> = fc.constantFrom(...charges).chain((chargeNa
       tincture: tinctureArb,
       count: fc.constantFrom(...supportedNumbers),
     });
-  }else if (chargeName === 'lozenge' || chargeName === 'roundel') {
+  } else if (chargeName === 'lozenge' || chargeName === 'roundel') {
     return fc.record({
       name: fc.constant(chargeName),
       tincture: tinctureArb,
       count: fc.constantFrom(...supportedNumbers),
-      voided: fc.boolean()
+      voided: fc.boolean(),
     });
   } else {
     return cannotHappen(chargeName);
