@@ -91,7 +91,7 @@ const eagleParser = () => {
 const fleurDeLysParser = (): P.Parser<FleurDeLys> => {
   return P.seq(
     P.alt(
-      aParser.skip(P.whitespace),
+      aParser,
       buildAltParser(supportedNumbers.filter(isNotOne), stringifyNumber).skip(P.whitespace)
     ),
     P.regexp(/Fleurs?[- ]de[- ]l[yi]s/i).skip(P.whitespace),
@@ -108,7 +108,7 @@ const fleurDeLysParser = (): P.Parser<FleurDeLys> => {
 const roundelParser = (): P.Parser<Roundel> => {
   return P.seq(
     P.alt(
-      aParser.skip(P.whitespace),
+      aParser,
       buildAltParser(supportedNumbers.filter(isNotOne), stringifyNumber).skip(P.whitespace)
     ),
     P.alt(
@@ -132,7 +132,7 @@ const roundelParser = (): P.Parser<Roundel> => {
 const lozengeParser = (): P.Parser<Lozenge> => {
   return P.seq(
     P.alt(
-      aParser.skip(P.whitespace),
+      aParser,
       buildAltParser(supportedNumbers.filter(isNotOne), stringifyNumber).skip(P.whitespace)
     ),
     P.alt(
@@ -162,7 +162,7 @@ export function chargeParser(): P.Parser<Charge> {
   return P.alt(
     ...charges.map((charge) => {
       if (charge === 'lion') {
-        return P.alt(aParser.skip(P.whitespace), numberParser(2), numberParser(3))
+        return P.alt(aParser, numberParser(2), numberParser(3))
           .trim(P.optWhitespace)
           .chain((count) => lionParser(count));
       } else if (charge === 'eagle') {

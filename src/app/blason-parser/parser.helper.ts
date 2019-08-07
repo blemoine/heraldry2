@@ -29,6 +29,6 @@ export function numberParser<N extends StringifiableNumber>(n: N): P.Parser<N> {
     .skip(P.whitespace);
 }
 
-export const aParser = P.regex(/an?/i).result(1 as const);
+export const aParser = P.regex(/an?/i).result(1 as const).skip(P.whitespace);
 
 export const lineParser: P.Parser<Line> = buildAltParser(lines, identity);
