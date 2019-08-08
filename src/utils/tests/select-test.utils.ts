@@ -26,7 +26,7 @@ export function selectInReactSelect(topSelector: string, classNamePrefix: string
   });
 }
 
-function selectElement(selector: string): Element {
+export function selectElement(selector: string): Element {
   const el = document.querySelector(selector);
   if (!el) {
     throw new Error(`'${selector} select should be defined`);

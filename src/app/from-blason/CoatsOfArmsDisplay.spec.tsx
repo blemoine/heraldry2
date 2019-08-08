@@ -127,8 +127,21 @@ describe('CoatsOfArms', () => {
     snapshotTest('Azure, twelve roundels argent');
   });
 
+  it('should render multiple annulets argent', () => {
+    snapshotTest('Azure, nineteen annulets argent');
+  });
+
   it('should render multiple lozenge', () => {
     snapshotTest('Or, thirteen lozenge or');
+  });
+
+  it('should render multiple rustres', () => {
+    snapshotTest('Or, eleven rustres sable');
+  });
+
+
+  it('should render multiple mascles', () => {
+    snapshotTest('Or, fifteen mascles sable');
   });
 });
 

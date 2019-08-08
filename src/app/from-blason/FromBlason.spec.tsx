@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FromBlason } from './FromBlason';
-import { render } from '@testing-library/react';
-import { selectInReactSelect, selectTincture } from '../../utils/tests/select-test.utils';
+import { render, fireEvent } from '@testing-library/react';
+import { selectElement, selectInReactSelect, selectTincture } from '../../utils/tests/select-test.utils';
 import { argent, azure, ermine, gules, murrey, purpure, vair } from '../model/tincture';
 
 describe('From Blason', () => {
@@ -55,5 +55,22 @@ describe('From Blason', () => {
         const blason = (fromBlason.getByPlaceholderText('Enter the blason here') as HTMLTextAreaElement).value;
         expect(blason).toBe('Barry of ten argent and purpure, a bend murrey');
       });
+  });
+
+  it('should reflect the change of the blason string in the form', () => {
+    const fromBlason = render(<FromBlason />);
+
+    const blason = fromBlason.getByPlaceholderText('Enter the blason here') as HTMLTextAreaElement;
+    fireEvent.change(blason, {
+      target: { value: 'Ermine, three eagles displayed in pale azure beaked and armed argent' },
+    });
+
+    const field = selectElement('.field-tincture-select .tincture-select__single-value') as HTMLDivElement;
+    const fieldValue = field.innerHTML;
+    expect(fieldValue).toBe('ermine');
+
+    const charge = selectElement('.charge-type-select .charge-name__single-value') as HTMLDivElement;
+    const chargeValue = charge.innerHTML;
+    expect(chargeValue).toBe('eagle');
   });
 });
