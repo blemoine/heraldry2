@@ -85,13 +85,9 @@ const ordinaryArb: Arbitrary<Ordinary> = fc
   );
 
 const chargeArb: Arbitrary<Charge> = fc.constantFrom(...charges).chain((chargeName) => {
-  const countAndDistionArb: Arbitrary<CountAndDisposition> = fc.constantFrom(...supportedNumbers).map((count) => {
-    if (count === 1) {
-      return { count };
-    } else {
-      return { count, disposition: 'pale' as const };
-    }
-  });
+  const countAndDistionArb: Arbitrary<CountAndDisposition> = fc
+    .tuple(fc.constantFrom(...supportedNumbers), fc.constantFrom('pale' as const, 'default' as const))
+    .map(([count, disposition]) => (count === 1 ? { count } : { count, disposition }));
   if (chargeName === 'lion') {
     return fc
       .tuple(

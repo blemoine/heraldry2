@@ -117,7 +117,7 @@ function stringifyCharge(charge: Charge): string {
 
     result += ' ' + charge.attitude;
 
-    if (charge.countAndDisposition.count !== 1) {
+    if (charge.countAndDisposition.count !== 1 && charge.countAndDisposition.disposition !== 'default') {
       result += ' in ' + charge.countAndDisposition.disposition;
     }
 
@@ -147,7 +147,7 @@ function stringifyCharge(charge: Charge): string {
     if (charge.tail !== null) {
       result += ' tail ' + charge.tail;
     }
-    if (charge.countAndDisposition.count !== 1) {
+    if (charge.countAndDisposition.count !== 1 && charge.countAndDisposition.disposition !== 'default') {
       result += ' in ' + charge.countAndDisposition.disposition;
     }
 

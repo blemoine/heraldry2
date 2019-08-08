@@ -28,7 +28,7 @@ const countParser: P.Parser<SupportedNumber> = P.alt(aParser, ...supportedNumber
 const countAndDispositionParser = (count: SupportedNumber) =>
   count === 1
     ? P.of({ count })
-    : P.whitespace.then(P.regex(/in pale/i).result('pale' as const)).map((disposition) => ({ count, disposition }));
+    : P.whitespace.then(P.regex(/in pale/i).result('pale' as const)).fallback('default' as const).map((disposition) => ({ count, disposition }));
 
 const lionParser = (count: SupportedNumber): P.Parser<Lion> => {
   const attitudeParser: P.Parser<LionAttitude> = buildAltParser(lionAttitudes, identity);
