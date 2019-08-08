@@ -25,7 +25,7 @@ import { isNotOne, SupportedNumber, supportedNumbers } from '../model/countAndDi
 
 const countParser: P.Parser<SupportedNumber> = P.alt(aParser, ...supportedNumbers.filter(isNotOne).map(numberParser));
 
-const lionParser = (count: 1 | 2 | 3): P.Parser<Lion> => {
+const lionParser = (count: SupportedNumber): P.Parser<Lion> => {
   const attitudeParser: P.Parser<LionAttitude> = buildAltParser(lionAttitudes, identity);
   const headParser: P.Parser<LionHead> = buildAltParser(lionHeads, identity);
   const tailParser: P.Parser<LionTail> = buildAltParser(lionTails, identity);
@@ -141,7 +141,7 @@ export function chargeParser(): P.Parser<Charge> {
   return P.alt(
     ...charges.map((charge) => {
       if (charge === 'lion') {
-        return P.alt(aParser, numberParser(2), numberParser(3))
+        return countParser
           .trim(P.optWhitespace)
           .chain((count) => lionParser(count));
       } else if (charge === 'eagle') {

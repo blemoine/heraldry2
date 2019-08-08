@@ -21,13 +21,15 @@ import {
   lionAttitudes,
   lionHeads,
   lionTails,
-  Lozenge, lozengeInsides,
-  Roundel, roundelInsides
+  Lozenge,
+  lozengeInsides,
+  Roundel,
+  roundelInsides,
 } from '../charge';
 import { cannotHappen } from '../../../utils/cannot-happen';
 import { Blason } from '../blason';
 import { Line, lines } from '../line';
-import { CountAndDisposition, supportedNumbers } from '../countAndDisposition';
+import { supportedNumbers } from '../countAndDisposition';
 
 const tinctureArb: Arbitrary<Tincture> = fc.constantFrom(...tinctures);
 const plainFieldArb: Arbitrary<PlainField> = tinctureArb.map((tincture) => ({ kind: 'plain', tincture }));
@@ -91,11 +93,13 @@ const chargeArb: Arbitrary<Charge> = fc.constantFrom(...charges).chain((chargeNa
         fc.option(fc.constantFrom(...lionTails)),
         tinctureArb,
         tinctureArb,
-        fc.constantFrom<CountAndDisposition>(
-          { count: 1 },
-          { count: 2, disposition: 'pale' },
-          { count: 3, disposition: 'pale' }
-        )
+        fc.constantFrom(...supportedNumbers).map((count) => {
+          if (count === 1) {
+            return { count };
+          } else {
+            return { count, disposition: 'pale' as const };
+          }
+        })
       )
       .map(
         ([attitude, head, tail, tincture, armedAndLangued, countAndDisposition]): Lion => {

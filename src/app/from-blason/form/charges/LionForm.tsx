@@ -3,11 +3,11 @@ import { Lion, LionAttitude, lionAttitudes, LionHead, lionHeads } from '../../..
 import { TinctureSelect } from '../TinctureSelect';
 import { Tincture } from '../../../model/tincture';
 import { SelectScalar } from '../../../common/SelectScalar';
+import { SupportedNumber, supportedNumbers } from '../../../model/countAndDisposition';
 
 type Props = { charge: Lion; chargeChange: (lion: Lion) => void };
 
 const headPostures = ['None', ...lionHeads] as const;
-const countOptions = [1, 2, 3] as const;
 
 export const LionForm = ({ charge, chargeChange }: Props) => {
   function chargeTinctureChange(tincture: Tincture) {
@@ -40,7 +40,7 @@ export const LionForm = ({ charge, chargeChange }: Props) => {
     });
   }
 
-  function countChange(count: 1 | 2 | 3) {
+  function countChange(count: SupportedNumber) {
     chargeChange({
       ...charge,
       countAndDisposition: count === 1 ? { count } : { count, disposition: 'pale' },
@@ -65,7 +65,11 @@ export const LionForm = ({ charge, chargeChange }: Props) => {
         <div className="col">
           <div className="form-group">
             <label>Select the number of lion</label>
-            <SelectScalar options={countOptions} value={charge.countAndDisposition.count} valueChange={countChange} />
+            <SelectScalar
+              options={supportedNumbers}
+              value={charge.countAndDisposition.count}
+              valueChange={countChange}
+            />
           </div>
         </div>
       </div>
