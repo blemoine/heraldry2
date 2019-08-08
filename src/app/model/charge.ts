@@ -36,6 +36,7 @@ export type Eagle = {
   attitude: EagleAttitude;
   tincture: Tincture;
   beakedAndArmed: Tincture;
+  countAndDisposition: CountAndDisposition;
 };
 
 export type FleurDeLys = {

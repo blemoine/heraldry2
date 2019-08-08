@@ -185,6 +185,7 @@ describe('stringifyBlason', () => {
           attitude: 'displayed',
           tincture: sable,
           beakedAndArmed: sable,
+          countAndDisposition: {count: 1}
         },
       })
     ).toBe('Or, an eagle displayed sable');

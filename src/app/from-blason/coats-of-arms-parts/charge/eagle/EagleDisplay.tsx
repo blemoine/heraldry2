@@ -3,6 +3,7 @@ import { Eagle } from '../../../../model/charge';
 import { Tincture } from '../../../../model/tincture';
 import SvgEagleDisplayed from './SvgEagleDisplayed';
 import { Dimension, scale } from '../../../../model/dimension';
+import { range } from '../../../../../utils/range';
 
 type Props = { charge: Eagle; dimension: Dimension; fillFromTincture: (tincture: Tincture) => string };
 export const EagleDisplay = (props: Props) => {
@@ -13,19 +14,29 @@ export const EagleDisplay = (props: Props) => {
   const tongueFill = props.fillFromTincture(charge.beakedAndArmed);
   const talonFill = props.fillFromTincture(charge.beakedAndArmed);
 
+  const count = charge.countAndDisposition.count;
   const sizeFactor = 0.85;
 
-  const computedDimension = scale(props.dimension, sizeFactor);
-
+  const dimension = props.dimension;
+  const computedDimension = scale(dimension, sizeFactor / count);
   return (
-    <g transform={`translate(${(props.dimension.width * (1 - sizeFactor)) / 2} 0)`}>
-      <SvgEagleDisplayed
-        dimension={computedDimension}
-        stroke={stroke}
-        mainFill={mainFill}
-        tongueFill={tongueFill}
-        talonFill={talonFill}
-      />
-    </g>
+    <>
+      {range(0, count).map((idx) => (
+        <g
+          key={idx}
+          transform={`translate(${(dimension.width - computedDimension.width) / 2} ${idx * computedDimension.height +
+            (dimension.height - count * computedDimension.height) / 2 -
+            computedDimension.height / 15} )`}
+        >
+          <SvgEagleDisplayed
+            dimension={computedDimension}
+            stroke={stroke}
+            mainFill={mainFill}
+            tongueFill={tongueFill}
+            talonFill={talonFill}
+          />
+        </g>
+      ))}
+    </>
   );
 };

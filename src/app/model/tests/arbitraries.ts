@@ -29,7 +29,7 @@ import {
 import { cannotHappen } from '../../../utils/cannot-happen';
 import { Blason } from '../blason';
 import { Line, lines } from '../line';
-import { supportedNumbers } from '../countAndDisposition';
+import { CountAndDisposition, supportedNumbers } from '../countAndDisposition';
 
 const tinctureArb: Arbitrary<Tincture> = fc.constantFrom(...tinctures);
 const plainFieldArb: Arbitrary<PlainField> = tinctureArb.map((tincture) => ({ kind: 'plain', tincture }));
@@ -85,6 +85,13 @@ const ordinaryArb: Arbitrary<Ordinary> = fc
   );
 
 const chargeArb: Arbitrary<Charge> = fc.constantFrom(...charges).chain((chargeName) => {
+  const countAndDistionArb: Arbitrary<CountAndDisposition> = fc.constantFrom(...supportedNumbers).map((count) => {
+    if (count === 1) {
+      return { count };
+    } else {
+      return { count, disposition: 'pale' as const };
+    }
+  });
   if (chargeName === 'lion') {
     return fc
       .tuple(
@@ -93,13 +100,7 @@ const chargeArb: Arbitrary<Charge> = fc.constantFrom(...charges).chain((chargeNa
         fc.option(fc.constantFrom(...lionTails)),
         tinctureArb,
         tinctureArb,
-        fc.constantFrom(...supportedNumbers).map((count) => {
-          if (count === 1) {
-            return { count };
-          } else {
-            return { count, disposition: 'pale' as const };
-          }
-        })
+        countAndDistionArb
       )
       .map(
         ([attitude, head, tail, tincture, armedAndLangued, countAndDisposition]): Lion => {
@@ -117,14 +118,15 @@ const chargeArb: Arbitrary<Charge> = fc.constantFrom(...charges).chain((chargeNa
       .map((i): Charge => i);
   } else if (chargeName === 'eagle') {
     return fc
-      .tuple(fc.constantFrom(...eagleAttitudes), tinctureArb, tinctureArb)
+      .tuple(fc.constantFrom(...eagleAttitudes), tinctureArb, tinctureArb, countAndDistionArb)
       .map(
-        ([attitude, tincture, beakedAndArmed]): Eagle => {
+        ([attitude, tincture, beakedAndArmed, countAndDisposition]): Eagle => {
           return {
             name: chargeName,
             attitude,
             tincture,
             beakedAndArmed,
+            countAndDisposition,
           };
         }
       )

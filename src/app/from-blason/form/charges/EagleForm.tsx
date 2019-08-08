@@ -3,6 +3,7 @@ import { Eagle, EagleAttitude, eagleAttitudes } from '../../../model/charge';
 import { TinctureSelect } from '../TinctureSelect';
 import { Tincture } from '../../../model/tincture';
 import { SelectScalar } from '../../../common/SelectScalar';
+import { SupportedNumber, supportedNumbers } from '../../../model/countAndDisposition';
 
 type Props = { charge: Eagle; chargeChange: (eagle: Eagle) => void };
 
@@ -17,6 +18,10 @@ export const EagleForm = ({ charge, chargeChange }: Props) => {
 
   function attitudeChange(attitude: EagleAttitude) {
     chargeChange({ ...charge, attitude });
+  }
+
+  function countChange(count: SupportedNumber) {
+    chargeChange({ ...charge, countAndDisposition: count === 1 ? { count } : { count, disposition: 'pale' } });
   }
 
   return (
@@ -41,6 +46,12 @@ export const EagleForm = ({ charge, chargeChange }: Props) => {
             <label>Select the attitude</label>
             <SelectScalar options={eagleAttitudes} value={charge.attitude} valueChange={attitudeChange} />
           </div>
+        </div>
+      </div>
+      <div className="col">
+        <div className="form-group">
+          <label>Select the number of eagles</label>
+          <SelectScalar options={supportedNumbers} value={charge.countAndDisposition.count} valueChange={countChange} />
         </div>
       </div>
     </>

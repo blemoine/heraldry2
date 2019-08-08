@@ -4016,7 +4016,7 @@ exports[`CoatsOfArms should render an eagle blason with a saltire 1`] = `
     clipPath="url(#plain-field-clip-path)"
   >
     <g
-      transform="translate(15.000000000000002 0)"
+      transform="translate(15 4.8888888888888875 )"
     >
       <svg
         height={226.66666666666669}

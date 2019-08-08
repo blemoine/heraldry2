@@ -19,7 +19,13 @@ export const ChargeForm = ({ charge, chargeChange }: Props) => {
         countAndDisposition: { count: 1 },
       });
     } else if (chargeName === 'eagle') {
-      chargeChange({ name: chargeName, attitude: 'displayed', tincture: sable, beakedAndArmed: or });
+      chargeChange({
+        name: chargeName,
+        attitude: 'displayed',
+        tincture: sable,
+        beakedAndArmed: or,
+        countAndDisposition: { count: 1 },
+      });
     } else if (chargeName === 'fleurdelys') {
       chargeChange({ name: chargeName, count: 3, tincture: or });
     } else if (chargeName === 'roundel' || chargeName === 'lozenge') {

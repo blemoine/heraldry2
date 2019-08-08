@@ -25,12 +25,18 @@ import { isNotOne, SupportedNumber, supportedNumbers } from '../model/countAndDi
 
 const countParser: P.Parser<SupportedNumber> = P.alt(aParser, ...supportedNumbers.filter(isNotOne).map(numberParser));
 
+const countAndDispositionParser = (count: SupportedNumber) =>
+  count === 1
+    ? P.of({ count })
+    : P.whitespace.then(P.regex(/in pale/i).result('pale' as const)).map((disposition) => ({ count, disposition }));
+
 const lionParser = (count: SupportedNumber): P.Parser<Lion> => {
   const attitudeParser: P.Parser<LionAttitude> = buildAltParser(lionAttitudes, identity);
   const headParser: P.Parser<LionHead> = buildAltParser(lionHeads, identity);
   const tailParser: P.Parser<LionTail> = buildAltParser(lionTails, identity);
 
   const lionNameParser = (count === 1 ? P.regex(/lion/i) : P.regex(/lions/i)).result('lion' as const);
+
   return P.seq(
     lionNameParser,
     P.whitespace.then(attitudeParser).fallback('rampant'),
@@ -40,9 +46,7 @@ const lionParser = (count: SupportedNumber): P.Parser<Lion> => {
       .then(P.whitespace)
       .then(tailParser)
       .fallback(null),
-    count === 1
-      ? P.of({ count })
-      : P.whitespace.then(P.regex(/in pale/i).result('pale' as const)).map((disposition) => ({ count, disposition })),
+    countAndDispositionParser(count),
     P.whitespace.then(tinctureParserFromName),
     P.whitespace
       .then(P.regex(/armed and langued/i))
@@ -64,12 +68,13 @@ const lionParser = (count: SupportedNumber): P.Parser<Lion> => {
   );
 };
 
-const eagleParser = () => {
-  const eagleNameParser = P.regex(/eagle/i);
+const eagleParser = (count: SupportedNumber) => {
+  const eagleNameParser = P.regex(/eagles?/i);
   const eagleAttitudeParser: P.Parser<EagleAttitude> = buildAltParser(eagleAttitudes, identity);
 
   return P.seq(
     eagleNameParser.skip(P.whitespace).then(eagleAttitudeParser),
+    countAndDispositionParser(count),
     P.whitespace.then(tinctureParserFromName),
     P.whitespace
       .then(P.regex(/beaked and armed/i))
@@ -77,9 +82,10 @@ const eagleParser = () => {
       .then(tinctureParserFromName)
       .fallback(null)
   ).map(
-    ([attitude, tincture, beakedAndArmed]): Eagle => {
+    ([attitude, countAndDisposition, tincture, beakedAndArmed]): Eagle => {
       return {
         name: 'eagle',
+        countAndDisposition,
         attitude,
         tincture,
         beakedAndArmed: beakedAndArmed || tincture,
@@ -141,13 +147,9 @@ export function chargeParser(): P.Parser<Charge> {
   return P.alt(
     ...charges.map((charge) => {
       if (charge === 'lion') {
-        return countParser
-          .trim(P.optWhitespace)
-          .chain((count) => lionParser(count));
+        return countParser.trim(P.optWhitespace).chain((count) => lionParser(count));
       } else if (charge === 'eagle') {
-        return P.alt(aParser)
-          .trim(P.optWhitespace)
-          .chain((): P.Parser<Charge> => eagleParser());
+        return countParser.trim(P.optWhitespace).chain((count): P.Parser<Charge> => eagleParser(count));
       } else if (charge === 'fleurdelys') {
         return fleurDeLysParser();
       } else if (charge === 'roundel') {
