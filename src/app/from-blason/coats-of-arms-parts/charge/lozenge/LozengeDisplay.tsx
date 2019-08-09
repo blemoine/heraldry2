@@ -12,7 +12,7 @@ export const LozengeDisplay = ({ charge, dimension: { width, height }, fillFromT
   const stroke = charge.tincture.name === 'sable' ? '#777' : '#000';
   const fill = fillFromTincture(charge.tincture);
 
-  const { cellWidth, positions } = getChargePositions(charge.count);
+  const { cellWidth, positions } = getChargePositions(charge.count, 'default');
   const radius = 0.75 * width * cellWidth;
 
   const acuteness = 1.2;

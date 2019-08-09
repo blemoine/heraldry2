@@ -1,8 +1,9 @@
 import { range } from '../../../../utils/range';
 import { max } from '../../../../utils/max';
 import { SupportedNumber } from '../../../model/countAndDisposition';
+import { cannotHappen } from '../../../../utils/cannot-happen';
 
-const repartitionMapping = {
+const defaultRepartitionMapping = {
   1: [1],
   2: [2],
   3: [2, 1],
@@ -26,14 +27,21 @@ const repartitionMapping = {
 } as const;
 
 export function getChargePositions(
-  count: SupportedNumber
-): { cellWidth: number; positions: ReadonlyArray<[number, number]> } {
-  const repartition: ReadonlyArray<number> = repartitionMapping[count];
+  count: SupportedNumber,
+  repartitionConfig: 'default' | 'pale'
+): { cellWidth: number; cellHeight: number; positions: ReadonlyArray<[number, number]> } {
+  const repartition: ReadonlyArray<number> =
+    repartitionConfig === 'default'
+      ? defaultRepartitionMapping[count]
+      : repartitionConfig === 'pale'
+      ? paleRepartition(count)
+      : cannotHappen(repartitionConfig);
   const columnCount = max(repartition) || 1;
+  const rowCount = repartition.length;
 
   const positions = repartition.flatMap(
     (numberOfRoundel, row): Array<[number, number]> => {
-      const cy = (row * 1.5 + 1) / (repartition.length * 2);
+      const cy = (row * 2 + 1) / (rowCount * 2);
       const offset: number = columnCount - numberOfRoundel;
       return range(0, numberOfRoundel).map((i): [number, number] => {
         const cx = (i * 2 + 1.5 + offset) / (columnCount * 2 + 1);
@@ -44,6 +52,11 @@ export function getChargePositions(
   );
   return {
     cellWidth: 1 / (columnCount * 2 + 1),
+    cellHeight: 1 / rowCount,
     positions,
   };
+}
+
+function paleRepartition(count: SupportedNumber): ReadonlyArray<number> {
+  return range(0, count).map((_i) => 1);
 }

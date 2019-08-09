@@ -27,4 +27,4 @@ Faire le "of the last"
 * Update bordure to user multiple MoveTo
 
 * SUpport for countAndDisposition for everythign (in pale and in fess)
-* Abstraire la disposition n pale and in fess comme c'est fait pour le defaut
+* Il y a quelques cas ou les annulets/losanges rentrent pas quand y'en a beaucoup

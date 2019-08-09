@@ -11,7 +11,7 @@ export const FleurDeLysDisplay = ({ charge, dimension, fillFromTincture }: Props
   const stroke = charge.tincture.name === 'sable' ? '#777' : '#000';
   const fill = fillFromTincture(charge.tincture);
 
-  const { cellWidth, positions } = getChargePositions(charge.count);
+  const { cellWidth, positions } = getChargePositions(charge.count, 'default');
   const computedDimension = scale(dimension, 1.5 * cellWidth);
 
   return (
