@@ -135,7 +135,7 @@ Argent, Azure, Barry of, Bendy, Bendy Sinister, Chequy, Ermine, Gules, Murrey, O
     const result = parseBlason('Per pale Azure and Sable, three Fleurs-de-Lis Or');
     const expected: Blason = {
       field: { kind: 'party', per: { name: 'pale', tinctures: [azure, sable], line: 'straight' } },
-      charge: { name: 'fleurdelys', count: 3, tincture: or },
+      charge: { name: 'fleurdelys', countAndDisposition: {count:3, disposition:'default'}, tincture: or },
     };
 
     expect(result).toEqual(expected);
@@ -229,6 +229,13 @@ Argent, Azure, Barry of, Bendy, Bendy Sinister, Chequy, Ermine, Gules, Murrey, O
     expect(parseBlason('Azure, seventeen annulets sable')).toEqual({
       field: { kind: 'plain', tincture: azure },
       charge: { name: 'roundel', tincture: sable, count: 17, inside: 'voided' },
+    });
+  });
+
+  it('should parse fleurs de lys in pale', () => {
+    expect(parseBlason('Azure, twelve fleur de lys in pale or')).toEqual({
+      field: { kind: 'plain', tincture: azure },
+      charge: { name: 'fleurdelys', tincture: or, countAndDisposition: {count:12, disposition: 'pale'} },
     });
   });
 });

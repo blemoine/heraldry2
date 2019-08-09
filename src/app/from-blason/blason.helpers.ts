@@ -108,7 +108,10 @@ export function stringifyParty(partyName: Party['name']): string {
 }
 
 function stringifyCharge(charge: Charge): string {
-  const count = charge.name === 'lion' || charge.name === 'eagle' ? charge.countAndDisposition.count : charge.count;
+  const count =
+    charge.name === 'lion' || charge.name === 'eagle' || charge.name === 'fleurdelys'
+      ? charge.countAndDisposition.count
+      : charge.count;
   const counterStr = count === 1 ? (charge.name === 'eagle' ? 'an' : 'a') : stringifyNumber(count);
   if (charge.name === 'eagle') {
     const count = charge.countAndDisposition.count;
@@ -129,7 +132,11 @@ function stringifyCharge(charge: Charge): string {
     return result;
   } else if (charge.name === 'fleurdelys') {
     let result = counterStr;
-    result += charge.count === 1 ? ' fleur de lys ' : ' fleurs de lys ';
+    result += charge.countAndDisposition.count === 1 ? ' fleur de lys ' : ' fleurs de lys ';
+
+    if (charge.countAndDisposition.count !== 1 && charge.countAndDisposition.disposition !== 'default') {
+      result += ' in ' + charge.countAndDisposition.disposition + ' ';
+    }
     result += charge.tincture.name;
 
     return result;

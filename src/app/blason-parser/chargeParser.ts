@@ -95,13 +95,13 @@ const eagleParser = (count: SupportedNumber) => {
 };
 
 const fleurDeLysParser = (): P.Parser<FleurDeLys> => {
-  return P.seq(
-    countParser,
-    P.regexp(/Fleurs?[- ]de[- ]l[yi]s/i)
-      .skip(P.whitespace)
-      .result('fleurdelys' as const),
-    tinctureParserFromName
-  ).map(([count, name, tincture]) => ({ name, count, tincture }));
+  return countParser.chain(count => {
+    return P.seq(
+      P.regexp(/Fleurs?[- ]de[- ]l[yi]s/i).result('fleurdelys' as const),
+      countAndDispositionParser(count),
+      P.whitespace.then(tinctureParserFromName)
+    ).map(([name, countAndDisposition, tincture]): FleurDeLys => ({ name, countAndDisposition, tincture }));
+  })
 };
 
 const roundelParser = (): P.Parser<Roundel> => {

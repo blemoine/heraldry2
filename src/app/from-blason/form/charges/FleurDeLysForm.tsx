@@ -12,7 +12,7 @@ export const FleurDeLysForm = ({ charge, chargeChange }: Props) => {
   }
 
   function countChange(count: SupportedNumber) {
-    chargeChange({ ...charge, count });
+    chargeChange({ ...charge, countAndDisposition: count === 1? {count}: {count, disposition: 'default'} });
   }
 
   return (
@@ -26,7 +26,7 @@ export const FleurDeLysForm = ({ charge, chargeChange }: Props) => {
       <div className="col">
         <div className="form-group">
           <label>Select the number of charge</label>
-          <SelectScalar options={supportedNumbers} value={charge.count} valueChange={countChange} />
+          <SelectScalar options={supportedNumbers} value={charge.countAndDisposition.count} valueChange={countChange} />
         </div>
       </div>
     </div>

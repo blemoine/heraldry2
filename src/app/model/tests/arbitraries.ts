@@ -16,7 +16,7 @@ import {
   Charge,
   charges,
   Eagle,
-  eagleAttitudes,
+  eagleAttitudes, FleurDeLys,
   Lion,
   lionAttitudes,
   lionHeads,
@@ -128,10 +128,10 @@ const chargeArb: Arbitrary<Charge> = fc.constantFrom(...charges).chain((chargeNa
       )
       .map((i): Charge => i);
   } else if (chargeName === 'fleurdelys') {
-    return fc.record({
+    return fc.record<FleurDeLys>({
       name: fc.constant(chargeName),
       tincture: tinctureArb,
-      count: fc.constantFrom(...supportedNumbers),
+      countAndDisposition: countAndDistionArb,
     });
   } else if (chargeName === 'lozenge') {
     return fc.record<Lozenge>({
