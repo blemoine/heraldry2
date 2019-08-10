@@ -108,13 +108,9 @@ export function stringifyParty(partyName: Party['name']): string {
 }
 
 function stringifyCharge(charge: Charge): string {
-  const count =
-    charge.name === 'lion' || charge.name === 'eagle' || charge.name === 'fleurdelys'
-      ? charge.countAndDisposition.count
-      : charge.count;
+  const count = charge.countAndDisposition.count;
   const counterStr = count === 1 ? (charge.name === 'eagle' ? 'an' : 'a') : stringifyNumber(count);
   if (charge.name === 'eagle') {
-    const count = charge.countAndDisposition.count;
     let result = counterStr;
     result += ' ' + pluralize('eagle', count);
 
@@ -141,8 +137,6 @@ function stringifyCharge(charge: Charge): string {
 
     return result;
   } else if (charge.name === 'lion') {
-    const count = charge.countAndDisposition.count;
-
     let result = counterStr;
     result += ' ' + pluralize('lion', count);
 
@@ -167,13 +161,22 @@ function stringifyCharge(charge: Charge): string {
   } else if (charge.name === 'roundel') {
     let result = counterStr;
     if (charge.inside === 'voided') {
-      result += ' ' + pluralize('annulet', charge.count) + ' ';
+      result += ' ' + pluralize('annulet', count) + ' ';
+      if (charge.countAndDisposition.count !== 1 && charge.countAndDisposition.disposition !== 'default') {
+        result += ' in ' + charge.countAndDisposition.disposition + ' ';
+      }
       result += charge.tincture.name;
     } else if (charge.inside === 'nothing') {
       if (charge.tincture.name === or.name) {
-        result += ' ' + pluralize('bezant', charge.count);
+        result += ' ' + pluralize('bezant', count);
+        if (charge.countAndDisposition.count !== 1 && charge.countAndDisposition.disposition !== 'default') {
+          result += ' in ' + charge.countAndDisposition.disposition + ' ';
+        }
       } else {
-        result += ' ' + pluralize('roundel', charge.count) + ' ';
+        result += ' ' + pluralize('roundel', count) + ' ';
+        if (charge.countAndDisposition.count !== 1 && charge.countAndDisposition.disposition !== 'default') {
+          result += ' in ' + charge.countAndDisposition.disposition + ' ';
+        }
         result += charge.tincture.name;
       }
     } else {
@@ -184,13 +187,16 @@ function stringifyCharge(charge: Charge): string {
   } else if (charge.name === 'lozenge') {
     let result = counterStr;
     if (charge.inside === 'voided') {
-      result += ' ' + pluralize('mascle', charge.count) + ' ';
+      result += ' ' + pluralize('mascle', count) + ' ';
     } else if (charge.inside === 'pierced') {
-      result += ' ' + pluralize('rustre', charge.count) + ' ';
+      result += ' ' + pluralize('rustre', count) + ' ';
     } else if (charge.inside === 'nothing') {
-      result += ' ' + pluralize('lozenge', charge.count) + ' ';
+      result += ' ' + pluralize('lozenge', count) + ' ';
     } else {
       return cannotHappen(charge.inside);
+    }
+    if (charge.countAndDisposition.count !== 1 && charge.countAndDisposition.disposition !== 'default') {
+      result += ' in ' + charge.countAndDisposition.disposition + ' ';
     }
     result += charge.tincture.name;
 

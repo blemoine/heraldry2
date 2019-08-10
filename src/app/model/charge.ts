@@ -1,5 +1,5 @@
 import { Tincture } from './tincture';
-import { CountAndDisposition, SupportedNumber } from './countAndDisposition';
+import { CountAndDisposition } from './countAndDisposition';
 
 export const lionAttitudes = [
   'rampant',
@@ -49,7 +49,7 @@ export const roundelInsides = ['nothing', 'voided'] as const;
 export type RoundelInside = typeof roundelInsides[number];
 export type Roundel = {
   name: 'roundel';
-  count: SupportedNumber;
+  countAndDisposition: CountAndDisposition;
   tincture: Tincture;
   inside: RoundelInside;
 };
@@ -58,7 +58,7 @@ export const lozengeInsides = ['nothing', 'voided', 'pierced'] as const;
 export type LozengeInside = typeof lozengeInsides[number];
 export type Lozenge = {
   name: 'lozenge';
-  count: SupportedNumber;
+  countAndDisposition: CountAndDisposition;
   tincture: Tincture;
   inside: LozengeInside;
 };

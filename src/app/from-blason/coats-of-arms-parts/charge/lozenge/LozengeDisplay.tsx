@@ -12,9 +12,11 @@ export const LozengeDisplay = ({ charge, dimension: { width, height }, fillFromT
   const stroke = charge.tincture.name === 'sable' ? '#777' : '#000';
   const fill = fillFromTincture(charge.tincture);
 
-  const { cellWidth, positions } = getChargePositions(charge.count, 'default');
-  const radius = 0.75 * width * cellWidth;
-
+  const countAndDisposition = charge.countAndDisposition;
+  const disposition = 'disposition' in countAndDisposition ? countAndDisposition.disposition : 'default';
+  const count = countAndDisposition.count;
+  const { cellWidth, cellHeight, positions } = getChargePositions(count, disposition);
+  const radius = Math.min(0.75 * cellWidth * width, 0.4 * cellHeight * height);
   const acuteness = 1.2;
   return (
     <>
@@ -42,7 +44,7 @@ export const LozengeDisplay = ({ charge, dimension: { width, height }, fillFromT
         } else if (charge.inside === 'nothing') {
           return <PathFromBuilder key={i} pathBuilder={pathBuilder} stroke={stroke} fill={fill} />;
         } else if (charge.inside === 'pierced') {
-          const innerRadius = radius * 0.50;
+          const innerRadius = radius * 0.5;
           const voidedPathBuilder = pathBuilder
             .moveTo([centerX, centerY - innerRadius])
             .arcTo([centerX, centerY + innerRadius], { radius: innerRadius })

@@ -8,12 +8,17 @@ import { SvgPathBuilder } from '../../../../svg-path-builder/svg-path-builder';
 import { cannotHappen } from '../../../../../utils/cannot-happen';
 
 type Props = { charge: Roundel; dimension: Dimension; fillFromTincture: (tincture: Tincture) => string };
-export const RoundelDisplay = ({ charge, dimension: { width, height }, fillFromTincture }: Props) => {
+export const RoundelDisplay = ({ charge, dimension, fillFromTincture }: Props) => {
+  const { width, height } = dimension;
   const stroke = charge.tincture.name === 'sable' ? '#777' : '#000';
   const fill = fillFromTincture(charge.tincture);
 
-  const { cellWidth, positions } = getChargePositions(charge.count, 'default');
-  const radius = 0.75 * width * cellWidth;
+  const countAndDisposition = charge.countAndDisposition;
+  const disposition = 'disposition' in countAndDisposition ? countAndDisposition.disposition : 'default';
+  const count = countAndDisposition.count;
+  const { cellWidth, cellHeight, positions } = getChargePositions(count, disposition);
+  const radius = Math.min(0.75 * cellWidth * width, 0.40 * cellHeight * height);
+
   return (
     <>
       {positions.map(([cx, cy], i) => {

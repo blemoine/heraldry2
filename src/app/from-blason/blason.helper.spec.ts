@@ -211,7 +211,7 @@ describe('stringifyBlason', () => {
         charge: {
           name: 'roundel',
           tincture: or,
-          count: 3,
+          countAndDisposition: {count:3, disposition: 'default'},
           inside: 'nothing',
         },
       })
@@ -225,7 +225,7 @@ describe('stringifyBlason', () => {
         charge: {
           name: 'roundel',
           tincture: or,
-          count: 3,
+          countAndDisposition: {count:3, disposition: 'default'},
           inside: 'voided',
         },
       })
@@ -239,7 +239,7 @@ describe('stringifyBlason', () => {
         charge: {
           name: 'lozenge',
           tincture: or,
-          count: 3,
+          countAndDisposition: {count:3, disposition: 'default'},
           inside: 'voided',
         },
       })

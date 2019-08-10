@@ -137,14 +137,14 @@ const chargeArb: Arbitrary<Charge> = fc.constantFrom(...charges).chain((chargeNa
     return fc.record<Lozenge>({
       name: fc.constant(chargeName),
       tincture: tinctureArb,
-      count: fc.constantFrom(...supportedNumbers),
+      countAndDisposition: countAndDistionArb,
       inside: fc.constantFrom(...lozengeInsides),
     });
   } else if (chargeName === 'roundel') {
     return fc.record<Roundel>({
       name: fc.constant(chargeName),
       tincture: tinctureArb,
-      count: fc.constantFrom(...supportedNumbers),
+      countAndDisposition: countAndDistionArb,
       inside: fc.constantFrom(...roundelInsides),
     });
   } else {

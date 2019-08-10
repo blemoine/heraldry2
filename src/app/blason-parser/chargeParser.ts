@@ -28,7 +28,10 @@ const countParser: P.Parser<SupportedNumber> = P.alt(aParser, ...supportedNumber
 const countAndDispositionParser = (count: SupportedNumber) =>
   count === 1
     ? P.of({ count })
-    : P.whitespace.then(P.regex(/in pale/i).result('pale' as const)).fallback('default' as const).map((disposition) => ({ count, disposition }));
+    : P.whitespace
+        .then(P.regex(/in pale/i).result('pale' as const))
+        .fallback('default' as const)
+        .map((disposition) => ({ count, disposition }));
 
 const lionParser = (count: SupportedNumber): P.Parser<Lion> => {
   const attitudeParser: P.Parser<LionAttitude> = buildAltParser(lionAttitudes, identity);
@@ -95,52 +98,53 @@ const eagleParser = (count: SupportedNumber) => {
 };
 
 const fleurDeLysParser = (): P.Parser<FleurDeLys> => {
-  return countParser.chain(count => {
+  return countParser.chain((count) => {
     return P.seq(
       P.regexp(/Fleurs?[- ]de[- ]l[yi]s/i).result('fleurdelys' as const),
       countAndDispositionParser(count),
       P.whitespace.then(tinctureParserFromName)
     ).map(([name, countAndDisposition, tincture]): FleurDeLys => ({ name, countAndDisposition, tincture }));
-  })
+  });
 };
 
 const roundelParser = (): P.Parser<Roundel> => {
-  return P.seq(
-    countParser,
-    P.alt(
-      P.seq(
-        P.regexp(/roundels?/i)
-          .skip(P.whitespace)
-          .result('roundel' as const),
-        tinctureParserFromName
-      ).map(([name, tincture]) => [name, tincture, 'nothing'] as const),
-      P.regex(/bezants?/i).result(['roundel' as const, or, 'nothing'] as const),
-      P.seq(
-        P.regexp(/annulets?/i)
-          .skip(P.whitespace)
-          .result('roundel' as const),
-        tinctureParserFromName
-      ).map(([name, tincture]) => [name, tincture, 'voided'] as const)
-    )
-  ).map(([count, [name, tincture, inside]]) => ({ name, count, tincture, inside }));
+  return countParser.chain((count) => {
+    return P.seq(
+      P.alt(
+        P.seq(
+          P.regexp(/roundels?/i).result('roundel' as const),
+          countAndDispositionParser(count),
+          P.whitespace.then(tinctureParserFromName)
+        ).map(([name, countAndDisposition, tincture]) => [name, countAndDisposition, tincture, 'nothing'] as const),
+        P.seq(P.regexp(/bezants?/i).result('roundel' as const), countAndDispositionParser(count)).map(
+          ([name, countAndDisposition]) => [name, countAndDisposition, or, 'nothing'] as const
+        ),
+        P.seq(
+          P.regexp(/annulets?/i).result('roundel' as const),
+          countAndDispositionParser(count),
+          P.whitespace.then(tinctureParserFromName)
+        ).map(([name, countAndDisposition, tincture]) => [name, countAndDisposition, tincture, 'voided'] as const)
+      )
+    ).map(
+      ([[name, countAndDisposition, tincture, inside]]): Roundel => ({ name, countAndDisposition, tincture, inside })
+    );
+  });
 };
 
 const lozengeParser = (): P.Parser<Lozenge> => {
-  return P.seq(
-    countParser,
-    P.alt(
-      P.regexp(/lozenges?/i)
-        .skip(P.whitespace)
-        .result(['lozenge', 'nothing'] as const),
-      P.regexp(/mascles?/i)
-        .skip(P.whitespace)
-        .result(['lozenge', 'voided'] as const),
-      P.regexp(/rustres?/i)
-        .skip(P.whitespace)
-        .result(['lozenge', 'pierced'] as const)
-    ),
-    tinctureParserFromName
-  ).map(([count, [name, inside], tincture]) => ({ name, count, tincture, inside }));
+  return countParser.chain((count) => {
+    return P.seq(
+      P.alt(
+        P.regexp(/lozenges?/i).result(['lozenge', 'nothing'] as const),
+        P.regexp(/mascles?/i).result(['lozenge', 'voided'] as const),
+        P.regexp(/rustres?/i).result(['lozenge', 'pierced'] as const)
+      ),
+      countAndDispositionParser(count),
+      P.whitespace.then(tinctureParserFromName)
+    ).map(
+      ([[name, inside], countAndDisposition, tincture]): Lozenge => ({ name, countAndDisposition, tincture, inside })
+    );
+  });
 };
 
 export function chargeParser(): P.Parser<Charge> {
