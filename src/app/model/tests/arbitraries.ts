@@ -16,7 +16,8 @@ import {
   Charge,
   charges,
   Eagle,
-  eagleAttitudes, FleurDeLys,
+  eagleAttitudes,
+  FleurDeLys,
   Lion,
   lionAttitudes,
   lionHeads,
@@ -87,7 +88,7 @@ const ordinaryArb: Arbitrary<Ordinary> = fc
 const chargeArb: Arbitrary<Charge> = fc.constantFrom(...charges).chain((chargeName) => {
   const countAndDistionArb: Arbitrary<CountAndDisposition> = fc
     .tuple(fc.constantFrom(...supportedNumbers), fc.constantFrom('pale' as const, 'default' as const))
-    .map(([count, disposition]) => (count === 1 ? { count } : { count, disposition }));
+    .map(([count, disposition]) => ({ count, disposition: count === 1 ? 'default' : disposition }));
   if (chargeName === 'lion') {
     return fc
       .tuple(

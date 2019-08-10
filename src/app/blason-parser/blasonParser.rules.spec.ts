@@ -9,7 +9,7 @@ describe('parseBlason and stringify', () => {
       fc.property(blasonArb, (blason) => {
         expect(parseBlason(stringifyBlason(blason))).toEqual(blason);
       }),
-      {numRuns: 500}
+      { numRuns: 500 }
     );
   });
 });

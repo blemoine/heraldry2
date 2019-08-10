@@ -78,7 +78,7 @@ describe('stringifyBlason', () => {
           attitude: 'rampant',
           tail: null,
           head: null,
-          countAndDisposition: { count: 1 },
+          countAndDisposition: { count: 1, disposition: 'default' },
         },
       })
     ).toBe('Azure, a lion rampant or');
@@ -95,7 +95,7 @@ describe('stringifyBlason', () => {
           attitude: 'rampant',
           tail: null,
           head: null,
-          countAndDisposition: { count: 1 },
+          countAndDisposition: { count: 1, disposition: 'default' },
         },
       })
     ).toBe('Gules, a lion rampant sable armed and langued azure');
@@ -113,7 +113,7 @@ describe('stringifyBlason', () => {
           attitude: 'passant',
           tail: 'nowed',
           head: 'guardant',
-          countAndDisposition: { count: 1 },
+          countAndDisposition: { count: 1, disposition: 'default' },
         },
       })
     ).toBe(
@@ -185,7 +185,7 @@ describe('stringifyBlason', () => {
           attitude: 'displayed',
           tincture: sable,
           beakedAndArmed: sable,
-          countAndDisposition: {count: 1}
+          countAndDisposition: { count: 1, disposition: 'default' },
         },
       })
     ).toBe('Or, an eagle displayed sable');
@@ -211,7 +211,7 @@ describe('stringifyBlason', () => {
         charge: {
           name: 'roundel',
           tincture: or,
-          countAndDisposition: {count:3, disposition: 'default'},
+          countAndDisposition: { count: 3, disposition: 'default' },
           inside: 'nothing',
         },
       })
@@ -225,7 +225,7 @@ describe('stringifyBlason', () => {
         charge: {
           name: 'roundel',
           tincture: or,
-          countAndDisposition: {count:3, disposition: 'default'},
+          countAndDisposition: { count: 3, disposition: 'default' },
           inside: 'voided',
         },
       })
@@ -239,7 +239,7 @@ describe('stringifyBlason', () => {
         charge: {
           name: 'lozenge',
           tincture: or,
-          countAndDisposition: {count:3, disposition: 'default'},
+          countAndDisposition: { count: 3, disposition: 'default' },
           inside: 'voided',
         },
       })
@@ -298,7 +298,7 @@ describe('isThereFur', () => {
             tincture: azure,
             attitude: 'rampant',
             tail: null,
-            countAndDisposition: { count: 1 },
+            countAndDisposition: { count: 1, disposition: 'default' },
           },
         },
         'ermine'
@@ -319,7 +319,7 @@ describe('isThereFur', () => {
             tincture: vair,
             attitude: 'rampant',
             tail: null,
-            countAndDisposition: { count: 1 },
+            countAndDisposition: { count: 1, disposition: 'default' },
           },
         },
         'vair'

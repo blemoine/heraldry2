@@ -13,11 +13,9 @@ export const RoundelDisplay = ({ charge, dimension, fillFromTincture }: Props) =
   const stroke = charge.tincture.name === 'sable' ? '#777' : '#000';
   const fill = fillFromTincture(charge.tincture);
 
-  const countAndDisposition = charge.countAndDisposition;
-  const disposition = 'disposition' in countAndDisposition ? countAndDisposition.disposition : 'default';
-  const count = countAndDisposition.count;
+  const { count, disposition } = charge.countAndDisposition;
   const { cellWidth, cellHeight, positions } = getChargePositions(count, disposition);
-  const radius = Math.min(0.75 * cellWidth * width, 0.40 * cellHeight * height);
+  const radius = Math.min(0.75 * cellWidth * width, 0.4 * cellHeight * height);
 
   return (
     <>

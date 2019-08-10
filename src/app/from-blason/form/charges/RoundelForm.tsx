@@ -12,7 +12,7 @@ export const RoundelForm = ({ charge, chargeChange }: Props) => {
   }
 
   function countChange(count: SupportedNumber) {
-    chargeChange({ ...charge, countAndDisposition: count === 1 ? { count } : { count, disposition: 'default' } });
+    chargeChange({ ...charge, countAndDisposition: { count, disposition: 'default' } });
   }
 
   function voidedChange(inside: RoundelInside) {

@@ -43,7 +43,7 @@ export const LionForm = ({ charge, chargeChange }: Props) => {
   function countChange(count: SupportedNumber) {
     chargeChange({
       ...charge,
-      countAndDisposition: count === 1 ? { count } : { count, disposition: 'pale' },
+      countAndDisposition: { count, disposition: 'default' },
     });
   }
 

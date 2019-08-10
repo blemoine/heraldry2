@@ -21,7 +21,7 @@ export const EagleForm = ({ charge, chargeChange }: Props) => {
   }
 
   function countChange(count: SupportedNumber) {
-    chargeChange({ ...charge, countAndDisposition: count === 1 ? { count } : { count, disposition: 'pale' } });
+    chargeChange({ ...charge, countAndDisposition: { count, disposition: 'default' } });
   }
 
   return (

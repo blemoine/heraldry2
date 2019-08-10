@@ -16,7 +16,7 @@ export const ChargeForm = ({ charge, chargeChange }: Props) => {
         head: null,
         tail: null,
         tincture: or,
-        countAndDisposition: { count: 1 },
+        countAndDisposition: { count: 1, disposition: 'default' },
       });
     } else if (chargeName === 'eagle') {
       chargeChange({
@@ -24,7 +24,7 @@ export const ChargeForm = ({ charge, chargeChange }: Props) => {
         attitude: 'displayed',
         tincture: sable,
         beakedAndArmed: or,
-        countAndDisposition: { count: 1 },
+        countAndDisposition: { count: 1, disposition: 'default' },
       });
     } else if (chargeName === 'fleurdelys') {
       chargeChange({ name: chargeName, countAndDisposition: { count: 3, disposition: 'default' }, tincture: or });
