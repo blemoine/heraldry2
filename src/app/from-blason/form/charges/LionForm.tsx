@@ -3,7 +3,8 @@ import { Lion, LionAttitude, lionAttitudes, LionHead, lionHeads } from '../../..
 import { TinctureSelect } from '../TinctureSelect';
 import { Tincture } from '../../../model/tincture';
 import { SelectScalar } from '../../../common/SelectScalar';
-import { SupportedNumber, supportedNumbers } from '../../../model/countAndDisposition';
+import { CountAndDisposition } from '../../../model/countAndDisposition';
+import { CountAndDispositionForm } from '../CountAndDispositionForm';
 
 type Props = { charge: Lion; chargeChange: (lion: Lion) => void };
 
@@ -11,17 +12,11 @@ const headPostures = ['None', ...lionHeads] as const;
 
 export const LionForm = ({ charge, chargeChange }: Props) => {
   function chargeTinctureChange(tincture: Tincture) {
-    chargeChange({
-      ...charge,
-      tincture: tincture,
-    });
+    chargeChange({ ...charge, tincture: tincture });
   }
 
   function armedLanguedTinctureChange(tincture: Tincture) {
-    chargeChange({
-      ...charge,
-      armedAndLangued: tincture,
-    });
+    chargeChange({ ...charge, armedAndLangued: tincture });
   }
 
   const selectedHead = charge.head || 'None';
@@ -34,17 +29,11 @@ export const LionForm = ({ charge, chargeChange }: Props) => {
   }
 
   function attitudeChange(attitude: LionAttitude) {
-    chargeChange({
-      ...charge,
-      attitude,
-    });
+    chargeChange({ ...charge, attitude });
   }
 
-  function countChange(count: SupportedNumber) {
-    chargeChange({
-      ...charge,
-      countAndDisposition: { count, disposition: 'default' },
-    });
+  function countAndDispositionChange(countAndDisposition: CountAndDisposition) {
+    chargeChange({ ...charge, countAndDisposition });
   }
 
   return (
@@ -62,17 +51,11 @@ export const LionForm = ({ charge, chargeChange }: Props) => {
             <TinctureSelect tincture={charge.armedAndLangued} tinctureChange={armedLanguedTinctureChange} />
           </div>
         </div>
-        <div className="col">
-          <div className="form-group">
-            <label>Select the number of lion</label>
-            <SelectScalar
-              options={supportedNumbers}
-              value={charge.countAndDisposition.count}
-              valueChange={countChange}
-            />
-          </div>
-        </div>
       </div>
+      <CountAndDispositionForm
+        countAndDisposition={charge.countAndDisposition}
+        countAndDispositionChange={countAndDispositionChange}
+      />
       <div className="row">
         <div className="col">
           <div className="form-group">
