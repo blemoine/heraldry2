@@ -1,6 +1,6 @@
 import { range } from '../../../../utils/range';
 import { max } from '../../../../utils/max';
-import { SupportedNumber } from '../../../model/countAndDisposition';
+import { Disposition, SupportedNumber } from '../../../model/countAndDisposition';
 import { cannotHappen } from '../../../../utils/cannot-happen';
 
 const defaultRepartitionMapping = {
@@ -28,14 +28,9 @@ const defaultRepartitionMapping = {
 
 export function getChargePositions(
   count: SupportedNumber,
-  repartitionConfig: 'default' | 'pale'
+  repartitionConfig: Disposition
 ): { cellWidth: number; cellHeight: number; positions: ReadonlyArray<[number, number]> } {
-  const repartition: ReadonlyArray<number> =
-    repartitionConfig === 'default'
-      ? defaultRepartitionMapping[count]
-      : repartitionConfig === 'pale'
-      ? paleRepartition(count)
-      : cannotHappen(repartitionConfig);
+  const repartition: ReadonlyArray<number> = getRepartition(count, repartitionConfig);
   const columnCount = max(repartition) || 1;
   const rowCount = repartition.length;
 
@@ -57,6 +52,14 @@ export function getChargePositions(
   };
 }
 
-function paleRepartition(count: SupportedNumber): ReadonlyArray<number> {
-  return range(0, count).map((_i) => 1);
+function getRepartition(count: SupportedNumber, repartitionConfig: 'default' | 'pale' | 'fess'): ReadonlyArray<number> {
+  if (repartitionConfig === 'default') {
+    return defaultRepartitionMapping[count];
+  } else if (repartitionConfig === 'pale') {
+    return range(0, count).map((_i) => 1);
+  } else if (repartitionConfig === 'fess') {
+    return [count];
+  } else {
+    return cannotHappen(repartitionConfig);
+  }
 }

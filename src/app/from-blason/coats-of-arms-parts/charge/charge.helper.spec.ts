@@ -65,4 +65,12 @@ describe('getChargePositions', () => {
       positions: [[0.5, 0.1], [0.5, 0.3], [0.5, 0.5], [0.5, 0.7], [0.5, 0.9]],
     });
   });
+
+  it('should display the number of element in fess', () => {
+    expect(getChargePositions(4, 'fess')).toEqual({
+      cellWidth: 1 / 9,
+      cellHeight: 1,
+      positions: [[3 / 18, 0.5], [7 / 18, 0.5], [11 / 18, 0.5], [15 / 18, 0.5]],
+    });
+  });
 });

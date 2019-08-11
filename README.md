@@ -26,5 +26,5 @@ Faire le "of the last"
 * extract stringify functions
 * Update bordure to user multiple MoveTo
 
-* SUpport for countAndDisposition for everythign (in pale and in fess)
-* Il y a quelques cas ou les annulets/losanges rentrent pas quand y'en a beaucoup
+* Factorize form for lozenge/roundel/fleur de lys
+* Il y a quelques cas ou les annulets/losanges rentrent pas quand y'en a beaucoup (9 en particulier)
