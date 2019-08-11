@@ -25,13 +25,16 @@ import { isNotOne, SupportedNumber, supportedNumbers } from '../model/countAndDi
 
 const countParser: P.Parser<SupportedNumber> = P.alt(aParser, ...supportedNumbers.filter(isNotOne).map(numberParser));
 
-const countAndDispositionParser = (count: SupportedNumber) =>
-  count === 1
-    ? P.of({ count, disposition: 'default' })
-    : P.whitespace
-        .then(P.regex(/in pale/i).result('pale' as const))
-        .fallback('default' as const)
-        .map((disposition) => ({ count, disposition }));
+const countAndDispositionParser = (count: SupportedNumber) => {
+  if (count === 1) {
+    return P.of({ count, disposition: 'default' });
+  } else {
+    return P.whitespace
+      .then(P.alt(P.regex(/in pale/i).result('pale' as const), P.regex(/in fess/i).result('fess' as const)))
+      .fallback('default' as const)
+      .map((disposition) => ({ count, disposition }));
+  }
+};
 
 const lionParser = (count: SupportedNumber): P.Parser<Lion> => {
   const attitudeParser: P.Parser<LionAttitude> = buildAltParser(lionAttitudes, identity);

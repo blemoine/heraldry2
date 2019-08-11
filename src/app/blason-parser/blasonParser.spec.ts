@@ -248,4 +248,13 @@ Argent, Azure, Barry of, Bendy, Bendy Sinister, Chequy, Ermine, Gules, Murrey, O
       charge: { name: 'fleurdelys', tincture: or, countAndDisposition: { count: 12, disposition: 'pale' } },
     });
   });
+
+  it('should parse Paly argent and gules, a chief engrailed sable, four lozenges in fess azure', () => {
+    const expected: Blason = {
+      field: { kind: 'paly', tinctures: [argent, gules] },
+      ordinary: {name:'chief', line: 'engrailed', tincture: sable},
+      charge: { name: 'lozenge', tincture: azure, countAndDisposition: { count: 4, disposition: 'fess' }, inside: 'nothing' },
+    };
+    expect(parseBlason('Paly argent and gules, a chief engrailed sable, four lozenges in fess azure')).toEqual(expected);
+  });
 });

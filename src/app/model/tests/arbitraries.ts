@@ -30,7 +30,7 @@ import {
 import { cannotHappen } from '../../../utils/cannot-happen';
 import { Blason } from '../blason';
 import { Line, lines } from '../line';
-import { CountAndDisposition, supportedNumbers } from '../countAndDisposition';
+import { availableDispositions, CountAndDisposition, supportedNumbers } from '../countAndDisposition';
 
 const tinctureArb: Arbitrary<Tincture> = fc.constantFrom(...tinctures);
 const plainFieldArb: Arbitrary<PlainField> = tinctureArb.map((tincture) => ({ kind: 'plain', tincture }));
@@ -87,7 +87,7 @@ const ordinaryArb: Arbitrary<Ordinary> = fc
 
 const chargeArb: Arbitrary<Charge> = fc.constantFrom(...charges).chain((chargeName) => {
   const countAndDistionArb: Arbitrary<CountAndDisposition> = fc
-    .tuple(fc.constantFrom(...supportedNumbers), fc.constantFrom('pale' as const, 'default' as const))
+    .tuple(fc.constantFrom(...supportedNumbers), fc.constantFrom(...availableDispositions))
     .map(([count, disposition]) => ({ count, disposition: count === 1 ? 'default' : disposition }));
   if (chargeName === 'lion') {
     return fc
