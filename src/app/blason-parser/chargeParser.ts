@@ -21,11 +21,11 @@ import { identity } from '../../utils/identity';
 import { gules, or } from '../model/tincture';
 import { cannotHappen } from '../../utils/cannot-happen';
 import { tinctureParserFromName } from './tinctureParser';
-import { isNotOne, SupportedNumber, supportedNumbers } from '../model/countAndDisposition';
+import { CountAndDisposition, isNotOne, SupportedNumber, supportedNumbers } from '../model/countAndDisposition';
 
 const countParser: P.Parser<SupportedNumber> = P.alt(aParser, ...supportedNumbers.filter(isNotOne).map(numberParser));
 
-const countAndDispositionParser = (count: SupportedNumber) => {
+const countAndDispositionParser = (count: SupportedNumber): P.Parser<CountAndDisposition> => {
   if (count === 1) {
     return P.of({ count, disposition: 'default' });
   } else {
@@ -45,7 +45,7 @@ const lionParser = (count: SupportedNumber): P.Parser<Lion> => {
 
   return P.seq(
     lionNameParser,
-    P.whitespace.then(attitudeParser).fallback('rampant'),
+    P.whitespace.then(attitudeParser).fallback('rampant' as const),
     P.whitespace.then(headParser).fallback(null),
     P.whitespace
       .then(P.regex(/tail/i))
