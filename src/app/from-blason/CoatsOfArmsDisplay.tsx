@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Blason } from '../model/blason';
 import { isThereFur } from './blason.helpers';
 import { OrdinaryDisplay } from './coats-of-arms-parts/ordinaries/OrdinaryDisplay';
-import { VairDisplay } from './coats-of-arms-parts/VairDisplay';
 import { uuid } from '../../utils/uuid';
 import { ermines, Furs, isFur, Tincture, vair } from '../model/tincture';
 import { FieldDisplay } from './coats-of-arms-parts/FieldDisplay';
@@ -10,6 +9,7 @@ import { HeaterDisplay } from './coats-of-arms-parts/escutcheon/HeaterDisplay';
 import { ChargeDisplay } from './coats-of-arms-parts/ChargeDisplay';
 import { Dimension } from '../model/dimension';
 import { ErminePatternDef } from './coats-of-arms-parts/ErminePatternDef';
+import { VairPatternDef } from './coats-of-arms-parts/VairPatternDef';
 
 type Props = { blason: Blason; dimension: Dimension };
 export const CoatsOfArmsDisplay = (props: Props) => {
@@ -48,30 +48,17 @@ export const CoatsOfArmsDisplay = (props: Props) => {
       <defs>
         {ermines.map((ermine) => {
           return isThereFur(blason, ermine.name) ? (
-            <ErminePatternDef key={ermine.name} ermine={ermine} dimension={dimension} patternId={furPatternId(ermine)} />
+            <ErminePatternDef
+              key={ermine.name}
+              ermine={ermine}
+              dimension={dimension}
+              patternId={furPatternId(ermine)}
+            />
           ) : (
             ''
           );
         })}
-        {isThereFur(blason, 'vair') && (
-          <>
-            <symbol viewBox="0 0 200 200" id="vair">
-              <VairDisplay width={200} height={200} />
-            </symbol>
-            <pattern
-              id={furPatternId(vair)}
-              width={width / 5}
-              height={width / 2.5}
-              patternUnits="userSpaceOnUse"
-              viewBox="0 0 100 200"
-            >
-              <rect width="100%" height="100%" fill="white" />
-              <use href="#vair" x="0" y="0" width={100} height={100} />
-              <use href="#vair" x="-50" y="100" width={100} height={100} />
-              <use href="#vair" x="50" y="100" width={100} height={100} />
-            </pattern>
-          </>
-        )}
+        {isThereFur(blason, 'vair') && <VairPatternDef patternId={furPatternId(vair)} dimension={dimension} />}
 
         <clipPath id="plain-field-clip-path">
           <HeaterDisplay dimension={dimension} />
