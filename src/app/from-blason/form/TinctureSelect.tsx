@@ -1,7 +1,7 @@
 import Select, { components } from 'react-select';
 import * as React from 'react';
 import { OptionProps } from 'react-select/src/components/Option';
-import { ermines, Tincture, tinctures } from '../../model/tincture';
+import { ermines, Tincture, tinctures, vairs } from '../../model/tincture';
 import { ErmineDisplay } from '../coats-of-arms-parts/ErmineDisplay';
 import { VairDisplay } from '../coats-of-arms-parts/VairDisplay';
 
@@ -35,11 +35,11 @@ const Option = (props: OptionProps<Tincture>) => {
           padding: '1px',
         }}
       >
-        {ermines.some(e => e.name === props.data.name) ? (
+        {ermines.some((e) => e.name === props.data.name) ? (
           <svg width={12.5} height={15} viewBox={`0 0 200 240`}>
             <ErmineDisplay width={200} height={240} fill={props.data.field.color} spot={props.data.spot.color} />
           </svg>
-        ) : props.data.name === 'vair' ? (
+        ) : vairs.some((e) => e.name === props.data.name) ? (
           <svg width={15} height={15} viewBox={`0 0 200 200`}>
             <VairDisplay width={200} height={200} />
           </svg>

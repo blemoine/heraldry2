@@ -39,15 +39,15 @@ export type Vair = typeof vair;
 export type Ermines = Ermine | CounterErmine | Erminois | Pean;
 export const ermines: ReadonlyArray<Ermines> = [ermine, counterErmine, erminois, pean] as const;
 
-export type Furs = Ermines | Vair;
+export type Vairs = Vair;
+export const vairs: ReadonlyArray<Vairs> = [vair] as const;
+
+export type Furs = Ermines | Vairs;
 
 export type Tincture = Metal | Colours | Stains | Furs;
 
 export function isFur(tincture: Tincture): tincture is Furs {
-  return (
-    ermines.some(e => e.name === tincture.name) ||
-    tincture.name === 'vair'
-  );
+  return ermines.some((e) => e.name === tincture.name) || vairs.some((e) => e.name === tincture.name);
 }
 
 export function isMetal(tincture: Tincture): tincture is Metal {
@@ -65,9 +65,6 @@ export const tinctures: Array<Tincture> = [
   murrey,
   sanguine,
   tenne,
-  ermine,
-  counterErmine,
-  erminois,
-  pean,
-  vair,
+  ...ermines,
+  ...vairs,
 ];

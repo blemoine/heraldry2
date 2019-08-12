@@ -3,7 +3,7 @@ import { Blason } from '../model/blason';
 import { isThereFur } from './blason.helpers';
 import { OrdinaryDisplay } from './coats-of-arms-parts/ordinaries/OrdinaryDisplay';
 import { uuid } from '../../utils/uuid';
-import { ermines, Furs, isFur, Tincture, vair } from '../model/tincture';
+import { ermines, Furs, isFur, Tincture, vairs } from '../model/tincture';
 import { FieldDisplay } from './coats-of-arms-parts/FieldDisplay';
 import { HeaterDisplay } from './coats-of-arms-parts/escutcheon/HeaterDisplay';
 import { ChargeDisplay } from './coats-of-arms-parts/ChargeDisplay';
@@ -58,7 +58,13 @@ export const CoatsOfArmsDisplay = (props: Props) => {
             ''
           );
         })}
-        {isThereFur(blason, 'vair') && <VairPatternDef patternId={furPatternId(vair)} dimension={dimension} />}
+        {vairs.map((vair) => {
+          return isThereFur(blason, vair.name) ? (
+            <VairPatternDef key={vair.name} vair={vair} patternId={furPatternId(vair)} dimension={dimension} />
+          ) : (
+            ''
+          );
+        })}
 
         <clipPath id="plain-field-clip-path">
           <HeaterDisplay dimension={dimension} />
