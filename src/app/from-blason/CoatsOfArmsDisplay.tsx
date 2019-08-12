@@ -18,6 +18,7 @@ export const CoatsOfArmsDisplay = (props: Props) => {
 
   const patternIds: { [K in Furs['name']]: string } = {
     vair: uuid(),
+    'counter-vair': uuid(),
     ermine: uuid(),
     'counter-ermine': uuid(),
     erminois: uuid(),
@@ -46,23 +47,23 @@ export const CoatsOfArmsDisplay = (props: Props) => {
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
       <defs>
-        {ermines.map((ermine) => {
+        {ermines.map((ermine, i) => {
           return isThereFur(blason, ermine.name) ? (
             <ErminePatternDef
-              key={ermine.name}
+              key={ermine.name + i}
               ermine={ermine}
               dimension={dimension}
               patternId={furPatternId(ermine)}
             />
           ) : (
-            <></>
+            ''
           );
         })}
-        {vairs.map((vair) => {
+        {vairs.map((vair, i) => {
           return isThereFur(blason, vair.name) ? (
-            <VairPatternDef key={vair.name} vair={vair} patternId={furPatternId(vair)} dimension={dimension} />
+            <VairPatternDef key={vair.name + i} vair={vair} patternId={furPatternId(vair)} dimension={dimension} />
           ) : (
-            <></>
+            ''
           );
         })}
 
