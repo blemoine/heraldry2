@@ -2,20 +2,21 @@ import * as React from 'react';
 import { Blason } from '../model/blason';
 import { isThereFur } from './blason.helpers';
 import { OrdinaryDisplay } from './coats-of-arms-parts/ordinaries/OrdinaryDisplay';
-import { ErmineDisplay } from './coats-of-arms-parts/ErmineDisplay';
 import { VairDisplay } from './coats-of-arms-parts/VairDisplay';
 import { uuid } from '../../utils/uuid';
-import { Tincture } from '../model/tincture';
+import { counterErmine, ermine, Tincture } from '../model/tincture';
 import { FieldDisplay } from './coats-of-arms-parts/FieldDisplay';
 import { HeaterDisplay } from './coats-of-arms-parts/escutcheon/HeaterDisplay';
 import { ChargeDisplay } from './coats-of-arms-parts/ChargeDisplay';
 import { Dimension } from '../model/dimension';
+import { ErminePatternDef } from './coats-of-arms-parts/ErminePatternDef';
 
 type Props = { blason: Blason; dimension: Dimension };
 export const CoatsOfArmsDisplay = (props: Props) => {
   const dimension = props.dimension;
   const { width, height } = dimension;
 
+  const counterErminePatternId = 'field-pattern-' + uuid();
   const erminePatternId = 'field-pattern-' + uuid();
   const vairPatternId = 'field-pattern-' + uuid();
 
@@ -24,6 +25,8 @@ export const CoatsOfArmsDisplay = (props: Props) => {
       ? 'url(#' + vairPatternId + ')'
       : tincture.name === 'ermine'
       ? 'url(#' + erminePatternId + ')'
+      : tincture.name === 'counter-ermine'
+      ? 'url(#' + counterErminePatternId + ')'
       : tincture.color;
   }
 
@@ -38,23 +41,10 @@ export const CoatsOfArmsDisplay = (props: Props) => {
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
       <defs>
         {isThereFur(blason, 'ermine') && (
-          <>
-            <symbol viewBox="0 0 200 240" id="ermine">
-              <ErmineDisplay width={200} height={240} />
-            </symbol>
-
-            <pattern
-              id={erminePatternId}
-              width={width / 5.5}
-              height={height / 4.1}
-              patternUnits="userSpaceOnUse"
-              viewBox="0 0 70 125"
-            >
-              <rect width="100%" height="100%" fill="white" />
-              <use href="#ermine" x="0" y="0" width={35} height={60} />
-              <use href="#ermine" x="35" y="65" width={35} height={60} />
-            </pattern>
-          </>
+          <ErminePatternDef ermine={ermine} dimension={dimension} patternId={erminePatternId} />
+        )}
+        {isThereFur(blason, 'counter-ermine') && (
+          <ErminePatternDef ermine={counterErmine} dimension={dimension} patternId={counterErminePatternId} />
         )}
         {isThereFur(blason, 'vair') && (
           <>

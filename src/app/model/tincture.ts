@@ -27,15 +27,19 @@ export type Stains = Murrey | Sanguine | Tenne;
 
 export const ermine = { name: 'ermine', field: argent, spot: sable } as const;
 export type Ermine = typeof ermine;
+export const counterErmine = { name: 'counter-ermine', field: sable, spot: argent } as const;
+export type CounterErmine = typeof counterErmine;
 export const vair = { name: 'vair', field: argent, bell: azure } as const;
 export type Vair = typeof vair;
 
-export type Furs = Ermine | Vair;
+export type Ermines = Ermine | CounterErmine;
+
+export type Furs = Ermines | Vair;
 
 export type Tincture = Metal | Colours | Stains | Furs;
 
 export function isFur(tincture: Tincture): tincture is Furs {
-  return tincture.name === 'ermine' || tincture.name === 'vair';
+  return tincture.name === 'ermine' || tincture.name === 'counter-ermine' || tincture.name === 'vair';
 }
 
 export function isMetal(tincture: Tincture): tincture is Metal {
@@ -54,5 +58,6 @@ export const tinctures: Array<Tincture> = [
   sanguine,
   tenne,
   ermine,
+  counterErmine,
   vair,
 ];
