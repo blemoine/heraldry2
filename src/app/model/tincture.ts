@@ -25,9 +25,9 @@ export type Metal = Argent | Or;
 export type Colours = Gules | Sable | Azure | Vert | Purpure;
 export type Stains = Murrey | Sanguine | Tenne;
 
-export const ermine = { name: 'ermine' } as const;
+export const ermine = { name: 'ermine', field: argent, spot: sable } as const;
 export type Ermine = typeof ermine;
-export const vair = { name: 'vair' } as const;
+export const vair = { name: 'vair', field: argent, bell: azure } as const;
 export type Vair = typeof vair;
 
 export type Furs = Ermine | Vair;
