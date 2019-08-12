@@ -4,7 +4,7 @@ import { isThereFur } from './blason.helpers';
 import { OrdinaryDisplay } from './coats-of-arms-parts/ordinaries/OrdinaryDisplay';
 import { VairDisplay } from './coats-of-arms-parts/VairDisplay';
 import { uuid } from '../../utils/uuid';
-import { counterErmine, ermine, Furs, isFur, Tincture, vair } from '../model/tincture';
+import { counterErmine, ermine, erminois, Furs, isFur, Tincture, vair } from '../model/tincture';
 import { FieldDisplay } from './coats-of-arms-parts/FieldDisplay';
 import { HeaterDisplay } from './coats-of-arms-parts/escutcheon/HeaterDisplay';
 import { ChargeDisplay } from './coats-of-arms-parts/ChargeDisplay';
@@ -23,6 +23,7 @@ export const CoatsOfArmsDisplay = (props: Props) => {
     vair: uuid(),
     ermine: uuid(),
     'counter-ermine': uuid(),
+    erminois: uuid()
   };
 
   function furPatternId(fur: Furs): string {
@@ -52,6 +53,9 @@ export const CoatsOfArmsDisplay = (props: Props) => {
         )}
         {isThereFur(blason, 'counter-ermine') && (
           <ErminePatternDef ermine={counterErmine} dimension={dimension} patternId={furPatternId(counterErmine)} />
+        )}
+        {isThereFur(blason, 'erminois') && (
+          <ErminePatternDef ermine={erminois} dimension={dimension} patternId={furPatternId(erminois)} />
         )}
         {isThereFur(blason, 'vair') && (
           <>

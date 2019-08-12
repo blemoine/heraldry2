@@ -35,7 +35,7 @@ const Option = (props: OptionProps<Tincture>) => {
           padding: '1px',
         }}
       >
-        { (props.data.name === 'ermine' || props.data.name === 'counter-ermine') ? (
+        { (props.data.name === 'ermine' || props.data.name === 'counter-ermine' || props.data.name === 'erminois') ? (
           <svg width={12.5} height={15} viewBox={`0 0 200 240`}>
             <ErmineDisplay width={200} height={240} fill={props.data.field.color} spot={props.data.spot.color}/>
           </svg>

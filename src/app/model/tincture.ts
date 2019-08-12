@@ -29,17 +29,24 @@ export const ermine = { name: 'ermine', field: argent, spot: sable } as const;
 export type Ermine = typeof ermine;
 export const counterErmine = { name: 'counter-ermine', field: sable, spot: argent } as const;
 export type CounterErmine = typeof counterErmine;
+export const erminois = { name: 'erminois', field: or, spot: sable } as const;
+export type Erminois = typeof erminois;
 export const vair = { name: 'vair', field: argent, bell: azure } as const;
 export type Vair = typeof vair;
 
-export type Ermines = Ermine | CounterErmine;
+export type Ermines = Ermine | CounterErmine | Erminois;
 
 export type Furs = Ermines | Vair;
 
 export type Tincture = Metal | Colours | Stains | Furs;
 
 export function isFur(tincture: Tincture): tincture is Furs {
-  return tincture.name === 'ermine' || tincture.name === 'counter-ermine' || tincture.name === 'vair';
+  return (
+    tincture.name === 'ermine' ||
+    tincture.name === 'counter-ermine' ||
+    tincture.name === 'erminois' ||
+    tincture.name === 'vair'
+  );
 }
 
 export function isMetal(tincture: Tincture): tincture is Metal {
@@ -59,5 +66,6 @@ export const tinctures: Array<Tincture> = [
   tenne,
   ermine,
   counterErmine,
+  erminois,
   vair,
 ];
