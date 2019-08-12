@@ -55,14 +55,14 @@ export const CoatsOfArmsDisplay = (props: Props) => {
               patternId={furPatternId(ermine)}
             />
           ) : (
-            ''
+            <></>
           );
         })}
         {vairs.map((vair) => {
           return isThereFur(blason, vair.name) ? (
             <VairPatternDef key={vair.name} vair={vair} patternId={furPatternId(vair)} dimension={dimension} />
           ) : (
-            ''
+            <></>
           );
         })}
 

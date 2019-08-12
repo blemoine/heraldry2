@@ -7,11 +7,6 @@ exports[`CoatsOfArms should render 'Argent, a chevron sable' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -58,11 +53,6 @@ exports[`CoatsOfArms should render 'Argent, a cross gules' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -109,11 +99,6 @@ exports[`CoatsOfArms should render 'Azure, nineteen annulets argent' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -269,11 +254,6 @@ exports[`CoatsOfArms should render 'Azure, twelve roundels argent' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -399,11 +379,6 @@ exports[`CoatsOfArms should render 'Bendy or and argent, a lion dormant gules' 1
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -705,10 +680,6 @@ exports[`CoatsOfArms should render 'Bendy or and argent, a lion rampant ermine' 
         y="65"
       />
     </pattern>
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -1026,11 +997,6 @@ exports[`CoatsOfArms should render 'Bendy sinister or and argent, a lion sejant 
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -1249,11 +1215,6 @@ exports[`CoatsOfArms should render 'Chequy gules and or, a chief engrailed azure
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -1648,10 +1609,6 @@ exports[`CoatsOfArms should render 'Chequy gules and or, a chief engrailed ermin
         y="65"
       />
     </pattern>
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -1984,11 +1941,6 @@ exports[`CoatsOfArms should render 'Chequy gules and or, a saltire argent, an ea
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -2503,9 +2455,6 @@ exports[`CoatsOfArms should render 'Ermine, a bend invected vair' 1`] = `
         y="65"
       />
     </pattern>
-    
-    
-    
     <symbol
       id="vair"
       viewBox="0 0 200 200"
@@ -2662,10 +2611,6 @@ exports[`CoatsOfArms should render 'Ermine, two pallets sable' 1`] = `
         y="65"
       />
     </pattern>
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -2719,10 +2664,6 @@ exports[`CoatsOfArms should render 'Or, a base engrailed vair' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
     <symbol
       id="vair"
       viewBox="0 0 200 200"
@@ -2879,10 +2820,6 @@ exports[`CoatsOfArms should render 'Or, a bend sinister invected ermine' 1`] = `
         y="65"
       />
     </pattern>
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -2933,11 +2870,6 @@ exports[`CoatsOfArms should render 'Or, a fess murrey' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -2984,11 +2916,6 @@ exports[`CoatsOfArms should render 'Or, eleven rustres sable' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -3096,11 +3023,6 @@ exports[`CoatsOfArms should render 'Or, fifteen mascles sable' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -3232,11 +3154,6 @@ exports[`CoatsOfArms should render 'Or, thirteen lozenge or' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -3343,11 +3260,6 @@ exports[`CoatsOfArms should render 'Per chevron Sable and Or, three fleurs de ly
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -3630,11 +3542,6 @@ exports[`CoatsOfArms should render 'Per cross or and argent' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -3748,10 +3655,6 @@ exports[`CoatsOfArms should render 'Per fess or and ermine, a bordure engrailed 
         y="65"
       />
     </pattern>
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -3865,10 +3768,6 @@ exports[`CoatsOfArms should render 'Per pale invected ermine and or' 1`] = `
         y="65"
       />
     </pattern>
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -3910,11 +3809,6 @@ exports[`CoatsOfArms should render 'Per saltire or and argent' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -4028,10 +3922,6 @@ exports[`CoatsOfArms should render a fur blason 1`] = `
         y="65"
       />
     </pattern>
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -4069,10 +3959,6 @@ exports[`CoatsOfArms should render a party blason 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
     <symbol
       id="vair"
       viewBox="0 0 200 200"
@@ -4162,10 +4048,6 @@ exports[`CoatsOfArms should render a party blason with some ordinary 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
     <symbol
       id="vair"
       viewBox="0 0 200 200"
@@ -4268,11 +4150,6 @@ exports[`CoatsOfArms should render a plain blason 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -4310,11 +4187,6 @@ exports[`CoatsOfArms should render a the england royal arms 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
