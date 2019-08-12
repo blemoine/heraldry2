@@ -28,3 +28,4 @@ Faire le "of the last"
 
 * Factorize form for lozenge/roundel/fleur de lys
 * Il y a quelques cas ou les annulets/losanges rentrent pas quand y'en a beaucoup (9 en particulier)
+* test le blason avec counter ermine (Serialization qui chie probablement)

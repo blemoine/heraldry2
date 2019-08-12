@@ -4,7 +4,7 @@ import { isThereFur } from './blason.helpers';
 import { OrdinaryDisplay } from './coats-of-arms-parts/ordinaries/OrdinaryDisplay';
 import { VairDisplay } from './coats-of-arms-parts/VairDisplay';
 import { uuid } from '../../utils/uuid';
-import { counterErmine, ermine, erminois, Furs, isFur, Tincture, vair } from '../model/tincture';
+import { ermines, Furs, isFur, Tincture, vair } from '../model/tincture';
 import { FieldDisplay } from './coats-of-arms-parts/FieldDisplay';
 import { HeaterDisplay } from './coats-of-arms-parts/escutcheon/HeaterDisplay';
 import { ChargeDisplay } from './coats-of-arms-parts/ChargeDisplay';
@@ -16,14 +16,12 @@ export const CoatsOfArmsDisplay = (props: Props) => {
   const dimension = props.dimension;
   const { width, height } = dimension;
 
-  //const counterErminePatternId = 'field-pattern-' + uuid();
-  //const erminePatternId = 'field-pattern-' + uuid();
-  //const vairPatternId = 'field-pattern-' + uuid();
   const patternIds: { [K in Furs['name']]: string } = {
     vair: uuid(),
     ermine: uuid(),
     'counter-ermine': uuid(),
-    erminois: uuid()
+    erminois: uuid(),
+    pean: uuid(),
   };
 
   function furPatternId(fur: Furs): string {
@@ -31,9 +29,9 @@ export const CoatsOfArmsDisplay = (props: Props) => {
   }
 
   function fillFromTincture(tincture: Tincture): string {
-    if(isFur(tincture)) {
-      return `url(#${furPatternId(tincture)})`
-    }  else {
+    if (isFur(tincture)) {
+      return `url(#${furPatternId(tincture)})`;
+    } else {
       return tincture.color;
     }
   }
@@ -48,15 +46,13 @@ export const CoatsOfArmsDisplay = (props: Props) => {
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
       <defs>
-        {isThereFur(blason, 'ermine') && (
-          <ErminePatternDef ermine={ermine} dimension={dimension} patternId={furPatternId(ermine)} />
-        )}
-        {isThereFur(blason, 'counter-ermine') && (
-          <ErminePatternDef ermine={counterErmine} dimension={dimension} patternId={furPatternId(counterErmine)} />
-        )}
-        {isThereFur(blason, 'erminois') && (
-          <ErminePatternDef ermine={erminois} dimension={dimension} patternId={furPatternId(erminois)} />
-        )}
+        {ermines.map((ermine) => {
+          return isThereFur(blason, ermine.name) ? (
+            <ErminePatternDef key={ermine.name} ermine={ermine} dimension={dimension} patternId={furPatternId(ermine)} />
+          ) : (
+            ''
+          );
+        })}
         {isThereFur(blason, 'vair') && (
           <>
             <symbol viewBox="0 0 200 200" id="vair">
