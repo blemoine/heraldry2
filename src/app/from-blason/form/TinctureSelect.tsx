@@ -42,13 +42,21 @@ const Option = (props: OptionProps<Tincture>) => {
           </svg>
         ) : vairs.some((e) => e.name === props.data.name) ? (
           <svg width={15} height={15} viewBox={`0 0 200 200`}>
-            <VairDisplay width={200} height={200} />
+            <VairDisplay
+              dimension={{ width: 200, height: 200 }}
+              bell={props.data.bell.color}
+              fill={props.data.field.color}
+            />
           </svg>
         ) : potents.some((e) => e.name === props.data.name) ? (
           <svg width={15} height={15} viewBox={`0 0 300 200`}>
-            <PotentDisplay  dimension={{width:300, height:200}} potent={props.data.bell.color} fill={props.data.field.color} />
+            <PotentDisplay
+              dimension={{ width: 300, height: 200 }}
+              potent={props.data.bell.color}
+              fill={props.data.field.color}
+            />
           </svg>
-        ):(
+        ) : (
           <>&nbsp;</>
         )}
       </span>

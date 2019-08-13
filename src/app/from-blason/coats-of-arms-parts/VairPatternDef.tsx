@@ -8,7 +8,7 @@ export const VairPatternDef = ({ vair, patternId, dimension: { width } }: Props)
   return (
     <>
       <symbol viewBox="0 0 200 200" id={vair.name}>
-        <VairDisplay width={200} height={200} />
+        <VairDisplay dimension={{ width: 200, height: 200 }} bell={vair.bell.color} fill={vair.field.color} />
       </symbol>
       <pattern
         id={patternId}

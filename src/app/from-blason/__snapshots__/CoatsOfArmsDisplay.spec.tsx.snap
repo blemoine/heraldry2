@@ -2551,7 +2551,7 @@ exports[`CoatsOfArms should render 'Ermine, a bend invected vair' 1`] = `
       viewBox="0 0 200 200"
     >
       <rect
-        fill="white"
+        fill="#FFFFFF"
         height="100%"
         width="100%"
       />
@@ -2776,7 +2776,7 @@ exports[`CoatsOfArms should render 'Or, a base engrailed vair' 1`] = `
       viewBox="0 0 200 200"
     >
       <rect
-        fill="white"
+        fill="#FFFFFF"
         height="100%"
         width="100%"
       />
@@ -4281,7 +4281,7 @@ exports[`CoatsOfArms should render a party blason 1`] = `
       viewBox="0 0 200 200"
     >
       <rect
-        fill="white"
+        fill="#FFFFFF"
         height="100%"
         width="100%"
       />
@@ -4378,7 +4378,7 @@ exports[`CoatsOfArms should render a party blason with some ordinary 1`] = `
       viewBox="0 0 200 200"
     >
       <rect
-        fill="white"
+        fill="#FFFFFF"
         height="100%"
         width="100%"
       />
