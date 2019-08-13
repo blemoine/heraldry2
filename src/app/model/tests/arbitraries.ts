@@ -57,7 +57,7 @@ const chequyFieldArb: Arbitrary<ChequyField> = fc
   .tuple(tinctureArb, tinctureArb)
   .map((tinctures) => ({ kind: 'chequy', tinctures }));
 
-const fieldArb: Arbitrary<Field> = fc.oneof<Field>(
+export const fieldArb: Arbitrary<Field> = fc.oneof<Field>(
   plainFieldArb,
   partyFieldArb,
   palyFieldArb,
