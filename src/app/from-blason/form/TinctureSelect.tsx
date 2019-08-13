@@ -6,8 +6,6 @@ import { ErmineDisplay } from '../coats-of-arms-parts/ErmineDisplay';
 import { VairDisplay } from '../coats-of-arms-parts/VairDisplay';
 import { PotentDisplay } from '../coats-of-arms-parts/PotentDisplay';
 
-type Props = { tincture: Tincture; tinctureChange: (t: Tincture) => void };
-
 const Option = (props: OptionProps<Tincture>) => {
   return (
     <components.Option {...props}>
@@ -64,6 +62,7 @@ const Option = (props: OptionProps<Tincture>) => {
   );
 };
 
+type Props = { tincture: Tincture; tinctureChange: (t: Tincture) => void };
 export const TinctureSelect = ({ tincture, tinctureChange }: Props) => {
   return (
     <Select

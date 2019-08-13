@@ -20,15 +20,19 @@ export const PotentPatternDef = ({ potent, patternId, dimension: { width } }: Pr
       >
         <rect width="100%" height="100%" fill={potent.field.color} />
         <use href={'#' + potent.name} x="0" y="0" width={150} height={100} />
-        {potent.name === 'potent' && <>
-        <use href={'#' + potent.name} x="-100" y="100" width={150} height={100} />
-        <use href={'#' + potent.name} x="100" y="100" width={150} height={100} />
-        </>}
-        {potent.name === 'counter-potent' && <>
+        {potent.name === 'potent' && (
+          <>
+            <use href={'#' + potent.name} x="-100" y="100" width={150} height={100} />
+            <use href={'#' + potent.name} x="100" y="100" width={150} height={100} />
+          </>
+        )}
+        {potent.name === 'counter-potent' && (
+          <>
             <g transform="scale(1,-1) translate(0 -300)">
-                <use href={'#' + potent.name} x="0" y="100" width={150} height={100} />
+              <use href={'#' + potent.name} x="0" y="100" width={150} height={100} />
             </g>
-        </>}
+          </>
+        )}
       </pattern>
     </>
   );

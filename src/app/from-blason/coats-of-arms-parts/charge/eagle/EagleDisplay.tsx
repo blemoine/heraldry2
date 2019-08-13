@@ -14,7 +14,7 @@ export const EagleDisplay = (props: Props) => {
   const tongueFill = props.fillFromTincture(charge.beakedAndArmed);
   const talonFill = props.fillFromTincture(charge.beakedAndArmed);
 
-  const {count, disposition} = charge.countAndDisposition;
+  const { count, disposition } = charge.countAndDisposition;
 
   const dimension = props.dimension;
 
