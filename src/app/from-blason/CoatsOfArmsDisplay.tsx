@@ -18,6 +18,7 @@ export const CoatsOfArmsDisplay = (props: Props) => {
 
   const patternIds: { [K in Furs['name']]: string } = {
     vair: uuid(),
+    'vair-en-pale': uuid(),
     'counter-vair': uuid(),
     ermine: uuid(),
     'counter-ermine': uuid(),

@@ -26,10 +26,11 @@ export const VairPatternDef = ({ vair, patternId, dimension: { width } }: Props)
           </>
         )}
         {vair.name === 'counter-vair' && (
-            <g transform="scale(1,-1) translate(0 -300)">
+          <g transform="scale(1,-1) translate(0 -300)">
             <use href={'#' + vair.name} x="0" y="100" width={100} height={100} />
-            </g>
+          </g>
         )}
+        {vair.name === 'vair-en-pale' && <use href={'#' + vair.name} x="0" y="100" width={100} height={100} />}
       </pattern>
     </>
   );

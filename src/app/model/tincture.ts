@@ -37,12 +37,14 @@ export const vair = { name: 'vair', field: argent, bell: azure } as const;
 export type Vair = typeof vair;
 export const counterVair = { name: 'counter-vair', field: argent, bell: azure } as const;
 export type CounterVair = typeof counterVair;
+export const vairEnPale = { name: 'vair-en-pale', field: argent, bell: azure } as const;
+export type VairEnPale = typeof vairEnPale;
 
 export type Ermines = Ermine | CounterErmine | Erminois | Pean;
 export const ermines: ReadonlyArray<Ermines> = [ermine, counterErmine, erminois, pean] as const;
 
-export type Vairs = Vair | CounterVair;
-export const vairs: ReadonlyArray<Vairs> = [vair, counterVair] as const;
+export type Vairs = Vair | CounterVair | VairEnPale;
+export const vairs: ReadonlyArray<Vairs> = [vair, counterVair, vairEnPale] as const;
 
 export type Furs = Ermines | Vairs;
 
