@@ -32,5 +32,5 @@ export const ordinaries: Array<Ordinary['name']> = [
   'saltire',
   'bordure',
   'base',
-  'chevronel'
+  'chevronel',
 ];

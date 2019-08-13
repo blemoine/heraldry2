@@ -1,5 +1,5 @@
 import { parseBlason } from './blasonParser';
-import { argent, azure, ermine, gules, or, sable, vair, vert } from '../model/tincture';
+import { argent, azure, ermine, gules, or, potent, sable, vair, vert } from '../model/tincture';
 import { Blason } from '../model/blason';
 
 describe('parseBlason', () => {
@@ -252,9 +252,24 @@ Argent, Azure, Barry of, Bendy, Bendy Sinister, Chequy, Counter-ermine, Counter-
   it('should parse Paly argent and gules, a chief engrailed sable, four lozenges in fess azure', () => {
     const expected: Blason = {
       field: { kind: 'paly', tinctures: [argent, gules] },
-      ordinary: {name:'chief', line: 'engrailed', tincture: sable},
-      charge: { name: 'lozenge', tincture: azure, countAndDisposition: { count: 4, disposition: 'fess' }, inside: 'nothing' },
+      ordinary: { name: 'chief', line: 'engrailed', tincture: sable },
+      charge: {
+        name: 'lozenge',
+        tincture: azure,
+        countAndDisposition: { count: 4, disposition: 'fess' },
+        inside: 'nothing',
+      },
     };
-    expect(parseBlason('Paly argent and gules, a chief engrailed sable, four lozenges in fess azure')).toEqual(expected);
+    expect(parseBlason('Paly argent and gules, a chief engrailed sable, four lozenges in fess azure')).toEqual(
+      expected
+    );
+  });
+
+  it('should parse  Potent,  a chief gules', () => {
+    const expected: Blason = {
+      field: { kind: 'plain', tincture: potent },
+      ordinary: { name: 'chief', line: 'straight', tincture: gules },
+    };
+    expect(parseBlason('Potent,  a chief gules')).toEqual(expected);
   });
 });
