@@ -31,6 +31,10 @@ export const VairPatternDef = ({ vair, patternId, dimension: { width } }: Props)
           </g>
         )}
         {vair.name === 'vair-en-pale' && <use href={'#' + vair.name} x="0" y="100" width={100} height={100} />}
+        {vair.name === 'vair-en-point' &&  <g transform="scale(1,-1) translate(0 -300)">
+            <use href={'#' + vair.name} x="50" y="100" width={100} height={100} />
+            <use href={'#' + vair.name} x="-50" y="100" width={100} height={100} />
+        </g>}
       </pattern>
     </>
   );

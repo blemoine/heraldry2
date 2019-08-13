@@ -33,6 +33,16 @@ export const PotentPatternDef = ({ potent, patternId, dimension: { width } }: Pr
             </g>
           </>
         )}
+        {potent.name === 'potent-en-pale' && <use href={'#' + potent.name} x="0" y="100" width={150} height={100} />}
+
+        {potent.name === 'potent-en-point' && (
+          <>
+            <g transform="scale(1,-1) translate(0 -300)">
+              <use href={'#' + potent.name} x="100" y="100" width={150} height={100} />
+              <use href={'#' + potent.name} x="-100" y="100" width={150} height={100} />
+            </g>
+          </>
+        )}
       </pattern>
     </>
   );

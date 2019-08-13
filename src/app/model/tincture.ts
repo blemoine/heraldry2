@@ -39,20 +39,26 @@ export const counterVair = { name: 'counter-vair', field: argent, bell: azure } 
 export type CounterVair = typeof counterVair;
 export const vairEnPale = { name: 'vair-en-pale', field: argent, bell: azure } as const;
 export type VairEnPale = typeof vairEnPale;
+export const vairEnPoint = { name: 'vair-en-point', field: argent, bell: azure } as const;
+export type VairEnPoint = typeof vairEnPoint;
 
 export const potent = { name: 'potent', field: argent, bell: azure } as const;
 export type Potent = typeof potent;
 export const counterPotent = { name: 'counter-potent', field: argent, bell: azure } as const;
 export type CounterPotent = typeof counterPotent;
+export const potentEnPale = { name: 'potent-en-pale', field: argent, bell: azure } as const;
+export type PotentEnPale = typeof potentEnPale;
+export const potentEnPoint = { name: 'potent-en-point', field: argent, bell: azure } as const;
+export type PotentEnPoint = typeof potentEnPoint;
 
 export type Ermines = Ermine | CounterErmine | Erminois | Pean;
 export const ermines: ReadonlyArray<Ermines> = [ermine, counterErmine, erminois, pean] as const;
 
-export type Vairs = Vair | CounterVair | VairEnPale;
-export const vairs: ReadonlyArray<Vairs> = [vair, counterVair, vairEnPale] as const;
+export type Vairs = Vair | CounterVair | VairEnPale | VairEnPoint;
+export const vairs: ReadonlyArray<Vairs> = [vair, counterVair, vairEnPale,vairEnPoint] as const;
 
-export type Potents = Potent | CounterPotent;
-export const potents: ReadonlyArray<Potents> = [potent, counterPotent] as const;
+export type Potents = Potent | CounterPotent | PotentEnPale | PotentEnPoint;
+export const potents: ReadonlyArray<Potents> = [potent, counterPotent, potentEnPale, potentEnPoint] as const;
 
 export type Furs = Ermines | Vairs | Potents;
 

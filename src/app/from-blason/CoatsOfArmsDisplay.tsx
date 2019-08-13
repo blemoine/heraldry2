@@ -27,6 +27,9 @@ export const CoatsOfArmsDisplay = (props: Props) => {
     pean: uuid(),
     potent: uuid(),
     'counter-potent': uuid(),
+    'potent-en-pale': uuid(),
+    'potent-en-point': uuid(),
+    'vair-en-point': uuid(),
   };
 
   function furPatternId(fur: Furs): string {
