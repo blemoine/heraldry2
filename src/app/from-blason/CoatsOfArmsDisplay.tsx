@@ -3,13 +3,14 @@ import { Blason } from '../model/blason';
 import { isThereFur } from './blason.helpers';
 import { OrdinaryDisplay } from './coats-of-arms-parts/ordinaries/OrdinaryDisplay';
 import { uuid } from '../../utils/uuid';
-import { ermines, Furs, isFur, Tincture, vairs } from '../model/tincture';
+import { ermines, Furs, isFur, potents, Tincture, vairs } from '../model/tincture';
 import { FieldDisplay } from './coats-of-arms-parts/FieldDisplay';
 import { HeaterDisplay } from './coats-of-arms-parts/escutcheon/HeaterDisplay';
 import { ChargeDisplay } from './coats-of-arms-parts/ChargeDisplay';
 import { Dimension } from '../model/dimension';
 import { ErminePatternDef } from './coats-of-arms-parts/ErminePatternDef';
 import { VairPatternDef } from './coats-of-arms-parts/VairPatternDef';
+import { PotentPatternDef } from './coats-of-arms-parts/PotentPatternDef';
 
 type Props = { blason: Blason; dimension: Dimension };
 export const CoatsOfArmsDisplay = (props: Props) => {
@@ -24,6 +25,7 @@ export const CoatsOfArmsDisplay = (props: Props) => {
     'counter-ermine': uuid(),
     erminois: uuid(),
     pean: uuid(),
+    potent: uuid(),
   };
 
   function furPatternId(fur: Furs): string {
@@ -63,6 +65,18 @@ export const CoatsOfArmsDisplay = (props: Props) => {
         {vairs.map((vair, i) => {
           return isThereFur(blason, vair.name) ? (
             <VairPatternDef key={vair.name + i} vair={vair} patternId={furPatternId(vair)} dimension={dimension} />
+          ) : (
+            ''
+          );
+        })}
+        {potents.map((potent, i) => {
+          return isThereFur(blason, potent.name) ? (
+            <PotentPatternDef
+              key={potent.name + i}
+              potent={potent}
+              patternId={furPatternId(potent)}
+              dimension={dimension}
+            />
           ) : (
             ''
           );

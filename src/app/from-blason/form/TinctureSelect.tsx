@@ -1,9 +1,10 @@
 import Select, { components } from 'react-select';
 import * as React from 'react';
 import { OptionProps } from 'react-select/src/components/Option';
-import { ermines, Tincture, tinctures, vairs } from '../../model/tincture';
+import { ermines, potents, Tincture, tinctures, vairs } from '../../model/tincture';
 import { ErmineDisplay } from '../coats-of-arms-parts/ErmineDisplay';
 import { VairDisplay } from '../coats-of-arms-parts/VairDisplay';
+import { PotentDisplay } from '../coats-of-arms-parts/PotentDisplay';
 
 type Props = { tincture: Tincture; tinctureChange: (t: Tincture) => void };
 
@@ -43,7 +44,11 @@ const Option = (props: OptionProps<Tincture>) => {
           <svg width={15} height={15} viewBox={`0 0 200 200`}>
             <VairDisplay width={200} height={200} />
           </svg>
-        ) : (
+        ) : potents.some((e) => e.name === props.data.name) ? (
+          <svg width={15} height={15} viewBox={`0 0 300 200`}>
+            <PotentDisplay  dimension={{width:300, height:200}} potent={props.data.bell.color} fill={props.data.field.color} />
+          </svg>
+        ):(
           <>&nbsp;</>
         )}
       </span>

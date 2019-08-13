@@ -17,7 +17,7 @@ export const VairPatternDef = ({ vair, patternId, dimension: { width } }: Props)
         patternUnits="userSpaceOnUse"
         viewBox="0 0 100 200"
       >
-        <rect width="100%" height="100%" fill="white" />
+        <rect width="100%" height="100%" fill={vair.field.color} />
         <use href={'#' + vair.name} x="0" y="0" width={100} height={100} />
         {vair.name === 'vair' && (
           <>
