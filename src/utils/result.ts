@@ -34,3 +34,11 @@ export function map<A, B>(r: Result<A>, fn: (a: A) => B): Result<B> {
     return fn(r);
   }
 }
+
+export function flatMap<A, B>(r: Result<A>, fn: (a: A) => Result<B>): Result<B> {
+  if (isError(r)) {
+    return r;
+  } else {
+    return fn(r);
+  }
+}

@@ -3,7 +3,8 @@ import { cannotHappen } from '../../utils/cannot-happen';
 import { Tincture, tinctures } from '../model/tincture';
 import { Line, lines } from '../model/line';
 import { parties, Party } from '../model/party';
-import { map, raise, Result, zip, zip3 } from '../../utils/result';
+import { flatMap, map, raise, Result, zip, zip3 } from '../../utils/result';
+import { ordinaries, Ordinary } from '../model/ordinary';
 
 export function encodeField(field: Field): Uint8Array {
   const result = new Uint8Array(5);
@@ -74,15 +75,64 @@ export function decodeField(arr: Uint8Array): Result<Field> {
     return map(maybeTinctures, (tinctures) => ({ kind: 'chequy', tinctures }));
   } else if (arr[0] === 7) {
     const maybeTinctures = zip(decodeTincture(arr[1]), decodeTincture(arr[2]));
-    const rawNumber = arr[3];
-    const maybeNumber: Result<6 | 8 | 10> =
-      rawNumber === 6 || rawNumber === 8 || rawNumber === 10
-        ? rawNumber
-        : raise(`Cannot decode barry number ${rawNumber}`);
+    const maybeNumber: Result<6 | 8 | 10> = decodeNumber([6, 8, 10], arr[3]);
     return map(zip(maybeTinctures, maybeNumber), ([tinctures, number]) => ({ kind: 'barry', tinctures, number }));
   } else {
     return raise(`Cannot decode field type with ${arr[0]}`);
   }
+}
+
+export function encodeOrdinary(ordinary: Ordinary | null): Uint8Array {
+  const result = new Uint8Array(4);
+  if (!ordinary) {
+    return result;
+  }
+  result[0] = encodeOrdinaryName(ordinary.name);
+  result[1] = encodeLine(ordinary.line);
+  result[2] = encodeTincture(ordinary.tincture);
+  if (ordinary.name === 'pale' || ordinary.name === 'chevron' || ordinary.name === 'chevronel') {
+    result[3] = ordinary.count;
+  }
+  return result;
+}
+
+export function decodeOrdinary(arr: Uint8Array): Result<Ordinary | null> {
+  if (arr[0] === 0) {
+    return null;
+  }
+  const maybeName = decodeOrdinaryName(arr[0]);
+  const maybeLine = decodeLine(arr[1]);
+  const maybeTincture = decodeTincture(arr[2]);
+
+  return flatMap(
+    zip3(maybeName, maybeLine, maybeTincture),
+    ([name, line, tincture]): Result<Ordinary> => {
+      if (name === 'pale') {
+        const maybeCount: Result<1 | 2> = decodeNumber([1, 2], arr[3]);
+        return map(maybeCount, (count) => ({ name, line, tincture, count }));
+      } else if (name === 'chevron' || name === 'chevronel') {
+        const maybeCount: Result<1 | 2 | 3> = decodeNumber([1, 2, 3], arr[3]);
+        return map(maybeCount, (count) => ({ name, line, tincture, count }));
+      } else {
+        return { name, line, tincture };
+      }
+    }
+  );
+}
+
+function decodeNumber<A extends number>(validNum: Array<A>, i: number): Result<A> {
+  if (validNum.indexOf(i as A) >= 0) {
+    return i as A;
+  } else {
+    return raise(`Cannot decode ${i} as a valid number ${validNum}`);
+  }
+}
+
+function encodeOrdinaryName(name: Ordinary['name']): number {
+  return ordinaries.indexOf(name) + 1;
+}
+function decodeOrdinaryName(i: number): Result<Ordinary['name']> {
+  return ordinaries[i - 1] || raise(`Cannot decode ordinary name ${i}`);
 }
 
 function encodeLine(line: Line): number {

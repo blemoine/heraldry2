@@ -67,7 +67,7 @@ export const fieldArb: Arbitrary<Field> = fc.oneof<Field>(
   chequyFieldArb
 );
 
-const ordinaryArb: Arbitrary<Ordinary> = fc
+export const ordinaryArb: Arbitrary<Ordinary> = fc
   .record({ name: fc.constantFrom(...ordinaries), tincture: tinctureArb, line: lineArb })
   .chain(
     (obj): Arbitrary<Ordinary> => {
