@@ -106,7 +106,7 @@ describe('parseBlason', () => {
 
 Expected one of the following: 
 
-Argent, Azure, Barry of, Bendy, Bendy Sinister, Chequy, Counter-ermine, Counter-vair, Ermine, Erminois, Gules, Murrey, Or, Paly, Pean, Per, Potent, Purpure, Sable, Sanguine, Tenné, Vair, Vair-en-pale, Vert
+Argent, Azure, Barry of, Bendy, Bendy Sinister, Chequy, Counter-ermine, Counter-potent, Counter-vair, Ermine, Erminois, Gules, Murrey, Or, Paly, Pean, Per, Potent, Purpure, Sable, Sanguine, Tenné, Vair, Vair-en-pale, Vert
 `,
     });
   });

@@ -26,6 +26,7 @@ export const CoatsOfArmsDisplay = (props: Props) => {
     erminois: uuid(),
     pean: uuid(),
     potent: uuid(),
+    'counter-potent': uuid(),
   };
 
   function furPatternId(fur: Furs): string {
