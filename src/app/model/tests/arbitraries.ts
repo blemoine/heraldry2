@@ -1,15 +1,6 @@
 import fc, { Arbitrary } from 'fast-check';
 import { Tincture, tinctures } from '../tincture';
-import {
-  BarryField,
-  BendyField,
-  BendySinisterField,
-  ChequyField,
-  Field, LozengyField,
-  PalyField,
-  PartyField,
-  PlainField,
-} from '../field';
+import { Field, fieldKinds, PartyField } from '../field';
 import { parties, Party } from '../party';
 import { ordinaries, Ordinary } from '../ordinary';
 import {
@@ -33,42 +24,27 @@ import { Line, lines } from '../line';
 import { availableDispositions, CountAndDisposition, supportedNumbers } from '../countAndDisposition';
 
 const tinctureArb: Arbitrary<Tincture> = fc.constantFrom(...tinctures);
-const plainFieldArb: Arbitrary<PlainField> = tinctureArb.map((tincture) => ({ kind: 'plain', tincture }));
 const lineArb: Arbitrary<Line> = fc.constantFrom(...lines);
 const partyArb: Arbitrary<Party> = fc.record({
   name: fc.constantFrom(...parties),
   tinctures: fc.tuple(tinctureArb, tinctureArb),
   line: lineArb,
 });
-const palyFieldArb: Arbitrary<PalyField> = fc
-  .tuple(tinctureArb, tinctureArb)
-  .map((tinctures) => ({ kind: 'paly', tinctures }));
-const bendyFieldArb: Arbitrary<BendyField> = fc
-  .tuple(tinctureArb, tinctureArb)
-  .map((tinctures) => ({ kind: 'bendy', tinctures }));
-const bendySinisterFieldArb: Arbitrary<BendySinisterField> = fc
-  .tuple(tinctureArb, tinctureArb)
-  .map((tinctures) => ({ kind: 'bendySinister', tinctures }));
-const partyFieldArb: Arbitrary<PartyField> = partyArb.map((party): PartyField => ({ kind: 'party', per: party }));
-const barryFieldArb: Arbitrary<BarryField> = fc
-  .tuple(fc.constantFrom(6 as const, 8 as const, 10 as const), tinctureArb, tinctureArb)
-  .map(([number, ...tinctures]) => ({ kind: 'barry', number, tinctures }));
-const chequyFieldArb: Arbitrary<ChequyField> = fc
-  .tuple(tinctureArb, tinctureArb)
-  .map((tinctures) => ({ kind: 'chequy', tinctures }));
-const lozengyFieldArb: Arbitrary<LozengyField> = fc
-  .tuple(tinctureArb, tinctureArb)
-  .map((tinctures) => ({ kind: 'lozengy', tinctures }));
 
-export const fieldArb: Arbitrary<Field> = fc.oneof<Field>(
-  plainFieldArb,
-  partyFieldArb,
-  palyFieldArb,
-  bendyFieldArb,
-  bendySinisterFieldArb,
-  barryFieldArb,
-  chequyFieldArb,
-  lozengyFieldArb
+export const fieldArb: Arbitrary<Field> = fc.constantFrom(...fieldKinds).chain(
+  (kind): Arbitrary<Field> => {
+    if (kind === 'plain') {
+      return tinctureArb.map((tincture) => ({ kind, tincture }));
+    } else if (kind === 'barry') {
+      return fc
+        .tuple(fc.constantFrom(...[6, 8, 10] as const), tinctureArb, tinctureArb)
+        .map(([number, ...tinctures]) => ({ kind, number, tinctures }));
+    } else if (kind === 'party') {
+      return partyArb.map((party): PartyField => ({ kind, per: party }));
+    } else {
+      return fc.tuple(tinctureArb, tinctureArb).map((tinctures) => ({ kind, tinctures }));
+    }
+  }
 );
 
 export const ordinaryArb: Arbitrary<Ordinary> = fc

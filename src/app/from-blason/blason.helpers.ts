@@ -64,9 +64,7 @@ export function stringifyOrdinaryName(name: Ordinary['name']): string {
 }
 
 function stringifyField(field: Field): string {
-  if (field.kind === 'plain') {
-    return capitalizeFirstLetter(field.tincture.name);
-  } else if (field.kind === 'party') {
+  if (field.kind === 'party') {
     const perName = stringifyParty(field.per.name);
     const tinctures = field.per.tinctures.map((t) => t.name).join(' and ');
     let result = 'Per ' + perName + ' ';
@@ -75,18 +73,47 @@ function stringifyField(field: Field): string {
     }
     result += tinctures;
     return result;
-  } else if (field.kind === 'bendy') {
-    return `Bendy ${field.tinctures[0].name} and ${field.tinctures[1].name}`;
-  } else if (field.kind === 'bendySinister') {
-    return `Bendy Sinister ${field.tinctures[0].name} and ${field.tinctures[1].name}`;
-  } else if (field.kind === 'paly') {
-    return `Paly ${field.tinctures[0].name} and ${field.tinctures[1].name}`;
-  } else if (field.kind === 'chequy') {
-    return `Chequy ${field.tinctures[0].name} and ${field.tinctures[1].name}`;
-  } else if (field.kind === 'lozengy') {
-    return `Lozengy ${field.tinctures[0].name} and ${field.tinctures[1].name}`;
-  } else if (field.kind === 'barry') {
-    return `Barry of ${stringifyNumber(field.number)} ${field.tinctures[0].name} and ${field.tinctures[1].name}`;
+  } else {
+    const fieldStr = capitalizeFirstLetter(stringifyFieldKind(field.kind));
+    if (field.kind === 'plain') {
+      return  capitalizeFirstLetter(field.tincture.name);
+    } else if (field.kind === 'bendy') {
+      return fieldStr + ` ${field.tinctures[0].name} and ${field.tinctures[1].name}`;
+    } else if (field.kind === 'bendySinister') {
+      return fieldStr + ` ${field.tinctures[0].name} and ${field.tinctures[1].name}`;
+    } else if (field.kind === 'paly') {
+      return fieldStr + ` ${field.tinctures[0].name} and ${field.tinctures[1].name}`;
+    } else if (field.kind === 'chequy') {
+      return fieldStr + ` ${field.tinctures[0].name} and ${field.tinctures[1].name}`;
+    } else if (field.kind === 'lozengy') {
+      return fieldStr + ` ${field.tinctures[0].name} and ${field.tinctures[1].name}`;
+    } else if (field.kind === 'barry') {
+      return (
+        fieldStr + ` of ${stringifyNumber(field.number)} ${field.tinctures[0].name} and ${field.tinctures[1].name}`
+      );
+    } else {
+      return cannotHappen(field);
+    }
+  }
+}
+
+export function stringifyFieldKind(field: Field['kind']): string {
+  if (field === 'plain') {
+    return 'plain';
+  } else if (field === 'bendy') {
+    return 'bendy';
+  } else if (field === 'bendySinister') {
+    return 'bendy sinister';
+  } else if (field === 'paly') {
+    return 'paly';
+  } else if (field === 'barry') {
+    return 'barry';
+  } else if (field === 'party') {
+    return 'party per';
+  } else if (field === 'chequy') {
+    return 'chequy';
+  } else if (field === 'lozengy') {
+    return 'lozengy';
   } else {
     return cannotHappen(field);
   }

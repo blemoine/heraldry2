@@ -4,6 +4,7 @@ import {
   BendySinisterField,
   ChequyField,
   Field,
+  fieldKinds,
   LozengyField,
   PalyField,
 } from '../../model/field';
@@ -13,44 +14,13 @@ import { argent, gules, isMetal, Tincture } from '../../model/tincture';
 import { PartyForm } from './PartyForm';
 import { SelectScalar } from '../../common/SelectScalar';
 import { cannotHappen } from '../../../utils/cannot-happen';
+import { stringifyFieldKind } from '../blason.helpers';
 
 const numberOfBars = [6, 8, 10] as const;
 type Props = { field: Field; fieldChange: (field: Field) => void };
 export const FieldForm = ({ field, fieldChange }: Props) => {
   function plainTinctureChange(tincture: Tincture) {
     fieldChange({ kind: 'plain', tincture });
-  }
-
-  const fieldKinds: Array<Field['kind']> = [
-    'plain',
-    'bendy',
-    'bendySinister',
-    'paly',
-    'party',
-    'barry',
-    'chequy',
-    'lozengy',
-  ];
-  function formatFieldKind(field: Field['kind']): string {
-    if (field === 'plain') {
-      return 'plain';
-    } else if (field === 'bendy') {
-      return 'bendy';
-    } else if (field === 'bendySinister') {
-      return 'bendy sinister';
-    } else if (field === 'paly') {
-      return 'paly';
-    } else if (field === 'barry') {
-      return 'barry';
-    } else if (field === 'party') {
-      return 'party';
-    } else if (field === 'chequy') {
-      return 'chequy';
-    } else if (field === 'lozengy') {
-      return 'lozengy';
-    } else {
-      return cannotHappen(field);
-    }
   }
 
   function changeFieldKind(newKind: Field['kind']) {
@@ -109,7 +79,6 @@ export const FieldForm = ({ field, fieldChange }: Props) => {
     fieldChange({ ...field, tinctures: [field.tinctures[0], tincture] });
   }
 
-
   return (
     <>
       <div className="form-group form-check field-type-select">
@@ -119,7 +88,7 @@ export const FieldForm = ({ field, fieldChange }: Props) => {
           options={fieldKinds}
           value={field.kind}
           valueChange={changeFieldKind}
-          formatValue={formatFieldKind}
+          formatValue={stringifyFieldKind}
         />
       </div>
 

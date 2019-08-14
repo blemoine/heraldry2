@@ -38,4 +38,22 @@ export type LozengyField = {
   tinctures: [Tincture, Tincture];
 };
 
-export type Field = PlainField | PartyField | PalyField | BendyField | BendySinisterField | BarryField | ChequyField | LozengyField;
+export type Field =
+  | PlainField
+  | PartyField
+  | PalyField
+  | BendyField
+  | BendySinisterField
+  | BarryField
+  | ChequyField
+  | LozengyField;
+export const fieldKinds: Array<Field['kind']> = [
+  'plain',
+  'bendy',
+  'bendySinister',
+  'paly',
+  'party',
+  'barry',
+  'chequy',
+  'lozengy',
+];

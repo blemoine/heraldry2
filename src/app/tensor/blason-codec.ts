@@ -1,9 +1,9 @@
-import { Field } from '../model/field';
+import { Field, fieldKinds } from '../model/field';
 import { cannotHappen } from '../../utils/cannot-happen';
 import { Tincture, tinctures } from '../model/tincture';
 import { Line, lines } from '../model/line';
 import { parties, Party } from '../model/party';
-import { flatMap, map, raise, Result, zip, zip3, zip4 } from '../../utils/result';
+import { flatMap, isError, map, raise, Result, zip, zip3, zip4 } from '../../utils/result';
 import { ordinaries, Ordinary } from '../model/ordinary';
 import {
   Charge,
@@ -48,38 +48,31 @@ export function decodeBlason(arr: Uint8Array): Result<Blason> {
 
 export function encodeField(field: Field): Uint8Array {
   const result = new Uint8Array(FIELD_SIZE);
+  result[0] = encodeFromList(fieldKinds, field.kind);
   if (field.kind === 'plain') {
-    result[0] = 1;
     result[1] = encodeTincture(field.tincture);
   } else if (field.kind === 'party') {
-    result[0] = 2;
     result[1] = encodeTincture(field.per.tinctures[0]);
     result[2] = encodeTincture(field.per.tinctures[1]);
     result[3] = encodeLine(field.per.line);
     result[4] = encodePartyName(field.per.name);
   } else if (field.kind === 'bendy') {
-    result[0] = 3;
     result[1] = encodeTincture(field.tinctures[0]);
     result[2] = encodeTincture(field.tinctures[1]);
   } else if (field.kind === 'bendySinister') {
-    result[0] = 4;
     result[1] = encodeTincture(field.tinctures[0]);
     result[2] = encodeTincture(field.tinctures[1]);
   } else if (field.kind === 'paly') {
-    result[0] = 5;
     result[1] = encodeTincture(field.tinctures[0]);
     result[2] = encodeTincture(field.tinctures[1]);
   } else if (field.kind === 'chequy') {
-    result[0] = 6;
     result[1] = encodeTincture(field.tinctures[0]);
     result[2] = encodeTincture(field.tinctures[1]);
   } else if (field.kind === 'barry') {
-    result[0] = 7;
     result[1] = encodeTincture(field.tinctures[0]);
     result[2] = encodeTincture(field.tinctures[1]);
     result[3] = field.number;
   } else if (field.kind === 'lozengy') {
-    result[0] = 8;
     result[1] = encodeTincture(field.tinctures[0]);
     result[2] = encodeTincture(field.tinctures[1]);
   } else {
@@ -90,42 +83,31 @@ export function encodeField(field: Field): Uint8Array {
 }
 
 export function decodeField(arr: Uint8Array): Result<Field> {
-  if (arr[0] === 1) {
-    return map(decodeTincture(arr[1]), (tincture) => ({ kind: 'plain', tincture }));
-  } else if (arr[0] === 2) {
+  const kind = decodeFromList(fieldKinds, arr[0]);
+  if (kind === 'plain') {
+    return map(decodeTincture(arr[1]), (tincture) => ({ kind, tincture }));
+  } else if (kind === 'party') {
     const maybeTinctures = zip(decodeTincture(arr[1]), decodeTincture(arr[2]));
     const maybeLine = decodeLine(arr[3]);
     const maybeName = decodePartyName(arr[4]);
 
     return map(zip3(maybeTinctures, maybeLine, maybeName), ([tinctures, line, name]) => ({
-      kind: 'party',
+      kind,
       per: {
         line,
         tinctures,
         name,
       },
     }));
-  } else if (arr[0] === 3) {
-    const maybeTinctures = zip(decodeTincture(arr[1]), decodeTincture(arr[2]));
-    return map(maybeTinctures, (tinctures) => ({ kind: 'bendy', tinctures }));
-  } else if (arr[0] === 4) {
-    const maybeTinctures = zip(decodeTincture(arr[1]), decodeTincture(arr[2]));
-    return map(maybeTinctures, (tinctures) => ({ kind: 'bendySinister', tinctures }));
-  } else if (arr[0] === 5) {
-    const maybeTinctures = zip(decodeTincture(arr[1]), decodeTincture(arr[2]));
-    return map(maybeTinctures, (tinctures) => ({ kind: 'paly', tinctures }));
-  } else if (arr[0] === 6) {
-    const maybeTinctures = zip(decodeTincture(arr[1]), decodeTincture(arr[2]));
-    return map(maybeTinctures, (tinctures) => ({ kind: 'chequy', tinctures }));
-  } else if (arr[0] === 7) {
+  } else if (kind === 'barry') {
     const maybeTinctures = zip(decodeTincture(arr[1]), decodeTincture(arr[2]));
     const maybeNumber: Result<6 | 8 | 10> = decodeNumber([6, 8, 10], arr[3]);
-    return map(zip(maybeTinctures, maybeNumber), ([tinctures, number]) => ({ kind: 'barry', tinctures, number }));
-  } else if (arr[0] === 8) {
+    return map(zip(maybeTinctures, maybeNumber), ([tinctures, number]) => ({ kind, tinctures, number }));
+  } else if (!isError(kind)) {
     const maybeTinctures = zip(decodeTincture(arr[1]), decodeTincture(arr[2]));
-    return map(maybeTinctures, (tinctures) => ({ kind: 'lozengy', tinctures }));
+    return map(maybeTinctures, (tinctures) => ({ kind, tinctures }));
   } else {
-    return raise(`Cannot decode field type with ${arr[0]}`);
+    return kind;
   }
 }
 
