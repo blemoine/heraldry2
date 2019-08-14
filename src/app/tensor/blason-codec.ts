@@ -3,11 +3,51 @@ import { cannotHappen } from '../../utils/cannot-happen';
 import { Tincture, tinctures } from '../model/tincture';
 import { Line, lines } from '../model/line';
 import { parties, Party } from '../model/party';
-import { flatMap, map, raise, Result, zip, zip3 } from '../../utils/result';
+import { flatMap, map, raise, Result, zip, zip3, zip4 } from '../../utils/result';
 import { ordinaries, Ordinary } from '../model/ordinary';
+import {
+  Charge,
+  charges,
+  eagleAttitudes,
+  lionAttitudes,
+  lionHeads,
+  lionTails,
+  lozengeInsides,
+  roundelInsides,
+} from '../model/charge';
+import { availableDispositions, CountAndDisposition, supportedNumbers } from '../model/countAndDisposition';
+import { Blason } from '../model/blason';
+
+const FIELD_SIZE = 5;
+const ORDINARY_SIZE = 4;
+const CHARGE_SIZE = 8;
+
+export function encodeBlason(blason: Blason): Uint8Array {
+  const fieldArr = encodeField(blason.field);
+  const ordinaryArr = encodeOrdinary(blason.ordinary || null);
+  const chargeArr = encodeCharge(blason.charge || null);
+
+  const result = new Uint8Array(FIELD_SIZE + ORDINARY_SIZE + CHARGE_SIZE);
+  result.set(fieldArr);
+  result.set(ordinaryArr, FIELD_SIZE);
+  result.set(chargeArr, FIELD_SIZE + ORDINARY_SIZE);
+  return result;
+}
+
+export function decodeBlason(arr: Uint8Array): Result<Blason> {
+  const maybeField = decodeField(arr.slice(0, FIELD_SIZE));
+  const maybeOrdinary = decodeOrdinary(arr.slice(FIELD_SIZE, FIELD_SIZE + ORDINARY_SIZE));
+  const maybeCharge = decodeCharge(arr.slice(FIELD_SIZE + ORDINARY_SIZE));
+
+  return map(zip3(maybeField, maybeOrdinary, maybeCharge), ([field, ordinary, charge]) => ({
+    field,
+    ...(ordinary ? { ordinary } : {}),
+    ...(charge ? { charge } : {}),
+  }));
+}
 
 export function encodeField(field: Field): Uint8Array {
-  const result = new Uint8Array(5);
+  const result = new Uint8Array(FIELD_SIZE);
   if (field.kind === 'plain') {
     result[0] = 1;
     result[1] = encodeTincture(field.tincture);
@@ -83,7 +123,7 @@ export function decodeField(arr: Uint8Array): Result<Field> {
 }
 
 export function encodeOrdinary(ordinary: Ordinary | null): Uint8Array {
-  const result = new Uint8Array(4);
+  const result = new Uint8Array(ORDINARY_SIZE);
   if (!ordinary) {
     return result;
   }
@@ -120,7 +160,92 @@ export function decodeOrdinary(arr: Uint8Array): Result<Ordinary | null> {
   );
 }
 
-function decodeNumber<A extends number>(validNum: Array<A>, i: number): Result<A> {
+export function encodeCharge(charge: Charge | null): Uint8Array {
+  const result = new Uint8Array(CHARGE_SIZE);
+  if (!charge) {
+    return result;
+  }
+  result[0] = encodeChargeName(charge.name);
+  result[1] = encodeTincture(charge.tincture);
+  const [count, disposition] = encodeCountAndDisposition(charge.countAndDisposition);
+  result[2] = count;
+  result[3] = disposition;
+  if (charge.name === 'lion') {
+    result[4] = encodeFromList(lionAttitudes, charge.attitude);
+    result[5] = encodeFromList([...lionHeads, null], charge.head);
+    result[6] = encodeFromList([...lionTails, null], charge.tail);
+    result[7] = encodeTincture(charge.armedAndLangued);
+  } else if (charge.name === 'eagle') {
+    result[4] = encodeFromList(eagleAttitudes, charge.attitude);
+    result[5] = encodeTincture(charge.beakedAndArmed);
+  } else if (charge.name === 'lozenge') {
+    result[4] = encodeFromList(lozengeInsides, charge.inside);
+  } else if (charge.name === 'roundel') {
+    result[4] = encodeFromList(roundelInsides, charge.inside);
+  } else if (charge.name === 'fleurdelys') {
+    // nothing to do for now
+  } else {
+    return cannotHappen(charge);
+  }
+  return result;
+}
+
+export function decodeCharge(arr: Uint8Array): Result<Charge | null> {
+  if (arr[0] === 0) {
+    return null;
+  }
+  const maybeName = decodeChargeName(arr[0]);
+  const maybeTincture = decodeTincture(arr[1]);
+  const maybeCountAndDisposition = decodeCountAndDisposition(arr[2], arr[3]);
+
+  return flatMap(
+    zip3(maybeName, maybeTincture, maybeCountAndDisposition),
+    ([name, tincture, countAndDisposition]): Result<Charge> => {
+      if (name === 'lion') {
+        const maybeAttitude = decodeFromList(lionAttitudes, arr[4]);
+        const maybeHead = decodeFromList([...lionHeads, null], arr[5]);
+        const maybeTail = decodeFromList([...lionTails, null], arr[6]);
+        const maybeArmedAndLangued = decodeTincture(arr[7]);
+
+        return map(
+          zip4(maybeAttitude, maybeHead, maybeTail, maybeArmedAndLangued),
+          ([attitude, head, tail, armedAndLangued]) => ({
+            name,
+            tincture,
+            countAndDisposition,
+            attitude,
+            head,
+            tail,
+            armedAndLangued,
+          })
+        );
+      } else if (name === 'eagle') {
+        const maybeAttitude = decodeFromList(eagleAttitudes, arr[4]);
+        const maybeBeakedAndArmed = decodeTincture(arr[5]);
+        return map(zip(maybeAttitude, maybeBeakedAndArmed), ([attitude, beakedAndArmed]) => ({
+          name,
+          tincture,
+          countAndDisposition,
+          attitude,
+          beakedAndArmed,
+        }));
+      } else if (name === 'lozenge') {
+        const maybeInside = decodeFromList(lozengeInsides, arr[4]);
+        return map(maybeInside, (inside) => ({ name, tincture, countAndDisposition, inside }));
+      } else if (name === 'roundel') {
+        const maybeInside = decodeFromList(roundelInsides, arr[4]);
+        return map(maybeInside, (inside) => ({ name, tincture, countAndDisposition, inside }));
+      } else if (name === 'fleurdelys') {
+        // nothing to do for now
+        return { name, tincture, countAndDisposition };
+      } else {
+        return cannotHappen(name);
+      }
+    }
+  );
+}
+
+function decodeNumber<A extends number>(validNum: ReadonlyArray<A>, i: number): Result<A> {
   if (validNum.indexOf(i as A) >= 0) {
     return i as A;
   } else {
@@ -129,17 +254,35 @@ function decodeNumber<A extends number>(validNum: Array<A>, i: number): Result<A
 }
 
 function encodeOrdinaryName(name: Ordinary['name']): number {
-  return ordinaries.indexOf(name) + 1;
+  return encodeFromList(ordinaries, name);
 }
 function decodeOrdinaryName(i: number): Result<Ordinary['name']> {
-  return ordinaries[i - 1] || raise(`Cannot decode ordinary name ${i}`);
+  return decodeFromList(ordinaries, i);
+}
+
+function encodeChargeName(name: Charge['name']): number {
+  return encodeFromList(charges, name);
+}
+function decodeChargeName(i: number): Result<Charge['name']> {
+  return decodeFromList(charges, i);
+}
+
+function encodeCountAndDisposition(countAndDisposition: CountAndDisposition): [number, number] {
+  return [countAndDisposition.count, encodeFromList(availableDispositions, countAndDisposition.disposition)];
+}
+
+function decodeCountAndDisposition(i: number, j: number): Result<CountAndDisposition> {
+  const maybeCount = decodeNumber(supportedNumbers, i);
+  const maybeDisposition = decodeFromList(availableDispositions, j);
+
+  return map(zip(maybeCount, maybeDisposition), ([count, disposition]) => ({ count, disposition }));
 }
 
 function encodeLine(line: Line): number {
-  return lines.indexOf(line) + 1;
+  return encodeFromList(lines, line);
 }
 function decodeLine(i: number): Result<Line> {
-  return lines[i - 1] || raise(`Cannot decode line ${i}`);
+  return decodeFromList(lines, i);
 }
 
 function encodeTincture(tincture: Tincture): number {
@@ -150,8 +293,20 @@ function decodeTincture(i: number): Result<Tincture> {
 }
 
 function encodePartyName(p: Party['name']): number {
-  return parties.indexOf(p) + 1;
+  return encodeFromList(parties, p);
 }
 function decodePartyName(i: number): Result<Party['name']> {
-  return parties[i - 1] || raise(`Cannot decode party name ${i}`);
+  return decodeFromList(parties, i);
+}
+
+function encodeFromList<A>(list: ReadonlyArray<A>, a: A): number {
+  return list.indexOf(a) + 1;
+}
+
+function decodeFromList<A>(list: ReadonlyArray<A>, i: number): Result<A> {
+  const result = list[i - 1];
+  if (result === undefined) {
+    return raise(`Cannot decode index ${i} for list ${list}`);
+  }
+  return result;
 }

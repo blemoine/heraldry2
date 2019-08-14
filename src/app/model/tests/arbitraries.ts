@@ -85,7 +85,7 @@ export const ordinaryArb: Arbitrary<Ordinary> = fc
     }
   );
 
-const chargeArb: Arbitrary<Charge> = fc.constantFrom(...charges).chain((chargeName) => {
+export const chargeArb: Arbitrary<Charge> = fc.constantFrom(...charges).chain((chargeName) => {
   const countAndDistionArb: Arbitrary<CountAndDisposition> = fc
     .tuple(fc.constantFrom(...supportedNumbers), fc.constantFrom(...availableDispositions))
     .map(([count, disposition]) => ({ count, disposition: count === 1 ? 'default' : disposition }));
