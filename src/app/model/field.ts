@@ -33,4 +33,9 @@ export type ChequyField = {
   tinctures: [Tincture, Tincture];
 };
 
-export type Field = PlainField | PartyField | PalyField | BendyField | BendySinisterField | BarryField | ChequyField;
+export type LozengyField = {
+  kind: 'lozengy';
+  tinctures: [Tincture, Tincture];
+};
+
+export type Field = PlainField | PartyField | PalyField | BendyField | BendySinisterField | BarryField | ChequyField | LozengyField;

@@ -1,4 +1,12 @@
-import { BarryField, BendyField, BendySinisterField, ChequyField, Field, PalyField } from '../../model/field';
+import {
+  BarryField,
+  BendyField,
+  BendySinisterField,
+  ChequyField,
+  Field,
+  LozengyField,
+  PalyField,
+} from '../../model/field';
 import { TinctureSelect } from './TinctureSelect';
 import * as React from 'react';
 import { argent, gules, isMetal, Tincture } from '../../model/tincture';
@@ -6,13 +14,23 @@ import { PartyForm } from './PartyForm';
 import { SelectScalar } from '../../common/SelectScalar';
 import { cannotHappen } from '../../../utils/cannot-happen';
 
+const numberOfBars = [6, 8, 10] as const;
 type Props = { field: Field; fieldChange: (field: Field) => void };
 export const FieldForm = ({ field, fieldChange }: Props) => {
   function plainTinctureChange(tincture: Tincture) {
     fieldChange({ kind: 'plain', tincture });
   }
 
-  const fieldKinds: Array<Field['kind']> = ['plain', 'bendy', 'bendySinister', 'paly', 'party', 'barry', 'chequy'];
+  const fieldKinds: Array<Field['kind']> = [
+    'plain',
+    'bendy',
+    'bendySinister',
+    'paly',
+    'party',
+    'barry',
+    'chequy',
+    'lozengy',
+  ];
   function formatFieldKind(field: Field['kind']): string {
     if (field === 'plain') {
       return 'plain';
@@ -28,6 +46,8 @@ export const FieldForm = ({ field, fieldChange }: Props) => {
       return 'party';
     } else if (field === 'chequy') {
       return 'chequy';
+    } else if (field === 'lozengy') {
+      return 'lozengy';
     } else {
       return cannotHappen(field);
     }
@@ -48,8 +68,8 @@ export const FieldForm = ({ field, fieldChange }: Props) => {
         fieldChange({ kind: 'plain', tincture: newColors[0] });
       } else if (newKind === 'barry') {
         fieldChange({ kind: 'barry', number: 10, tinctures: newColors });
-      } else if (newKind === 'chequy') {
-        fieldChange({ kind: 'chequy', tinctures: newColors });
+      } else if (newKind === 'chequy' || newKind === 'lozengy') {
+        fieldChange({ kind: newKind, tinctures: newColors });
       } else {
         cannotHappen(newKind);
       }
@@ -66,7 +86,8 @@ export const FieldForm = ({ field, fieldChange }: Props) => {
       field.kind === 'paly' ||
       field.kind === 'bendySinister' ||
       field.kind === 'bendy' ||
-      field.kind === 'chequy'
+      field.kind === 'chequy' ||
+      field.kind === 'lozengy'
     ) {
       return field.tinctures;
     } else {
@@ -75,20 +96,20 @@ export const FieldForm = ({ field, fieldChange }: Props) => {
   }
 
   function firstTinctureChange(
-    field: PalyField | BendyField | BendySinisterField | BarryField | ChequyField,
+    field: PalyField | BendyField | BendySinisterField | BarryField | ChequyField | LozengyField,
     tincture: Tincture
   ) {
     fieldChange({ ...field, tinctures: [tincture, field.tinctures[1]] });
   }
 
   function secondTinctureChange(
-    field: PalyField | BendyField | BendySinisterField | BarryField | ChequyField,
+    field: PalyField | BendyField | BendySinisterField | BarryField | ChequyField | LozengyField,
     tincture: Tincture
   ) {
     fieldChange({ ...field, tinctures: [field.tinctures[0], tincture] });
   }
 
-  const numberOfBars = [6, 8, 10] as const;
+
   return (
     <>
       <div className="form-group form-check field-type-select">
@@ -124,6 +145,7 @@ export const FieldForm = ({ field, fieldChange }: Props) => {
         field.kind === 'bendySinister' ||
         field.kind === 'paly' ||
         field.kind === 'chequy' ||
+        field.kind === 'lozengy' ||
         field.kind === 'barry' ? (
         <div className="row">
           <div className="col">

@@ -16,6 +16,7 @@ import { BarryDisplay } from './fields/BarryDisplay';
 import { BendySinisterDisplay } from './fields/BendySinisterDisplay';
 import { ChequyDisplay } from './fields/ChequyDisplay';
 import { Dimension } from '../../model/dimension';
+import { LozengyDisplay } from './fields/LozengyDisplay';
 
 type Props = { dimension: Dimension; field: Field; fillFromTincture: (tincture: Tincture) => string };
 export const FieldDisplay = ({ field, dimension, fillFromTincture }: Props) => {
@@ -60,6 +61,9 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture }: Props) => {
   } else if (field.kind === 'chequy') {
     const fill: [string, string] = fillFromTincturePair(field.tinctures);
     return <ChequyDisplay fill={fill} dimension={dimension} />;
+  } else if (field.kind === 'lozengy') {
+    const fill: [string, string] = fillFromTincturePair(field.tinctures);
+    return <LozengyDisplay fill={fill} dimension={dimension} />;
   } else {
     return cannotHappen(field);
   }

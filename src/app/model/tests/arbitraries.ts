@@ -5,7 +5,7 @@ import {
   BendyField,
   BendySinisterField,
   ChequyField,
-  Field,
+  Field, LozengyField,
   PalyField,
   PartyField,
   PlainField,
@@ -56,6 +56,9 @@ const barryFieldArb: Arbitrary<BarryField> = fc
 const chequyFieldArb: Arbitrary<ChequyField> = fc
   .tuple(tinctureArb, tinctureArb)
   .map((tinctures) => ({ kind: 'chequy', tinctures }));
+const lozengyFieldArb: Arbitrary<LozengyField> = fc
+  .tuple(tinctureArb, tinctureArb)
+  .map((tinctures) => ({ kind: 'lozengy', tinctures }));
 
 export const fieldArb: Arbitrary<Field> = fc.oneof<Field>(
   plainFieldArb,
@@ -64,7 +67,8 @@ export const fieldArb: Arbitrary<Field> = fc.oneof<Field>(
   bendyFieldArb,
   bendySinisterFieldArb,
   barryFieldArb,
-  chequyFieldArb
+  chequyFieldArb,
+  lozengyFieldArb
 );
 
 export const ordinaryArb: Arbitrary<Ordinary> = fc

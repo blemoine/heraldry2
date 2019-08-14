@@ -78,6 +78,10 @@ export function encodeField(field: Field): Uint8Array {
     result[1] = encodeTincture(field.tinctures[0]);
     result[2] = encodeTincture(field.tinctures[1]);
     result[3] = field.number;
+  } else if (field.kind === 'lozengy') {
+    result[0] = 8;
+    result[1] = encodeTincture(field.tinctures[0]);
+    result[2] = encodeTincture(field.tinctures[1]);
   } else {
     return cannotHappen(field);
   }
@@ -117,6 +121,9 @@ export function decodeField(arr: Uint8Array): Result<Field> {
     const maybeTinctures = zip(decodeTincture(arr[1]), decodeTincture(arr[2]));
     const maybeNumber: Result<6 | 8 | 10> = decodeNumber([6, 8, 10], arr[3]);
     return map(zip(maybeTinctures, maybeNumber), ([tinctures, number]) => ({ kind: 'barry', tinctures, number }));
+  } else if (arr[0] === 8) {
+    const maybeTinctures = zip(decodeTincture(arr[1]), decodeTincture(arr[2]));
+    return map(maybeTinctures, (tinctures) => ({ kind: 'lozengy', tinctures }));
   } else {
     return raise(`Cannot decode field type with ${arr[0]}`);
   }
