@@ -55,7 +55,7 @@ export type Ermines = Ermine | CounterErmine | Erminois | Pean;
 export const ermines: ReadonlyArray<Ermines> = [ermine, counterErmine, erminois, pean] as const;
 
 export type Vairs = Vair | CounterVair | VairEnPale | VairEnPoint;
-export const vairs: ReadonlyArray<Vairs> = [vair, counterVair, vairEnPale,vairEnPoint] as const;
+export const vairs: ReadonlyArray<Vairs> = [vair, counterVair, vairEnPale, vairEnPoint] as const;
 
 export type Potents = Potent | CounterPotent | PotentEnPale | PotentEnPoint;
 export const potents: ReadonlyArray<Potents> = [potent, counterPotent, potentEnPale, potentEnPoint] as const;
