@@ -25,7 +25,8 @@ export const FieldForm = ({ field, fieldChange }: Props) => {
         newKind === 'bendySinister' ||
         newKind === 'bendy' ||
         newKind === 'chequy' ||
-        newKind === 'lozengy'
+        newKind === 'lozengy' ||
+        newKind === 'barry-pily'
       ) {
         fieldChange({ kind: newKind, tinctures: newColors });
       } else if (newKind === 'plain') {
@@ -50,7 +51,8 @@ export const FieldForm = ({ field, fieldChange }: Props) => {
       field.kind === 'bendy' ||
       field.kind === 'chequy' ||
       field.kind === 'lozengy' ||
-      field.kind === 'paly-pily'
+      field.kind === 'paly-pily' ||
+      field.kind === 'barry-pily'
     ) {
       return field.tinctures;
     } else {
@@ -103,6 +105,7 @@ export const FieldForm = ({ field, fieldChange }: Props) => {
         field.kind === 'chequy' ||
         field.kind === 'lozengy' ||
         field.kind === 'paly-pily' ||
+        field.kind === 'barry-pily' ||
         field.kind === 'barry' ? (
         <div className="row">
           <div className="col">

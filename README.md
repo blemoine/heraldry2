@@ -34,3 +34,4 @@ Faire le "of the last"
 * Support optionnel de de "Party Per" instead of "Per"
 
 * Meilleur support de l'optionnalité des virgules
+* Pouvoir passer en parametre un range de couleur pour les tinctures

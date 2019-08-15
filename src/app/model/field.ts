@@ -18,6 +18,10 @@ export type PalyPilyField = {
   kind: 'paly-pily';
   tinctures: [Tincture, Tincture];
 };
+export type BarryPilyField = {
+  kind: 'barry-pily';
+  tinctures: [Tincture, Tincture];
+};
 export type BendyField = {
   kind: 'bendy';
   tinctures: [Tincture, Tincture];
@@ -52,7 +56,8 @@ export type Field =
   | BarryField
   | ChequyField
   | LozengyField
-  | PalyPilyField;
+  | PalyPilyField
+  | BarryPilyField;
 export const fieldKinds: Array<Field['kind']> = [
   'plain',
   'bendy',
@@ -63,4 +68,5 @@ export const fieldKinds: Array<Field['kind']> = [
   'chequy',
   'lozengy',
   'paly-pily',
+  'barry-pily',
 ];

@@ -83,7 +83,7 @@ describe('CoatsOfArms', () => {
   snapshotTest('Or, fifteen mascles sable');
   snapshotTest('Potent, a chief gules');
   snapshotTest('Paly pily vair and pean');
-  snapshotTest('Paly pily counter ermine and potent en point');
+  snapshotTest('Barry pily counter ermine and potent en point');
 });
 
 function snapshotTest(blason: string) {
