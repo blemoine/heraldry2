@@ -82,6 +82,7 @@ describe('CoatsOfArms', () => {
   snapshotTest('Or, eleven rustres sable');
   snapshotTest('Or, fifteen mascles sable');
   snapshotTest('Potent, a chief gules');
+  snapshotTest('Paly pily vair and pean');
 });
 
 function snapshotTest(blason: string) {

@@ -3462,6 +3462,169 @@ exports[`CoatsOfArms should render 'Or, thirteen lozenge or' 1`] = `
 </svg>
 `;
 
+exports[`CoatsOfArms should render 'Paly pily vair and pean' 1`] = `
+<svg
+  height={266.6666666666667}
+  viewBox="0 0 200 266.6666666666667"
+  width={200}
+>
+  <defs>
+    
+    
+    
+    <symbol
+      id="pean"
+      viewBox="0 0 200 240"
+    >
+      <rect
+        fill="#000000"
+        height="100%"
+        width="100%"
+      />
+      <g
+        transform="translate(100, 240)"
+      >
+        <path
+          d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
+          fill="#FFD700"
+        />
+        <circle
+          cy={-226}
+          fill="#FFD700"
+          r="14"
+        />
+        <circle
+          cx={-32}
+          cy={-194}
+          fill="#FFD700"
+          r={14}
+        />
+        <circle
+          cx={32}
+          cy={-194}
+          fill="#FFD700"
+          r={14}
+        />
+      </g>
+    </symbol>
+    <pattern
+      height={65.04065040650407}
+      id="field-pattern-355"
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 70 125"
+      width={36.36363636363637}
+    >
+      <rect
+        fill="#000000"
+        height="100%"
+        width="100%"
+      />
+      <use
+        height={60}
+        href="#pean"
+        width={35}
+        x="0"
+        y="0"
+      />
+      <use
+        height={60}
+        href="#pean"
+        width={35}
+        x="35"
+        y="65"
+      />
+    </pattern>
+    <symbol
+      id="vair"
+      viewBox="0 0 200 200"
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <path
+        d="M0 200 L200 200 L150 150 L150 50 L100 0 L50 50 L50 150 Z"
+        fill="#0000FF"
+      />
+    </symbol>
+    <pattern
+      height={80}
+      id="field-pattern-349"
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 100 200"
+      width={40}
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <use
+        height={100}
+        href="#vair"
+        width={100}
+        x="0"
+        y="0"
+      />
+      <use
+        height={100}
+        href="#vair"
+        width={100}
+        x="-50"
+        y="100"
+      />
+      <use
+        height={100}
+        href="#vair"
+        width={100}
+        x="50"
+        y="100"
+      />
+    </pattern>
+    
+    
+    
+    
+    
+    
+    
+    <clipPath
+      id="plain-field-clip-path"
+    >
+      <path
+        d="M 0 0 H200 V88.8888888888889 A200 200 90 0 1 100 266.6666666666667 A200 200 -90 0 1 0 88.8888888888889 Z"
+        fill="transparent"
+        stroke="#333"
+      />
+    </clipPath>
+  </defs>
+  <g
+    clipPath="url(#plain-field-clip-path)"
+  >
+    <g>
+      <rect
+        fill="url(#field-pattern-355)"
+        height={266.6666666666667}
+        width={200}
+        x={0}
+        y={0}
+      />
+      <path
+        d="M 0 0 L 25 213.33333333333337 L 50 0 L 75 213.33333333333337 L 100 0 L 125 213.33333333333337 L 150 0 L 175 213.33333333333337 L 200 0 Z"
+        fill="url(#field-pattern-349)"
+        stroke="#333"
+      />
+    </g>
+  </g>
+  <path
+    d="M 0 0 H200 V88.8888888888889 A200 200 90 0 1 100 266.6666666666667 A200 200 -90 0 1 0 88.8888888888889 Z"
+    fill="transparent"
+    stroke="#333"
+  />
+</svg>
+`;
+
 exports[`CoatsOfArms should render 'Per chevron Sable and Or, three fleurs de lys argent' 1`] = `
 <svg
   height={266.6666666666667}
