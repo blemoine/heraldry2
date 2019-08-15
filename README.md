@@ -28,7 +28,6 @@ Faire le "of the last"
 
 * Factorize form for lozenge/roundel/fleur de lys
 * Il y a quelques cas ou les annulets/losanges rentrent pas quand y'en a beaucoup (9 en particulier)
-* test le blason avec counter ermine (Serialization qui chie probablement)
 * Support for quarterly
 * Support for parsing gardant (en plus de guardant)
 * Support for Checky (en plus de Chequy)

@@ -1,5 +1,5 @@
 import { Blason } from '../model/blason';
-import { Furs, gules, or } from '../model/tincture';
+import { Furs, gules, or, Tincture } from '../model/tincture';
 import { Party } from '../model/party';
 import { cannotHappen } from '../../utils/cannot-happen';
 import { Charge } from '../model/charge';
@@ -43,14 +43,14 @@ function stringifyOrdinary(ordinary: Ordinary): string {
     if (ordinary.line !== 'straight') {
       result += ordinary.line + ' ';
     }
-    result += ordinary.tincture.name;
+    result += stringifyTincture(ordinary.tincture);
     return result;
   } else {
     let result = 'a ' + stringifyOrdinaryName(ordinary.name) + ' ';
     if (ordinary.line !== 'straight') {
       result += ordinary.line + ' ';
     }
-    result += ordinary.tincture.name;
+    result += stringifyTincture(ordinary.tincture);
     return result;
   }
 }
@@ -66,7 +66,7 @@ export function stringifyOrdinaryName(name: Ordinary['name']): string {
 function stringifyField(field: Field): string {
   if (field.kind === 'party') {
     const perName = stringifyParty(field.per.name);
-    const tinctures = field.per.tinctures.map((t) => t.name).join(' and ');
+    const tinctures = field.per.tinctures.map((t) => stringifyTincture(t)).join(' and ');
     let result = 'Per ' + perName + ' ';
     if (field.per.line !== 'straight') {
       result += field.per.line + ' ';
@@ -76,23 +76,23 @@ function stringifyField(field: Field): string {
   } else {
     const fieldStr = capitalizeFirstLetter(stringifyFieldKind(field.kind));
     if (field.kind === 'plain') {
-      return capitalizeFirstLetter(field.tincture.name);
+      return capitalizeFirstLetter(stringifyTincture(field.tincture));
     } else if (field.kind === 'bendy') {
-      return fieldStr + ` ${field.tinctures[0].name} and ${field.tinctures[1].name}`;
+      return fieldStr + ` ${stringifyTincture(field.tinctures[0])} and ${stringifyTincture(field.tinctures[1])}`;
     } else if (field.kind === 'bendySinister') {
-      return fieldStr + ` ${field.tinctures[0].name} and ${field.tinctures[1].name}`;
+      return fieldStr + ` ${stringifyTincture(field.tinctures[0])} and ${stringifyTincture(field.tinctures[1])}`;
     } else if (field.kind === 'paly') {
-      return fieldStr + ` ${field.tinctures[0].name} and ${field.tinctures[1].name}`;
+      return fieldStr + ` ${stringifyTincture(field.tinctures[0])} and ${stringifyTincture(field.tinctures[1])}`;
     } else if (field.kind === 'chequy') {
-      return fieldStr + ` ${field.tinctures[0].name} and ${field.tinctures[1].name}`;
+      return fieldStr + ` ${stringifyTincture(field.tinctures[0])} and ${stringifyTincture(field.tinctures[1])}`;
     } else if (field.kind === 'lozengy') {
-      return fieldStr + ` ${field.tinctures[0].name} and ${field.tinctures[1].name}`;
+      return fieldStr + ` ${stringifyTincture(field.tinctures[0])} and ${stringifyTincture(field.tinctures[1])}`;
     } else if (field.kind === 'barry') {
       return (
-        fieldStr + ` of ${stringifyNumber(field.number)} ${field.tinctures[0].name} and ${field.tinctures[1].name}`
+        fieldStr + ` of ${stringifyNumber(field.number)} ${stringifyTincture(field.tinctures[0])} and ${stringifyTincture(field.tinctures[1])}`
       );
     } else if (field.kind === 'paly-pily') {
-      return fieldStr + ` ${field.tinctures[0].name} and ${field.tinctures[1].name}`;
+      return fieldStr + ` ${stringifyTincture(field.tinctures[0])} and ${stringifyTincture(field.tinctures[1])}`;
     } else {
       return cannotHappen(field);
     }
@@ -153,10 +153,10 @@ function stringifyCharge(charge: Charge): string {
       result += ' in ' + charge.countAndDisposition.disposition;
     }
 
-    result += ' ' + charge.tincture.name;
+    result += ' ' + stringifyTincture(charge.tincture);
 
     if (charge.beakedAndArmed.name != charge.tincture.name) {
-      result += ' beaked and armed ' + charge.beakedAndArmed.name;
+      result += ' beaked and armed ' + stringifyTincture(charge.beakedAndArmed);
     }
     return result;
   } else if (charge.name === 'fleurdelys') {
@@ -166,7 +166,7 @@ function stringifyCharge(charge: Charge): string {
     if (charge.countAndDisposition.count !== 1 && charge.countAndDisposition.disposition !== 'default') {
       result += ' in ' + charge.countAndDisposition.disposition + ' ';
     }
-    result += charge.tincture.name;
+    result += stringifyTincture(charge.tincture);
 
     return result;
   } else if (charge.name === 'lion') {
@@ -185,9 +185,9 @@ function stringifyCharge(charge: Charge): string {
       result += ' in ' + charge.countAndDisposition.disposition;
     }
 
-    result += ' ' + charge.tincture.name;
+    result += ' ' + stringifyTincture(charge.tincture);
     if (charge.armedAndLangued.name !== gules.name) {
-      result += ' armed and langued ' + charge.armedAndLangued.name;
+      result += ' armed and langued ' + stringifyTincture(charge.armedAndLangued);
     }
 
     return result;
@@ -198,7 +198,7 @@ function stringifyCharge(charge: Charge): string {
       if (charge.countAndDisposition.count !== 1 && charge.countAndDisposition.disposition !== 'default') {
         result += ' in ' + charge.countAndDisposition.disposition + ' ';
       }
-      result += charge.tincture.name;
+      result += stringifyTincture(charge.tincture);
     } else if (charge.inside === 'nothing') {
       if (charge.tincture.name === or.name) {
         result += ' ' + pluralize('bezant', count);
@@ -210,7 +210,7 @@ function stringifyCharge(charge: Charge): string {
         if (charge.countAndDisposition.count !== 1 && charge.countAndDisposition.disposition !== 'default') {
           result += ' in ' + charge.countAndDisposition.disposition + ' ';
         }
-        result += charge.tincture.name;
+        result += stringifyTincture(charge.tincture);
       }
     } else {
       return cannotHappen(charge.inside);
@@ -231,7 +231,7 @@ function stringifyCharge(charge: Charge): string {
     if (charge.countAndDisposition.count !== 1 && charge.countAndDisposition.disposition !== 'default') {
       result += ' in ' + charge.countAndDisposition.disposition + ' ';
     }
-    result += charge.tincture.name;
+    result += stringifyTincture(charge.tincture);
 
     return result;
   } else {
@@ -310,4 +310,24 @@ export function isThereFur(blason: Blason, fur: Furs['name']): boolean {
   }
 
   return false;
+}
+
+export function stringifyTincture(tincture: Tincture): string {
+  if (tincture.name === 'counter-ermine') {
+    return 'counter ermine';
+  } else if (tincture.name === 'counter-vair') {
+    return 'counter vair';
+  } else if (tincture.name === 'vair-en-pale') {
+    return 'vair en pale';
+  } else if (tincture.name === 'vair-en-point') {
+    return 'vair en point';
+  } else if (tincture.name === 'counter-potent') {
+    return 'potent vair';
+  } else if (tincture.name === 'potent-en-pale') {
+    return 'potent en pale';
+  } else if (tincture.name === 'potent-en-point') {
+    return 'potent en point';
+  } else {
+    return tincture.name;
+  }
 }
