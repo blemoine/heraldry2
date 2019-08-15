@@ -51,32 +51,18 @@ export function encodeField(field: Field): Uint8Array {
   result[0] = encodeFromList(fieldKinds, field.kind);
   if (field.kind === 'plain') {
     result[1] = encodeTincture(field.tincture);
+  } else if (field.kind === 'barry') {
+    result[1] = encodeTincture(field.tinctures[0]);
+    result[2] = encodeTincture(field.tinctures[1]);
+    result[3] = field.number;
   } else if (field.kind === 'party') {
     result[1] = encodeTincture(field.per.tinctures[0]);
     result[2] = encodeTincture(field.per.tinctures[1]);
     result[3] = encodeLine(field.per.line);
     result[4] = encodePartyName(field.per.name);
-  } else if (field.kind === 'bendy') {
-    result[1] = encodeTincture(field.tinctures[0]);
-    result[2] = encodeTincture(field.tinctures[1]);
-  } else if (field.kind === 'bendySinister') {
-    result[1] = encodeTincture(field.tinctures[0]);
-    result[2] = encodeTincture(field.tinctures[1]);
-  } else if (field.kind === 'paly') {
-    result[1] = encodeTincture(field.tinctures[0]);
-    result[2] = encodeTincture(field.tinctures[1]);
-  } else if (field.kind === 'chequy') {
-    result[1] = encodeTincture(field.tinctures[0]);
-    result[2] = encodeTincture(field.tinctures[1]);
-  } else if (field.kind === 'barry') {
-    result[1] = encodeTincture(field.tinctures[0]);
-    result[2] = encodeTincture(field.tinctures[1]);
-    result[3] = field.number;
-  } else if (field.kind === 'lozengy') {
-    result[1] = encodeTincture(field.tinctures[0]);
-    result[2] = encodeTincture(field.tinctures[1]);
   } else {
-    return cannotHappen(field);
+    result[1] = encodeTincture(field.tinctures[0]);
+    result[2] = encodeTincture(field.tinctures[1]);
   }
 
   return result;

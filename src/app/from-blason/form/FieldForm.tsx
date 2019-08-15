@@ -1,13 +1,4 @@
-import {
-  BarryField,
-  BendyField,
-  BendySinisterField,
-  ChequyField,
-  Field,
-  fieldKinds,
-  LozengyField,
-  PalyField,
-} from '../../model/field';
+import { Field, fieldKinds, PartyField, PlainField } from '../../model/field';
 import { TinctureSelect } from './TinctureSelect';
 import * as React from 'react';
 import { argent, gules, isMetal, Tincture } from '../../model/tincture';
@@ -28,18 +19,19 @@ export const FieldForm = ({ field, fieldChange }: Props) => {
       const newColors = extractColors(field);
       if (newKind === 'party') {
         fieldChange({ kind: 'party', per: { name: 'fess', tinctures: newColors, line: 'straight' } });
-      } else if (newKind === 'bendy') {
-        fieldChange({ kind: 'bendy', tinctures: newColors });
-      } else if (newKind === 'bendySinister') {
-        fieldChange({ kind: 'bendySinister', tinctures: newColors });
-      } else if (newKind === 'paly') {
-        fieldChange({ kind: 'paly', tinctures: newColors });
+      } else if (
+        newKind === 'paly' ||
+        newKind === 'paly-pily' ||
+        newKind === 'bendySinister' ||
+        newKind === 'bendy' ||
+        newKind === 'chequy' ||
+        newKind === 'lozengy'
+      ) {
+        fieldChange({ kind: newKind, tinctures: newColors });
       } else if (newKind === 'plain') {
         fieldChange({ kind: 'plain', tincture: newColors[0] });
       } else if (newKind === 'barry') {
         fieldChange({ kind: 'barry', number: 10, tinctures: newColors });
-      } else if (newKind === 'chequy' || newKind === 'lozengy') {
-        fieldChange({ kind: newKind, tinctures: newColors });
       } else {
         cannotHappen(newKind);
       }
@@ -57,7 +49,8 @@ export const FieldForm = ({ field, fieldChange }: Props) => {
       field.kind === 'bendySinister' ||
       field.kind === 'bendy' ||
       field.kind === 'chequy' ||
-      field.kind === 'lozengy'
+      field.kind === 'lozengy' ||
+      field.kind === 'paly-pily'
     ) {
       return field.tinctures;
     } else {
@@ -65,17 +58,11 @@ export const FieldForm = ({ field, fieldChange }: Props) => {
     }
   }
 
-  function firstTinctureChange(
-    field: PalyField | BendyField | BendySinisterField | BarryField | ChequyField | LozengyField,
-    tincture: Tincture
-  ) {
+  function firstTinctureChange(field: Exclude<Field, PlainField | PartyField>, tincture: Tincture) {
     fieldChange({ ...field, tinctures: [tincture, field.tinctures[1]] });
   }
 
-  function secondTinctureChange(
-    field: PalyField | BendyField | BendySinisterField | BarryField | ChequyField | LozengyField,
-    tincture: Tincture
-  ) {
+  function secondTinctureChange(field: Exclude<Field, PlainField | PartyField>, tincture: Tincture) {
     fieldChange({ ...field, tinctures: [field.tinctures[0], tincture] });
   }
 
@@ -115,6 +102,7 @@ export const FieldForm = ({ field, fieldChange }: Props) => {
         field.kind === 'paly' ||
         field.kind === 'chequy' ||
         field.kind === 'lozengy' ||
+        field.kind === 'paly-pily' ||
         field.kind === 'barry' ? (
         <div className="row">
           <div className="col">

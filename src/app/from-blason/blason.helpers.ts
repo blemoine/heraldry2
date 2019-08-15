@@ -76,7 +76,7 @@ function stringifyField(field: Field): string {
   } else {
     const fieldStr = capitalizeFirstLetter(stringifyFieldKind(field.kind));
     if (field.kind === 'plain') {
-      return  capitalizeFirstLetter(field.tincture.name);
+      return capitalizeFirstLetter(field.tincture.name);
     } else if (field.kind === 'bendy') {
       return fieldStr + ` ${field.tinctures[0].name} and ${field.tinctures[1].name}`;
     } else if (field.kind === 'bendySinister') {
@@ -91,6 +91,8 @@ function stringifyField(field: Field): string {
       return (
         fieldStr + ` of ${stringifyNumber(field.number)} ${field.tinctures[0].name} and ${field.tinctures[1].name}`
       );
+    } else if (field.kind === 'paly-pily') {
+      return fieldStr + ` ${field.tinctures[0].name} and ${field.tinctures[1].name}`;
     } else {
       return cannotHappen(field);
     }
@@ -114,6 +116,8 @@ export function stringifyFieldKind(field: Field['kind']): string {
     return 'chequy';
   } else if (field === 'lozengy') {
     return 'lozengy';
+  } else if (field === 'paly-pily') {
+    return 'paly pily';
   } else {
     return cannotHappen(field);
   }
@@ -263,7 +267,8 @@ export function isThereFur(blason: Blason, fur: Furs['name']): boolean {
     field.kind === 'bendySinister' ||
     field.kind === 'barry' ||
     field.kind === 'chequy' ||
-    field.kind === 'lozengy'
+    field.kind === 'lozengy' ||
+    field.kind === 'paly-pily'
   ) {
     if (field.tinctures.some((t) => t.name === fur)) {
       return true;

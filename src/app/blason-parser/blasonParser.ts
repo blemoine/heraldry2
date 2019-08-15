@@ -4,15 +4,7 @@ import { parties, Party } from '../model/party';
 import { Ordinary } from '../model/ordinary';
 import { stringifyParty } from '../from-blason/blason.helpers';
 import { Charge } from '../model/charge';
-import {
-  BarryField,
-  BendyField,
-  BendySinisterField,
-  ChequyField,
-  Field,
-  LozengyField,
-  PalyField
-} from '../model/field';
+import { BarryField, Field, PartyField, PlainField } from '../model/field';
 import { buildAltParser, constStr, lineParser } from './parser.helper';
 import { tinctureParserFromCapitalizedName, tinctureParserFromName } from './tinctureParser';
 import { ordinaryParser } from './ordinaryParser';
@@ -58,16 +50,25 @@ const language: Language = {
     ).map(
       ([number, tincture1, tincture2]): BarryField => ({ kind: 'barry', number, tinctures: [tincture1, tincture2] })
     );
-    const palyBendyParser: P.Parser<PalyField | BendyField | BendySinisterField | ChequyField | LozengyField> = P.seq(
-      P.alt(constStr('bendySinister', 'Bendy Sinister'), constStr('paly'), constStr('bendy'), constStr('chequy'), constStr('lozengy')),
+    const palyBendyParser: P.Parser<Exclude<Field, PlainField>> = P.seq(
+      P.alt(
+        constStr('bendySinister', 'Bendy Sinister'),
+        constStr('paly-pily', 'Paly pily'),
+        constStr('paly'),
+        constStr('bendy'),
+        constStr('chequy'),
+        constStr('lozengy')
+      ),
       P.whitespace.then(tinctureParserFromName).skip(P.whitespace),
       P.regex(/and/i)
         .skip(P.whitespace)
         .then(tinctureParserFromName)
-    ).map(([kind, tincture1, tincture2]): PalyField | BendyField | BendySinisterField | ChequyField | LozengyField => ({
-      kind,
-      tinctures: [tincture1, tincture2],
-    }));
+    ).map(
+      ([kind, tincture1, tincture2]): Exclude<Field, PlainField | PartyField | BarryField> => ({
+        kind,
+        tinctures: [tincture1, tincture2],
+      })
+    );
     return P.alt(
       tinctureParserFromCapitalizedName.map((tincture) => ({
         kind: 'plain',

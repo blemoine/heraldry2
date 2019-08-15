@@ -17,4 +17,4 @@ export function computeLineOptions(line: Line, { width }: Dimension): LineOption
   }
 }
 
-export const chiefHeightRatio = 1/5;
+export const chiefHeightRatio = 1 / 5;

@@ -106,7 +106,7 @@ describe('parseBlason', () => {
 
 Expected one of the following: 
 
-Argent, Azure, Barry of, Bendy, Bendy Sinister, Chequy, Counter-ermine, Counter-potent, Counter-vair, Ermine, Erminois, Gules, Lozengy, Murrey, Or, Paly, Pean, Per, Potent, Potent-en-pale, Potent-en-point, Purpure, Sable, Sanguine, Tenné, Vair, Vair-en-pale, Vair-en-point, Vert
+Argent, Azure, Barry of, Bendy, Bendy Sinister, Chequy, Counter-ermine, Counter-potent, Counter-vair, Ermine, Erminois, Gules, Lozengy, Murrey, Or, Paly, Paly pily, Pean, Per, Potent, Potent-en-pale, Potent-en-point, Purpure, Sable, Sanguine, Tenné, Vair, Vair-en-pale, Vair-en-point, Vert
 `,
     });
   });
@@ -271,5 +271,10 @@ Argent, Azure, Barry of, Bendy, Bendy Sinister, Chequy, Counter-ermine, Counter-
       ordinary: { name: 'chief', line: 'straight', tincture: gules },
     };
     expect(parseBlason('Potent,  a chief gules')).toEqual(expected);
+  });
+
+  it('should parse  Paly pily', () => {
+    const expected: Blason = { field: { kind: 'paly-pily', tinctures: [gules, azure] } };
+    expect(parseBlason('Paly pily gules and azure')).toEqual(expected);
   });
 });
