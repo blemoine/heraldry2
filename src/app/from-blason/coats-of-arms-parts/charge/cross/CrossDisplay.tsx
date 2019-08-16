@@ -42,40 +42,40 @@ export const CrossDisplay = ({ charge, dimension: { width, height }, fillFromTin
 
           return <PathFromBuilder key={i} pathBuilder={pathBuilder} fill={fill} stroke={stroke} />;
         } else if (charge.limbs === 'pattée') {
+          const wideFactor = 6;
           const pathBuilder = SvgPathBuilder.start([centerX - crossWidth, centerY - crossWidth])
             .quadraticeBezier(
-              [centerX - 2 * crossWidth, crossMarginY],
+              [centerX - wideFactor * crossWidth, crossMarginY],
               [centerX - crossWidth, (centerY - crossWidth + crossMarginY) / 2]
             )
-            .goTo([centerX + 2 * crossWidth, crossMarginY])
+            .goTo([centerX + wideFactor * crossWidth, crossMarginY])
             .quadraticeBezier(
               [centerX + crossWidth, centerY - crossWidth],
               [centerX + crossWidth, (centerY - crossWidth + crossMarginY) / 2]
             )
             .quadraticeBezier(
-              [centerX + radius, centerY - 2 * crossWidth],
+              [centerX + radius, centerY - wideFactor * crossWidth],
               [(centerX + radius + centerX + crossWidth) / 2, centerY - crossWidth]
             )
-
-            .goTo([centerX + radius, centerY + 2 * crossWidth])
+            .goTo([centerX + radius, centerY + wideFactor * crossWidth])
             .quadraticeBezier(
               [centerX + crossWidth, centerY + crossWidth],
               [(centerX + radius + centerX + crossWidth) / 2, centerY + crossWidth]
             )
             .quadraticeBezier(
-              [centerX + 2 * crossWidth, centerY + radius],
+              [centerX + wideFactor * crossWidth, centerY + radius],
               [centerX + crossWidth, (centerY + radius + centerY + crossWidth) / 2]
             )
-            .goTo([centerX - 2 * crossWidth, centerY + radius])
+            .goTo([centerX - wideFactor * crossWidth, centerY + radius])
             .quadraticeBezier(
               [centerX - crossWidth, centerY + crossWidth],
               [centerX - crossWidth, (centerY + radius + centerY + crossWidth) / 2]
             )
             .quadraticeBezier(
-              [crossMarginX, centerY + 2 * crossWidth],
+              [crossMarginX, centerY + wideFactor * crossWidth],
               [(crossMarginX + centerX - crossWidth) / 2, centerY + crossWidth]
             )
-            .goTo([crossMarginX, centerY - 2 * crossWidth])
+            .goTo([crossMarginX, centerY - wideFactor * crossWidth])
             .quadraticeBezier(
               [centerX - crossWidth, centerY - crossWidth],
               [(crossMarginX + centerX - crossWidth) / 2, centerY - crossWidth]
