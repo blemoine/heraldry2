@@ -35,6 +35,13 @@ export const ChargeForm = ({ charge, chargeChange }: Props) => {
         tincture: or,
         inside: 'nothing',
       });
+    } else if (chargeName === 'cross') {
+      chargeChange({
+        name: chargeName,
+        countAndDisposition: { count: 1, disposition: 'default' },
+        tincture: or,
+        limbs: 'hummetty',
+      });
     } else if (!chargeName) {
       chargeChange(null);
     } else {

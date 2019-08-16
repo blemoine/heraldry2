@@ -237,6 +237,20 @@ function stringifyCharge(charge: Charge): string {
     result += stringifyTincture(charge.tincture);
 
     return result;
+  } else if (charge.name === 'cross') {
+    let result = counterStr;
+    result += ' ' + pluralize('cross', count) + ' ';
+    if (charge.limbs === 'hummetty' || charge.limbs === 'pattée') {
+      result += charge.limbs + ' ';
+    } else {
+      return cannotHappen(charge.limbs);
+    }
+    if (charge.countAndDisposition.count !== 1 && charge.countAndDisposition.disposition !== 'default') {
+      result += ' in ' + charge.countAndDisposition.disposition + ' ';
+    }
+    result += stringifyTincture(charge.tincture);
+
+    return result;
   } else {
     return cannotHappen(charge);
   }
@@ -248,6 +262,8 @@ function pluralize(str: string, count: SupportedNumber): string {
   } else {
     if (str === 'fleur de lys') {
       return 'fleurs de lys';
+    } else if (str === 'cross') {
+      return 'crosses';
     } else {
       return str + 's';
     }
@@ -304,7 +320,12 @@ export function isThereFur(blason: Blason, fur: Furs['name']): boolean {
       if (charge.beakedAndArmed.name === fur) {
         return true;
       }
-    } else if (charge.name === 'fleurdelys' || charge.name === 'roundel' || charge.name === 'lozenge') {
+    } else if (
+      charge.name === 'fleurdelys' ||
+      charge.name === 'roundel' ||
+      charge.name === 'lozenge' ||
+      charge.name === 'cross'
+    ) {
       if (charge.tincture.name === fur) {
         return true;
       }

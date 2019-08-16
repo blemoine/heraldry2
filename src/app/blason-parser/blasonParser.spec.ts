@@ -294,4 +294,17 @@ Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Chequy, Counter ermi
     const expected: Blason = { field: { kind: 'chequy', tinctures: [counterErmine, vairEnPoint] } };
     expect(parseBlason('Chequy counter ermine and vair en point')).toEqual(expected);
   });
+
+  it('should parse  Cross charge', () => {
+    const expected: Blason = {
+      field: { kind: 'plain', tincture: gules },
+      charge: {
+        name: 'cross',
+        limbs: 'hummetty',
+        tincture: or,
+        countAndDisposition: { count: 3, disposition: 'pale' },
+      },
+    };
+    expect(parseBlason('Gules, three crosses hummetty in pale or ')).toEqual(expected);
+  });
 });

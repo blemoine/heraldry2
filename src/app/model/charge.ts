@@ -63,6 +63,15 @@ export type Lozenge = {
   inside: LozengeInside;
 };
 
-export type Charge = Lion | Eagle | FleurDeLys | Roundel | Lozenge;
+export const crossLimbs = ['hummetty', 'pattée'] as const;
+export type CrossLimbs = typeof crossLimbs[number];
+export type Cross = {
+  name: 'cross';
+  countAndDisposition: CountAndDisposition;
+  tincture: Tincture;
+  limbs: CrossLimbs;
+};
 
-export const charges: Array<Charge['name']> = ['lion', 'eagle', 'fleurdelys', 'roundel', 'lozenge'];
+export type Charge = Lion | Eagle | FleurDeLys | Roundel | Lozenge | Cross;
+
+export const charges: Array<Charge['name']> = ['lion', 'eagle', 'fleurdelys', 'roundel', 'lozenge', 'cross'];

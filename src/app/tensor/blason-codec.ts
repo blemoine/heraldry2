@@ -8,6 +8,7 @@ import { ordinaries, Ordinary } from '../model/ordinary';
 import {
   Charge,
   charges,
+  crossLimbs,
   eagleAttitudes,
   lionAttitudes,
   lionHeads,
@@ -159,6 +160,9 @@ export function encodeCharge(charge: Charge | null): Uint8Array {
     result[4] = encodeFromList(roundelInsides, charge.inside);
   } else if (charge.name === 'fleurdelys') {
     // nothing to do for now
+  } else if (charge.name === 'cross') {
+    // nothing to do for now
+    result[4] = encodeFromList(crossLimbs, charge.limbs);
   } else {
     return cannotHappen(charge);
   }
@@ -211,8 +215,10 @@ export function decodeCharge(arr: Uint8Array): Result<Charge | null> {
         const maybeInside = decodeFromList(roundelInsides, arr[4]);
         return map(maybeInside, (inside) => ({ name, tincture, countAndDisposition, inside }));
       } else if (name === 'fleurdelys') {
-        // nothing to do for now
         return { name, tincture, countAndDisposition };
+      } else if (name === 'cross') {
+        const maybeLimbs = decodeFromList(crossLimbs, arr[4]);
+        return map(maybeLimbs, (limbs) => ({ name, tincture, countAndDisposition, limbs }));
       } else {
         return cannotHappen(name);
       }

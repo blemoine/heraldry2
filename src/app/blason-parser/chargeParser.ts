@@ -2,6 +2,8 @@ import * as P from 'parsimmon';
 import {
   Charge,
   charges,
+  Cross,
+  crossLimbs,
   Eagle,
   EagleAttitude,
   eagleAttitudes,
@@ -16,7 +18,7 @@ import {
   Lozenge,
   Roundel,
 } from '../model/charge';
-import { aParser, buildAltParser, numberParser } from './parser.helper';
+import { aParser, buildAltParser, constStr, numberParser } from './parser.helper';
 import { identity } from '../../utils/identity';
 import { gules, or } from '../model/tincture';
 import { cannotHappen } from '../../utils/cannot-happen';
@@ -150,6 +152,17 @@ const lozengeParser = (): P.Parser<Lozenge> => {
   });
 };
 
+const crossParser = (): P.Parser<Cross> => {
+  return countParser.chain((count) => {
+    return P.seq(
+      P.alt<'cross'>(constStr('cross', 'crosses'), constStr('cross')),
+      P.whitespace.then(buildAltParser(crossLimbs, identity)),
+      countAndDispositionParser(count),
+      P.whitespace.then(tinctureParserFromName)
+    ).map(([name, limbs, countAndDisposition, tincture]): Cross => ({ name, countAndDisposition, tincture, limbs }));
+  });
+};
+
 export function chargeParser(): P.Parser<Charge> {
   return P.alt(
     ...charges.map((charge) => {
@@ -163,6 +176,8 @@ export function chargeParser(): P.Parser<Charge> {
         return roundelParser();
       } else if (charge === 'lozenge') {
         return lozengeParser();
+      } else if (charge === 'cross') {
+        return crossParser();
       } else {
         return cannotHappen(charge);
       }

@@ -7,6 +7,7 @@ type MoveTo = { command: 'M'; point: PathAbsolutePoint };
 type GoToPoint = { command: 'L'; point: PathAbsolutePoint };
 type Vertical = { command: 'V'; coordinate: number };
 type Horizontal = { command: 'H'; coordinate: number };
+type QuadraticBezier = { command: 'Q'; point: PathAbsolutePoint; controlPoint: PathAbsolutePoint };
 type Arc = {
   command: 'A';
   point: PathAbsolutePoint;
@@ -17,7 +18,7 @@ type Arc = {
 };
 type Close = { command: 'Z' };
 
-type PathCommand = MoveTo | GoToPoint | Arc | Vertical | Horizontal | Close;
+type PathCommand = MoveTo | GoToPoint | Arc | Vertical | Horizontal | Close | QuadraticBezier;
 
 export type EngrailedLineOptions = { line: 'with-arc'; radius: number; sweep: boolean };
 export type LineOptions = EngrailedLineOptions;
@@ -38,6 +39,18 @@ export class SvgPathBuilder {
           return command.command + ' ' + command.point[0] + ' ' + command.point[1];
         } else if (command.command === 'Z') {
           return command.command;
+        } else if (command.command === 'Q') {
+          return (
+            command.command +
+            ' ' +
+            command.controlPoint[0] +
+            ' ' +
+            command.controlPoint[1] +
+            ' ' +
+            command.point[0] +
+            ' ' +
+            command.point[1]
+          );
         } else if (command.command === 'A') {
           return (
             command.command +
@@ -64,6 +77,10 @@ export class SvgPathBuilder {
 
   moveTo(point: PathAbsolutePoint): SvgPathBuilder {
     return this.addCommand({ command: 'M', point });
+  }
+
+  quadraticeBezier(point: PathAbsolutePoint, controlPoint: PathAbsolutePoint): SvgPathBuilder {
+    return this.addCommand({ command: 'Q', controlPoint, point });
   }
 
   goTo(point: PathAbsolutePoint, lineOptions: LineOptions | null = null): SvgPathBuilder {
@@ -173,7 +190,7 @@ function getX(commands: Array<PathCommand>): number | null {
   } else {
     const previousCommand = commands[commands.length - 1];
 
-    if (previousCommand.command === 'M' || previousCommand.command === 'L' || previousCommand.command === 'A') {
+    if (previousCommand.command === 'M' || previousCommand.command === 'L' || previousCommand.command === 'A' || previousCommand.command === 'Q') {
       return previousCommand.point[0];
     } else if (previousCommand.command === 'H') {
       return previousCommand.coordinate;
@@ -193,7 +210,7 @@ function getY(commands: Array<PathCommand>): number | null {
   } else {
     const previousCommand = commands[commands.length - 1];
 
-    if (previousCommand.command === 'M' || previousCommand.command === 'L' || previousCommand.command === 'A') {
+    if (previousCommand.command === 'M' || previousCommand.command === 'L' || previousCommand.command === 'A' || previousCommand.command === 'Q') {
       return previousCommand.point[1];
     } else if (previousCommand.command === 'V') {
       return previousCommand.coordinate;

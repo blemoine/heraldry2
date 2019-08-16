@@ -8,6 +8,7 @@ import { Dimension } from '../../model/dimension';
 import { FleurDeLysDisplay } from './charge/fleurdelys/FleurDeLysDisplay';
 import { RoundelDisplay } from './charge/roundel/RoundelDisplay';
 import { LozengeDisplay } from './charge/lozenge/LozengeDisplay';
+import { CrossDisplay } from './charge/cross/CrossDisplay';
 
 type Props = { charge: Charge; dimension: Dimension; fillFromTincture: (tincture: Tincture) => string };
 export const ChargeDisplay = ({ charge, dimension, fillFromTincture }: Props) => {
@@ -21,6 +22,8 @@ export const ChargeDisplay = ({ charge, dimension, fillFromTincture }: Props) =>
     return <RoundelDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} />;
   } else if (charge.name === 'lozenge') {
     return <LozengeDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} />;
+  } else if (charge.name === 'cross') {
+    return <CrossDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} />;
   } else {
     return cannotHappen(charge);
   }

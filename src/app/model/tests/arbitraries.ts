@@ -6,6 +6,8 @@ import { ordinaries, Ordinary } from '../ordinary';
 import {
   Charge,
   charges,
+  Cross,
+  crossLimbs,
   Eagle,
   eagleAttitudes,
   FleurDeLys,
@@ -127,6 +129,13 @@ export const chargeArb: Arbitrary<Charge> = fc.constantFrom(...charges).chain((c
       tincture: tinctureArb,
       countAndDisposition: countAndDistionArb,
       inside: fc.constantFrom(...roundelInsides),
+    });
+  } else if (chargeName === 'cross') {
+    return fc.record<Cross>({
+      name: fc.constant(chargeName),
+      tincture: tinctureArb,
+      countAndDisposition: countAndDistionArb,
+      limbs: fc.constantFrom(...crossLimbs),
     });
   } else {
     return cannotHappen(chargeName);
