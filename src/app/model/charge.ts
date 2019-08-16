@@ -63,7 +63,7 @@ export type Lozenge = {
   inside: LozengeInside;
 };
 
-export const crossLimbs = ['hummetty', 'pattée'] as const;
+export const crossLimbs = ['hummetty', 'pattée', 'potent'] as const;
 export type CrossLimbs = typeof crossLimbs[number];
 export type Cross = {
   name: 'cross';

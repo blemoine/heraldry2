@@ -240,14 +240,12 @@ function stringifyCharge(charge: Charge): string {
   } else if (charge.name === 'cross') {
     let result = counterStr;
     result += ' ' + pluralize('cross', count) + ' ';
-    if (charge.limbs === 'hummetty' || charge.limbs === 'pattée') {
-      result += charge.limbs + ' ';
-    } else {
-      return cannotHappen(charge.limbs);
-    }
+    result += charge.limbs + ' ';
+
     if (charge.countAndDisposition.count !== 1 && charge.countAndDisposition.disposition !== 'default') {
       result += ' in ' + charge.countAndDisposition.disposition + ' ';
     }
+
     result += stringifyTincture(charge.tincture);
 
     return result;
@@ -347,7 +345,7 @@ export function stringifyTincture(tincture: Tincture): string {
   } else if (tincture.name === 'vair-en-point') {
     return 'vair en point';
   } else if (tincture.name === 'counter-potent') {
-    return 'potent vair';
+    return 'counter potent';
   } else if (tincture.name === 'potent-en-pale') {
     return 'potent en pale';
   } else if (tincture.name === 'potent-en-point') {

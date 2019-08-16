@@ -23,12 +23,10 @@ export const CrossDisplay = ({ charge, dimension: { width, height }, fillFromTin
       {positions.map(([cx, cy], i) => {
         const centerX = cx * width;
         const centerY = cy * height;
-        const crossMarginX = centerX - radius;
-        const crossMarginY = centerY - radius;
         if (charge.limbs === 'hummetty') {
           const pathBuilder = SvgPathBuilder.start([centerX - crossWidth, centerY - crossWidth])
-            .goTo([centerX - crossWidth, crossMarginY])
-            .goTo([centerX + crossWidth, crossMarginY])
+            .goTo([centerX - crossWidth, centerY - radius])
+            .goTo([centerX + crossWidth, centerY - radius])
             .goTo([centerX + crossWidth, centerY - crossWidth])
             .goTo([centerX + radius, centerY - crossWidth])
             .goTo([centerX + radius, centerY + crossWidth])
@@ -36,22 +34,55 @@ export const CrossDisplay = ({ charge, dimension: { width, height }, fillFromTin
             .goTo([centerX + crossWidth, centerY + radius])
             .goTo([centerX - crossWidth, centerY + radius])
             .goTo([centerX - crossWidth, centerY + crossWidth])
-            .goTo([crossMarginX, centerY + crossWidth])
-            .goTo([crossMarginX, centerY - crossWidth])
+            .goTo([centerX - radius, centerY + crossWidth])
+            .goTo([centerX - radius, centerY - crossWidth])
             .close();
+
+          return <PathFromBuilder key={i} pathBuilder={pathBuilder} fill={fill} stroke={stroke} />;
+        } else if (charge.limbs === 'potent') {
+          const wideFactor = 6;
+          const pathBuilder = SvgPathBuilder.start([centerX - crossWidth, centerY - crossWidth])
+            .goTo([centerX - crossWidth, centerY - radius + 2 * crossWidth])
+            .goTo([centerX - wideFactor * crossWidth, centerY - radius + 2 * crossWidth])
+            .goTo([centerX - wideFactor * crossWidth, centerY - radius])
+            .goTo([centerX + wideFactor * crossWidth, centerY - radius])
+            .goTo([centerX + wideFactor * crossWidth, centerY - radius + 2 * crossWidth])
+            .goTo([centerX + crossWidth, centerY - radius + 2 * crossWidth])
+            .goTo([centerX + crossWidth, centerY - crossWidth])
+            .goTo([centerX + radius - 2 * crossWidth, centerY - crossWidth])
+            .goTo([centerX + radius - 2 * crossWidth, centerY - wideFactor * crossWidth])
+            .goTo([centerX + radius, centerY - wideFactor * crossWidth])
+            .goTo([centerX + radius, centerY + wideFactor * crossWidth])
+            .goTo([centerX + radius - 2 * crossWidth, centerY + wideFactor * crossWidth])
+            .goTo([centerX + radius - 2 * crossWidth, centerY + crossWidth])
+            .goTo([centerX + crossWidth, centerY + crossWidth])
+            .goTo([centerX + crossWidth, centerY + radius - 2 * crossWidth])
+            .goTo([centerX + wideFactor * crossWidth, centerY + radius - 2 * crossWidth])
+            .goTo([centerX + wideFactor * crossWidth, centerY + radius])
+            .goTo([centerX - wideFactor * crossWidth, centerY + radius])
+            .goTo([centerX - wideFactor * crossWidth, centerY + radius - 2 * crossWidth])
+            .goTo([centerX - crossWidth, centerY + radius - 2 * crossWidth])
+            .goTo([centerX - crossWidth, centerY + crossWidth])
+            .goTo([centerX - radius + 2 * crossWidth, centerY + crossWidth])
+            .goTo([centerX - radius + 2 * crossWidth, centerY + wideFactor * crossWidth])
+            .goTo([centerX - radius, centerY + wideFactor * crossWidth])
+            .goTo([centerX - radius, centerY - wideFactor * crossWidth])
+            .goTo([centerX - radius + 2 * crossWidth, centerY - wideFactor * crossWidth])
+            .goTo([centerX - radius + 2 * crossWidth, centerY - crossWidth])
+            .goTo([centerX - crossWidth, centerY - crossWidth]);
 
           return <PathFromBuilder key={i} pathBuilder={pathBuilder} fill={fill} stroke={stroke} />;
         } else if (charge.limbs === 'pattée') {
           const wideFactor = 6;
           const pathBuilder = SvgPathBuilder.start([centerX - crossWidth, centerY - crossWidth])
             .quadraticeBezier(
-              [centerX - wideFactor * crossWidth, crossMarginY],
-              [centerX - crossWidth, (centerY - crossWidth + crossMarginY) / 2]
+              [centerX - wideFactor * crossWidth, centerY - radius],
+              [centerX - crossWidth, (centerY - crossWidth + (centerY - radius)) / 2]
             )
-            .goTo([centerX + wideFactor * crossWidth, crossMarginY])
+            .goTo([centerX + wideFactor * crossWidth, centerY - radius])
             .quadraticeBezier(
               [centerX + crossWidth, centerY - crossWidth],
-              [centerX + crossWidth, (centerY - crossWidth + crossMarginY) / 2]
+              [centerX + crossWidth, (centerY - crossWidth + (centerY - radius)) / 2]
             )
             .quadraticeBezier(
               [centerX + radius, centerY - wideFactor * crossWidth],
@@ -72,13 +103,13 @@ export const CrossDisplay = ({ charge, dimension: { width, height }, fillFromTin
               [centerX - crossWidth, (centerY + radius + centerY + crossWidth) / 2]
             )
             .quadraticeBezier(
-              [crossMarginX, centerY + wideFactor * crossWidth],
-              [(crossMarginX + centerX - crossWidth) / 2, centerY + crossWidth]
+              [centerX - radius, centerY + wideFactor * crossWidth],
+              [(centerX - radius + centerX - crossWidth) / 2, centerY + crossWidth]
             )
-            .goTo([crossMarginX, centerY - wideFactor * crossWidth])
+            .goTo([centerX - radius, centerY - wideFactor * crossWidth])
             .quadraticeBezier(
               [centerX - crossWidth, centerY - crossWidth],
-              [(crossMarginX + centerX - crossWidth) / 2, centerY - crossWidth]
+              [(centerX - radius + centerX - crossWidth) / 2, centerY - crossWidth]
             );
 
           return <PathFromBuilder key={i} pathBuilder={pathBuilder} fill={fill} stroke={stroke} />;

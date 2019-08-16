@@ -1,5 +1,5 @@
 import * as P from 'parsimmon';
-import { Chevron, Chevronel, ordinaries, Ordinary, Pale } from '../model/ordinary';
+import { Chevron, Chevronel, ordinaries, Ordinary, OrdinaryCross, Pale } from '../model/ordinary';
 import { aParser, buildAltParser, lineParser, numberParser } from './parser.helper';
 import { tinctureParserFromName } from './tinctureParser';
 import { stringifyOrdinaryName } from '../from-blason/blason.helpers';
@@ -34,15 +34,15 @@ export function ordinaryParser(): P.Parser<Ordinary> {
     tinctureParserFromName
   ).map(([count, name, line, tincture]): Chevron | Chevronel => ({ name, count, line, tincture }));
 
-  const ordinaryWithLineParser: P.Parser<Exclude<Ordinary, Pale | Chevron>> = P.seq(
-    aParser.then(buildAltParser(ordinaries.filter(isNotPaleOrChevron), stringifyOrdinaryName)).skip(P.whitespace),
+  const ordinaryWithLineParser: P.Parser<Exclude<Ordinary, Pale | Chevron | OrdinaryCross>> = P.seq(
+    aParser.then(buildAltParser(ordinaries.filter(isNotPaleOrChevronOrCross), stringifyOrdinaryName)).skip(P.whitespace),
     lineParser.skip(P.whitespace).fallback('straight' as const),
     tinctureParserFromName
-  ).map(([name, line, tincture]): Exclude<Ordinary, Pale | Chevron | Chevronel> => ({ name, line, tincture }));
+  ).map(([name, line, tincture]): Exclude<Ordinary, Pale | Chevron | Chevronel | OrdinaryCross> => ({ name, line, tincture }));
 
   return P.alt(paleParser, chevronParser, ordinaryWithLineParser);
 }
 
-function isNotPaleOrChevron(o: Ordinary['name']): o is Exclude<Ordinary['name'], 'pale' | 'chevron' | 'chevronel'> {
-  return !['pale', 'chevron', 'chevronel'].includes(o);
+function isNotPaleOrChevronOrCross(o: Ordinary['name']): o is Exclude<Ordinary['name'], 'pale' | 'chevron' | 'chevronel' | 'cross'> {
+  return !['pale', 'chevron', 'chevronel', 'cross'].includes(o);
 }

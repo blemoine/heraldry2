@@ -1,14 +1,14 @@
 import * as P from 'parsimmon';
 import { Blason } from '../model/blason';
 import { parties, Party } from '../model/party';
-import { Ordinary } from '../model/ordinary';
+import { Ordinary, OrdinaryCross } from '../model/ordinary';
 import { stringifyParty } from '../from-blason/blason.helpers';
-import { Charge } from '../model/charge';
+import { Charge, Cross } from '../model/charge';
 import { BarryField, Field, PartyField, PlainField } from '../model/field';
 import { buildAltParser, constStr, lineParser } from './parser.helper';
 import { tinctureParserFromCapitalizedName, tinctureParserFromName } from './tinctureParser';
 import { ordinaryParser } from './ordinaryParser';
-import { chargeParser } from './chargeParser';
+import { chargeParser, crossParser } from './chargeParser';
 import { stringifyNumber } from '../model/countAndDisposition';
 
 type Language = {
@@ -82,15 +82,24 @@ const language: Language = {
   },
 
   Blason(r: AppliedLanguage): P.Parser<Blason> {
+    // a cross depending on different thing, can be either and ordinary or chager
+    const crossParserToObj: P.Parser<{ charge: Cross } | { ordinary: OrdinaryCross }> = crossParser().map((crossPartial) => {
+      if ('limbs' in crossPartial) {
+        return { charge: crossPartial };
+      } else {
+        return { ordinary: crossPartial };
+      }
+    });
     const ordinaryToObj = ordinaryParser().map((ordinary) => ({ ordinary }));
     const chargeToObj = chargeParser().map((charge) => ({ charge }));
+
     return P.seq(
       r.Field,
       P.string(',')
         .trim(P.optWhitespace)
         .chain((_) =>
-          P.sepBy(P.alt(ordinaryToObj, chargeToObj).fallback({}), P.string(',').trim(P.optWhitespace)).map(
-            (arr: Array<{ ordinary?: Ordinary } | { charge?: Charge }>) =>
+          P.sepBy(P.alt(crossParserToObj, ordinaryToObj, chargeToObj).fallback({}), P.string(',').trim(P.optWhitespace)).map(
+            (arr: Array<{ charge: Cross } | { ordinary: OrdinaryCross } | { ordinary?: Ordinary } | { charge?: Charge }>) =>
               arr.reduce((acc, obj): { ordinary?: Ordinary; charge?: Charge } => ({ ...acc, ...obj }), {})
           )
         )

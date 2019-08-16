@@ -118,7 +118,7 @@ describe('parseBlason', () => {
 
 Expected one of the following: 
 
-Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Chequy, Counter ermine, Counter vair, Ermine, Erminois, Gules, Lozengy, Murrey, Or, Paly, Paly pily, Pean, Per, Potent, Potent en pale, Potent en point, Potent vair, Purpure, Sable, Sanguine, Tenné, Vair, Vair en pale, Vair en point, Vert
+Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Chequy, Counter ermine, Counter potent, Counter vair, Ermine, Erminois, Gules, Lozengy, Murrey, Or, Paly, Paly pily, Pean, Per, Potent, Potent en pale, Potent en point, Purpure, Sable, Sanguine, Tenné, Vair, Vair en pale, Vair en point, Vert
 `,
     });
   });
@@ -306,5 +306,18 @@ Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Chequy, Counter ermi
       },
     };
     expect(parseBlason('Gules, three crosses hummetty in pale or ')).toEqual(expected);
+  });
+
+  it('should parse cross potent', () => {
+    const expected: Blason = {
+      field: { kind: 'plain', tincture: gules },
+      charge: {
+        name: 'cross',
+        limbs: 'potent',
+        tincture: argent,
+        countAndDisposition: { count: 1, disposition: 'default' },
+      },
+    };
+    expect(parseBlason('Gules, a cross potent argent')).toEqual(expected);
   });
 });

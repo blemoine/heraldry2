@@ -18,12 +18,13 @@ import {
   Lozenge,
   Roundel,
 } from '../model/charge';
-import { aParser, buildAltParser, constStr, numberParser } from './parser.helper';
+import { aParser, buildAltParser, constStr, lineParser, numberParser } from './parser.helper';
 import { identity } from '../../utils/identity';
 import { gules, or } from '../model/tincture';
 import { cannotHappen } from '../../utils/cannot-happen';
 import { tinctureParserFromName } from './tinctureParser';
 import { CountAndDisposition, isNotOne, SupportedNumber, supportedNumbers } from '../model/countAndDisposition';
+import { OrdinaryCross } from '../model/ordinary';
 
 const countParser: P.Parser<SupportedNumber> = P.alt(aParser, ...supportedNumbers.filter(isNotOne).map(numberParser));
 
@@ -152,35 +153,48 @@ const lozengeParser = (): P.Parser<Lozenge> => {
   });
 };
 
-const crossParser = (): P.Parser<Cross> => {
-  return countParser.chain((count) => {
-    return P.seq(
-      P.alt<'cross'>(constStr('cross', 'crosses'), constStr('cross')),
-      P.whitespace.then(buildAltParser(crossLimbs, identity)),
-      countAndDispositionParser(count),
-      P.whitespace.then(tinctureParserFromName)
-    ).map(([name, limbs, countAndDisposition, tincture]): Cross => ({ name, countAndDisposition, tincture, limbs }));
-  });
+export const crossParser = (): P.Parser<Cross | OrdinaryCross> => {
+  return P.alt(
+    countParser.chain((count) => {
+      return P.seq(
+        P.alt<'cross'>(constStr('cross', 'crosses'), constStr('cross')),
+        P.whitespace.then(buildAltParser(crossLimbs, identity)),
+        countAndDispositionParser(count),
+        P.whitespace.then(tinctureParserFromName)
+      ).map(([name, limbs, countAndDisposition, tincture]): Cross => ({ name, countAndDisposition, tincture, limbs }));
+    }),
+    P.seq(aParser.then(constStr('cross')).skip(P.whitespace), tinctureParserFromName).map(
+      ([name, tincture]): OrdinaryCross => ({ name, tincture, line: 'straight' })
+    ),
+    P.seq(
+      aParser.then(constStr('cross')).skip(P.whitespace),
+      lineParser.skip(P.whitespace),
+      tinctureParserFromName
+    ).map(([name, line, tincture]): OrdinaryCross => ({ name, tincture, line }))
+  );
 };
 
-export function chargeParser(): P.Parser<Charge> {
-  return P.alt(
-    ...charges.map((charge) => {
+export function chargeParser(): P.Parser<Exclude<Charge, Cross>> {
+  const chareParsers: Array<P.Parser<Exclude<Charge, Cross>>> = charges.filter(isNotCross).map(
+    (charge): P.Parser<Exclude<Charge, Cross>> => {
       if (charge === 'lion') {
-        return countParser.trim(P.optWhitespace).chain((count) => lionParser(count));
+        return countParser.trim(P.optWhitespace).chain<Lion>((count) => lionParser(count));
       } else if (charge === 'eagle') {
-        return countParser.trim(P.optWhitespace).chain((count): P.Parser<Charge> => eagleParser(count));
+        return countParser.trim(P.optWhitespace).chain<Eagle>((count) => eagleParser(count));
       } else if (charge === 'fleurdelys') {
         return fleurDeLysParser();
       } else if (charge === 'roundel') {
         return roundelParser();
       } else if (charge === 'lozenge') {
         return lozengeParser();
-      } else if (charge === 'cross') {
-        return crossParser();
       } else {
         return cannotHappen(charge);
       }
-    })
+    }
   );
+  return P.alt(...chareParsers);
+}
+
+function isNotCross(c: Charge['name']): c is Exclude<Charge['name'], 'cross'> {
+  return c !== 'cross';
 }
