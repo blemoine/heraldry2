@@ -2,13 +2,15 @@ import { parseBlason } from './blasonParser';
 import {
   argent,
   azure,
-  counterErmine, counterVair,
+  counterErmine,
+  counterVair,
   ermine,
   gules,
   or,
   potent,
   sable,
-  vair, vairEnPale,
+  vair,
+  vairEnPale,
   vairEnPoint,
   vert,
 } from '../model/tincture';
@@ -324,5 +326,11 @@ Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Chequy, Counter ermi
   it('should support checky', () => {
     const expected: Blason = { field: { kind: 'chequy', tinctures: [counterVair, vairEnPale] } };
     expect(parseBlason('Checky counter vair and vair en pale')).toEqual(expected);
-  })
+  });
+  it('should support party per', () => {
+    const expected: Blason = {
+      field: { kind: 'party', per: { name: 'bend', tinctures: [gules, vert], line: 'straight' } },
+    };
+    expect(parseBlason('Party per bend gules and vert')).toEqual(expected);
+  });
 });

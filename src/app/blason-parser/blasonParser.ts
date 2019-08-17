@@ -23,7 +23,7 @@ const partyUnit: P.Parser<Party['name']> = buildAltParser(parties, stringifyPart
 const language: Language = {
   Party(): P.Parser<Party> {
     return P.seq(
-      constStr('per')
+      P.alt(constStr('per', 'Party per'),constStr('per')).desc('Per')
         .skip(P.whitespace)
         .then(partyUnit)
         .skip(P.whitespace),
