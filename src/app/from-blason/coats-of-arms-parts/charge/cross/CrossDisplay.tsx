@@ -7,6 +7,7 @@ import { getChargePositions } from '../charge.helper';
 import { CrossHummetty } from './CrossHummetty';
 import { CrossPotent } from './CrossPotent';
 import { CrossPatty } from './CrossPatty';
+import { CrossCercelee } from './CrossCercelee';
 
 type Props = { charge: Cross; dimension: Dimension; fillFromTincture: (tincture: Tincture) => string };
 export const CrossDisplay = ({ charge, dimension: { width, height }, fillFromTincture }: Props) => {
@@ -32,6 +33,17 @@ export const CrossDisplay = ({ charge, dimension: { width, height }, fillFromTin
               center={center}
               crossWidth={crossWidth}
               crossRadius={radius}
+            />
+          );
+        } else if (charge.limbs === 'cercelée') {
+          return (
+            <CrossCercelee
+              key={i}
+              fill={fill}
+              stroke={stroke}
+              center={center}
+              crossWidth={crossWidth}
+              crossRadius={radius * 0.85}
             />
           );
         } else if (charge.limbs === 'potent') {
