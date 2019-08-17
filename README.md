@@ -29,7 +29,6 @@ Faire le "of the last"
 * Factorize form for lozenge/roundel/fleur de lys
 * Support for quarterly
 * Support for parsing gardant (en plus de guardant)
-* Support for Checky (en plus de Chequy)
 * Support optionnel de de "Party Per" instead of "Per"
 
 * Meilleur support de l'optionnalité des virgules

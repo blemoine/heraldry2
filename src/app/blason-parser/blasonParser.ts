@@ -57,7 +57,7 @@ const language: Language = {
         constStr('barry-pily', 'Barry pily'),
         constStr('paly'),
         constStr('bendy'),
-        constStr('chequy'),
+        P.alt(constStr('chequy'), constStr('chequy', 'Checky')).desc('Chequy'),
         constStr('lozengy')
       ),
       P.whitespace.then(tinctureParserFromName).skip(P.whitespace),
