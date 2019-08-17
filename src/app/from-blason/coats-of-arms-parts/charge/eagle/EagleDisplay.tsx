@@ -21,7 +21,7 @@ export const EagleDisplay = (props: Props) => {
   const { cellWidth, positions, cellHeight } = getChargePositions(count, disposition);
   const { width, height } = dimension;
 
-  const computedDimension = scale(dimension, Math.min(2.2 * cellWidth, cellHeight));
+  const computedDimension = scale(dimension, Math.min(2.2 * cellWidth, 0.8 * cellHeight));
   return (
     <>
       {positions.map(([cx, cy], idx) => {

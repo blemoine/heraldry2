@@ -27,7 +27,6 @@ Faire le "of the last"
 * Update bordure to user multiple MoveTo
 
 * Factorize form for lozenge/roundel/fleur de lys
-* Il y a quelques cas ou les annulets/losanges rentrent pas quand y'en a beaucoup (9 en particulier)
 * Support for quarterly
 * Support for parsing gardant (en plus de guardant)
 * Support for Checky (en plus de Chequy)
