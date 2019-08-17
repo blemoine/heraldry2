@@ -12,8 +12,8 @@ type Props = {
 export const CrossMoline = ({ fill, stroke, center, crossWidth, crossRadius }: Props) => {
   const [centerX, centerY] = center;
   const wideFactor = 3;
-  const topRadius = 10;
-  const bottomRadius = 15;
+  const topRadius = 2 * crossWidth;
+  const bottomRadius = 3 * crossWidth;
 
   const pathBuilder = SvgPathBuilder.start([centerX - crossWidth, centerY - crossWidth])
     .goTo([centerX - crossWidth, centerY - crossRadius + 2 * crossWidth])

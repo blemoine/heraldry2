@@ -9,6 +9,7 @@ import { CrossPotent } from './CrossPotent';
 import { CrossPatty } from './CrossPatty';
 import { CrossCercelee } from './CrossCercelee';
 import { CrossMoline } from './CrossMoline';
+import { CrossBottony } from './CrossBottony';
 
 type Props = { charge: Cross; dimension: Dimension; fillFromTincture: (tincture: Tincture) => string };
 export const CrossDisplay = ({ charge, dimension: { width, height }, fillFromTincture }: Props) => {
@@ -28,6 +29,17 @@ export const CrossDisplay = ({ charge, dimension: { width, height }, fillFromTin
         if (charge.limbs === 'hummetty') {
           return (
             <CrossHummetty
+              key={i}
+              fill={fill}
+              stroke={stroke}
+              center={center}
+              crossWidth={crossWidth}
+              crossRadius={radius}
+            />
+          );
+        } else if (charge.limbs === 'bottony') {
+          return (
+            <CrossBottony
               key={i}
               fill={fill}
               stroke={stroke}
