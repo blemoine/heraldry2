@@ -10,6 +10,7 @@ import { CrossPatty } from './CrossPatty';
 import { CrossCercelee } from './CrossCercelee';
 import { CrossMoline } from './CrossMoline';
 import { CrossBottony } from './CrossBottony';
+import { CrossCrosselet } from './CrossCrosselet';
 
 type Props = { charge: Cross; dimension: Dimension; fillFromTincture: (tincture: Tincture) => string };
 export const CrossDisplay = ({ charge, dimension: { width, height }, fillFromTincture }: Props) => {
@@ -89,6 +90,17 @@ export const CrossDisplay = ({ charge, dimension: { width, height }, fillFromTin
               stroke={stroke}
               center={center}
               crossWidth={crossWidth}
+              crossRadius={radius}
+            />
+          );
+        } else if (charge.limbs === 'crosselet') {
+          return (
+            <CrossCrosselet
+              key={i}
+              fill={fill}
+              stroke={stroke}
+              center={center}
+              crossWidth={crossWidth * 0.7}
               crossRadius={radius}
             />
           );
