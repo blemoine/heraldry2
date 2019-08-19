@@ -1,4 +1,4 @@
-export type PathAbsolutePoint = [number, number];
+export type PathAbsolutePoint = readonly [number, number];
 
 export function toRadians(angle: number): number {
   return angle * (Math.PI / 180);

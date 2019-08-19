@@ -105,4 +105,25 @@ describe('SvgPathBuilder', () => {
 
     expect(result.toPathAttribute()).toEqual('M 10 10 Q 5 7 20 30');
   });
+
+  it('should support positive relative horizontal move', () => {
+    const result = SvgPathBuilder.start([10, 5]).relativeHorizontalMove(15);
+
+    expect(result.toPathAttribute()).toEqual('M 10 5 H25');
+  });
+  it('should support negative relative horizontal move', () => {
+    const result = SvgPathBuilder.start([10, 5]).relativeHorizontalMove(-15);
+
+    expect(result.toPathAttribute()).toEqual('M 10 5 H-5');
+  });
+  it('should support positive relative vertical move', () => {
+    const result = SvgPathBuilder.start([5, 10]).relativeVerticalMove(15);
+
+    expect(result.toPathAttribute()).toEqual('M 5 10 V25');
+  });
+  it('should support negative relative vertical move', () => {
+    const result = SvgPathBuilder.start([5, 10]).relativeVerticalMove(-15);
+
+    expect(result.toPathAttribute()).toEqual('M 5 10 V-5');
+  });
 });

@@ -79,6 +79,25 @@ export class SvgPathBuilder {
     return this.addCommand({ command: 'M', point });
   }
 
+  relativeHorizontalMove(size: number): SvgPathBuilder {
+    const currentPoint = this.currentPoint();
+    if (currentPoint) {
+      const coordinate = currentPoint[0] + size;
+      return this.addCommand({ command: 'H', coordinate });
+    } else {
+      return this;
+    }
+  }
+  relativeVerticalMove(size: number): SvgPathBuilder {
+    const currentPoint = this.currentPoint();
+    if (currentPoint) {
+      const coordinate = currentPoint[1] + size;
+      return this.addCommand({ command: 'V', coordinate });
+    } else {
+      return this;
+    }
+  }
+
   quadraticeBezier(point: PathAbsolutePoint, controlPoint: PathAbsolutePoint): SvgPathBuilder {
     return this.addCommand({ command: 'Q', controlPoint, point });
   }
@@ -190,7 +209,12 @@ function getX(commands: Array<PathCommand>): number | null {
   } else {
     const previousCommand = commands[commands.length - 1];
 
-    if (previousCommand.command === 'M' || previousCommand.command === 'L' || previousCommand.command === 'A' || previousCommand.command === 'Q') {
+    if (
+      previousCommand.command === 'M' ||
+      previousCommand.command === 'L' ||
+      previousCommand.command === 'A' ||
+      previousCommand.command === 'Q'
+    ) {
       return previousCommand.point[0];
     } else if (previousCommand.command === 'H') {
       return previousCommand.coordinate;
@@ -210,7 +234,12 @@ function getY(commands: Array<PathCommand>): number | null {
   } else {
     const previousCommand = commands[commands.length - 1];
 
-    if (previousCommand.command === 'M' || previousCommand.command === 'L' || previousCommand.command === 'A' || previousCommand.command === 'Q') {
+    if (
+      previousCommand.command === 'M' ||
+      previousCommand.command === 'L' ||
+      previousCommand.command === 'A' ||
+      previousCommand.command === 'Q'
+    ) {
       return previousCommand.point[1];
     } else if (previousCommand.command === 'V') {
       return previousCommand.coordinate;
