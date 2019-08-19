@@ -99,4 +99,10 @@ describe('SvgPathBuilder', () => {
 
     expect(result.toPathAttribute()).toEqual('M 10 10 V70 M 5 5');
   });
+
+  it('should support quadratic bezier', () => {
+    const result = SvgPathBuilder.start([10, 10]).quadraticeBezier([20, 30], [5, 7]);
+
+    expect(result.toPathAttribute()).toEqual('M 10 10 Q 5 7 20 30');
+  });
 });
