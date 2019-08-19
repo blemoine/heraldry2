@@ -123,12 +123,16 @@ export class SvgPathBuilder {
         return cannotHappen(lineOptions.line);
       }
     } else {
-      if (getX(this.commands) === point[0]) {
+      const previousX = getX(this.commands);
+      if (previousX !== null && round(previousX, 5) === round(point[0], 5)) {
         return this.addCommand({ command: 'V', coordinate: point[1] });
-      } else if (getY(this.commands) === point[1]) {
-        return this.addCommand({ command: 'H', coordinate: point[0] });
       } else {
-        return this.addCommand({ command: 'L', point });
+        const previousY = getY(this.commands);
+        if (previousY !== null && round(previousY, 5) === round(point[1], 5)) {
+          return this.addCommand({ command: 'H', coordinate: point[0] });
+        } else {
+          return this.addCommand({ command: 'L', point });
+        }
       }
     }
   }
