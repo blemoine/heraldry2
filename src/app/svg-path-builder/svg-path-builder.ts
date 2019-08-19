@@ -2,6 +2,7 @@ import { cannotHappen } from '../../utils/cannot-happen';
 import { range } from '../../utils/range';
 import { angleBetween, distanceBetween, PathAbsolutePoint, toDegree } from './geometrical.helper';
 import { pointOnEllipticalArc } from './point-on-elliptical-arc';
+import { round } from '../../utils/round';
 
 type MoveTo = { command: 'M'; point: PathAbsolutePoint };
 type GoToPoint = { command: 'L'; point: PathAbsolutePoint };
@@ -31,25 +32,26 @@ export class SvgPathBuilder {
   private constructor(private commands: Array<PathCommand>) {}
 
   toPathAttribute(): string {
+    const precision = 5;
     return this.commands
       .map((command) => {
         if (command.command === 'H' || command.command === 'V') {
-          return command.command + command.coordinate;
+          return command.command + round(command.coordinate, precision);
         } else if (command.command === 'M' || command.command === 'L') {
-          return command.command + ' ' + command.point[0] + ' ' + command.point[1];
+          return command.command + ' ' + round(command.point[0], precision) + ' ' + round(command.point[1], precision);
         } else if (command.command === 'Z') {
           return command.command;
         } else if (command.command === 'Q') {
           return (
             command.command +
             ' ' +
-            command.controlPoint[0] +
+            round(command.controlPoint[0], precision) +
             ' ' +
-            command.controlPoint[1] +
+            round(command.controlPoint[1], precision) +
             ' ' +
-            command.point[0] +
+            round(command.point[0], precision) +
             ' ' +
-            command.point[1]
+            round(command.point[1], precision)
           );
         } else if (command.command === 'A') {
           return (
@@ -64,9 +66,9 @@ export class SvgPathBuilder {
             ' ' +
             command.sweepFlag +
             ' ' +
-            command.point[0] +
+            round(command.point[0], precision) +
             ' ' +
-            command.point[1]
+            round(command.point[1], precision)
           );
         } else {
           return cannotHappen(command);

@@ -126,4 +126,10 @@ describe('SvgPathBuilder', () => {
 
     expect(result.toPathAttribute()).toEqual('M 5 10 V-5');
   });
+
+  it('should be insensible to rounding error', () => {
+    const result = SvgPathBuilder.start([0.1, 0.1]).relativeVerticalMove(0.2).relativeHorizontalMove(0.2);
+
+    expect(result.toPathAttribute()).toEqual('M 0.1 0.1 V0.3 H0.3');
+  });
 });
