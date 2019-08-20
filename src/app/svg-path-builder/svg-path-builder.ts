@@ -81,7 +81,7 @@ export class SvgPathBuilder {
     return this.addCommand({ command: 'M', point });
   }
 
-  relativeHorizontalMove(size: number): SvgPathBuilder {
+  horizontalMove(size: number): SvgPathBuilder {
     const currentPoint = this.currentPoint();
     if (currentPoint) {
       const coordinate = currentPoint[0] + size;
@@ -90,7 +90,7 @@ export class SvgPathBuilder {
       return this;
     }
   }
-  relativeVerticalMove(size: number): SvgPathBuilder {
+  verticalMove(size: number): SvgPathBuilder {
     const currentPoint = this.currentPoint();
     if (currentPoint) {
       const coordinate = currentPoint[1] + size;
@@ -135,6 +135,18 @@ export class SvgPathBuilder {
         }
       }
     }
+  }
+
+  relativeArcTo(
+    [relativeMoveX, relativeMoveY]: PathAbsolutePoint,
+    options: { radius: number | [number, number]; xAxisRotation?: number; largeArc?: 0 | 1; sweep?: 0 | 1 },
+    lineOptions: LineOptions | null = null
+  ): SvgPathBuilder {
+    const point = this.currentPoint();
+    if (!point) {
+      return this;
+    }
+    return this.arcTo([point[0] + relativeMoveX, point[1] + relativeMoveY], options, lineOptions);
   }
 
   arcTo(

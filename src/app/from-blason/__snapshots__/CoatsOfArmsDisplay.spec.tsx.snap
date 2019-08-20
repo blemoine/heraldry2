@@ -598,6 +598,130 @@ exports[`CoatsOfArms should render 'Azure, two crosses crosselet vert' 1`] = `
 </svg>
 `;
 
+exports[`CoatsOfArms should render 'Azure, two crosses moline counter ermine' 1`] = `
+<svg
+  height={266.6666666666667}
+  viewBox="0 0 200 266.6666666666667"
+  width={200}
+>
+  <defs>
+    
+    <symbol
+      id="counter-ermine"
+      viewBox="0 0 200 240"
+    >
+      <rect
+        fill="#000000"
+        height="100%"
+        width="100%"
+      />
+      <g
+        transform="translate(100, 240)"
+      >
+        <path
+          d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
+          fill="#FFFFFF"
+        />
+        <circle
+          cy={-226}
+          fill="#FFFFFF"
+          r="14"
+        />
+        <circle
+          cx={-32}
+          cy={-194}
+          fill="#FFFFFF"
+          r={14}
+        />
+        <circle
+          cx={32}
+          cy={-194}
+          fill="#FFFFFF"
+          r={14}
+        />
+      </g>
+    </symbol>
+    <pattern
+      height={65.04065040650407}
+      id="field-pattern-425"
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 70 125"
+      width={36.36363636363637}
+    >
+      <rect
+        fill="#000000"
+        height="100%"
+        width="100%"
+      />
+      <use
+        height={60}
+        href="#counter-ermine"
+        width={35}
+        x="0"
+        y="0"
+      />
+      <use
+        height={60}
+        href="#counter-ermine"
+        width={35}
+        x="35"
+        y="65"
+      />
+    </pattern>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <clipPath
+      id="plain-field-clip-path"
+    >
+      <path
+        d="M 0 0 H200 V160 Q 200 253.33333 100 266.66667 Q 0 253.33333 0 160 Z"
+        fill="transparent"
+        stroke="#333"
+      />
+    </clipPath>
+  </defs>
+  <g
+    clipPath="url(#plain-field-clip-path)"
+  >
+    <rect
+      fill="#0000FF"
+      height={266.6666666666667}
+      stroke="#333"
+      width={200}
+      x={0}
+      y={0}
+    />
+  </g>
+  <g
+    clipPath="url(#plain-field-clip-path)"
+  >
+    <path
+      d="M 56.4 129.73333 V109.93333 A10.8 10.8 0 0 0 49.2 106.33333 A7.2 7.2 0 0 1 60 106.33333 A7.2 7.2 0 0 1 70.8 106.33333 A10.8 10.8 0 0 0 63.6 109.93333 V129.73333 H83.4 A10.8 10.8 0 0 0 87 122.53333 A7.2 7.2 0 0 1 87 133.33333 A7.2 7.2 0 0 1 87 144.13333 A10.8 10.8 0 0 0 83.4 136.93333 H63.6 V156.73333 A10.8 10.8 0 0 0 70.8 160.33333 A7.2 7.2 0 0 1 60 160.33333 A7.2 7.2 0 0 1 49.2 160.33333 A10.8 10.8 0 0 0 56.4 156.73333 V136.93333 H36.6 A10.8 10.8 0 0 0 33 144.13333 A7.2 7.2 0 0 1 33 133.33333 A7.2 7.2 0 0 1 33 122.53333 A10.8 10.8 0 0 0 36.6 129.73333 H56.4"
+      fill="url(#field-pattern-425)"
+      stroke="#000"
+    />
+    <path
+      d="M 136.4 129.73333 V109.93333 A10.8 10.8 0 0 0 129.2 106.33333 A7.2 7.2 0 0 1 140 106.33333 A7.2 7.2 0 0 1 150.8 106.33333 A10.8 10.8 0 0 0 143.6 109.93333 V129.73333 H163.4 A10.8 10.8 0 0 0 167 122.53333 A7.2 7.2 0 0 1 167 133.33333 A7.2 7.2 0 0 1 167 144.13333 A10.8 10.8 0 0 0 163.4 136.93333 H143.6 V156.73333 A10.8 10.8 0 0 0 150.8 160.33333 A7.2 7.2 0 0 1 140 160.33333 A7.2 7.2 0 0 1 129.2 160.33333 A10.8 10.8 0 0 0 136.4 156.73333 V136.93333 H116.6 A10.8 10.8 0 0 0 113 144.13333 A7.2 7.2 0 0 1 113 133.33333 A7.2 7.2 0 0 1 113 122.53333 A10.8 10.8 0 0 0 116.6 129.73333 H136.4"
+      fill="url(#field-pattern-425)"
+      stroke="#000"
+    />
+  </g>
+  <path
+    d="M 0 0 H200 V160 Q 200 253.33333 100 266.66667 Q 0 253.33333 0 160 Z"
+    fill="transparent"
+    stroke="#333"
+  />
+</svg>
+`;
+
 exports[`CoatsOfArms should render 'Barry pily counter ermine and potent en point' 1`] = `
 <svg
   height={266.6666666666667}

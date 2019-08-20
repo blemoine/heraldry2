@@ -88,6 +88,7 @@ describe('CoatsOfArms', () => {
   snapshotTest('Argent, three crosses potent vair');
   snapshotTest('Sable, a cross maltese argent');
   snapshotTest('Azure, two crosses crosselet vert');
+  snapshotTest('Azure, two crosses moline counter ermine');
 });
 
 function snapshotTest(blason: string) {

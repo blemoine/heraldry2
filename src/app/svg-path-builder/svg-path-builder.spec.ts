@@ -107,28 +107,28 @@ describe('SvgPathBuilder', () => {
   });
 
   it('should support positive relative horizontal move', () => {
-    const result = SvgPathBuilder.start([10, 5]).relativeHorizontalMove(15);
+    const result = SvgPathBuilder.start([10, 5]).horizontalMove(15);
 
     expect(result.toPathAttribute()).toEqual('M 10 5 H25');
   });
   it('should support negative relative horizontal move', () => {
-    const result = SvgPathBuilder.start([10, 5]).relativeHorizontalMove(-15);
+    const result = SvgPathBuilder.start([10, 5]).horizontalMove(-15);
 
     expect(result.toPathAttribute()).toEqual('M 10 5 H-5');
   });
   it('should support positive relative vertical move', () => {
-    const result = SvgPathBuilder.start([5, 10]).relativeVerticalMove(15);
+    const result = SvgPathBuilder.start([5, 10]).verticalMove(15);
 
     expect(result.toPathAttribute()).toEqual('M 5 10 V25');
   });
   it('should support negative relative vertical move', () => {
-    const result = SvgPathBuilder.start([5, 10]).relativeVerticalMove(-15);
+    const result = SvgPathBuilder.start([5, 10]).verticalMove(-15);
 
     expect(result.toPathAttribute()).toEqual('M 5 10 V-5');
   });
 
   it('should be insensible to rounding error', () => {
-    const result = SvgPathBuilder.start([0.1, 0.1]).relativeVerticalMove(0.2).relativeHorizontalMove(0.2);
+    const result = SvgPathBuilder.start([0.1, 0.1]).verticalMove(0.2).horizontalMove(0.2);
 
     expect(result.toPathAttribute()).toEqual('M 0.1 0.1 V0.3 H0.3');
   });
