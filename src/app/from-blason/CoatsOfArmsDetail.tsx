@@ -6,6 +6,7 @@ import { ResizableBox, ResizeCallbackData } from 'react-resizable';
 import 'react-resizable/css/styles.css';
 import { scale } from '../model/dimension';
 import { BlasonForm } from './BlasonForm';
+import { defaultTinctureConfiguration } from '../model/tincture-configuration';
 
 type Props = { blason: Blason; blasonChange: (blason: Blason) => void };
 export const CoatsOfArmsDetail = ({ blason, blasonChange }: Props) => {
@@ -15,6 +16,7 @@ export const CoatsOfArmsDetail = ({ blason, blasonChange }: Props) => {
   function onResize(_e: React.SyntheticEvent, { size }: ResizeCallbackData) {
     setWidth(size.width);
   }
+  const tinctureConfiguration = defaultTinctureConfiguration;
 
   return (
     <div>
@@ -28,7 +30,11 @@ export const CoatsOfArmsDetail = ({ blason, blasonChange }: Props) => {
         resizeHandles={['e']}
         onResize={onResize}
       >
-        <CoatsOfArmsDisplay blason={blason} dimension={scale(dimension, 0.9)} />
+        <CoatsOfArmsDisplay
+          blason={blason}
+          dimension={scale(dimension, 0.9)}
+          tinctureConfiguration={tinctureConfiguration}
+        />
       </ResizableBox>
     </div>
   );

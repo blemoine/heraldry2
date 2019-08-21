@@ -11,9 +11,11 @@ import { Dimension } from '../model/dimension';
 import { ErminePatternDef } from './coats-of-arms-parts/ErminePatternDef';
 import { VairPatternDef } from './coats-of-arms-parts/VairPatternDef';
 import { PotentPatternDef } from './coats-of-arms-parts/PotentPatternDef';
+import { TinctureConfiguration } from '../model/tincture-configuration';
 
-type Props = { blason: Blason; dimension: Dimension };
+type Props = { blason: Blason; dimension: Dimension; tinctureConfiguration: TinctureConfiguration };
 export const CoatsOfArmsDisplay = (props: Props) => {
+  const tinctureConfiguration = props.tinctureConfiguration;
   const dimension = props.dimension;
   const { width, height } = dimension;
 
@@ -40,7 +42,7 @@ export const CoatsOfArmsDisplay = (props: Props) => {
     if (isFur(tincture)) {
       return `url(#${furPatternId(tincture)})`;
     } else {
-      return tincture.color;
+      return tinctureConfiguration[tincture.name];
     }
   }
 
@@ -61,6 +63,7 @@ export const CoatsOfArmsDisplay = (props: Props) => {
               ermine={ermine}
               dimension={dimension}
               patternId={furPatternId(ermine)}
+              tinctureConfiguration={tinctureConfiguration}
             />
           ) : (
             ''
@@ -68,7 +71,13 @@ export const CoatsOfArmsDisplay = (props: Props) => {
         })}
         {vairs.map((vair, i) => {
           return isThereFur(blason, vair.name) ? (
-            <VairPatternDef key={vair.name + i} vair={vair} patternId={furPatternId(vair)} dimension={dimension} />
+            <VairPatternDef
+              key={vair.name + i}
+              vair={vair}
+              patternId={furPatternId(vair)}
+              dimension={dimension}
+              tinctureConfiguration={tinctureConfiguration}
+            />
           ) : (
             ''
           );
@@ -80,6 +89,7 @@ export const CoatsOfArmsDisplay = (props: Props) => {
               potent={potent}
               patternId={furPatternId(potent)}
               dimension={dimension}
+              tinctureConfiguration={tinctureConfiguration}
             />
           ) : (
             ''

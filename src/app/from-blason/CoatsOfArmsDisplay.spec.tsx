@@ -4,6 +4,7 @@ import { CoatsOfArmsDisplay } from './CoatsOfArmsDisplay';
 import { Blason } from '../model/blason';
 import { azure, ermine, gules, or, purpure, vair } from '../model/tincture';
 import { parseBlason } from '../blason-parser/blasonParser';
+import { defaultTinctureConfiguration } from '../model/tincture-configuration';
 jest.mock('../../utils/uuid');
 
 const dimension = {
@@ -14,13 +15,17 @@ const dimension = {
 describe('CoatsOfArms', () => {
   it('should render a plain blason', () => {
     const blason: Blason = { field: { kind: 'plain', tincture: gules } };
-    const component = renderer.create(<CoatsOfArmsDisplay blason={blason} dimension={dimension} />);
+    const component = renderer.create(
+      <CoatsOfArmsDisplay blason={blason} dimension={dimension} tinctureConfiguration={defaultTinctureConfiguration} />
+    );
     expect(component.toJSON()).toMatchSnapshot();
   });
 
   it('should render a fur blason', () => {
     const blason: Blason = { field: { kind: 'plain', tincture: ermine } };
-    const component = renderer.create(<CoatsOfArmsDisplay blason={blason} dimension={dimension} />);
+    const component = renderer.create(
+      <CoatsOfArmsDisplay blason={blason} dimension={dimension} tinctureConfiguration={defaultTinctureConfiguration} />
+    );
     expect(component.toJSON()).toMatchSnapshot();
   });
 
@@ -28,7 +33,9 @@ describe('CoatsOfArms', () => {
     const blason: Blason = {
       field: { kind: 'party', per: { name: 'bend', tinctures: [vair, azure], line: 'straight' } },
     };
-    const component = renderer.create(<CoatsOfArmsDisplay blason={blason} dimension={dimension} />);
+    const component = renderer.create(
+      <CoatsOfArmsDisplay blason={blason} dimension={dimension} tinctureConfiguration={defaultTinctureConfiguration} />
+    );
     expect(component.toJSON()).toMatchSnapshot();
   });
 
@@ -37,7 +44,9 @@ describe('CoatsOfArms', () => {
       field: { kind: 'party', per: { name: 'bend', tinctures: [vair, azure], line: 'straight' } },
       ordinary: { name: 'chief', tincture: purpure, line: 'straight' },
     };
-    const component = renderer.create(<CoatsOfArmsDisplay blason={blason} dimension={dimension} />);
+    const component = renderer.create(
+      <CoatsOfArmsDisplay blason={blason} dimension={dimension} tinctureConfiguration={defaultTinctureConfiguration} />
+    );
     expect(component.toJSON()).toMatchSnapshot();
   });
 
@@ -54,7 +63,9 @@ describe('CoatsOfArms', () => {
         countAndDisposition: { count: 3, disposition: 'pale' },
       },
     };
-    const component = renderer.create(<CoatsOfArmsDisplay blason={blason} dimension={dimension} />);
+    const component = renderer.create(
+      <CoatsOfArmsDisplay blason={blason} dimension={dimension} tinctureConfiguration={defaultTinctureConfiguration} />
+    );
     expect(component.toJSON()).toMatchSnapshot();
   });
 
@@ -99,7 +110,13 @@ function snapshotTest(blason: string) {
       return;
     }
 
-    const component = renderer.create(<CoatsOfArmsDisplay blason={maybeBlason} dimension={dimension} />);
+    const component = renderer.create(
+      <CoatsOfArmsDisplay
+        blason={maybeBlason}
+        dimension={dimension}
+        tinctureConfiguration={defaultTinctureConfiguration}
+      />
+    );
     expect(component.toJSON()).toMatchSnapshot();
   });
 }

@@ -350,6 +350,8 @@ export function stringifyTincture(tincture: Tincture): string {
     return 'potent en pale';
   } else if (tincture.name === 'potent-en-point') {
     return 'potent en point';
+  } else if (tincture.name === 'tenne') {
+    return 'tenné';
   } else {
     return tincture.name;
   }
