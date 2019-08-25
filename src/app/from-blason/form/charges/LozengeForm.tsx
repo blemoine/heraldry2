@@ -5,9 +5,10 @@ import { Tincture } from '../../../model/tincture';
 import { SelectScalar } from '../../../common/SelectScalar';
 import { CountAndDisposition } from '../../../model/countAndDisposition';
 import { CountAndDispositionForm } from '../CountAndDispositionForm';
+import { TinctureConfiguration } from '../../../model/tincture-configuration';
 
-type Props = { charge: Lozenge; chargeChange: (lozenge: Lozenge) => void };
-export const LozengeForm = ({ charge, chargeChange }: Props) => {
+type Props = { tinctureConfiguration: TinctureConfiguration, charge: Lozenge; chargeChange: (lozenge: Lozenge) => void };
+export const LozengeForm = ({ tinctureConfiguration, charge, chargeChange }: Props) => {
   function chargeTinctureChange(tincture: Tincture) {
     chargeChange({ ...charge, tincture });
   }
@@ -25,7 +26,7 @@ export const LozengeForm = ({ charge, chargeChange }: Props) => {
         <div className="col">
           <div className="form-group">
             <label>Select the tincture of the charge</label>
-            <TinctureSelect tincture={charge.tincture} tinctureChange={chargeTinctureChange} />
+            <TinctureSelect tinctureConfiguration={tinctureConfiguration} tincture={charge.tincture} tinctureChange={chargeTinctureChange} />
           </div>
         </div>
         <div className="col">

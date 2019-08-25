@@ -5,10 +5,11 @@ import { Tincture } from '../../../model/tincture';
 import { SelectScalar } from '../../../common/SelectScalar';
 import { LineSelect } from '../LineSelect';
 import { Line } from '../../../model/line';
+import { TinctureConfiguration } from '../../../model/tincture-configuration';
 
-type Props = { ordinary: Pale; ordinaryChange: (pale: Pale) => void };
+type Props = { tinctureConfiguration: TinctureConfiguration; ordinary: Pale; ordinaryChange: (pale: Pale) => void };
 const countOptions = [1, 2] as const;
-export const PaleForm = ({ ordinary, ordinaryChange }: Props) => {
+export const PaleForm = ({ tinctureConfiguration, ordinary, ordinaryChange }: Props) => {
   function ordinaryTinctureChange(tincture: Tincture) {
     ordinaryChange({ ...ordinary, tincture });
   }
@@ -25,7 +26,11 @@ export const PaleForm = ({ ordinary, ordinaryChange }: Props) => {
     <>
       <div className="form-group">
         <label>Select the tincture of the ordinary</label>
-        <TinctureSelect tincture={ordinary.tincture} tinctureChange={ordinaryTinctureChange} />
+        <TinctureSelect
+          tinctureConfiguration={tinctureConfiguration}
+          tincture={ordinary.tincture}
+          tinctureChange={ordinaryTinctureChange}
+        />
       </div>
       <div className="form-group">
         <label>Select the number of pale</label>

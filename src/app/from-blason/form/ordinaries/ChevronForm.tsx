@@ -5,10 +5,15 @@ import { Tincture } from '../../../model/tincture';
 import { SelectScalar } from '../../../common/SelectScalar';
 import { LineSelect } from '../LineSelect';
 import { Line } from '../../../model/line';
+import { TinctureConfiguration } from '../../../model/tincture-configuration';
 
-type Props = { ordinary: Chevron | Chevronel; ordinaryChange: (chevron: Chevron | Chevronel) => void };
+type Props = {
+  tinctureConfiguration: TinctureConfiguration;
+  ordinary: Chevron | Chevronel;
+  ordinaryChange: (chevron: Chevron | Chevronel) => void;
+};
 const countOptions = [1, 2, 3] as const;
-export const ChevronForm = ({ ordinary, ordinaryChange }: Props) => {
+export const ChevronForm = ({ tinctureConfiguration, ordinary, ordinaryChange }: Props) => {
   function ordinaryTinctureChange(tincture: Tincture) {
     ordinaryChange({ ...ordinary, tincture });
   }
@@ -25,7 +30,11 @@ export const ChevronForm = ({ ordinary, ordinaryChange }: Props) => {
     <>
       <div className="form-group">
         <label>Select the tincture of the ordinary</label>
-        <TinctureSelect tincture={ordinary.tincture} tinctureChange={ordinaryTinctureChange} />
+        <TinctureSelect
+          tinctureConfiguration={tinctureConfiguration}
+          tincture={ordinary.tincture}
+          tinctureChange={ordinaryTinctureChange}
+        />
       </div>
       <div className="form-group">
         <label>Select the number of chevron</label>

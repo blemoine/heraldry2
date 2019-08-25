@@ -826,7 +826,7 @@ exports[`CoatsOfArms should render 'Barry pily counter ermine and potent en poin
       <rect
         fill="#FFFFFF"
         height="100%"
-        width="100%"
+        width="150%"
       />
       <use
         height={100}
@@ -4861,7 +4861,7 @@ exports[`CoatsOfArms should render 'Potent, a chief gules' 1`] = `
       <rect
         fill="#FFFFFF"
         height="100%"
-        width="100%"
+        width="150%"
       />
       <use
         height={100}

@@ -30,4 +30,10 @@ Faire le "of the last"
 * Support for parsing gardant (en plus de guardant)
 
 * Meilleur support de l'optionnalité des virgules
-* Pouvoir passer en parametre un range de couleur pour les tinctures
+* Bouger la configuration dans la navbar probablement
+* Sauvegarder le pattern de couleur dans le localstorage
+* utiliser un context pour la configuration
+* Configurer la forme du bouclier
+* Support de custom comme couleur conf
+* Support de "Random" comme couleur conf (implique que chaque tincture evolue dans un espace)
+

@@ -9,9 +9,9 @@ export const HeaterDisplay: React.FunctionComponent<Props> = ({ dimension }) => 
 
   const pathBuilder = SvgPathBuilder.start([0, 0])
     .goTo([width, 0])
-    .goTo([width, 3 * height / 5])
+    .goTo([width, (3 * height) / 5])
     .quadraticeBezier([width / 2, height], [width, height * 0.95])
-    .quadraticeBezier([0, 3 * height / 5], [0, height * 0.95])
+    .quadraticeBezier([0, (3 * height) / 5], [0, height * 0.95])
     .close();
 
   return <PathFromBuilder pathBuilder={pathBuilder} fill="transparent" stroke="#333" />;

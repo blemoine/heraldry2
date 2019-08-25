@@ -4,10 +4,15 @@ import { TinctureSelect } from '../TinctureSelect';
 import { Tincture } from '../../../model/tincture';
 import { LineSelect } from '../LineSelect';
 import { Line } from '../../../model/line';
+import { TinctureConfiguration } from '../../../model/tincture-configuration';
 
 type SupportedOrdinary = Exclude<Ordinary, Pale>;
-type Props = { ordinary: SupportedOrdinary; ordinaryChange: (ordinary: SupportedOrdinary) => void };
-export const StandardOrdinaryForm = ({ ordinary, ordinaryChange }: Props) => {
+type Props = {
+  tinctureConfiguration: TinctureConfiguration;
+  ordinary: SupportedOrdinary;
+  ordinaryChange: (ordinary: SupportedOrdinary) => void;
+};
+export const StandardOrdinaryForm = ({ tinctureConfiguration, ordinary, ordinaryChange }: Props) => {
   function ordinaryTinctureChange(tincture: Tincture) {
     ordinaryChange({ ...ordinary, tincture });
   }
@@ -20,7 +25,11 @@ export const StandardOrdinaryForm = ({ ordinary, ordinaryChange }: Props) => {
     <>
       <div className="form-group ordinary-tincture-select">
         <label>Select the tincture of the ordinary</label>
-        <TinctureSelect tincture={ordinary.tincture} tinctureChange={ordinaryTinctureChange} />
+        <TinctureSelect
+          tinctureConfiguration={tinctureConfiguration}
+          tincture={ordinary.tincture}
+          tinctureChange={ordinaryTinctureChange}
+        />
       </div>
 
       <div className="form-group">

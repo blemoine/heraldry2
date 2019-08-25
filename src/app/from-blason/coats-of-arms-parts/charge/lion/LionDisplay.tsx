@@ -7,7 +7,7 @@ import { getChargePositions } from '../charge.helper';
 
 type Props = { charge: Lion; dimension: Dimension; fillFromTincture: (tincture: Tincture) => string };
 export const LionDisplay = ({ charge, dimension, fillFromTincture }: Props) => {
-  const {count, disposition} = charge.countAndDisposition;
+  const { count, disposition } = charge.countAndDisposition;
   const { cellWidth, cellHeight, positions } = getChargePositions(count, disposition);
   const { width, height } = dimension;
   const computedDimension = scale(dimension, Math.min(2.2 * cellWidth, cellHeight));

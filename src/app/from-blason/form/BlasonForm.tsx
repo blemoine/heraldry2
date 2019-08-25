@@ -6,9 +6,10 @@ import { Blason } from '../../model/blason';
 import { Field } from '../../model/field';
 import { Ordinary } from '../../model/ordinary';
 import { Charge } from '../../model/charge';
+import { TinctureConfiguration } from '../../model/tincture-configuration';
 
-type Props = { blason: Blason; blasonChange: (blason: Blason) => void };
-export const BlasonForm = ({ blason, blasonChange }: Props) => {
+type Props = { tinctureConfiguration: TinctureConfiguration; blason: Blason; blasonChange: (blason: Blason) => void };
+export const BlasonForm = ({ tinctureConfiguration, blason, blasonChange }: Props) => {
   function fieldChange(field: Field) {
     blasonChange({ ...blason, field });
   }
@@ -34,9 +35,17 @@ export const BlasonForm = ({ blason, blasonChange }: Props) => {
   }
   return (
     <>
-      <FieldForm field={blason.field} fieldChange={fieldChange} />
-      <OrdinaryForm ordinary={blason.ordinary || null} ordinaryChange={ordinaryChange} />
-      <ChargeForm charge={blason.charge || null} chargeChange={chargeChange} />
+      <FieldForm tinctureConfiguration={tinctureConfiguration} field={blason.field} fieldChange={fieldChange} />
+      <OrdinaryForm
+        tinctureConfiguration={tinctureConfiguration}
+        ordinary={blason.ordinary || null}
+        ordinaryChange={ordinaryChange}
+      />
+      <ChargeForm
+        tinctureConfiguration={tinctureConfiguration}
+        charge={blason.charge || null}
+        chargeChange={chargeChange}
+      />
     </>
   );
 };

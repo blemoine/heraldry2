@@ -7,11 +7,12 @@ import { stringifyParty } from '../blason.helpers';
 import { SelectScalar } from '../../common/SelectScalar';
 import { LineSelect } from './LineSelect';
 import { Line } from '../../model/line';
+import { TinctureConfiguration } from '../../model/tincture-configuration';
 
 const partiesOptions = parties;
 
-type Props = { field: PartyField; fieldChange: (field: PartyField) => void };
-export const PartyForm = ({ field, fieldChange }: Props) => {
+type Props = { tinctureConfiguration: TinctureConfiguration, field: PartyField; fieldChange: (field: PartyField) => void };
+export const PartyForm = ({ tinctureConfiguration, field, fieldChange }: Props) => {
   function firstTinctureChange(tincture: Tincture) {
     fieldChange({ kind: 'party', per: { ...field.per, tinctures: [tincture, field.per.tinctures[1]] } });
   }
@@ -42,13 +43,13 @@ export const PartyForm = ({ field, fieldChange }: Props) => {
       <div className="col">
         <div className="form-group">
           <label>Select your first tincture</label>
-          <TinctureSelect tincture={field.per.tinctures[0]} tinctureChange={firstTinctureChange} />
+          <TinctureSelect tinctureConfiguration={tinctureConfiguration} tincture={field.per.tinctures[0]} tinctureChange={firstTinctureChange} />
         </div>
       </div>
       <div className="col">
         <div className="form-group">
           <label>Select your second tincture</label>
-          <TinctureSelect tincture={field.per.tinctures[1]} tinctureChange={secondTinctureChange} />
+          <TinctureSelect tinctureConfiguration={tinctureConfiguration} tincture={field.per.tinctures[1]} tinctureChange={secondTinctureChange} />
         </div>
       </div>
       <div className="form-group">

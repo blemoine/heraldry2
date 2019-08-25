@@ -4,9 +4,10 @@ import { Charge } from '../../model/charge';
 import { cannotHappen } from '../../../utils/cannot-happen';
 import { ChargeNameSelect } from './ChargeNameSelect';
 import { ChargeDetailForm } from './ChargeDetailForm';
+import { TinctureConfiguration } from '../../model/tincture-configuration';
 
-type Props = { charge: Charge | null; chargeChange: (charge: Charge | null) => void };
-export const ChargeForm = ({ charge, chargeChange }: Props) => {
+type Props = { tinctureConfiguration: TinctureConfiguration, charge: Charge | null; chargeChange: (charge: Charge | null) => void };
+export const ChargeForm = ({ tinctureConfiguration, charge, chargeChange }: Props) => {
   function changeChargeType(chargeName: Charge['name'] | null) {
     if (chargeName === 'lion') {
       chargeChange({
@@ -56,7 +57,7 @@ export const ChargeForm = ({ charge, chargeChange }: Props) => {
         <ChargeNameSelect charge={charge ? charge.name : null} chargeChange={changeChargeType} />
       </div>
 
-      {charge && <ChargeDetailForm charge={charge} chargeChange={chargeChange} />}
+      {charge && <ChargeDetailForm tinctureConfiguration={tinctureConfiguration} charge={charge} chargeChange={chargeChange} />}
     </>
   );
 };

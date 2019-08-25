@@ -3,9 +3,14 @@ import * as React from 'react';
 import { Ordinary } from '../../model/ordinary';
 import { argent } from '../../model/tincture';
 import { OrdinaryDispatcherForm } from './ordinaries/OrdinaryDispatcherForm';
+import { TinctureConfiguration } from '../../model/tincture-configuration';
 
-type Props = { ordinary: Ordinary | null; ordinaryChange: (ordinary: Ordinary | null) => void };
-export const OrdinaryForm = ({ ordinary, ordinaryChange }: Props) => {
+type Props = {
+  tinctureConfiguration: TinctureConfiguration;
+  ordinary: Ordinary | null;
+  ordinaryChange: (ordinary: Ordinary | null) => void;
+};
+export const OrdinaryForm = ({ tinctureConfiguration, ordinary, ordinaryChange }: Props) => {
   function changeOrdinary(ordinaryName: Ordinary['name'] | null) {
     if (ordinaryName) {
       const tincture = ordinary ? ordinary.tincture : argent;
@@ -28,7 +33,13 @@ export const OrdinaryForm = ({ ordinary, ordinaryChange }: Props) => {
         </div>
       </div>
       <div className="col">
-        {ordinary && <OrdinaryDispatcherForm ordinary={ordinary} ordinaryChange={ordinaryChange} />}
+        {ordinary && (
+          <OrdinaryDispatcherForm
+            tinctureConfiguration={tinctureConfiguration}
+            ordinary={ordinary}
+            ordinaryChange={ordinaryChange}
+          />
+        )}
       </div>
     </div>
   );
