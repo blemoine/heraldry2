@@ -21,21 +21,22 @@ export const FromBlason = () => {
     localStorage.setItem(localStorageKey, JSON.stringify(blason));
   }, [blason]);
 
-  const [tinctureConfiguration, setTinctureConfiguration] = useState(defaultTinctureConfiguration);
+  const [configuration, setConfiguration] = useState({ tinctureConfiguration: defaultTinctureConfiguration });
 
   return (
     <>
-      <ConfigurationForm
-        tinctureConfiguration={tinctureConfiguration}
-        tinctureConfigurationChange={setTinctureConfiguration}
-      />
+      <ConfigurationForm configuration={configuration} configurationChange={setConfiguration} />
       <div className="row">
         <div className="col-md-12 col-lg-6">
-          <BlasonForm tinctureConfiguration={tinctureConfiguration} blason={blason} blasonChange={setBlason} />
+          <BlasonForm
+            tinctureConfiguration={configuration.tinctureConfiguration}
+            blason={blason}
+            blasonChange={setBlason}
+          />
         </div>
         <div className="col-md-12 col-lg-6">
           <CoatsOfArmsDetail
-            tinctureConfiguration={tinctureConfiguration}
+            configuration={configuration}
             blason={blason}
             blasonChange={(blason) => setBlason(blason)}
           />

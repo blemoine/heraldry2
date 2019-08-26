@@ -14,7 +14,17 @@ export type Chevron = { name: 'chevron'; tincture: Tincture; line: Line; count: 
 export type Chevronel = { name: 'chevronel'; tincture: Tincture; line: Line; count: 1 | 2 | 3 };
 
 export type SubOrdinary = Bordure | Base;
-export type Ordinary = Chief | Bend | BendSinister | Pale | Fess | Chevron | OrdinaryCross | Saltire | SubOrdinary | Chevronel;
+export type Ordinary =
+  | Chief
+  | Bend
+  | BendSinister
+  | Pale
+  | Fess
+  | Chevron
+  | OrdinaryCross
+  | Saltire
+  | SubOrdinary
+  | Chevronel;
 
 export function isSubOrdinary(o: Ordinary['name']): o is SubOrdinary['name'] {
   return o === 'bordure' || o === 'base' || o === 'chevronel';

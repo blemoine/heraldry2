@@ -6,7 +6,11 @@ import { ChargeNameSelect } from './ChargeNameSelect';
 import { ChargeDetailForm } from './ChargeDetailForm';
 import { TinctureConfiguration } from '../../model/tincture-configuration';
 
-type Props = { tinctureConfiguration: TinctureConfiguration, charge: Charge | null; chargeChange: (charge: Charge | null) => void };
+type Props = {
+  tinctureConfiguration: TinctureConfiguration;
+  charge: Charge | null;
+  chargeChange: (charge: Charge | null) => void;
+};
 export const ChargeForm = ({ tinctureConfiguration, charge, chargeChange }: Props) => {
   function changeChargeType(chargeName: Charge['name'] | null) {
     if (chargeName === 'lion') {
@@ -57,7 +61,9 @@ export const ChargeForm = ({ tinctureConfiguration, charge, chargeChange }: Prop
         <ChargeNameSelect charge={charge ? charge.name : null} chargeChange={changeChargeType} />
       </div>
 
-      {charge && <ChargeDetailForm tinctureConfiguration={tinctureConfiguration} charge={charge} chargeChange={chargeChange} />}
+      {charge && (
+        <ChargeDetailForm tinctureConfiguration={tinctureConfiguration} charge={charge} chargeChange={chargeChange} />
+      )}
     </>
   );
 };

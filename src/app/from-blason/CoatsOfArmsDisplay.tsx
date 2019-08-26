@@ -11,11 +11,11 @@ import { Dimension } from '../model/dimension';
 import { ErminePatternDef } from './coats-of-arms-parts/ErminePatternDef';
 import { VairPatternDef } from './coats-of-arms-parts/VairPatternDef';
 import { PotentPatternDef } from './coats-of-arms-parts/PotentPatternDef';
-import { TinctureConfiguration } from '../model/tincture-configuration';
+import { Configuration } from '../model/configuration';
 
-type Props = { blason: Blason; dimension: Dimension; tinctureConfiguration: TinctureConfiguration };
+type Props = { blason: Blason; dimension: Dimension; configuration: Configuration };
 export const CoatsOfArmsDisplay = (props: Props) => {
-  const tinctureConfiguration = props.tinctureConfiguration;
+  const tinctureConfiguration = props.configuration.tinctureConfiguration;
   const dimension = props.dimension;
   const { width, height } = dimension;
 

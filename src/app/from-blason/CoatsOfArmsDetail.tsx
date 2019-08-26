@@ -6,10 +6,10 @@ import { ResizableBox, ResizeCallbackData } from 'react-resizable';
 import 'react-resizable/css/styles.css';
 import { scale } from '../model/dimension';
 import { BlasonForm } from './BlasonForm';
-import { TinctureConfiguration } from '../model/tincture-configuration';
+import { Configuration } from '../model/configuration';
 
-type Props = { tinctureConfiguration: TinctureConfiguration; blason: Blason; blasonChange: (blason: Blason) => void };
-export const CoatsOfArmsDetail = ({ tinctureConfiguration, blason, blasonChange }: Props) => {
+type Props = { configuration: Configuration; blason: Blason; blasonChange: (blason: Blason) => void };
+export const CoatsOfArmsDetail = ({ configuration, blason, blasonChange }: Props) => {
   const [width, setWidth] = useState(200);
   const height = (width * 4) / 3;
   const dimension = { height, width };
@@ -32,7 +32,7 @@ export const CoatsOfArmsDetail = ({ tinctureConfiguration, blason, blasonChange 
         <CoatsOfArmsDisplay
           blason={blason}
           dimension={scale(dimension, 0.9)}
-          tinctureConfiguration={tinctureConfiguration}
+          configuration={configuration}
         />
       </ResizableBox>
     </div>

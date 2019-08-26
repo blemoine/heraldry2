@@ -23,7 +23,8 @@ const partyUnit: P.Parser<Party['name']> = buildAltParser(parties, stringifyPart
 const language: Language = {
   Party(): P.Parser<Party> {
     return P.seq(
-      P.alt(constStr('per', 'Party per'),constStr('per')).desc('Per')
+      P.alt(constStr('per', 'Party per'), constStr('per'))
+        .desc('Per')
         .skip(P.whitespace)
         .then(partyUnit)
         .skip(P.whitespace),
@@ -83,13 +84,15 @@ const language: Language = {
 
   Blason(r: AppliedLanguage): P.Parser<Blason> {
     // a cross depending on different thing, can be either and ordinary or chager
-    const crossParserToObj: P.Parser<{ charge: Cross } | { ordinary: OrdinaryCross }> = crossParser().map((crossPartial) => {
-      if ('limbs' in crossPartial) {
-        return { charge: crossPartial };
-      } else {
-        return { ordinary: crossPartial };
+    const crossParserToObj: P.Parser<{ charge: Cross } | { ordinary: OrdinaryCross }> = crossParser().map(
+      (crossPartial) => {
+        if ('limbs' in crossPartial) {
+          return { charge: crossPartial };
+        } else {
+          return { ordinary: crossPartial };
+        }
       }
-    });
+    );
     const ordinaryToObj = ordinaryParser().map((ordinary) => ({ ordinary }));
     const chargeToObj = chargeParser().map((charge) => ({ charge }));
 
@@ -98,9 +101,15 @@ const language: Language = {
       P.string(',')
         .trim(P.optWhitespace)
         .chain((_) =>
-          P.sepBy(P.alt(crossParserToObj, ordinaryToObj, chargeToObj).fallback({}), P.string(',').trim(P.optWhitespace)).map(
-            (arr: Array<{ charge: Cross } | { ordinary: OrdinaryCross } | { ordinary?: Ordinary } | { charge?: Charge }>) =>
-              arr.reduce((acc, obj): { ordinary?: Ordinary; charge?: Charge } => ({ ...acc, ...obj }), {})
+          P.sepBy(
+            P.alt(crossParserToObj, ordinaryToObj, chargeToObj).fallback({}),
+            P.string(',').trim(P.optWhitespace)
+          ).map(
+            (
+              arr: Array<
+                { charge: Cross } | { ordinary: OrdinaryCross } | { ordinary?: Ordinary } | { charge?: Charge }
+              >
+            ) => arr.reduce((acc, obj): { ordinary?: Ordinary; charge?: Charge } => ({ ...acc, ...obj }), {})
           )
         )
         .fallback({})

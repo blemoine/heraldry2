@@ -11,12 +11,13 @@ const dimension = {
   height: 266.6666666666667,
   width: 200,
 };
+const configuration = { tinctureConfiguration: defaultTinctureConfiguration };
 
 describe('CoatsOfArms', () => {
   it('should render a plain blason', () => {
     const blason: Blason = { field: { kind: 'plain', tincture: gules } };
     const component = renderer.create(
-      <CoatsOfArmsDisplay blason={blason} dimension={dimension} tinctureConfiguration={defaultTinctureConfiguration} />
+      <CoatsOfArmsDisplay blason={blason} dimension={dimension} configuration={configuration} />
     );
     expect(component.toJSON()).toMatchSnapshot();
   });
@@ -24,7 +25,7 @@ describe('CoatsOfArms', () => {
   it('should render a fur blason', () => {
     const blason: Blason = { field: { kind: 'plain', tincture: ermine } };
     const component = renderer.create(
-      <CoatsOfArmsDisplay blason={blason} dimension={dimension} tinctureConfiguration={defaultTinctureConfiguration} />
+      <CoatsOfArmsDisplay blason={blason} dimension={dimension} configuration={configuration} />
     );
     expect(component.toJSON()).toMatchSnapshot();
   });
@@ -34,7 +35,7 @@ describe('CoatsOfArms', () => {
       field: { kind: 'party', per: { name: 'bend', tinctures: [vair, azure], line: 'straight' } },
     };
     const component = renderer.create(
-      <CoatsOfArmsDisplay blason={blason} dimension={dimension} tinctureConfiguration={defaultTinctureConfiguration} />
+      <CoatsOfArmsDisplay blason={blason} dimension={dimension} configuration={configuration} />
     );
     expect(component.toJSON()).toMatchSnapshot();
   });
@@ -45,7 +46,7 @@ describe('CoatsOfArms', () => {
       ordinary: { name: 'chief', tincture: purpure, line: 'straight' },
     };
     const component = renderer.create(
-      <CoatsOfArmsDisplay blason={blason} dimension={dimension} tinctureConfiguration={defaultTinctureConfiguration} />
+      <CoatsOfArmsDisplay blason={blason} dimension={dimension} configuration={configuration} />
     );
     expect(component.toJSON()).toMatchSnapshot();
   });
@@ -64,7 +65,7 @@ describe('CoatsOfArms', () => {
       },
     };
     const component = renderer.create(
-      <CoatsOfArmsDisplay blason={blason} dimension={dimension} tinctureConfiguration={defaultTinctureConfiguration} />
+      <CoatsOfArmsDisplay blason={blason} dimension={dimension} configuration={configuration} />
     );
     expect(component.toJSON()).toMatchSnapshot();
   });
@@ -111,11 +112,7 @@ function snapshotTest(blason: string) {
     }
 
     const component = renderer.create(
-      <CoatsOfArmsDisplay
-        blason={maybeBlason}
-        dimension={dimension}
-        tinctureConfiguration={defaultTinctureConfiguration}
-      />
+      <CoatsOfArmsDisplay blason={maybeBlason} dimension={dimension} configuration={configuration} />
     );
     expect(component.toJSON()).toMatchSnapshot();
   });

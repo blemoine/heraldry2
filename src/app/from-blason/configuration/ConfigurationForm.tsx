@@ -6,38 +6,41 @@ import {
   wappenWikiConfiguration,
 } from '../../model/tincture-configuration';
 import { useState } from 'react';
+import { Configuration } from '../../model/configuration';
 
 type Props = {
-  tinctureConfiguration: TinctureConfiguration;
-  tinctureConfigurationChange: (tinctureConfiguration: TinctureConfiguration) => void;
+  configuration: Configuration;
+  configurationChange: (configuration: Configuration) => void;
 };
 
-const availableConfiguration: Array<{ name: string; configuration: TinctureConfiguration }> = [
-  { name: 'default', configuration: defaultTinctureConfiguration },
-  { name: 'default_2', configuration: defaultTinctureConfiguration2 },
-  { name: 'wappenWiki', configuration: wappenWikiConfiguration },
+const availableTinctureConfiguration: Array<{ name: string; tinctureConfiguration: TinctureConfiguration }> = [
+  { name: 'default', tinctureConfiguration: defaultTinctureConfiguration },
+  { name: 'default_2', tinctureConfiguration: defaultTinctureConfiguration2 },
+  { name: 'wappenWiki', tinctureConfiguration: wappenWikiConfiguration },
 ];
 const colorBoxWidth = 20;
 
-export const ConfigurationForm = ({ tinctureConfiguration, tinctureConfigurationChange }: Props) => {
+export const ConfigurationForm = ({ configuration, configurationChange }: Props) => {
   const [isCollapsed, setCollapsed] = useState(true);
 
   return (
     <div style={{ border: '1px solid #999', padding: '10px 5px' }}>
       <div style={{ cursor: 'pointer' }} onClick={() => setCollapsed(!isCollapsed)}>
         <span style={{ padding: '3px 10px' }}>{isCollapsed ? '+' : '-'}</span>
-        <span style={{ margin: '0 10px', borderBottom: '1px solid #333', padding: '3px 0', fontWeight: 'bold' }}>Configuration</span>
+        <span style={{ margin: '0 10px', borderBottom: '1px solid #333', padding: '3px 0', fontWeight: 'bold' }}>
+          Configuration
+        </span>
       </div>
       <div style={{ transition: 'all 0.5s', overflow: 'hidden', height: isCollapsed ? 0 : '100px' }}>
         <div style={{ marginTop: '10px' }}>
           <ul className="list-inline">
-            {availableConfiguration.map(({ name, configuration }) => {
+            {availableTinctureConfiguration.map(({ name, tinctureConfiguration }) => {
               return (
                 <li
                   key={name}
                   className="list-inline-item"
                   style={{ padding: '5px 10px', cursor: 'pointer' }}
-                  onClick={() => tinctureConfigurationChange(configuration)}
+                  onClick={() => configurationChange({ ...configuration, tinctureConfiguration })}
                 >
                   <div
                     style={{
@@ -47,7 +50,7 @@ export const ConfigurationForm = ({ tinctureConfiguration, tinctureConfiguration
                       width: 5 * colorBoxWidth + 2 + 'px',
                     }}
                   >
-                    {Object.entries(configuration).map(([name, color], i) => {
+                    {Object.entries(tinctureConfiguration).map(([name, color], i) => {
                       return (
                         <div
                           key={i}
@@ -65,7 +68,7 @@ export const ConfigurationForm = ({ tinctureConfiguration, tinctureConfiguration
                         readOnly={true}
                         name="tincture-configuration"
                         style={{ marginRight: '5px' }}
-                        checked={tinctureConfiguration === configuration}
+                        checked={tinctureConfiguration === tinctureConfiguration}
                       />
                       {name}
                     </label>
