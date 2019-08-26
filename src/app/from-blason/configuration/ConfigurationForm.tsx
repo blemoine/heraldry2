@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Configuration } from '../../model/configuration';
+import { Configuration, ShieldShape, shieldShapes } from '../../model/configuration';
 import { TinctureConfigurationForm } from './TinctureConfigurationForm';
 import { TinctureConfiguration } from '../../model/tincture-configuration';
+import { SelectScalar } from '../../common/SelectScalar';
 
 type Props = {
   configuration: Configuration;
@@ -16,6 +17,10 @@ export const ConfigurationForm = ({ configuration, configurationChange }: Props)
     configurationChange({ ...configuration, tinctureConfiguration });
   }
 
+  function updateShieldShape(shieldShape: ShieldShape) {
+    configurationChange({ ...configuration, shieldShape });
+  }
+
   return (
     <div style={{ border: '1px solid #999', padding: '10px 5px' }}>
       <div style={{ cursor: 'pointer' }} onClick={() => setCollapsed(!isCollapsed)}>
@@ -24,11 +29,20 @@ export const ConfigurationForm = ({ configuration, configurationChange }: Props)
           Configuration
         </span>
       </div>
-      <div style={{ transition: 'all 0.5s', overflow: 'hidden', height: isCollapsed ? 0 : '100px' }}>
+      <div
+        style={{
+          transition: 'all 0.5s',
+          overflow: isCollapsed ? 'hidden' : 'visible',
+          height: isCollapsed ? 0 : 'auto',
+        }}
+      >
         <TinctureConfigurationForm
           tinctureConfiguration={configuration.tinctureConfiguration}
           tinctureConfigurationChange={updateTinctureConfiguration}
         />
+        <div>
+          <SelectScalar options={shieldShapes} value={configuration.shieldShape} valueChange={updateShieldShape} />
+        </div>
       </div>
     </div>
   );

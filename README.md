@@ -23,7 +23,7 @@ Look at https://books.google.ca/books?id=TvNfAAAAcAAJ&pg=PA32&lpg=PA32&dq=lion+w
 Faire un mode de representation "Sans couleur"
 Faire le "of the last"
 * extract stringify functions
-* Update bordure to user multiple MoveTo
+* Update bordure to use multiple MoveTo
 
 * Factorize form for lozenge/roundel/fleur de lys
 * Support for quarterly
@@ -35,4 +35,4 @@ Faire le "of the last"
 * Configurer la forme du bouclier
 * Support de custom comme couleur conf
 * Support de "Random" comme couleur conf (implique que chaque tincture evolue dans un espace)
-
+* animate configuration 0 to auto 
