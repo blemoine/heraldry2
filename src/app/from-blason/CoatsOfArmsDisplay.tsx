@@ -5,17 +5,18 @@ import { OrdinaryDisplay } from './coats-of-arms-parts/ordinaries/OrdinaryDispla
 import { uuid } from '../../utils/uuid';
 import { ermines, Furs, isFur, potents, Tincture, vairs } from '../model/tincture';
 import { FieldDisplay } from './coats-of-arms-parts/FieldDisplay';
-import { HeaterDisplay } from './coats-of-arms-parts/escutcheon/HeaterDisplay';
 import { ChargeDisplay } from './coats-of-arms-parts/ChargeDisplay';
 import { Dimension } from '../model/dimension';
 import { ErminePatternDef } from './coats-of-arms-parts/ErminePatternDef';
 import { VairPatternDef } from './coats-of-arms-parts/VairPatternDef';
 import { PotentPatternDef } from './coats-of-arms-parts/PotentPatternDef';
 import { Configuration } from '../model/configuration';
+import { EscutcheonDisplay } from './coats-of-arms-parts/escutcheon/EscutcheonDisplay';
 
 type Props = { blason: Blason; dimension: Dimension; configuration: Configuration };
 export const CoatsOfArmsDisplay = (props: Props) => {
-  const tinctureConfiguration = props.configuration.tinctureConfiguration;
+  const configuration = props.configuration;
+  const tinctureConfiguration = configuration.tinctureConfiguration;
   const dimension = props.dimension;
   const { width, height } = dimension;
 
@@ -97,7 +98,7 @@ export const CoatsOfArmsDisplay = (props: Props) => {
         })}
 
         <clipPath id="plain-field-clip-path">
-          <HeaterDisplay dimension={dimension} />
+          <EscutcheonDisplay dimension={dimension} shieldShape={configuration.shieldShape} />
         </clipPath>
       </defs>
 
@@ -121,7 +122,7 @@ export const CoatsOfArmsDisplay = (props: Props) => {
         </g>
       )}
 
-      <HeaterDisplay dimension={dimension} />
+      <EscutcheonDisplay dimension={dimension} shieldShape={configuration.shieldShape} />
     </svg>
   );
 };

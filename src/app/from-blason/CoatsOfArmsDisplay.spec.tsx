@@ -5,13 +5,14 @@ import { Blason } from '../model/blason';
 import { azure, ermine, gules, or, purpure, vair } from '../model/tincture';
 import { parseBlason } from '../blason-parser/blasonParser';
 import { defaultTinctureConfiguration } from '../model/tincture-configuration';
+import { Configuration } from '../model/configuration';
 jest.mock('../../utils/uuid');
 
 const dimension = {
   height: 266.6666666666667,
   width: 200,
 };
-const configuration = { tinctureConfiguration: defaultTinctureConfiguration };
+const configuration: Configuration = { tinctureConfiguration: defaultTinctureConfiguration, shieldShape: 'heater' };
 
 describe('CoatsOfArms', () => {
   it('should render a plain blason', () => {

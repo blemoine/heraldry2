@@ -6,6 +6,7 @@ import { CoatsOfArmsDetail } from './CoatsOfArmsDetail';
 import { BlasonForm } from './form/BlasonForm';
 import { ConfigurationForm } from './configuration/ConfigurationForm';
 import { defaultTinctureConfiguration } from '../model/tincture-configuration';
+import { Configuration } from '../model/configuration';
 
 const baseDefaultBlason: Blason = {
   field: { kind: 'plain', tincture: gules },
@@ -21,7 +22,10 @@ export const FromBlason = () => {
     localStorage.setItem(localStorageKey, JSON.stringify(blason));
   }, [blason]);
 
-  const [configuration, setConfiguration] = useState({ tinctureConfiguration: defaultTinctureConfiguration });
+  const [configuration, setConfiguration] = useState<Configuration>({
+    shieldShape: 'heater',
+    tinctureConfiguration: defaultTinctureConfiguration,
+  });
 
   return (
     <>
