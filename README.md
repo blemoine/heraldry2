@@ -27,7 +27,6 @@ Faire le "of the last"
 
 * Factorize form for lozenge/roundel/fleur de lys
 * Support for quarterly
-* Support for parsing gardant (en plus de guardant)
 
 * Meilleur support de l'optionnalité des virgules
 * Bouger la configuration dans la navbar probablement

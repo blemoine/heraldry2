@@ -333,4 +333,19 @@ Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Chequy, Counter ermi
     };
     expect(parseBlason('Party per bend gules and vert')).toEqual(expected);
   });
+  it('should support gardant', () => {
+    const expected: Blason = {
+      field: { kind: 'plain', tincture: gules },
+      charge: {
+        name: 'lion',
+        attitude: 'passant',
+        tincture: or,
+        head: 'guardant',
+        tail: null,
+        armedAndLangued: gules,
+        countAndDisposition: { count: 1, disposition: 'default' },
+      },
+    };
+    expect(parseBlason('Gules, a lion passant gardant or')).toEqual(expected);
+  });
 });

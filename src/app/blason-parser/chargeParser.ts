@@ -41,7 +41,10 @@ const countAndDispositionParser = (count: SupportedNumber): P.Parser<CountAndDis
 
 const lionParser = (count: SupportedNumber): P.Parser<Lion> => {
   const attitudeParser: P.Parser<LionAttitude> = buildAltParser(lionAttitudes, identity);
-  const headParser: P.Parser<LionHead> = buildAltParser(lionHeads, identity);
+  const headParser: P.Parser<LionHead> = P.alt(
+    P.regex(/gardant/i).result('guardant'),
+    buildAltParser(lionHeads, identity)
+  );
   const tailParser: P.Parser<LionTail> = buildAltParser(lionTails, identity);
 
   const lionNameParser = (count === 1 ? P.regex(/lion/i) : P.regex(/lions/i)).result('lion' as const);
