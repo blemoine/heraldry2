@@ -1,7 +1,7 @@
 import { SvgPathBuilder } from '../../../../svg-path-builder/svg-path-builder';
 import { PathFromBuilder } from '../../../../common/PathFromBuilder';
 import * as React from 'react';
-import { flatMap, Result, isError } from '../../../../../utils/result';
+import { combine, isError } from '../../../../../utils/result';
 
 type Props = {
   fill: string;
@@ -23,13 +23,15 @@ export const CrossPotent = ({ fill, stroke, center, crossWidth, crossRadius }: P
     .goTo([centerX + crossWidth, centerY - crossRadius + 2 * crossWidth])
     .goTo([centerX + crossWidth, centerY - crossWidth]);
 
-  const maybePathBuilder = [
-    topLimb.rotate([centerX, centerY], 90),
-    topLimb.rotate([centerX, centerY], 180),
-    topLimb.rotate([centerX, centerY], 270),
-  ].reduce((maybeAcc: Result<SvgPathBuilder>, limb): Result<SvgPathBuilder> => {
-    return flatMap(maybeAcc, (acc) => acc.concat(limb));
-  }, topLimb);
+  const maybePathBuilder = combine(
+    [
+      topLimb,
+      topLimb.rotate([centerX, centerY], 90),
+      topLimb.rotate([centerX, centerY], 180),
+      topLimb.rotate([centerX, centerY], 270),
+    ],
+    (a, b) => a.concat(b)
+  );
 
   if (isError(maybePathBuilder)) {
     throw new Error(maybePathBuilder.error.join('\n'));

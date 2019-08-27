@@ -6,7 +6,7 @@ export function raise(msg: string): Error {
 }
 
 export function isError<A>(r: Result<A>): r is Error {
-  return r != null && (typeof r === 'object') && 'error' in r;
+  return r != null && typeof r === 'object' && 'error' in r;
 }
 
 export function zip<A, B>(r: Result<A>, r2: Result<B>): Result<[A, B]> {
@@ -44,5 +44,16 @@ export function flatMap<A, B>(r: Result<A>, fn: (a: A) => Result<B>): Result<B> 
     return r;
   } else {
     return fn(r);
+  }
+}
+
+export function combine<A>(arr: Array<Result<A>>, concat: (a: A, a2: A) => Result<A>): Result<A> {
+  if (arr.length === 0) {
+    return raise('There must be at least one element in the array');
+  } else {
+    const [head, ...tail] = arr;
+    return tail.reduce((maybeAcc, a) => {
+      return map(zip(maybeAcc, a), ([a1, a2]) => concat(a1, a2));
+    }, head);
   }
 }
