@@ -280,7 +280,12 @@ export class SvgPathBuilder {
   concat(path: SvgPathBuilder): Result<SvgPathBuilder> {
     const lastPoint = this.currentPoint();
     const pathStartPoint = path.getStartPoint();
-    if (lastPoint && pathStartPoint && lastPoint[0] === pathStartPoint[0] && lastPoint[1] === pathStartPoint[1]) {
+    if (
+      lastPoint &&
+      pathStartPoint &&
+      round(lastPoint[0], 5) === round(pathStartPoint[0], 5) &&
+      round(lastPoint[1], 5) === round(pathStartPoint[1], 5)
+    ) {
       return new SvgPathBuilder(this.commands.concat(path.commands.slice(1)));
     } else {
       return raise(`The current endpoint ${lastPoint} and param startPoint ${pathStartPoint} are not the same`);

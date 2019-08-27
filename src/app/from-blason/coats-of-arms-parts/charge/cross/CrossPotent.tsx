@@ -1,6 +1,7 @@
 import { SvgPathBuilder } from '../../../../svg-path-builder/svg-path-builder';
 import { PathFromBuilder } from '../../../../common/PathFromBuilder';
 import * as React from 'react';
+import { flatMap, Result, isError } from '../../../../../utils/result';
 
 type Props = {
   fill: string;
@@ -13,35 +14,26 @@ export const CrossPotent = ({ fill, stroke, center, crossWidth, crossRadius }: P
   const [centerX, centerY] = center;
 
   const wideFactor = 6;
-  const pathBuilder = SvgPathBuilder.start([centerX - crossWidth, centerY - crossWidth])
+  const topLimb = SvgPathBuilder.start([centerX - crossWidth, centerY - crossWidth])
     .goTo([centerX - crossWidth, centerY - crossRadius + 2 * crossWidth])
     .goTo([centerX - wideFactor * crossWidth, centerY - crossRadius + 2 * crossWidth])
     .goTo([centerX - wideFactor * crossWidth, centerY - crossRadius])
     .goTo([centerX + wideFactor * crossWidth, centerY - crossRadius])
     .goTo([centerX + wideFactor * crossWidth, centerY - crossRadius + 2 * crossWidth])
     .goTo([centerX + crossWidth, centerY - crossRadius + 2 * crossWidth])
-    .goTo([centerX + crossWidth, centerY - crossWidth])
-    .goTo([centerX + crossRadius - 2 * crossWidth, centerY - crossWidth])
-    .goTo([centerX + crossRadius - 2 * crossWidth, centerY - wideFactor * crossWidth])
-    .goTo([centerX + crossRadius, centerY - wideFactor * crossWidth])
-    .goTo([centerX + crossRadius, centerY + wideFactor * crossWidth])
-    .goTo([centerX + crossRadius - 2 * crossWidth, centerY + wideFactor * crossWidth])
-    .goTo([centerX + crossRadius - 2 * crossWidth, centerY + crossWidth])
-    .goTo([centerX + crossWidth, centerY + crossWidth])
-    .goTo([centerX + crossWidth, centerY + crossRadius - 2 * crossWidth])
-    .goTo([centerX + wideFactor * crossWidth, centerY + crossRadius - 2 * crossWidth])
-    .goTo([centerX + wideFactor * crossWidth, centerY + crossRadius])
-    .goTo([centerX - wideFactor * crossWidth, centerY + crossRadius])
-    .goTo([centerX - wideFactor * crossWidth, centerY + crossRadius - 2 * crossWidth])
-    .goTo([centerX - crossWidth, centerY + crossRadius - 2 * crossWidth])
-    .goTo([centerX - crossWidth, centerY + crossWidth])
-    .goTo([centerX - crossRadius + 2 * crossWidth, centerY + crossWidth])
-    .goTo([centerX - crossRadius + 2 * crossWidth, centerY + wideFactor * crossWidth])
-    .goTo([centerX - crossRadius, centerY + wideFactor * crossWidth])
-    .goTo([centerX - crossRadius, centerY - wideFactor * crossWidth])
-    .goTo([centerX - crossRadius + 2 * crossWidth, centerY - wideFactor * crossWidth])
-    .goTo([centerX - crossRadius + 2 * crossWidth, centerY - crossWidth])
-    .goTo([centerX - crossWidth, centerY - crossWidth]);
+    .goTo([centerX + crossWidth, centerY - crossWidth]);
 
-  return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke={stroke} />;
+  const maybePathBuilder = [
+    topLimb.rotate([centerX, centerY], 90),
+    topLimb.rotate([centerX, centerY], 180),
+    topLimb.rotate([centerX, centerY], 270),
+  ].reduce((maybeAcc: Result<SvgPathBuilder>, limb): Result<SvgPathBuilder> => {
+    return flatMap(maybeAcc, (acc) => acc.concat(limb));
+  }, topLimb);
+
+  if (isError(maybePathBuilder)) {
+    throw new Error(maybePathBuilder.error.join('\n'));
+  } else {
+    return <PathFromBuilder pathBuilder={maybePathBuilder} fill={fill} stroke={stroke} />;
+  }
 };
