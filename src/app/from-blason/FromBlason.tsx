@@ -12,20 +12,29 @@ const baseDefaultBlason: Blason = {
   field: { kind: 'plain', tincture: gules },
 } as const;
 export const FromBlason = () => {
-  const localStorageKey = 'default-blason#2';
-  const defaultBlasonStr = localStorage.getItem(localStorageKey);
+  const blasonLocalStorageKey = 'default-blason#2';
+  const defaultBlasonStr = localStorage.getItem(blasonLocalStorageKey);
   const defaultBlason = defaultBlasonStr ? JSON.parse(defaultBlasonStr) : baseDefaultBlason;
 
   const [blason, setBlason] = useState<Blason>(defaultBlason);
 
   useEffect(() => {
-    localStorage.setItem(localStorageKey, JSON.stringify(blason));
+    localStorage.setItem(blasonLocalStorageKey, JSON.stringify(blason));
   }, [blason]);
 
-  const [configuration, setConfiguration] = useState<Configuration>({
-    shieldShape: 'heater',
-    tinctureConfiguration: defaultTinctureConfiguration,
-  });
+  const configurationLocalStorageKey = 'configuration#1';
+  const defaultConfigurationStr = localStorage.getItem(configurationLocalStorageKey);
+  const defaultConfiguration = defaultConfigurationStr
+    ? JSON.parse(defaultConfigurationStr)
+    : {
+        shieldShape: 'heater',
+        tinctureConfiguration: defaultTinctureConfiguration,
+      };
+
+  const [configuration, setConfiguration] = useState<Configuration>(defaultConfiguration);
+  useEffect(() => {
+    localStorage.setItem(configurationLocalStorageKey, JSON.stringify(configuration));
+  }, [configuration]);
 
   return (
     <>

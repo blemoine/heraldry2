@@ -30,9 +30,9 @@ Faire le "of the last"
 
 * Meilleur support de l'optionnalité des virgules
 * Bouger la configuration dans la navbar probablement
-* Sauvegarder le pattern de couleur dans le localstorage
 * utiliser un context pour la configuration
 * Configurer la forme du bouclier
 * Support de custom comme couleur conf
 * Support de "Random" comme couleur conf (implique que chaque tincture evolue dans un espace)
 * animate configuration 0 to auto 
+* Factorise with `useLocalStorage`

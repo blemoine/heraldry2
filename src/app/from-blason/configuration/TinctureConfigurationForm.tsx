@@ -5,6 +5,7 @@ import {
   TinctureConfiguration,
   wappenWikiConfiguration,
 } from '../../model/tincture-configuration';
+import { isEqual } from 'lodash';
 
 const availableTinctureConfiguration: Array<{ name: string; tinctureConfiguration: TinctureConfiguration }> = [
   { name: 'default', tinctureConfiguration: defaultTinctureConfiguration },
@@ -58,7 +59,7 @@ export const TinctureConfigurationForm = (props: Props) => {
                     readOnly={true}
                     name="tincture-configuration"
                     style={{ marginRight: '5px' }}
-                    checked={tinctureConfiguration === selectedTinctureConfiguration}
+                    checked={isEqual(tinctureConfiguration, selectedTinctureConfiguration)}
                   />
                   {name}
                 </label>
