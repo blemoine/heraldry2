@@ -9,6 +9,7 @@ type GoToPoint = { command: 'L'; point: PathAbsolutePoint };
 type Vertical = { command: 'V'; coordinate: number };
 type Horizontal = { command: 'H'; coordinate: number };
 type QuadraticBezier = { command: 'Q'; point: PathAbsolutePoint; controlPoint: PathAbsolutePoint };
+type CubicBezier = { command: 'C'; point: PathAbsolutePoint; controlPoints: [PathAbsolutePoint, PathAbsolutePoint] };
 type Arc = {
   command: 'A';
   point: PathAbsolutePoint;
@@ -19,7 +20,7 @@ type Arc = {
 };
 type Close = { command: 'Z' };
 
-type PathCommand = MoveTo | GoToPoint | Arc | Vertical | Horizontal | Close | QuadraticBezier;
+type PathCommand = MoveTo | GoToPoint | Arc | Vertical | Horizontal | Close | QuadraticBezier | CubicBezier;
 
 export type EngrailedLineOptions = { line: 'with-arc'; radius: number; sweep: boolean };
 export type LineOptions = EngrailedLineOptions;
@@ -48,6 +49,22 @@ export class SvgPathBuilder {
             round(command.controlPoint[0], precision) +
             ' ' +
             round(command.controlPoint[1], precision) +
+            ' ' +
+            round(command.point[0], precision) +
+            ' ' +
+            round(command.point[1], precision)
+          );
+        } else if (command.command === 'C') {
+          return (
+            command.command +
+            ' ' +
+            round(command.controlPoints[0][0], precision) +
+            ' ' +
+            round(command.controlPoints[0][1], precision) +
+            ' ' +
+            round(command.controlPoints[1][0], precision) +
+            ' ' +
+            round(command.controlPoints[1][1], precision) +
             ' ' +
             round(command.point[0], precision) +
             ' ' +
@@ -102,6 +119,10 @@ export class SvgPathBuilder {
 
   quadraticeBezier(point: PathAbsolutePoint, controlPoint: PathAbsolutePoint): SvgPathBuilder {
     return this.addCommand({ command: 'Q', controlPoint, point });
+  }
+
+  cubicBezier(point: PathAbsolutePoint, controlPoints: [PathAbsolutePoint, PathAbsolutePoint]): SvgPathBuilder {
+    return this.addCommand({ command: 'C', controlPoints, point });
   }
 
   goTo(point: PathAbsolutePoint, lineOptions: LineOptions | null = null): SvgPathBuilder {
@@ -231,7 +252,8 @@ function getX(commands: Array<PathCommand>): number | null {
       previousCommand.command === 'M' ||
       previousCommand.command === 'L' ||
       previousCommand.command === 'A' ||
-      previousCommand.command === 'Q'
+      previousCommand.command === 'Q' ||
+      previousCommand.command === 'C'
     ) {
       return previousCommand.point[0];
     } else if (previousCommand.command === 'H') {
@@ -256,7 +278,8 @@ function getY(commands: Array<PathCommand>): number | null {
       previousCommand.command === 'M' ||
       previousCommand.command === 'L' ||
       previousCommand.command === 'A' ||
-      previousCommand.command === 'Q'
+      previousCommand.command === 'Q' ||
+      previousCommand.command === 'C'
     ) {
       return previousCommand.point[1];
     } else if (previousCommand.command === 'V') {

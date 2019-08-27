@@ -128,8 +128,16 @@ describe('SvgPathBuilder', () => {
   });
 
   it('should be insensible to rounding error', () => {
-    const result = SvgPathBuilder.start([0.1, 0.1]).verticalMove(0.2).horizontalMove(0.2);
+    const result = SvgPathBuilder.start([0.1, 0.1])
+      .verticalMove(0.2)
+      .horizontalMove(0.2);
 
     expect(result.toPathAttribute()).toEqual('M 0.1 0.1 V0.3 H0.3');
+  });
+
+  it('should support cubic bezier', () => {
+    const result = SvgPathBuilder.start([0.1, 0.1]).cubicBezier([5, 6], [[1, 2], [3, 4]]);
+
+    expect(result.toPathAttribute()).toEqual('M 0.1 0.1 C 1 2 3 4 5 6');
   });
 });
