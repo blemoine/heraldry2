@@ -24,6 +24,7 @@ Faire un mode de representation "Sans couleur"
 Faire le "of the last"
 * extract stringify functions
 * Update bordure to use multiple MoveTo
+* 9 symboles ne rentrent pas dans les shields
 
 * Factorize form for lozenge/roundel/fleur de lys
 * Support for quarterly
