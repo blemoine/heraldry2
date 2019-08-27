@@ -3,6 +3,7 @@ import { range } from '../../utils/range';
 import { angleBetween, distanceBetween, PathAbsolutePoint, rotate, toDegree } from './geometrical.helper';
 import { pointOnEllipticalArc } from './point-on-elliptical-arc';
 import { round } from '../../utils/round';
+import { Result, raise } from '../../utils/result';
 
 type MoveTo = { command: 'M'; point: PathAbsolutePoint };
 type GoToPoint = { command: 'L'; point: PathAbsolutePoint };
@@ -276,6 +277,25 @@ export class SvgPathBuilder {
     );
   }
 
+  concat(path: SvgPathBuilder): Result<SvgPathBuilder> {
+    const lastPoint = this.currentPoint();
+    const pathStartPoint = path.getStartPoint();
+    if (lastPoint && pathStartPoint && lastPoint[0] === pathStartPoint[0] && lastPoint[1] === pathStartPoint[1]) {
+      return new SvgPathBuilder(this.commands.concat(path.commands.slice(1)));
+    } else {
+      return raise(`The current endpoint ${lastPoint} and param startPoint ${pathStartPoint} are not the same`);
+    }
+  }
+
+  protected getStartPoint(): PathAbsolutePoint | null {
+    const commands = [this.commands[0]];
+    const x = getX(commands);
+    const y = getY(commands);
+    if (x === null || y === null) {
+      return null;
+    }
+    return [x, y];
+  }
   private addCommand(command: PathCommand): SvgPathBuilder {
     return new SvgPathBuilder([...this.commands, command]);
   }

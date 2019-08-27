@@ -166,4 +166,14 @@ describe('SvgPathBuilder', () => {
 
     expect(result.toPathAttribute()).toEqual('M 0 0 L 2.12132 2.12132 L -0.70711 4.94975');
   });
+
+  it('should support concatenation of path', () => {
+    const p1 = SvgPathBuilder.start([0, 0])
+      .horizontalMove(12)
+      .goTo([23, 34]);
+    const p2 = SvgPathBuilder.start([23, 34]).goTo([7, 8]);
+    const result = p1.concat(p2);
+
+    expect((result as SvgPathBuilder).toPathAttribute()).toEqual('M 0 0 H12 L 23 34 L 7 8');
+  });
 });
