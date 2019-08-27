@@ -140,4 +140,30 @@ describe('SvgPathBuilder', () => {
 
     expect(result.toPathAttribute()).toEqual('M 0.1 0.1 C 1 2 3 4 5 6');
   });
+
+  it('should support rotation of line from center 0,0 ', () => {
+    const result = SvgPathBuilder.start([0, 0])
+      .goTo([4, -20])
+      .goTo([8, 0])
+      .rotate([0, 0], 90);
+
+    expect(result.toPathAttribute()).toEqual('M 0 0 L 20 4 L 0 8');
+  });
+
+  it('should support rotation of arc from a given center 0,0 ', () => {
+    const result = SvgPathBuilder.start([4, 12])
+      .arcTo([8, 12], { radius: 9 })
+      .rotate([6, 12], 90);
+
+    expect(result.toPathAttribute()).toEqual('M 6 10 A9 9 0 0 0 6 14');
+  });
+
+  it('should support rotation of horizontal and vertical move ', () => {
+    const result = SvgPathBuilder.start([0, 0])
+      .horizontalMove(3)
+      .verticalMove(4)
+      .rotate([0, 0], 45);
+
+    expect(result.toPathAttribute()).toEqual('M 0 0 L 2.12132 2.12132 L -0.70711 4.94975');
+  });
 });

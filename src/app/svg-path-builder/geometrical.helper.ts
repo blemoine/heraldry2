@@ -18,3 +18,20 @@ export function angleBetween(v0: PathAbsolutePoint, v1: PathAbsolutePoint): numb
 export function distanceBetween(pointA: PathAbsolutePoint, pointB: PathAbsolutePoint): number {
   return Math.sqrt((pointA[0] - pointB[0]) ** 2 + (pointA[1] - pointB[1]) ** 2);
 }
+
+export function rotate(
+  [x, y]: PathAbsolutePoint,
+  [centerX, centerY]: PathAbsolutePoint,
+  angleInDegree: number
+): PathAbsolutePoint {
+  const angleInRad = toRadians(angleInDegree);
+  const r00 = Math.cos(angleInRad);
+  const r01 = -Math.sin(angleInRad);
+  const r10 = -r01;
+  const r11 = r00;
+
+  const rotatedX = r00 * x + r01 * y + centerX - r00 * centerX - r01 * centerY;
+  const rotatedY = r10 * x + r11 * y + centerY - r10 * centerX - r11 * centerY;
+
+  return [rotatedX, rotatedY];
+}

@@ -1,6 +1,6 @@
 import { cannotHappen } from '../../utils/cannot-happen';
 import { range } from '../../utils/range';
-import { angleBetween, distanceBetween, PathAbsolutePoint, toDegree } from './geometrical.helper';
+import { angleBetween, distanceBetween, PathAbsolutePoint, rotate, toDegree } from './geometrical.helper';
 import { pointOnEllipticalArc } from './point-on-elliptical-arc';
 import { round } from '../../utils/round';
 
@@ -235,6 +235,45 @@ export class SvgPathBuilder {
     } else {
       return [x, y];
     }
+  }
+
+  rotate(center: PathAbsolutePoint, angleInDegree: number): SvgPathBuilder {
+    return new SvgPathBuilder(
+      this.commands.map(
+        (command, i): PathCommand => {
+          if (command.command === 'L' || command.command === 'A' || command.command === 'M') {
+            return { ...command, point: rotate(command.point, center, angleInDegree) };
+          } else if (command.command === 'H') {
+            const previousY = getY(this.commands.slice(0, i)) || 0;
+            return { command: 'L', point: rotate([command.coordinate, previousY], center, angleInDegree) };
+          } else if (command.command === 'V') {
+            const previousX = getX(this.commands.slice(0, i)) || 0;
+            return { command: 'L', point: rotate([previousX, command.coordinate], center, angleInDegree) };
+          } else if (command.command === 'C') {
+            return {
+              ...command,
+              point: rotate(command.point, center, angleInDegree),
+              controlPoints: [
+                rotate(command.controlPoints[0], center, angleInDegree),
+                rotate(command.controlPoints[1], center, angleInDegree),
+              ],
+            };
+          } else if (command.command === 'Q') {
+            return {
+              ...command,
+              point: rotate(command.point, center, angleInDegree),
+              controlPoint: rotate(command.controlPoint, center, angleInDegree),
+            };
+          } else if (command.command === 'Z') {
+            const x = getX([this.commands[0]]) || 0;
+            const y = getY([this.commands[0]]) || 0;
+            return { command: 'L', point: rotate([x, y], center, angleInDegree) };
+          } else {
+            return cannotHappen(command);
+          }
+        }
+      )
+    );
   }
 
   private addCommand(command: PathCommand): SvgPathBuilder {
