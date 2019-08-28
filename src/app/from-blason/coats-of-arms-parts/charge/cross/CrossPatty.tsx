@@ -1,7 +1,6 @@
 import { SvgPathBuilder } from '../../../../svg-path-builder/svg-path-builder';
-import { PathFromBuilder } from '../../../../common/PathFromBuilder';
 import * as React from 'react';
-import { combine, isError } from '../../../../../utils/result';
+import { CrossFromLimb } from './CrossFromLimb';
 
 type Props = {
   fill: string;
@@ -25,19 +24,5 @@ export const CrossPatty = ({ fill, stroke, center, crossWidth, crossRadius }: Pr
       [centerX + crossWidth, (centerY - crossWidth + (centerY - crossRadius)) / 2]
     );
 
-  const maybePathBuilder = combine(
-    [
-      topLimb,
-      topLimb.rotate([centerX, centerY], 90),
-      topLimb.rotate([centerX, centerY], 180),
-      topLimb.rotate([centerX, centerY], 270),
-    ],
-    (a, b) => a.concat(b)
-  );
-
-  if (isError(maybePathBuilder)) {
-    throw new Error(maybePathBuilder.error.join('\n'));
-  } else {
-    return <PathFromBuilder pathBuilder={maybePathBuilder} fill={fill} stroke={stroke} />;
-  }
+  return <CrossFromLimb topLimb={topLimb} center={center} fill={fill} stroke={stroke} />;
 };
