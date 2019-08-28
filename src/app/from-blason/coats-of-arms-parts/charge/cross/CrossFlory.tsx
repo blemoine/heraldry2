@@ -1,6 +1,6 @@
 import { SvgPathBuilder } from '../../../../svg-path-builder/svg-path-builder';
-import { PathFromBuilder } from '../../../../common/PathFromBuilder';
 import * as React from 'react';
+import { CrossFromLimb } from './CrossFromLimb';
 
 type Props = {
   fill: string;
@@ -16,8 +16,7 @@ export const CrossFlory = ({ fill, stroke, center, crossWidth, crossRadius }: Pr
   const bottomRadius = 1.5 * crossWidth;
   const limbLength = crossRadius - 4 * crossWidth;
 
-  const pathBuilder = SvgPathBuilder.start([centerX - crossWidth, centerY - crossWidth])
-
+  const topLimb = SvgPathBuilder.start([centerX - crossWidth, centerY - crossWidth])
     .verticalMove(-limbLength)
     .arcTo([centerX - wideFactor * crossWidth, centerY - crossRadius + 3 * crossWidth], { radius: bottomRadius })
     .arcTo([centerX - crossWidth, centerY - crossRadius + 2 * crossWidth], { radius: topRadius, sweep: 1 })
@@ -25,34 +24,7 @@ export const CrossFlory = ({ fill, stroke, center, crossWidth, crossRadius }: Pr
     .arcTo([centerX + crossWidth, centerY - crossRadius + 2 * crossWidth], { radius: topRadius, sweep: 1 })
     .arcTo([centerX + wideFactor * crossWidth, centerY - crossRadius + 3 * crossWidth], { radius: topRadius, sweep: 1 })
     .arcTo([centerX + crossWidth, centerY - crossRadius + 3 * crossWidth], { radius: bottomRadius })
-    .verticalMove(limbLength)
+    .verticalMove(limbLength);
 
-    .horizontalMove(limbLength)
-    .arcTo([centerX + crossRadius - 3 * crossWidth, centerY - wideFactor * crossWidth], { radius: bottomRadius })
-    .arcTo([centerX + crossRadius - 2 * crossWidth, centerY - crossWidth], { radius: topRadius, sweep: 1 })
-    .arcTo([centerX + crossRadius, centerY], { radius: topRadius, sweep: 1 })
-    .arcTo([centerX + crossRadius - 2 * crossWidth, centerY + crossWidth], { radius: topRadius, sweep: 1 })
-    .arcTo([centerX + crossRadius - 3 * crossWidth, centerY + wideFactor * crossWidth], { radius: topRadius, sweep: 1 })
-    .arcTo([centerX + crossRadius - 3 * crossWidth, centerY + crossWidth], { radius: bottomRadius })
-    .horizontalMove(-limbLength)
-
-    .verticalMove(limbLength)
-    .arcTo([centerX + wideFactor * crossWidth, centerY + crossRadius - 3 * crossWidth], { radius: bottomRadius })
-    .arcTo([centerX + crossWidth, centerY + crossRadius - 2 * crossWidth], { radius: topRadius, sweep: 1 })
-    .arcTo([centerX, centerY + crossRadius], { radius: topRadius, sweep: 1 })
-    .arcTo([centerX - crossWidth, centerY + crossRadius - 2 * crossWidth], { radius: topRadius, sweep: 1 })
-    .arcTo([centerX - wideFactor * crossWidth, centerY + crossRadius - 3 * crossWidth], { radius: topRadius, sweep: 1 })
-    .arcTo([centerX - crossWidth, centerY + crossRadius - 3 * crossWidth], { radius: bottomRadius })
-    .verticalMove(-limbLength)
-
-    .horizontalMove(-limbLength)
-    .arcTo([centerX - crossRadius + 3 * crossWidth, centerY + wideFactor * crossWidth], { radius: bottomRadius })
-    .arcTo([centerX - crossRadius + 2 * crossWidth, centerY + crossWidth], { radius: topRadius, sweep: 1 })
-    .arcTo([centerX - crossRadius, centerY], { radius: topRadius, sweep: 1 })
-    .arcTo([centerX - crossRadius + 2 * crossWidth, centerY - crossWidth], { radius: topRadius, sweep: 1 })
-    .arcTo([centerX - crossRadius + 3 * crossWidth, centerY - wideFactor * crossWidth], { radius: topRadius, sweep: 1 })
-    .arcTo([centerX - crossRadius + 3 * crossWidth, centerY - crossWidth], { radius: bottomRadius })
-    .horizontalMove(limbLength);
-
-  return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke={stroke} />;
+  return <CrossFromLimb topLimb={topLimb} center={center} fill={fill} stroke={stroke} />;
 };
