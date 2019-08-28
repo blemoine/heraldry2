@@ -36,3 +36,4 @@ Faire le "of the last"
 * Support de custom comme couleur conf
 * Support de "Random" comme couleur conf (implique que chaque tincture evolue dans un espace)
 * animate configuration 0 to auto 
+* Dans la liste des boucliers, afficher un petit icone représentant la forme attendue

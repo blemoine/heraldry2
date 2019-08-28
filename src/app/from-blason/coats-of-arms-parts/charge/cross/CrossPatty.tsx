@@ -1,6 +1,7 @@
 import { SvgPathBuilder } from '../../../../svg-path-builder/svg-path-builder';
 import { PathFromBuilder } from '../../../../common/PathFromBuilder';
 import * as React from 'react';
+import { combine, isError } from '../../../../../utils/result';
 
 type Props = {
   fill: string;
@@ -13,7 +14,7 @@ export const CrossPatty = ({ fill, stroke, center, crossWidth, crossRadius }: Pr
   const [centerX, centerY] = center;
 
   const wideFactor = 6;
-  const pathBuilder = SvgPathBuilder.start([centerX - crossWidth, centerY - crossWidth])
+  const topLimb = SvgPathBuilder.start([centerX - crossWidth, centerY - crossWidth])
     .quadraticeBezier(
       [centerX - wideFactor * crossWidth, centerY - crossRadius],
       [centerX - crossWidth, (centerY - crossWidth + (centerY - crossRadius)) / 2]
@@ -22,34 +23,21 @@ export const CrossPatty = ({ fill, stroke, center, crossWidth, crossRadius }: Pr
     .quadraticeBezier(
       [centerX + crossWidth, centerY - crossWidth],
       [centerX + crossWidth, (centerY - crossWidth + (centerY - crossRadius)) / 2]
-    )
-    .quadraticeBezier(
-      [centerX + crossRadius, centerY - wideFactor * crossWidth],
-      [(centerX + crossRadius + centerX + crossWidth) / 2, centerY - crossWidth]
-    )
-    .goTo([centerX + crossRadius, centerY + wideFactor * crossWidth])
-    .quadraticeBezier(
-      [centerX + crossWidth, centerY + crossWidth],
-      [(centerX + crossRadius + centerX + crossWidth) / 2, centerY + crossWidth]
-    )
-    .quadraticeBezier(
-      [centerX + wideFactor * crossWidth, centerY + crossRadius],
-      [centerX + crossWidth, (centerY + crossRadius + centerY + crossWidth) / 2]
-    )
-    .goTo([centerX - wideFactor * crossWidth, centerY + crossRadius])
-    .quadraticeBezier(
-      [centerX - crossWidth, centerY + crossWidth],
-      [centerX - crossWidth, (centerY + crossRadius + centerY + crossWidth) / 2]
-    )
-    .quadraticeBezier(
-      [centerX - crossRadius, centerY + wideFactor * crossWidth],
-      [(centerX - crossRadius + centerX - crossWidth) / 2, centerY + crossWidth]
-    )
-    .goTo([centerX - crossRadius, centerY - wideFactor * crossWidth])
-    .quadraticeBezier(
-      [centerX - crossWidth, centerY - crossWidth],
-      [(centerX - crossRadius + centerX - crossWidth) / 2, centerY - crossWidth]
     );
 
-  return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke={stroke} />;
+  const maybePathBuilder = combine(
+    [
+      topLimb,
+      topLimb.rotate([centerX, centerY], 90),
+      topLimb.rotate([centerX, centerY], 180),
+      topLimb.rotate([centerX, centerY], 270),
+    ],
+    (a, b) => a.concat(b)
+  );
+
+  if (isError(maybePathBuilder)) {
+    throw new Error(maybePathBuilder.error.join('\n'));
+  } else {
+    return <PathFromBuilder pathBuilder={maybePathBuilder} fill={fill} stroke={stroke} />;
+  }
 };
