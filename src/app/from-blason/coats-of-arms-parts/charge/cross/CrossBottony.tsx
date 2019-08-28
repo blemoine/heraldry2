@@ -1,6 +1,6 @@
 import { SvgPathBuilder } from '../../../../svg-path-builder/svg-path-builder';
-import { PathFromBuilder } from '../../../../common/PathFromBuilder';
 import * as React from 'react';
+import { CrossFromLimb } from './CrossFromLimb';
 
 type Props = {
   fill: string;
@@ -14,27 +14,12 @@ export const CrossBottony = ({ fill, stroke, center, crossWidth, crossRadius }: 
   const [centerX, centerY] = center;
 
   const radius = 1.4 * crossWidth;
-  const pathBuilder = SvgPathBuilder.start([centerX - crossWidth, centerY - crossWidth])
+  const topLimb = SvgPathBuilder.start([centerX - crossWidth, centerY - crossWidth])
     .goTo([centerX - crossWidth, centerY - computeCrossRadius + crossWidth])
     .arcTo([centerX - crossWidth, centerY - computeCrossRadius], { radius: radius, largeArc: 1, sweep: 1 })
     .arcTo([centerX + crossWidth, centerY - computeCrossRadius], { radius: radius, largeArc: 1, sweep: 1 })
     .arcTo([centerX + crossWidth, centerY - computeCrossRadius + crossWidth], { radius: radius, largeArc: 1, sweep: 1 })
-    .goTo([centerX + crossWidth, centerY - crossWidth])
-    .goTo([centerX + computeCrossRadius - crossWidth, centerY - crossWidth])
-    .arcTo([centerX + computeCrossRadius, centerY - crossWidth], { radius: radius, largeArc: 1, sweep: 1 })
-    .arcTo([centerX + computeCrossRadius, centerY + crossWidth], { radius: radius, largeArc: 1, sweep: 1 })
-    .arcTo([centerX + computeCrossRadius - crossWidth, centerY + crossWidth], { radius: radius, largeArc: 1, sweep: 1 })
-    .goTo([centerX + crossWidth, centerY + crossWidth])
-    .goTo([centerX + crossWidth, centerY + computeCrossRadius - crossWidth])
-    .arcTo([centerX + crossWidth, centerY + computeCrossRadius], { radius: radius, largeArc: 1, sweep: 1 })
-    .arcTo([centerX - crossWidth, centerY + computeCrossRadius], { radius: radius, largeArc: 1, sweep: 1 })
-    .arcTo([centerX - crossWidth, centerY + computeCrossRadius - crossWidth], { radius: radius, largeArc: 1, sweep: 1 })
-    .goTo([centerX - crossWidth, centerY + crossWidth])
-    .goTo([centerX - computeCrossRadius + crossWidth, centerY + crossWidth])
-    .arcTo([centerX - computeCrossRadius, centerY + crossWidth], { radius: radius, largeArc: 1, sweep: 1 })
-    .arcTo([centerX - computeCrossRadius, centerY - crossWidth], { radius: radius, largeArc: 1, sweep: 1 })
-    .arcTo([centerX - computeCrossRadius + crossWidth, centerY - crossWidth], { radius: radius, largeArc: 1, sweep: 1 })
-    .close();
+    .goTo([centerX + crossWidth, centerY - crossWidth]);
 
-  return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke={stroke} />;
+  return <CrossFromLimb topLimb={topLimb} center={center} fill={fill} stroke={stroke} />;
 };
