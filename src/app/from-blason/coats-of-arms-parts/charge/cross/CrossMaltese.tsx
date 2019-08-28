@@ -1,6 +1,6 @@
 import { SvgPathBuilder } from '../../../../svg-path-builder/svg-path-builder';
-import { PathFromBuilder } from '../../../../common/PathFromBuilder';
 import * as React from 'react';
+import { CrossFromLimb } from './CrossFromLimb';
 
 type Props = {
   fill: string;
@@ -14,26 +14,11 @@ export const CrossMaltese = ({ fill, stroke, center, crossWidth, crossRadius }: 
   const wideFactor = 6;
   const depthFactor = 4;
 
-  const pathBuilder = SvgPathBuilder.start([centerX - crossWidth, centerY - crossWidth])
+  const topLimb = SvgPathBuilder.start([centerX - crossWidth, centerY - crossWidth])
     .goTo([centerX - wideFactor * crossWidth, centerY - crossRadius])
     .goTo([centerX, centerY - crossRadius + depthFactor * crossWidth])
     .goTo([centerX + wideFactor * crossWidth, centerY - crossRadius])
-    .goTo([centerX + crossWidth, centerY - crossWidth])
+    .goTo([centerX + crossWidth, centerY - crossWidth]);
 
-    .goTo([centerX + crossRadius, centerY - wideFactor * crossWidth])
-    .goTo([centerX + crossRadius - depthFactor * crossWidth, centerY])
-    .goTo([centerX + crossRadius, centerY + wideFactor * crossWidth])
-    .goTo([centerX + crossWidth, centerY + crossWidth])
-
-    .goTo([centerX + wideFactor * crossWidth, centerY + crossRadius])
-    .goTo([centerX, centerY + crossRadius - depthFactor * crossWidth])
-    .goTo([centerX - wideFactor * crossWidth, centerY + crossRadius])
-    .goTo([centerX - crossWidth, centerY + crossWidth])
-
-    .goTo([centerX - crossRadius, centerY + wideFactor * crossWidth])
-    .goTo([centerX - crossRadius + depthFactor * crossWidth, centerY])
-    .goTo([centerX - crossRadius, centerY - wideFactor * crossWidth])
-    .goTo([centerX - crossWidth, centerY - crossWidth]);
-
-  return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke={stroke} />;
+  return <CrossFromLimb topLimb={topLimb} center={center} fill={fill} stroke={stroke} />;
 };
