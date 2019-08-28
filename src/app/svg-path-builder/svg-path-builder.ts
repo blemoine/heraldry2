@@ -1,6 +1,6 @@
 import { cannotHappen } from '../../utils/cannot-happen';
 import { range } from '../../utils/range';
-import { angleBetween, distanceBetween, PathAbsolutePoint, rotate, toDegree } from './geometrical.helper';
+import { angleBetween, distanceBetween, PathAbsolutePoint, rotate, toDegree, translate } from './geometrical.helper';
 import { pointOnEllipticalArc } from './point-on-elliptical-arc';
 import { round } from '../../utils/round';
 import { Result, raise } from '../../utils/result';
@@ -236,6 +236,43 @@ export class SvgPathBuilder {
     } else {
       return [x, y];
     }
+  }
+
+  translate(translation: PathAbsolutePoint): SvgPathBuilder {
+    return new SvgPathBuilder(
+      this.commands.map(
+        (command): PathCommand => {
+          if (command.command === 'L' || command.command === 'A' || command.command === 'M') {
+            return { ...command, point: translate(command.point, translation) };
+          } else if (command.command === 'H') {
+            return { ...command, coordinate: command.coordinate + translation[0] };
+          } else if (command.command === 'V') {
+            return { ...command, coordinate: command.coordinate + translation[1] };
+          } else if (command.command === 'C') {
+            return {
+              ...command,
+              point: translate(command.point, translation),
+              controlPoints: [
+                translate(command.controlPoints[0], translation),
+                translate(command.controlPoints[1], translation),
+              ],
+            };
+          } else if (command.command === 'Q') {
+            return {
+              ...command,
+              point: translate(command.point, translation),
+              controlPoint: translate(command.controlPoint, translation),
+            };
+          } else if (command.command === 'Z') {
+            const x = getX([this.commands[0]]) || 0;
+            const y = getY([this.commands[0]]) || 0;
+            return { command: 'L', point: translate([x, y], translation) };
+          } else {
+            return cannotHappen(command);
+          }
+        }
+      )
+    );
   }
 
   rotate(center: PathAbsolutePoint, angleInDegree: number): SvgPathBuilder {

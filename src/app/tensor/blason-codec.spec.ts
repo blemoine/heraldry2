@@ -1,6 +1,15 @@
 import fc from 'fast-check';
 import { blasonArb, chargeArb, fieldArb, ordinaryArb } from '../model/tests/arbitraries';
-import { decodeField, encodeField, decodeOrdinary, encodeOrdinary, decodeCharge, encodeCharge, decodeBlason, encodeBlason } from './blason-codec';
+import {
+  decodeField,
+  encodeField,
+  decodeOrdinary,
+  encodeOrdinary,
+  decodeCharge,
+  encodeCharge,
+  decodeBlason,
+  encodeBlason,
+} from './blason-codec';
 
 describe('blason-codec', () => {
   describe('codec field', () => {

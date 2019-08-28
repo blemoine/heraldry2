@@ -35,3 +35,7 @@ export function rotate(
 
   return [rotatedX, rotatedY];
 }
+
+export function translate([x, y]: PathAbsolutePoint, translation: PathAbsolutePoint): PathAbsolutePoint {
+  return [x + translation[0], y + translation[1]];
+}

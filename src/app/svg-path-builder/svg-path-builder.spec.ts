@@ -167,6 +167,31 @@ describe('SvgPathBuilder', () => {
     expect(result.toPathAttribute()).toEqual('M 0 0 L 2.12132 2.12132 L -0.70711 4.94975');
   });
 
+  it('should support translation of line ', () => {
+    const result = SvgPathBuilder.start([0, 0])
+      .goTo([4, -20])
+      .translate([5, 10]);
+
+    expect(result.toPathAttribute()).toEqual('M 5 10 L 9 -10');
+  });
+
+  it('should support translation of arc ', () => {
+    const result = SvgPathBuilder.start([4, 12])
+      .arcTo([8, 12], { radius: 9 })
+      .translate([6, 12]);
+
+    expect(result.toPathAttribute()).toEqual('M 10 24 A9 9 0 0 0 14 24');
+  });
+
+  it('should support translation of horizontal and vertical move ', () => {
+    const result = SvgPathBuilder.start([0, 0])
+      .horizontalMove(3)
+      .verticalMove(4)
+      .translate([5, 6]);
+
+    expect(result.toPathAttribute()).toEqual('M 5 6 H8 V10');
+  });
+
   it('should support concatenation of path', () => {
     const p1 = SvgPathBuilder.start([0, 0])
       .horizontalMove(12)

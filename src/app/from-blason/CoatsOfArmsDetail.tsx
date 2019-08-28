@@ -29,11 +29,7 @@ export const CoatsOfArmsDetail = ({ configuration, blason, blasonChange }: Props
         resizeHandles={['e']}
         onResize={onResize}
       >
-        <CoatsOfArmsDisplay
-          blason={blason}
-          dimension={scale(dimension, 0.9)}
-          configuration={configuration}
-        />
+        <CoatsOfArmsDisplay blason={blason} dimension={scale(dimension, 0.9)} configuration={configuration} />
       </ResizableBox>
     </div>
   );

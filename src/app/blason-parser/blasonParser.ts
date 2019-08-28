@@ -59,7 +59,8 @@ const language: Language = {
         constStr('paly'),
         constStr('bendy'),
         P.alt(constStr('chequy'), constStr('chequy', 'Checky')).desc('Chequy'),
-        constStr('lozengy')
+        constStr('lozengy'),
+        constStr('chevronny')
       ),
       P.whitespace.then(tinctureParserFromName).skip(P.whitespace),
       P.regex(/and/i)
