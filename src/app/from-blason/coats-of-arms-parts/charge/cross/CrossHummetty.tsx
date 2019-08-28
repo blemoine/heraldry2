@@ -1,6 +1,6 @@
 import { SvgPathBuilder } from '../../../../svg-path-builder/svg-path-builder';
-import { PathFromBuilder } from '../../../../common/PathFromBuilder';
 import * as React from 'react';
+import { CrossFromLimb } from './CrossFromLimb';
 
 type Props = {
   fill: string;
@@ -12,19 +12,10 @@ type Props = {
 export const CrossHummetty = ({ fill, stroke, center, crossWidth, crossRadius }: Props) => {
   const [centerX, centerY] = center;
 
-  const pathBuilder = SvgPathBuilder.start([centerX - crossWidth, centerY - crossWidth])
+  const topLimb = SvgPathBuilder.start([centerX - crossWidth, centerY - crossWidth])
     .goTo([centerX - crossWidth, centerY - crossRadius])
     .goTo([centerX + crossWidth, centerY - crossRadius])
-    .goTo([centerX + crossWidth, centerY - crossWidth])
-    .goTo([centerX + crossRadius, centerY - crossWidth])
-    .goTo([centerX + crossRadius, centerY + crossWidth])
-    .goTo([centerX + crossWidth, centerY + crossWidth])
-    .goTo([centerX + crossWidth, centerY + crossRadius])
-    .goTo([centerX - crossWidth, centerY + crossRadius])
-    .goTo([centerX - crossWidth, centerY + crossWidth])
-    .goTo([centerX - crossRadius, centerY + crossWidth])
-    .goTo([centerX - crossRadius, centerY - crossWidth])
-    .close();
+    .goTo([centerX + crossWidth, centerY - crossWidth]);
 
-  return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke={stroke} />;
+  return <CrossFromLimb topLimb={topLimb} center={center} fill={fill} stroke={stroke} />;
 };

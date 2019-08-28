@@ -4989,6 +4989,114 @@ exports[`CoatsOfArms should render 'Sable, a cross maltese argent' 1`] = `
 </svg>
 `;
 
+exports[`CoatsOfArms should render 'Vert, two crosses hummetty counter potent' 1`] = `
+<svg
+  height={266.6666666666667}
+  viewBox="0 0 200 266.6666666666667"
+  width={200}
+>
+  <defs>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <symbol
+      id="counter-potent"
+      viewBox="0 0 300 200"
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <path
+        d="M 0 0 H300 V100 H200 V200 H100 V100 H0 Z"
+        fill="#0000FF"
+        stroke="transparent"
+      />
+    </symbol>
+    <pattern
+      height={72.72727272727273}
+      id="field-pattern-441"
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 200 200"
+      width={72.72727272727273}
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="150%"
+      />
+      <use
+        height={100}
+        href="#counter-potent"
+        width={150}
+        x="0"
+        y="0"
+      />
+      <g
+        transform="scale(1,-1) translate(0 -300)"
+      >
+        <use
+          height={100}
+          href="#counter-potent"
+          width={150}
+          x="0"
+          y="100"
+        />
+      </g>
+    </pattern>
+    
+    
+    <clipPath
+      id="plain-field-clip-path"
+    >
+      <path
+        d="M 0 0 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
+        fill="transparent"
+        stroke="#333"
+      />
+    </clipPath>
+  </defs>
+  <g
+    clipPath="url(#plain-field-clip-path)"
+  >
+    <rect
+      fill="#008000"
+      height={266.6666666666667}
+      stroke="#333"
+      width={200}
+      x={0}
+      y={0}
+    />
+  </g>
+  <g
+    clipPath="url(#plain-field-clip-path)"
+  >
+    <path
+      d="M 56.4 129.73333 V97.33333 H63.6 V129.73333 L 96 129.73333 L 96 136.93333 L 63.6 136.93333 L 63.6 169.33333 L 56.4 169.33333 L 56.4 136.93333 L 24 136.93333 L 24 129.73333 L 56.4 129.73333"
+      fill="url(#field-pattern-441)"
+      stroke="#000"
+    />
+    <path
+      d="M 136.4 129.73333 V97.33333 H143.6 V129.73333 L 176 129.73333 L 176 136.93333 L 143.6 136.93333 L 143.6 169.33333 L 136.4 169.33333 L 136.4 136.93333 L 104 136.93333 L 104 129.73333 L 136.4 129.73333"
+      fill="url(#field-pattern-441)"
+      stroke="#000"
+    />
+  </g>
+  <path
+    d="M 0 0 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
+    fill="transparent"
+    stroke="#333"
+  />
+</svg>
+`;
+
 exports[`CoatsOfArms should render a fur blason 1`] = `
 <svg
   height={266.6666666666667}
