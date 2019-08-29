@@ -21,7 +21,7 @@ import {
   roundelInsides,
 } from '../charge';
 import { cannotHappen } from '../../../utils/cannot-happen';
-import { Blason } from '../blason';
+import { Blason, QuarterlyBlason, SimpleBlason } from '../blason';
 import { Line, lines } from '../line';
 import { availableDispositions, CountAndDisposition, supportedNumbers } from '../countAndDisposition';
 
@@ -142,12 +142,24 @@ export const chargeArb: Arbitrary<Charge> = fc.constantFrom(...charges).chain((c
   }
 });
 
-export const blasonArb: Arbitrary<Blason> = fc.tuple(fieldArb, ordinaryArb, chargeArb).map(
-  ([field, ordinary, charge]): Blason => {
+const simpleBlasonArb: Arbitrary<SimpleBlason> = fc.tuple(fieldArb, ordinaryArb, chargeArb).map(
+  ([field, ordinary, charge]): SimpleBlason => {
     return {
+      kind: 'simple',
       field,
       ...(charge ? { charge } : {}),
       ...(ordinary ? { ordinary } : {}),
     };
   }
 );
+
+const quarterlyBlasonArb: Arbitrary<QuarterlyBlason> = fc
+  .tuple(simpleBlasonArb, simpleBlasonArb, simpleBlasonArb, simpleBlasonArb)
+  .map((blasons) => {
+    return {
+      kind: 'quarterly',
+      blasons,
+    };
+  });
+
+export const blasonArb: Arbitrary<Blason> = fc.oneof<Blason>(simpleBlasonArb, quarterlyBlasonArb);

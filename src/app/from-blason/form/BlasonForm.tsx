@@ -1,51 +1,58 @@
-import { FieldForm } from './FieldForm';
-import { OrdinaryForm } from './OrdinaryForm';
-import { ChargeForm } from './ChargeForm';
 import * as React from 'react';
-import { Blason } from '../../model/blason';
-import { Field } from '../../model/field';
-import { Ordinary } from '../../model/ordinary';
-import { Charge } from '../../model/charge';
 import { TinctureConfiguration } from '../../model/tincture-configuration';
+import { Blason, SimpleBlason } from '../../model/blason';
+import { cannotHappen } from '../../../utils/cannot-happen';
+import { SimpleBlasonForm } from './SimpleBlasonForm';
 
-type Props = { tinctureConfiguration: TinctureConfiguration; blason: Blason; blasonChange: (blason: Blason) => void };
-export const BlasonForm = ({ tinctureConfiguration, blason, blasonChange }: Props) => {
-  function fieldChange(field: Field) {
-    blasonChange({ ...blason, field });
-  }
+type Props = {
+  tinctureConfiguration: TinctureConfiguration;
+  blason: Blason;
+  blasonChange: (blason: Blason) => void;
+};
+export const BlasonForm = ({ blason, blasonChange, tinctureConfiguration }: Props) => {
+  if (blason.kind === 'simple') {
+    return (
+      <SimpleBlasonForm tinctureConfiguration={tinctureConfiguration} blason={blason} blasonChange={blasonChange} />
+    );
+  } else if (blason.kind === 'quarterly') {
+    const quarterlyBlasonChange = (i: 0 | 1 | 2 | 3) => (newBlason: SimpleBlason) => {
+      const blasons = [
+        i === 0 ? newBlason : blason.blasons[0],
+        i === 1 ? newBlason : blason.blasons[1],
+        i === 2 ? newBlason : blason.blasons[2],
+        i === 3 ? newBlason : blason.blasons[3],
+      ] as const;
 
-  function ordinaryChange(ordinary: Ordinary | null) {
-    if (ordinary) {
-      blasonChange({ ...blason, ordinary });
-    } else {
-      const newBlason = { ...blason };
-      delete newBlason.ordinary;
-      blasonChange(newBlason);
-    }
+      blasonChange({
+        ...blason,
+        blasons,
+      });
+    };
+    return (
+      <div>
+        <SimpleBlasonForm
+          tinctureConfiguration={tinctureConfiguration}
+          blason={blason.blasons[0]}
+          blasonChange={quarterlyBlasonChange(0)}
+        />
+        <SimpleBlasonForm
+          tinctureConfiguration={tinctureConfiguration}
+          blason={blason.blasons[1]}
+          blasonChange={quarterlyBlasonChange(1)}
+        />
+        <SimpleBlasonForm
+          tinctureConfiguration={tinctureConfiguration}
+          blason={blason.blasons[2]}
+          blasonChange={quarterlyBlasonChange(2)}
+        />
+        <SimpleBlasonForm
+          tinctureConfiguration={tinctureConfiguration}
+          blason={blason.blasons[3]}
+          blasonChange={quarterlyBlasonChange(3)}
+        />
+      </div>
+    );
+  } else {
+    return cannotHappen(blason);
   }
-
-  function chargeChange(charge: Charge | null) {
-    if (charge) {
-      blasonChange({ ...blason, charge });
-    } else {
-      const newBlason = { ...blason };
-      delete newBlason.charge;
-      blasonChange(newBlason);
-    }
-  }
-  return (
-    <>
-      <FieldForm tinctureConfiguration={tinctureConfiguration} field={blason.field} fieldChange={fieldChange} />
-      <OrdinaryForm
-        tinctureConfiguration={tinctureConfiguration}
-        ordinary={blason.ordinary || null}
-        ordinaryChange={ordinaryChange}
-      />
-      <ChargeForm
-        tinctureConfiguration={tinctureConfiguration}
-        charge={blason.charge || null}
-        chargeChange={chargeChange}
-      />
-    </>
-  );
 };

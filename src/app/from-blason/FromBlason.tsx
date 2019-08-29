@@ -2,15 +2,13 @@ import * as React from 'react';
 import { gules } from '../model/tincture';
 import { Blason } from '../model/blason';
 import { CoatsOfArmsDetail } from './CoatsOfArmsDetail';
-import { BlasonForm } from './form/BlasonForm';
 import { ConfigurationForm } from './configuration/ConfigurationForm';
 import { defaultTinctureConfiguration } from '../model/tincture-configuration';
 import { Configuration } from '../model/configuration';
 import { useLocalStorage } from '../../utils/useLocalStorage';
+import { BlasonForm } from './form/BlasonForm';
 
-const baseDefaultBlason: Blason = {
-  field: { kind: 'plain', tincture: gules },
-} as const;
+const baseDefaultBlason: Blason = { kind: 'simple', field: { kind: 'plain', tincture: gules } } as const;
 export const FromBlason = () => {
   const blasonLocalStorageKey = 'default-blason#2';
   const [blason, setBlason] = useLocalStorage<Blason>(blasonLocalStorageKey, baseDefaultBlason);

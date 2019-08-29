@@ -16,7 +16,7 @@ const configuration: Configuration = { tinctureConfiguration: defaultTinctureCon
 
 describe('CoatsOfArms', () => {
   it('should render a plain blason', () => {
-    const blason: Blason = { field: { kind: 'plain', tincture: gules } };
+    const blason: Blason = { kind: 'simple', field: { kind: 'plain', tincture: gules } };
     const component = renderer.create(
       <CoatsOfArmsDisplay blason={blason} dimension={dimension} configuration={configuration} />
     );
@@ -24,7 +24,7 @@ describe('CoatsOfArms', () => {
   });
 
   it('should render a fur blason', () => {
-    const blason: Blason = { field: { kind: 'plain', tincture: ermine } };
+    const blason: Blason = { kind: 'simple', field: { kind: 'plain', tincture: ermine } };
     const component = renderer.create(
       <CoatsOfArmsDisplay blason={blason} dimension={dimension} configuration={configuration} />
     );
@@ -33,6 +33,7 @@ describe('CoatsOfArms', () => {
 
   it('should render a party blason', () => {
     const blason: Blason = {
+      kind: 'simple',
       field: { kind: 'party', per: { name: 'bend', tinctures: [vair, azure], line: 'straight' } },
     };
     const component = renderer.create(
@@ -43,6 +44,7 @@ describe('CoatsOfArms', () => {
 
   it('should render a party blason with some ordinary', () => {
     const blason: Blason = {
+      kind: 'simple',
       field: { kind: 'party', per: { name: 'bend', tinctures: [vair, azure], line: 'straight' } },
       ordinary: { name: 'chief', tincture: purpure, line: 'straight' },
     };
@@ -54,6 +56,7 @@ describe('CoatsOfArms', () => {
 
   it('should render a the england royal arms', () => {
     const blason: Blason = {
+      kind: 'simple',
       field: { kind: 'plain', tincture: gules },
       charge: {
         name: 'lion',

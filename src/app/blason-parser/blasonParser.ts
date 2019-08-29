@@ -1,5 +1,5 @@
 import * as P from 'parsimmon';
-import { Blason } from '../model/blason';
+import { Blason, QuarterlyBlason, SimpleBlason } from '../model/blason';
 import { parties, Party } from '../model/party';
 import { Ordinary, OrdinaryCross } from '../model/ordinary';
 import { stringifyParty } from '../from-blason/blason.helpers';
@@ -15,6 +15,7 @@ type Language = {
   Party: (r: AppliedLanguage) => P.Parser<Party>;
   Field: (r: AppliedLanguage) => P.Parser<Field>;
   Blason: (r: AppliedLanguage) => P.Parser<Blason>;
+  SimpleBlason: (r: AppliedLanguage) => P.Parser<SimpleBlason>;
 };
 type AppliedLanguage = { [K in keyof Language]: ReturnType<Language[K]> };
 
@@ -83,7 +84,7 @@ const language: Language = {
     );
   },
 
-  Blason(r: AppliedLanguage): P.Parser<Blason> {
+  SimpleBlason(r: AppliedLanguage): P.Parser<SimpleBlason> {
     // a cross depending on different thing, can be either and ordinary or chager
     const crossParserToObj: P.Parser<{ charge: Cross } | { ordinary: OrdinaryCross }> = crossParser().map(
       (crossPartial) => {
@@ -115,8 +116,38 @@ const language: Language = {
         )
         .fallback({})
     )
-      .map(([field, rest]) => ({ field, ...rest }))
+      .map(([field, rest]) => ({ kind: 'simple' as const, field, ...rest }))
       .trim(P.optWhitespace);
+  },
+
+  Blason(r: AppliedLanguage): P.Parser<Blason> {
+    const quarterlyParser: P.Parser<QuarterlyBlason> = P.seq(
+      P.regexp(/1st:/i).desc('1st')
+        .then(P.whitespace)
+        .then(r.SimpleBlason)
+        .skip(P.string(';'))
+        .skip(P.optWhitespace),
+      P.regexp(/2nd:/i).desc('2nd')
+        .then(P.whitespace)
+        .then(r.SimpleBlason)
+        .skip(P.string(';'))
+        .skip(P.optWhitespace),
+      P.regexp(/3rd:/i).desc('3rd')
+        .then(P.whitespace)
+        .then(r.SimpleBlason)
+        .skip(P.string(';'))
+        .skip(P.optWhitespace),
+      P.regexp(/4th:/i).desc('4th')
+        .then(P.whitespace)
+        .then(r.SimpleBlason)
+    ).map((blasons): QuarterlyBlason => ({ kind: 'quarterly', blasons }));
+
+    return P.alt(
+      P.regexp(/quarterly,/i).desc('Quarterly')
+        .then(P.whitespace)
+        .then(quarterlyParser),
+      r.SimpleBlason
+    );
   },
 };
 

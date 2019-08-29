@@ -10,17 +10,37 @@ import { Ordinary } from '../model/ordinary';
 import { stringifyNumber, SupportedNumber } from '../model/countAndDisposition';
 
 export function stringifyBlason(blason: Blason): string {
-  const field = stringifyField(blason.field);
+  if (blason.kind === 'simple') {
+    const field = stringifyField(blason.field);
 
-  const addendum = [
-    blason.ordinary ? stringifyOrdinary(blason.ordinary) : null,
-    blason.charge ? stringifyCharge(blason.charge) : null,
-  ].filter(isNotNull);
+    const addendum = [
+      blason.ordinary ? stringifyOrdinary(blason.ordinary) : null,
+      blason.charge ? stringifyCharge(blason.charge) : null,
+    ].filter(isNotNull);
 
-  if (addendum.length > 0) {
-    return field + ', ' + addendum.join(', ');
+    if (addendum.length > 0) {
+      return field + ', ' + addendum.join(', ');
+    } else {
+      return field;
+    }
+  } else if (blason.kind === 'quarterly') {
+    return 'Quarterly, ' + blason.blasons.map((b, i) => stringifyOrdinal(i + 1) + ': ' + stringifyBlason(b)).join(';');
   } else {
-    return field;
+    return cannotHappen(blason);
+  }
+}
+
+function stringifyOrdinal(i: number) {
+  if (i === 1) {
+    return '1st';
+  } else if (i === 2) {
+    return '2nd';
+  } else if (i === 3) {
+    return '3rd';
+  } else if (i === 4) {
+    return '4th';
+  } else {
+    throw new Error(`Number ${i} ordinal stringification is unsupported yet`);
   }
 }
 
@@ -272,71 +292,77 @@ function pluralize(str: string, count: SupportedNumber): string {
 }
 
 export function isThereFur(blason: Blason, fur: Furs['name']): boolean {
-  const field = blason.field;
-  if (field.kind === 'plain') {
-    if (field.tincture.name === fur) {
-      return true;
-    }
-  } else if (field.kind === 'party') {
-    if (field.per.tinctures.some((t) => t.name === fur)) {
-      return true;
-    }
-  } else if (
-    field.kind === 'paly' ||
-    field.kind === 'bendy' ||
-    field.kind === 'bendySinister' ||
-    field.kind === 'barry' ||
-    field.kind === 'chequy' ||
-    field.kind === 'lozengy' ||
-    field.kind === 'paly-pily' ||
-    field.kind === 'barry-pily' ||
-    field.kind === 'chevronny'
-  ) {
-    if (field.tinctures.some((t) => t.name === fur)) {
-      return true;
-    }
-  } else {
-    return cannotHappen(field);
-  }
-
-  const ordinary = blason.ordinary;
-  if (!!ordinary) {
-    if (ordinary.tincture.name === fur) {
-      return true;
-    }
-  }
-
-  const charge = blason.charge;
-  if (!!charge) {
-    if (charge.name === 'lion') {
-      if (charge.tincture.name === fur) {
+  if (blason.kind === 'simple') {
+    const field = blason.field;
+    if (field.kind === 'plain') {
+      if (field.tincture.name === fur) {
         return true;
       }
-      if (charge.armedAndLangued.name === fur) {
-        return true;
-      }
-    } else if (charge.name === 'eagle') {
-      if (charge.tincture.name === fur) {
-        return true;
-      }
-      if (charge.beakedAndArmed.name === fur) {
+    } else if (field.kind === 'party') {
+      if (field.per.tinctures.some((t) => t.name === fur)) {
         return true;
       }
     } else if (
-      charge.name === 'fleurdelys' ||
-      charge.name === 'roundel' ||
-      charge.name === 'lozenge' ||
-      charge.name === 'cross'
+      field.kind === 'paly' ||
+      field.kind === 'bendy' ||
+      field.kind === 'bendySinister' ||
+      field.kind === 'barry' ||
+      field.kind === 'chequy' ||
+      field.kind === 'lozengy' ||
+      field.kind === 'paly-pily' ||
+      field.kind === 'barry-pily' ||
+      field.kind === 'chevronny'
     ) {
-      if (charge.tincture.name === fur) {
+      if (field.tinctures.some((t) => t.name === fur)) {
         return true;
       }
     } else {
-      return cannotHappen(charge);
+      return cannotHappen(field);
     }
-  }
 
-  return false;
+    const ordinary = blason.ordinary;
+    if (!!ordinary) {
+      if (ordinary.tincture.name === fur) {
+        return true;
+      }
+    }
+
+    const charge = blason.charge;
+    if (!!charge) {
+      if (charge.name === 'lion') {
+        if (charge.tincture.name === fur) {
+          return true;
+        }
+        if (charge.armedAndLangued.name === fur) {
+          return true;
+        }
+      } else if (charge.name === 'eagle') {
+        if (charge.tincture.name === fur) {
+          return true;
+        }
+        if (charge.beakedAndArmed.name === fur) {
+          return true;
+        }
+      } else if (
+        charge.name === 'fleurdelys' ||
+        charge.name === 'roundel' ||
+        charge.name === 'lozenge' ||
+        charge.name === 'cross'
+      ) {
+        if (charge.tincture.name === fur) {
+          return true;
+        }
+      } else {
+        return cannotHappen(charge);
+      }
+    }
+
+    return false;
+  } else if (blason.kind === 'quarterly') {
+    return blason.blasons.some((b) => isThereFur(b, fur));
+  } else {
+    return cannotHappen(blason);
+  }
 }
 
 export function stringifyTincture(tincture: Tincture): string {

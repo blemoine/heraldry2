@@ -3,25 +3,28 @@ import { argent, azure, ermine, gules, or, purpure, sable, vair, vert } from '..
 
 describe('stringifyBlason', () => {
   it('should write a plain field first', () => {
-    expect(stringifyBlason({ field: { kind: 'plain', tincture: gules } })).toBe('Gules');
-    expect(stringifyBlason({ field: { kind: 'plain', tincture: ermine } })).toBe('Ermine');
+    expect(stringifyBlason({ kind: 'simple', field: { kind: 'plain', tincture: gules } })).toBe('Gules');
+    expect(stringifyBlason({ kind: 'simple', field: { kind: 'plain', tincture: ermine } })).toBe('Ermine');
   });
 
   it('should write the ordinary after the field', () => {
     expect(
       stringifyBlason({
+        kind: 'simple',
         field: { kind: 'plain', tincture: vair },
         ordinary: { name: 'bend', tincture: azure, line: 'straight' },
       })
     ).toBe('Vair, a bend azure');
     expect(
       stringifyBlason({
+        kind: 'simple',
         field: { kind: 'plain', tincture: sable },
         ordinary: { name: 'fess', tincture: gules, line: 'straight' },
       })
     ).toBe('Sable, a fess gules');
     expect(
       stringifyBlason({
+        kind: 'simple',
         field: { kind: 'plain', tincture: or },
         ordinary: { name: 'chief', tincture: argent, line: 'straight' },
       })
@@ -30,20 +33,28 @@ describe('stringifyBlason', () => {
 
   it('should write a party field with the colors after', () => {
     expect(
-      stringifyBlason({ field: { kind: 'party', per: { name: 'fess', tinctures: [gules, or], line: 'straight' } } })
+      stringifyBlason({
+        kind: 'simple',
+        field: { kind: 'party', per: { name: 'fess', tinctures: [gules, or], line: 'straight' } },
+      })
     ).toBe('Per fess gules and or');
     expect(
       stringifyBlason({
+        kind: 'simple',
         field: { kind: 'party', per: { name: 'chevron', tinctures: [argent, vert], line: 'straight' } },
       })
     ).toBe('Per chevron argent and vert');
     expect(
-      stringifyBlason({ field: { kind: 'party', per: { name: 'pale', tinctures: [ermine, azure], line: 'straight' } } })
+      stringifyBlason({
+        kind: 'simple',
+        field: { kind: 'party', per: { name: 'pale', tinctures: [ermine, azure], line: 'straight' } },
+      })
     ).toBe('Per pale ermine and azure');
   });
   it('should write the party field for a bend sinister', () => {
     expect(
       stringifyBlason({
+        kind: 'simple',
         field: { kind: 'party', per: { name: 'bendSinister', tinctures: [gules, or], line: 'straight' } },
       })
     ).toBe('Per bend sinister gules and or');
@@ -52,6 +63,7 @@ describe('stringifyBlason', () => {
   it('should write a party field with the colors after and the ordinary', () => {
     expect(
       stringifyBlason({
+        kind: 'simple',
         field: { kind: 'party', per: { name: 'pale', tinctures: [sable, argent], line: 'straight' } },
         ordinary: { name: 'pale', tincture: purpure, count: 1, line: 'straight' },
       })
@@ -61,6 +73,7 @@ describe('stringifyBlason', () => {
   it('should write multiple pale as pallets', () => {
     expect(
       stringifyBlason({
+        kind: 'simple',
         field: { kind: 'plain', tincture: vair },
         ordinary: { name: 'pale', tincture: purpure, count: 2, line: 'straight' },
       })
@@ -70,6 +83,7 @@ describe('stringifyBlason', () => {
   it('should write a default lion correctly', () => {
     expect(
       stringifyBlason({
+        kind: 'simple',
         field: { kind: 'plain', tincture: azure },
         charge: {
           name: 'lion',
@@ -87,6 +101,7 @@ describe('stringifyBlason', () => {
   it('should write a lion armed and langued correctly', () => {
     expect(
       stringifyBlason({
+        kind: 'simple',
         field: { kind: 'plain', tincture: gules },
         charge: {
           name: 'lion',
@@ -104,6 +119,7 @@ describe('stringifyBlason', () => {
   it('should write a lion over an ordinary correctly', () => {
     expect(
       stringifyBlason({
+        kind: 'simple',
         field: { kind: 'party', per: { name: 'pale', tinctures: [ermine, azure], line: 'straight' } },
         ordinary: { name: 'chief', tincture: ermine, line: 'straight' },
         charge: {
@@ -124,6 +140,7 @@ describe('stringifyBlason', () => {
   it('should stringify correctly the England Royal Arms', () => {
     expect(
       stringifyBlason({
+        kind: 'simple',
         field: { kind: 'plain', tincture: gules },
         charge: {
           name: 'lion',
@@ -141,6 +158,7 @@ describe('stringifyBlason', () => {
   it('should stringify paly field', () => {
     expect(
       stringifyBlason({
+        kind: 'simple',
         field: { kind: 'paly', tinctures: [argent, gules] },
       })
     ).toBe('Paly argent and gules');
@@ -148,6 +166,7 @@ describe('stringifyBlason', () => {
   it('should stringify bendy field', () => {
     expect(
       stringifyBlason({
+        kind: 'simple',
         field: { kind: 'bendy', tinctures: [ermine, vert] },
       })
     ).toBe('Bendy ermine and vert');
@@ -156,6 +175,7 @@ describe('stringifyBlason', () => {
   it('should stringify 10 barry field', () => {
     expect(
       stringifyBlason({
+        kind: 'simple',
         field: { kind: 'barry', number: 10, tinctures: [vert, purpure] },
       })
     ).toBe('Barry of ten vert and purpure');
@@ -164,6 +184,7 @@ describe('stringifyBlason', () => {
   it('should stringify 6 barry field', () => {
     expect(
       stringifyBlason({
+        kind: 'simple',
         field: { kind: 'barry', number: 6, tinctures: [vert, purpure] },
       })
     ).toBe('Barry of six vert and purpure');
@@ -171,6 +192,7 @@ describe('stringifyBlason', () => {
   it('should stringify 8 barry field', () => {
     expect(
       stringifyBlason({
+        kind: 'simple',
         field: { kind: 'barry', number: 8, tinctures: [vert, ermine] },
       })
     ).toBe('Barry of eight vert and ermine');
@@ -179,6 +201,7 @@ describe('stringifyBlason', () => {
   it('should stringify an eagle charge', () => {
     expect(
       stringifyBlason({
+        kind: 'simple',
         field: { kind: 'plain', tincture: or },
         charge: {
           name: 'eagle',
@@ -194,6 +217,7 @@ describe('stringifyBlason', () => {
   it('should stringify a straight base', () => {
     expect(
       stringifyBlason({
+        kind: 'simple',
         field: { kind: 'plain', tincture: or },
         ordinary: {
           name: 'base',
@@ -207,6 +231,7 @@ describe('stringifyBlason', () => {
   it('should stringify a roundel or as bezant', () => {
     expect(
       stringifyBlason({
+        kind: 'simple',
         field: { kind: 'plain', tincture: purpure },
         charge: {
           name: 'roundel',
@@ -221,6 +246,7 @@ describe('stringifyBlason', () => {
   it('should stringify a roundel voided as annulet', () => {
     expect(
       stringifyBlason({
+        kind: 'simple',
         field: { kind: 'plain', tincture: purpure },
         charge: {
           name: 'roundel',
@@ -235,6 +261,7 @@ describe('stringifyBlason', () => {
   it('should stringify a lozenge voided as mascles', () => {
     expect(
       stringifyBlason({
+        kind: 'simple',
         field: { kind: 'plain', tincture: purpure },
         charge: {
           name: 'lozenge',
@@ -249,15 +276,19 @@ describe('stringifyBlason', () => {
 
 describe('isThereFur', () => {
   it('should return true if the field is vair and the fur search is vair', () => {
-    expect(isThereFur({ field: { kind: 'plain', tincture: vair } }, 'vair')).toBe(true);
+    expect(isThereFur({ kind: 'simple', field: { kind: 'plain', tincture: vair } }, 'vair')).toBe(true);
   });
   it('should return false if the field is ermine and the fur search is vair', () => {
-    expect(isThereFur({ field: { kind: 'plain', tincture: ermine } }, 'vair')).toBe(false);
+    expect(isThereFur({ kind: 'simple', field: { kind: 'plain', tincture: ermine } }, 'vair')).toBe(false);
   });
   it('should return true if the field is ermine, and the ordinary is vair and the fur search is vair', () => {
     expect(
       isThereFur(
-        { field: { kind: 'plain', tincture: ermine }, ordinary: { name: 'bend', tincture: vair, line: 'straight' } },
+        {
+          kind: 'simple',
+          field: { kind: 'plain', tincture: ermine },
+          ordinary: { name: 'bend', tincture: vair, line: 'straight' },
+        },
         'vair'
       )
     ).toBe(true);
@@ -265,7 +296,11 @@ describe('isThereFur', () => {
   it('should return false if the field is ermine, and the ordinary is ermine and the fur search is vair', () => {
     expect(
       isThereFur(
-        { field: { kind: 'plain', tincture: ermine }, ordinary: { name: 'bend', tincture: ermine, line: 'straight' } },
+        {
+          kind: 'simple',
+          field: { kind: 'plain', tincture: ermine },
+          ordinary: { name: 'bend', tincture: ermine, line: 'straight' },
+        },
         'vair'
       )
     ).toBe(false);
@@ -273,13 +308,21 @@ describe('isThereFur', () => {
   it('should return false if nothing is a fur', () => {
     expect(
       isThereFur(
-        { field: { kind: 'plain', tincture: azure }, ordinary: { name: 'bend', tincture: argent, line: 'straight' } },
+        {
+          kind: 'simple',
+          field: { kind: 'plain', tincture: azure },
+          ordinary: { name: 'bend', tincture: argent, line: 'straight' },
+        },
         'vair'
       )
     ).toBe(false);
     expect(
       isThereFur(
-        { field: { kind: 'plain', tincture: azure }, ordinary: { name: 'bend', tincture: argent, line: 'straight' } },
+        {
+          kind: 'simple',
+          field: { kind: 'plain', tincture: azure },
+          ordinary: { name: 'bend', tincture: argent, line: 'straight' },
+        },
         'ermine'
       )
     ).toBe(false);
@@ -289,6 +332,7 @@ describe('isThereFur', () => {
     expect(
       isThereFur(
         {
+          kind: 'simple',
           field: { kind: 'plain', tincture: gules },
           ordinary: { name: 'bend', tincture: azure, line: 'straight' },
           charge: {
@@ -310,6 +354,7 @@ describe('isThereFur', () => {
     expect(
       isThereFur(
         {
+          kind: 'simple',
           field: { kind: 'plain', tincture: gules },
           ordinary: { name: 'bend', tincture: azure, line: 'straight' },
           charge: {
@@ -328,6 +373,6 @@ describe('isThereFur', () => {
   });
 
   it('should return true if the field  is bendy vair', () => {
-    expect(isThereFur({ field: { kind: 'bendy', tinctures: [gules, vair] } }, 'vair')).toBe(true);
+    expect(isThereFur({ kind: 'simple', field: { kind: 'bendy', tinctures: [gules, vair] } }, 'vair')).toBe(true);
   });
 });

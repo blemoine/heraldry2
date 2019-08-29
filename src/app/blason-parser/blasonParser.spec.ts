@@ -14,13 +14,13 @@ import {
   vairEnPoint,
   vert,
 } from '../model/tincture';
-import { Blason } from '../model/blason';
+import { Blason, QuarterlyBlason } from '../model/blason';
 
 describe('parseBlason', () => {
   it('should parse a plain blason', () => {
     const result = parseBlason('Gules');
 
-    const expected: Blason = { field: { kind: 'plain', tincture: gules } };
+    const expected: Blason = { kind: 'simple', field: { kind: 'plain', tincture: gules } };
     expect(result).toEqual(expected);
   });
   it('should parse a plain blason ignoring the whitespaces', () => {
@@ -28,19 +28,20 @@ describe('parseBlason', () => {
      Argent   
       `);
 
-    const expected: Blason = { field: { kind: 'plain', tincture: argent } };
+    const expected: Blason = { kind: 'simple', field: { kind: 'plain', tincture: argent } };
     expect(result).toEqual(expected);
   });
   it('should parse a fur blason', () => {
     const result = parseBlason('Ermine');
 
-    const expected: Blason = { field: { kind: 'plain', tincture: ermine } };
+    const expected: Blason = { kind: 'simple', field: { kind: 'plain', tincture: ermine } };
     expect(result).toEqual(expected);
   });
   it('should parse a party division', () => {
     const result = parseBlason('Per pale vair and azure');
 
     const expected: Blason = {
+      kind: 'simple',
       field: { kind: 'party', per: { name: 'pale', tinctures: [vair, azure], line: 'straight' } },
     };
     expect(result).toEqual(expected);
@@ -49,6 +50,7 @@ describe('parseBlason', () => {
     const result = parseBlason('Per bend sinister ermine and vert');
 
     const expected: Blason = {
+      kind: 'simple',
       field: { kind: 'party', per: { name: 'bendSinister', tinctures: [ermine, vert], line: 'straight' } },
     };
     expect(result).toEqual(expected);
@@ -57,6 +59,7 @@ describe('parseBlason', () => {
     const result = parseBlason('Or, a chief argent');
 
     const expected: Blason = {
+      kind: 'simple',
       field: { kind: 'plain', tincture: or },
       ordinary: { name: 'chief', tincture: argent, line: 'straight' },
     };
@@ -66,6 +69,7 @@ describe('parseBlason', () => {
   it('should parse a simple lion correctly', () => {
     const result = parseBlason('Gules, a lion rampant sable armed and langued azure');
     const expected: Blason = {
+      kind: 'simple',
       field: { kind: 'plain', tincture: gules },
       charge: {
         name: 'lion',
@@ -84,6 +88,7 @@ describe('parseBlason', () => {
   it('should parse correctly the England Royal Arms', () => {
     const result = parseBlason('Gules, three lions passant guardant in pale or armed and langued azure');
     const expected: Blason = {
+      kind: 'simple',
       field: { kind: 'plain', tincture: gules },
       charge: {
         name: 'lion',
@@ -101,9 +106,7 @@ describe('parseBlason', () => {
 
   it('should parse correctly a bendy field', () => {
     const result = parseBlason('Bendy argent and sable');
-    const expected: Blason = {
-      field: { kind: 'bendy', tinctures: [argent, sable] },
-    };
+    const expected: Blason = { kind: 'simple', field: { kind: 'bendy', tinctures: [argent, sable] } };
 
     expect(result).toEqual(expected);
   });
@@ -120,7 +123,7 @@ describe('parseBlason', () => {
 
 Expected one of the following: 
 
-Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Chequy, Chevronny, Counter ermine, Counter potent, Counter vair, Ermine, Erminois, Gules, Lozengy, Murrey, Or, Paly, Paly pily, Pean, Per, Potent, Potent en pale, Potent en point, Purpure, Sable, Sanguine, Tenné, Vair, Vair en pale, Vair en point, Vert
+Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Chequy, Chevronny, Counter ermine, Counter potent, Counter vair, Ermine, Erminois, Gules, Lozengy, Murrey, Or, Paly, Paly pily, Pean, Per, Potent, Potent en pale, Potent en point, Purpure, Quarterly, Sable, Sanguine, Tenné, Vair, Vair en pale, Vair en point, Vert
 `,
     });
   });
@@ -128,6 +131,7 @@ Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Chequy, Chevronny, C
   it('should parse the blason of Greece', () => {
     const result = parseBlason('Azure, a cross Argent ');
     const expected: Blason = {
+      kind: 'simple',
       field: { kind: 'plain', tincture: azure },
       ordinary: { name: 'cross', tincture: argent, line: 'straight' },
     };
@@ -138,6 +142,7 @@ Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Chequy, Chevronny, C
   it('should parse the blason of Battenberg', () => {
     const result = parseBlason('Argent, two pallets Sable ');
     const expected: Blason = {
+      kind: 'simple',
       field: { kind: 'plain', tincture: argent },
       ordinary: { name: 'pale', tincture: sable, count: 2, line: 'straight' },
     };
@@ -148,6 +153,7 @@ Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Chequy, Chevronny, C
   it('should parse the arms of Gwent', () => {
     const result = parseBlason('Per pale Azure and Sable, three Fleurs-de-Lis Or');
     const expected: Blason = {
+      kind: 'simple',
       field: { kind: 'party', per: { name: 'pale', tinctures: [azure, sable], line: 'straight' } },
       charge: { name: 'fleurdelys', countAndDisposition: { count: 3, disposition: 'default' }, tincture: or },
     };
@@ -159,6 +165,7 @@ Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Chequy, Chevronny, C
     const result = parseBlason('Gules, a Lion rampant Or, a bordure engrailed azure');
 
     const expected: Blason = {
+      kind: 'simple',
       field: { kind: 'plain', tincture: gules },
       charge: {
         name: 'lion',
@@ -182,6 +189,7 @@ Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Chequy, Chevronny, C
   it('should accept a lion without explicit attitude', () => {
     const result = parseBlason('Or, a lion Gules armed and langued Azure');
     const expected: Blason = {
+      kind: 'simple',
       field: { kind: 'plain', tincture: or },
       charge: {
         name: 'lion',
@@ -199,6 +207,7 @@ Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Chequy, Chevronny, C
   it('should parse a chief engrailed', () => {
     const result = parseBlason('Azure, a chief engrailed or');
     const expected: Blason = {
+      kind: 'simple',
       field: { kind: 'plain', tincture: azure },
       ordinary: { name: 'chief', line: 'engrailed', tincture: or },
     };
@@ -208,6 +217,7 @@ Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Chequy, Chevronny, C
   it('should parse a base invected', () => {
     const result = parseBlason('Azure, a base invected ermine');
     const expected: Blason = {
+      kind: 'simple',
       field: { kind: 'plain', tincture: azure },
       ordinary: { name: 'base', line: 'invected', tincture: ermine },
     };
@@ -217,6 +227,7 @@ Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Chequy, Chevronny, C
   it('should parse a base straight', () => {
     const result = parseBlason('Or, a base vair');
     const expected: Blason = {
+      kind: 'simple',
       field: { kind: 'plain', tincture: or },
       ordinary: { name: 'base', line: 'straight', tincture: vair },
     };
@@ -226,6 +237,7 @@ Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Chequy, Chevronny, C
   it('should parse a bend sinister engrailed', () => {
     const result = parseBlason('Or, a bend sinister engrailed gules');
     const expected: Blason = {
+      kind: 'simple',
       field: { kind: 'plain', tincture: or },
       ordinary: { name: 'bendSinister', line: 'engrailed', tincture: gules },
     };
@@ -233,7 +245,8 @@ Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Chequy, Chevronny, C
   });
 
   it('should parse 18 roundels', () => {
-    expect(parseBlason('Argent, eighteen roundels argent')).toEqual({
+    const expected: Blason = {
+      kind: 'simple',
       field: { kind: 'plain', tincture: argent },
       charge: {
         name: 'roundel',
@@ -241,11 +254,13 @@ Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Chequy, Chevronny, C
         countAndDisposition: { count: 18, disposition: 'default' },
         inside: 'nothing',
       },
-    });
+    };
+    expect(parseBlason('Argent, eighteen roundels argent')).toEqual(expected);
   });
 
   it('should parse 17 annulets', () => {
-    expect(parseBlason('Azure, seventeen annulets sable')).toEqual({
+    const expected: Blason = {
+      kind: 'simple',
       field: { kind: 'plain', tincture: azure },
       charge: {
         name: 'roundel',
@@ -253,18 +268,22 @@ Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Chequy, Chevronny, C
         countAndDisposition: { count: 17, disposition: 'default' },
         inside: 'voided',
       },
-    });
+    };
+    expect(parseBlason('Azure, seventeen annulets sable')).toEqual(expected);
   });
 
   it('should parse fleurs de lys in pale', () => {
-    expect(parseBlason('Azure, twelve fleur de lys in pale or')).toEqual({
+    const expected: Blason = {
+      kind: 'simple',
       field: { kind: 'plain', tincture: azure },
       charge: { name: 'fleurdelys', tincture: or, countAndDisposition: { count: 12, disposition: 'pale' } },
-    });
+    };
+    expect(parseBlason('Azure, twelve fleur de lys in pale or')).toEqual(expected);
   });
 
   it('should parse Paly argent and gules, a chief engrailed sable, four lozenges in fess azure', () => {
     const expected: Blason = {
+      kind: 'simple',
       field: { kind: 'paly', tinctures: [argent, gules] },
       ordinary: { name: 'chief', line: 'engrailed', tincture: sable },
       charge: {
@@ -281,6 +300,7 @@ Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Chequy, Chevronny, C
 
   it('should parse  Potent,  a chief gules', () => {
     const expected: Blason = {
+      kind: 'simple',
       field: { kind: 'plain', tincture: potent },
       ordinary: { name: 'chief', line: 'straight', tincture: gules },
     };
@@ -288,17 +308,18 @@ Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Chequy, Chevronny, C
   });
 
   it('should parse  Paly pily', () => {
-    const expected: Blason = { field: { kind: 'paly-pily', tinctures: [gules, azure] } };
+    const expected: Blason = { kind: 'simple', field: { kind: 'paly-pily', tinctures: [gules, azure] } };
     expect(parseBlason('Paly pily gules and azure')).toEqual(expected);
   });
 
   it('should parse  Counter ermine and vair en point', () => {
-    const expected: Blason = { field: { kind: 'chequy', tinctures: [counterErmine, vairEnPoint] } };
+    const expected: Blason = { kind: 'simple', field: { kind: 'chequy', tinctures: [counterErmine, vairEnPoint] } };
     expect(parseBlason('Chequy counter ermine and vair en point')).toEqual(expected);
   });
 
   it('should parse  Cross charge', () => {
     const expected: Blason = {
+      kind: 'simple',
       field: { kind: 'plain', tincture: gules },
       charge: {
         name: 'cross',
@@ -312,6 +333,7 @@ Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Chequy, Chevronny, C
 
   it('should parse cross potent', () => {
     const expected: Blason = {
+      kind: 'simple',
       field: { kind: 'plain', tincture: gules },
       charge: {
         name: 'cross',
@@ -324,17 +346,19 @@ Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Chequy, Chevronny, C
   });
 
   it('should support checky', () => {
-    const expected: Blason = { field: { kind: 'chequy', tinctures: [counterVair, vairEnPale] } };
+    const expected: Blason = { kind: 'simple', field: { kind: 'chequy', tinctures: [counterVair, vairEnPale] } };
     expect(parseBlason('Checky counter vair and vair en pale')).toEqual(expected);
   });
   it('should support party per', () => {
     const expected: Blason = {
+      kind: 'simple',
       field: { kind: 'party', per: { name: 'bend', tinctures: [gules, vert], line: 'straight' } },
     };
     expect(parseBlason('Party per bend gules and vert')).toEqual(expected);
   });
   it('should support gardant', () => {
     const expected: Blason = {
+      kind: 'simple',
       field: { kind: 'plain', tincture: gules },
       charge: {
         name: 'lion',
@@ -347,5 +371,19 @@ Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Chequy, Chevronny, C
       },
     };
     expect(parseBlason('Gules, a lion passant gardant or')).toEqual(expected);
+  });
+
+  it('should support quartering', () => {
+    const expected: QuarterlyBlason = {
+      kind: 'quarterly',
+      blasons: [
+        { kind: 'simple', field: { kind: 'plain', tincture: gules } },
+        { kind: 'simple', field: { kind: 'plain', tincture: azure } },
+        { kind: 'simple', field: { kind: 'plain', tincture: vert } },
+        { kind: 'simple', field: { kind: 'plain', tincture: ermine } },
+      ],
+    };
+
+    expect(parseBlason('Quarterly, 1st: gules; 2nd: azure; 3rd: vert; 4th: ermine')).toEqual(expected);
   });
 });

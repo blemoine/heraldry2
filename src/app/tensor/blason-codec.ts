@@ -17,18 +17,37 @@ import {
   roundelInsides,
 } from '../model/charge';
 import { availableDispositions, CountAndDisposition, supportedNumbers } from '../model/countAndDisposition';
-import { Blason } from '../model/blason';
+import { Blason, QuarterlyBlason, SimpleBlason } from '../model/blason';
 
 const FIELD_SIZE = 5;
 const ORDINARY_SIZE = 4;
 const CHARGE_SIZE = 8;
+const BLASON_SIZE = FIELD_SIZE + ORDINARY_SIZE + CHARGE_SIZE;
 
 export function encodeBlason(blason: Blason): Uint8Array {
+  const result = new Uint8Array(1 + 4 * BLASON_SIZE);
+  if (blason.kind === 'simple') {
+    result[0] = 1;
+    result.set(encodeSimpleBlason(blason), 1);
+  } else if (blason.kind === 'quarterly') {
+    result[0] = 2;
+    result.set(encodeSimpleBlason(blason.blasons[0]), 1);
+    result.set(encodeSimpleBlason(blason.blasons[1]), 1 + BLASON_SIZE);
+    result.set(encodeSimpleBlason(blason.blasons[2]), 1 + 2 * BLASON_SIZE);
+    result.set(encodeSimpleBlason(blason.blasons[3]), 1 + 3 * BLASON_SIZE);
+  } else {
+    cannotHappen(blason);
+  }
+
+  return result;
+}
+
+function encodeSimpleBlason(blason: SimpleBlason): Uint8Array {
   const fieldArr = encodeField(blason.field);
   const ordinaryArr = encodeOrdinary(blason.ordinary || null);
   const chargeArr = encodeCharge(blason.charge || null);
 
-  const result = new Uint8Array(FIELD_SIZE + ORDINARY_SIZE + CHARGE_SIZE);
+  const result = new Uint8Array(BLASON_SIZE);
   result.set(fieldArr);
   result.set(ordinaryArr, FIELD_SIZE);
   result.set(chargeArr, FIELD_SIZE + ORDINARY_SIZE);
@@ -36,11 +55,32 @@ export function encodeBlason(blason: Blason): Uint8Array {
 }
 
 export function decodeBlason(arr: Uint8Array): Result<Blason> {
+  if (arr[0] === 1) {
+    return decodeSimpleBlason(arr.slice(1, BLASON_SIZE + 1));
+  } else if (arr[0] === 2) {
+    const maybeBlason1 = decodeSimpleBlason(arr.slice(1, BLASON_SIZE + 1));
+    const maybeBlason2 = decodeSimpleBlason(arr.slice(BLASON_SIZE + 1, 2 * BLASON_SIZE + 1));
+    const maybeBlason3 = decodeSimpleBlason(arr.slice(2 * BLASON_SIZE + 1, 3 * BLASON_SIZE + 1));
+    const maybeBlason4 = decodeSimpleBlason(arr.slice(3 * BLASON_SIZE + 1, 4 * BLASON_SIZE + 1));
+
+    return map(
+      zip4(maybeBlason1, maybeBlason2, maybeBlason3, maybeBlason4),
+      (blasons): QuarterlyBlason => ({
+        kind: 'quarterly',
+        blasons,
+      })
+    );
+  } else {
+    return raise(`Unexpected blason kind discriminant ${arr[0]}`);
+  }
+}
+export function decodeSimpleBlason(arr: Uint8Array): Result<SimpleBlason> {
   const maybeField = decodeField(arr.slice(0, FIELD_SIZE));
   const maybeOrdinary = decodeOrdinary(arr.slice(FIELD_SIZE, FIELD_SIZE + ORDINARY_SIZE));
   const maybeCharge = decodeCharge(arr.slice(FIELD_SIZE + ORDINARY_SIZE));
 
   return map(zip3(maybeField, maybeOrdinary, maybeCharge), ([field, ordinary, charge]) => ({
+    kind: 'simple',
     field,
     ...(ordinary ? { ordinary } : {}),
     ...(charge ? { charge } : {}),
