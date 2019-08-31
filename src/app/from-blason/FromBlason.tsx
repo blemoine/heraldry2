@@ -30,17 +30,17 @@ export const FromBlason = ({ pageState }: Props) => {
       />
       <div className="row mt-3 ml-2 mr-2">
         <div className="col-md-12 col-lg-6">
-          <BlasonForm
-            tinctureConfiguration={configuration.tinctureConfiguration}
-            blason={blason}
-            blasonChange={setBlason}
-          />
-        </div>
-        <div className="col-md-12 col-lg-6">
           <CoatsOfArmsDetail
             configuration={configuration}
             blason={blason}
             blasonChange={(blason) => setBlason(blason)}
+          />
+        </div>
+        <div className="col-md-12 col-lg-6">
+          <BlasonForm
+            tinctureConfiguration={configuration.tinctureConfiguration}
+            blason={blason}
+            blasonChange={setBlason}
           />
         </div>
       </div>

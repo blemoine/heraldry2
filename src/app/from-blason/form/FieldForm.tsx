@@ -71,16 +71,81 @@ export const FieldForm = ({ tinctureConfiguration, field, fieldChange }: Props) 
 
   return (
     <>
-      <div className="form-group form-check field-type-select">
-        <label>Select the field type</label>
-        <SelectScalar
-          classNamePrefix="field-type"
-          options={fieldKinds}
-          value={field.kind}
-          valueChange={changeFieldKind}
-          formatValue={stringifyFieldKind}
-        />
-      </div>
+      {field.kind === 'party' ? (
+        <>
+          <div className="form-group field-type-select">
+            <label>Select the field type</label>
+            <SelectScalar
+              classNamePrefix="field-type"
+              options={fieldKinds}
+              value={field.kind}
+              valueChange={changeFieldKind}
+              formatValue={stringifyFieldKind}
+            />
+          </div>
+          <PartyForm tinctureConfiguration={tinctureConfiguration} field={field} fieldChange={fieldChange} />
+        </>
+      ) : (
+        <div className="row">
+          <div className="col">
+            <div className="form-group field-type-select">
+              <label>Select the field type</label>
+              <SelectScalar
+                classNamePrefix="field-type"
+                options={fieldKinds}
+                value={field.kind}
+                valueChange={changeFieldKind}
+                formatValue={stringifyFieldKind}
+              />
+            </div>
+          </div>
+          {field.kind === 'plain' ? (
+            <div className="col">
+              <div className="form-group field-tincture-select">
+                <label>Select your field</label>
+                <TinctureSelect
+                  tinctureConfiguration={tinctureConfiguration}
+                  tincture={field.tincture}
+                  tinctureChange={plainTinctureChange}
+                />
+              </div>
+            </div>
+          ) : field.kind === 'bendy' ||
+            field.kind === 'bendySinister' ||
+            field.kind === 'paly' ||
+            field.kind === 'chequy' ||
+            field.kind === 'lozengy' ||
+            field.kind === 'paly-pily' ||
+            field.kind === 'barry-pily' ||
+            field.kind === 'chevronny' ||
+            field.kind === 'barry' ? (
+            <>
+              <div className="col">
+                <div className="form-group field-first-tincture-select">
+                  <label>Select your first tincture</label>
+                  <TinctureSelect
+                    tinctureConfiguration={tinctureConfiguration}
+                    tincture={field.tinctures[0]}
+                    tinctureChange={(t) => firstTinctureChange(field, t)}
+                  />
+                </div>
+              </div>
+              <div className="col">
+                <div className="form-group field-second-tincture-select">
+                  <label>Select your second tincture</label>
+                  <TinctureSelect
+                    tinctureConfiguration={tinctureConfiguration}
+                    tincture={field.tinctures[1]}
+                    tinctureChange={(t) => secondTinctureChange(field, t)}
+                  />
+                </div>
+              </div>
+            </>
+          ) : (
+            cannotHappen(field)
+          )}
+        </div>
+      )}
 
       {(field.kind === 'barry' || field.kind === 'bendy') && (
         <div className="form-group">
@@ -91,52 +156,6 @@ export const FieldForm = ({ tinctureConfiguration, field, fieldChange }: Props) 
             valueChange={(number) => fieldChange({ ...field, number })}
           />
         </div>
-      )}
-
-      {field.kind === 'plain' ? (
-        <div className="form-group field-tincture-select">
-          <label>Select your field</label>
-          <TinctureSelect
-            tinctureConfiguration={tinctureConfiguration}
-            tincture={field.tincture}
-            tinctureChange={plainTinctureChange}
-          />
-        </div>
-      ) : field.kind === 'party' ? (
-        <PartyForm tinctureConfiguration={tinctureConfiguration} field={field} fieldChange={fieldChange} />
-      ) : field.kind === 'bendy' ||
-        field.kind === 'bendySinister' ||
-        field.kind === 'paly' ||
-        field.kind === 'chequy' ||
-        field.kind === 'lozengy' ||
-        field.kind === 'paly-pily' ||
-        field.kind === 'barry-pily' ||
-        field.kind === 'chevronny' ||
-        field.kind === 'barry' ? (
-        <div className="row">
-          <div className="col">
-            <div className="form-group field-first-tincture-select">
-              <label>Select your first tincture</label>
-              <TinctureSelect
-                tinctureConfiguration={tinctureConfiguration}
-                tincture={field.tinctures[0]}
-                tinctureChange={(t) => firstTinctureChange(field, t)}
-              />
-            </div>
-          </div>
-          <div className="col">
-            <div className="form-group field-second-tincture-select">
-              <label>Select your second tincture</label>
-              <TinctureSelect
-                tinctureConfiguration={tinctureConfiguration}
-                tincture={field.tinctures[1]}
-                tinctureChange={(t) => secondTinctureChange(field, t)}
-              />
-            </div>
-          </div>
-        </div>
-      ) : (
-        cannotHappen(field)
       )}
     </>
   );

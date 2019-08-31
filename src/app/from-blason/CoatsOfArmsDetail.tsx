@@ -25,7 +25,7 @@ export const CoatsOfArmsDetail = ({ configuration, blason, blasonChange }: Props
         width={width}
         height={height}
         minConstraints={[60, 80]}
-        maxConstraints={[420, 560]}
+        maxConstraints={[480, 640]}
         resizeHandles={['e']}
         onResize={onResize}
       >

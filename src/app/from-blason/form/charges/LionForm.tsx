@@ -72,8 +72,6 @@ export const LionForm = ({ tinctureConfiguration, charge, chargeChange }: Props)
             <SelectScalar options={lionAttitudes} value={charge.attitude} valueChange={attitudeChange} />
           </div>
         </div>
-      </div>
-      <div className="row">
         {charge.attitude !== 'dormant' && (
           <div className="col">
             <div className="form-group">
