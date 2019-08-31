@@ -5,27 +5,39 @@ import { FieldDisplay } from './FieldDisplay';
 import { OrdinaryDisplay } from './ordinaries/OrdinaryDisplay';
 import { ChargeDisplay } from './ChargeDisplay';
 import { Tincture } from '../../model/tincture';
+import { SimpleBlasonShape } from './blasonDisplay.helper';
 
 type Props = {
   blason: SimpleBlason;
   dimension: Dimension;
   fillFromTincture: (tincture: Tincture) => string;
   clipPathId: string;
+  shape: SimpleBlasonShape;
 };
-export const SimpleBlasonDisplay = ({ blason, dimension, fillFromTincture, clipPathId }: Props) => {
+export const SimpleBlasonDisplay = ({ blason, dimension, fillFromTincture, clipPathId, shape }: Props) => {
   const { width, height } = dimension;
   const ordinary = blason.ordinary;
 
   const [verticalOffset, heightScale] = ordinary && ordinary.name === 'chief' ? [1 / 5, 4 / 5] : [0, 1];
 
   const computedDimension = { width, height: height * heightScale };
-
+  const chargeWidthOffset = shape === 'rightCut' || shape === 'leftCut' ? 0.1 : 0.05;
+  const chargeHeightOffset = shape === 'rightCut' || shape === 'leftCut' ? 0.11 : 0.05;
+  const chargeDimension = {
+    width: computedDimension.width * (1 - 2 * chargeWidthOffset),
+    height: computedDimension.height * (1 - 2 * chargeHeightOffset),
+  };
   const clipPathUrl = `url(#${clipPathId})`;
   return (
     <>
       <g clipPath={clipPathUrl}>
         <GWrapper translate={[0, verticalOffset * height]}>
-          <FieldDisplay dimension={computedDimension} field={blason.field} fillFromTincture={fillFromTincture} />
+          <FieldDisplay
+            dimension={computedDimension}
+            field={blason.field}
+            fillFromTincture={fillFromTincture}
+            shape={shape}
+          />
         </GWrapper>
       </g>
 
@@ -37,8 +49,8 @@ export const SimpleBlasonDisplay = ({ blason, dimension, fillFromTincture, clipP
 
       {blason.charge && (
         <g clipPath={clipPathUrl}>
-          <GWrapper translate={[0, verticalOffset * height]}>
-            <ChargeDisplay dimension={computedDimension} charge={blason.charge} fillFromTincture={fillFromTincture} />
+          <GWrapper translate={[chargeWidthOffset * width, verticalOffset * height]}>
+            <ChargeDisplay dimension={chargeDimension} charge={blason.charge} fillFromTincture={fillFromTincture} />
           </GWrapper>
         </g>
       )}

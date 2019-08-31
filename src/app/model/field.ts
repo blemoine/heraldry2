@@ -24,6 +24,7 @@ export type BarryPilyField = {
 };
 export type BendyField = {
   kind: 'bendy';
+  number: 6 | 8 | 10;
   tinctures: [Tincture, Tincture];
 };
 export type BendySinisterField = {

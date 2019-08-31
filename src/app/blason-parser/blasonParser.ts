@@ -4,7 +4,7 @@ import { parties, Party } from '../model/party';
 import { Ordinary, OrdinaryCross } from '../model/ordinary';
 import { stringifyParty } from '../from-blason/blason.helpers';
 import { Charge, Cross } from '../model/charge';
-import { BarryField, Field, PartyField, PlainField } from '../model/field';
+import { BarryField, BendyField, Field, PartyField, PlainField } from '../model/field';
 import { buildAltParser, constStr, lineParser } from './parser.helper';
 import { tinctureParserFromCapitalizedName, tinctureParserFromName } from './tinctureParser';
 import { ordinaryParser } from './ordinaryParser';
@@ -52,13 +52,29 @@ const language: Language = {
     ).map(
       ([number, tincture1, tincture2]): BarryField => ({ kind: 'barry', number, tinctures: [tincture1, tincture2] })
     );
+
+    const bendyParser: P.Parser<BendyField> = P.seq(
+      P.alt(
+        constStr('Bendy of')
+          .skip(P.whitespace)
+          .then(buildAltParser([6, 8, 10] as const, stringifyNumber)),
+        constStr('Bendy').result(6 as const)
+      ),
+      P.whitespace.then(tinctureParserFromName).skip(P.whitespace),
+      P.regex(/and/i)
+        .skip(P.whitespace)
+        .then(tinctureParserFromName)
+    ).map(
+      ([number, tincture1, tincture2]): BendyField => ({ kind: 'bendy', number, tinctures: [tincture1, tincture2] })
+    );
+
     const palyBendyParser: P.Parser<Exclude<Field, PlainField>> = P.seq(
       P.alt(
         constStr('bendySinister', 'Bendy Sinister'),
         constStr('paly-pily', 'Paly pily'),
         constStr('barry-pily', 'Barry pily'),
         constStr('paly'),
-        constStr('bendy'),
+
         P.alt(constStr('chequy'), constStr('chequy', 'Checky')).desc('Chequy'),
         constStr('lozengy'),
         constStr('chevronny')
@@ -79,8 +95,9 @@ const language: Language = {
         tincture,
       })),
       r.Party.map((party) => ({ kind: 'party', per: party })),
-      palyBendyParser,
-      barryParser
+      bendyParser,
+      barryParser,
+      palyBendyParser
     );
   },
 
@@ -122,28 +139,29 @@ const language: Language = {
 
   Blason(r: AppliedLanguage): P.Parser<Blason> {
     const quarterlyParser: P.Parser<QuarterlyBlason> = P.seq(
-      P.regexp(/1st:/i).desc('1st')
+      P.alt(P.regexp(/1st:/i).desc('1st'), constStr('first'))
         .then(P.whitespace)
         .then(r.SimpleBlason)
         .skip(P.string(';'))
         .skip(P.optWhitespace),
-      P.regexp(/2nd:/i).desc('2nd')
+      P.alt(P.regexp(/2nd:/i).desc('2nd'), constStr('second'))
         .then(P.whitespace)
         .then(r.SimpleBlason)
         .skip(P.string(';'))
         .skip(P.optWhitespace),
-      P.regexp(/3rd:/i).desc('3rd')
+      P.alt(P.regexp(/3rd:/i).desc('3rd'), constStr('third'))
         .then(P.whitespace)
         .then(r.SimpleBlason)
         .skip(P.string(';'))
         .skip(P.optWhitespace),
-      P.regexp(/4th:/i).desc('4th')
+      P.alt(P.regexp(/4th:/i).desc('4th'), constStr('fourth'))
         .then(P.whitespace)
         .then(r.SimpleBlason)
     ).map((blasons): QuarterlyBlason => ({ kind: 'quarterly', blasons }));
 
     return P.alt(
-      P.regexp(/quarterly,/i).desc('Quarterly')
+      P.regexp(/quarterly,/i)
+        .desc('Quarterly')
         .then(P.whitespace)
         .then(quarterlyParser),
       r.SimpleBlason

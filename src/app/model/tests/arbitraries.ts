@@ -37,7 +37,7 @@ export const fieldArb: Arbitrary<Field> = fc.constantFrom(...fieldKinds).chain(
   (kind): Arbitrary<Field> => {
     if (kind === 'plain') {
       return tinctureArb.map((tincture) => ({ kind, tincture }));
-    } else if (kind === 'barry') {
+    } else if (kind === 'barry' || kind === 'bendy') {
       return fc
         .tuple(fc.constantFrom(...([6, 8, 10] as const)), tinctureArb, tinctureArb)
         .map(([number, ...tinctures]) => ({ kind, number, tinctures }));

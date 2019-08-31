@@ -99,7 +99,6 @@ function stringifyField(field: Field): string {
       return capitalizeFirstLetter(stringifyTincture(field.tincture));
     } else if (
       field.kind === 'bendySinister' ||
-      field.kind === 'bendy' ||
       field.kind === 'paly' ||
       field.kind === 'lozengy' ||
       field.kind === 'paly-pily' ||
@@ -114,6 +113,12 @@ function stringifyField(field: Field): string {
         ` of ${stringifyNumber(field.number)} ${stringifyTincture(field.tinctures[0])} and ${stringifyTincture(
           field.tinctures[1]
         )}`
+      );
+    } else if (field.kind === 'bendy') {
+      return (
+        fieldStr +
+        (field.number !== 6 ? ` of ${stringifyNumber(field.number)}` : '') +
+        ` ${stringifyTincture(field.tinctures[0])} and ${stringifyTincture(field.tinctures[1])}`
       );
     } else {
       return cannotHappen(field);

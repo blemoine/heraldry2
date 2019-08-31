@@ -2,56 +2,33 @@ import * as React from 'react';
 import { Dimension } from '../../../model/dimension';
 import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { PathFromBuilder } from '../../../common/PathFromBuilder';
+import { BendyField } from '../../../model/field';
+import { range } from '../../../../utils/range';
 
-type Props = { fill: [string, string]; dimension: Dimension };
+type Props = { fill: [string, string]; dimension: Dimension; number: BendyField['number'] };
 export const BendyDisplay: React.FunctionComponent<Props> = (props) => {
-  const { dimension, fill } = props;
+  const { fill } = props;
+  const dimension = props.dimension;
   const height = dimension.height;
-  const width = props.dimension.width * 1.5;
+  const width = dimension.width;
+  const maxCoordinate = Math.max(height * 1.09, width);
+  const bendWidth = maxCoordinate / (props.number );
 
-  const firstPoint = 1 / 4;
-  const secondPoint = 1 / 2;
-
-  const path1 = SvgPathBuilder.start([0, 0])
-    .goTo([width * firstPoint, 0])
-    .goTo([width, height * (1 - firstPoint)])
-    .goTo([width, height])
-    .close();
-
-  const path2 = SvgPathBuilder.start([width * firstPoint, 0])
-    .goTo([width * secondPoint, 0])
-    .goTo([width, height * (1 - secondPoint)])
-    .goTo([width, height * (1 - firstPoint)])
-    .close();
-
-  const path3 = SvgPathBuilder.start([width * secondPoint, 0])
-    .goTo([width, 0])
-    .goTo([width, height * (1 - secondPoint)])
-    .close();
-
-  const path4 = SvgPathBuilder.start([0, 0])
-    .goTo([0, height * firstPoint])
-    .goTo([width * (1 - firstPoint), height])
-    .goTo([width, height])
-    .close();
-  const path5 = SvgPathBuilder.start([0, height * firstPoint])
-    .goTo([0, height * secondPoint])
-    .goTo([width * firstPoint, height])
-    .goTo([width * (1 - firstPoint), height])
-    .close();
-  const path6 = SvgPathBuilder.start([0, height * secondPoint])
-    .goTo([0, height])
-    .goTo([width * (1 - secondPoint), height])
-    .close();
+  const bendPath = SvgPathBuilder.start([-maxCoordinate, 0])
+    .goTo([maxCoordinate * 2, 0])
+    .goTo([maxCoordinate * 2, bendWidth])
+    .goTo([-maxCoordinate, bendWidth])
+    .close()
+    .rotate([(Math.sqrt(2) * bendWidth) / 2, bendWidth / 2], 45)
+    .translate([width, 0]);
 
   return (
     <g>
-      <PathFromBuilder pathBuilder={path1} fill={fill[0]} stroke="#333" />
-      <PathFromBuilder pathBuilder={path2} fill={fill[1]} stroke="#333" />
-      <PathFromBuilder pathBuilder={path3} fill={fill[0]} stroke="#333" />
-      <PathFromBuilder pathBuilder={path4} fill={fill[1]} stroke="#333" />
-      <PathFromBuilder pathBuilder={path5} fill={fill[0]} stroke="#333" />
-      <PathFromBuilder pathBuilder={path6} fill={fill[1]} stroke="#333" />
+      {range(0, props.number).map((i) => {
+        const path = bendPath.translate([-Math.sqrt(2) * bendWidth * (i + 1 / 2), 0]);
+
+        return <PathFromBuilder key={i} pathBuilder={path} fill={fill[i % 2]} stroke="#333" />;
+      })}
     </g>
   );
 };

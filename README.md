@@ -39,3 +39,8 @@ Faire le "of the last"
 
 * Quarterly : support syntax like 1 (without ordinal)
 * Quarterly : support syntax like 1 and 4 azure
+* Le form , en particulier en quaterly est vraiment moch
+*Supporter le clic sur une zone -> edition
+* Bordure quarterly is broken
+* 9 charge auqrterly is broken
+*Support for bendy sinister of

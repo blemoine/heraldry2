@@ -167,9 +167,18 @@ describe('stringifyBlason', () => {
     expect(
       stringifyBlason({
         kind: 'simple',
-        field: { kind: 'bendy', tinctures: [ermine, vert] },
+        field: { kind: 'bendy', tinctures: [ermine, vert], number: 6 },
       })
     ).toBe('Bendy ermine and vert');
+  });
+
+  it('should stringify bendy field with a number', () => {
+    expect(
+      stringifyBlason({
+        kind: 'simple',
+        field: { kind: 'bendy', tinctures: [ermine, vert], number: 10 },
+      })
+    ).toBe('Bendy of ten ermine and vert');
   });
 
   it('should stringify 10 barry field', () => {
@@ -373,6 +382,6 @@ describe('isThereFur', () => {
   });
 
   it('should return true if the field  is bendy vair', () => {
-    expect(isThereFur({ kind: 'simple', field: { kind: 'bendy', tinctures: [gules, vair] } }, 'vair')).toBe(true);
+    expect(isThereFur({ kind: 'simple', field: { kind: 'bendy', tinctures: [gules, vair], number: 6 } }, 'vair')).toBe(true);
   });
 });

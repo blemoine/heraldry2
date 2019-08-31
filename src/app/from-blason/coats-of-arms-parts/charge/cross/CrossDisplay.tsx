@@ -24,7 +24,6 @@ export const CrossDisplay = ({ charge, dimension: { width, height }, fillFromTin
 
   const radius = Math.min(width * cellWidth * 0.9, height * cellHeight * 0.45);
   const crossWidth = radius / 10;
-
   return (
     <>
       {positions.map(([cx, cy], i) => {

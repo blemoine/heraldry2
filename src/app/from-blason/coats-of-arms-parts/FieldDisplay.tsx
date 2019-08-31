@@ -20,9 +20,15 @@ import { LozengyDisplay } from './fields/LozengyDisplay';
 import { PalyPilyDisplay } from './fields/PalyPilyDisplay';
 import { BarryPilyDisplay } from './fields/BarryPilyDisplay';
 import { ChevronnyDisplay } from './fields/ChevronnyDisplay';
+import { SimpleBlasonShape } from './blasonDisplay.helper';
 
-type Props = { dimension: Dimension; field: Field; fillFromTincture: (tincture: Tincture) => string };
-export const FieldDisplay = ({ field, dimension, fillFromTincture }: Props) => {
+type Props = {
+  dimension: Dimension;
+  field: Field;
+  shape: SimpleBlasonShape;
+  fillFromTincture: (tincture: Tincture) => string;
+};
+export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Props) => {
   function fillFromTincturePair(arr: [Tincture, Tincture]): [string, string] {
     return [fillFromTincture(arr[0]), fillFromTincture(arr[1])];
   }
@@ -51,10 +57,34 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture }: Props) => {
     }
   } else if (field.kind === 'bendy') {
     const fill: [string, string] = fillFromTincturePair(field.tinctures);
-    return <BendyDisplay fill={fill} dimension={dimension} />;
+
+    let updatedDimension: Dimension;
+    if (shape === 'default') {
+      updatedDimension = dimension;
+    } else if (shape === 'square' || shape === 'rightCut') {
+      updatedDimension = { width: dimension.width, height: dimension.height * 1.2 };
+    } else if (shape === 'leftCut') {
+      updatedDimension = { width: dimension.width, height: dimension.height * 0.8 };
+    } else {
+      return cannotHappen(shape);
+    }
+
+    return <BendyDisplay fill={fill} dimension={updatedDimension} number={field.number} />;
   } else if (field.kind === 'bendySinister') {
     const fill: [string, string] = fillFromTincturePair(field.tinctures);
-    return <BendySinisterDisplay fill={fill} dimension={dimension} />;
+
+    let updatedDimension: Dimension;
+    if (shape === 'default') {
+      updatedDimension = dimension;
+    } else if (shape === 'square' || shape === 'leftCut') {
+      updatedDimension = { width: dimension.width, height: dimension.height * 1.2 };
+    } else if (shape === 'rightCut') {
+      updatedDimension = { width: dimension.width, height: dimension.height * 0.8 };
+    } else {
+      return cannotHappen(shape);
+    }
+
+    return <BendySinisterDisplay fill={fill} dimension={updatedDimension} />;
   } else if (field.kind === 'paly') {
     const fill: [string, string] = fillFromTincturePair(field.tinctures);
     return <PalyDisplay fill={fill} dimension={dimension} />;

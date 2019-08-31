@@ -6,9 +6,10 @@ import { azure, ermine, gules, or, purpure, vair } from '../model/tincture';
 import { parseBlason } from '../blason-parser/blasonParser';
 import { defaultTinctureConfiguration } from '../model/tincture-configuration';
 import { Configuration } from '../model/configuration';
+import { Dimension } from '../model/dimension';
 jest.mock('../../utils/uuid');
 
-const dimension = {
+const dimension: Dimension = {
   height: 266.6666666666667,
   width: 200,
 };

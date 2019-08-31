@@ -14,7 +14,7 @@ import {
   vairEnPoint,
   vert,
 } from '../model/tincture';
-import { Blason, QuarterlyBlason } from '../model/blason';
+import { Blason, QuarterlyBlason, SimpleBlason } from '../model/blason';
 
 describe('parseBlason', () => {
   it('should parse a plain blason', () => {
@@ -106,7 +106,7 @@ describe('parseBlason', () => {
 
   it('should parse correctly a bendy field', () => {
     const result = parseBlason('Bendy argent and sable');
-    const expected: Blason = { kind: 'simple', field: { kind: 'bendy', tinctures: [argent, sable] } };
+    const expected: Blason = { kind: 'simple', field: { kind: 'bendy', tinctures: [argent, sable], number: 6 } };
 
     expect(result).toEqual(expected);
   });
@@ -123,7 +123,7 @@ describe('parseBlason', () => {
 
 Expected one of the following: 
 
-Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Chequy, Chevronny, Counter ermine, Counter potent, Counter vair, Ermine, Erminois, Gules, Lozengy, Murrey, Or, Paly, Paly pily, Pean, Per, Potent, Potent en pale, Potent en point, Purpure, Quarterly, Sable, Sanguine, Tenné, Vair, Vair en pale, Vair en point, Vert
+Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Bendy of, Chequy, Chevronny, Counter ermine, Counter potent, Counter vair, Ermine, Erminois, Gules, Lozengy, Murrey, Or, Paly, Paly pily, Pean, Per, Potent, Potent en pale, Potent en point, Purpure, Quarterly, Sable, Sanguine, Tenné, Vair, Vair en pale, Vair en point, Vert
 `,
     });
   });
@@ -385,5 +385,53 @@ Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Chequy, Chevronny, C
     };
 
     expect(parseBlason('Quarterly, 1st: gules; 2nd: azure; 3rd: vert; 4th: ermine')).toEqual(expected);
+  });
+
+  it('should parse a bendy field', () => {
+    const expected: SimpleBlason = { kind: 'simple', field: { kind: 'bendy', number: 10, tinctures: [or, gules] } };
+
+    expect(parseBlason('Bendy of ten or and gules')).toEqual(expected);
+  });
+
+  it('should support the arms of Correze', () => {
+    const expected: QuarterlyBlason = {
+      kind: 'quarterly',
+      blasons: [
+        {
+          kind: 'simple',
+          field: { kind: 'plain', tincture: or },
+          charge: {
+            name: 'lion',
+            attitude: 'passant',
+            tincture: gules,
+            armedAndLangued: gules,
+            countAndDisposition: { count: 2, disposition: 'default' },
+            head: null,
+            tail: null,
+          },
+        },
+        { kind: 'simple', field: { kind: 'chequy', tinctures: [or, gules] } },
+        { kind: 'simple', field: { kind: 'bendy', number: 10, tinctures: [or, gules] } },
+        {
+          kind: 'simple',
+          field: { kind: 'plain', tincture: or },
+          charge: {
+            name: 'lion',
+            attitude: 'rampant',
+            tincture: azure,
+            armedAndLangued: gules,
+            countAndDisposition: { count: 3, disposition: 'default' },
+            head: null,
+            tail: null,
+          },
+        },
+      ],
+    };
+
+    expect(
+      parseBlason(
+        'Quarterly, first or, two lions passant gules; second chequy or and gules; third bendy of ten or and gules; fourth or, three lions azure armed and langued gules'
+      )
+    ).toEqual(expected);
   });
 });

@@ -4,7 +4,7 @@ import { Blason } from '../model/blason';
 import { CoatsOfArmsDisplay } from './CoatsOfArmsDisplay';
 import { ResizableBox, ResizeCallbackData } from 'react-resizable';
 import 'react-resizable/css/styles.css';
-import { scale } from '../model/dimension';
+import { Dimension, scale } from '../model/dimension';
 import { BlasonForm } from './BlasonForm';
 import { Configuration } from '../model/configuration';
 
@@ -12,7 +12,7 @@ type Props = { configuration: Configuration; blason: Blason; blasonChange: (blas
 export const CoatsOfArmsDetail = ({ configuration, blason, blasonChange }: Props) => {
   const [width, setWidth] = useState(200);
   const height = (width * 4) / 3;
-  const dimension = { height, width };
+  const dimension: Dimension = { height, width };
   function onResize(_e: React.SyntheticEvent, { size }: ResizeCallbackData) {
     setWidth(size.width);
   }

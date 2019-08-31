@@ -24,7 +24,6 @@ export const FieldForm = ({ tinctureConfiguration, field, fieldChange }: Props) 
         newKind === 'paly' ||
         newKind === 'paly-pily' ||
         newKind === 'bendySinister' ||
-        newKind === 'bendy' ||
         newKind === 'chequy' ||
         newKind === 'lozengy' ||
         newKind === 'barry-pily' ||
@@ -33,7 +32,7 @@ export const FieldForm = ({ tinctureConfiguration, field, fieldChange }: Props) 
         fieldChange({ kind: newKind, tinctures: newColors });
       } else if (newKind === 'plain') {
         fieldChange({ kind: 'plain', tincture: newColors[0] });
-      } else if (newKind === 'barry') {
+      } else if (newKind === 'barry' || newKind === 'bendy') {
         fieldChange({ kind: 'barry', number: 10, tinctures: newColors });
       } else {
         cannotHappen(newKind);
@@ -84,7 +83,7 @@ export const FieldForm = ({ tinctureConfiguration, field, fieldChange }: Props) 
         />
       </div>
 
-      {field.kind === 'barry' && (
+      {(field.kind === 'barry' || field.kind === 'bendy') && (
         <div className="form-group">
           <label>Select the number of bar</label>
           <SelectScalar

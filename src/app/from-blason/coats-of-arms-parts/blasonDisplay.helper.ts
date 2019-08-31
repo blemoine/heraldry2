@@ -18,3 +18,5 @@ export function computeLineOptions(line: Line, { width }: Dimension): LineOption
 }
 
 export const chiefHeightRatio = 1 / 5;
+
+export type SimpleBlasonShape = 'default' | 'square' | 'leftCut' | 'rightCut';
