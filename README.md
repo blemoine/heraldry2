@@ -40,7 +40,5 @@ Faire le "of the last"
 - Le form , en particulier en quaterly est vraiment moch
 - Supporter le clic sur une zone -> edition
 - 9 charge auqrterly is broken
-- Refondre l'UX (par exemple roue de configuration en haut a droite dans le menu, par defaut on affiche que le bouclier + blason, et on peut deplier le form en dessous ( qui n'est donc pas la par défaut))
-- engriled arcto ne pointe pas au bon endroit (cf bordure engrailed)
-- Bordure quarterly is broken :
-    `Quarterly, 1st: Bendy or and purpure, a bordure argent;2nd: Bendy of eight azure and or, a bordure argent;3rd: Bendy of eight or and vert, a bordure argent;4th: Bendy of eight or and gules, a bordure argent`
+- Refondre l'UX (par defaut on affiche que le bouclier + blason, et on peut deplier le form a coté
+- engrailed arcto ne pointe pas au bon endroit (cf bordure engrailed)

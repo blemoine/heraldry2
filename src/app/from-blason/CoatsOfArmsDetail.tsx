@@ -10,7 +10,7 @@ import { Configuration } from '../model/configuration';
 
 type Props = { configuration: Configuration; blason: Blason; blasonChange: (blason: Blason) => void };
 export const CoatsOfArmsDetail = ({ configuration, blason, blasonChange }: Props) => {
-  const [width, setWidth] = useState(200);
+  const [width, setWidth] = useState(400);
   const height = (width * 4) / 3;
   const dimension: Dimension = { height, width };
   function onResize(_e: React.SyntheticEvent, { size }: ResizeCallbackData) {
@@ -29,7 +29,9 @@ export const CoatsOfArmsDetail = ({ configuration, blason, blasonChange }: Props
         resizeHandles={['e']}
         onResize={onResize}
       >
-        <CoatsOfArmsDisplay blason={blason} dimension={scale(dimension, 0.9)} configuration={configuration} />
+        <div style={{ border: '1px solid #CCC', padding: '5%' }}>
+          <CoatsOfArmsDisplay blason={blason} dimension={scale(dimension, 0.9)} configuration={configuration} />
+        </div>
       </ResizableBox>
     </div>
   );

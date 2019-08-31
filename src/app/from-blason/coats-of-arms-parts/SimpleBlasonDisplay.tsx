@@ -20,7 +20,12 @@ export const SimpleBlasonDisplay = ({ blason, dimension, fillFromTincture, clipP
   const { width, height } = dimension;
   const ordinary = blason.ordinary;
 
-  const [verticalOffset, heightScale] = ordinary && ordinary.name === 'chief' ? [1 / 5, 4 / 5] : [0, 1];
+  const [verticalOffset, heightScale] =
+    ordinary && ordinary.name === 'chief'
+      ? [1 / 5, 4 / 5]
+      : ordinary && ordinary.name === 'bordure'
+      ? [1 / 10, 9 / 10]
+      : [0, 1];
 
   const computedDimension = { width, height: height * heightScale };
   const chargeWidthOffset = shape === 'rightCut' || shape === 'leftCut' ? 0.1 : 0.05;
@@ -29,6 +34,10 @@ export const SimpleBlasonDisplay = ({ blason, dimension, fillFromTincture, clipP
     width: computedDimension.width * (1 - 2 * chargeWidthOffset),
     height: computedDimension.height * (1 - 2 * chargeHeightOffset),
   };
+  if (shape === 'rightCut' || shape === 'leftCut') {
+    chargeDimension.width = chargeDimension.width * 0.9;
+    chargeDimension.height = chargeDimension.height * 0.82;
+  }
   const clipPathUrl = `url(#${clipPathId})`;
   return (
     <>
@@ -57,7 +66,9 @@ export const SimpleBlasonDisplay = ({ blason, dimension, fillFromTincture, clipP
 
       {blason.charge && (
         <g clipPath={clipPathUrl}>
-          <GWrapper translate={[chargeWidthOffset * width, verticalOffset * height]}>
+          <GWrapper
+            translate={[chargeWidthOffset * width + (shape === 'leftCut' ? 0.1 * width : 0), verticalOffset * height]}
+          >
             <ChargeDisplay dimension={chargeDimension} charge={blason.charge} fillFromTincture={fillFromTincture} />
           </GWrapper>
         </g>
