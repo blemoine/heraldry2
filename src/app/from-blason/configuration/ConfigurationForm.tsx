@@ -3,6 +3,7 @@ import { Configuration, ShieldShape, shieldShapes } from '../../model/configurat
 import { TinctureConfigurationForm } from './TinctureConfigurationForm';
 import { TinctureConfiguration } from '../../model/tincture-configuration';
 import { SelectScalar } from '../../common/SelectScalar';
+import { useState } from 'react';
 
 type Props = {
   isOpen: boolean;
@@ -10,7 +11,7 @@ type Props = {
   configurationChange: (configuration: Configuration) => void;
 };
 
-export const ConfigurationForm = ({ isOpen, configuration, configurationChange }: Props) => {
+export function ConfigurationForm({ isOpen, configuration, configurationChange }: Props) {
   function updateTinctureConfiguration(tinctureConfiguration: TinctureConfiguration) {
     configurationChange({ ...configuration, tinctureConfiguration });
   }
@@ -19,12 +20,14 @@ export const ConfigurationForm = ({ isOpen, configuration, configurationChange }
     configurationChange({ ...configuration, shieldShape });
   }
 
+  const [overflow, setOverflow] = useState<'hidden' | 'visible'>('hidden');
+
   return (
     <div
       style={{
         border: '1px solid #999',
-        transition: 'all 0.5s',
-        overflow: !isOpen ? 'hidden' : 'visible',
+        transition: 'all 0.3s',
+        overflow: overflow,
         height: 'auto',
         maxHeight: !isOpen ? 0 : '400px',
       }}
@@ -40,9 +43,15 @@ export const ConfigurationForm = ({ isOpen, configuration, configurationChange }
           tinctureConfigurationChange={updateTinctureConfiguration}
         />
         <div>
-          <SelectScalar options={shieldShapes} value={configuration.shieldShape} valueChange={updateShieldShape} />
+          <SelectScalar
+            options={shieldShapes}
+            value={configuration.shieldShape}
+            valueChange={updateShieldShape}
+            onMenuOpen={() => setOverflow('visible')}
+            onMenuClose={() => setOverflow('hidden')}
+          />
         </div>
       </div>
     </div>
   );
-};
+}

@@ -24,7 +24,7 @@ export const SimpleBlasonDisplay = ({ blason, dimension, fillFromTincture, clipP
     ordinary && ordinary.name === 'chief'
       ? [1 / 5, 4 / 5]
       : ordinary && ordinary.name === 'bordure'
-      ? [1 / 10, 9 / 10]
+      ? [8 / 100, 92 / 100]
       : [0, 1];
 
   const computedDimension = { width, height: height * heightScale };

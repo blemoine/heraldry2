@@ -12,7 +12,7 @@ import { EscutcheonDisplay } from './coats-of-arms-parts/escutcheon/EscutcheonDi
 import { BlasonDisplay } from './coats-of-arms-parts/BlasonDisplay';
 
 type Props = { blason: Blason; dimension: Dimension; configuration: Configuration };
-export const CoatsOfArmsDisplay = (props: Props) => {
+export function CoatsOfArmsDisplay(props: Props) {
   const configuration = props.configuration;
   const tinctureConfiguration = configuration.tinctureConfiguration;
   const dimension = props.dimension;
@@ -105,4 +105,4 @@ export const CoatsOfArmsDisplay = (props: Props) => {
       <EscutcheonDisplay dimension={dimension} shieldShape={configuration.shieldShape} />
     </svg>
   );
-};
+}

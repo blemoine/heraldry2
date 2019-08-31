@@ -10,7 +10,7 @@ type Props = {
   ordinary: Ordinary | null;
   ordinaryChange: (ordinary: Ordinary | null) => void;
 };
-export const OrdinaryForm = ({ tinctureConfiguration, ordinary, ordinaryChange }: Props) => {
+export function OrdinaryForm({ tinctureConfiguration, ordinary, ordinaryChange }: Props) {
   function changeOrdinary(ordinaryName: Ordinary['name'] | null) {
     if (ordinaryName) {
       const tincture = ordinary ? ordinary.tincture : argent;
@@ -43,4 +43,4 @@ export const OrdinaryForm = ({ tinctureConfiguration, ordinary, ordinaryChange }
       </div>
     </div>
   );
-};
+}

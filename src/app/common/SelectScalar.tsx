@@ -7,8 +7,10 @@ type Props<A extends string | number> = {
   valueChange: (a: A) => void;
   formatValue?: (a: A) => string;
   classNamePrefix?: string;
+  onMenuOpen?: () => void;
+  onMenuClose?: () => void;
 };
-export const SelectScalar = <A extends string | number>(props: Props<A>) => {
+export function SelectScalar<A extends string | number>(props: Props<A>) {
   const options = props.options.map((v) => ({ value: v, label: props.formatValue ? props.formatValue(v) : v }));
   const value = options.find((v) => v.value === props.value);
 
@@ -18,6 +20,8 @@ export const SelectScalar = <A extends string | number>(props: Props<A>) => {
       options={options}
       value={value}
       onChange={(t: any) => props.valueChange(t.value)}
+      onMenuClose={props.onMenuClose}
+      onMenuOpen={props.onMenuOpen}
     />
   );
-};
+}

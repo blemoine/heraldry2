@@ -1,37 +1,36 @@
 import * as React from 'react';
-import { FromBlason } from './FromBlason';
-import { render, fireEvent } from '@testing-library/react';
-import { selectElement, selectInReactSelect, selectTincture } from '../../utils/tests/select-test.utils';
-import { argent, azure, ermine, gules, murrey, purpure, vair } from '../model/tincture';
-import { defaultPageState } from '../model/pageState';
+import { fireEvent, render } from '@testing-library/react';
+import { selectElement, selectInReactSelect, selectTincture } from '../utils/tests/select-test.utils';
+import { argent, azure, ermine, gules, murrey, purpure, vair } from './model/tincture';
+import { App } from './App';
 
-describe('From Blason', () => {
+describe('App', () => {
   beforeEach(() => {
     localStorage.clear();
   });
   it('should reflect the change of field tincture in the blason', () => {
-    const fromBlason = render(<FromBlason pageState={defaultPageState} />);
+    const app = render(<App />);
 
     return selectTincture('.field-tincture-select', ermine).then(() => {
-      const blason = (fromBlason.getByPlaceholderText('Enter the blason here') as HTMLTextAreaElement).value;
+      const blason = (app.getByPlaceholderText('Enter the blason here') as HTMLTextAreaElement).value;
       expect(blason).toBe('Ermine');
     });
   });
 
   it('should reflect the change of the field type in the blason', () => {
-    const fromBlason = render(<FromBlason pageState={defaultPageState} />);
+    const app = render(<App />);
 
     return selectInReactSelect('.field-type-select', 'field-type', 'chequy')
       .then(() => selectTincture('.field-first-tincture-select', vair))
       .then(() => selectTincture('.field-second-tincture-select', gules))
       .then(() => {
-        const blason = (fromBlason.getByPlaceholderText('Enter the blason here') as HTMLTextAreaElement).value;
+        const blason = (app.getByPlaceholderText('Enter the blason here') as HTMLTextAreaElement).value;
         expect(blason).toBe('Chequy vair and gules');
       });
   });
 
   it('should reflect the change of the charge type in the blason', () => {
-    const fromBlason = render(<FromBlason pageState={defaultPageState} />);
+    const app = render(<App />);
 
     return selectInReactSelect('.field-type-select', 'field-type', 'paly')
       .then(() => selectTincture('.field-first-tincture-select', argent))
@@ -39,13 +38,13 @@ describe('From Blason', () => {
       .then(() => selectInReactSelect('.charge-type-select', 'charge-name', 'lion'))
       .then(() => selectTincture('.charge-lion-tincture-select', azure))
       .then(() => {
-        const blason = (fromBlason.getByPlaceholderText('Enter the blason here') as HTMLTextAreaElement).value;
+        const blason = (app.getByPlaceholderText('Enter the blason here') as HTMLTextAreaElement).value;
         expect(blason).toBe('Paly argent and purpure, a lion rampant azure');
       });
   });
 
   it('should reflect the change of the ordinary type in the blason', () => {
-    const fromBlason = render(<FromBlason pageState={defaultPageState} />);
+    const app = render(<App />);
 
     return selectInReactSelect('.field-type-select', 'field-type', 'barry')
       .then(() => selectTincture('.field-first-tincture-select', argent))
@@ -53,15 +52,15 @@ describe('From Blason', () => {
       .then(() => selectInReactSelect('.ordinary-type-select', 'ordinary-name', 'bend'))
       .then(() => selectTincture('.ordinary-tincture-select', murrey))
       .then(() => {
-        const blason = (fromBlason.getByPlaceholderText('Enter the blason here') as HTMLTextAreaElement).value;
+        const blason = (app.getByPlaceholderText('Enter the blason here') as HTMLTextAreaElement).value;
         expect(blason).toBe('Barry of ten argent and purpure, a bend murrey');
       });
   });
 
   it('should reflect the change of the blason string in the form', () => {
-    const fromBlason = render(<FromBlason pageState={defaultPageState} />);
+    const app = render(<App />);
 
-    const blason = fromBlason.getByPlaceholderText('Enter the blason here') as HTMLTextAreaElement;
+    const blason = app.getByPlaceholderText('Enter the blason here') as HTMLTextAreaElement;
     fireEvent.change(blason, {
       target: { value: 'Ermine, three eagles displayed in pale azure beaked and armed argent' },
     });

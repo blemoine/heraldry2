@@ -7,38 +7,51 @@ import { Field } from '../../model/field';
 import { Ordinary } from '../../model/ordinary';
 import { Charge } from '../../model/charge';
 import { TinctureConfiguration } from '../../model/tincture-configuration';
+import { useCallback } from 'react';
+
+const wrapperStyle = { border: '1px solid #CCC', padding: '5px' };
 
 type Props = {
   tinctureConfiguration: TinctureConfiguration;
   blason: SimpleBlason;
   blasonChange: (blason: SimpleBlason) => void;
 };
-export const SimpleBlasonForm = ({ tinctureConfiguration, blason, blasonChange }: Props) => {
-  function fieldChange(field: Field) {
-    blasonChange({ ...blason, field });
-  }
+export function SimpleBlasonForm({ tinctureConfiguration, blason, blasonChange }: Props) {
+  const fieldChange = useCallback(
+    function fieldChange(field: Field) {
+      blasonChange({ ...blason, field });
+    },
+    [blason, blasonChange]
+  );
 
-  function ordinaryChange(ordinary: Ordinary | null) {
-    if (ordinary) {
-      blasonChange({ ...blason, ordinary });
-    } else {
-      const newBlason = { ...blason };
-      delete newBlason.ordinary;
-      blasonChange(newBlason);
-    }
-  }
+  const ordinaryChange = useCallback(
+    function ordinaryChange(ordinary: Ordinary | null) {
+      if (ordinary) {
+        blasonChange({ ...blason, ordinary });
+      } else {
+        const newBlason = { ...blason };
+        delete newBlason.ordinary;
+        blasonChange(newBlason);
+      }
+    },
+    [blason, blasonChange]
+  );
 
-  function chargeChange(charge: Charge | null) {
-    if (charge) {
-      blasonChange({ ...blason, charge });
-    } else {
-      const newBlason = { ...blason };
-      delete newBlason.charge;
-      blasonChange(newBlason);
-    }
-  }
+  const chargeChange = useCallback(
+    function(charge: Charge | null) {
+      if (charge) {
+        blasonChange({ ...blason, charge });
+      } else {
+        const newBlason = { ...blason };
+        delete newBlason.charge;
+        blasonChange(newBlason);
+      }
+    },
+    [blason, blasonChange]
+  );
+
   return (
-    <div style={{ border: '1px solid #CCC', padding: '5px' }}>
+    <div style={wrapperStyle}>
       <FieldForm tinctureConfiguration={tinctureConfiguration} field={blason.field} fieldChange={fieldChange} />
       <OrdinaryForm
         tinctureConfiguration={tinctureConfiguration}
@@ -52,4 +65,4 @@ export const SimpleBlasonForm = ({ tinctureConfiguration, blason, blasonChange }
       />
     </div>
   );
-};
+}

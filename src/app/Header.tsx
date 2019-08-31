@@ -7,7 +7,7 @@ const spanStyle: CSSProperties = { fontSize: '1.3rem', cursor: 'pointer', color:
 const openedSpanStyle: CSSProperties = { ...spanStyle, color: '#007bff', transform: 'rotate(45deg)' };
 
 type Props = { pageState: PageState; toggleConfiguration: () => void };
-export const Header = ({ pageState, toggleConfiguration }: Props) => {
+export function Header({ pageState, toggleConfiguration }: Props) {
   return (
     <header>
       <div className="navbar navbar-dark bg-dark shadow-sm">
@@ -23,4 +23,4 @@ export const Header = ({ pageState, toggleConfiguration }: Props) => {
       </div>
     </header>
   );
-};
+}

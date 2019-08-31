@@ -3,31 +3,35 @@ import { TinctureConfiguration } from '../../model/tincture-configuration';
 import { Blason, SimpleBlason } from '../../model/blason';
 import { cannotHappen } from '../../../utils/cannot-happen';
 import { SimpleBlasonForm } from './SimpleBlasonForm';
+import { useCallback } from 'react';
 
 type Props = {
   tinctureConfiguration: TinctureConfiguration;
   blason: Blason;
   blasonChange: (blason: Blason) => void;
 };
-export const BlasonForm = ({ blason, blasonChange, tinctureConfiguration }: Props) => {
+export const BlasonForm = React.memo(function BlasonForm({ blason, blasonChange, tinctureConfiguration }: Props) {
   if (blason.kind === 'simple') {
     return (
       <SimpleBlasonForm tinctureConfiguration={tinctureConfiguration} blason={blason} blasonChange={blasonChange} />
     );
   } else if (blason.kind === 'quarterly') {
-    const quarterlyBlasonChange = (i: 0 | 1 | 2 | 3) => (newBlason: SimpleBlason) => {
-      const blasons = [
-        i === 0 ? newBlason : blason.blasons[0],
-        i === 1 ? newBlason : blason.blasons[1],
-        i === 2 ? newBlason : blason.blasons[2],
-        i === 3 ? newBlason : blason.blasons[3],
-      ] as const;
+    const quarterlyBlasonChange = useCallback(
+      (i: 0 | 1 | 2 | 3) => (newBlason: SimpleBlason) => {
+        const blasons = [
+          i === 0 ? newBlason : blason.blasons[0],
+          i === 1 ? newBlason : blason.blasons[1],
+          i === 2 ? newBlason : blason.blasons[2],
+          i === 3 ? newBlason : blason.blasons[3],
+        ] as const;
 
-      blasonChange({
-        ...blason,
-        blasons,
-      });
-    };
+        blasonChange({
+          ...blason,
+          blasons,
+        });
+      },
+      [blasonChange]
+    );
     return (
       <div>
         <SimpleBlasonForm
@@ -55,4 +59,4 @@ export const BlasonForm = ({ blason, blasonChange, tinctureConfiguration }: Prop
   } else {
     return cannotHappen(blason);
   }
-};
+});

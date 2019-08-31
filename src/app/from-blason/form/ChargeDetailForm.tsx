@@ -10,7 +10,7 @@ import { CrossForm } from './charges/CrossForm';
 import { TinctureConfiguration } from '../../model/tincture-configuration';
 
 type Props = { tinctureConfiguration: TinctureConfiguration; charge: Charge; chargeChange: (charge: Charge) => void };
-export const ChargeDetailForm = ({ tinctureConfiguration, charge, chargeChange }: Props) => {
+export function ChargeDetailForm({ tinctureConfiguration, charge, chargeChange }: Props) {
   if (charge.name === 'lion') {
     return <LionForm tinctureConfiguration={tinctureConfiguration} charge={charge} chargeChange={chargeChange} />;
   } else if (charge.name === 'eagle') {

@@ -1,13 +1,12 @@
 import * as React from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Blason } from '../model/blason';
-import { useState } from 'react';
 import { stringifyBlason } from './blason.helpers';
-import { useEffect } from 'react';
 import { parseBlason } from '../blason-parser/blasonParser';
 import { isEqual } from 'lodash';
 
 type Props = { blason: Blason; blasonChange: (blason: Blason) => void };
-export const BlasonForm = ({ blason, blasonChange }: Props) => {
+export function BlasonForm({ blason, blasonChange }: Props) {
   const [blasonStr, setBlasonStr] = useState(stringifyBlason(blason));
   const [blasonErr, setBlasonErr] = useState<Array<string>>([]);
 
@@ -15,18 +14,21 @@ export const BlasonForm = ({ blason, blasonChange }: Props) => {
     setBlasonStr(stringifyBlason(blason));
   }, [blason]);
 
-  function updateBlason(str: string) {
-    setBlasonStr(str);
-    const result = parseBlason(str);
-    if ('error' in result) {
-      setBlasonErr([result.error]);
-    } else {
-      if (!isEqual(blason, result)) {
-        blasonChange(result);
-        setBlasonErr([]);
+  const updateBlason = useCallback(
+    function updateBlason(str: string) {
+      setBlasonStr(str);
+      const result = parseBlason(str);
+      if ('error' in result) {
+        setBlasonErr([result.error]);
+      } else {
+        if (!isEqual(blason, result)) {
+          blasonChange(result);
+          setBlasonErr([]);
+        }
       }
-    }
-  }
+    },
+    [blason, blasonChange]
+  );
 
   return (
     <>
@@ -48,4 +50,4 @@ export const BlasonForm = ({ blason, blasonChange }: Props) => {
       </pre>
     </>
   );
-};
+}
