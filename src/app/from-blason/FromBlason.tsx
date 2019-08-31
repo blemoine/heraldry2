@@ -7,9 +7,11 @@ import { defaultTinctureConfiguration } from '../model/tincture-configuration';
 import { Configuration } from '../model/configuration';
 import { useLocalStorage } from '../../utils/useLocalStorage';
 import { BlasonForm } from './form/BlasonForm';
+import { PageState } from '../model/pageState';
 
 const baseDefaultBlason: Blason = { kind: 'simple', field: { kind: 'plain', tincture: gules } } as const;
-export const FromBlason = () => {
+type Props = { pageState: PageState };
+export const FromBlason = ({ pageState }: Props) => {
   const blasonLocalStorageKey = 'default-blason#2';
   const [blason, setBlason] = useLocalStorage<Blason>(blasonLocalStorageKey, baseDefaultBlason);
 
@@ -21,8 +23,12 @@ export const FromBlason = () => {
 
   return (
     <>
-      <ConfigurationForm configuration={configuration} configurationChange={setConfiguration} />
-      <div className="row">
+      <ConfigurationForm
+        isOpen={pageState.configurationOpened}
+        configuration={configuration}
+        configurationChange={setConfiguration}
+      />
+      <div className="row mt-3 ml-2 mr-2">
         <div className="col-md-12 col-lg-6">
           <BlasonForm
             tinctureConfiguration={configuration.tinctureConfiguration}

@@ -3,13 +3,14 @@ import { FromBlason } from './FromBlason';
 import { render, fireEvent } from '@testing-library/react';
 import { selectElement, selectInReactSelect, selectTincture } from '../../utils/tests/select-test.utils';
 import { argent, azure, ermine, gules, murrey, purpure, vair } from '../model/tincture';
+import { defaultPageState } from '../model/pageState';
 
 describe('From Blason', () => {
   beforeEach(() => {
     localStorage.clear();
   });
   it('should reflect the change of field tincture in the blason', () => {
-    const fromBlason = render(<FromBlason />);
+    const fromBlason = render(<FromBlason pageState={defaultPageState} />);
 
     return selectTincture('.field-tincture-select', ermine).then(() => {
       const blason = (fromBlason.getByPlaceholderText('Enter the blason here') as HTMLTextAreaElement).value;
@@ -18,7 +19,7 @@ describe('From Blason', () => {
   });
 
   it('should reflect the change of the field type in the blason', () => {
-    const fromBlason = render(<FromBlason />);
+    const fromBlason = render(<FromBlason pageState={defaultPageState} />);
 
     return selectInReactSelect('.field-type-select', 'field-type', 'chequy')
       .then(() => selectTincture('.field-first-tincture-select', vair))
@@ -30,7 +31,7 @@ describe('From Blason', () => {
   });
 
   it('should reflect the change of the charge type in the blason', () => {
-    const fromBlason = render(<FromBlason />);
+    const fromBlason = render(<FromBlason pageState={defaultPageState} />);
 
     return selectInReactSelect('.field-type-select', 'field-type', 'paly')
       .then(() => selectTincture('.field-first-tincture-select', argent))
@@ -44,7 +45,7 @@ describe('From Blason', () => {
   });
 
   it('should reflect the change of the ordinary type in the blason', () => {
-    const fromBlason = render(<FromBlason />);
+    const fromBlason = render(<FromBlason pageState={defaultPageState} />);
 
     return selectInReactSelect('.field-type-select', 'field-type', 'barry')
       .then(() => selectTincture('.field-first-tincture-select', argent))
@@ -58,7 +59,7 @@ describe('From Blason', () => {
   });
 
   it('should reflect the change of the blason string in the form', () => {
-    const fromBlason = render(<FromBlason />);
+    const fromBlason = render(<FromBlason pageState={defaultPageState} />);
 
     const blason = fromBlason.getByPlaceholderText('Enter the blason here') as HTMLTextAreaElement;
     fireEvent.change(blason, {

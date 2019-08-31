@@ -393,7 +393,10 @@ Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Chequy, Chevronny, C
     expect(parseBlason('Bendy of ten or and gules')).toEqual(expected);
   });
   it('should parse a bendy sinister of ten field', () => {
-    const expected: SimpleBlason = { kind: 'simple', field: { kind: 'bendySinister', number: 10, tinctures: [or, gules] } };
+    const expected: SimpleBlason = {
+      kind: 'simple',
+      field: { kind: 'bendySinister', number: 10, tinctures: [or, gules] },
+    };
 
     expect(parseBlason('Bendy sinister of ten or and gules')).toEqual(expected);
   });
