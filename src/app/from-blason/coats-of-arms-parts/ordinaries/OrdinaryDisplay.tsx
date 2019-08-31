@@ -70,7 +70,13 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape 
   } else if (ordinary.name === 'bendSinister') {
     return (
       <g transform={`scale(-1,1) translate(-${width} 0)`}>
-        <OrdinaryDisplay ordinary={{ ...ordinary, name: 'bend' }} fill={fill} dimension={dimension} shape={shape} shieldShape={shieldShape} />
+        <OrdinaryDisplay
+          ordinary={{ ...ordinary, name: 'bend' }}
+          fill={fill}
+          dimension={dimension}
+          shape={shape}
+          shieldShape={shieldShape}
+        />
       </g>
     );
   } else if (ordinary.name === 'pale') {
@@ -162,14 +168,72 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape 
     const translateVector = [bordureWidth, bordureHeight] as const;
 
     let basePathBuilderFn: (dimension: Dimension, lineOptions: LineOptions | null) => SvgPathBuilder;
-    if (shieldShape === 'swiss') {
-      basePathBuilderFn = swissPathBuilder;
-    } else if (shieldShape === 'spanish') {
-      basePathBuilderFn = spanishPathBuilder;
-    } else if (shieldShape === 'heater') {
-      basePathBuilderFn = heaterPathBuilder;
+    if (shape === 'default') {
+      if (shieldShape === 'swiss') {
+        basePathBuilderFn = swissPathBuilder;
+      } else if (shieldShape === 'spanish') {
+        basePathBuilderFn = spanishPathBuilder;
+      } else if (shieldShape === 'heater') {
+        basePathBuilderFn = heaterPathBuilder;
+      } else {
+        return cannotHappen(shieldShape);
+      }
+    } else if (shape === 'square') {
+      if (shieldShape === 'swiss') {
+        basePathBuilderFn = ({ width, height }: Dimension, lineOptions: LineOptions | null) =>
+          SvgPathBuilder.start([0, 0])
+            .arcTo([width, 0], { radius: width * 0.9 }, lineOptions)
+            .goTo([width, height], lineOptions)
+            .goTo([0, height], lineOptions)
+            .goTo([0, 0], lineOptions);
+      } else if (shieldShape === 'spanish' || shieldShape === 'heater') {
+        basePathBuilderFn = ({ width, height }: Dimension, lineOptions: LineOptions | null) =>
+          SvgPathBuilder.start([0, 0])
+            .goTo([width, 0], lineOptions)
+            .goTo([width, height], lineOptions)
+            .goTo([0, height], lineOptions)
+            .goTo([0, 0], lineOptions);
+      } else {
+        return cannotHappen(shieldShape);
+      }
+    } else if (shape === 'leftCut') {
+      if (shieldShape === 'spanish') {
+        basePathBuilderFn = ({ width, height }: Dimension, lineOptions: LineOptions | null) =>
+          SvgPathBuilder.start([0, 0])
+            .goTo([width, 0], lineOptions)
+            .goTo([width, height], lineOptions)
+            .arcTo([0, height / 5], { radius: width, sweep: 1 }, lineOptions)
+            .goTo([0, 0], lineOptions);
+      } else if (shieldShape === 'swiss' || shieldShape === 'heater') {
+        basePathBuilderFn = ({ width, height }: Dimension, lineOptions: LineOptions | null) =>
+          SvgPathBuilder.start([0, 0])
+            .goTo([width, 0], lineOptions)
+            .goTo([width, height], lineOptions)
+            .arcTo([0, (1.5 * height) / 5], { radius: width * 1.7, sweep: 1 }, lineOptions)
+            .goTo([0, 0], lineOptions);
+      } else {
+        return cannotHappen(shieldShape);
+      }
+    } else if (shape === 'rightCut') {
+      if (shieldShape === 'spanish') {
+        basePathBuilderFn = ({ width, height }: Dimension, lineOptions: LineOptions | null) =>
+          SvgPathBuilder.start([0, 0])
+            .goTo([width, 0], lineOptions)
+            .goTo([width, height / 5], lineOptions)
+            .arcTo([0, height], { radius: width, sweep: 1 }, lineOptions)
+            .goTo([0, 0], lineOptions);
+      } else if (shieldShape === 'swiss' || shieldShape === 'heater') {
+        basePathBuilderFn = ({ width, height }: Dimension, lineOptions: LineOptions | null) =>
+          SvgPathBuilder.start([0, 0])
+            .goTo([width, 0], lineOptions)
+            .goTo([width, (1.5 * height) / 5], lineOptions)
+            .arcTo([0, height], { radius: width * 1.7, sweep: 1 }, lineOptions)
+            .goTo([0, 0], lineOptions);
+      } else {
+        return cannotHappen(shieldShape);
+      }
     } else {
-      return cannotHappen(shieldShape);
+      return cannotHappen(shape);
     }
 
     const pathBuilder = basePathBuilderFn({ height, width }, null)
@@ -184,7 +248,7 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape 
       throw new Error(`Got ${JSON.stringify(pathBuilder)} error`);
     }
 
-    return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke="transparent" fillRule={'evenodd'} />;
+    return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke="#333" fillRule={'evenodd'} />;
   } else {
     return cannotHappen(ordinary);
   }

@@ -109,6 +109,9 @@ describe('CoatsOfArms', () => {
   snapshotTest('Vert, two crosses hummetty counter potent');
   snapshotTest('Purpure, four crosses crosselet or');
   snapshotTest('Erminois, four crosses bottony argent');
+  snapshotTest(
+    'Quarterly, 1st: Bendy or and purpure, a bordure argent;2nd: Bendy of eight azure and or, a bordure argent;3rd: Bendy of eight or and vert, a bordure argent;4th: Bendy of eight or and gules, a bordure argent'
+  );
 });
 
 function snapshotTest(blason: string) {
