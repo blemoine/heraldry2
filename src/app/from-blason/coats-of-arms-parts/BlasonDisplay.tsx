@@ -4,14 +4,16 @@ import { Dimension, scale } from '../../model/dimension';
 import { cannotHappen } from '../../../utils/cannot-happen';
 import { SimpleBlasonDisplay } from './SimpleBlasonDisplay';
 import { Tincture } from '../../model/tincture';
+import { ShieldShape } from '../../model/configuration';
 
 type Props = {
   blason: Blason;
   dimension: Dimension;
   fillFromTincture: (tincture: Tincture) => string;
   clipPathId: string;
+  shieldShape: ShieldShape;
 };
-export const BlasonDisplay = ({ blason, dimension, fillFromTincture, clipPathId }: Props) => {
+export const BlasonDisplay = ({ blason, dimension, fillFromTincture, clipPathId, shieldShape }: Props) => {
   if (blason.kind === 'simple') {
     return (
       <SimpleBlasonDisplay
@@ -20,6 +22,7 @@ export const BlasonDisplay = ({ blason, dimension, fillFromTincture, clipPathId 
         fillFromTincture={fillFromTincture}
         clipPathId={clipPathId}
         shape="default"
+        shieldShape={shieldShape}
       />
     );
   } else if (blason.kind === 'quarterly') {
@@ -49,6 +52,7 @@ export const BlasonDisplay = ({ blason, dimension, fillFromTincture, clipPathId 
                   fillFromTincture={fillFromTincture}
                   clipPathId="quarterly-clip-path"
                   shape={shape}
+                  shieldShape={shieldShape}
                 />
               </g>
             );

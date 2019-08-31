@@ -6,6 +6,7 @@ import { OrdinaryDisplay } from './ordinaries/OrdinaryDisplay';
 import { ChargeDisplay } from './ChargeDisplay';
 import { Tincture } from '../../model/tincture';
 import { SimpleBlasonShape } from './blasonDisplay.helper';
+import { ShieldShape } from '../../model/configuration';
 
 type Props = {
   blason: SimpleBlason;
@@ -13,8 +14,9 @@ type Props = {
   fillFromTincture: (tincture: Tincture) => string;
   clipPathId: string;
   shape: SimpleBlasonShape;
+  shieldShape: ShieldShape
 };
-export const SimpleBlasonDisplay = ({ blason, dimension, fillFromTincture, clipPathId, shape }: Props) => {
+export const SimpleBlasonDisplay = ({ blason, dimension, fillFromTincture, clipPathId, shape, shieldShape }: Props) => {
   const { width, height } = dimension;
   const ordinary = blason.ordinary;
 
@@ -43,7 +45,13 @@ export const SimpleBlasonDisplay = ({ blason, dimension, fillFromTincture, clipP
 
       {ordinary && (
         <g clipPath={clipPathUrl}>
-          <OrdinaryDisplay dimension={dimension} ordinary={ordinary} fill={fillFromTincture(ordinary.tincture)} />
+          <OrdinaryDisplay
+            dimension={dimension}
+            ordinary={ordinary}
+            fill={fillFromTincture(ordinary.tincture)}
+            shape={shape}
+            shieldShape={shieldShape}
+          />
         </g>
       )}
 

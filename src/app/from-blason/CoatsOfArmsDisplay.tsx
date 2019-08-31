@@ -100,6 +100,7 @@ export const CoatsOfArmsDisplay = (props: Props) => {
         dimension={dimension}
         fillFromTincture={fillFromTincture}
         clipPathId="plain-field-clip-path"
+        shieldShape={configuration.shieldShape}
       />
       <EscutcheonDisplay dimension={dimension} shieldShape={configuration.shieldShape} />
     </svg>

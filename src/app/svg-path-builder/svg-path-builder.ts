@@ -1,7 +1,15 @@
 import { cannotHappen } from '../../utils/cannot-happen';
 import { range } from '../../utils/range';
-import { angleBetween, distanceBetween, PathAbsolutePoint, rotate, toDegree, translate } from './geometrical.helper';
-import { pointOnEllipticalArc } from './point-on-elliptical-arc';
+import {
+  angleBetween,
+  arePointEquivalent,
+  distanceBetween,
+  PathAbsolutePoint,
+  rotate,
+  toDegree,
+  translate,
+} from './geometrical.helper';
+import { pointOnEllipticalArc, pointOnQuadraticBezier } from './point-on-elliptical-arc';
 import { round } from '../../utils/round';
 import { Result, raise } from '../../utils/result';
 
@@ -118,8 +126,28 @@ export class SvgPathBuilder {
     }
   }
 
-  quadraticeBezier(point: PathAbsolutePoint, controlPoint: PathAbsolutePoint): SvgPathBuilder {
-    return this.addCommand({ command: 'Q', controlPoint, point });
+  quadraticBezier(
+    point: PathAbsolutePoint,
+    controlPoint: PathAbsolutePoint,
+    lineOptions: LineOptions | null = null
+  ): SvgPathBuilder {
+    if (lineOptions) {
+      if (lineOptions.line === 'with-arc') {
+        const previousPoint = this.currentPoint();
+
+        if (previousPoint === null) {
+          return this.addCommand({ command: 'Q', controlPoint, point });
+        } else {
+          const nextPointFn = (t: number) => pointOnQuadraticBezier(previousPoint, controlPoint, point, t);
+
+          return engrailedBetweenPoints(this, point, lineOptions, nextPointFn);
+        }
+      } else {
+        return cannotHappen(lineOptions.line);
+      }
+    } else {
+      return this.addCommand({ command: 'Q', controlPoint, point });
+    }
   }
 
   cubicBezier(point: PathAbsolutePoint, controlPoints: [PathAbsolutePoint, PathAbsolutePoint]): SvgPathBuilder {
@@ -146,7 +174,14 @@ export class SvgPathBuilder {
       }
     } else {
       const previousX = getX(this.commands);
-      if (previousX !== null && round(previousX, 5) === round(point[0], 5)) {
+
+      const firstCommand = this.commands[0];
+      const firstPointX = firstCommand ? getX([firstCommand]) : null;
+      const firstPointY = firstCommand ? getY([firstCommand]) : null;
+
+      if (firstPointX !== null && firstPointY !== null && arePointEquivalent(point, [firstPointX, firstPointY])) {
+        return this.addCommand({ command: 'Z' });
+      } else if (previousX !== null && round(previousX, 5) === round(point[0], 5)) {
         return this.addCommand({ command: 'V', coordinate: point[1] });
       } else {
         const previousY = getY(this.commands);
@@ -317,12 +352,7 @@ export class SvgPathBuilder {
   concat(path: SvgPathBuilder): Result<SvgPathBuilder> {
     const lastPoint = this.currentPoint();
     const pathStartPoint = path.getStartPoint();
-    if (
-      lastPoint &&
-      pathStartPoint &&
-      round(lastPoint[0], 5) === round(pathStartPoint[0], 5) &&
-      round(lastPoint[1], 5) === round(pathStartPoint[1], 5)
-    ) {
+    if (lastPoint && pathStartPoint && arePointEquivalent(lastPoint, pathStartPoint)) {
       return new SvgPathBuilder(this.commands.concat(path.commands.slice(1)));
     } else {
       return raise(`The current endpoint ${lastPoint} and param startPoint ${pathStartPoint} are not the same`);

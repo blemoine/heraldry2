@@ -3,13 +3,24 @@ import { Ordinary } from '../../../model/ordinary';
 import { cannotHappen } from '../../../../utils/cannot-happen';
 import { Dimension } from '../../../model/dimension';
 import { range } from '../../../../utils/range';
-import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
+import { LineOptions, SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { PathFromBuilder } from '../../../common/PathFromBuilder';
-import { chiefHeightRatio, computeLineOptions } from '../blasonDisplay.helper';
+import { chiefHeightRatio, computeLineOptions, SimpleBlasonShape } from '../blasonDisplay.helper';
+import { ShieldShape } from '../../../model/configuration';
+import { swissPathBuilder } from '../escutcheon/SwissDisplay';
+import { isError } from '../../../../utils/result';
+import { spanishPathBuilder } from '../escutcheon/SpanishDisplay';
+import { heaterPathBuilder } from '../escutcheon/HeaterDisplay';
 
-type Props = { ordinary: Ordinary; fill: string; dimension: Dimension };
+type Props = {
+  ordinary: Ordinary;
+  fill: string;
+  dimension: Dimension;
+  shape: SimpleBlasonShape;
+  shieldShape: ShieldShape;
+};
 
-export const OrdinaryDisplay = ({ ordinary, fill, dimension }: Props) => {
+export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape }: Props) => {
   const { width, height } = dimension;
   if (ordinary.name === 'chief') {
     const chiefHeight = height * chiefHeightRatio;
@@ -59,7 +70,7 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension }: Props) => {
   } else if (ordinary.name === 'bendSinister') {
     return (
       <g transform={`scale(-1,1) translate(-${width} 0)`}>
-        <OrdinaryDisplay ordinary={{ ...ordinary, name: 'bend' }} fill={fill} dimension={dimension} />
+        <OrdinaryDisplay ordinary={{ ...ordinary, name: 'bend' }} fill={fill} dimension={dimension} shape={shape} shieldShape={shieldShape} />
       </g>
     );
   } else if (ordinary.name === 'pale') {
@@ -70,7 +81,6 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension }: Props) => {
           const startX = ((i * 2 + 1) * width) / (2 * ordinary.count + 1);
           const paleWidth = width / (2 * ordinary.count + 1);
           const pathBuilder = SvgPathBuilder.start([startX, 0])
-            .goTo([startX, 0])
             .goTo([startX, height], lineOptions)
             .goTo([startX + paleWidth, height])
             .goTo([startX + paleWidth, 0], lineOptions);
@@ -148,19 +158,31 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension }: Props) => {
 
     const lineOptions = computeLineOptions(ordinary.line, dimension);
 
-    const pathBuilder = SvgPathBuilder.start([0, 0])
-      .goTo([width, 0])
-      .goTo([width, height / 3])
-      .arcTo([width / 2, height], { radius: width, xAxisRotation: 90, sweep: 1 })
-      .arcTo([0, height / 3], { radius: width, xAxisRotation: -90, sweep: 1 })
-      .goTo([0, 0])
-      .goTo([bordureWidth, bordureWidth])
-      .goTo([width - bordureWidth, bordureWidth], lineOptions)
-      .goTo([width - bordureWidth, height / 3], lineOptions)
-      .arcTo([width / 2, height - bordureWidth], { radius: width, xAxisRotation: 90, sweep: 1 }, lineOptions)
-      .arcTo([bordureWidth, height / 3], { radius: width, xAxisRotation: -90, sweep: 1 }, lineOptions)
-      .goTo([bordureWidth, bordureWidth], lineOptions)
-      .close();
+    const bordureHeight = height / 10;
+    const translateVector = [bordureWidth, bordureHeight] as const;
+
+    let basePathBuilderFn: (dimension: Dimension, lineOptions: LineOptions | null) => SvgPathBuilder;
+    if (shieldShape === 'swiss') {
+      basePathBuilderFn = swissPathBuilder;
+    } else if (shieldShape === 'spanish') {
+      basePathBuilderFn = spanishPathBuilder;
+    } else if (shieldShape === 'heater') {
+      basePathBuilderFn = heaterPathBuilder;
+    } else {
+      return cannotHappen(shieldShape);
+    }
+
+    const pathBuilder = basePathBuilderFn({ height, width }, null)
+      .moveTo(translateVector)
+      .concat(
+        basePathBuilderFn(
+          { width: width - 2 * bordureWidth, height: height - 2 * bordureHeight },
+          lineOptions
+        ).translate(translateVector)
+      );
+    if (isError(pathBuilder)) {
+      throw new Error(`Got ${JSON.stringify(pathBuilder)} error`);
+    }
 
     return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke="transparent" fillRule={'evenodd'} />;
   } else {

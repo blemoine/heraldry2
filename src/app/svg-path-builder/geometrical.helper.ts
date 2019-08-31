@@ -1,3 +1,5 @@
+import { round } from '../../utils/round';
+
 export type PathAbsolutePoint = readonly [number, number];
 
 export function toRadians(angle: number): number {
@@ -38,4 +40,8 @@ export function rotate(
 
 export function translate([x, y]: PathAbsolutePoint, translation: PathAbsolutePoint): PathAbsolutePoint {
   return [x + translation[0], y + translation[1]];
+}
+
+export function arePointEquivalent([x1, y1]: PathAbsolutePoint, [x2, y2]: PathAbsolutePoint): boolean {
+  return round(x1, 5) === round(x2, 5) && round(y1, 5) === round(y2, 5);
 }

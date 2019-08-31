@@ -14,12 +14,12 @@ export const CrossPatty = ({ fill, stroke, center, crossWidth, crossRadius }: Pr
 
   const wideFactor = 6;
   const topLimb = SvgPathBuilder.start([centerX - crossWidth, centerY - crossWidth])
-    .quadraticeBezier(
+    .quadraticBezier(
       [centerX - wideFactor * crossWidth, centerY - crossRadius],
       [centerX - crossWidth, (centerY - crossWidth + (centerY - crossRadius)) / 2]
     )
     .goTo([centerX + wideFactor * crossWidth, centerY - crossRadius])
-    .quadraticeBezier(
+    .quadraticBezier(
       [centerX + crossWidth, centerY - crossWidth],
       [centerX + crossWidth, (centerY - crossWidth + (centerY - crossRadius)) / 2]
     );

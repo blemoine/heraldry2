@@ -116,6 +116,22 @@ function pointOnLine(p0: PathAbsolutePoint, p1: PathAbsolutePoint, t: number): P
   return [calculateLineParameter(p0[0], p1[0], t), calculateLineParameter(p0[1], p1[1], t)];
 }
 
+export function pointOnQuadraticBezier(
+  p0: PathAbsolutePoint,
+  p1: PathAbsolutePoint,
+  p2: PathAbsolutePoint,
+  t: number
+): PathAbsolutePoint {
+  function calculateQuadraticBezierParameter(x0: number, x1: number, x2: number, t: number) {
+    return Math.pow(1 - t, 2) * x0 + 2 * t * (1 - t) * x1 + Math.pow(t, 2) * x2;
+  }
+
+  return [
+    calculateQuadraticBezierParameter(p0[0], p1[0], p2[0], t),
+    calculateQuadraticBezierParameter(p0[1], p1[1], p2[1], t),
+  ];
+}
+
 function mod(x: number, m: number): number {
   return ((x % m) + m) % m;
 }

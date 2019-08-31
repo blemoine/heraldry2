@@ -101,7 +101,7 @@ describe('SvgPathBuilder', () => {
   });
 
   it('should support quadratic bezier', () => {
-    const result = SvgPathBuilder.start([10, 10]).quadraticeBezier([20, 30], [5, 7]);
+    const result = SvgPathBuilder.start([10, 10]).quadraticBezier([20, 30], [5, 7]);
 
     expect(result.toPathAttribute()).toEqual('M 10 10 Q 5 7 20 30');
   });
@@ -201,4 +201,10 @@ describe('SvgPathBuilder', () => {
 
     expect((result as SvgPathBuilder).toPathAttribute()).toEqual('M 0 0 H12 L 23 34 L 7 8');
   });
+
+  it('should optimize the goto', () => {
+    const result = SvgPathBuilder.start([12,24]).goTo([65,78]).goTo([12,24]);
+
+    expect((result as SvgPathBuilder).toPathAttribute()).toEqual('M 12 24 L 65 78 Z');
+  })
 });
