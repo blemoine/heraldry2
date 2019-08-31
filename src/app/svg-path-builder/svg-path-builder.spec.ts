@@ -183,6 +183,15 @@ describe('SvgPathBuilder', () => {
     expect(result.toPathAttribute()).toEqual('M 10 24 A9 9 0 0 0 14 24');
   });
 
+  it('should support translation of bezier curves ', () => {
+    const result = SvgPathBuilder.start([4, 12])
+      .cubicBezier([1, 2], [[6, 7], [8, 9]])
+      .quadraticBezier([10, 11], [12, 13])
+      .translate([6, 12]);
+
+    expect(result.toPathAttribute()).toEqual('M 10 24 C 12 19 14 21 7 14 Q 18 25 16 23');
+  });
+
   it('should support translation of horizontal and vertical move ', () => {
     const result = SvgPathBuilder.start([0, 0])
       .horizontalMove(3)
