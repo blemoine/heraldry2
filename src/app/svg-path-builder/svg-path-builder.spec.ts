@@ -203,8 +203,10 @@ describe('SvgPathBuilder', () => {
   });
 
   it('should optimize the goto', () => {
-    const result = SvgPathBuilder.start([12,24]).goTo([65,78]).goTo([12,24]);
+    const result = SvgPathBuilder.start([12, 24])
+      .goTo([65, 78])
+      .goTo([12, 24]);
 
     expect((result as SvgPathBuilder).toPathAttribute()).toEqual('M 12 24 L 65 78 Z');
-  })
+  });
 });

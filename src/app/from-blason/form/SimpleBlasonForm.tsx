@@ -38,7 +38,7 @@ export const SimpleBlasonForm = ({ tinctureConfiguration, blason, blasonChange }
     }
   }
   return (
-    <div style={{border: '1px solid #CCC', padding: '5px'}}>
+    <div style={{ border: '1px solid #CCC', padding: '5px' }}>
       <FieldForm tinctureConfiguration={tinctureConfiguration} field={blason.field} fieldChange={fieldChange} />
       <OrdinaryForm
         tinctureConfiguration={tinctureConfiguration}

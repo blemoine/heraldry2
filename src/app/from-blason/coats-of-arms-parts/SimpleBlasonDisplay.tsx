@@ -14,7 +14,7 @@ type Props = {
   fillFromTincture: (tincture: Tincture) => string;
   clipPathId: string;
   shape: SimpleBlasonShape;
-  shieldShape: ShieldShape
+  shieldShape: ShieldShape;
 };
 export const SimpleBlasonDisplay = ({ blason, dimension, fillFromTincture, clipPathId, shape, shieldShape }: Props) => {
   const { width, height } = dimension;

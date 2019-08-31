@@ -65,10 +65,10 @@ export const PartyForm = ({ tinctureConfiguration, field, fieldChange }: Props) 
         </div>
       </div>
       <div className="col">
-      <div className="form-group">
-        <label>Select the line style</label>
-        <LineSelect line={field.per.line} lineChange={lineChange} />
-      </div>
+        <div className="form-group">
+          <label>Select the line style</label>
+          <LineSelect line={field.per.line} lineChange={lineChange} />
+        </div>
       </div>
     </div>
   );

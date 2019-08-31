@@ -32,7 +32,7 @@ export const BlasonForm = ({ blason, blasonChange }: Props) => {
     <>
       <div className="form-group" style={{ padding: '5px 10px', marginTop: '10px' }}>
         <textarea
-          style={{height:'120px'}}
+          style={{ height: '120px' }}
           value={blasonStr}
           onChange={(e) => updateBlason(e.target.value)}
           placeholder="Enter the blason here"
