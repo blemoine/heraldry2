@@ -29,6 +29,7 @@ export type BendyField = {
 };
 export type BendySinisterField = {
   kind: 'bendySinister';
+  number: 6 | 8 | 10;
   tinctures: [Tincture, Tincture];
 };
 

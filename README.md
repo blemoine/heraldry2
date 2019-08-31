@@ -43,4 +43,3 @@ Faire le "of the last"
 *Supporter le clic sur une zone -> edition
 * Bordure quarterly is broken
 * 9 charge auqrterly is broken
-*Support for bendy sinister of

@@ -84,7 +84,7 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
       return cannotHappen(shape);
     }
 
-    return <BendySinisterDisplay fill={fill} dimension={updatedDimension} />;
+    return <BendySinisterDisplay fill={fill} dimension={updatedDimension} number={field.number} />;
   } else if (field.kind === 'paly') {
     const fill: [string, string] = fillFromTincturePair(field.tinctures);
     return <PalyDisplay fill={fill} dimension={dimension} />;

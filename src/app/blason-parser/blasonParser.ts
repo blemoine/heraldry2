@@ -4,7 +4,7 @@ import { parties, Party } from '../model/party';
 import { Ordinary, OrdinaryCross } from '../model/ordinary';
 import { stringifyParty } from '../from-blason/blason.helpers';
 import { Charge, Cross } from '../model/charge';
-import { BarryField, BendyField, Field, PartyField, PlainField } from '../model/field';
+import { BarryField, BendyField, BendySinisterField, Field, PartyField, PlainField } from '../model/field';
 import { buildAltParser, constStr, lineParser } from './parser.helper';
 import { tinctureParserFromCapitalizedName, tinctureParserFromName } from './tinctureParser';
 import { ordinaryParser } from './ordinaryParser';
@@ -56,6 +56,7 @@ const language: Language = {
     const bendyParser: P.Parser<BendyField> = P.seq(
       P.alt(
         constStr('Bendy of')
+          .desc('Bendy')
           .skip(P.whitespace)
           .then(buildAltParser([6, 8, 10] as const, stringifyNumber)),
         constStr('Bendy').result(6 as const)
@@ -68,9 +69,28 @@ const language: Language = {
       ([number, tincture1, tincture2]): BendyField => ({ kind: 'bendy', number, tinctures: [tincture1, tincture2] })
     );
 
+    const bendySinisterParser: P.Parser<BendySinisterField> = P.seq(
+      P.alt(
+        constStr('Bendy Sinister of')
+          .desc('Bendy Sinister')
+          .skip(P.whitespace)
+          .then(buildAltParser([6, 8, 10] as const, stringifyNumber)),
+        constStr('Bendy Sinister').result(6 as const)
+      ),
+      P.whitespace.then(tinctureParserFromName).skip(P.whitespace),
+      P.regex(/and/i)
+        .skip(P.whitespace)
+        .then(tinctureParserFromName)
+    ).map(
+      ([number, tincture1, tincture2]): BendySinisterField => ({
+        kind: 'bendySinister',
+        number,
+        tinctures: [tincture1, tincture2],
+      })
+    );
+
     const palyBendyParser: P.Parser<Exclude<Field, PlainField>> = P.seq(
       P.alt(
-        constStr('bendySinister', 'Bendy Sinister'),
         constStr('paly-pily', 'Paly pily'),
         constStr('barry-pily', 'Barry pily'),
         constStr('paly'),
@@ -95,6 +115,7 @@ const language: Language = {
         tincture,
       })),
       r.Party.map((party) => ({ kind: 'party', per: party })),
+      bendySinisterParser,
       bendyParser,
       barryParser,
       palyBendyParser

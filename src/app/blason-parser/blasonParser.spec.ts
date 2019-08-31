@@ -123,7 +123,7 @@ describe('parseBlason', () => {
 
 Expected one of the following: 
 
-Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Bendy of, Chequy, Chevronny, Counter ermine, Counter potent, Counter vair, Ermine, Erminois, Gules, Lozengy, Murrey, Or, Paly, Paly pily, Pean, Per, Potent, Potent en pale, Potent en point, Purpure, Quarterly, Sable, Sanguine, Tenné, Vair, Vair en pale, Vair en point, Vert
+Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Chequy, Chevronny, Counter ermine, Counter potent, Counter vair, Ermine, Erminois, Gules, Lozengy, Murrey, Or, Paly, Paly pily, Pean, Per, Potent, Potent en pale, Potent en point, Purpure, Quarterly, Sable, Sanguine, Tenné, Vair, Vair en pale, Vair en point, Vert
 `,
     });
   });
@@ -387,10 +387,15 @@ Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Bendy of, Chequy, Ch
     expect(parseBlason('Quarterly, 1st: gules; 2nd: azure; 3rd: vert; 4th: ermine')).toEqual(expected);
   });
 
-  it('should parse a bendy field', () => {
+  it('should parse a bendy of ten field', () => {
     const expected: SimpleBlason = { kind: 'simple', field: { kind: 'bendy', number: 10, tinctures: [or, gules] } };
 
     expect(parseBlason('Bendy of ten or and gules')).toEqual(expected);
+  });
+  it('should parse a bendy sinister of ten field', () => {
+    const expected: SimpleBlason = { kind: 'simple', field: { kind: 'bendySinister', number: 10, tinctures: [or, gules] } };
+
+    expect(parseBlason('Bendy sinister of ten or and gules')).toEqual(expected);
   });
 
   it('should support the arms of Correze', () => {
