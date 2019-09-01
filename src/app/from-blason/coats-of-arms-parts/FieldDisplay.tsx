@@ -64,7 +64,7 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
     } else if (shape === 'square' || shape === 'rightCut') {
       updatedDimension = { width: dimension.width, height: dimension.height * 1.2 };
     } else if (shape === 'leftCut') {
-      updatedDimension = { width: dimension.width, height: dimension.height * 0.8 };
+      updatedDimension = { width: dimension.width, height: dimension.height * 0.87 };
     } else {
       return cannotHappen(shape);
     }

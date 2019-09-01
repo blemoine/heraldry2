@@ -159,27 +159,53 @@ const language: Language = {
   },
 
   Blason(r: AppliedLanguage): P.Parser<Blason> {
-    const quarterlyParser: P.Parser<QuarterlyBlason> = P.seq(
-      P.alt(P.regexp(/1st:/i).desc('1st'), constStr('first'))
-        .then(P.whitespace)
-        .then(r.SimpleBlason)
-        .skip(P.string(';'))
-        .skip(P.optWhitespace),
-      P.alt(P.regexp(/2nd:/i).desc('2nd'), constStr('second'))
-        .then(P.whitespace)
-        .then(r.SimpleBlason)
-        .skip(P.string(';'))
-        .skip(P.optWhitespace),
-      P.alt(P.regexp(/3rd:/i).desc('3rd'), constStr('third'))
-        .then(P.whitespace)
-        .then(r.SimpleBlason)
-        .skip(P.string(';'))
-        .skip(P.optWhitespace),
-      P.alt(P.regexp(/4th:/i).desc('4th'), constStr('fourth'))
-        .then(P.whitespace)
-        .then(r.SimpleBlason)
-    ).map((blasons): QuarterlyBlason => ({ kind: 'quarterly', blasons }));
+    const firstParser = P.alt(P.regexp(/1st:?/i), P.regexp(/first:?/i))
+      .result(1 as const)
+      .desc('first');
+    const secondParser = P.alt(P.regexp(/2nd:?/i), P.regexp(/second:?/i))
+      .result(2 as const)
+      .desc('second');
+    const thirdParser = P.alt(P.regexp(/3rd:?/i), P.regexp(/third:?/i))
+      .result(3 as const)
+      .desc('third');
+    const fourthParser = P.alt(P.regexp(/4th:?/i), P.regexp(/fourth:?/i))
+      .result(4 as const)
+      .desc('fourth');
 
+    const ordinalParser: P.Parser<1 | 2 | 3 | 4> = P.alt(firstParser, secondParser, thirdParser, fourthParser);
+    const ordinalCombinationParser: P.Parser<Array<1 | 2 | 3 | 4>> = P.sepBy(
+      ordinalParser,
+      P.string('and').wrap(P.whitespace, P.whitespace)
+    );
+
+    const quarterParser: P.Parser<[Array<1 | 2 | 3 | 4>, SimpleBlason]> = P.seq(
+      ordinalCombinationParser.skip(P.optWhitespace),
+      r.SimpleBlason
+    );
+    const quarterlyParser: P.Parser<QuarterlyBlason> = P.sepBy(
+      quarterParser,
+      P.string(';').wrap(P.optWhitespace, P.optWhitespace)
+    ).chain((positionsAndBlasons) => {
+      const [blason1, blason2, blason3, blason4] = positionsAndBlasons.reduce<Array<SimpleBlason | null>>(
+        (acc, [positions, blason]) => {
+          positions.forEach((i) => (acc[i - 1] = blason));
+          return acc;
+        },
+        [null, null, null, null]
+      );
+
+      if (!blason1) {
+        return P.fail('Cannot find first blason');
+      } else if (!blason2) {
+        return P.fail('Cannot find second blason');
+      } else if (!blason3) {
+        return P.fail('Cannot find third blason');
+      } else if (!blason4) {
+        return P.fail('Cannot find fourth blason');
+      } else {
+        return P.of({ kind: 'quarterly', blasons: [blason1, blason2, blason3, blason4] });
+      }
+    });
     return P.alt(
       P.regexp(/quarterly,/i)
         .desc('Quarterly')

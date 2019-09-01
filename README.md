@@ -36,9 +36,10 @@ Faire le "of the last"
 - Dans la liste des boucliers, afficher un petit icone représentant la forme attendue
 
 - Quarterly : support syntax like 1 (without ordinal)
-- Quarterly : support syntax like 1 and 4 azure
-- Le form , en particulier en quaterly est vraiment moch
+- Le form , en particulier en quaterly est vraiment moche
 - Supporter le clic sur une zone -> edition
-- 9 charge auqrterly is broken
 - Refondre l'UX (par defaut on affiche que le bouclier + blason, et on peut deplier le form a coté
 - engrailed arcto ne pointe pas au bon endroit (cf bordure engrailed)
+- etre plus lenient sur la syntaxe des quarterly (avec les : et les;)
+- ecrire des tests dans app pour faire un quarterly 
+- faire le form pour les quarterly

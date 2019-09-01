@@ -281,6 +281,20 @@ describe('stringifyBlason', () => {
       })
     ).toBe('Purpure, three mascles or');
   });
+
+  it('should stringify quarterly with repetition', () => {
+    expect(
+      stringifyBlason({
+        kind: 'quarterly',
+        blasons: [
+          { kind: 'simple', field: { kind: 'plain', tincture: or } },
+          { kind: 'simple', field: { kind: 'plain', tincture: azure } },
+          { kind: 'simple', field: { kind: 'plain', tincture: azure } },
+          { kind: 'simple', field: { kind: 'plain', tincture: or } },
+        ],
+      })
+    ).toEqual('Quarterly, 1st and 4th or; 2nd and 3rd azure');
+  });
 });
 
 describe('isThereFur', () => {

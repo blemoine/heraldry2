@@ -387,6 +387,20 @@ Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Chequy, Chevronny, C
     expect(parseBlason('Quarterly, 1st: gules; 2nd: azure; 3rd: vert; 4th: ermine')).toEqual(expected);
   });
 
+  it('should support without :', () => {
+    const expected: QuarterlyBlason = {
+      kind: 'quarterly',
+      blasons: [
+        { kind: 'simple', field: { kind: 'plain', tincture: gules } },
+        { kind: 'simple', field: { kind: 'plain', tincture: azure } },
+        { kind: 'simple', field: { kind: 'plain', tincture: vert } },
+        { kind: 'simple', field: { kind: 'plain', tincture: ermine } },
+      ],
+    };
+
+    expect(parseBlason('Quarterly, 1st: gules; 2nd azure; third vert; fourth: ermine')).toEqual(expected);
+  });
+
   it('should parse a bendy of ten field', () => {
     const expected: SimpleBlason = { kind: 'simple', field: { kind: 'bendy', number: 10, tinctures: [or, gules] } };
 
@@ -441,5 +455,28 @@ Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Chequy, Chevronny, C
         'Quarterly, first or, two lions passant gules; second chequy or and gules; third bendy of ten or and gules; fourth or, three lions azure armed and langued gules'
       )
     ).toEqual(expected);
+  });
+
+  it('should support quarterly with referencing multiple numbers at the same time', () => {
+    const expected: QuarterlyBlason = {
+      kind: 'quarterly',
+      blasons: [
+        { kind: 'simple', field: { kind: 'plain', tincture: or } },
+        { kind: 'simple', field: { kind: 'plain', tincture: azure } },
+        { kind: 'simple', field: { kind: 'plain', tincture: azure } },
+        { kind: 'simple', field: { kind: 'plain', tincture: or } },
+      ],
+    };
+
+    expect(parseBlason('Quarterly, first and fourth or; second and third: azure')).toEqual(expected);
+  });
+
+  it('should return an error if quarterly is missing a quarter', () => {
+    const error = parseBlason('Quarterly, first and fourth or; second: azure');
+    if ('error' in error) {
+      expect(error.error).toMatch('Cannot find third blason');
+    } else {
+      fail(`${error} should be a failure`);
+    }
   });
 });

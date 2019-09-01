@@ -13,9 +13,11 @@ type Props = {
   blasonChange: (blason: Blason) => void;
   configurationChange: (conf: Configuration) => void;
 };
+const headerHeight = '65px';
+const minHeight = `calc(100vh - ${headerHeight})`;
 export function FromBlason({ pageState, blason, configuration, blasonChange, configurationChange }: Props) {
   return (
-    <div style={{ backgroundColor: '#f5f5e0' }}>
+    <div style={{ backgroundColor: '#f5f5e0', minHeight: minHeight }}>
       <ConfigurationForm
         isOpen={pageState.configurationOpened}
         configuration={configuration}

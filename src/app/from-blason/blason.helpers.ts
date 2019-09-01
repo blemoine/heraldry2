@@ -1,4 +1,4 @@
-import { Blason } from '../model/blason';
+import { Blason, SimpleBlason } from '../model/blason';
 import { Furs, gules, or, Tincture } from '../model/tincture';
 import { Party } from '../model/party';
 import { cannotHappen } from '../../utils/cannot-happen';
@@ -8,10 +8,15 @@ import { Field } from '../model/field';
 import { capitalizeFirstLetter } from '../../utils/strings';
 import { Ordinary } from '../model/ordinary';
 import { stringifyNumber, SupportedNumber } from '../model/countAndDisposition';
+import { isEqual } from 'lodash';
 
 export function stringifyBlason(blason: Blason): string {
+  return stringifyBlasonWithCapitalization(blason, true);
+}
+
+function stringifyBlasonWithCapitalization(blason: Blason, shouldCapitalize: boolean): string {
   if (blason.kind === 'simple') {
-    const field = stringifyField(blason.field);
+    const field = stringifyField(blason.field, shouldCapitalize);
 
     const addendum = [
       blason.ordinary ? stringifyOrdinary(blason.ordinary) : null,
@@ -24,7 +29,32 @@ export function stringifyBlason(blason: Blason): string {
       return field;
     }
   } else if (blason.kind === 'quarterly') {
-    return 'Quarterly, ' + blason.blasons.map((b, i) => stringifyOrdinal(i + 1) + ': ' + stringifyBlason(b)).join(';');
+    const groupedBlason = blason.blasons.reduce<Array<{ blason: SimpleBlason; quarter: Array<number> }>>(
+      (acc, blason, i) => {
+        const idx = acc.findIndex((b) => isEqual(b.blason, blason));
+        if (idx < 0) {
+          acc.push({ blason, quarter: [i] });
+        } else {
+          acc[idx].quarter.push(i);
+        }
+
+        return acc;
+      },
+      []
+    );
+
+    return (
+      'Quarterly, ' +
+      groupedBlason
+        .map(({ blason, quarter }) => {
+          return (
+            quarter.map((i) => stringifyOrdinal(i + 1)).join(' and ') +
+            ' ' +
+            stringifyBlasonWithCapitalization(blason, false)
+          );
+        })
+        .join('; ')
+    );
   } else {
     return cannotHappen(blason);
   }
@@ -83,7 +113,7 @@ export function stringifyOrdinaryName(name: Ordinary['name']): string {
   }
 }
 
-function stringifyField(field: Field): string {
+function stringifyField(field: Field, shouldCapitalize: boolean): string {
   if (field.kind === 'party') {
     const perName = stringifyParty(field.per.name);
     const tinctures = field.per.tinctures.map((t) => stringifyTincture(t)).join(' and ');
@@ -94,9 +124,11 @@ function stringifyField(field: Field): string {
     result += tinctures;
     return result;
   } else {
-    const fieldStr = capitalizeFirstLetter(stringifyFieldKind(field.kind));
+    const rawFieldStr = stringifyFieldKind(field.kind);
+    const fieldStr = shouldCapitalize ? capitalizeFirstLetter(rawFieldStr) : rawFieldStr;
     if (field.kind === 'plain') {
-      return capitalizeFirstLetter(stringifyTincture(field.tincture));
+      const tincturesStr = stringifyTincture(field.tincture);
+      return shouldCapitalize ? capitalizeFirstLetter(tincturesStr) : tincturesStr;
     } else if (
       field.kind === 'paly' ||
       field.kind === 'lozengy' ||
