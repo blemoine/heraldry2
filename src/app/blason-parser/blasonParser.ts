@@ -41,54 +41,33 @@ const language: Language = {
   },
 
   Field(r: AppliedLanguage): P.Parser<Field> {
-    const barryParser: P.Parser<BarryField> = P.seq(
-      P.alt(
-        constStr('Barry of')
+    const numberedFieldParserGenerator = <A extends string>(baseName: string, value: A) => {
+      return P.alt(
+        constStr(baseName + ' of')
           .skip(P.whitespace)
           .then(buildAltParser([6, 8, 10] as const, stringifyNumber)),
-        constStr('Barry').result(6 as const)
-      ).desc('Barry'),
-      P.whitespace.then(tinctureParserFromName).skip(P.whitespace),
-      P.regex(/and/i)
-        .skip(P.whitespace)
-        .then(tinctureParserFromName)
-    ).map(
-      ([number, tincture1, tincture2]): BarryField => ({ kind: 'barry', number, tinctures: [tincture1, tincture2] })
-    );
+        constStr(baseName).result(6 as const)
+      )
+        .desc(baseName)
+        .map((i) => [value, i] as const);
+    };
 
-    const bendyParser: P.Parser<BendyField> = P.seq(
+    const numberedFieldParser: P.Parser<BarryField | BendyField | BendySinisterField> = P.seq(
       P.alt(
-        constStr('Bendy of')
-          .skip(P.whitespace)
-          .then(buildAltParser([6, 8, 10] as const, stringifyNumber)),
-        constStr('Bendy').result(6 as const)
-      ).desc('Bendy'),
-      P.whitespace.then(tinctureParserFromName).skip(P.whitespace),
-      P.regex(/and/i)
-        .skip(P.whitespace)
-        .then(tinctureParserFromName)
-    ).map(
-      ([number, tincture1, tincture2]): BendyField => ({ kind: 'bendy', number, tinctures: [tincture1, tincture2] })
-    );
+        numberedFieldParserGenerator('Bendy Sinister', 'bendySinister'),
+        numberedFieldParserGenerator('Bendy', 'bendy'),
+        numberedFieldParserGenerator('Barry', 'barry')
+      ),
 
-    const bendySinisterParser: P.Parser<BendySinisterField> = P.seq(
-      P.alt(
-        constStr('Bendy Sinister of')
-          .skip(P.whitespace)
-          .then(buildAltParser([6, 8, 10] as const, stringifyNumber)),
-        constStr('Bendy Sinister').result(6 as const)
-      ).desc('Bendy Sinister'),
       P.whitespace.then(tinctureParserFromName).skip(P.whitespace),
       P.regex(/and/i)
         .skip(P.whitespace)
         .then(tinctureParserFromName)
-    ).map(
-      ([number, tincture1, tincture2]): BendySinisterField => ({
-        kind: 'bendySinister',
-        number,
-        tinctures: [tincture1, tincture2],
-      })
-    );
+    ).map(([[kind, number], tincture1, tincture2]): BarryField | BendyField | BendySinisterField => ({
+      kind,
+      number,
+      tinctures: [tincture1, tincture2],
+    }));
 
     const palyBendyParser: P.Parser<Exclude<Field, PlainField>> = P.seq(
       P.alt(
@@ -116,9 +95,7 @@ const language: Language = {
         tincture,
       })),
       r.Party.map((party) => ({ kind: 'party', per: party })),
-      bendySinisterParser,
-      bendyParser,
-      barryParser,
+      numberedFieldParser,
       palyBendyParser
     );
   },
