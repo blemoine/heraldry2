@@ -196,7 +196,7 @@ describe('stringifyBlason', () => {
         kind: 'simple',
         field: { kind: 'barry', number: 6, tinctures: [vert, purpure] },
       })
-    ).toBe('Barry of six vert and purpure');
+    ).toBe('Barry vert and purpure');
   });
   it('should stringify 8 barry field', () => {
     expect(

@@ -138,14 +138,7 @@ function stringifyField(field: Field, shouldCapitalize: boolean): string {
       field.kind === 'chevronny'
     ) {
       return fieldStr + ` ${stringifyTincture(field.tinctures[0])} and ${stringifyTincture(field.tinctures[1])}`;
-    } else if (field.kind === 'barry') {
-      return (
-        fieldStr +
-        ` of ${stringifyNumber(field.number)} ${stringifyTincture(field.tinctures[0])} and ${stringifyTincture(
-          field.tinctures[1]
-        )}`
-      );
-    } else if (field.kind === 'bendy' || field.kind === 'bendySinister') {
+    } else if (field.kind === 'barry' || field.kind === 'bendy' || field.kind === 'bendySinister') {
       return (
         fieldStr +
         (field.number !== 6 ? ` of ${stringifyNumber(field.number)}` : '') +

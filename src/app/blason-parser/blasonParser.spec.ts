@@ -111,6 +111,13 @@ describe('parseBlason', () => {
     expect(result).toEqual(expected);
   });
 
+  it('should parse correctly a barry field', () => {
+    const result = parseBlason('Barry argent and sable');
+    const expected: Blason = { kind: 'simple', field: { kind: 'barry', tinctures: [argent, sable], number: 6 } };
+
+    expect(result).toEqual(expected);
+  });
+
   it('should return error in human readable way', () => {
     const result = parseBlason('Bandy argent and sable');
 
@@ -123,7 +130,7 @@ describe('parseBlason', () => {
 
 Expected one of the following: 
 
-Argent, Azure, Barry of, Barry pily, Bendy, Bendy Sinister, Chequy, Chevronny, Counter ermine, Counter potent, Counter vair, Ermine, Erminois, Gules, Lozengy, Murrey, Or, Paly, Paly pily, Pean, Per, Potent, Potent en pale, Potent en point, Purpure, Quarterly, Sable, Sanguine, Tenné, Vair, Vair en pale, Vair en point, Vert
+Argent, Azure, Barry, Barry pily, Bendy, Bendy Sinister, Chequy, Chevronny, Counter ermine, Counter potent, Counter vair, Ermine, Erminois, Gules, Lozengy, Murrey, Or, Paly, Paly pily, Pean, Per, Potent, Potent en pale, Potent en point, Purpure, Quarterly, Sable, Sanguine, Tenné, Vair, Vair en pale, Vair en point, Vert
 `,
     });
   });

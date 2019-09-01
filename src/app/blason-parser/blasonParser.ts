@@ -42,9 +42,12 @@ const language: Language = {
 
   Field(r: AppliedLanguage): P.Parser<Field> {
     const barryParser: P.Parser<BarryField> = P.seq(
-      constStr('Barry of')
-        .skip(P.whitespace)
-        .then(buildAltParser([6, 8, 10] as const, stringifyNumber)),
+      P.alt(
+        constStr('Barry of')
+          .skip(P.whitespace)
+          .then(buildAltParser([6, 8, 10] as const, stringifyNumber)),
+        constStr('Barry').result(6 as const)
+      ).desc('Barry'),
       P.whitespace.then(tinctureParserFromName).skip(P.whitespace),
       P.regex(/and/i)
         .skip(P.whitespace)
@@ -56,11 +59,10 @@ const language: Language = {
     const bendyParser: P.Parser<BendyField> = P.seq(
       P.alt(
         constStr('Bendy of')
-          .desc('Bendy')
           .skip(P.whitespace)
           .then(buildAltParser([6, 8, 10] as const, stringifyNumber)),
         constStr('Bendy').result(6 as const)
-      ),
+      ).desc('Bendy'),
       P.whitespace.then(tinctureParserFromName).skip(P.whitespace),
       P.regex(/and/i)
         .skip(P.whitespace)
@@ -72,11 +74,10 @@ const language: Language = {
     const bendySinisterParser: P.Parser<BendySinisterField> = P.seq(
       P.alt(
         constStr('Bendy Sinister of')
-          .desc('Bendy Sinister')
           .skip(P.whitespace)
           .then(buildAltParser([6, 8, 10] as const, stringifyNumber)),
         constStr('Bendy Sinister').result(6 as const)
-      ),
+      ).desc('Bendy Sinister'),
       P.whitespace.then(tinctureParserFromName).skip(P.whitespace),
       P.regex(/and/i)
         .skip(P.whitespace)
