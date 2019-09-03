@@ -21,6 +21,7 @@
     "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.4",
     "@types/react-resizable": "^1.7.0",
+    "@types/react-router-dom": "^4.3.5",
     "@types/react-select": "^3.0.0",
     "@types/react-test-renderer": "^16.8.2",
     "fast-check": "^1.16.0",
@@ -40,6 +41,7 @@
     "react": "^16.9.0",
     "react-dom": "^16.8.6",
     "react-resizable": "^1.8.0",
+    "react-router-dom": "^5.0.1",
     "react-select": "^3.0.4"
   }
 }
