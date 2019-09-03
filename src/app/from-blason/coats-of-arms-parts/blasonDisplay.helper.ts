@@ -3,13 +3,15 @@ import { Dimension } from '../../model/dimension';
 import { LineOptions } from '../../svg-path-builder/svg-path-builder';
 import { cannotHappen } from '../../../utils/cannot-happen';
 
-export function computeLineOptions(line: Line, { width }: Dimension): LineOptions | null {
+export function computeLineOptions(line: Line, { width, height }: Dimension): LineOptions | null {
   if (line === 'engrailed') {
     const radius = width / 10;
     return { line: 'with-arc', radius, sweep: true };
   } else if (line === 'invected') {
     const radius = width / 10;
     return { line: 'with-arc', radius, sweep: false };
+  } else if (line === 'indented') {
+    return { line: 'indented', height: height / 30, width: width / 10 };
   } else if (line === 'straight') {
     return null;
   } else {

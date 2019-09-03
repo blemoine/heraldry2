@@ -22,7 +22,13 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape 
   if (ordinary.name === 'chief') {
     const chiefHeight = height * chiefHeightRatio;
     const lineOptions = computeLineOptions(ordinary.line, dimension);
-    const computedHeight = chiefHeight + (lineOptions && lineOptions.radius ? lineOptions.radius : 0);
+    const computedHeight =
+      chiefHeight +
+      (lineOptions && lineOptions.line === 'with-arc'
+        ? lineOptions.radius
+        : lineOptions && lineOptions.line === 'indented'
+        ? lineOptions.height
+        : 0);
     const pathBuilder = SvgPathBuilder.start([0, 0])
       .goTo([0, computedHeight])
       .goTo([width, computedHeight], lineOptions)

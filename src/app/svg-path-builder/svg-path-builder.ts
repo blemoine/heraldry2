@@ -32,7 +32,8 @@ type Close = { command: 'Z' };
 type PathCommand = MoveTo | GoToPoint | Arc | Vertical | Horizontal | Close | QuadraticBezier | CubicBezier;
 
 export type EngrailedLineOptions = { line: 'with-arc'; radius: number; sweep: boolean };
-export type LineOptions = EngrailedLineOptions;
+export type IndentedLineOptions = { line: 'indented'; height: number; width: number };
+export type LineOptions = EngrailedLineOptions | IndentedLineOptions;
 
 export class SvgPathBuilder {
   static start(startingPoint: PathAbsolutePoint): SvgPathBuilder {
@@ -132,18 +133,18 @@ export class SvgPathBuilder {
     lineOptions: LineOptions | null = null
   ): SvgPathBuilder {
     if (lineOptions) {
-      if (lineOptions.line === 'with-arc') {
-        const previousPoint = this.currentPoint();
-
-        if (previousPoint === null) {
-          return this.addCommand({ command: 'Q', controlPoint, point });
-        } else {
-          const nextPointFn = (t: number) => pointOnQuadraticBezier(previousPoint, controlPoint, point, t);
-
-          return engrailedBetweenPoints(this, point, lineOptions, nextPointFn);
-        }
+      const previousPoint = this.currentPoint();
+      if (previousPoint === null) {
+        return this.addCommand({ command: 'Q', controlPoint, point });
       } else {
-        return cannotHappen(lineOptions.line);
+        const nextPointFn = (t: number) => pointOnQuadraticBezier(previousPoint, controlPoint, point, t);
+        if (lineOptions.line === 'with-arc') {
+          return engrailedBetweenPoints(this, point, lineOptions, nextPointFn);
+        } else if (lineOptions.line === 'indented') {
+          return indentedBetweenPoints(this, point, lineOptions, nextPointFn);
+        } else {
+          return cannotHappen(lineOptions);
+        }
       }
     } else {
       return this.addCommand({ command: 'Q', controlPoint, point });
@@ -156,21 +157,21 @@ export class SvgPathBuilder {
 
   goTo(point: PathAbsolutePoint, lineOptions: LineOptions | null = null): SvgPathBuilder {
     if (lineOptions) {
-      if (lineOptions.line === 'with-arc') {
-        const previous = this.currentPoint();
-
-        if (previous === null) {
-          return this.addCommand({ command: 'L', point });
-        } else {
-          const nextPointFn = (step: number): PathAbsolutePoint => [
-            previous[0] + step * (point[0] - previous[0]),
-            previous[1] + step * (point[1] - previous[1]),
-          ];
-
-          return engrailedBetweenPoints(this, point, lineOptions, nextPointFn);
-        }
+      const previous = this.currentPoint();
+      if (previous === null) {
+        return this.addCommand({ command: 'L', point });
       } else {
-        return cannotHappen(lineOptions.line);
+        const nextPointFn = (step: number): PathAbsolutePoint => [
+          previous[0] + step * (point[0] - previous[0]),
+          previous[1] + step * (point[1] - previous[1]),
+        ];
+        if (lineOptions.line === 'with-arc') {
+          return engrailedBetweenPoints(this, point, lineOptions, nextPointFn);
+        } else if (lineOptions.line === 'indented') {
+          return indentedBetweenPoints(this, point, lineOptions, nextPointFn);
+        } else {
+          return cannotHappen(lineOptions);
+        }
       }
     } else {
       const previousX = getX(this.commands);
@@ -217,35 +218,36 @@ export class SvgPathBuilder {
     const largeArcFlag = options.largeArc || 0;
 
     if (lineOptions) {
-      if (lineOptions.line === 'with-arc') {
-        const previousPoint = this.currentPoint();
+      const previousPoint = this.currentPoint();
 
-        if (previousPoint === null) {
-          return this.addCommand({
-            command: 'A',
-            point,
-            sweepFlag,
-            largeArcFlag,
-            xAxisRotation,
-            radius,
-          });
-        } else {
-          const nextPointFn = (t: number) =>
-            pointOnEllipticalArc(
-              previousPoint,
-              radius[0],
-              radius[1],
-              xAxisRotation,
-              options.largeArc === 1,
-              options.sweep === 1,
-              point,
-              t
-            );
-
-          return engrailedBetweenPoints(this, point, lineOptions, nextPointFn);
-        }
+      if (previousPoint === null) {
+        return this.addCommand({
+          command: 'A',
+          point,
+          sweepFlag,
+          largeArcFlag,
+          xAxisRotation,
+          radius,
+        });
       } else {
-        return cannotHappen(lineOptions.line);
+        const nextPointFn = (t: number) =>
+          pointOnEllipticalArc(
+            previousPoint,
+            radius[0],
+            radius[1],
+            xAxisRotation,
+            options.largeArc === 1,
+            options.sweep === 1,
+            point,
+            t
+          );
+        if (lineOptions.line === 'with-arc') {
+          return engrailedBetweenPoints(this, point, lineOptions, nextPointFn);
+        } else if (lineOptions.line === 'indented') {
+          return indentedBetweenPoints(this, point, lineOptions, nextPointFn);
+        } else {
+          return cannotHappen(lineOptions);
+        }
       }
     } else {
       return this.addCommand({
@@ -423,6 +425,39 @@ function getY(commands: Array<PathCommand>): number | null {
       return cannotHappen(previousCommand);
     }
   }
+}
+
+function indentedBetweenPoints(
+  basePathBuilder: SvgPathBuilder,
+  pointTo: PathAbsolutePoint,
+  lineOption: IndentedLineOptions,
+  nextPointFn: (step: number) => PathAbsolutePoint
+): SvgPathBuilder {
+  const previousPoint = basePathBuilder.currentPoint();
+  if (previousPoint === null) {
+    return basePathBuilder;
+  }
+  const distance = distanceBetween(previousPoint, pointTo);
+  const triangleCount = Math.floor(distance / lineOption.width);
+  const height = lineOption.height;
+
+  return range(0, triangleCount).reduce<SvgPathBuilder>((pathBuilder, i) => {
+    const currentPoint = nextPointFn(i / triangleCount);
+    const nextPoint = nextPointFn((i + 1) / triangleCount);
+    const xh = (nextPoint[0] + currentPoint[0]) / 2;
+    const yh = (nextPoint[1] + currentPoint[1]) / 2;
+
+    if (nextPoint[0] === currentPoint[0]) {
+      return pathBuilder.goTo([xh + height, yh], null).goTo(nextPoint);
+    } else {
+      const alpha = (nextPoint[1] - currentPoint[1]) / (nextPoint[0] - currentPoint[0]);
+      const yc = height * Math.sqrt(1 / (1 + alpha ** 2)) + yh;
+      const xc = xh - (yc - yh) * alpha;
+
+      console.log(nextPoint[0] - currentPoint[0]);
+      return pathBuilder.goTo([xc, yc], null).goTo(nextPoint);
+    }
+  }, basePathBuilder);
 }
 
 function engrailedBetweenPoints(

@@ -1,3 +1,4 @@
-export type Line = 'straight' | 'engrailed' | 'invected';
 
-export const lines: ReadonlyArray<Line> = ['straight', 'engrailed', 'invected'] as const;
+export const lines = ['straight', 'engrailed', 'invected', 'indented'] as const;
+
+export type Line = typeof lines[number];

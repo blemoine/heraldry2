@@ -43,3 +43,7 @@ Faire le "of the last"
 - etre plus lenient sur la syntaxe des quarterly (avec les : et les;)
 - ecrire des tests dans app pour faire un quarterly 
 - faire le form pour les quarterly
+- utiliser un router pour mettre dans l'URL l'etat courant du blason (a la place du localstorage)
+- sous section pour le form, depliable (genre en mode accordeon)
+- line indented est pas tres jolie sur plein d'ordinary
+
