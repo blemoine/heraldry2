@@ -8,8 +8,15 @@ import { Ordinary } from '../../model/ordinary';
 import { Charge } from '../../model/charge';
 import { TinctureConfiguration } from '../../model/tincture-configuration';
 import { useCallback } from 'react';
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemHeading,
+  AccordionItemButton,
+  AccordionItemPanel,
+} from 'react-accessible-accordion';
 
-const wrapperStyle = { border: '1px solid #CCC', padding: '5px' };
+const wrapperStyle = { border: '1px solid #CCC' /*, padding: '5px'  */ };
 
 type Props = {
   tinctureConfiguration: TinctureConfiguration;
@@ -52,17 +59,40 @@ export function SimpleBlasonForm({ tinctureConfiguration, blason, blasonChange }
 
   return (
     <div style={wrapperStyle}>
-      <FieldForm tinctureConfiguration={tinctureConfiguration} field={blason.field} fieldChange={fieldChange} />
-      <OrdinaryForm
-        tinctureConfiguration={tinctureConfiguration}
-        ordinary={blason.ordinary || null}
-        ordinaryChange={ordinaryChange}
-      />
-      <ChargeForm
-        tinctureConfiguration={tinctureConfiguration}
-        charge={blason.charge || null}
-        chargeChange={chargeChange}
-      />
+      <Accordion allowMultipleExpanded={true} allowZeroExpanded={true}>
+        <AccordionItem>
+          <AccordionItemHeading>
+            <AccordionItemButton>Field</AccordionItemButton>
+          </AccordionItemHeading>
+          <AccordionItemPanel>
+            <FieldForm tinctureConfiguration={tinctureConfiguration} field={blason.field} fieldChange={fieldChange} />
+          </AccordionItemPanel>
+        </AccordionItem>
+        <AccordionItem>
+          <AccordionItemHeading>
+            <AccordionItemButton>Ordinary</AccordionItemButton>
+          </AccordionItemHeading>
+          <AccordionItemPanel>
+            <OrdinaryForm
+              tinctureConfiguration={tinctureConfiguration}
+              ordinary={blason.ordinary || null}
+              ordinaryChange={ordinaryChange}
+            />
+          </AccordionItemPanel>
+        </AccordionItem>
+        <AccordionItem>
+          <AccordionItemHeading>
+            <AccordionItemButton>Charge</AccordionItemButton>
+          </AccordionItemHeading>
+          <AccordionItemPanel>
+            <ChargeForm
+              tinctureConfiguration={tinctureConfiguration}
+              charge={blason.charge || null}
+              chargeChange={chargeChange}
+            />
+          </AccordionItemPanel>
+        </AccordionItem>
+      </Accordion>
     </div>
   );
 }

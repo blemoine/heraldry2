@@ -4,6 +4,13 @@ import { Blason, SimpleBlason } from '../../model/blason';
 import { cannotHappen } from '../../../utils/cannot-happen';
 import { SimpleBlasonForm } from './SimpleBlasonForm';
 import { useCallback } from 'react';
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemButton,
+  AccordionItemHeading,
+  AccordionItemPanel,
+} from 'react-accessible-accordion';
 
 type Props = {
   tinctureConfiguration: TinctureConfiguration;
@@ -34,26 +41,56 @@ export const BlasonForm = React.memo(function BlasonForm({ blason, blasonChange,
     );
     return (
       <div>
-        <SimpleBlasonForm
-          tinctureConfiguration={tinctureConfiguration}
-          blason={blason.blasons[0]}
-          blasonChange={quarterlyBlasonChange(0)}
-        />
-        <SimpleBlasonForm
-          tinctureConfiguration={tinctureConfiguration}
-          blason={blason.blasons[1]}
-          blasonChange={quarterlyBlasonChange(1)}
-        />
-        <SimpleBlasonForm
-          tinctureConfiguration={tinctureConfiguration}
-          blason={blason.blasons[2]}
-          blasonChange={quarterlyBlasonChange(2)}
-        />
-        <SimpleBlasonForm
-          tinctureConfiguration={tinctureConfiguration}
-          blason={blason.blasons[3]}
-          blasonChange={quarterlyBlasonChange(3)}
-        />
+        <Accordion allowMultipleExpanded={true} allowZeroExpanded={true}>
+          <AccordionItem>
+            <AccordionItemHeading>
+              <AccordionItemButton>Quarter 1</AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel>
+              <SimpleBlasonForm
+                tinctureConfiguration={tinctureConfiguration}
+                blason={blason.blasons[0]}
+                blasonChange={quarterlyBlasonChange(0)}
+              />
+            </AccordionItemPanel>
+          </AccordionItem>
+          <AccordionItem>
+            <AccordionItemHeading>
+              <AccordionItemButton>Quarter 2</AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel>
+              <SimpleBlasonForm
+                tinctureConfiguration={tinctureConfiguration}
+                blason={blason.blasons[1]}
+                blasonChange={quarterlyBlasonChange(1)}
+              />
+            </AccordionItemPanel>
+          </AccordionItem>
+          <AccordionItem>
+            <AccordionItemHeading>
+              <AccordionItemButton>Quarter 3</AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel>
+              <SimpleBlasonForm
+                tinctureConfiguration={tinctureConfiguration}
+                blason={blason.blasons[2]}
+                blasonChange={quarterlyBlasonChange(2)}
+              />
+            </AccordionItemPanel>
+          </AccordionItem>
+          <AccordionItem>
+            <AccordionItemHeading>
+              <AccordionItemButton>Quarter 4</AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel>
+              <SimpleBlasonForm
+                tinctureConfiguration={tinctureConfiguration}
+                blason={blason.blasons[3]}
+                blasonChange={quarterlyBlasonChange(3)}
+              />
+            </AccordionItemPanel>
+          </AccordionItem>
+        </Accordion>
       </div>
     );
   } else {
