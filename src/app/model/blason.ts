@@ -13,3 +13,5 @@ export type QuarterlyBlason = {
   blasons: readonly [SimpleBlason, SimpleBlason, SimpleBlason, SimpleBlason];
 };
 export type Blason = SimpleBlason | QuarterlyBlason;
+
+export const availableDivisions = ['simple', 'quarterly'] as const;

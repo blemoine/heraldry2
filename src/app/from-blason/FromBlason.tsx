@@ -3,8 +3,8 @@ import { Blason } from '../model/blason';
 import { CoatsOfArmsDetail } from './CoatsOfArmsDetail';
 import { ConfigurationForm } from './configuration/ConfigurationForm';
 import { Configuration } from '../model/configuration';
-import { BlasonForm } from './form/BlasonForm';
 import { PageState } from '../model/pageState';
+import { BlasonForm } from './form/BlasonForm';
 
 type Props = {
   pageState: PageState;

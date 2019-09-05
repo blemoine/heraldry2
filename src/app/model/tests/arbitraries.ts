@@ -21,7 +21,7 @@ import {
   roundelInsides,
 } from '../charge';
 import { cannotHappen } from '../../../utils/cannot-happen';
-import { Blason, QuarterlyBlason, SimpleBlason } from '../blason';
+import { availableDivisions, Blason, QuarterlyBlason, SimpleBlason } from '../blason';
 import { Line, lines } from '../line';
 import { availableDispositions, CountAndDisposition, supportedNumbers } from '../countAndDisposition';
 
@@ -162,4 +162,13 @@ const quarterlyBlasonArb: Arbitrary<QuarterlyBlason> = fc
     };
   });
 
-export const blasonArb: Arbitrary<Blason> = fc.oneof<Blason>(simpleBlasonArb, quarterlyBlasonArb);
+const divisionArb: Arbitrary<Blason['kind']> = fc.constantFrom(...availableDivisions);
+export const blasonArb: Arbitrary<Blason> = divisionArb.chain((kind): Arbitrary<Blason> => {
+  if (kind === 'simple') {
+    return simpleBlasonArb;
+  } else if (kind === 'quarterly') {
+    return quarterlyBlasonArb;
+  } else {
+    return cannotHappen(kind);
+  }
+});

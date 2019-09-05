@@ -5,4 +5,5 @@ module.exports = {
     '\\.(css|less)$': 'identity-obj-proxy',
   },
   setupFilesAfterEnv: ['@testing-library/react/cleanup-after-each'],
+  modulePathIgnorePatterns: ['node_modules'],
 };
