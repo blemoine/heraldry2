@@ -35,15 +35,12 @@ Faire le "of the last"
 - animate configuration 0 to auto
 - Dans la liste des boucliers, afficher un petit icone représentant la forme attendue
 
-- Quarterly : support syntax like 1 (without ordinal)
 - Le form , en particulier en quaterly est vraiment moche
 - Supporter le clic sur une zone -> edition
 - Refondre l'UX (par defaut on affiche que le bouclier + blason, et on peut deplier le form a coté
 - engrailed arcto ne pointe pas au bon endroit (cf bordure engrailed)
 - etre plus lenient sur la syntaxe des quarterly (avec les : et les;)
 - ecrire des tests dans app pour faire un quarterly 
-- faire le form pour les quarterly
-- sous section pour le form, depliable (genre en mode accordeon)
 - line indented est pas tres jolie sur plein d'ordinary
 - faire le déploiement
 - gerer les erreurs provenant de l'URL 

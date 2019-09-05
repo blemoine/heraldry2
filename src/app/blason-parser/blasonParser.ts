@@ -137,16 +137,16 @@ const language: Language = {
   },
 
   Blason(r: AppliedLanguage): P.Parser<Blason> {
-    const firstParser = P.alt(P.regexp(/1st:?/i), P.regexp(/first:?/i))
+    const firstParser = P.alt(P.regexp(/1st:?/i), P.regexp(/1:?/i), P.regexp(/first:?/i))
       .result(1 as const)
       .desc('first');
-    const secondParser = P.alt(P.regexp(/2nd:?/i), P.regexp(/second:?/i))
+    const secondParser = P.alt(P.regexp(/2nd:?/i), P.regexp(/2:?/i), P.regexp(/second:?/i))
       .result(2 as const)
       .desc('second');
-    const thirdParser = P.alt(P.regexp(/3rd:?/i), P.regexp(/third:?/i))
+    const thirdParser = P.alt(P.regexp(/3rd:?/i), P.regexp(/3:?/i), P.regexp(/third:?/i))
       .result(3 as const)
       .desc('third');
-    const fourthParser = P.alt(P.regexp(/4th:?/i), P.regexp(/fourth:?/i))
+    const fourthParser = P.alt(P.regexp(/4th:?/i), P.regexp(/4:?/i), P.regexp(/fourth:?/i))
       .result(4 as const)
       .desc('fourth');
 

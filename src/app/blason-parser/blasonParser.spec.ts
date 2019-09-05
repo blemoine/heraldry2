@@ -408,6 +408,20 @@ Argent, Azure, Barry, Barry pily, Bendy, Bendy Sinister, Chequy, Chevronny, Coun
     expect(parseBlason('Quarterly, 1st: gules; 2nd azure; third vert; fourth: ermine')).toEqual(expected);
   });
 
+  it('should support without numeral in quaterly', () => {
+    const expected: QuarterlyBlason = {
+      kind: 'quarterly',
+      blasons: [
+        { kind: 'simple', field: { kind: 'plain', tincture: gules } },
+        { kind: 'simple', field: { kind: 'plain', tincture: azure } },
+        { kind: 'simple', field: { kind: 'plain', tincture: vert } },
+        { kind: 'simple', field: { kind: 'plain', tincture: ermine } },
+      ],
+    };
+
+    expect(parseBlason('Quarterly, 1: gules; 2 azure; 3 vert; 4: ermine')).toEqual(expected);
+  });
+
   it('should parse a bendy of ten field', () => {
     const expected: SimpleBlason = { kind: 'simple', field: { kind: 'bendy', number: 10, tinctures: [or, gules] } };
 
