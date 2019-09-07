@@ -36,16 +36,22 @@ export const BordureDisplay = ({ dimension, line, shape, shieldShape, fill }: Pr
     if (shieldShape === 'swiss') {
       basePathBuilderFn = ({ width, height }: Dimension, lineOptions: LineOptions | null) =>
         SvgPathBuilder.start([0, 0])
-          .arcTo([width, 0], { radius: width * 0.9 }, lineOptions)
+          .goTo([width / 10, 0], null)
+          .arcTo([width - width / 10, 0], { radius: width * 0.9 }, lineOptions)
+          .goTo([width, 0], null)
           .goTo([width, height], lineOptions)
           .goTo([0, height], lineOptions)
           .goTo([0, 0], lineOptions);
     } else if (shieldShape === 'spanish' || shieldShape === 'heater') {
       basePathBuilderFn = ({ width, height }: Dimension, lineOptions: LineOptions | null) =>
         SvgPathBuilder.start([0, 0])
-          .goTo([width, 0], lineOptions)
+          .goTo([width / 20, 0], null)
+          .goTo([width - width / 20, 0], lineOptions)
+          .goTo([width, 0], null)
           .goTo([width, height], lineOptions)
-          .goTo([0, height], lineOptions)
+          .goTo([width - width / 20, height], null)
+          .goTo([width / 20, height], lineOptions)
+          .goTo([0, height], null)
           .goTo([0, 0], lineOptions);
     } else {
       return cannotHappen(shieldShape);
@@ -54,14 +60,18 @@ export const BordureDisplay = ({ dimension, line, shape, shieldShape, fill }: Pr
     if (shieldShape === 'spanish') {
       basePathBuilderFn = ({ width, height }: Dimension, lineOptions: LineOptions | null) =>
         SvgPathBuilder.start([0, 0])
-          .goTo([width, 0], lineOptions)
+          .goTo([width / 20, 0], null)
+          .goTo([width - width / 20, 0], lineOptions)
+          .goTo([width, 0], null)
           .goTo([width, height], lineOptions)
           .arcTo([0, height / 5], { radius: width, sweep: 1 }, lineOptions)
           .goTo([0, 0], lineOptions);
     } else if (shieldShape === 'swiss' || shieldShape === 'heater') {
       basePathBuilderFn = ({ width, height }: Dimension, lineOptions: LineOptions | null) =>
         SvgPathBuilder.start([0, 0])
-          .goTo([width, 0], lineOptions)
+          .goTo([width / 20, 0], null)
+          .goTo([width - width / 20, 0], lineOptions)
+          .goTo([width, 0], null)
           .goTo([width, height], lineOptions)
           .arcTo([0, (1.5 * height) / 5], { radius: width * 1.7, sweep: 1 }, lineOptions)
           .goTo([0, 0], lineOptions);
@@ -72,14 +82,18 @@ export const BordureDisplay = ({ dimension, line, shape, shieldShape, fill }: Pr
     if (shieldShape === 'spanish') {
       basePathBuilderFn = ({ width, height }: Dimension, lineOptions: LineOptions | null) =>
         SvgPathBuilder.start([0, 0])
-          .goTo([width, 0], lineOptions)
+          .goTo([width / 20, 0], null)
+          .goTo([width - width / 20, 0], lineOptions)
+          .goTo([width, 0], null)
           .goTo([width, height / 5], lineOptions)
           .arcTo([0, height], { radius: width, sweep: 1 }, lineOptions)
           .goTo([0, 0], lineOptions);
     } else if (shieldShape === 'swiss' || shieldShape === 'heater') {
       basePathBuilderFn = ({ width, height }: Dimension, lineOptions: LineOptions | null) =>
         SvgPathBuilder.start([0, 0])
-          .goTo([width, 0], lineOptions)
+          .goTo([width / 20, 0], null)
+          .goTo([width - width / 20, 0], lineOptions)
+          .goTo([width, 0], null)
           .goTo([width, (1.5 * height) / 5], lineOptions)
           .arcTo([0, height], { radius: width * 1.7, sweep: 1 }, lineOptions)
           .goTo([0, 0], lineOptions);

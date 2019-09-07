@@ -3,7 +3,7 @@ import { arePointEquivalent, PathAbsolutePoint, rotate, translate } from './geom
 import { pointOnEllipticalArc, pointOnQuadraticBezier } from './point-on-elliptical-arc';
 import { round } from '../../utils/round';
 import { raise, Result } from '../../utils/result';
-import { engrailedBetweenPoints, indentBetweenPoint } from './line-style.helper';
+import { engrailBetweenPoint, indentBetweenPoint } from './line-style.helper';
 
 type MoveTo = { command: 'M'; point: PathAbsolutePoint };
 type GoToPoint = { command: 'L'; point: PathAbsolutePoint };
@@ -131,7 +131,7 @@ export class SvgPathBuilder {
       } else {
         const nextPointFn = (t: number) => pointOnQuadraticBezier(previousPoint, controlPoint, point, t);
         if (lineOptions.line === 'with-arc') {
-          return engrailedBetweenPoints(this, point, lineOptions, nextPointFn);
+          return engrailBetweenPoint(this, lineOptions, nextPointFn);
         } else if (lineOptions.line === 'indented') {
           return indentBetweenPoint(this, lineOptions, nextPointFn);
         } else {
@@ -158,7 +158,7 @@ export class SvgPathBuilder {
           previous[1] + step * (point[1] - previous[1]),
         ];
         if (lineOptions.line === 'with-arc') {
-          return engrailedBetweenPoints(this, point, lineOptions, nextPointFn);
+          return engrailBetweenPoint(this, lineOptions, nextPointFn);
         } else if (lineOptions.line === 'indented') {
           return indentBetweenPoint(this, lineOptions, nextPointFn);
         } else {
@@ -234,7 +234,7 @@ export class SvgPathBuilder {
             t
           );
         if (lineOptions.line === 'with-arc') {
-          return engrailedBetweenPoints(this, point, lineOptions, nextPointFn);
+          return engrailBetweenPoint(this, lineOptions, nextPointFn);
         } else if (lineOptions.line === 'indented') {
           return indentBetweenPoint(this, lineOptions, nextPointFn);
         } else {

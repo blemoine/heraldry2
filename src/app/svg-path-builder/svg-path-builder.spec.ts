@@ -74,21 +74,21 @@ describe('SvgPathBuilder', () => {
     const result = SvgPathBuilder.start([10, 10]).goTo([70, 10], { line: 'with-arc', radius: 20, sweep: true });
 
     expect(result.toPathAttribute()).toEqual(
-      'M 10 10 A20 60 -180 0 1 30 10 A20 60 -180 0 1 50 10 A20 60 -180 0 1 70 10'
+      'M 10 10 Q 20 -10 30 10 Q 40 -10 50 10 Q 60 -10 70 10'
     );
   });
 
   it('should draw line engrailed vertically', () => {
     const result = SvgPathBuilder.start([10, 10]).goTo([10, 70], { line: 'with-arc', radius: 20, sweep: true });
 
-    expect(result.toPathAttribute()).toEqual('M 10 10 A20 60 -90 0 1 10 30 A20 60 -90 0 1 10 50 A20 60 -90 0 1 10 70');
+    expect(result.toPathAttribute()).toEqual('M 10 10 Q 30 20 10 30 Q 30 40 10 50 Q 30 60 10 70');
   });
 
   it('should draw line engrailed diagonally', () => {
     const result = SvgPathBuilder.start([10, 10]).goTo([70, 70], { line: 'with-arc', radius: 20, sweep: true });
 
     expect(result.toPathAttribute()).toEqual(
-      'M 10 10 A21.213203435596427 63.63961030678928 -135 0 1 25 25 A21.213203435596427 63.63961030678928 -135 0 1 40 40 A21.213203435596427 63.63961030678928 -135 0 1 55 55 A21.213203435596427 63.63961030678928 -135 0 1 70 70'
+      'M 10 10 Q 30.14214 1.85786 22 22 Q 42.14214 13.85786 34 34 Q 54.14214 25.85786 46 46 Q 66.14214 37.85786 58 58 Q 78.14214 49.85786 70 70'
     );
   });
 

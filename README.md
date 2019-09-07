@@ -38,10 +38,8 @@ Faire le "of the last"
 - Le form , en particulier en quaterly est vraiment moche
 - Supporter le clic sur une zone -> edition
 - Refondre l'UX (par defaut on affiche que le bouclier + blason, et on peut deplier le form a coté
-- engrailed arcto ne pointe pas au bon endroit (cf bordure engrailed)
 - etre plus lenient sur la syntaxe des quarterly (avec les : et les;)
 - ecrire des tests dans app pour faire un quarterly 
-- line indented est pas tres jolie sur plein d'ordinary
 - faire le déploiement
 - gerer les erreurs provenant de l'URL 
 
