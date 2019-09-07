@@ -17,7 +17,11 @@ type Props = {
   blason: Blason;
   blasonChange: (blason: Blason) => void;
 };
-export const BlasonDispatcherForm = React.memo(function BlasonForm({ blason, blasonChange, tinctureConfiguration }: Props) {
+export const BlasonDispatcherForm = React.memo(function BlasonForm({
+  blason,
+  blasonChange,
+  tinctureConfiguration,
+}: Props) {
   if (blason.kind === 'simple') {
     return (
       <SimpleBlasonForm tinctureConfiguration={tinctureConfiguration} blason={blason} blasonChange={blasonChange} />

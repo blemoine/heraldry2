@@ -12,9 +12,9 @@ export const HeaterDisplay: React.FunctionComponent<Props> = ({ dimension }) => 
 
 export function heaterPathBuilder({ width, height }: Dimension, lineOptions: LineOptions | null): SvgPathBuilder {
   return SvgPathBuilder.start([0, 0])
-    .goTo([width, 0],lineOptions)
-    .goTo([width, (3 * height) / 5],lineOptions)
-    .quadraticBezier([width / 2, height], [width, height * 0.8],lineOptions)
-    .quadraticBezier([0, (3 * height) / 5], [0, height * 0.8],lineOptions)
-    .goTo([0,0], lineOptions);
+    .goTo([width, 0], lineOptions)
+    .goTo([width, (3 * height) / 5], lineOptions)
+    .quadraticBezier([width / 2, height], [width, height * 0.8], lineOptions)
+    .quadraticBezier([0, (3 * height) / 5], [0, height * 0.8], lineOptions)
+    .goTo([0, 0], lineOptions);
 }

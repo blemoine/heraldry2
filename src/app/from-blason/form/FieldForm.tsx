@@ -10,7 +10,7 @@ import { TinctureConfiguration } from '../../model/tincture-configuration';
 
 const numberOfBars = [6, 8, 10] as const;
 type Props = { tinctureConfiguration: TinctureConfiguration; field: Field; fieldChange: (field: Field) => void };
-export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props)  {
+export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) {
   function plainTinctureChange(tincture: Tincture) {
     fieldChange({ kind: 'plain', tincture });
   }
@@ -159,4 +159,4 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
       )}
     </>
   );
-};
+}

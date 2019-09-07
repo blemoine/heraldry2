@@ -26,4 +26,4 @@ export function ChargeDetailForm({ tinctureConfiguration, charge, chargeChange }
   } else {
     return cannotHappen(charge);
   }
-};
+}

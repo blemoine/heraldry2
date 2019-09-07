@@ -5,14 +5,16 @@ import { argent, azure, ermine, gules, murrey, purpure, vair } from './model/tin
 import { App } from './App';
 import { MemoryRouter } from 'react-router-dom';
 
-
-
 describe('App', () => {
   beforeEach(() => {
     localStorage.clear();
   });
   it('should reflect the change of field tincture in the blason', () => {
-    const app = render(<MemoryRouter><App /></MemoryRouter>);
+    const app = render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    );
 
     return selectTincture('.field-tincture-select', ermine).then(() => {
       const blason = (app.getByPlaceholderText('Enter the blason here') as HTMLTextAreaElement).value;
@@ -21,7 +23,11 @@ describe('App', () => {
   });
 
   it('should reflect the change of the field type in the blason', () => {
-    const app = render(<MemoryRouter><App /></MemoryRouter>);
+    const app = render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    );
 
     return selectInReactSelect('.field-type-select', 'field-type', 'chequy')
       .then(() => selectTincture('.field-first-tincture-select', vair))
@@ -33,7 +39,11 @@ describe('App', () => {
   });
 
   it('should reflect the change of the charge type in the blason', () => {
-    const app = render(<MemoryRouter><App /></MemoryRouter>);
+    const app = render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    );
 
     return selectInReactSelect('.field-type-select', 'field-type', 'paly')
       .then(() => selectTincture('.field-first-tincture-select', argent))
@@ -47,7 +57,11 @@ describe('App', () => {
   });
 
   it('should reflect the change of the ordinary type in the blason', () => {
-    const app = render(<MemoryRouter><App /></MemoryRouter>);
+    const app = render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    );
 
     return selectInReactSelect('.field-type-select', 'field-type', 'barry')
       .then(() => selectTincture('.field-first-tincture-select', argent))
@@ -61,7 +75,11 @@ describe('App', () => {
   });
 
   it('should reflect the change of the blason string in the form', () => {
-    const app = render(<MemoryRouter><App /></MemoryRouter>);
+    const app = render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    );
 
     const blason = app.getByPlaceholderText('Enter the blason here') as HTMLTextAreaElement;
     fireEvent.change(blason, {

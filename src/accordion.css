@@ -6,7 +6,6 @@
 * ----------------------------------------------
 **/
 .accordion {
-
 }
 
 .accordion__item + .accordion__item {
@@ -27,8 +26,8 @@
   background-color: rgb(215, 215, 200);
 }
 .accordion__button:focus {
-    border: none;
-    outline: none;
+  border: none;
+  outline: none;
 }
 
 .accordion__button:before {

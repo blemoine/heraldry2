@@ -1,33 +1,79 @@
-import { angleBetween, distanceBetween, PathAbsolutePoint, toDegree } from './geometrical.helper';
+import { angleBetween, arePointEquivalent, distanceBetween, PathAbsolutePoint, toDegree } from './geometrical.helper';
 import { range } from '../../utils/range';
 import { EngrailedLineOptions, IndentedLineOptions, SvgPathBuilder } from './svg-path-builder';
 
-export function indentedBetweenPoints(
-  basePathBuilder: SvgPathBuilder,
-  pointTo: PathAbsolutePoint,
+export function indentBetweenPoint(
+  path: SvgPathBuilder,
   lineOption: IndentedLineOptions,
-  nextPointFn: (step: number) => PathAbsolutePoint
+  parametricPath: (t: number) => PathAbsolutePoint
 ): SvgPathBuilder {
-  const previousPoint = basePathBuilder.currentPoint();
-  if (previousPoint === null) {
-    return basePathBuilder;
+  const currentPoint = path.currentPoint();
+  if (!currentPoint) {
+    return path;
   }
-  const distance = distanceBetween(previousPoint, pointTo);
-  const triangleCount = Math.floor(distance / lineOption.width);
-  const height = lineOption.height;
+  const distanceToCover = range(0, 15)
+    .map((i) => {
+      return parametricPath((i + 1) / 15);
+    })
+    .reduce(
+      ({ dist, lastPoint }, point) => {
+        return { dist: dist + distanceBetween(lastPoint, point), lastPoint: point };
+      },
+      { dist: 0, lastPoint: currentPoint }
+    ).dist;
+  const pointCount = Math.ceil(distanceToCover / lineOption.width);
 
-  return range(0, triangleCount).reduce<SvgPathBuilder>((pathBuilder, i) => {
-    const currentPoint = nextPointFn(i / triangleCount);
-    const nextPoint = nextPointFn((i + 1) / triangleCount);
-    const xh = (nextPoint[0] + currentPoint[0]) / 2;
-    const yh = (nextPoint[1] + currentPoint[1]) / 2;
+  function dichotomizePoint(from: PathAbsolutePoint, bounds: [number, number]): PathAbsolutePoint {
+    const expectedDistance = distanceToCover / pointCount;
+    const i = (bounds[0] + bounds[1]) / 2;
 
-    if (nextPoint[0] === currentPoint[0]) {
-      return pathBuilder.goTo([xh + height, yh], null).goTo(nextPoint);
-    } else {
-      return pathBuilder.goTo(perpendicularTo2Points(currentPoint, nextPoint, height), null).goTo(nextPoint);
+    const to = parametricPath(i / pointCount);
+    if (Math.abs(bounds[0] - bounds[1]) < 0.01) {
+      return to;
     }
-  }, basePathBuilder);
+    const segmentLength = distanceBetween(from, to);
+    if (segmentLength > expectedDistance + 1) {
+      const j = (bounds[1] + i) / 2;
+
+      return dichotomizePoint(from, [bounds[0], j]);
+    } else if (segmentLength < expectedDistance - 1) {
+      const j = (bounds[0] + i) / 2;
+
+      return dichotomizePoint(from, [j, bounds[1]]);
+    } else {
+      return to;
+    }
+  }
+
+  return range(0, pointCount).reduce((result, i) => {
+    let to = dichotomizePoint(result.currentPoint()!, [i, i + 2]);
+
+    return indentLineTo(result, to, lineOption.height);
+  }, path);
+}
+
+export function indentLineTo(path: SvgPathBuilder, to: PathAbsolutePoint, height: number): SvgPathBuilder {
+  // H is the middle of [start, end]
+  // C is the perpendicular to [start, end], at point H with length height
+
+  const from = path.currentPoint();
+  if (!from || arePointEquivalent(from, to)) {
+    return path;
+  }
+  const [fromX, fromY] = from;
+  const [toX, toY] = to;
+
+  const xh = (fromX + toX) / 2;
+  const yh = (fromY + toY) / 2;
+
+  const a = fromY - toY;
+  const b = toX - fromX;
+
+  const norm = Math.sqrt(a * a + b * b);
+  const xc = xh + (a / norm) * height;
+  const yc = yh + (b / norm) * height;
+
+  return path.goTo([xc, yc]).goTo(to);
 }
 
 export function engrailedBetweenPoints(
@@ -64,16 +110,4 @@ function engrailedXAxisRotation(start: PathAbsolutePoint, end: PathAbsolutePoint
   const cb1: PathAbsolutePoint = [c[0] + distance, 0];
   const theta = angleBetween(cb, cb1);
   return toDegree(-theta);
-}
-
-function perpendicularTo2Points(p1: PathAbsolutePoint, p2: PathAbsolutePoint, height: number): PathAbsolutePoint {
-  // H is the center of p1/p2
-  // C is the perpendicular to vector p1p2 at point H, with length height
-  const xh = (p2[0] + p1[0]) / 2;
-  const yh = (p2[1] + p1[1]) / 2;
-  const alpha = (p2[1] - p1[1]) / (p2[0] - p1[0]);
-  const yc = height * Math.sqrt(1 / (1 + alpha ** 2)) + yh;
-  const xc = xh - (yc - yh) * alpha;
-
-  return [xc, yc];
 }
