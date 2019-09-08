@@ -7,6 +7,8 @@ import { ChargeDisplay } from './ChargeDisplay';
 import { Tincture } from '../../model/tincture';
 import { SimpleBlasonShape } from './blasonDisplay.helper';
 import { ShieldShape } from '../../model/configuration';
+import { Ordinary } from '../../model/ordinary';
+import { cannotHappen } from '../../../utils/cannot-happen';
 
 type Props = {
   blason: SimpleBlason;
@@ -20,24 +22,12 @@ export const SimpleBlasonDisplay = ({ blason, dimension, fillFromTincture, clipP
   const { width, height } = dimension;
   const ordinary = blason.ordinary;
 
-  const [verticalOffset, heightScale] =
-    ordinary && ordinary.name === 'chief'
-      ? [1 / 5, 4 / 5]
-      : ordinary && ordinary.name === 'bordure'
-      ? [6 / 100, 94 / 100]
-      : [0, 1];
+  const verticalOffset = ordinary ? getChargeVerticalOffsetPosition(ordinary) : 0;
+  const heightScale = 1 - verticalOffset;
 
   const computedDimension = { width, height: height * heightScale };
-  const chargeWidthOffset = shape === 'rightCut' || shape === 'leftCut' ? 0.1 : 0.05;
-  const chargeHeightOffset = shape === 'rightCut' || shape === 'leftCut' ? 0.11 : 0.05;
-  const chargeDimension = {
-    width: computedDimension.width * (1 - 2 * chargeWidthOffset),
-    height: computedDimension.height * (1 - 2 * chargeHeightOffset),
-  };
-  if (shape === 'rightCut' || shape === 'leftCut') {
-    chargeDimension.width = chargeDimension.width * 0.9;
-    chargeDimension.height = chargeDimension.height * 0.82;
-  }
+  const { chargeDimension, chargeHorizontalOffset } = getChargeDimension(computedDimension, ordinary, shape);
+
   const clipPathUrl = `url(#${clipPathId})`;
   return (
     <>
@@ -66,9 +56,7 @@ export const SimpleBlasonDisplay = ({ blason, dimension, fillFromTincture, clipP
 
       {blason.charge && (
         <g clipPath={clipPathUrl}>
-          <GWrapper
-            translate={[chargeWidthOffset * width + (shape === 'leftCut' ? 0.1 * width : 0), verticalOffset * height]}
-          >
+          <GWrapper translate={[chargeHorizontalOffset * width, verticalOffset * height]}>
             <ChargeDisplay dimension={chargeDimension} charge={blason.charge} fillFromTincture={fillFromTincture} />
           </GWrapper>
         </g>
@@ -86,3 +74,129 @@ const GWrapper: React.FunctionComponent<GWrapperProps> = (props) => {
     return <>{props.children}</>;
   }
 };
+
+function getChargeDimension(
+  baseDimension: Dimension,
+  ordinary: Ordinary | undefined,
+  shape: SimpleBlasonShape
+): { chargeDimension: Dimension; chargeHorizontalOffset: number } {
+  if (shape === 'default') {
+    const chargeHorizontalOffset = ordinary && ordinary.name === 'bordure' ? 0.05 : 0;
+
+    const defaultChargeHeightOffset = 0.07;
+
+    let chargeHeightOffset: number;
+    if (ordinary) {
+      if (ordinary.name === 'chief') {
+        chargeHeightOffset = 0.09;
+      } else if (ordinary.name === 'base') {
+        chargeHeightOffset = 0.12;
+      } else if (ordinary.name === 'bordure') {
+        if (ordinary.line === 'straight') {
+          chargeHeightOffset = 0.12;
+        } else {
+          chargeHeightOffset = 0.14;
+        }
+      } else {
+        chargeHeightOffset = defaultChargeHeightOffset;
+      }
+    } else {
+      chargeHeightOffset = defaultChargeHeightOffset;
+    }
+
+    return {
+      chargeDimension: {
+        width: baseDimension.width * (1 - 2 * chargeHorizontalOffset),
+        height: baseDimension.height * (1 - 2 * chargeHeightOffset),
+      },
+      chargeHorizontalOffset,
+    };
+  } else if (shape === 'square') {
+    const chargeHorizontalOffset = ordinary && ordinary.name === 'bordure' ? 0.05 : 0;
+
+    const defaultChargeHeightOffset = 0;
+
+    let chargeHeightOffset: number;
+    if (ordinary) {
+      if (ordinary.name === 'base') {
+        chargeHeightOffset = 0.12;
+      } else if (ordinary.name === 'bordure') {
+        if (ordinary.line === 'straight') {
+          chargeHeightOffset = 0.04;
+        } else {
+          chargeHeightOffset = 0.06;
+        }
+      } else {
+        chargeHeightOffset = defaultChargeHeightOffset;
+      }
+    } else {
+      chargeHeightOffset = defaultChargeHeightOffset;
+    }
+
+    return {
+      chargeDimension: {
+        width: baseDimension.width * (1 - 2 * chargeHorizontalOffset),
+        height: baseDimension.height * (1 - 2 * chargeHeightOffset),
+      },
+      chargeHorizontalOffset,
+    };
+  } else if (shape === 'rightCut' || shape === 'leftCut') {
+    const chargeWidthOffset = 0.1;
+    const defaultChargeHeightOffset = 0.09;
+
+    let chargeHeightOffset: number;
+    if (ordinary) {
+      if (ordinary.name === 'chief') {
+        chargeHeightOffset = 0.12;
+      } else if (ordinary.name === 'base') {
+        chargeHeightOffset = 0.12;
+      } else if (ordinary.name === 'bordure') {
+        if (ordinary.line === 'straight') {
+          chargeHeightOffset = 0.12;
+        } else {
+          chargeHeightOffset = 0.14;
+        }
+      } else {
+        chargeHeightOffset = defaultChargeHeightOffset;
+      }
+    } else {
+      chargeHeightOffset = defaultChargeHeightOffset;
+    }
+
+    const chargeDimension = {
+      width: baseDimension.width * (1 - 2 * chargeWidthOffset),
+      height: baseDimension.height * (1 - 2 * chargeHeightOffset),
+    };
+
+    chargeDimension.width = chargeDimension.width * 0.9;
+    chargeDimension.height = chargeDimension.height * 0.82;
+
+    return { chargeDimension, chargeHorizontalOffset: chargeWidthOffset + (shape === 'leftCut'?0.1:0) };
+  } else {
+    return cannotHappen(shape);
+  }
+}
+
+function getChargeVerticalOffsetPosition(ordinary: Ordinary): number {
+  if (ordinary.name === 'chief') {
+    if (ordinary.line === 'straight') {
+      return 1 / 5;
+    } else if (ordinary.line === 'engrailed') {
+      return 11 / 50;
+    } else if (ordinary.line === 'invected') {
+      return 13 / 50;
+    } else if (ordinary.line === 'indented') {
+      return 11 / 50;
+    } else {
+      return cannotHappen(ordinary.line);
+    }
+  } else if (ordinary.name === 'bordure') {
+    if (ordinary.line === 'engrailed') {
+      return 6 / 100;
+    } else {
+      return 8 / 100;
+    }
+  } else {
+    return 0;
+  }
+}

@@ -19,15 +19,11 @@ Look at https://books.google.ca/books?id=TvNfAAAAcAAJ&pg=PA32&lpg=PA32&dq=lion+w
 Faire un mode de representation "Sans couleur"
 Faire le "of the last"
 
-- extract stringify functions
-- Update bordure to use multiple MoveTo
-- 9 symboles ne rentrent pas dans les shields
 
 - Factorize form for lozenge/roundel/fleur de lys
 - Support for quarterly
 
 - Meilleur support de l'optionnalité des virgules
-- Bouger la configuration dans la navbar probablement
 - utiliser un context pour la configuration
 - Ajouter les formes de bouclier manquantes
 - Support de custom comme couleur conf
@@ -42,3 +38,4 @@ Faire le "of the last"
 - faire le déploiement
 - gerer les erreurs provenant de l'URL 
 
+- ecrire des tests qui verifient que quelque soit les ordinaries, ils sont dans les bornes autoriséée( dans le bouclier, sous le chief, dans la bordur, etc.)
