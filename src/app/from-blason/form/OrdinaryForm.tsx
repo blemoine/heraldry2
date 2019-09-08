@@ -4,6 +4,7 @@ import { Ordinary } from '../../model/ordinary';
 import { argent } from '../../model/tincture';
 import { OrdinaryDispatcherForm } from './ordinaries/OrdinaryDispatcherForm';
 import { TinctureConfiguration } from '../../model/tincture-configuration';
+import { Line } from '../../model/line';
 
 type Props = {
   tinctureConfiguration: TinctureConfiguration;
@@ -14,10 +15,11 @@ export function OrdinaryForm({ tinctureConfiguration, ordinary, ordinaryChange }
   function changeOrdinary(ordinaryName: Ordinary['name'] | null) {
     if (ordinaryName) {
       const tincture = ordinary ? ordinary.tincture : argent;
+      const line: Line = ordinary ? ordinary.line : 'straight';
       if (ordinaryName === 'pale' || ordinaryName === 'chevron' || ordinaryName === 'chevronel') {
-        ordinaryChange({ name: ordinaryName, tincture, count: 1, line: 'straight' });
+        ordinaryChange({ name: ordinaryName, tincture, count: 1, line });
       } else {
-        ordinaryChange({ name: ordinaryName, tincture, line: 'straight' });
+        ordinaryChange({ name: ordinaryName, tincture, line });
       }
     } else {
       ordinaryChange(null);

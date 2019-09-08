@@ -35,7 +35,6 @@ Faire le "of the last"
 - animate configuration 0 to auto
 - Dans la liste des boucliers, afficher un petit icone représentant la forme attendue
 
-- Le form , en particulier en quaterly est vraiment moche
 - Supporter le clic sur une zone -> edition
 - Refondre l'UX (par defaut on affiche que le bouclier + blason, et on peut deplier le form a coté
 - etre plus lenient sur la syntaxe des quarterly (avec les : et les;)
