@@ -1,4 +1,4 @@
-import { indentBetweenPoint, indentLineTo } from './line-style.helper';
+import { engrailBetweenPoint, indentBetweenPoint, indentLineTo } from './line-style.helper';
 import { SvgPathBuilder } from './svg-path-builder';
 
 describe('line-style', () => {
@@ -46,6 +46,17 @@ describe('line-style', () => {
       );
 
       expect(result.toPathAttribute()).toBe('M 5 10 L 10 16 L 15 10 L 20 16 L 25 10 L 30 16 L 35 10');
+    });
+  });
+  describe('engrailBetweenPoint', () => {
+    it('should draw multiple arcs on an horizontal line', () => {
+      const result = engrailBetweenPoint(
+        path,
+        { line: 'with-arc', radius: 10, sweep: false },
+        (t: number) => [5 + 30 * t, 10] as const
+      );
+
+      expect(result.toPathAttribute()).toBe('M 5 10 Q 10 20 15 10 Q 20 20 25 10 Q 30 20 35 10');
     });
   });
 });
