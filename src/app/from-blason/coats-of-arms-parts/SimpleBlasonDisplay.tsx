@@ -22,19 +22,23 @@ export const SimpleBlasonDisplay = ({ blason, dimension, fillFromTincture, clipP
   const { width, height } = dimension;
   const ordinary = blason.ordinary;
 
-  const verticalOffset = ordinary ? getChargeVerticalOffsetPosition(ordinary) : 0;
-  const heightScale = 1 - verticalOffset;
+  const verticalOffset = ordinary ? getFieldVerticalOffset(ordinary) : 0;
+  const fieldHeightScale = 1 - verticalOffset;
+  const fieldDimension = { width, height: height * fieldHeightScale };
 
-  const computedDimension = { width, height: height * heightScale };
-  const { chargeDimension, chargeHorizontalOffset } = getChargeDimension(computedDimension, ordinary, shape);
+  const { chargeDimension, chargeHorizontalOffset, chargeVerticalOffset } = getChargeDimension(
+    fieldDimension,
+    blason,
+    shape
+  );
 
   const clipPathUrl = `url(#${clipPathId})`;
   return (
     <>
-      <g clipPath={clipPathUrl}>
+      <g clipPath={clipPathUrl} className="blason-field">
         <GWrapper translate={[0, verticalOffset * height]}>
           <FieldDisplay
-            dimension={computedDimension}
+            dimension={fieldDimension}
             field={blason.field}
             fillFromTincture={fillFromTincture}
             shape={shape}
@@ -43,7 +47,7 @@ export const SimpleBlasonDisplay = ({ blason, dimension, fillFromTincture, clipP
       </g>
 
       {ordinary && (
-        <g clipPath={clipPathUrl}>
+        <g clipPath={clipPathUrl} className="blason-ordinary">
           <OrdinaryDisplay
             dimension={dimension}
             ordinary={ordinary}
@@ -55,8 +59,8 @@ export const SimpleBlasonDisplay = ({ blason, dimension, fillFromTincture, clipP
       )}
 
       {blason.charge && (
-        <g clipPath={clipPathUrl}>
-          <GWrapper translate={[chargeHorizontalOffset * width, verticalOffset * height]}>
+        <g clipPath={clipPathUrl} className="blason-charge">
+          <GWrapper translate={[chargeHorizontalOffset * width, chargeVerticalOffset * verticalOffset * height]}>
             <ChargeDisplay dimension={chargeDimension} charge={blason.charge} fillFromTincture={fillFromTincture} />
           </GWrapper>
         </g>
@@ -77,14 +81,27 @@ const GWrapper: React.FunctionComponent<GWrapperProps> = (props) => {
 
 function getChargeDimension(
   baseDimension: Dimension,
-  ordinary: Ordinary | undefined,
+  blason: SimpleBlason,
   shape: SimpleBlasonShape
-): { chargeDimension: Dimension; chargeHorizontalOffset: number } {
+): { chargeDimension: Dimension; chargeHorizontalOffset: number; chargeVerticalOffset: number } {
+  const ordinary = blason.ordinary;
+  const charge = blason.charge;
+
   if (shape === 'default') {
-    const chargeHorizontalOffset = ordinary && ordinary.name === 'bordure' ? 0.05 : 0;
-
-    const defaultChargeHeightOffset = 0.07;
-
+    const chargeHorizontalOffset = ordinary && ordinary.name === 'bordure' ? 0.05 : 0.015;
+    const chargeCount = charge ? charge.countAndDisposition.count : 0;
+    const chargeDisposition = charge ? charge.countAndDisposition.disposition : null;
+    const defaultChargeHeightOffset =
+      chargeDisposition === 'pale'
+        ? 0.035
+        : chargeCount === 7 || chargeCount === 13
+        ? 0.08
+        : chargeCount === 8
+        ? 0.06
+        : chargeCount === 12
+        ? 0.05
+        : 0.04;
+    0;
     let chargeHeightOffset: number;
     if (ordinary) {
       if (ordinary.name === 'chief') {
@@ -110,6 +127,7 @@ function getChargeDimension(
         height: baseDimension.height * (1 - 2 * chargeHeightOffset),
       },
       chargeHorizontalOffset,
+      chargeVerticalOffset: 0,
     };
   } else if (shape === 'square') {
     const chargeHorizontalOffset = ordinary && ordinary.name === 'bordure' ? 0.05 : 0;
@@ -139,6 +157,7 @@ function getChargeDimension(
         height: baseDimension.height * (1 - 2 * chargeHeightOffset),
       },
       chargeHorizontalOffset,
+      chargeVerticalOffset: 0,
     };
   } else if (shape === 'rightCut' || shape === 'leftCut') {
     const chargeWidthOffset = 0.1;
@@ -171,13 +190,17 @@ function getChargeDimension(
     chargeDimension.width = chargeDimension.width * 0.9;
     chargeDimension.height = chargeDimension.height * 0.82;
 
-    return { chargeDimension, chargeHorizontalOffset: chargeWidthOffset + (shape === 'leftCut'?0.1:0) };
+    return {
+      chargeDimension,
+      chargeHorizontalOffset: chargeWidthOffset + (shape === 'leftCut' ? 0.1 : 0),
+      chargeVerticalOffset: 0,
+    };
   } else {
     return cannotHappen(shape);
   }
 }
 
-function getChargeVerticalOffsetPosition(ordinary: Ordinary): number {
+function getFieldVerticalOffset(ordinary: Ordinary): number {
   if (ordinary.name === 'chief') {
     if (ordinary.line === 'straight') {
       return 1 / 5;

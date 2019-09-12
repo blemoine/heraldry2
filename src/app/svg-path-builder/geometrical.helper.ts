@@ -1,6 +1,7 @@
 import { round } from '../../utils/round';
 
 export type PathAbsolutePoint = readonly [number, number];
+export type Matrix2 = readonly [[number, number], [number, number]];
 
 export function toRadians(angle: number): number {
   return angle * (Math.PI / 180);
@@ -44,4 +45,8 @@ export function translate([x, y]: PathAbsolutePoint, translation: PathAbsolutePo
 
 export function arePointEquivalent([x1, y1]: PathAbsolutePoint, [x2, y2]: PathAbsolutePoint): boolean {
   return round(x1, 5) === round(x2, 5) && round(y1, 5) === round(y2, 5);
+}
+
+export function matrixTransform([x, y]: PathAbsolutePoint, [[a11, a12], [a21, a22]]: Matrix2): PathAbsolutePoint {
+  return [x * a11 + y * a12, x * a21 + y * a22];
 }
