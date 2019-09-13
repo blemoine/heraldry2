@@ -5,6 +5,9 @@
     "outDir": "./dist/",
 
     "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
 
     "noUnusedLocals": true,
     "noUnusedParameters": true,
