@@ -11,6 +11,9 @@ import { defaultTinctureConfiguration } from '../model/tincture-configuration';
 import * as pointInSvgPolygon from 'point-in-svg-polygon';
 import { stringifyBlason } from './blason.helpers';
 import { identity3, Matrix3, mul, mulVec, scale3, translation3 } from '../svg-path-builder/matrix';
+import { memoize } from 'lodash';
+
+const numRuns = 50
 
 describe('CoatsOfArms rules', () => {
   const dimension: Dimension = { width: 360, height: 480 };
@@ -18,7 +21,7 @@ describe('CoatsOfArms rules', () => {
 
   it('should ensure that charges are always inside a plain field', () => {
     fc.assert(
-      fc.property(chargeArb, fc.context(), (charge, ctx) => {
+      fc.property(chargeArb, fc.context(), (charge) => {
         const blason: SimpleBlason = {
           kind: 'simple',
           field: { kind: 'plain', tincture: azure },
@@ -29,25 +32,26 @@ describe('CoatsOfArms rules', () => {
         render(<CoatsOfArmsDisplay blason={blason} dimension={dimension} configuration={configuration} />);
 
         const clipPathStr = document.querySelector('#plain-field-clip-path path')!.getAttribute('d');
-        const clipPath = pointInSvgPolygon.segments(clipPathStr);
+        const clipPath = getPathSegments(clipPathStr);
 
         const chargesParsedPoints = getChargePoints();
 
         chargesParsedPoints.forEach((point) => {
           const isInside = pointInSvgPolygon.isInside(point, clipPath);
           if (!isInside) {
-            ctx.log(`Blason '${stringifyBlason(blason)}' returns false for point ${point}`);
+            fail(`Blason '${stringifyBlason(blason)}' returns false for point ${point}`);
           }
-          expect(isInside).toBe(true);
+          return isInside;
         });
+
       }),
-      { numRuns: 50 }
+      { numRuns }
     );
   });
 
   it('should ensure that charges are always inside the field under a chief', () => {
     fc.assert(
-      fc.property(chargeArb, fc.context(), (charge, ctx) => {
+      fc.property(chargeArb, fc.context(), (charge) => {
         const blason: SimpleBlason = {
           kind: 'simple',
           field: { kind: 'plain', tincture: azure },
@@ -59,10 +63,10 @@ describe('CoatsOfArms rules', () => {
         render(<CoatsOfArmsDisplay blason={blason} dimension={dimension} configuration={configuration} />);
 
         const clipPathStr = document.querySelector('#plain-field-clip-path path')!.getAttribute('d');
-        const clipPath = pointInSvgPolygon.segments(clipPathStr);
+        const clipPath = getPathSegments(clipPathStr);
 
         const chiefPathStr = document.querySelector('.blason-ordinary path')!.getAttribute('d');
-        const chiefPath: Array<any> = pointInSvgPolygon.segments(chiefPathStr);
+        const chiefPath: Array<any> = getPathSegments(chiefPathStr);
         const minY: number = chiefPath
           .flatMap(({ coords }) => coords)
           .reduce(([accX, accY], [x, y]) => {
@@ -75,23 +79,23 @@ describe('CoatsOfArms rules', () => {
 
         const chargesParsedPoints = getChargePoints();
 
-        chargesParsedPoints.forEach((point) => {
-          try {
-            expect(pointInSvgPolygon.isInside(point, clipPath)).toBe(true);
-            expect(minY).toBeLessThanOrEqual(point[1]);
-          } catch (e) {
-            ctx.log(`Blason '${stringifyBlason(blason)}' returns false for point ${point}, with minY ${minY}`);
-            throw e;
+         chargesParsedPoints.forEach((point) => {
+          const isInside = pointInSvgPolygon.isInside(point, clipPath);
+          const isBelow = minY < point[1];
+          if (!isInside || !isBelow) {
+            fail(`Blason '${stringifyBlason(blason)}' returns false for point ${point}, with minY ${minY}`);
           }
+          return [isInside, isBelow];
         });
+
       }),
-      { numRuns: 50 }
+      { numRuns }
     );
   });
 
   it('should ensure that charges are always inside the field above a base', () => {
     fc.assert(
-      fc.property(chargeArb, fc.context(), (charge, ctx) => {
+      fc.property(chargeArb, fc.context(), (charge) => {
         const blason: SimpleBlason = {
           kind: 'simple',
           field: { kind: 'plain', tincture: azure },
@@ -103,10 +107,10 @@ describe('CoatsOfArms rules', () => {
         render(<CoatsOfArmsDisplay blason={blason} dimension={dimension} configuration={configuration} />);
 
         const clipPathStr = document.querySelector('#plain-field-clip-path path')!.getAttribute('d');
-        const clipPath = pointInSvgPolygon.segments(clipPathStr);
+        const clipPath = getPathSegments(clipPathStr);
 
         const basePathStr = document.querySelector('.blason-ordinary path')!.getAttribute('d');
-        const basePath: Array<any> = pointInSvgPolygon.segments(basePathStr);
+        const basePath: Array<any> = getPathSegments(basePathStr);
         const maxY: number = basePath
           .flatMap(({ coords }) => coords)
           .reduce(([accX, accY], [x, y]) => {
@@ -120,18 +124,21 @@ describe('CoatsOfArms rules', () => {
         const chargesParsedPoints = getChargePoints();
 
         chargesParsedPoints.forEach((point) => {
-          try {
-            expect(pointInSvgPolygon.isInside(point, clipPath)).toBe(true);
-            expect(maxY).toBeGreaterThanOrEqual(point[1]);
-          } catch (e) {
-            ctx.log(`Blason '${stringifyBlason(blason)}' returns false for point ${point}, with maxY ${maxY}`);
-            throw e;
+          const isInside = pointInSvgPolygon.isInside(point, clipPath);
+          const isAbove = maxY > point[1];
+          if (!isInside || !isAbove) {
+            fail(`Blason '${stringifyBlason(blason)}' returns false for point ${point}, with maxY ${maxY}`);
           }
+          return [isInside, isAbove];
         });
       }),
-      { numRuns: 50 }
+      { numRuns }
     );
-  })
+  });
+});
+
+const getPathSegments = memoize(function(pathStr: string | null) {
+  return pathStr ? pointInSvgPolygon.segments(pathStr) : [];
 });
 
 function parentsUntil(el: Node, selector: string): Array<Element> {

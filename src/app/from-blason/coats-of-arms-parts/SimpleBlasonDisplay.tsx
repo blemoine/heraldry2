@@ -91,6 +91,7 @@ function getChargeDimension(
     const chargeHorizontalOffset = ordinary && ordinary.name === 'bordure' ? 0.05 : 0.015;
     const chargeCount = charge ? charge.countAndDisposition.count : 0;
     const chargeDisposition = charge ? charge.countAndDisposition.disposition : null;
+
     const defaultChargeHeightOffset =
       chargeDisposition === 'pale'
         ? 0.035
@@ -102,10 +103,11 @@ function getChargeDimension(
         ? 0.05
         : 0.04;
     0;
+
     let chargeHeightOffset: number;
     if (ordinary) {
       if (ordinary.name === 'chief') {
-        chargeHeightOffset = 0.09;
+        chargeHeightOffset = 0.1;
       } else if (ordinary.name === 'base') {
         chargeHeightOffset = 0.13;
       } else if (ordinary.name === 'bordure') {
