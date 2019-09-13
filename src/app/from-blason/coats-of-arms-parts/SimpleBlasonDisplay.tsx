@@ -60,7 +60,7 @@ export const SimpleBlasonDisplay = ({ blason, dimension, fillFromTincture, clipP
 
       {blason.charge && (
         <g clipPath={clipPathUrl} className="blason-charge">
-          <GWrapper translate={[chargeHorizontalOffset * width, chargeVerticalOffset * verticalOffset * height]}>
+          <GWrapper translate={[chargeHorizontalOffset * width, (chargeVerticalOffset + verticalOffset) * height]}>
             <ChargeDisplay dimension={chargeDimension} charge={blason.charge} fillFromTincture={fillFromTincture} />
           </GWrapper>
         </g>

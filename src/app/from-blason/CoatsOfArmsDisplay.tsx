@@ -48,7 +48,7 @@ export function CoatsOfArmsDisplay(props: Props) {
   const blason = props.blason;
 
   return (
-    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} className="coats-of-arms-display">
       <defs>
         {ermines.map((ermine, i) => {
           return isThereFur(blason, ermine.name) ? (

@@ -2,6 +2,7 @@
 
 exports[`CoatsOfArms should render 'Argent, a chevron sable' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -62,6 +63,7 @@ exports[`CoatsOfArms should render 'Argent, a chevron sable' 1`] = `
 
 exports[`CoatsOfArms should render 'Argent, a cross gules' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -122,6 +124,7 @@ exports[`CoatsOfArms should render 'Argent, a cross gules' 1`] = `
 
 exports[`CoatsOfArms should render 'Argent, three crosses potent vair' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -243,6 +246,7 @@ exports[`CoatsOfArms should render 'Argent, three crosses potent vair' 1`] = `
 
 exports[`CoatsOfArms should render 'Azure, nineteen annulets argent' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -416,6 +420,7 @@ exports[`CoatsOfArms should render 'Azure, nineteen annulets argent' 1`] = `
 
 exports[`CoatsOfArms should render 'Azure, twelve roundels argent' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -559,6 +564,7 @@ exports[`CoatsOfArms should render 'Azure, twelve roundels argent' 1`] = `
 
 exports[`CoatsOfArms should render 'Azure, two crosses crosselet vert' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -628,6 +634,7 @@ exports[`CoatsOfArms should render 'Azure, two crosses crosselet vert' 1`] = `
 
 exports[`CoatsOfArms should render 'Azure, two crosses moline counter ermine' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -758,6 +765,7 @@ exports[`CoatsOfArms should render 'Azure, two crosses moline counter ermine' 1`
 
 exports[`CoatsOfArms should render 'Barry pily counter ermine and potent en point' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -927,6 +935,7 @@ exports[`CoatsOfArms should render 'Barry pily counter ermine and potent en poin
 
 exports[`CoatsOfArms should render 'Bendy or and argent, a lion dormant gules' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -1184,6 +1193,7 @@ exports[`CoatsOfArms should render 'Bendy or and argent, a lion dormant gules' 1
 
 exports[`CoatsOfArms should render 'Bendy or and argent, a lion rampant ermine' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -1580,6 +1590,7 @@ exports[`CoatsOfArms should render 'Bendy or and argent, a lion rampant ermine' 
 
 exports[`CoatsOfArms should render 'Bendy sinister or and argent, a lion sejant regardant gules' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -1816,6 +1827,7 @@ exports[`CoatsOfArms should render 'Bendy sinister or and argent, a lion sejant 
 
 exports[`CoatsOfArms should render 'Chequy gules and or, a chief engrailed azure' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -2162,6 +2174,7 @@ exports[`CoatsOfArms should render 'Chequy gules and or, a chief engrailed azure
 
 exports[`CoatsOfArms should render 'Chequy gules and or, a chief engrailed ermine' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -2569,6 +2582,7 @@ exports[`CoatsOfArms should render 'Chequy gules and or, a chief engrailed ermin
 
 exports[`CoatsOfArms should render 'Chequy gules and or, a saltire argent, an eagle displayed sable beaked and armed or' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -3040,6 +3054,7 @@ exports[`CoatsOfArms should render 'Chequy gules and or, a saltire argent, an ea
 
 exports[`CoatsOfArms should render 'Ermine, a bend invected vair' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -3208,6 +3223,7 @@ exports[`CoatsOfArms should render 'Ermine, a bend invected vair' 1`] = `
 
 exports[`CoatsOfArms should render 'Ermine, two pallets sable' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -3336,6 +3352,7 @@ exports[`CoatsOfArms should render 'Ermine, two pallets sable' 1`] = `
 
 exports[`CoatsOfArms should render 'Erminois, four crosses bottony argent' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -3476,6 +3493,7 @@ exports[`CoatsOfArms should render 'Erminois, four crosses bottony argent' 1`] =
 
 exports[`CoatsOfArms should render 'Gules, three crosses pattée argent' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -3550,6 +3568,7 @@ exports[`CoatsOfArms should render 'Gules, three crosses pattée argent' 1`] = `
 
 exports[`CoatsOfArms should render 'Or, a base engrailed vair' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -3657,6 +3676,7 @@ exports[`CoatsOfArms should render 'Or, a base engrailed vair' 1`] = `
 
 exports[`CoatsOfArms should render 'Or, a bend sinister invected ermine' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -3782,6 +3802,7 @@ exports[`CoatsOfArms should render 'Or, a bend sinister invected ermine' 1`] = `
 
 exports[`CoatsOfArms should render 'Or, a fess murrey' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -3842,6 +3863,7 @@ exports[`CoatsOfArms should render 'Or, a fess murrey' 1`] = `
 
 exports[`CoatsOfArms should render 'Or, eleven rustres sable' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -3967,6 +3989,7 @@ exports[`CoatsOfArms should render 'Or, eleven rustres sable' 1`] = `
 
 exports[`CoatsOfArms should render 'Or, fifteen mascles sable' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -4116,6 +4139,7 @@ exports[`CoatsOfArms should render 'Or, fifteen mascles sable' 1`] = `
 
 exports[`CoatsOfArms should render 'Or, thirteen lozenge or' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -4240,6 +4264,7 @@ exports[`CoatsOfArms should render 'Or, thirteen lozenge or' 1`] = `
 
 exports[`CoatsOfArms should render 'Paly pily vair and pean' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -4404,6 +4429,7 @@ exports[`CoatsOfArms should render 'Paly pily vair and pean' 1`] = `
 
 exports[`CoatsOfArms should render 'Per chevron Sable and Or, three fleurs de lys argent' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -4587,6 +4613,7 @@ exports[`CoatsOfArms should render 'Per chevron Sable and Or, three fleurs de ly
 
 exports[`CoatsOfArms should render 'Per cross or and argent' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -4651,6 +4678,7 @@ exports[`CoatsOfArms should render 'Per cross or and argent' 1`] = `
 
 exports[`CoatsOfArms should render 'Per fess or and ermine, a bordure engrailed azure' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -4781,6 +4809,7 @@ exports[`CoatsOfArms should render 'Per fess or and ermine, a bordure engrailed 
 
 exports[`CoatsOfArms should render 'Per pale invected ermine and or' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -4896,6 +4925,7 @@ exports[`CoatsOfArms should render 'Per pale invected ermine and or' 1`] = `
 
 exports[`CoatsOfArms should render 'Per saltire or and argent' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -4960,6 +4990,7 @@ exports[`CoatsOfArms should render 'Per saltire or and argent' 1`] = `
 
 exports[`CoatsOfArms should render 'Potent, a chief gules' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -5072,6 +5103,7 @@ exports[`CoatsOfArms should render 'Potent, a chief gules' 1`] = `
 
 exports[`CoatsOfArms should render 'Purpure, four crosses crosselet or' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -5151,6 +5183,7 @@ exports[`CoatsOfArms should render 'Purpure, four crosses crosselet or' 1`] = `
 
 exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gules; 2nd ermine, a bordure engrailed gules; 3rd ermine, a chief engrailed vert; 4th ermine, a bordure invected gules' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -5390,6 +5423,7 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
 
 exports[`CoatsOfArms should render 'Quarterly, 1st: Bendy or and purpure, a bordure argent;2nd: Bendy of eight azure and or, a bordure argent;3rd: Bendy of eight or and vert, a bordure argent;4th: Bendy of eight or and gules, a bordure argent' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -5695,6 +5729,7 @@ exports[`CoatsOfArms should render 'Quarterly, 1st: Bendy or and purpure, a bord
 
 exports[`CoatsOfArms should render 'Sable, a cross maltese argent' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -5759,6 +5794,7 @@ exports[`CoatsOfArms should render 'Sable, a cross maltese argent' 1`] = `
 
 exports[`CoatsOfArms should render 'Vert, two crosses hummetty counter potent' 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -5873,6 +5909,7 @@ exports[`CoatsOfArms should render 'Vert, two crosses hummetty counter potent' 1
 
 exports[`CoatsOfArms should render a fur blason 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -5984,6 +6021,7 @@ exports[`CoatsOfArms should render a fur blason 1`] = `
 
 exports[`CoatsOfArms should render a party blason 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -6085,6 +6123,7 @@ exports[`CoatsOfArms should render a party blason 1`] = `
 
 exports[`CoatsOfArms should render a party blason with some ordinary 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -6200,6 +6239,7 @@ exports[`CoatsOfArms should render a party blason with some ordinary 1`] = `
 
 exports[`CoatsOfArms should render a plain blason 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}
@@ -6250,6 +6290,7 @@ exports[`CoatsOfArms should render a plain blason 1`] = `
 
 exports[`CoatsOfArms should render a the england royal arms 1`] = `
 <svg
+  className="coats-of-arms-display"
   height={266.6666666666667}
   viewBox="0 0 200 266.6666666666667"
   width={200}

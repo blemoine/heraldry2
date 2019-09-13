@@ -96,7 +96,7 @@ const SvgLionStatant = (props: {
       stroke={props.stroke}
       strokeWidth={2.5}
     />
-    <g transform="translate(-50, 0)">{props.head}</g>
+    <g transform="translate(-50 0)">{props.head}</g>
   </svg>
 );
 

@@ -163,12 +163,14 @@ const quarterlyBlasonArb: Arbitrary<QuarterlyBlason> = fc
   });
 
 const divisionArb: Arbitrary<Blason['kind']> = fc.constantFrom(...availableDivisions);
-export const blasonArb: Arbitrary<Blason> = divisionArb.chain((kind): Arbitrary<Blason> => {
-  if (kind === 'simple') {
-    return simpleBlasonArb;
-  } else if (kind === 'quarterly') {
-    return quarterlyBlasonArb;
-  } else {
-    return cannotHappen(kind);
+export const blasonArb: Arbitrary<Blason> = divisionArb.chain(
+  (kind): Arbitrary<Blason> => {
+    if (kind === 'simple') {
+      return simpleBlasonArb;
+    } else if (kind === 'quarterly') {
+      return quarterlyBlasonArb;
+    } else {
+      return cannotHappen(kind);
+    }
   }
-});
+);

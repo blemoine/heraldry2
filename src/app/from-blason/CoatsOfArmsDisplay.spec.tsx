@@ -112,7 +112,9 @@ describe('CoatsOfArms', () => {
   snapshotTest(
     'Quarterly, 1st: Bendy or and purpure, a bordure argent;2nd: Bendy of eight azure and or, a bordure argent;3rd: Bendy of eight or and vert, a bordure argent;4th: Bendy of eight or and gules, a bordure argent'
   );
-  snapshotTest('Quarterly, 1st ermine, a bordure indented gules; 2nd ermine, a bordure engrailed gules; 3rd ermine, a chief engrailed vert; 4th ermine, a bordure invected gules')
+  snapshotTest(
+    'Quarterly, 1st ermine, a bordure indented gules; 2nd ermine, a bordure engrailed gules; 3rd ermine, a chief engrailed vert; 4th ermine, a bordure invected gules'
+  );
 });
 
 function snapshotTest(blason: string) {

@@ -1,7 +1,8 @@
 import { round } from '../../utils/round';
+import { Matrix2 } from './matrix';
 
 export type PathAbsolutePoint = readonly [number, number];
-export type Matrix2 = readonly [[number, number], [number, number]];
+
 
 export function toRadians(angle: number): number {
   return angle * (Math.PI / 180);

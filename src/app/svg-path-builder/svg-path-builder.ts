@@ -1,7 +1,6 @@
 import { cannotHappen } from '../../utils/cannot-happen';
 import {
   arePointEquivalent,
-  Matrix2,
   matrixTransform,
   PathAbsolutePoint,
   rotate,
@@ -11,6 +10,7 @@ import { pointOnEllipticalArc, pointOnQuadraticBezier } from './point-on-ellipti
 import { round } from '../../utils/round';
 import { raise, Result } from '../../utils/result';
 import { engrailBetweenPoint, indentBetweenPoint } from './line-style.helper';
+import { Matrix2 } from './matrix';
 
 type MoveTo = { command: 'M'; point: PathAbsolutePoint };
 type GoToPoint = { command: 'L'; point: PathAbsolutePoint };
