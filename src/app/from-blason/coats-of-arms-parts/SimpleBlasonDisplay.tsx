@@ -107,7 +107,7 @@ function getChargeDimension(
       if (ordinary.name === 'chief') {
         chargeHeightOffset = 0.09;
       } else if (ordinary.name === 'base') {
-        chargeHeightOffset = 0.12;
+        chargeHeightOffset = 0.13;
       } else if (ordinary.name === 'bordure') {
         if (ordinary.line === 'straight') {
           chargeHeightOffset = 0.12;

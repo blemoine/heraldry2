@@ -16,7 +16,7 @@ describe('CoatsOfArms rules', () => {
   const dimension: Dimension = { width: 360, height: 480 };
   const configuration: Configuration = { shieldShape: 'heater', tinctureConfiguration: defaultTinctureConfiguration };
 
-  it.skip('should ensure that charges are always inside a plain field', () => {
+  it('should ensure that charges are always inside a plain field', () => {
     fc.assert(
       fc.property(chargeArb, fc.context(), (charge, ctx) => {
         const blason: SimpleBlason = {
@@ -88,6 +88,50 @@ describe('CoatsOfArms rules', () => {
       { numRuns: 50 }
     );
   });
+
+  it('should ensure that charges are always inside the field above a base', () => {
+    fc.assert(
+      fc.property(chargeArb, fc.context(), (charge, ctx) => {
+        const blason: SimpleBlason = {
+          kind: 'simple',
+          field: { kind: 'plain', tincture: azure },
+          ordinary: { name: 'base', line: 'straight', tincture: or },
+          charge,
+        };
+
+        cleanup();
+        render(<CoatsOfArmsDisplay blason={blason} dimension={dimension} configuration={configuration} />);
+
+        const clipPathStr = document.querySelector('#plain-field-clip-path path')!.getAttribute('d');
+        const clipPath = pointInSvgPolygon.segments(clipPathStr);
+
+        const basePathStr = document.querySelector('.blason-ordinary path')!.getAttribute('d');
+        const basePath: Array<any> = pointInSvgPolygon.segments(basePathStr);
+        const maxY: number = basePath
+          .flatMap(({ coords }) => coords)
+          .reduce(([accX, accY], [x, y]) => {
+            if (accY < y) {
+              return [accX, accY];
+            } else {
+              return [x, y];
+            }
+          })[1];
+
+        const chargesParsedPoints = getChargePoints();
+
+        chargesParsedPoints.forEach((point) => {
+          try {
+            expect(pointInSvgPolygon.isInside(point, clipPath)).toBe(true);
+            expect(maxY).toBeGreaterThanOrEqual(point[1]);
+          } catch (e) {
+            ctx.log(`Blason '${stringifyBlason(blason)}' returns false for point ${point}, with maxY ${maxY}`);
+            throw e;
+          }
+        });
+      }),
+      { numRuns: 50 }
+    );
+  })
 });
 
 function parentsUntil(el: Node, selector: string): Array<Element> {
