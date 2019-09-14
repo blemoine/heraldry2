@@ -153,11 +153,17 @@ function getChargeDimension(
   } else if (shape === 'square') {
     const chargeHorizontalOffset = ordinary && ordinary.name === 'bordure' ? 0.05 : 0;
 
-    const defaultChargeHeightOffset = 0;
+    const defaultChargeHeightOffset = 0.01;
 
+    let chargeVerticalOffset = 0.01;
     let chargeHeightOffset: number;
     if (ordinary) {
-      if (ordinary.name === 'base') {
+      if (ordinary.name === 'chief') {
+        chargeHeightOffset = 0.12;
+        if (ordinary.line !== 'straight') {
+          chargeVerticalOffset = 0.08;
+        }
+      } else if (ordinary.name === 'base') {
         chargeHeightOffset = 0.12;
       } else if (ordinary.name === 'bordure') {
         if (ordinary.line === 'straight') {
@@ -172,16 +178,24 @@ function getChargeDimension(
       chargeHeightOffset = defaultChargeHeightOffset;
     }
 
+    const chargeDimension = {
+      width: baseDimension.width * (1 - 2 * chargeHorizontalOffset),
+      height: baseDimension.height * (1 - 2 * chargeHeightOffset),
+    };
+    if (chargeDisposition === 'pale') {
+      chargeVerticalOffset += 0.03;
+      chargeDimension.height = chargeDimension.height * 0.9;
+    } else {
+      chargeVerticalOffset += 0.01;
+    }
+
     return {
-      chargeDimension: {
-        width: baseDimension.width * (1 - 2 * chargeHorizontalOffset),
-        height: baseDimension.height * (1 - 2 * chargeHeightOffset),
-      },
+      chargeDimension,
       chargeHorizontalOffset,
-      chargeVerticalOffset: 0,
+      chargeVerticalOffset,
     };
   } else if (shape === 'rightCut' || shape === 'leftCut') {
-    const chargeWidthOffset = chargeDisposition === 'fess' ? 0 : 0.12;
+    const chargeWidthOffset = chargeDisposition === 'fess' ? 0 : 0.15;
     const defaultChargeHeightOffset = 0.09;
 
     let chargeHeightOffset: number;
@@ -203,7 +217,7 @@ function getChargeDimension(
       chargeHeightOffset = defaultChargeHeightOffset;
     }
 
-    const horizontalFactor = 0.87;
+    const horizontalFactor = 0.851;
     const chargeDimension = {
       width: baseDimension.width * (1 - 2 * chargeWidthOffset) * horizontalFactor,
       height: baseDimension.height * (1 - 2 * chargeHeightOffset),
@@ -220,13 +234,19 @@ function getChargeDimension(
       chargeVerticalOffset = 0;
     }
 
+    if (ordinary && ordinary.name === 'chief' && ordinary.line !== 'straight') {
+      chargeVerticalOffset += 0.045;
+      chargeDimension.height = chargeDimension.height * 0.95;
+    }
+
     return {
       chargeDimension,
       chargeHorizontalOffset:
         chargeWidthOffset +
-        (shape === 'leftCut' ? 1.1 - horizontalFactor : 0) +
+        (chargeDisposition !== 'fess' && shape === 'leftCut' ? 1.1 - horizontalFactor : 0) +
+        (chargeDisposition === 'fess' && shape === 'leftCut' ? 1.13 - horizontalFactor : 0) +
         (chargeDisposition !== 'fess' && shape === 'rightCut' ? -(1 - horizontalFactor) : 0) +
-        (chargeDisposition === 'fess' && shape === 'rightCut' ? 0.95 - horizontalFactor : 0),
+        (chargeDisposition === 'fess' && shape === 'rightCut' ? 0.9 - horizontalFactor : 0),
       chargeVerticalOffset,
     };
   } else {

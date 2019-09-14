@@ -8,7 +8,12 @@ import { PathFromBuilder } from '../../../../common/PathFromBuilder';
 import { cannotHappen } from '../../../../../utils/cannot-happen';
 import { SimpleBlasonShape } from '../../blasonDisplay.helper';
 
-type Props = { charge: Lozenge; dimension: Dimension; shape:SimpleBlasonShape;fillFromTincture: (tincture: Tincture) => string };
+type Props = {
+  charge: Lozenge;
+  dimension: Dimension;
+  shape: SimpleBlasonShape;
+  fillFromTincture: (tincture: Tincture) => string;
+};
 export const LozengeDisplay = ({ charge, dimension: { width, height }, fillFromTincture, shape }: Props) => {
   const stroke = charge.tincture.name === 'sable' ? '#777' : '#000';
   const fill = fillFromTincture(charge.tincture);

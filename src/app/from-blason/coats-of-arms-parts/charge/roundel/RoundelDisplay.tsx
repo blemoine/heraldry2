@@ -8,7 +8,12 @@ import { SvgPathBuilder } from '../../../../svg-path-builder/svg-path-builder';
 import { cannotHappen } from '../../../../../utils/cannot-happen';
 import { SimpleBlasonShape } from '../../blasonDisplay.helper';
 
-type Props = { charge: Roundel; dimension: Dimension;shape:SimpleBlasonShape; fillFromTincture: (tincture: Tincture) => string };
+type Props = {
+  charge: Roundel;
+  dimension: Dimension;
+  shape: SimpleBlasonShape;
+  fillFromTincture: (tincture: Tincture) => string;
+};
 export const RoundelDisplay = ({ charge, dimension, fillFromTincture, shape }: Props) => {
   const { width, height } = dimension;
   const stroke = charge.tincture.name === 'sable' ? '#777' : '#000';
