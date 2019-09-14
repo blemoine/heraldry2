@@ -26,7 +26,7 @@ import { Line, lines } from '../line';
 import { availableDispositions, CountAndDisposition, supportedNumbers } from '../countAndDisposition';
 
 const tinctureArb: Arbitrary<Tincture> = fc.constantFrom(...tinctures);
-const lineArb: Arbitrary<Line> = fc.constantFrom(...lines);
+export const lineArb: Arbitrary<Line> = fc.constantFrom(...lines);
 const partyArb: Arbitrary<Party> = fc.record({
   name: fc.constantFrom(...parties),
   tinctures: fc.tuple(tinctureArb, tinctureArb),

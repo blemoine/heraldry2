@@ -1,11 +1,5 @@
 import { cannotHappen } from '../../utils/cannot-happen';
-import {
-  arePointEquivalent,
-  matrixTransform,
-  PathAbsolutePoint,
-  rotate,
-  translate,
-} from './geometrical.helper';
+import { arePointEquivalent, matrixTransform, PathAbsolutePoint, rotate, translate } from './geometrical.helper';
 import { pointOnEllipticalArc, pointOnQuadraticBezier } from './point-on-elliptical-arc';
 import { round } from '../../utils/round';
 import { raise, Result } from '../../utils/result';

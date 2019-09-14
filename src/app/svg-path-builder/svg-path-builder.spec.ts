@@ -73,9 +73,7 @@ describe('SvgPathBuilder', () => {
   it('should draw line engrailed horizontally', () => {
     const result = SvgPathBuilder.start([10, 10]).goTo([70, 10], { line: 'with-arc', radius: 20, sweep: true });
 
-    expect(result.toPathAttribute()).toEqual(
-      'M 10 10 Q 20 -10 30 10 Q 40 -10 50 10 Q 60 -10 70 10'
-    );
+    expect(result.toPathAttribute()).toEqual('M 10 10 Q 20 -10 30 10 Q 40 -10 50 10 Q 60 -10 70 10');
   });
 
   it('should draw line engrailed vertically', () => {

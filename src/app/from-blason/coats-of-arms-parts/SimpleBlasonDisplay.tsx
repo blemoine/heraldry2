@@ -88,9 +88,11 @@ function getChargeDimension(
   const charge = blason.charge;
 
   if (shape === 'default') {
-    const chargeHorizontalOffset = ordinary && ordinary.name === 'bordure' ? 0.05 : 0.015;
     const chargeCount = charge ? charge.countAndDisposition.count : 0;
     const chargeDisposition = charge ? charge.countAndDisposition.disposition : null;
+
+    const chargeHorizontalOffset =
+      (ordinary && ordinary.name === 'bordure' ? (ordinary.line === 'straight'?0.085:0.125) : 0.015) + (chargeDisposition === 'fess' ? 0.012 : 0);
 
     const defaultChargeHeightOffset =
       chargeDisposition === 'pale'
@@ -104,18 +106,33 @@ function getChargeDimension(
         : 0.04;
     0;
 
+    let chargeVerticalOffset = 0.01;
     let chargeHeightOffset: number;
     if (ordinary) {
       if (ordinary.name === 'chief') {
-        chargeHeightOffset = 0.1;
+
+        if(ordinary.line === 'straight') {
+          chargeHeightOffset = 0.1;
+        } else {
+          chargeHeightOffset = 0.16;
+          chargeVerticalOffset = 0.08
+        }
       } else if (ordinary.name === 'base') {
-        chargeHeightOffset = 0.13;
+
+        if(ordinary.line === 'straight') {
+          chargeHeightOffset = 0.13;
+        } else {
+          chargeHeightOffset = 0.16;
+        }
       } else if (ordinary.name === 'bordure') {
         if (ordinary.line === 'straight') {
-          chargeHeightOffset = 0.12;
-        } else {
           chargeHeightOffset = 0.14;
+          chargeVerticalOffset = 0.02;
+        } else {
+          chargeHeightOffset = 0.17;
+          chargeVerticalOffset = 0.04;
         }
+
       } else {
         chargeHeightOffset = defaultChargeHeightOffset;
       }
@@ -129,7 +146,7 @@ function getChargeDimension(
         height: baseDimension.height * (1 - 2 * chargeHeightOffset),
       },
       chargeHorizontalOffset,
-      chargeVerticalOffset: 0,
+      chargeVerticalOffset,
     };
   } else if (shape === 'square') {
     const chargeHorizontalOffset = ordinary && ordinary.name === 'bordure' ? 0.05 : 0;
@@ -219,7 +236,7 @@ function getFieldVerticalOffset(ordinary: Ordinary): number {
     if (ordinary.line === 'engrailed') {
       return 6 / 100;
     } else {
-      return 8 / 100;
+      return 10 / 100;
     }
   } else {
     return 0;

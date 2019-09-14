@@ -7,6 +7,7 @@
     "clean": "rm -rf dist .cache node_modules",
     "start": "parcel src/index.html",
     "test": "npm run typecheck && jest",
+    "test:rules": "npm run typecheck && GENERATOR_CASE_COUNT=1000 jest",
     "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
     "typecheck": "tsc --noEmit"
   },

@@ -1,5 +1,5 @@
 import fc from 'fast-check';
-import { chargeArb } from '../model/tests/arbitraries';
+import { chargeArb, lineArb } from '../model/tests/arbitraries';
 import { Blason, SimpleBlason } from '../model/blason';
 import { azure, or } from '../model/tincture';
 import { cleanup, render } from '@testing-library/react';
@@ -13,7 +13,7 @@ import { stringifyBlason } from './blason.helpers';
 import { identity3, Matrix3, mul, mulVec, scale3, translation3 } from '../svg-path-builder/matrix';
 import { memoize } from 'lodash';
 
-const numRuns = 50;
+const numRuns = process.env.GENERATOR_CASE_COUNT ? parseFloat(process.env.GENERATOR_CASE_COUNT) : 40;
 
 describe('CoatsOfArms rules', () => {
   const dimension: Dimension = { width: 360, height: 480 };
@@ -33,7 +33,7 @@ describe('CoatsOfArms rules', () => {
 
   it('should ensure that charges are always inside a plain field', () => {
     fc.assert(
-      fc.property(chargeArb, fc.context(), (charge) => {
+      fc.property(chargeArb, (charge) => {
         const blason: SimpleBlason = {
           kind: 'simple',
           field: { kind: 'plain', tincture: azure },
@@ -45,7 +45,7 @@ describe('CoatsOfArms rules', () => {
         chargesParsedPoints.forEach((point) => {
           const isInside = pointInSvgPolygon.isInside(point, clipPath);
           if (!isInside) {
-            fail(`Blason '${stringifyBlason(blason)}' returns false for point ${point}`);
+            expect(false).toBe(`Blason '${stringifyBlason(blason)}' returns false for point ${point}`);
           }
         });
       }),
@@ -55,11 +55,11 @@ describe('CoatsOfArms rules', () => {
 
   it('should ensure that charges are always inside the field under a chief', () => {
     fc.assert(
-      fc.property(chargeArb, fc.context(), (charge) => {
+      fc.property(chargeArb, lineArb, (charge, line) => {
         const blason: SimpleBlason = {
           kind: 'simple',
           field: { kind: 'plain', tincture: azure },
-          ordinary: { name: 'chief', line: 'straight', tincture: or },
+          ordinary: { name: 'chief', line, tincture: or },
           charge,
         };
 
@@ -75,7 +75,9 @@ describe('CoatsOfArms rules', () => {
           const isInside = pointInSvgPolygon.isInside(point, clipPath);
           const isBelow = minY < point[1];
           if (!isInside || !isBelow) {
-            fail(`Blason '${stringifyBlason(blason)}' returns false for point ${point}, with minY ${minY}`);
+            expect(false).toBe(
+              `Blason '${stringifyBlason(blason)}' returns false for point ${point}, with minY ${minY}`
+            );
           }
         });
       }),
@@ -85,11 +87,11 @@ describe('CoatsOfArms rules', () => {
 
   it('should ensure that charges are always inside the field above a base', () => {
     fc.assert(
-      fc.property(chargeArb, fc.context(), (charge) => {
+      fc.property(chargeArb, lineArb, (charge, line) => {
         const blason: SimpleBlason = {
           kind: 'simple',
           field: { kind: 'plain', tincture: azure },
-          ordinary: { name: 'base', line: 'straight', tincture: or },
+          ordinary: { name: 'base', line, tincture: or },
           charge,
         };
 
@@ -105,7 +107,36 @@ describe('CoatsOfArms rules', () => {
           const isInside = pointInSvgPolygon.isInside(point, clipPath);
           const isAbove = maxY > point[1];
           if (!isInside || !isAbove) {
-            fail(`Blason '${stringifyBlason(blason)}' returns false for point ${point}, with maxY ${maxY}`);
+            expect(false).toBe(
+              `Blason '${stringifyBlason(blason)}' returns false for point ${point}, with maxY ${maxY}`
+            );
+          }
+        });
+      }),
+      { numRuns }
+    );
+  });
+
+  it('should ensure that charges are always inside a bordure', () => {
+    fc.assert(
+      fc.property(chargeArb, lineArb, (charge, line) => {
+        const blason: SimpleBlason = {
+          kind: 'simple',
+          field: { kind: 'plain', tincture: azure },
+          ordinary: { name: 'bordure', line, tincture: or },
+          charge,
+        };
+
+        const { chargesParsedPoints } = assertOnCoatsOfArms(blason);
+
+        const bordurePathStr = document.querySelector('.blason-ordinary path')!.getAttribute('d') || '';
+        const firstZIndex = bordurePathStr.indexOf('Z');
+        const bordurePath: Array<any> = getPathSegments(bordurePathStr.substr(firstZIndex + 1));
+
+        chargesParsedPoints.forEach((point) => {
+          const isInsideBordure = pointInSvgPolygon.isInside(point, bordurePath);
+          if (!isInsideBordure) {
+            expect(false).toBe(`Blason '${stringifyBlason(blason)}' returns false for point ${point}`);
           }
         });
       }),
