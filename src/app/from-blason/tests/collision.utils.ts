@@ -57,7 +57,7 @@ export function getChargePoints(parentSelector: string = ''): Array<[number, num
         return accMat;
       }
     }, identity3());
-    return points.map((p) => {
+    return points.map((p): [number, number] => {
       const r = mulVec(transformMatrix, [p[0], p[1], 1]);
 
       return [r[0], r[1]];
