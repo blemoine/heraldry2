@@ -2,28 +2,28 @@ import { getChargePositions } from './charge.helper';
 
 describe('getChargePositions', () => {
   it('should center element if there is one', () => {
-    expect(getChargePositions(1, 'default')).toEqual({
+    expect(getChargePositions(1, 'default', 'default')).toEqual({
       cellWidth: 1 / 3,
       cellHeight: 1,
       positions: [[0.5, 0.5]],
     });
   });
   it('should center element if there is two', () => {
-    expect(getChargePositions(2, 'default')).toEqual({
+    expect(getChargePositions(2, 'default', 'default')).toEqual({
       cellWidth: 1 / 5,
       cellHeight: 1,
       positions: [[0.3, 0.5], [0.7, 0.5]],
     });
   });
   it('should center element if there is three', () => {
-    expect(getChargePositions(3, 'default')).toEqual({
+    expect(getChargePositions(3, 'default', 'default')).toEqual({
       cellWidth: 1 / 5,
       cellHeight: 1 / 2,
       positions: [[0.3, 0.25], [0.7, 0.25], [0.5, 0.75]],
     });
   });
   it('should center element if there is four', () => {
-    expect(getChargePositions(4, 'default')).toEqual({
+    expect(getChargePositions(4, 'default', 'default')).toEqual({
       cellWidth: 1 / 7,
       cellHeight: 1 / 2,
       positions: [[1 / 7 + 1 / 14, 0.25], [0.5, 0.25], [5 / 7 + 1 / 14, 0.25], [0.5, 0.75]],
@@ -31,7 +31,7 @@ describe('getChargePositions', () => {
   });
 
   it('should center element if there is nineteen', () => {
-    expect(getChargePositions(19, 'default')).toEqual({
+    expect(getChargePositions(19, 'default', 'default')).toEqual({
       cellWidth: 1 / 13,
       cellHeight: 1 / 5,
       positions: [
@@ -59,7 +59,7 @@ describe('getChargePositions', () => {
   });
 
   it('should display the number of element in pale', () => {
-    expect(getChargePositions(5, 'pale')).toEqual({
+    expect(getChargePositions(5, 'pale', 'default')).toEqual({
       cellWidth: 1 / 3,
       cellHeight: 1 / 5,
       positions: [[0.5, 0.1], [0.5, 0.3], [0.5, 0.5], [0.5, 0.7], [0.5, 0.9]],
@@ -67,7 +67,7 @@ describe('getChargePositions', () => {
   });
 
   it('should display the number of element in fess', () => {
-    expect(getChargePositions(4, 'fess')).toEqual({
+    expect(getChargePositions(4, 'fess', 'default')).toEqual({
       cellWidth: 1 / 9,
       cellHeight: 1,
       positions: [[3 / 18, 0.5], [7 / 18, 0.5], [11 / 18, 0.5], [15 / 18, 0.5]],

@@ -4,8 +4,14 @@ import { Tincture } from '../../../../model/tincture';
 import SvgEagleDisplayed from './SvgEagleDisplayed';
 import { Dimension, scale } from '../../../../model/dimension';
 import { getChargePositions } from '../charge.helper';
+import { SimpleBlasonShape } from '../../blasonDisplay.helper';
 
-type Props = { charge: Eagle; dimension: Dimension; fillFromTincture: (tincture: Tincture) => string };
+type Props = {
+  charge: Eagle;
+  dimension: Dimension;
+  shape: SimpleBlasonShape;
+  fillFromTincture: (tincture: Tincture) => string;
+};
 export const EagleDisplay = (props: Props) => {
   const charge = props.charge;
   const stroke = charge.tincture.name === 'sable' ? '#777' : '#000';
@@ -18,7 +24,7 @@ export const EagleDisplay = (props: Props) => {
 
   const dimension = props.dimension;
 
-  const { cellWidth, positions, cellHeight } = getChargePositions(count, disposition);
+  const { cellWidth, positions, cellHeight } = getChargePositions(count, disposition, props.shape);
   const { width, height } = dimension;
 
   const computedDimension = scale(dimension, Math.min(2.2 * cellWidth, 0.8 * cellHeight));

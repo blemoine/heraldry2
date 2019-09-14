@@ -45,7 +45,7 @@ export const BlasonDisplay = ({ blason, dimension, fillFromTincture, clipPathId,
 
             const shape = row > 0 ? (col === 0 ? 'leftCut' : 'rightCut') : 'square';
             return (
-              <g key={i} transform={`translate(${xTranslate} ${yTranslate})`}>
+              <g key={i} className={'blason-quarter-' + (i + 1)} transform={`translate(${xTranslate} ${yTranslate})`}>
                 <SimpleBlasonDisplay
                   blason={b}
                   dimension={quarterDimension}

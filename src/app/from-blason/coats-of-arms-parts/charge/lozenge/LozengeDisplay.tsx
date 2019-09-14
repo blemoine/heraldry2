@@ -6,14 +6,15 @@ import { getChargePositions } from '../charge.helper';
 import { SvgPathBuilder } from '../../../../svg-path-builder/svg-path-builder';
 import { PathFromBuilder } from '../../../../common/PathFromBuilder';
 import { cannotHappen } from '../../../../../utils/cannot-happen';
+import { SimpleBlasonShape } from '../../blasonDisplay.helper';
 
-type Props = { charge: Lozenge; dimension: Dimension; fillFromTincture: (tincture: Tincture) => string };
-export const LozengeDisplay = ({ charge, dimension: { width, height }, fillFromTincture }: Props) => {
+type Props = { charge: Lozenge; dimension: Dimension; shape:SimpleBlasonShape;fillFromTincture: (tincture: Tincture) => string };
+export const LozengeDisplay = ({ charge, dimension: { width, height }, fillFromTincture, shape }: Props) => {
   const stroke = charge.tincture.name === 'sable' ? '#777' : '#000';
   const fill = fillFromTincture(charge.tincture);
 
   const { count, disposition } = charge.countAndDisposition;
-  const { cellWidth, cellHeight, positions } = getChargePositions(count, disposition);
+  const { cellWidth, cellHeight, positions } = getChargePositions(count, disposition, shape);
   const radius = Math.min(0.75 * cellWidth * width, 0.4 * cellHeight * height);
   const acuteness = 1.2;
   return (

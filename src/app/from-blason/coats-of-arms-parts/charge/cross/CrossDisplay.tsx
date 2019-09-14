@@ -13,14 +13,20 @@ import { CrossBottony } from './CrossBottony';
 import { CrossCrosselet } from './CrossCrosselet';
 import { CrossMaltese } from './CrossMaltese';
 import { CrossFlory } from './CrossFlory';
+import { SimpleBlasonShape } from '../../blasonDisplay.helper';
 
-type Props = { charge: Cross; dimension: Dimension; fillFromTincture: (tincture: Tincture) => string };
-export const CrossDisplay = ({ charge, dimension: { width, height }, fillFromTincture }: Props) => {
+type Props = {
+  charge: Cross;
+  dimension: Dimension;
+  shape: SimpleBlasonShape;
+  fillFromTincture: (tincture: Tincture) => string;
+};
+export const CrossDisplay = ({ charge, dimension: { width, height }, fillFromTincture, shape }: Props) => {
   const stroke = charge.tincture.name === 'sable' ? '#777' : '#000';
   const fill = fillFromTincture(charge.tincture);
 
   const { count, disposition } = charge.countAndDisposition;
-  const { cellWidth, cellHeight, positions } = getChargePositions(count, disposition);
+  const { cellWidth, cellHeight, positions } = getChargePositions(count, disposition, shape);
 
   const radius = Math.min(width * cellWidth * 0.9, height * cellHeight * 0.45);
   const crossWidth = radius / 10;

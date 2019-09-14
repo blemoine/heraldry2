@@ -61,7 +61,12 @@ export const SimpleBlasonDisplay = ({ blason, dimension, fillFromTincture, clipP
       {blason.charge && (
         <g clipPath={clipPathUrl} className="blason-charge">
           <GWrapper translate={[chargeHorizontalOffset * width, (chargeVerticalOffset + verticalOffset) * height]}>
-            <ChargeDisplay dimension={chargeDimension} charge={blason.charge} fillFromTincture={fillFromTincture} />
+            <ChargeDisplay
+              dimension={chargeDimension}
+              charge={blason.charge}
+              shape={shape}
+              fillFromTincture={fillFromTincture}
+            />
           </GWrapper>
         </g>
       )}
@@ -87,12 +92,12 @@ function getChargeDimension(
   const ordinary = blason.ordinary;
   const charge = blason.charge;
 
+  const chargeCount = charge ? charge.countAndDisposition.count : 0;
+  const chargeDisposition = charge ? charge.countAndDisposition.disposition : null;
   if (shape === 'default') {
-    const chargeCount = charge ? charge.countAndDisposition.count : 0;
-    const chargeDisposition = charge ? charge.countAndDisposition.disposition : null;
-
     const chargeHorizontalOffset =
-      (ordinary && ordinary.name === 'bordure' ? (ordinary.line === 'straight'?0.085:0.125) : 0.015) + (chargeDisposition === 'fess' ? 0.012 : 0);
+      (ordinary && ordinary.name === 'bordure' ? (ordinary.line === 'straight' ? 0.085 : 0.125) : 0.015) +
+      (chargeDisposition === 'fess' ? 0.012 : 0);
 
     const defaultChargeHeightOffset =
       chargeDisposition === 'pale'
@@ -110,16 +115,14 @@ function getChargeDimension(
     let chargeHeightOffset: number;
     if (ordinary) {
       if (ordinary.name === 'chief') {
-
-        if(ordinary.line === 'straight') {
+        if (ordinary.line === 'straight') {
           chargeHeightOffset = 0.1;
         } else {
           chargeHeightOffset = 0.16;
-          chargeVerticalOffset = 0.08
+          chargeVerticalOffset = 0.08;
         }
       } else if (ordinary.name === 'base') {
-
-        if(ordinary.line === 'straight') {
+        if (ordinary.line === 'straight') {
           chargeHeightOffset = 0.13;
         } else {
           chargeHeightOffset = 0.16;
@@ -132,7 +135,6 @@ function getChargeDimension(
           chargeHeightOffset = 0.17;
           chargeVerticalOffset = 0.04;
         }
-
       } else {
         chargeHeightOffset = defaultChargeHeightOffset;
       }
@@ -179,7 +181,7 @@ function getChargeDimension(
       chargeVerticalOffset: 0,
     };
   } else if (shape === 'rightCut' || shape === 'leftCut') {
-    const chargeWidthOffset = 0.1;
+    const chargeWidthOffset = chargeDisposition === 'fess' ? 0 : 0.12;
     const defaultChargeHeightOffset = 0.09;
 
     let chargeHeightOffset: number;
@@ -201,18 +203,31 @@ function getChargeDimension(
       chargeHeightOffset = defaultChargeHeightOffset;
     }
 
+    const horizontalFactor = 0.87;
     const chargeDimension = {
-      width: baseDimension.width * (1 - 2 * chargeWidthOffset),
+      width: baseDimension.width * (1 - 2 * chargeWidthOffset) * horizontalFactor,
       height: baseDimension.height * (1 - 2 * chargeHeightOffset),
     };
 
-    chargeDimension.width = chargeDimension.width * 0.9;
-    chargeDimension.height = chargeDimension.height * 0.82;
+    let chargeVerticalOffset: number;
+    if (chargeDisposition === 'pale') {
+      chargeVerticalOffset = 0.03;
+      chargeDimension.height = chargeDimension.height * 0.9;
+    } else if (chargeDisposition === 'fess') {
+      chargeDimension.width = chargeDimension.width * 0.8;
+      chargeVerticalOffset = 0;
+    } else {
+      chargeVerticalOffset = 0;
+    }
 
     return {
       chargeDimension,
-      chargeHorizontalOffset: chargeWidthOffset + (shape === 'leftCut' ? 0.1 : 0),
-      chargeVerticalOffset: 0,
+      chargeHorizontalOffset:
+        chargeWidthOffset +
+        (shape === 'leftCut' ? 1.1 - horizontalFactor : 0) +
+        (chargeDisposition !== 'fess' && shape === 'rightCut' ? -(1 - horizontalFactor) : 0) +
+        (chargeDisposition === 'fess' && shape === 'rightCut' ? 0.95 - horizontalFactor : 0),
+      chargeVerticalOffset,
     };
   } else {
     return cannotHappen(shape);

@@ -2,6 +2,7 @@ import { range } from '../../../../utils/range';
 import { max } from '../../../../utils/max';
 import { Disposition, SupportedNumber } from '../../../model/countAndDisposition';
 import { cannotHappen } from '../../../../utils/cannot-happen';
+import { SimpleBlasonShape } from '../blasonDisplay.helper';
 
 const defaultRepartitionMapping = {
   1: [1],
@@ -26,22 +27,43 @@ const defaultRepartitionMapping = {
   20: [6, 5, 4, 3, 2],
 } as const;
 
+const leftAndRightCutRepatitionMapping = {
+  ...defaultRepartitionMapping,
+  13: [4, 3, 3, 2, 1],
+} as const;
+
 export function getChargePositions(
   count: SupportedNumber,
-  repartitionConfig: Disposition
+  repartitionConfig: Disposition,
+  shape: SimpleBlasonShape
 ): { cellWidth: number; cellHeight: number; positions: ReadonlyArray<[number, number]> } {
-  const repartition: ReadonlyArray<number> = getRepartition(count, repartitionConfig);
+  const repartition: ReadonlyArray<number> = getRepartition(count, repartitionConfig, shape);
   const columnCount = max(repartition) || 1;
   const rowCount = repartition.length;
 
-  const positions = repartition.flatMap(
-    (numberOfRoundel, row): Array<[number, number]> => {
-      const cy = (row * 2 + 1) / (rowCount * 2);
-      const offset: number = columnCount - numberOfRoundel;
-      return range(0, numberOfRoundel).map((i): [number, number] => {
-        const cx = (i * 2 + 1.5 + offset) / (columnCount * 2 + 1);
+  const align =
+    shape === 'leftCut' ? ('right' as const) : shape === 'rightCut' ? ('left' as const) : ('center' as const);
 
-        return [cx, cy];
+  const positions = repartition.flatMap(
+    (numberOfCharge, row): Array<[number, number]> => {
+      const cy = (row * 2 + 1) / (rowCount * 2);
+      const offset: number = columnCount - numberOfCharge;
+      return range(0, numberOfCharge).map((i): [number, number] => {
+        if (align === 'center') {
+          const cx = (i * 2 + 1.5 + offset) / (columnCount * 2 + 1);
+
+          return [cx, cy];
+        } else if (align === 'right') {
+          const cx = (i * 2 + 1.5 + 2 * offset) / (columnCount * 2 + 1);
+
+          return [cx, cy];
+        } else if (align === 'left') {
+          const cx = (i * 2 + 1.5) / (columnCount * 2 + 1);
+
+          return [cx, cy];
+        } else {
+          return cannotHappen(align);
+        }
       });
     }
   );
@@ -52,9 +74,21 @@ export function getChargePositions(
   };
 }
 
-function getRepartition(count: SupportedNumber, repartitionConfig: 'default' | 'pale' | 'fess'): ReadonlyArray<number> {
+function getRepartition(
+  count: SupportedNumber,
+  repartitionConfig: 'default' | 'pale' | 'fess',
+  shape: SimpleBlasonShape
+): ReadonlyArray<number> {
   if (repartitionConfig === 'default') {
-    return defaultRepartitionMapping[count];
+    if (shape === 'default' || shape === 'square') {
+      return defaultRepartitionMapping[count];
+    } else if (shape === 'leftCut') {
+      return leftAndRightCutRepatitionMapping[count];
+    } else if (shape === 'rightCut') {
+      return leftAndRightCutRepatitionMapping[count];
+    } else {
+      return cannotHappen(shape);
+    }
   } else if (repartitionConfig === 'pale') {
     return range(0, count).map((_i) => 1);
   } else if (repartitionConfig === 'fess') {

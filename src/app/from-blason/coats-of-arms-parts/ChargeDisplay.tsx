@@ -9,21 +9,22 @@ import { FleurDeLysDisplay } from './charge/fleurdelys/FleurDeLysDisplay';
 import { RoundelDisplay } from './charge/roundel/RoundelDisplay';
 import { LozengeDisplay } from './charge/lozenge/LozengeDisplay';
 import { CrossDisplay } from './charge/cross/CrossDisplay';
+import { SimpleBlasonShape } from './blasonDisplay.helper';
 
-type Props = { charge: Charge; dimension: Dimension; fillFromTincture: (tincture: Tincture) => string };
-export const ChargeDisplay = ({ charge, dimension, fillFromTincture }: Props) => {
+type Props = { charge: Charge; dimension: Dimension; shape:SimpleBlasonShape, fillFromTincture: (tincture: Tincture) => string };
+export const ChargeDisplay = ({ charge, dimension, fillFromTincture, shape }: Props) => {
   if (charge.name === 'lion') {
-    return <LionDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} />;
+    return <LionDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} shape={shape}/>;
   } else if (charge.name === 'eagle') {
-    return <EagleDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} />;
+    return <EagleDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} shape={shape} />;
   } else if (charge.name === 'fleurdelys') {
-    return <FleurDeLysDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} />;
+    return <FleurDeLysDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} shape={shape} />;
   } else if (charge.name === 'roundel') {
-    return <RoundelDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} />;
+    return <RoundelDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} shape={shape} />;
   } else if (charge.name === 'lozenge') {
-    return <LozengeDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} />;
+    return <LozengeDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} shape={shape} />;
   } else if (charge.name === 'cross') {
-    return <CrossDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} />;
+    return <CrossDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} shape={shape} />;
   } else {
     return cannotHappen(charge);
   }

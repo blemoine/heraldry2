@@ -5296,6 +5296,7 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
     clipPath="url(#plain-field-clip-path)"
   >
     <g
+      className="blason-quarter-1"
       transform="translate(0 0)"
     >
       <g
@@ -5328,6 +5329,7 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
       </g>
     </g>
     <g
+      className="blason-quarter-2"
       transform="translate(100 0)"
     >
       <g
@@ -5360,6 +5362,7 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
       </g>
     </g>
     <g
+      className="blason-quarter-3"
       transform="translate(0 133.33333333333334)"
     >
       <g
@@ -5391,6 +5394,7 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
       </g>
     </g>
     <g
+      className="blason-quarter-4"
       transform="translate(100 133.33333333333334)"
     >
       <g
@@ -5475,6 +5479,7 @@ exports[`CoatsOfArms should render 'Quarterly, 1st: Bendy or and purpure, a bord
     clipPath="url(#plain-field-clip-path)"
   >
     <g
+      className="blason-quarter-1"
       transform="translate(0 0)"
     >
       <g
@@ -5531,6 +5536,7 @@ exports[`CoatsOfArms should render 'Quarterly, 1st: Bendy or and purpure, a bord
       </g>
     </g>
     <g
+      className="blason-quarter-2"
       transform="translate(100 0)"
     >
       <g
@@ -5597,6 +5603,7 @@ exports[`CoatsOfArms should render 'Quarterly, 1st: Bendy or and purpure, a bord
       </g>
     </g>
     <g
+      className="blason-quarter-3"
       transform="translate(0 133.33333333333334)"
     >
       <g
@@ -5663,6 +5670,7 @@ exports[`CoatsOfArms should render 'Quarterly, 1st: Bendy or and purpure, a bord
       </g>
     </g>
     <g
+      className="blason-quarter-4"
       transform="translate(100 133.33333333333334)"
     >
       <g

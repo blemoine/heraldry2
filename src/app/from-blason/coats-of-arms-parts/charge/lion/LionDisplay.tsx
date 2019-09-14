@@ -4,11 +4,17 @@ import { Tincture } from '../../../../model/tincture';
 import { UnitLionDisplay } from './UnitLionDisplay';
 import { Dimension, scale } from '../../../../model/dimension';
 import { getChargePositions } from '../charge.helper';
+import { SimpleBlasonShape } from '../../blasonDisplay.helper';
 
-type Props = { charge: Lion; dimension: Dimension; fillFromTincture: (tincture: Tincture) => string };
-export const LionDisplay = ({ charge, dimension, fillFromTincture }: Props) => {
+type Props = {
+  charge: Lion;
+  dimension: Dimension;
+  shape: SimpleBlasonShape;
+  fillFromTincture: (tincture: Tincture) => string;
+};
+export const LionDisplay = ({ charge, dimension, fillFromTincture, shape }: Props) => {
   const { count, disposition } = charge.countAndDisposition;
-  const { cellWidth, cellHeight, positions } = getChargePositions(count, disposition);
+  const { cellWidth, cellHeight, positions } = getChargePositions(count, disposition, shape);
   const { width, height } = dimension;
   const computedDimension = scale(dimension, Math.min(2.2 * cellWidth, cellHeight));
 
