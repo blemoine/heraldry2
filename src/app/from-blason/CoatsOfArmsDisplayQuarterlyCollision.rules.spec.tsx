@@ -1,6 +1,6 @@
 import fc from 'fast-check';
 import { chargeArb, lineArb } from '../model/tests/arbitraries';
-import { QuarterlyBlason, SimpleBlason } from '../model/blason';
+import { Blason, QuarterlyBlason, SimpleBlason } from '../model/blason';
 import { azure, or } from '../model/tincture';
 import * as React from 'react';
 import { Dimension } from '../model/dimension';
@@ -74,12 +74,12 @@ describe('CoatsOfArms quarterly collision rules', () => {
             const isInside = pointInSvgPolygon.isInside(point, clipPath);
             if (!isInside) {
               expect(false).toBe(
-                `Blason '${stringifyBlason(blason)}' in quarter ${i + 1} is not inside blason for point ${point}`
+                `Blason '${linkToBlason(blason)}' in quarter ${i + 1} is not inside blason for point ${point}`
               );
             }
             if (!isInRect(point, quarterRect)) {
               expect(false).toBe(
-                `Blason '${stringifyBlason(blason)}' in quarter ${i + 1} is not inside quarter for point ${point}`
+                `Blason '${linkToBlason(blason)}' in quarter ${i + 1} is not inside quarter for point ${point}`
               );
             }
           });
@@ -112,7 +112,7 @@ describe('CoatsOfArms quarterly collision rules', () => {
             .querySelector('.blason-quarter-' + (i + 1) + ' .blason-ordinary path')!
             .getAttribute('d');
           const chiefPath: Array<any> = getPathSegments(chiefPathStr);
-          const minY: number = chiefPath
+          const minY: number = quarterRect.y + chiefPath
             .flatMap(({ coords }) => coords)
             .reduce(([accX, accY], [x, y]) => (accY > y ? [accX, accY] : [x, y]))[1];
 
@@ -120,18 +120,70 @@ describe('CoatsOfArms quarterly collision rules', () => {
             const isInside = pointInSvgPolygon.isInside(point, clipPath);
             if (!isInside) {
               expect(false).toBe(
-                `Blason '${stringifyBlason(blason)}' in quarter ${i + 1} is not inside blason for point ${point}`
+                `Blason '${linkToBlason(blason)}' in quarter ${i + 1} is not inside blason for point ${point}`
               );
             }
             const isBelow = minY < point[1];
             if (!isBelow) {
               expect(false).toBe(
-                `Blason '${stringifyBlason(blason)}' in quarter ${i + 1} is not below the chief for point ${point}`
+                `Blason '${linkToBlason(blason)}' in quarter ${i + 1} is not below the chief ${minY} for point ${point}`
               );
             }
             if (!isInRect(point, quarterRect)) {
               expect(false).toBe(
-                `Blason '${stringifyBlason(blason)}' in quarter ${i + 1} is not inside quarter for point ${point}`
+                `Blason '${linkToBlason(blason)}' in quarter ${i + 1} is not inside quarter for point ${point}`
+              );
+            }
+          });
+        });
+      }),
+      { numRuns  }
+    );
+  });
+
+  it('should ensure that charges are always above a base field', () => {
+    fc.assert(
+      fc.property(chargeArbFiltered, lineArb, (charge, line) => {
+        const baseBlason: SimpleBlason = {
+          kind: 'simple',
+          field: { kind: 'plain', tincture: azure },
+          ordinary: { name: 'base', line, tincture: or },
+          charge,
+        };
+
+        const blason: QuarterlyBlason = {
+          kind: 'quarterly',
+          blasons: [baseBlason, baseBlason, baseBlason, baseBlason],
+        };
+
+        const quarters = assertOnCoatsOfArms(blason);
+        expect(quarters.length).toBe(4);
+
+        quarters.forEach(({ clipPath, chargesParsedPoints, quarterRect }, i) => {
+          const chiefPathStr = document
+            .querySelector('.blason-quarter-' + (i + 1) + ' .blason-ordinary path')!
+            .getAttribute('d');
+          const chiefPath: Array<any> = getPathSegments(chiefPathStr);
+          const maxY: number = quarterRect.y + chiefPath
+            .flatMap(({ coords }) => coords)
+            .reduce(([accX, accY], [x, y]) => (accY < y ? [accX, accY] : [x, y]))[1];
+
+          chargesParsedPoints.forEach((point) => {
+            const isInside = pointInSvgPolygon.isInside(point, clipPath);
+            if (!isInside) {
+              expect(false).toBe(
+                `Blason '${linkToBlason(blason)}' in quarter ${i + 1} is not inside blason for point ${point}`
+              );
+            }
+            const isAbove = maxY > point[1];
+            if (!isAbove) {
+              expect(false).toBe(
+                `Blason '${linkToBlason(blason)}' in quarter ${i + 1} is not above the base ${maxY} for point ${point}`
+              );
+            }
+            if (!isInRect(point, quarterRect)) {
+              expect(false).toBe(
+                `Blason '${linkToBlason(blason)}' in quarter ${i + 1} is not inside quarter for point ${point}`
               );
             }
           });
@@ -144,4 +196,8 @@ describe('CoatsOfArms quarterly collision rules', () => {
 
 function isInRect([x, y]: PathAbsolutePoint, rect: { x: number; y: number; width: number; height: number }): boolean {
   return x > rect.x && x < rect.x + rect.width && y > rect.y && y < rect.y + rect.height;
+}
+
+function linkToBlason(blason: Blason): string {
+  return `http://localhost:1234/#/?blason=${encodeURI(stringifyBlason(blason))}`
 }

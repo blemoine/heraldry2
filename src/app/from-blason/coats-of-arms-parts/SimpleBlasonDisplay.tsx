@@ -164,7 +164,11 @@ function getChargeDimension(
           chargeVerticalOffset = 0.08;
         }
       } else if (ordinary.name === 'base') {
-        chargeHeightOffset = 0.12;
+        if (ordinary.line === 'straight') {
+          chargeHeightOffset = 0.14;
+        } else {
+          chargeHeightOffset = 0.16;
+        }
       } else if (ordinary.name === 'bordure') {
         if (ordinary.line === 'straight') {
           chargeHeightOffset = 0.04;
@@ -197,13 +201,23 @@ function getChargeDimension(
   } else if (shape === 'rightCut' || shape === 'leftCut') {
     const chargeWidthOffset = chargeDisposition === 'fess' ? 0 : 0.15;
     const defaultChargeHeightOffset = 0.09;
+    let chargeVerticalOffset: number = 0;
 
     let chargeHeightOffset: number;
     if (ordinary) {
       if (ordinary.name === 'chief') {
-        chargeHeightOffset = 0.12;
+        if (ordinary.line === 'straight') {
+          chargeHeightOffset = 0.12;
+        } else {
+          chargeHeightOffset = 0.13;
+          chargeVerticalOffset = 0.04;
+        }
       } else if (ordinary.name === 'base') {
-        chargeHeightOffset = 0.12;
+        if (ordinary.line === 'straight') {
+          chargeHeightOffset = 0.13;
+        } else {
+          chargeHeightOffset = 0.16;
+        }
       } else if (ordinary.name === 'bordure') {
         if (ordinary.line === 'straight') {
           chargeHeightOffset = 0.12;
@@ -223,15 +237,15 @@ function getChargeDimension(
       height: baseDimension.height * (1 - 2 * chargeHeightOffset),
     };
 
-    let chargeVerticalOffset: number;
+
     if (chargeDisposition === 'pale') {
       chargeVerticalOffset = 0.03;
       chargeDimension.height = chargeDimension.height * 0.9;
     } else if (chargeDisposition === 'fess') {
       chargeDimension.width = chargeDimension.width * 0.8;
-      chargeVerticalOffset = 0;
+      chargeVerticalOffset += 0;
     } else {
-      chargeVerticalOffset = 0;
+      chargeVerticalOffset += 0;
     }
 
     if (ordinary && ordinary.name === 'chief' && ordinary.line !== 'straight') {
