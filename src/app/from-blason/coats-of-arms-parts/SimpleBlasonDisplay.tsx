@@ -22,17 +22,17 @@ export const SimpleBlasonDisplay = ({ blason, dimension, fillFromTincture, clipP
   const { width, height } = dimension;
   const ordinary = blason.ordinary;
 
-  const verticalOffset = ordinary ? getFieldVerticalOffset(ordinary) : 0;
-  const fieldHeightScale = 1 - verticalOffset;
+  const baseVerticalOffset = ordinary ? getFieldVerticalOffset(ordinary) : 0;
+  const fieldHeightScale = 1 - baseVerticalOffset;
   const fieldDimension = { width, height: height * fieldHeightScale };
 
-  const { chargeDimension, chargeHorizontalOffset, chargeVerticalOffset } = getChargeDimension(blason, shape);
+  const { horizontalScale, verticalScale, horizontalOffset, verticalOffset } = getChargeDimension(blason, shape);
 
   const clipPathUrl = `url(#${clipPathId})`;
   return (
     <>
       <g clipPath={clipPathUrl} className="blason-field">
-        <GWrapper translate={[0, verticalOffset * height]}>
+        <GWrapper translate={[0, baseVerticalOffset * height]}>
           <FieldDisplay
             dimension={fieldDimension}
             field={blason.field}
@@ -56,11 +56,11 @@ export const SimpleBlasonDisplay = ({ blason, dimension, fillFromTincture, clipP
 
       {blason.charge && (
         <g clipPath={clipPathUrl} className="blason-charge">
-          <GWrapper translate={[chargeHorizontalOffset * width, (chargeVerticalOffset + verticalOffset) * height]}>
+          <GWrapper translate={[horizontalOffset * width, (baseVerticalOffset + verticalOffset) * height]}>
             <ChargeDisplay
               dimension={{
-                width: chargeDimension.width * fieldDimension.width,
-                height: chargeDimension.height * fieldDimension.height,
+                width: horizontalScale * fieldDimension.width,
+                height: verticalScale * fieldDimension.height,
               }}
               charge={blason.charge}
               shape={shape}
@@ -86,7 +86,7 @@ const GWrapper: React.FunctionComponent<GWrapperProps> = (props) => {
 function getChargeDimension(
   blason: SimpleBlason,
   shape: SimpleBlasonShape
-): { chargeDimension: Dimension; chargeHorizontalOffset: number; chargeVerticalOffset: number } {
+): { verticalScale: number; horizontalScale: number; horizontalOffset: number; verticalOffset: number } {
   const ordinary = blason.ordinary;
   const charge = blason.charge;
 
@@ -141,12 +141,10 @@ function getChargeDimension(
     }
 
     return {
-      chargeDimension: {
-        width: 1 - 2 * chargeHorizontalOffset,
-        height: 1 - 2 * chargeHeightOffset,
-      },
-      chargeHorizontalOffset,
-      chargeVerticalOffset,
+      verticalScale: 1 - 2 * chargeHeightOffset,
+      horizontalScale: 1 - 2 * chargeHorizontalOffset,
+      horizontalOffset: chargeHorizontalOffset,
+      verticalOffset: chargeVerticalOffset,
     };
   } else if (shape === 'square') {
     let chargeHorizontalOffset =
@@ -182,15 +180,15 @@ function getChargeDimension(
     }
 
     const chargeDimension = {
-      width: 1 - 2 * chargeHorizontalOffset,
-      height: 1 - 2 * chargeHeightOffset,
+      horizontalScale: 1 - 2 * chargeHorizontalOffset,
+      verticalScale: 1 - 2 * chargeHeightOffset,
     };
     if (chargeDisposition === 'pale') {
       chargeVerticalOffset += 0.03;
-      chargeDimension.height = chargeDimension.height * 0.9;
+      chargeDimension.verticalScale = chargeDimension.verticalScale * 0.9;
     } else if (chargeDisposition === 'fess') {
       chargeHorizontalOffset += 0.03;
-      chargeDimension.width = chargeDimension.width * 0.9;
+      chargeDimension.horizontalScale = chargeDimension.horizontalScale * 0.9;
     } else {
       chargeVerticalOffset += 0.01;
     }
@@ -200,9 +198,9 @@ function getChargeDimension(
     }
 
     return {
-      chargeDimension,
-      chargeHorizontalOffset,
-      chargeVerticalOffset,
+      ...chargeDimension,
+      horizontalOffset: chargeHorizontalOffset,
+      verticalOffset: chargeVerticalOffset,
     };
   } else if (shape === 'rightCut' || shape === 'leftCut') {
     const ordinaryName = ordinary ? ordinary.name : null;
@@ -213,41 +211,33 @@ function getChargeDimension(
         if (ordinaryLine === 'straight') {
           if (chargeCount > 1) {
             return {
-              chargeDimension: {
-                height: 0.7,
-                width: 0.7,
-              },
-              chargeVerticalOffset: 0,
-              chargeHorizontalOffset: shape === 'leftCut' ? 0.2 : 0.087,
+              verticalScale: 0.7,
+              horizontalScale: 0.7,
+              verticalOffset: 0,
+              horizontalOffset: shape === 'leftCut' ? 0.2 : 0.087,
             };
           } else {
             return {
-              chargeDimension: {
-                height: 0.8,
-                width: 0.65,
-              },
-              chargeVerticalOffset: -0.05,
-              chargeHorizontalOffset: shape === 'leftCut' ? 0.23 : 0.07,
+              verticalScale: 0.8,
+              horizontalScale: 0.65,
+              verticalOffset: -0.05,
+              horizontalOffset: shape === 'leftCut' ? 0.23 : 0.07,
             };
           }
         } else {
           if (chargeCount > 1) {
             return {
-              chargeDimension: {
-                height: 0.63,
-                width: 0.55,
-              },
-              chargeVerticalOffset: 0.04,
-              chargeHorizontalOffset: shape === 'leftCut' ? 0.29 : 0.15,
+              verticalScale: 0.63,
+              horizontalScale: 0.55,
+              verticalOffset: 0.04,
+              horizontalOffset: shape === 'leftCut' ? 0.29 : 0.15,
             };
           } else {
             return {
-              chargeDimension: {
-                height: 0.72,
-                width: 0.59,
-              },
-              chargeVerticalOffset: -0.03,
-              chargeHorizontalOffset: shape === 'leftCut' ? 0.26 : 0.11,
+              verticalScale: 0.72,
+              horizontalScale: 0.59,
+              verticalOffset: -0.03,
+              horizontalOffset: shape === 'leftCut' ? 0.26 : 0.11,
             };
           }
         }
@@ -256,40 +246,32 @@ function getChargeDimension(
       if (ordinaryName === 'bordure') {
         if (ordinaryLine === 'straight') {
           return {
-            chargeDimension: {
-              height: 1,
-              width: 0.62,
-            },
-            chargeVerticalOffset: -0.15,
-            chargeHorizontalOffset: shape === 'leftCut' ? 0.23 : 0.15,
+            verticalScale: 1,
+            horizontalScale: 0.62,
+            verticalOffset: -0.15,
+            horizontalOffset: shape === 'leftCut' ? 0.23 : 0.15,
           };
         } else {
           return {
-            chargeDimension: {
-              height: 1,
-              width: 0.59,
-            },
-            chargeVerticalOffset: -0.15,
-            chargeHorizontalOffset: shape === 'leftCut' ? 0.25 : 0.15,
+            verticalScale: 1,
+            horizontalScale: 0.59,
+            verticalOffset: -0.15,
+            horizontalOffset: shape === 'leftCut' ? 0.25 : 0.15,
           };
         }
       } else if (ordinaryName === 'chief') {
         return {
-          chargeDimension: {
-            height: 0.85,
-            width: 0.8,
-          },
-          chargeVerticalOffset: -0.07,
-          chargeHorizontalOffset: shape === 'leftCut' ? 0.2 : 0,
+          verticalScale: 0.85,
+          horizontalScale: 0.8,
+          verticalOffset: -0.07,
+          horizontalOffset: shape === 'leftCut' ? 0.2 : 0,
         };
       } else {
         return {
-          chargeDimension: {
-            height: 1,
-            width: 0.8,
-          },
-          chargeVerticalOffset: -0.15,
-          chargeHorizontalOffset: shape === 'leftCut' ? 0.2 : 0,
+          verticalScale: 1,
+          horizontalScale: 0.8,
+          verticalOffset: -0.15,
+          horizontalOffset: shape === 'leftCut' ? 0.2 : 0,
         };
       }
     }
@@ -328,34 +310,34 @@ function getChargeDimension(
 
     const horizontalFactor = 0.76;
     const chargeDimension = {
-      width: (1 - 2 * chargeWidthOffset) * horizontalFactor,
-      height: 1 - 2 * chargeHeightOffset,
+      horizontalScale: (1 - 2 * chargeWidthOffset) * horizontalFactor,
+      verticalScale: 1 - 2 * chargeHeightOffset,
     };
 
     if (chargeDisposition === 'pale') {
       chargeVerticalOffset = 0.035;
-      chargeDimension.height = chargeDimension.height * 0.85;
+      chargeDimension.verticalScale = chargeDimension.verticalScale * 0.85;
     } else {
       chargeVerticalOffset += 0;
     }
 
     if (ordinaryName === 'chief' && ordinaryLine !== 'straight') {
       chargeVerticalOffset += 0.045;
-      chargeDimension.height = chargeDimension.height * 0.9;
+      chargeDimension.verticalScale = chargeDimension.verticalScale * 0.9;
     }
 
     if (ordinaryName === 'bordure' && ordinaryLine !== 'straight') {
       chargeVerticalOffset += 0.045;
-      chargeDimension.height = chargeDimension.height * 0.9;
-      chargeDimension.width = chargeDimension.width * 0.95;
+      chargeDimension.verticalScale = chargeDimension.verticalScale * 0.9;
+      chargeDimension.horizontalScale = chargeDimension.horizontalScale * 0.95;
     }
     if (ordinaryName === 'bordure' && ordinaryLine === 'straight') {
-      chargeDimension.width = chargeDimension.width * 0.95;
+      chargeDimension.horizontalScale = chargeDimension.horizontalScale * 0.95;
     }
 
     return {
-      chargeDimension,
-      chargeHorizontalOffset:
+      ...chargeDimension,
+      horizontalOffset:
         chargeWidthOffset +
         (ordinaryName === 'bordure' && shape === 'rightCut' ? 0.16 : 0) +
         (ordinaryName === 'bordure' && shape === 'leftCut' ? -0.14 : 0) +
@@ -363,7 +345,7 @@ function getChargeDimension(
         (ordinaryName !== 'bordure' && shape === 'leftCut' ? -0.09 : 0) +
         (shape === 'leftCut' ? 1.13 - horizontalFactor : 0) +
         (shape === 'rightCut' ? -(1.03 - horizontalFactor) : 0),
-      chargeVerticalOffset,
+      verticalOffset: chargeVerticalOffset,
     };
   } else {
     return cannotHappen(shape);
