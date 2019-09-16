@@ -26,11 +26,7 @@ export const SimpleBlasonDisplay = ({ blason, dimension, fillFromTincture, clipP
   const fieldHeightScale = 1 - verticalOffset;
   const fieldDimension = { width, height: height * fieldHeightScale };
 
-  const { chargeDimension, chargeHorizontalOffset, chargeVerticalOffset } = getChargeDimension(
-    fieldDimension,
-    blason,
-    shape
-  );
+  const { chargeDimension, chargeHorizontalOffset, chargeVerticalOffset } = getChargeDimension(blason, shape);
 
   const clipPathUrl = `url(#${clipPathId})`;
   return (
@@ -62,7 +58,10 @@ export const SimpleBlasonDisplay = ({ blason, dimension, fillFromTincture, clipP
         <g clipPath={clipPathUrl} className="blason-charge">
           <GWrapper translate={[chargeHorizontalOffset * width, (chargeVerticalOffset + verticalOffset) * height]}>
             <ChargeDisplay
-              dimension={chargeDimension}
+              dimension={{
+                width: chargeDimension.width * fieldDimension.width,
+                height: chargeDimension.height * fieldDimension.height,
+              }}
               charge={blason.charge}
               shape={shape}
               fillFromTincture={fillFromTincture}
@@ -85,7 +84,6 @@ const GWrapper: React.FunctionComponent<GWrapperProps> = (props) => {
 };
 
 function getChargeDimension(
-  baseDimension: Dimension,
   blason: SimpleBlason,
   shape: SimpleBlasonShape
 ): { chargeDimension: Dimension; chargeHorizontalOffset: number; chargeVerticalOffset: number } {
@@ -144,8 +142,8 @@ function getChargeDimension(
 
     return {
       chargeDimension: {
-        width: baseDimension.width * (1 - 2 * chargeHorizontalOffset),
-        height: baseDimension.height * (1 - 2 * chargeHeightOffset),
+        width: 1 - 2 * chargeHorizontalOffset,
+        height: 1 - 2 * chargeHeightOffset,
       },
       chargeHorizontalOffset,
       chargeVerticalOffset,
@@ -184,8 +182,8 @@ function getChargeDimension(
     }
 
     const chargeDimension = {
-      width: baseDimension.width * (1 - 2 * chargeHorizontalOffset),
-      height: baseDimension.height * (1 - 2 * chargeHeightOffset),
+      width: 1 - 2 * chargeHorizontalOffset,
+      height: 1 - 2 * chargeHeightOffset,
     };
     if (chargeDisposition === 'pale') {
       chargeVerticalOffset += 0.03;
@@ -216,8 +214,8 @@ function getChargeDimension(
           if (chargeCount > 1) {
             return {
               chargeDimension: {
-                height: baseDimension.height * 0.7,
-                width: baseDimension.width * 0.7,
+                height: 0.7,
+                width: 0.7,
               },
               chargeVerticalOffset: 0,
               chargeHorizontalOffset: shape === 'leftCut' ? 0.2 : 0.087,
@@ -225,8 +223,8 @@ function getChargeDimension(
           } else {
             return {
               chargeDimension: {
-                height: baseDimension.height * 0.8,
-                width: baseDimension.width * 0.65,
+                height: 0.8,
+                width: 0.65,
               },
               chargeVerticalOffset: -0.05,
               chargeHorizontalOffset: shape === 'leftCut' ? 0.23 : 0.07,
@@ -236,8 +234,8 @@ function getChargeDimension(
           if (chargeCount > 1) {
             return {
               chargeDimension: {
-                height: baseDimension.height * 0.63,
-                width: baseDimension.width * 0.55,
+                height: 0.63,
+                width: 0.55,
               },
               chargeVerticalOffset: 0.04,
               chargeHorizontalOffset: shape === 'leftCut' ? 0.29 : 0.15,
@@ -245,8 +243,8 @@ function getChargeDimension(
           } else {
             return {
               chargeDimension: {
-                height: baseDimension.height * 0.72,
-                width: baseDimension.width * 0.59,
+                height: 0.72,
+                width: 0.59,
               },
               chargeVerticalOffset: -0.03,
               chargeHorizontalOffset: shape === 'leftCut' ? 0.26 : 0.11,
@@ -259,8 +257,8 @@ function getChargeDimension(
         if (ordinaryLine === 'straight') {
           return {
             chargeDimension: {
-              height: baseDimension.height,
-              width: baseDimension.width * 0.62,
+              height: 1,
+              width: 0.62,
             },
             chargeVerticalOffset: -0.15,
             chargeHorizontalOffset: shape === 'leftCut' ? 0.23 : 0.15,
@@ -268,8 +266,8 @@ function getChargeDimension(
         } else {
           return {
             chargeDimension: {
-              height: baseDimension.height,
-              width: baseDimension.width * 0.59,
+              height: 1,
+              width: 0.59,
             },
             chargeVerticalOffset: -0.15,
             chargeHorizontalOffset: shape === 'leftCut' ? 0.25 : 0.15,
@@ -278,8 +276,8 @@ function getChargeDimension(
       } else if (ordinaryName === 'chief') {
         return {
           chargeDimension: {
-            height: baseDimension.height * 0.85,
-            width: baseDimension.width * 0.8,
+            height: 0.85,
+            width: 0.8,
           },
           chargeVerticalOffset: -0.07,
           chargeHorizontalOffset: shape === 'leftCut' ? 0.2 : 0,
@@ -287,8 +285,8 @@ function getChargeDimension(
       } else {
         return {
           chargeDimension: {
-            height: baseDimension.height,
-            width: baseDimension.width * 0.8,
+            height: 1,
+            width: 0.8,
           },
           chargeVerticalOffset: -0.15,
           chargeHorizontalOffset: shape === 'leftCut' ? 0.2 : 0,
@@ -330,8 +328,8 @@ function getChargeDimension(
 
     const horizontalFactor = 0.76;
     const chargeDimension = {
-      width: baseDimension.width * (1 - 2 * chargeWidthOffset) * horizontalFactor,
-      height: baseDimension.height * (1 - 2 * chargeHeightOffset),
+      width: (1 - 2 * chargeWidthOffset) * horizontalFactor,
+      height: 1 - 2 * chargeHeightOffset,
     };
 
     if (chargeDisposition === 'pale') {
