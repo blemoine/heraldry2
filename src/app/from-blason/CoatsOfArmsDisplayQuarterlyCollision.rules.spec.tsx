@@ -1,5 +1,5 @@
 import fc from 'fast-check';
-import { chargeArb, lineArb } from '../model/tests/arbitraries';
+import { lineArb, simplifiedChargeArb } from '../model/tests/arbitraries';
 import { Blason, QuarterlyBlason, SimpleBlason } from '../model/blason';
 import { azure, or } from '../model/tincture';
 import * as React from 'react';
@@ -17,7 +17,7 @@ import { PathAbsolutePoint } from '../svg-path-builder/geometrical.helper';
 const numRuns = process.env.GENERATOR_CASE_COUNT ? parseFloat(process.env.GENERATOR_CASE_COUNT) : 40;
 
 // I don't have an explanation, but the dormant lion has strange coordinate, not refleted in the way it is drawn
-const chargeArbFiltered = chargeArb.filter((t) => t.name !== 'lion' || t.attitude !== 'dormant');
+const chargeArbFiltered = simplifiedChargeArb.filter((t) => t.name !== 'lion' || t.attitude !== 'dormant');
 
 describe('CoatsOfArms quarterly collision rules', () => {
   const dimension: Dimension = { width: 360, height: 480 };
@@ -112,9 +112,11 @@ describe('CoatsOfArms quarterly collision rules', () => {
             .querySelector('.blason-quarter-' + (i + 1) + ' .blason-ordinary path')!
             .getAttribute('d');
           const chiefPath: Array<any> = getPathSegments(chiefPathStr);
-          const minY: number = quarterRect.y + chiefPath
-            .flatMap(({ coords }) => coords)
-            .reduce(([accX, accY], [x, y]) => (accY > y ? [accX, accY] : [x, y]))[1];
+          const minY: number =
+            quarterRect.y +
+            chiefPath
+              .flatMap(({ coords }) => coords)
+              .reduce(([accX, accY], [x, y]) => (accY > y ? [accX, accY] : [x, y]))[1];
 
           chargesParsedPoints.forEach((point) => {
             const isInside = pointInSvgPolygon.isInside(point, clipPath);
@@ -137,7 +139,7 @@ describe('CoatsOfArms quarterly collision rules', () => {
           });
         });
       }),
-      { numRuns  }
+      { numRuns }
     );
   });
 
@@ -164,9 +166,11 @@ describe('CoatsOfArms quarterly collision rules', () => {
             .querySelector('.blason-quarter-' + (i + 1) + ' .blason-ordinary path')!
             .getAttribute('d');
           const chiefPath: Array<any> = getPathSegments(chiefPathStr);
-          const maxY: number = quarterRect.y + chiefPath
-            .flatMap(({ coords }) => coords)
-            .reduce(([accX, accY], [x, y]) => (accY < y ? [accX, accY] : [x, y]))[1];
+          const maxY: number =
+            quarterRect.y +
+            chiefPath
+              .flatMap(({ coords }) => coords)
+              .reduce(([accX, accY], [x, y]) => (accY < y ? [accX, accY] : [x, y]))[1];
 
           chargesParsedPoints.forEach((point) => {
             const isInside = pointInSvgPolygon.isInside(point, clipPath);
@@ -192,6 +196,75 @@ describe('CoatsOfArms quarterly collision rules', () => {
       { numRuns }
     );
   });
+
+  it('should ensure that charges are always inside a bordure', () => {
+    const chargeArbFiltered = simplifiedChargeArb.filter((t) => {
+      if (t.name === 'lion') {
+        const attitude = t.attitude;
+        if (attitude === 'dormant' || attitude === 'statant') {
+          return false;
+        } else {
+          const count = t.countAndDisposition.count;
+          if (attitude === 'rampant') {
+            return count !== 7 && count !== 10 && count !== 11 && count !== 17 && count !== 19;
+          } else if (attitude === 'passant') {
+            return count !== 1;
+          } else if (attitude === 'couchant') {
+            return count !== 16 && count !== 2;
+          } else if (attitude === 'sejant-erect') {
+            return count !== 2;
+          } else {
+            return true;
+          }
+        }
+      } else {
+        return true;
+      }
+    });
+    fc.assert(
+      fc.property(chargeArbFiltered, lineArb, (charge, line) => {
+        const baseBlason: SimpleBlason = {
+          kind: 'simple',
+          field: { kind: 'plain', tincture: azure },
+          ordinary: { name: 'bordure', line, tincture: or },
+          charge,
+        };
+
+        const blason: QuarterlyBlason = {
+          kind: 'quarterly',
+          blasons: [baseBlason, baseBlason, baseBlason, baseBlason],
+        };
+
+        const quarters = assertOnCoatsOfArms(blason);
+        expect(quarters.length).toBe(4);
+
+        quarters.forEach(({ chargesParsedPoints, quarterRect }, i) => {
+          const bordurePathStr =
+            document.querySelector('.blason-quarter-' + (i + 1) + ' .blason-ordinary path')!.getAttribute('d') || '';
+          const firstZIndex = bordurePathStr.indexOf('Z');
+          const bordurePath: Array<any> = getPathSegments(bordurePathStr.substr(firstZIndex + 1)).map((c: any) => ({
+            ...c,
+            coords: c.coords.map(([x, y]: [number, number]) => [x + quarterRect.x, y + quarterRect.y]),
+          }));
+
+          chargesParsedPoints.forEach((point) => {
+            const isInsideBordure = pointInSvgPolygon.isInside(point, bordurePath);
+            if (!isInsideBordure) {
+              expect(false).toBe(
+                `Blason '${linkToBlason(blason)}' in quarter ${i + 1} is not inside blason bordure for point ${point}`
+              );
+            }
+            if (!isInRect(point, quarterRect)) {
+              expect(false).toBe(
+                `Blason '${linkToBlason(blason)}' in quarter ${i + 1} is not inside quarter for point ${point}`
+              );
+            }
+          });
+        });
+      }),
+      { numRuns }
+    );
+  });
 });
 
 function isInRect([x, y]: PathAbsolutePoint, rect: { x: number; y: number; width: number; height: number }): boolean {
@@ -199,5 +272,5 @@ function isInRect([x, y]: PathAbsolutePoint, rect: { x: number; y: number; width
 }
 
 function linkToBlason(blason: Blason): string {
-  return `http://localhost:1234/#/?blason=${encodeURI(stringifyBlason(blason))}`
+  return `http://localhost:1234/#/?blason=${encodeURI(stringifyBlason(blason))}`;
 }

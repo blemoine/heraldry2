@@ -1,5 +1,5 @@
 import fc from 'fast-check';
-import { chargeArb, lineArb } from '../model/tests/arbitraries';
+import { lineArb, simplifiedChargeArb } from '../model/tests/arbitraries';
 import { Blason, SimpleBlason } from '../model/blason';
 import { azure, or } from '../model/tincture';
 import { cleanup, render } from '@testing-library/react';
@@ -31,7 +31,7 @@ describe('CoatsOfArms Simple collision rules', () => {
 
   it('should ensure that charges are always inside a plain field', () => {
     fc.assert(
-      fc.property(chargeArb, (charge) => {
+      fc.property(simplifiedChargeArb, (charge) => {
         const blason: SimpleBlason = {
           kind: 'simple',
           field: { kind: 'plain', tincture: azure },
@@ -52,7 +52,7 @@ describe('CoatsOfArms Simple collision rules', () => {
 
   it('should ensure that charges are always inside the field under a chief', () => {
     fc.assert(
-      fc.property(chargeArb, lineArb, (charge, line) => {
+      fc.property(simplifiedChargeArb, lineArb, (charge, line) => {
         const blason: SimpleBlason = {
           kind: 'simple',
           field: { kind: 'plain', tincture: azure },
@@ -84,7 +84,7 @@ describe('CoatsOfArms Simple collision rules', () => {
 
   it('should ensure that charges are always inside the field above a base', () => {
     fc.assert(
-      fc.property(chargeArb, lineArb, (charge, line) => {
+      fc.property(simplifiedChargeArb, lineArb, (charge, line) => {
         const blason: SimpleBlason = {
           kind: 'simple',
           field: { kind: 'plain', tincture: azure },
@@ -116,7 +116,7 @@ describe('CoatsOfArms Simple collision rules', () => {
 
   it('should ensure that charges are always inside a bordure', () => {
     fc.assert(
-      fc.property(chargeArb, lineArb, (charge, line) => {
+      fc.property(simplifiedChargeArb, lineArb, (charge, line) => {
         const blason: SimpleBlason = {
           kind: 'simple',
           field: { kind: 'plain', tincture: azure },

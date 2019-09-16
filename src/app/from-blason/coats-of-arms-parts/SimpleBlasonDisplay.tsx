@@ -151,7 +151,8 @@ function getChargeDimension(
       chargeVerticalOffset,
     };
   } else if (shape === 'square') {
-    const chargeHorizontalOffset = ordinary && ordinary.name === 'bordure' ? 0.05 : 0;
+    let chargeHorizontalOffset =
+      ordinary && ordinary.name === 'bordure' ? (ordinary.line === 'straight' ? 0.09 : 0.15) : 0;
 
     const defaultChargeHeightOffset = 0.01;
 
@@ -171,9 +172,9 @@ function getChargeDimension(
         }
       } else if (ordinary.name === 'bordure') {
         if (ordinary.line === 'straight') {
-          chargeHeightOffset = 0.04;
+          chargeHeightOffset = 0.07;
         } else {
-          chargeHeightOffset = 0.06;
+          chargeHeightOffset = 0.15;
         }
       } else {
         chargeHeightOffset = defaultChargeHeightOffset;
@@ -189,8 +190,15 @@ function getChargeDimension(
     if (chargeDisposition === 'pale') {
       chargeVerticalOffset += 0.03;
       chargeDimension.height = chargeDimension.height * 0.9;
+    } else if (chargeDisposition === 'fess') {
+      chargeHorizontalOffset += 0.03;
+      chargeDimension.width = chargeDimension.width * 0.9;
     } else {
       chargeVerticalOffset += 0.01;
+    }
+
+    if (ordinary && ordinary.name === 'bordure' && ordinary.line !== 'straight') {
+      chargeVerticalOffset += 0.035;
     }
 
     return {
@@ -199,27 +207,116 @@ function getChargeDimension(
       chargeVerticalOffset,
     };
   } else if (shape === 'rightCut' || shape === 'leftCut') {
-    const chargeWidthOffset = chargeDisposition === 'fess' ? 0 : 0.15;
+    const ordinaryName = ordinary ? ordinary.name : null;
+    const ordinaryLine = ordinary ? ordinary.line : null;
+
+    if (chargeDisposition === 'default') {
+      if (ordinaryName === 'bordure') {
+        if (ordinaryLine === 'straight') {
+          if (chargeCount > 1) {
+            return {
+              chargeDimension: {
+                height: baseDimension.height * 0.7,
+                width: baseDimension.width * 0.7,
+              },
+              chargeVerticalOffset: 0,
+              chargeHorizontalOffset: shape === 'leftCut' ? 0.2 : 0.087,
+            };
+          } else {
+            return {
+              chargeDimension: {
+                height: baseDimension.height * 0.8,
+                width: baseDimension.width * 0.65,
+              },
+              chargeVerticalOffset: -0.05,
+              chargeHorizontalOffset: shape === 'leftCut' ? 0.23 : 0.07,
+            };
+          }
+        } else {
+          if (chargeCount > 1) {
+            return {
+              chargeDimension: {
+                height: baseDimension.height * 0.63,
+                width: baseDimension.width * 0.55,
+              },
+              chargeVerticalOffset: 0.04,
+              chargeHorizontalOffset: shape === 'leftCut' ? 0.29 : 0.15,
+            };
+          } else {
+            return {
+              chargeDimension: {
+                height: baseDimension.height * 0.72,
+                width: baseDimension.width * 0.59,
+              },
+              chargeVerticalOffset: -0.03,
+              chargeHorizontalOffset: shape === 'leftCut' ? 0.26 : 0.11,
+            };
+          }
+        }
+      }
+    } else if (chargeDisposition === 'fess') {
+      if (ordinaryName === 'bordure') {
+        if (ordinaryLine === 'straight') {
+          return {
+            chargeDimension: {
+              height: baseDimension.height,
+              width: baseDimension.width * 0.62,
+            },
+            chargeVerticalOffset: -0.15,
+            chargeHorizontalOffset: shape === 'leftCut' ? 0.23 : 0.15,
+          };
+        } else {
+          return {
+            chargeDimension: {
+              height: baseDimension.height,
+              width: baseDimension.width * 0.59,
+            },
+            chargeVerticalOffset: -0.15,
+            chargeHorizontalOffset: shape === 'leftCut' ? 0.25 : 0.15,
+          };
+        }
+      } else if (ordinaryName === 'chief') {
+        return {
+          chargeDimension: {
+            height: baseDimension.height * 0.85,
+            width: baseDimension.width * 0.8,
+          },
+          chargeVerticalOffset: -0.07,
+          chargeHorizontalOffset: shape === 'leftCut' ? 0.2 : 0,
+        };
+      } else {
+        return {
+          chargeDimension: {
+            height: baseDimension.height,
+            width: baseDimension.width * 0.8,
+          },
+          chargeVerticalOffset: -0.15,
+          chargeHorizontalOffset: shape === 'leftCut' ? 0.2 : 0,
+        };
+      }
+    }
+
+    const chargeWidthOffset = 0.17;
     const defaultChargeHeightOffset = 0.09;
     let chargeVerticalOffset: number = 0;
 
     let chargeHeightOffset: number;
     if (ordinary) {
-      if (ordinary.name === 'chief') {
-        if (ordinary.line === 'straight') {
+      if (ordinaryName === 'chief') {
+        if (ordinaryLine === 'straight') {
           chargeHeightOffset = 0.12;
         } else {
           chargeHeightOffset = 0.13;
           chargeVerticalOffset = 0.04;
         }
-      } else if (ordinary.name === 'base') {
-        if (ordinary.line === 'straight') {
+      } else if (ordinaryName === 'base') {
+        if (ordinaryLine === 'straight') {
           chargeHeightOffset = 0.13;
         } else {
           chargeHeightOffset = 0.16;
         }
-      } else if (ordinary.name === 'bordure') {
-        if (ordinary.line === 'straight') {
+      } else if (ordinaryName === 'bordure') {
+        if (ordinaryLine === 'straight') {
           chargeHeightOffset = 0.12;
         } else {
           chargeHeightOffset = 0.14;
@@ -231,36 +328,43 @@ function getChargeDimension(
       chargeHeightOffset = defaultChargeHeightOffset;
     }
 
-    const horizontalFactor = 0.851;
+    const horizontalFactor = 0.76;
     const chargeDimension = {
       width: baseDimension.width * (1 - 2 * chargeWidthOffset) * horizontalFactor,
       height: baseDimension.height * (1 - 2 * chargeHeightOffset),
     };
 
-
     if (chargeDisposition === 'pale') {
-      chargeVerticalOffset = 0.03;
-      chargeDimension.height = chargeDimension.height * 0.9;
-    } else if (chargeDisposition === 'fess') {
-      chargeDimension.width = chargeDimension.width * 0.8;
-      chargeVerticalOffset += 0;
+      chargeVerticalOffset = 0.035;
+      chargeDimension.height = chargeDimension.height * 0.85;
     } else {
       chargeVerticalOffset += 0;
     }
 
-    if (ordinary && ordinary.name === 'chief' && ordinary.line !== 'straight') {
+    if (ordinaryName === 'chief' && ordinaryLine !== 'straight') {
       chargeVerticalOffset += 0.045;
-      chargeDimension.height = chargeDimension.height * 0.95;
+      chargeDimension.height = chargeDimension.height * 0.9;
+    }
+
+    if (ordinaryName === 'bordure' && ordinaryLine !== 'straight') {
+      chargeVerticalOffset += 0.045;
+      chargeDimension.height = chargeDimension.height * 0.9;
+      chargeDimension.width = chargeDimension.width * 0.95;
+    }
+    if (ordinaryName === 'bordure' && ordinaryLine === 'straight') {
+      chargeDimension.width = chargeDimension.width * 0.95;
     }
 
     return {
       chargeDimension,
       chargeHorizontalOffset:
         chargeWidthOffset +
-        (chargeDisposition !== 'fess' && shape === 'leftCut' ? 1.1 - horizontalFactor : 0) +
-        (chargeDisposition === 'fess' && shape === 'leftCut' ? 1.13 - horizontalFactor : 0) +
-        (chargeDisposition !== 'fess' && shape === 'rightCut' ? -(1 - horizontalFactor) : 0) +
-        (chargeDisposition === 'fess' && shape === 'rightCut' ? 0.9 - horizontalFactor : 0),
+        (ordinaryName === 'bordure' && shape === 'rightCut' ? 0.16 : 0) +
+        (ordinaryName === 'bordure' && shape === 'leftCut' ? -0.14 : 0) +
+        (ordinaryName !== 'bordure' && shape === 'rightCut' ? 0.09 : 0) +
+        (ordinaryName !== 'bordure' && shape === 'leftCut' ? -0.09 : 0) +
+        (shape === 'leftCut' ? 1.13 - horizontalFactor : 0) +
+        (shape === 'rightCut' ? -(1.03 - horizontalFactor) : 0),
       chargeVerticalOffset,
     };
   } else {

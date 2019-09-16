@@ -1,6 +1,6 @@
-import * as pointInSvgPolygon from "point-in-svg-polygon";
+import * as pointInSvgPolygon from 'point-in-svg-polygon';
 import { identity3, Matrix3, mul, mulVec, scale3, translation3 } from '../../svg-path-builder/matrix';
-import { memoize } from "lodash";
+import { memoize } from 'lodash';
 
 export const getPathSegments = memoize(function(pathStr: string | null) {
   return pathStr ? pointInSvgPolygon.segments(pathStr) : [];
@@ -16,7 +16,7 @@ function parentsUntil(el: Node, selector: string): Array<Element> {
 }
 
 export function getChargePoints(parentSelector: string = ''): Array<[number, number]> {
-  const chargePath = Array.from(document.querySelectorAll<SVGPathElement>(parentSelector+' .blason-charge path'));
+  const chargePath = Array.from(document.querySelectorAll<SVGPathElement>(parentSelector + ' .blason-charge path'));
 
   return chargePath.flatMap((path) => {
     const points: Array<[number, number]> = pointInSvgPolygon

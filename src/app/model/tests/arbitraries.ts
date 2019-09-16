@@ -1,5 +1,5 @@
 import fc, { Arbitrary } from 'fast-check';
-import { Tincture, tinctures } from '../tincture';
+import { argent, gules, or, Tincture, tinctures } from '../tincture';
 import { Field, fieldKinds, PartyField } from '../field';
 import { parties, Party } from '../party';
 import { ordinaries, Ordinary } from '../ordinary';
@@ -66,6 +66,79 @@ export const ordinaryArb: Arbitrary<Ordinary> = fc
       }
     }
   );
+
+export const simplifiedChargeArb: Arbitrary<Charge> = fc.constantFrom(...charges).chain((chargeName) => {
+  const countAndDistionArb: Arbitrary<CountAndDisposition> = fc
+    .tuple(fc.constantFrom(...supportedNumbers), fc.constantFrom(...availableDispositions))
+    .map(([count, disposition]) => ({ count, disposition: count === 1 ? 'default' : disposition }));
+  if (chargeName === 'lion') {
+    return fc
+      .tuple(
+        fc.constantFrom(...lionAttitudes),
+        fc.option(fc.constantFrom(...lionHeads)),
+        fc.option(fc.constantFrom(...lionTails)),
+        countAndDistionArb
+      )
+      .map(
+        ([attitude, head, tail, countAndDisposition]): Lion => {
+          return {
+            name: chargeName,
+            attitude,
+            head,
+            tail,
+            tincture: argent,
+            armedAndLangued: gules,
+            countAndDisposition,
+          };
+        }
+      )
+      .map((i): Charge => i);
+  } else if (chargeName === 'eagle') {
+    return fc
+      .tuple(fc.constantFrom(...eagleAttitudes), countAndDistionArb)
+      .map(
+        ([attitude, countAndDisposition]): Eagle => {
+          return {
+            name: chargeName,
+            attitude,
+            tincture: argent,
+            beakedAndArmed: gules,
+            countAndDisposition,
+          };
+        }
+      )
+      .map((i): Charge => i);
+  } else if (chargeName === 'fleurdelys') {
+    return fc.record<FleurDeLys>({
+      name: fc.constant(chargeName),
+      tincture: fc.constant(or),
+      countAndDisposition: countAndDistionArb,
+    });
+  } else if (chargeName === 'lozenge') {
+    return fc.record<Lozenge>({
+      name: fc.constant(chargeName),
+      tincture: fc.constant(or),
+      countAndDisposition: countAndDistionArb,
+      inside: fc.constantFrom(...lozengeInsides),
+    });
+  } else if (chargeName === 'roundel') {
+    return fc.record<Roundel>({
+      name: fc.constant(chargeName),
+      tincture: fc.constant(or),
+      countAndDisposition: countAndDistionArb,
+      inside: fc.constantFrom(...roundelInsides),
+    });
+  } else if (chargeName === 'cross') {
+    return fc.record<Cross>({
+      name: fc.constant(chargeName),
+      tincture: fc.constant(or),
+      countAndDisposition: countAndDistionArb,
+      limbs: fc.constantFrom(...crossLimbs),
+    });
+  } else {
+    return cannotHappen(chargeName);
+  }
+});
 
 export const chargeArb: Arbitrary<Charge> = fc.constantFrom(...charges).chain((chargeName) => {
   const countAndDistionArb: Arbitrary<CountAndDisposition> = fc

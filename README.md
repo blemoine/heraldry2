@@ -38,4 +38,4 @@ Faire le "of the last"
 - faire le déploiement
 - gerer les erreurs provenant de l'URL 
 
-- ecrire des tests qui verifient que quelque soit les ordinaries, ils sont dans les bornes autoriséée( dans le bouclier, sous le chief, dans la bordur, etc.)
+- dans les arbitraries, facotrisee les charges generators

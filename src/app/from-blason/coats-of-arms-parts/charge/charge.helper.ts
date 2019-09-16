@@ -29,6 +29,7 @@ const defaultRepartitionMapping = {
 
 const leftAndRightCutRepatitionMapping = {
   ...defaultRepartitionMapping,
+  8:[4,3,1],
   9: [4,3,2],
   13: [4, 3, 3, 2, 1],
 } as const;
