@@ -38,4 +38,4 @@ Faire le "of the last"
 - faire le déploiement
 - gerer les erreurs provenant de l'URL 
 
-- optimiser les perfs du test:rules
+
