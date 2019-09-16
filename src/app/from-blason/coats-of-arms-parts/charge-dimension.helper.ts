@@ -9,11 +9,13 @@ export function getChargeDimension(
   const ordinary = blason.ordinary;
   const charge = blason.charge;
 
+  const ordinaryName = ordinary ? ordinary.name : null;
+  const ordinaryLine = ordinary ? ordinary.line : null;
   const chargeCount = charge ? charge.countAndDisposition.count : 0;
   const chargeDisposition = charge ? charge.countAndDisposition.disposition : null;
   if (shape === 'default') {
     const chargeHorizontalOffset =
-      (ordinary && ordinary.name === 'bordure' ? (ordinary.line === 'straight' ? 0.085 : 0.125) : 0.015) +
+      (ordinaryName === 'bordure' ? (ordinaryLine === 'straight' ? 0.085 : 0.125) : 0.015) +
       (chargeDisposition === 'fess' ? 0.012 : 0);
 
     const defaultChargeHeightOffset =
@@ -30,30 +32,26 @@ export function getChargeDimension(
 
     let chargeVerticalOffset = 0.01;
     let chargeHeightOffset: number;
-    if (ordinary) {
-      if (ordinary.name === 'chief') {
-        if (ordinary.line === 'straight') {
-          chargeHeightOffset = 0.1;
-        } else {
-          chargeHeightOffset = 0.16;
-          chargeVerticalOffset = 0.08;
-        }
-      } else if (ordinary.name === 'base') {
-        if (ordinary.line === 'straight') {
-          chargeHeightOffset = 0.13;
-        } else {
-          chargeHeightOffset = 0.16;
-        }
-      } else if (ordinary.name === 'bordure') {
-        if (ordinary.line === 'straight') {
-          chargeHeightOffset = 0.14;
-          chargeVerticalOffset = 0.02;
-        } else {
-          chargeHeightOffset = 0.17;
-          chargeVerticalOffset = 0.04;
-        }
+    if (ordinaryName === 'chief') {
+      if (ordinaryLine === 'straight') {
+        chargeHeightOffset = 0.1;
       } else {
-        chargeHeightOffset = defaultChargeHeightOffset;
+        chargeHeightOffset = 0.16;
+        chargeVerticalOffset = 0.08;
+      }
+    } else if (ordinaryName === 'base') {
+      if (ordinaryLine === 'straight') {
+        chargeHeightOffset = 0.13;
+      } else {
+        chargeHeightOffset = 0.16;
+      }
+    } else if (ordinaryName === 'bordure') {
+      if (ordinaryLine === 'straight') {
+        chargeHeightOffset = 0.14;
+        chargeVerticalOffset = 0.02;
+      } else {
+        chargeHeightOffset = 0.17;
+        chargeVerticalOffset = 0.04;
       }
     } else {
       chargeHeightOffset = defaultChargeHeightOffset;
@@ -66,33 +64,28 @@ export function getChargeDimension(
       verticalOffset: chargeVerticalOffset,
     };
   } else if (shape === 'square') {
-    let chargeHorizontalOffset =
-      ordinary && ordinary.name === 'bordure' ? (ordinary.line === 'straight' ? 0.09 : 0.15) : 0;
+    let chargeHorizontalOffset = ordinaryName === 'bordure' ? (ordinaryLine === 'straight' ? 0.09 : 0.15) : 0;
 
     const defaultChargeHeightOffset = 0.01;
 
     let chargeVerticalOffset = 0.01;
     let chargeHeightOffset: number;
-    if (ordinary) {
-      if (ordinary.name === 'chief') {
-        chargeHeightOffset = 0.12;
-        if (ordinary.line !== 'straight') {
-          chargeVerticalOffset = 0.08;
-        }
-      } else if (ordinary.name === 'base') {
-        if (ordinary.line === 'straight') {
-          chargeHeightOffset = 0.14;
-        } else {
-          chargeHeightOffset = 0.16;
-        }
-      } else if (ordinary.name === 'bordure') {
-        if (ordinary.line === 'straight') {
-          chargeHeightOffset = 0.07;
-        } else {
-          chargeHeightOffset = 0.15;
-        }
+    if (ordinaryName === 'chief') {
+      chargeHeightOffset = 0.12;
+      if (ordinaryLine !== 'straight') {
+        chargeVerticalOffset = 0.08;
+      }
+    } else if (ordinaryName === 'base') {
+      if (ordinaryLine === 'straight') {
+        chargeHeightOffset = 0.14;
       } else {
-        chargeHeightOffset = defaultChargeHeightOffset;
+        chargeHeightOffset = 0.16;
+      }
+    } else if (ordinaryName === 'bordure') {
+      if (ordinaryLine === 'straight') {
+        chargeHeightOffset = 0.07;
+      } else {
+        chargeHeightOffset = 0.15;
       }
     } else {
       chargeHeightOffset = defaultChargeHeightOffset;
@@ -112,7 +105,7 @@ export function getChargeDimension(
       chargeVerticalOffset += 0.01;
     }
 
-    if (ordinary && ordinary.name === 'bordure' && ordinary.line !== 'straight') {
+    if (ordinaryName === 'bordure' && ordinaryLine !== 'straight') {
       chargeVerticalOffset += 0.035;
     }
 
@@ -122,9 +115,6 @@ export function getChargeDimension(
       verticalOffset: chargeVerticalOffset,
     };
   } else if (shape === 'rightCut' || shape === 'leftCut') {
-    const ordinaryName = ordinary ? ordinary.name : null;
-    const ordinaryLine = ordinary ? ordinary.line : null;
-
     if (chargeDisposition === 'default') {
       if (ordinaryName === 'bordure') {
         if (ordinaryLine === 'straight') {
