@@ -9,6 +9,7 @@ import { FleurDeLysDisplay } from './charge/fleurdelys/FleurDeLysDisplay';
 import { RoundelDisplay } from './charge/roundel/RoundelDisplay';
 import { LozengeDisplay } from './charge/lozenge/LozengeDisplay';
 import { CrossDisplay } from './charge/cross/CrossDisplay';
+import { MulletDisplay } from './charge/mullet/MulletDisplay';
 import { SimpleBlasonShape } from './blasonDisplay.helper';
 
 type Props = { charge: Charge; dimension: Dimension; shape:SimpleBlasonShape, fillFromTincture: (tincture: Tincture) => string };
@@ -25,6 +26,8 @@ export const ChargeDisplay = ({ charge, dimension, fillFromTincture, shape }: Pr
     return <LozengeDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} shape={shape} />;
   } else if (charge.name === 'cross') {
     return <CrossDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} shape={shape} />;
+  } else if (charge.name === 'mullet') {
+    return <MulletDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} shape={shape} />;
   } else {
     return cannotHappen(charge);
   }

@@ -301,6 +301,23 @@ function stringifyCharge(charge: Charge): string {
     result += stringifyTincture(charge.tincture);
 
     return result;
+  } else if (charge.name === 'mullet') {
+    let result = counterStr;
+    result += ' ' + pluralize('mullet', count);
+    if (charge.points !== 5) {
+      result += ' of ' + stringifyNumber(charge.points) + ' points';
+    }
+    if (charge.inside === 'pierced') {
+      result += ' pierced';
+    }
+
+    if (charge.countAndDisposition.count !== 1 && charge.countAndDisposition.disposition !== 'default') {
+      result += ' in ' + charge.countAndDisposition.disposition;
+    }
+
+    result += ' ' + stringifyTincture(charge.tincture);
+
+    return result;
   } else {
     return cannotHappen(charge);
   }
@@ -376,7 +393,8 @@ export function isThereFur(blason: Blason, fur: Furs['name']): boolean {
         charge.name === 'fleurdelys' ||
         charge.name === 'roundel' ||
         charge.name === 'lozenge' ||
-        charge.name === 'cross'
+        charge.name === 'cross' ||
+        charge.name === 'mullet'
       ) {
         if (charge.tincture.name === fur) {
           return true;

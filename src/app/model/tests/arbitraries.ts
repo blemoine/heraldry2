@@ -17,6 +17,9 @@ import {
   lionTails,
   Lozenge,
   lozengeInsides,
+  Mullet,
+  mulletInsides,
+  mulletPoints,
   Roundel,
   roundelInsides,
 } from '../charge';
@@ -137,6 +140,14 @@ function createChargeArb(tinctureArb: Arbitrary<Tincture>): Arbitrary<Charge> {
         tincture: tinctureArb,
         countAndDisposition: countAndDistionArb,
         limbs: fc.constantFrom(...crossLimbs),
+      });
+    } else if (chargeName === 'mullet') {
+      return fc.record<Mullet>({
+        name: fc.constant(chargeName),
+        tincture: tinctureArb,
+        countAndDisposition: countAndDistionArb,
+        inside: fc.constantFrom(...mulletInsides),
+        points: fc.constantFrom(...mulletPoints),
       });
     } else {
       return cannotHappen(chargeName);

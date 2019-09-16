@@ -14,6 +14,8 @@ import {
   lionHeads,
   lionTails,
   lozengeInsides,
+  mulletInsides,
+  mulletPoints,
   roundelInsides,
 } from '../model/charge';
 import { availableDispositions, CountAndDisposition, supportedNumbers } from '../model/countAndDisposition';
@@ -201,8 +203,10 @@ export function encodeCharge(charge: Charge | null): Uint8Array {
   } else if (charge.name === 'fleurdelys') {
     // nothing to do for now
   } else if (charge.name === 'cross') {
-    // nothing to do for now
     result[4] = encodeFromList(crossLimbs, charge.limbs);
+  } else if (charge.name === 'mullet') {
+    result[4] = encodeFromList(mulletInsides, charge.inside);
+    result[5] = charge.points;
   } else {
     return cannotHappen(charge);
   }
@@ -259,6 +263,16 @@ export function decodeCharge(arr: Uint8Array): Result<Charge | null> {
       } else if (name === 'cross') {
         const maybeLimbs = decodeFromList(crossLimbs, arr[4]);
         return map(maybeLimbs, (limbs) => ({ name, tincture, countAndDisposition, limbs }));
+      } else if (name === 'mullet') {
+        const maybeInside = decodeFromList(mulletInsides, arr[4]);
+        const maybePoints = decodeNumber(mulletPoints, arr[5]);
+        return map(zip(maybeInside, maybePoints), ([inside, points]) => ({
+          name,
+          tincture,
+          countAndDisposition,
+          inside,
+          points,
+        }));
       } else {
         return cannotHappen(name);
       }

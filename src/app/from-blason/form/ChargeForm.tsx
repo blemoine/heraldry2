@@ -49,6 +49,14 @@ export function ChargeForm({ tinctureConfiguration, charge, chargeChange }: Prop
           tincture: or,
           limbs: 'hummetty',
         });
+      } else if (chargeName === 'mullet') {
+        chargeChange({
+          name: chargeName,
+          countAndDisposition: { count: 1, disposition: 'default' },
+          tincture: or,
+          inside: 'nothing',
+          points: 5,
+        });
       } else if (!chargeName) {
         chargeChange(null);
       } else {

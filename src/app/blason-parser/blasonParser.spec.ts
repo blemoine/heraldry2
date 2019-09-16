@@ -500,4 +500,66 @@ Argent, Azure, Barry, Barry pily, Bendy, Bendy Sinister, Chequy, Chevronny, Coun
       fail(`${error} should be a failure`);
     }
   });
+
+  it('should parse a simple mullet', () => {
+    const expected: SimpleBlason = {
+      kind: 'simple',
+      field: { kind: 'plain', tincture: or },
+      charge: {
+        name: 'mullet',
+        points: 5,
+        countAndDisposition: { count: 1, disposition: 'default' },
+        tincture: argent,
+        inside: 'nothing',
+      },
+    };
+
+    expect(parseBlason('Or, a mullet argent ')).toEqual(expected);
+  });
+
+  it('should parse a mullet with points', () => {
+    const expected: SimpleBlason = {
+      kind: 'simple',
+      field: { kind: 'plain', tincture: or },
+      charge: {
+        name: 'mullet',
+        points: 8,
+        countAndDisposition: { count: 2, disposition: 'pale' },
+        tincture: gules,
+        inside: 'nothing',
+      },
+    };
+
+    expect(parseBlason('Or, two mullets of eight points in pale gules ')).toEqual(expected);
+  });
+  it('should parse a mullet pierced', () => {
+    const expected: SimpleBlason = {
+      kind: 'simple',
+      field: { kind: 'plain', tincture: or },
+      charge: {
+        name: 'mullet',
+        points: 5,
+        countAndDisposition: { count: 1, disposition: 'default' },
+        tincture: gules,
+        inside: 'pierced',
+      },
+    };
+
+    expect(parseBlason('Or, a mullet pierced gules ')).toEqual(expected);
+  });
+  it('should parse a mullet pierced with points', () => {
+    const expected: SimpleBlason = {
+      kind: 'simple',
+      field: { kind: 'plain', tincture: or },
+      charge: {
+        name: 'mullet',
+        points: 6,
+        countAndDisposition: { count: 3, disposition: 'default' },
+        tincture: gules,
+        inside: 'pierced',
+      },
+    };
+
+    expect(parseBlason('Or, three mullets of six points pierced gules ')).toEqual(expected);
+  });
 });

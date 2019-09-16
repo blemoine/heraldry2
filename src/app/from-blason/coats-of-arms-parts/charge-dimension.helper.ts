@@ -163,8 +163,8 @@ export function getChargeDimension(
         } else {
           return {
             verticalScale: 1,
-            horizontalScale: 0.59,
-            verticalOffset: -0.15,
+            horizontalScale: 0.57,
+            verticalOffset: -0.18,
             horizontalOffset: shape === 'leftCut' ? 0.25 : 0.15,
           };
         }

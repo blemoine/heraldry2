@@ -16,6 +16,9 @@ import {
   LionTail,
   lionTails,
   Lozenge,
+  Mullet,
+  MulletPoints,
+  mulletPoints,
   Roundel,
 } from '../model/charge';
 import { aParser, buildAltParser, constStr, lineParser, numberParser } from './parser.helper';
@@ -156,6 +159,32 @@ const lozengeParser = (): P.Parser<Lozenge> => {
   });
 };
 
+const mulletParser = (): P.Parser<Mullet> => {
+  return countParser.chain((count) => {
+    return P.seq(
+      P.alt<'mullet'>(constStr('mullet', 'mullets'), constStr('mullet')),
+      P.whitespace
+        .then(P.string('of'))
+        .then(P.whitespace)
+        .then(P.alt<MulletPoints>(...mulletPoints.map(numberParser)))
+
+        .skip(P.string('points'))
+        .fallback(5 as const),
+      P.whitespace.then(constStr('pierced')).fallback('nothing' as const),
+      countAndDispositionParser(count),
+      P.whitespace.then(tinctureParserFromName)
+    ).map(
+      ([name, points, inside, countAndDisposition, tincture]): Mullet => ({
+        name,
+        countAndDisposition,
+        tincture,
+        points,
+        inside,
+      })
+    );
+  });
+};
+
 export const crossParser = (): P.Parser<Cross | OrdinaryCross> => {
   return P.alt(
     countParser.chain((count) => {
@@ -190,6 +219,8 @@ export function chargeParser(): P.Parser<Exclude<Charge, Cross>> {
         return roundelParser();
       } else if (charge === 'lozenge') {
         return lozengeParser();
+      } else if (charge === 'mullet') {
+        return mulletParser();
       } else {
         return cannotHappen(charge);
       }

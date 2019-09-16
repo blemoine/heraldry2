@@ -21,7 +21,6 @@ Faire le "of the last"
 
 
 - Factorize form for lozenge/roundel/fleur de lys
-- Support for quarterly
 
 - Meilleur support de l'optionnalité des virgules
 - utiliser un context pour la configuration

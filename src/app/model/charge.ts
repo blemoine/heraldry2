@@ -82,6 +82,18 @@ export type Cross = {
   limbs: CrossLimbs;
 };
 
-export type Charge = Lion | Eagle | FleurDeLys | Roundel | Lozenge | Cross;
+export const mulletInsides = ['nothing', 'pierced'] as const;
+export type MulletInside = typeof mulletInsides[number];
+export const mulletPoints = [5, 6, 7, 8] as const;
+export type MulletPoints = typeof mulletPoints[number];
+export type Mullet = {
+  name: 'mullet';
+  countAndDisposition: CountAndDisposition;
+  tincture: Tincture;
+  inside: MulletInside;
+  points: MulletPoints;
+};
 
-export const charges: Array<Charge['name']> = ['lion', 'eagle', 'fleurdelys', 'roundel', 'lozenge', 'cross'];
+export type Charge = Lion | Eagle | FleurDeLys | Roundel | Lozenge | Cross | Mullet;
+
+export const charges: Array<Charge['name']> = ['lion', 'eagle', 'fleurdelys', 'roundel', 'lozenge', 'cross', 'mullet'];

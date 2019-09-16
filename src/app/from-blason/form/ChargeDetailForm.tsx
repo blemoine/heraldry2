@@ -8,6 +8,7 @@ import { RoundelForm } from './charges/RoundelForm';
 import { LozengeForm } from './charges/LozengeForm';
 import { CrossForm } from './charges/CrossForm';
 import { TinctureConfiguration } from '../../model/tincture-configuration';
+import { MulletForm } from './charges/MulletForm';
 
 type Props = { tinctureConfiguration: TinctureConfiguration; charge: Charge; chargeChange: (charge: Charge) => void };
 export function ChargeDetailForm({ tinctureConfiguration, charge, chargeChange }: Props) {
@@ -23,6 +24,8 @@ export function ChargeDetailForm({ tinctureConfiguration, charge, chargeChange }
     return <LozengeForm tinctureConfiguration={tinctureConfiguration} charge={charge} chargeChange={chargeChange} />;
   } else if (charge.name === 'cross') {
     return <CrossForm tinctureConfiguration={tinctureConfiguration} charge={charge} chargeChange={chargeChange} />;
+  } else if (charge.name === 'mullet') {
+    return <MulletForm tinctureConfiguration={tinctureConfiguration} charge={charge} chargeChange={chargeChange} />;
   } else {
     return cannotHappen(charge);
   }
