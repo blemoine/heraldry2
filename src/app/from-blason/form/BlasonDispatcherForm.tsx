@@ -4,13 +4,7 @@ import { Blason, SimpleBlason } from '../../model/blason';
 import { cannotHappen } from '../../../utils/cannot-happen';
 import { SimpleBlasonForm } from './SimpleBlasonForm';
 import { useCallback } from 'react';
-import {
-  Accordion,
-  AccordionItem,
-  AccordionItemButton,
-  AccordionItemHeading,
-  AccordionItemPanel,
-} from 'react-accessible-accordion';
+import { Accordion, Card } from 'react-bootstrap';
 
 type Props = {
   tinctureConfiguration: TinctureConfiguration;
@@ -45,55 +39,66 @@ export const BlasonDispatcherForm = React.memo(function BlasonForm({
     );
     return (
       <div>
-        <Accordion allowMultipleExpanded={true} allowZeroExpanded={true}>
-          <AccordionItem>
-            <AccordionItemHeading>
-              <AccordionItemButton>Quarter 1</AccordionItemButton>
-            </AccordionItemHeading>
-            <AccordionItemPanel>
-              <SimpleBlasonForm
-                tinctureConfiguration={tinctureConfiguration}
-                blason={blason.blasons[0]}
-                blasonChange={quarterlyBlasonChange(0)}
-              />
-            </AccordionItemPanel>
-          </AccordionItem>
-          <AccordionItem>
-            <AccordionItemHeading>
-              <AccordionItemButton>Quarter 2</AccordionItemButton>
-            </AccordionItemHeading>
-            <AccordionItemPanel>
-              <SimpleBlasonForm
-                tinctureConfiguration={tinctureConfiguration}
-                blason={blason.blasons[1]}
-                blasonChange={quarterlyBlasonChange(1)}
-              />
-            </AccordionItemPanel>
-          </AccordionItem>
-          <AccordionItem>
-            <AccordionItemHeading>
-              <AccordionItemButton>Quarter 3</AccordionItemButton>
-            </AccordionItemHeading>
-            <AccordionItemPanel>
-              <SimpleBlasonForm
-                tinctureConfiguration={tinctureConfiguration}
-                blason={blason.blasons[2]}
-                blasonChange={quarterlyBlasonChange(2)}
-              />
-            </AccordionItemPanel>
-          </AccordionItem>
-          <AccordionItem>
-            <AccordionItemHeading>
-              <AccordionItemButton>Quarter 4</AccordionItemButton>
-            </AccordionItemHeading>
-            <AccordionItemPanel>
-              <SimpleBlasonForm
-                tinctureConfiguration={tinctureConfiguration}
-                blason={blason.blasons[3]}
-                blasonChange={quarterlyBlasonChange(3)}
-              />
-            </AccordionItemPanel>
-          </AccordionItem>
+        <Accordion>
+          <Card>
+            <Accordion.Toggle as={Card.Header} variant="link" eventKey="0">
+              Quarter 1
+            </Accordion.Toggle>
+            <Accordion.Collapse eventKey="0">
+              <Card.Body className="top-card-body">
+                <SimpleBlasonForm
+                  tinctureConfiguration={tinctureConfiguration}
+                  blason={blason.blasons[0]}
+                  blasonChange={quarterlyBlasonChange(0)}
+                />
+              </Card.Body>
+            </Accordion.Collapse>
+          </Card>
+
+          <Card>
+            <Accordion.Toggle as={Card.Header} variant="link" eventKey="1">
+              Quarter 2
+            </Accordion.Toggle>
+            <Accordion.Collapse eventKey="1">
+              <Card.Body className="top-card-body">
+                <SimpleBlasonForm
+                  tinctureConfiguration={tinctureConfiguration}
+                  blason={blason.blasons[1]}
+                  blasonChange={quarterlyBlasonChange(1)}
+                />
+              </Card.Body>
+            </Accordion.Collapse>
+          </Card>
+
+          <Card>
+            <Accordion.Toggle as={Card.Header} variant="link" eventKey="2">
+              Quarter 3
+            </Accordion.Toggle>
+            <Accordion.Collapse eventKey="2">
+              <Card.Body className="top-card-body">
+                <SimpleBlasonForm
+                  tinctureConfiguration={tinctureConfiguration}
+                  blason={blason.blasons[2]}
+                  blasonChange={quarterlyBlasonChange(2)}
+                />
+              </Card.Body>
+            </Accordion.Collapse>
+          </Card>
+
+          <Card>
+            <Accordion.Toggle as={Card.Header} variant="link" eventKey="3">
+              Quarter 4
+            </Accordion.Toggle>
+            <Accordion.Collapse eventKey="3">
+              <Card.Body className="top-card-body">
+                <SimpleBlasonForm
+                  tinctureConfiguration={tinctureConfiguration}
+                  blason={blason.blasons[3]}
+                  blasonChange={quarterlyBlasonChange(3)}
+                />
+              </Card.Body>
+            </Accordion.Collapse>
+          </Card>
         </Accordion>
       </div>
     );

@@ -8,15 +8,7 @@ import { Ordinary } from '../../model/ordinary';
 import { Charge } from '../../model/charge';
 import { TinctureConfiguration } from '../../model/tincture-configuration';
 import { useCallback } from 'react';
-import {
-  Accordion,
-  AccordionItem,
-  AccordionItemHeading,
-  AccordionItemButton,
-  AccordionItemPanel,
-} from 'react-accessible-accordion';
-
-const wrapperStyle = { border: '1px solid #CCC' /*, padding: '5px'  */ };
+import { Accordion, Card } from 'react-bootstrap';
 
 type Props = {
   tinctureConfiguration: TinctureConfiguration;
@@ -58,41 +50,46 @@ export function SimpleBlasonForm({ tinctureConfiguration, blason, blasonChange }
   );
 
   return (
-    <div style={wrapperStyle}>
-      <Accordion allowMultipleExpanded={true} allowZeroExpanded={true}>
-        <AccordionItem>
-          <AccordionItemHeading>
-            <AccordionItemButton>Field</AccordionItemButton>
-          </AccordionItemHeading>
-          <AccordionItemPanel>
+    <Accordion>
+      <Card>
+        <Accordion.Toggle as={Card.Header} variant="link" eventKey="0">
+          Field
+        </Accordion.Toggle>
+        <Accordion.Collapse eventKey="0">
+          <Card.Body>
             <FieldForm tinctureConfiguration={tinctureConfiguration} field={blason.field} fieldChange={fieldChange} />
-          </AccordionItemPanel>
-        </AccordionItem>
-        <AccordionItem>
-          <AccordionItemHeading>
-            <AccordionItemButton>Ordinary</AccordionItemButton>
-          </AccordionItemHeading>
-          <AccordionItemPanel>
+          </Card.Body>
+        </Accordion.Collapse>
+      </Card>
+      <Card>
+        <Accordion.Toggle as={Card.Header} variant="link" eventKey="1">
+          Ordinary
+        </Accordion.Toggle>
+        <Accordion.Collapse eventKey="1">
+          <Card.Body>
             <OrdinaryForm
               tinctureConfiguration={tinctureConfiguration}
               ordinary={blason.ordinary || null}
               ordinaryChange={ordinaryChange}
             />
-          </AccordionItemPanel>
-        </AccordionItem>
-        <AccordionItem>
-          <AccordionItemHeading>
-            <AccordionItemButton>Charge</AccordionItemButton>
-          </AccordionItemHeading>
-          <AccordionItemPanel>
+          </Card.Body>
+        </Accordion.Collapse>
+      </Card>
+
+      <Card>
+        <Accordion.Toggle as={Card.Header} variant="link" eventKey="2">
+          Charge
+        </Accordion.Toggle>
+        <Accordion.Collapse eventKey="2">
+          <Card.Body>
             <ChargeForm
               tinctureConfiguration={tinctureConfiguration}
               charge={blason.charge || null}
               chargeChange={chargeChange}
             />
-          </AccordionItemPanel>
-        </AccordionItem>
-      </Accordion>
-    </div>
+          </Card.Body>
+        </Accordion.Collapse>
+      </Card>
+    </Accordion>
   );
 }
