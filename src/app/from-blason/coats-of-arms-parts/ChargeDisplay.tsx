@@ -12,14 +12,21 @@ import { CrossDisplay } from './charge/cross/CrossDisplay';
 import { MulletDisplay } from './charge/mullet/MulletDisplay';
 import { SimpleBlasonShape } from './blasonDisplay.helper';
 
-type Props = { charge: Charge; dimension: Dimension; shape:SimpleBlasonShape, fillFromTincture: (tincture: Tincture) => string };
+type Props = {
+  charge: Charge;
+  dimension: Dimension;
+  shape: SimpleBlasonShape;
+  fillFromTincture: (tincture: Tincture) => string;
+};
 export const ChargeDisplay = ({ charge, dimension, fillFromTincture, shape }: Props) => {
   if (charge.name === 'lion') {
-    return <LionDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} shape={shape}/>;
+    return <LionDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} shape={shape} />;
   } else if (charge.name === 'eagle') {
     return <EagleDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} shape={shape} />;
   } else if (charge.name === 'fleurdelys') {
-    return <FleurDeLysDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} shape={shape} />;
+    return (
+      <FleurDeLysDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} shape={shape} />
+    );
   } else if (charge.name === 'roundel') {
     return <RoundelDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} shape={shape} />;
   } else if (charge.name === 'lozenge') {

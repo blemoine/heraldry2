@@ -10,6 +10,7 @@ import { ShieldShape } from '../../model/configuration';
 import { Ordinary } from '../../model/ordinary';
 import { cannotHappen } from '../../../utils/cannot-happen';
 import { getChargeDimension } from './charge-dimension.helper';
+import { SimpleBlasonPath } from '../../model/blason-path';
 
 type Props = {
   blason: SimpleBlason;
@@ -18,8 +19,9 @@ type Props = {
   clipPathId: string;
   shape: SimpleBlasonShape;
   shieldShape: ShieldShape;
+  selectBlasonPart: (path: SimpleBlasonPath) => void
 };
-export const SimpleBlasonDisplay = ({ blason, dimension, fillFromTincture, clipPathId, shape, shieldShape }: Props) => {
+export const SimpleBlasonDisplay = ({ blason, dimension, fillFromTincture, clipPathId, shape, shieldShape, selectBlasonPart }: Props) => {
   const { width, height } = dimension;
   const ordinary = blason.ordinary;
 
@@ -51,6 +53,7 @@ export const SimpleBlasonDisplay = ({ blason, dimension, fillFromTincture, clipP
             fill={fillFromTincture(ordinary.tincture)}
             shape={shape}
             shieldShape={shieldShape}
+            onClick={() => selectBlasonPart('ordinary')}
           />
         </g>
       )}

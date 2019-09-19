@@ -9,13 +9,16 @@ import { Charge } from '../../model/charge';
 import { TinctureConfiguration } from '../../model/tincture-configuration';
 import { useCallback } from 'react';
 import { Accordion, Card } from 'react-bootstrap';
+import { SimpleBlasonPath } from '../../model/blason-path';
 
 type Props = {
   tinctureConfiguration: TinctureConfiguration;
   blason: SimpleBlason;
   blasonChange: (blason: SimpleBlason) => void;
+  blasonPath: SimpleBlasonPath | null;
+  setBlasonPath: (path: SimpleBlasonPath | null) => void;
 };
-export function SimpleBlasonForm({ tinctureConfiguration, blason, blasonChange }: Props) {
+export function SimpleBlasonForm({ tinctureConfiguration, blason, blasonChange, blasonPath, setBlasonPath }: Props) {
   const fieldChange = useCallback(
     function fieldChange(field: Field) {
       blasonChange({ ...blason, field });
@@ -50,22 +53,18 @@ export function SimpleBlasonForm({ tinctureConfiguration, blason, blasonChange }
   );
 
   return (
-    <Accordion>
+    <Accordion activeKey={blasonPath || undefined}>
       <Card>
-        <Accordion.Toggle as={Card.Header} variant="link" eventKey="0">
-          Field
-        </Accordion.Toggle>
-        <Accordion.Collapse eventKey="0">
+        <Card.Header onClick={() => setBlasonPath('field')}>Field</Card.Header>
+        <Accordion.Collapse eventKey="field">
           <Card.Body>
             <FieldForm tinctureConfiguration={tinctureConfiguration} field={blason.field} fieldChange={fieldChange} />
           </Card.Body>
         </Accordion.Collapse>
       </Card>
       <Card>
-        <Accordion.Toggle as={Card.Header} variant="link" eventKey="1">
-          Ordinary
-        </Accordion.Toggle>
-        <Accordion.Collapse eventKey="1">
+        <Card.Header onClick={() => setBlasonPath('ordinary')}>Ordinary</Card.Header>
+        <Accordion.Collapse eventKey="ordinary">
           <Card.Body>
             <OrdinaryForm
               tinctureConfiguration={tinctureConfiguration}
@@ -77,10 +76,8 @@ export function SimpleBlasonForm({ tinctureConfiguration, blason, blasonChange }
       </Card>
 
       <Card>
-        <Accordion.Toggle as={Card.Header} variant="link" eventKey="2">
-          Charge
-        </Accordion.Toggle>
-        <Accordion.Collapse eventKey="2">
+        <Card.Header onClick={() => setBlasonPath('charge')}>Charge</Card.Header>
+        <Accordion.Collapse eventKey="charge">
           <Card.Body>
             <ChargeForm
               tinctureConfiguration={tinctureConfiguration}

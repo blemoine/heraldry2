@@ -11,8 +11,15 @@ import { PathFromBuilder } from '../../../common/PathFromBuilder';
 import { Line } from '../../../model/line';
 import { ShieldShape } from '../../../model/configuration';
 
-type Props = { dimension: Dimension; line: Line; shape: SimpleBlasonShape; shieldShape: ShieldShape; fill: string };
-export const BordureDisplay = ({ dimension, line, shape, shieldShape, fill }: Props) => {
+type Props = {
+  dimension: Dimension;
+  line: Line;
+  shape: SimpleBlasonShape;
+  shieldShape: ShieldShape;
+  fill: string;
+  onClick: () => void;
+};
+export const BordureDisplay = ({ dimension, line, shape, shieldShape, fill, onClick }: Props) => {
   const { width, height } = dimension;
 
   const lineOptions = computeLineOptions(line, dimension);
@@ -115,5 +122,14 @@ export const BordureDisplay = ({ dimension, line, shape, shieldShape, fill }: Pr
     throw new Error(`Got ${JSON.stringify(pathBuilder)} error`);
   }
 
-  return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke="#333" fillRule={'evenodd'} />;
+  return (
+    <PathFromBuilder
+      pathBuilder={pathBuilder}
+      fill={fill}
+      stroke="#333"
+      fillRule={'evenodd'}
+      style={{ cursor: 'pointer' }}
+      onClick={onClick}
+    />
+  );
 };

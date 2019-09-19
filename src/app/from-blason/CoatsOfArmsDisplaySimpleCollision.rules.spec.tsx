@@ -20,7 +20,14 @@ describe('CoatsOfArms Simple collision rules', () => {
 
   function assertOnCoatsOfArms(blason: Blason) {
     cleanup();
-    render(<CoatsOfArmsDisplay blason={blason} dimension={dimension} configuration={configuration} />);
+    render(
+      <CoatsOfArmsDisplay
+        blason={blason}
+        dimension={dimension}
+        configuration={configuration}
+        selectBlasonPart={() => {}}
+      />
+    );
 
     const clipPathStr = document.querySelector('#plain-field-clip-path path')!.getAttribute('d');
     const clipPath = getPathSegments(clipPathStr);

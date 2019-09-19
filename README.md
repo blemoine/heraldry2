@@ -36,5 +36,7 @@ Faire le "of the last"
 - ecrire des tests dans app pour faire un quarterly 
 - faire le déploiement
 - gerer les erreurs provenant de l'URL 
-
+- use Collapse pour la configuration
+- going to quarterly is a slow click
+- gerer le onclick sur le form pour le deplier apres la prise de control 
 

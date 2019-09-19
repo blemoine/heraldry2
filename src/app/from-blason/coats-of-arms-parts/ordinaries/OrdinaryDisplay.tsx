@@ -15,9 +15,10 @@ type Props = {
   dimension: Dimension;
   shape: SimpleBlasonShape;
   shieldShape: ShieldShape;
+  onClick: () => void;
 };
 
-export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape }: Props) => {
+export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape, onClick }: Props) => {
   const { width, height } = dimension;
   if (ordinary.name === 'chief') {
     const chiefHeight = height * chiefHeightRatio;
@@ -35,7 +36,15 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape 
       .goTo([width, 0])
       .close();
 
-    return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke="#333" />;
+    return (
+      <PathFromBuilder
+        pathBuilder={pathBuilder}
+        fill={fill}
+        stroke="#333"
+        style={{ cursor: 'pointer' }}
+        onClick={onClick}
+      />
+    );
   } else if (ordinary.name === 'base') {
     const baseHeight = height / 4;
     const lineOptions = computeLineOptions(ordinary.line, dimension);
@@ -46,7 +55,15 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape 
       .goTo([0, height - baseHeight], lineOptions)
       .close();
 
-    return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke="#333" />;
+    return (
+      <PathFromBuilder
+        pathBuilder={pathBuilder}
+        fill={fill}
+        stroke="#333"
+        style={{ cursor: 'pointer' }}
+        onClick={onClick}
+      />
+    );
   } else if (ordinary.name === 'fess') {
     const lineOptions = computeLineOptions(ordinary.line, dimension);
 
@@ -56,7 +73,15 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape 
       .goTo([width, height / 3])
       .goTo([0, height / 3], lineOptions);
 
-    return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke="#333" />;
+    return (
+      <PathFromBuilder
+        pathBuilder={pathBuilder}
+        fill={fill}
+        stroke="#333"
+        style={{ cursor: 'pointer' }}
+        onClick={onClick}
+      />
+    );
   } else if (ordinary.name === 'bend') {
     const basePoint = height / (8 * Math.sqrt(2));
     const length = Math.sqrt(width ** 2 + height ** 2);
@@ -69,7 +94,15 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape 
       .goTo([length + basePoint, length - basePoint])
       .goTo([basePoint, -basePoint], lineOptions);
 
-    return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke="#333" />;
+    return (
+      <PathFromBuilder
+        pathBuilder={pathBuilder}
+        fill={fill}
+        stroke="#333"
+        style={{ cursor: 'pointer' }}
+        onClick={onClick}
+      />
+    );
   } else if (ordinary.name === 'bendSinister') {
     return (
       <g transform={`scale(-1,1) translate(-${width} 0)`}>
@@ -79,6 +112,7 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape 
           dimension={dimension}
           shape={shape}
           shieldShape={shieldShape}
+          onClick={onClick}
         />
       </g>
     );
@@ -94,7 +128,16 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape 
             .goTo([startX + paleWidth, height])
             .goTo([startX + paleWidth, 0], lineOptions);
 
-          return <PathFromBuilder key={i} pathBuilder={pathBuilder} fill={fill} stroke="#333" />;
+          return (
+            <PathFromBuilder
+              key={i}
+              pathBuilder={pathBuilder}
+              fill={fill}
+              stroke="#333"
+              style={{ cursor: 'pointer' }}
+              onClick={onClick}
+            />
+          );
         })}
       </g>
     );
@@ -115,7 +158,15 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape 
       .goTo([(3 * width) / 5, 0], lineOptions)
       .goTo([(2 * width) / 5, 0]);
 
-    return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke="#333" />;
+    return (
+      <PathFromBuilder
+        pathBuilder={pathBuilder}
+        fill={fill}
+        stroke="#333"
+        style={{ cursor: 'pointer' }}
+        onClick={onClick}
+      />
+    );
   } else if (ordinary.name === 'saltire') {
     const lineOptions = computeLineOptions(ordinary.line, dimension);
     const basePointW = width / (10 * Math.sqrt(2));
@@ -138,7 +189,15 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape 
       .goTo([2 * w, -basePointH])
       .goTo([w, h - basePointH], lineOptions);
 
-    return <PathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke="#333" />;
+    return (
+      <PathFromBuilder
+        pathBuilder={pathBuilder}
+        fill={fill}
+        stroke="#333"
+        style={{ cursor: 'pointer' }}
+        onClick={onClick}
+      />
+    );
   } else if (ordinary.name === 'chevron' || ordinary.name === 'chevronel') {
     const lineOptions = computeLineOptions(ordinary.line, dimension);
     const chevronHeight =
@@ -158,13 +217,29 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape 
             .goTo([0, bottomPoint - chevronHeight])
             .goTo([width / 2, topPoint], lineOptions);
 
-          return <PathFromBuilder key={i} pathBuilder={pathBuilder} fill={fill} stroke="#333" />;
+          return (
+            <PathFromBuilder
+              key={i}
+              pathBuilder={pathBuilder}
+              fill={fill}
+              stroke="#333"
+              style={{ cursor: 'pointer' }}
+              onClick={onClick}
+            />
+          );
         })}
       </>
     );
   } else if (ordinary.name === 'bordure') {
     return (
-      <BordureDisplay shieldShape={shieldShape} shape={shape} dimension={dimension} fill={fill} line={ordinary.line} />
+      <BordureDisplay
+        shieldShape={shieldShape}
+        shape={shape}
+        dimension={dimension}
+        fill={fill}
+        line={ordinary.line}
+        onClick={onClick}
+      />
     );
   } else {
     return cannotHappen(ordinary);

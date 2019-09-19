@@ -52,6 +52,7 @@ export const OrdinaryNameSelect = ({ ordinary, ordinaryChange }: Props) => {
       options={ordinariesWithNone}
       value={value}
       onChange={(t: any) => ordinaryTypeChange(t.value)}
+      menuPortalTarget={document.body}
     />
   );
 };

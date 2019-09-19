@@ -22,6 +22,7 @@ export function SelectScalar<A extends string | number>(props: Props<A>) {
       onChange={(t: any) => props.valueChange(t.value)}
       onMenuClose={props.onMenuClose}
       onMenuOpen={props.onMenuOpen}
+      menuPortalTarget={document.body}
     />
   );
 }

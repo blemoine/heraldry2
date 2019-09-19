@@ -84,6 +84,7 @@ export const TinctureSelect = ({ tinctureConfiguration, tincture, tinctureChange
       getOptionValue={(t) => t.name}
       value={tincture}
       onChange={(t: any) => t && tinctureChange(t)}
+      menuPortalTarget={document.body}
     />
   );
 };

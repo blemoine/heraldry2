@@ -7,7 +7,7 @@ type Props = { dimension: Dimension };
 export const HeaterDisplay: React.FunctionComponent<Props> = ({ dimension }) => {
   const pathBuilder = heaterPathBuilder(dimension, null);
 
-  return <PathFromBuilder pathBuilder={pathBuilder} fill="transparent" stroke="#333" />;
+  return <PathFromBuilder pathBuilder={pathBuilder} fill="transparent" stroke="#333"  style={{ pointerEvents: 'none' }}/>;
 };
 
 export function heaterPathBuilder({ width, height }: Dimension, lineOptions: LineOptions | null): SvgPathBuilder {
