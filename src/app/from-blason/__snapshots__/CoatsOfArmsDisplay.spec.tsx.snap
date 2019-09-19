@@ -38,6 +38,12 @@ exports[`CoatsOfArms should render 'Argent, a chevron sable' 1`] = `
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <rect
       fill="#FFFFFF"
@@ -115,6 +121,12 @@ exports[`CoatsOfArms should render 'Argent, a cross gules' 1`] = `
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <rect
       fill="#FFFFFF"
@@ -239,6 +251,12 @@ exports[`CoatsOfArms should render 'Argent, three crosses potent vair' 1`] = `
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <rect
       fill="#FFFFFF"
@@ -324,6 +342,12 @@ exports[`CoatsOfArms should render 'Azure, nineteen annulets argent' 1`] = `
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <rect
       fill="#0000FF"
@@ -508,6 +532,12 @@ exports[`CoatsOfArms should render 'Azure, twelve roundels argent' 1`] = `
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <rect
       fill="#0000FF"
@@ -662,6 +692,12 @@ exports[`CoatsOfArms should render 'Azure, two crosses crosselet vert' 1`] = `
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <rect
       fill="#0000FF"
@@ -803,6 +839,12 @@ exports[`CoatsOfArms should render 'Azure, two crosses moline counter ermine' 1`
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <rect
       fill="#0000FF"
@@ -996,6 +1038,12 @@ exports[`CoatsOfArms should render 'Barry pily counter ermine and potent en poin
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <g>
       <rect
@@ -1063,6 +1111,12 @@ exports[`CoatsOfArms should render 'Bendy or and argent, a lion dormant gules' 1
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <g>
       <path
@@ -1402,6 +1456,12 @@ exports[`CoatsOfArms should render 'Bendy or and argent, a lion rampant ermine' 
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <g>
       <path
@@ -1748,6 +1808,12 @@ exports[`CoatsOfArms should render 'Bendy sinister or and argent, a lion sejant 
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <g
       transform="scale(-1,1) translate(-200 0)"
@@ -1995,6 +2061,12 @@ exports[`CoatsOfArms should render 'Chequy gules and or, a chief engrailed azure
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <g
       transform="translate(0 58.66666666666667)"
@@ -2419,6 +2491,12 @@ exports[`CoatsOfArms should render 'Chequy gules and or, a chief engrailed ermin
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <g
       transform="translate(0 58.66666666666667)"
@@ -2782,6 +2860,12 @@ exports[`CoatsOfArms should render 'Chequy gules and or, a saltire argent, an ea
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <g>
       <rect
@@ -3378,6 +3462,12 @@ exports[`CoatsOfArms should render 'Ermine, a bend invected vair' 1`] = `
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <rect
       fill="url(#field-pattern-160)"
@@ -3516,6 +3606,12 @@ exports[`CoatsOfArms should render 'Ermine, two pallets sable' 1`] = `
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <rect
       fill="url(#field-pattern-172)"
@@ -3667,6 +3763,12 @@ exports[`CoatsOfArms should render 'Erminois, four crosses bottony argent' 1`] =
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <rect
       fill="url(#field-pattern-462)"
@@ -3757,6 +3859,12 @@ exports[`CoatsOfArms should render 'Gules, three crosses pattée argent' 1`] = `
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <rect
       fill="#FF0000"
@@ -3889,6 +3997,12 @@ exports[`CoatsOfArms should render 'Or, a base engrailed vair' 1`] = `
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <rect
       fill="#FFD700"
@@ -4027,6 +4141,12 @@ exports[`CoatsOfArms should render 'Or, a bend sinister invected ermine' 1`] = `
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <rect
       fill="#FFD700"
@@ -4108,6 +4228,12 @@ exports[`CoatsOfArms should render 'Or, a fess murrey' 1`] = `
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <rect
       fill="#FFD700"
@@ -4185,6 +4311,12 @@ exports[`CoatsOfArms should render 'Or, eleven rustres sable' 1`] = `
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <rect
       fill="#FFD700"
@@ -4321,6 +4453,12 @@ exports[`CoatsOfArms should render 'Or, fifteen mascles sable' 1`] = `
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <rect
       fill="#FFD700"
@@ -4481,6 +4619,12 @@ exports[`CoatsOfArms should render 'Or, thirteen lozenge or' 1`] = `
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <rect
       fill="#FFD700"
@@ -4724,6 +4868,12 @@ exports[`CoatsOfArms should render 'Paly pily vair and pean' 1`] = `
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <g>
       <rect
@@ -4791,6 +4941,12 @@ exports[`CoatsOfArms should render 'Per chevron Sable and Or, three fleurs de ly
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <g>
       <rect
@@ -4985,6 +5141,12 @@ exports[`CoatsOfArms should render 'Per cross or and argent' 1`] = `
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <g>
       <path
@@ -5121,6 +5283,12 @@ exports[`CoatsOfArms should render 'Per fess or and ermine, a bordure engrailed 
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <g
       transform="translate(0 16)"
@@ -5268,6 +5436,12 @@ exports[`CoatsOfArms should render 'Per pale invected ermine and or' 1`] = `
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <g>
       <path
@@ -5333,6 +5507,12 @@ exports[`CoatsOfArms should render 'Per saltire or and argent' 1`] = `
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <g>
       <path
@@ -5456,6 +5636,12 @@ exports[`CoatsOfArms should render 'Potent, a chief gules' 1`] = `
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <g
       transform="translate(0 53.33333333333334)"
@@ -5537,6 +5723,12 @@ exports[`CoatsOfArms should render 'Purpure, four crosses crosselet or' 1`] = `
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <rect
       fill="#800080"
@@ -5705,6 +5897,12 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
       <g
         className="blason-field"
         clipPath="url(#quarterly-clip-path)"
+        onClick={[Function]}
+        style={
+          Object {
+            "cursor": "pointer",
+          }
+        }
       >
         <g
           transform="translate(0 13.333333333333336)"
@@ -5744,6 +5942,12 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
       <g
         className="blason-field"
         clipPath="url(#quarterly-clip-path)"
+        onClick={[Function]}
+        style={
+          Object {
+            "cursor": "pointer",
+          }
+        }
       >
         <g
           transform="translate(0 8)"
@@ -5783,6 +5987,12 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
       <g
         className="blason-field"
         clipPath="url(#quarterly-clip-path)"
+        onClick={[Function]}
+        style={
+          Object {
+            "cursor": "pointer",
+          }
+        }
       >
         <g
           transform="translate(0 29.333333333333336)"
@@ -5821,6 +6031,12 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
       <g
         className="blason-field"
         clipPath="url(#quarterly-clip-path)"
+        onClick={[Function]}
+        style={
+          Object {
+            "cursor": "pointer",
+          }
+        }
       >
         <g
           transform="translate(0 13.333333333333336)"
@@ -5922,6 +6138,12 @@ exports[`CoatsOfArms should render 'Quarterly, 1st: Bendy or and purpure, a bord
       <g
         className="blason-field"
         clipPath="url(#quarterly-clip-path)"
+        onClick={[Function]}
+        style={
+          Object {
+            "cursor": "pointer",
+          }
+        }
       >
         <g
           transform="translate(0 13.333333333333336)"
@@ -5985,6 +6207,12 @@ exports[`CoatsOfArms should render 'Quarterly, 1st: Bendy or and purpure, a bord
       <g
         className="blason-field"
         clipPath="url(#quarterly-clip-path)"
+        onClick={[Function]}
+        style={
+          Object {
+            "cursor": "pointer",
+          }
+        }
       >
         <g
           transform="translate(0 13.333333333333336)"
@@ -6058,6 +6286,12 @@ exports[`CoatsOfArms should render 'Quarterly, 1st: Bendy or and purpure, a bord
       <g
         className="blason-field"
         clipPath="url(#quarterly-clip-path)"
+        onClick={[Function]}
+        style={
+          Object {
+            "cursor": "pointer",
+          }
+        }
       >
         <g
           transform="translate(0 13.333333333333336)"
@@ -6131,6 +6365,12 @@ exports[`CoatsOfArms should render 'Quarterly, 1st: Bendy or and purpure, a bord
       <g
         className="blason-field"
         clipPath="url(#quarterly-clip-path)"
+        onClick={[Function]}
+        style={
+          Object {
+            "cursor": "pointer",
+          }
+        }
       >
         <g
           transform="translate(0 13.333333333333336)"
@@ -6249,6 +6489,12 @@ exports[`CoatsOfArms should render 'Sable, a cross maltese argent' 1`] = `
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <rect
       fill="#000000"
@@ -6369,6 +6615,12 @@ exports[`CoatsOfArms should render 'Vert, two crosses hummetty counter potent' 1
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <rect
       fill="#008000"
@@ -6510,6 +6762,12 @@ exports[`CoatsOfArms should render a fur blason 1`] = `
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <rect
       fill="url(#field-pattern-16)"
@@ -6618,6 +6876,12 @@ exports[`CoatsOfArms should render a party blason 1`] = `
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <g>
       <path
@@ -6730,6 +6994,12 @@ exports[`CoatsOfArms should render a party blason with some ordinary 1`] = `
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <g
       transform="translate(0 53.33333333333334)"
@@ -6815,6 +7085,12 @@ exports[`CoatsOfArms should render a plain blason 1`] = `
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <rect
       fill="#FF0000"
@@ -6876,6 +7152,12 @@ exports[`CoatsOfArms should render a the england royal arms 1`] = `
   <g
     className="blason-field"
     clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
   >
     <rect
       fill="#FF0000"

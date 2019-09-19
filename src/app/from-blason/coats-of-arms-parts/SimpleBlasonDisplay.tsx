@@ -19,9 +19,17 @@ type Props = {
   clipPathId: string;
   shape: SimpleBlasonShape;
   shieldShape: ShieldShape;
-  selectBlasonPart: (path: SimpleBlasonPath) => void
+  selectBlasonPart: (path: SimpleBlasonPath) => void;
 };
-export const SimpleBlasonDisplay = ({ blason, dimension, fillFromTincture, clipPathId, shape, shieldShape, selectBlasonPart }: Props) => {
+export const SimpleBlasonDisplay = ({
+  blason,
+  dimension,
+  fillFromTincture,
+  clipPathId,
+  shape,
+  shieldShape,
+  selectBlasonPart,
+}: Props) => {
   const { width, height } = dimension;
   const ordinary = blason.ordinary;
 
@@ -34,7 +42,12 @@ export const SimpleBlasonDisplay = ({ blason, dimension, fillFromTincture, clipP
   const clipPathUrl = `url(#${clipPathId})`;
   return (
     <>
-      <g clipPath={clipPathUrl} className="blason-field">
+      <g
+        clipPath={clipPathUrl}
+        className="blason-field"
+        style={{ cursor: 'pointer' }}
+        onClick={() => selectBlasonPart('field')}
+      >
         <GWrapper translate={[0, baseVerticalOffset * height]}>
           <FieldDisplay
             dimension={fieldDimension}
