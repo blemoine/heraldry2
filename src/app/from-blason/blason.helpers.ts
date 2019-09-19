@@ -134,6 +134,7 @@ function stringifyField(field: Field, shouldCapitalize: boolean): string {
       field.kind === 'lozengy' ||
       field.kind === 'paly-pily' ||
       field.kind === 'barry-pily' ||
+      field.kind === 'bendy-pily' ||
       field.kind === 'chequy' ||
       field.kind === 'chevronny'
     ) {
@@ -171,6 +172,8 @@ export function stringifyFieldKind(field: Field['kind']): string {
     return 'paly pily';
   } else if (field === 'barry-pily') {
     return 'barry pily';
+  } else if (field === 'bendy-pily') {
+    return 'bendy pily';
   } else if (field === 'chevronny') {
     return 'chevronny';
   } else {
@@ -357,6 +360,7 @@ export function isThereFur(blason: Blason, fur: Furs['name']): boolean {
       field.kind === 'lozengy' ||
       field.kind === 'paly-pily' ||
       field.kind === 'barry-pily' ||
+      field.kind === 'bendy-pily' ||
       field.kind === 'chevronny'
     ) {
       if (field.tinctures.some((t) => t.name === fur)) {

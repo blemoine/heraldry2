@@ -73,6 +73,7 @@ const language: Language = {
       P.alt(
         constStr('paly-pily', 'Paly pily'),
         constStr('barry-pily', 'Barry pily'),
+        constStr('bendy-pily', 'Bendy pily'),
         constStr('paly'),
 
         P.alt(constStr('chequy'), constStr('chequy', 'Checky')).desc('Chequy'),
