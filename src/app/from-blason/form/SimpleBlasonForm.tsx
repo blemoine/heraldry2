@@ -18,7 +18,13 @@ type Props = {
   blasonPath: SimpleBlasonPath | null;
   setBlasonPath: (path: SimpleBlasonPath | null) => void;
 };
-export function SimpleBlasonForm({ tinctureConfiguration, blason, blasonChange, blasonPath, setBlasonPath }: Props) {
+export const SimpleBlasonForm = React.memo(function SimpleBlasonForm({
+  tinctureConfiguration,
+  blason,
+  blasonChange,
+  blasonPath,
+  setBlasonPath,
+}: Props) {
   const fieldChange = useCallback(
     function fieldChange(field: Field) {
       blasonChange({ ...blason, field });
@@ -89,4 +95,4 @@ export function SimpleBlasonForm({ tinctureConfiguration, blason, blasonChange, 
       </Card>
     </Accordion>
   );
-}
+});

@@ -4,7 +4,6 @@ import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { PathFromBuilder } from '../../../common/PathFromBuilder';
 import { range } from '../../../../utils/range';
 import { toRadians } from '../../../svg-path-builder/geometrical.helper';
-import { identity3, mul, scale3, translation3 } from '../../../svg-path-builder/matrix';
 
 type Props = { fill: [string, string]; dimension: Dimension; number: number };
 export const GironnyDisplay = (props: Props) => {
@@ -27,15 +26,22 @@ export const GironnyDisplay = (props: Props) => {
 
       {range(0, props.number / 2).map((i) => {
         const angleInDegree = i * 2 * angleBetweenPart;
-        const scale =
-          (angleInDegree >= 90 && angleInDegree < 180) || angleInDegree >= 270
-            ? mul(
-                mul(translation3(width / 2, height / 2), scale3(2 * height / width, 2 * width / height)),
-                translation3(-width / 2, -height / 2)
-              )
-            : identity3();
-        const pathBuilder = basePath.transform(scale).rotate(center, angleInDegree);
-        return <PathFromBuilder key={i} pathBuilder={pathBuilder} fill={fill[1]} stroke="#333" />;
+
+        let pathBuilder: SvgPathBuilder;
+        if ((angleInDegree >= 90 && angleInDegree < 180) || angleInDegree >= 270) {
+          pathBuilder = basePath.scale([width / 2, height / 2], (2 * height) / width, (2 * width) / height);
+        } else {
+          pathBuilder = basePath;
+        }
+
+        return (
+          <PathFromBuilder
+            key={i}
+            pathBuilder={pathBuilder.rotate(center, angleInDegree)}
+            fill={fill[1]}
+            stroke="#333"
+          />
+        );
       })}
     </g>
   );

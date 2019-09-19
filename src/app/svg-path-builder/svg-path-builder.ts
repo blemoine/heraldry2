@@ -1,10 +1,10 @@
 import { cannotHappen } from '../../utils/cannot-happen';
-import { arePointEquivalent, PathAbsolutePoint, rotate, translate } from './geometrical.helper';
+import { arePointEquivalent, PathAbsolutePoint } from './geometrical.helper';
 import { pointOnEllipticalArc, pointOnQuadraticBezier } from './point-on-elliptical-arc';
 import { round } from '../../utils/round';
 import { raise, Result } from '../../utils/result';
 import { engrailBetweenPoint, indentBetweenPoint } from './line-style.helper';
-import {  Matrix3, mul, mulVec, scale3, translation3 } from './matrix';
+import { Matrix3, mul, mulVec, rotate3, scale3, translation3 } from './matrix';
 
 type MoveTo = { command: 'M'; point: PathAbsolutePoint };
 type GoToPoint = { command: 'L'; point: PathAbsolutePoint };
@@ -277,12 +277,17 @@ export class SvgPathBuilder {
   }
 
   verticalMirror(verticalLinePosition: number): SvgPathBuilder {
+    return this.scale([verticalLinePosition, 0], -1, 1);
+  }
+
+  scale(center: PathAbsolutePoint, scaleX: number, scaleY: number): SvgPathBuilder {
     return this.transform(
-      mul(mul(translation3(verticalLinePosition, 0), scale3(-1, 1)), translation3(-verticalLinePosition, 0))
+      mul(translation3(center[0], center[1]), scale3(scaleX, scaleY), translation3(-center[0], -center[1])),
+      true
     );
   }
 
-  transform(transformMatrix: Matrix3): SvgPathBuilder {
+  private transform(transformMatrix: Matrix3, sweepInversion: boolean): SvgPathBuilder {
     function transformPoint(p: PathAbsolutePoint): PathAbsolutePoint {
       const result = mulVec(transformMatrix, [p[0], p[1], 1]);
 
@@ -298,7 +303,7 @@ export class SvgPathBuilder {
             return {
               ...command,
               point: transformPoint(command.point),
-              sweepFlag: command.sweepFlag === 0 ? 1 : 0,
+              sweepFlag: sweepInversion ? (command.sweepFlag === 0 ? 1 : 0) : command.sweepFlag,
             };
           } else if (command.command === 'H') {
             const previousY = getY(this.commands.slice(0, i)) || 0;
@@ -331,78 +336,13 @@ export class SvgPathBuilder {
   }
 
   translate(translation: PathAbsolutePoint): SvgPathBuilder {
-    return new SvgPathBuilder(
-      this.commands.map(
-        (command): PathCommand => {
-          if (command.command === 'L' || command.command === 'A' || command.command === 'M') {
-            return { ...command, point: translate(command.point, translation) };
-          } else if (command.command === 'H') {
-            return { ...command, coordinate: command.coordinate + translation[0] };
-          } else if (command.command === 'V') {
-            return { ...command, coordinate: command.coordinate + translation[1] };
-          } else if (command.command === 'C') {
-            return {
-              ...command,
-              point: translate(command.point, translation),
-              controlPoints: [
-                translate(command.controlPoints[0], translation),
-                translate(command.controlPoints[1], translation),
-              ],
-            };
-          } else if (command.command === 'Q') {
-            return {
-              ...command,
-              point: translate(command.point, translation),
-              controlPoint: translate(command.controlPoint, translation),
-            };
-          } else if (command.command === 'Z') {
-            const x = getX([this.commands[0]]) || 0;
-            const y = getY([this.commands[0]]) || 0;
-            return { command: 'L', point: translate([x, y], translation) };
-          } else {
-            return cannotHappen(command);
-          }
-        }
-      )
-    );
+    return this.transform(translation3(translation[0], translation[1]), false);
   }
 
   rotate(center: PathAbsolutePoint, angleInDegree: number): SvgPathBuilder {
-    return new SvgPathBuilder(
-      this.commands.map(
-        (command, i): PathCommand => {
-          if (command.command === 'L' || command.command === 'A' || command.command === 'M') {
-            return { ...command, point: rotate(command.point, center, angleInDegree) };
-          } else if (command.command === 'H') {
-            const previousY = getY(this.commands.slice(0, i)) || 0;
-            return { command: 'L', point: rotate([command.coordinate, previousY], center, angleInDegree) };
-          } else if (command.command === 'V') {
-            const previousX = getX(this.commands.slice(0, i)) || 0;
-            return { command: 'L', point: rotate([previousX, command.coordinate], center, angleInDegree) };
-          } else if (command.command === 'C') {
-            return {
-              ...command,
-              point: rotate(command.point, center, angleInDegree),
-              controlPoints: [
-                rotate(command.controlPoints[0], center, angleInDegree),
-                rotate(command.controlPoints[1], center, angleInDegree),
-              ],
-            };
-          } else if (command.command === 'Q') {
-            return {
-              ...command,
-              point: rotate(command.point, center, angleInDegree),
-              controlPoint: rotate(command.controlPoint, center, angleInDegree),
-            };
-          } else if (command.command === 'Z') {
-            const x = getX([this.commands[0]]) || 0;
-            const y = getY([this.commands[0]]) || 0;
-            return { command: 'L', point: rotate([x, y], center, angleInDegree) };
-          } else {
-            return cannotHappen(command);
-          }
-        }
-      )
+    return this.transform(
+      mul(translation3(center[0], center[1]), rotate3(angleInDegree), translation3(-center[0], -center[1])),
+      false
     );
   }
 

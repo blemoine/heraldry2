@@ -196,7 +196,7 @@ describe('SvgPathBuilder', () => {
       .verticalMove(4)
       .translate([5, 6]);
 
-    expect(result.toPathAttribute()).toEqual('M 5 6 H8 V10');
+    expect(result.toPathAttribute()).toEqual('M 5 6 L 8 6 L 8 10');
   });
 
   it('should support concatenation of path', () => {
