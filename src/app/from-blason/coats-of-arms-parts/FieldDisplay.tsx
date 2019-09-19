@@ -23,6 +23,7 @@ import { ChevronnyDisplay } from './fields/ChevronnyDisplay';
 import { SimpleBlasonShape } from './blasonDisplay.helper';
 import { BendyPilyDisplay } from './fields/BendyPilyDisplay';
 import { BendyPilySinisterDisplay } from './fields/BendyPilySinisterDisplay';
+import { GironnyDisplay } from './fields/GironnyDisplay';
 
 type Props = {
   dimension: Dimension;
@@ -114,6 +115,9 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
   } else if (field.kind === 'chevronny') {
     const fill: [string, string] = fillFromTincturePair(field.tinctures);
     return <ChevronnyDisplay fill={fill} dimension={dimension} />;
+  } else if (field.kind === 'gironny') {
+    const fill: [string, string] = fillFromTincturePair(field.tinctures);
+    return <GironnyDisplay fill={fill} dimension={dimension} number={field.number} />;
   } else {
     return cannotHappen(field);
   }

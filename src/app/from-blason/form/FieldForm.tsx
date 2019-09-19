@@ -35,6 +35,8 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
         fieldChange({ kind: 'plain', tincture: newColors[0] });
       } else if (newKind === 'barry' || newKind === 'bendy' || newKind === 'bendySinister') {
         fieldChange({ kind: 'barry', number: 10, tinctures: newColors });
+      } else if (newKind === 'gironny') {
+        fieldChange({ kind: 'gironny', number: 8, tinctures: newColors });
       } else {
         cannotHappen(newKind);
       }
@@ -57,7 +59,8 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
       field.kind === 'barry-pily' ||
       field.kind === 'bendy-pily' ||
       field.kind === 'bendy-pily-sinister' ||
-      field.kind === 'chevronny'
+      field.kind === 'chevronny' ||
+      field.kind === 'gironny'
     ) {
       return field.tinctures;
     } else {
@@ -124,7 +127,8 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
             field.kind === 'bendy-pily' ||
             field.kind === 'bendy-pily-sinister' ||
             field.kind === 'chevronny' ||
-            field.kind === 'barry' ? (
+            field.kind === 'barry' ||
+            field.kind === 'gironny' ? (
             <>
               <div className="col">
                 <div className="form-group field-first-tincture-select">
@@ -150,6 +154,17 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
           ) : (
             cannotHappen(field)
           )}
+        </div>
+      )}
+
+      {field.kind === 'gironny' && (
+        <div className="form-group">
+          <label>Select the number</label>
+          <SelectScalar
+            options={[8, 12] as const}
+            value={field.number}
+            valueChange={(number) => fieldChange({ ...field, number })}
+          />
         </div>
       )}
 

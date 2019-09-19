@@ -25,11 +25,11 @@ export type BarryPilyField = {
 export type BendyPilyField = {
   kind: 'bendy-pily';
   tinctures: [Tincture, Tincture];
-}
+};
 export type BendyPilySinisterField = {
   kind: 'bendy-pily-sinister';
   tinctures: [Tincture, Tincture];
-}
+};
 export type BendyField = {
   kind: 'bendy';
   number: 6 | 8 | 10;
@@ -62,6 +62,12 @@ export type ChevronnyField = {
   tinctures: [Tincture, Tincture];
 };
 
+export type GironnyField = {
+  kind: 'gironny';
+  number: 8 | 12;
+  tinctures: [Tincture, Tincture];
+};
+
 export type Field =
   | PlainField
   | PartyField
@@ -75,7 +81,8 @@ export type Field =
   | BarryPilyField
   | BendyPilyField
   | BendyPilySinisterField
-  | ChevronnyField;
+  | ChevronnyField
+  | GironnyField;
 export const fieldKinds: Array<Field['kind']> = [
   'plain',
   'bendy',
@@ -90,4 +97,5 @@ export const fieldKinds: Array<Field['kind']> = [
   'bendy-pily',
   'bendy-pily-sinister',
   'chevronny',
+  'gironny',
 ];
