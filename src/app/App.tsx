@@ -16,23 +16,32 @@ import { stringifyBlason } from './from-blason/blason.helpers';
 const baseDefaultBlason: Blason = { kind: 'simple', field: { kind: 'plain', tincture: gules } } as const;
 const configurationLocalStorageKey = 'configuration#1';
 
-type Props = { location: H.Location; history: H.History };
-const InnerApp = ({ location, history }: Props) => {
-  const [pageState, setPageState] = useState(defaultPageState);
-
+function useBlasonFromUrl(location: H.Location, history: H.History): [Blason, (blason: Blason) => void] {
   const urlParams = new URLSearchParams(location.search);
   const urlBlason = urlParams.get('blason');
-  const blason = urlBlason ? parseBlason(urlBlason) : baseDefaultBlason;
+  const blason = React.useMemo(() => (urlBlason ? parseBlason(urlBlason) : baseDefaultBlason), [urlBlason]);
   if ('error' in blason) {
     // TODO display that correctly
     throw new Error(`Unsupported blason ${blason.error}`);
   }
-  function setBlason(blason: Blason) {
-    const blasonStr = stringifyBlason(blason);
-    history.push({
-      search: '?blason=' + blasonStr,
-    });
-  }
+  const setBlason = React.useCallback(
+    function setBlason(blason: Blason) {
+      const blasonStr = stringifyBlason(blason);
+      history.push({
+        search: '?blason=' + blasonStr,
+      });
+    },
+    [history]
+  );
+
+  return [blason, setBlason];
+}
+
+type Props = { location: H.Location; history: H.History };
+const InnerApp = ({ location, history }: Props) => {
+  const [pageState, setPageState] = useState(defaultPageState);
+
+  const [blason, setBlason] = useBlasonFromUrl(location, history);
 
   const [configuration, setConfiguration] = useLocalStorage<Configuration>(configurationLocalStorageKey, {
     shieldShape: 'heater',

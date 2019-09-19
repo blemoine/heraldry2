@@ -40,3 +40,7 @@ Faire le "of the last"
 - going to quarterly is a slow click
 - gerer le onclick sur le form pour le deplier apres la prise de control 
 - Factoriser intelligemment le dessin des paths dans les charges (repetition du onClick et du cursor pointer)
+-  Per bend en quarterly est pas centré
+- Per bend en bordure est pas centré
+- Gyronny + bordre pas centré
+- Field select "bendy" et "bendy sinister" doesn't work
