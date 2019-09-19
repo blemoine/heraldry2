@@ -11,8 +11,9 @@ type Props = {
   dimension: Dimension;
   shape: SimpleBlasonShape;
   fillFromTincture: (tincture: Tincture) => string;
+  onClick: () => void;
 };
-export const LionDisplay = ({ charge, dimension, fillFromTincture, shape }: Props) => {
+export const LionDisplay = ({ charge, dimension, fillFromTincture, shape, onClick }: Props) => {
   const { count, disposition } = charge.countAndDisposition;
   const { cellWidth, cellHeight, positions } = getChargePositions(count, disposition, shape);
   const { width, height } = dimension;
@@ -28,7 +29,12 @@ export const LionDisplay = ({ charge, dimension, fillFromTincture, shape }: Prop
             key={idx}
             transform={`translate(${centerX - computedDimension.width / 2} ${centerY - computedDimension.height / 2} )`}
           >
-            <UnitLionDisplay charge={charge} dimension={computedDimension} fillFromTincture={fillFromTincture} />
+            <UnitLionDisplay
+              charge={charge}
+              dimension={computedDimension}
+              fillFromTincture={fillFromTincture}
+              onClick={onClick}
+            />
           </g>
         );
       })}

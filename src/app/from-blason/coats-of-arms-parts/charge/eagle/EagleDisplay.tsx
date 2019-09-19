@@ -11,6 +11,7 @@ type Props = {
   dimension: Dimension;
   shape: SimpleBlasonShape;
   fillFromTincture: (tincture: Tincture) => string;
+  onClick: () => void;
 };
 export const EagleDisplay = (props: Props) => {
   const charge = props.charge;
@@ -44,6 +45,7 @@ export const EagleDisplay = (props: Props) => {
               mainFill={mainFill}
               tongueFill={tongueFill}
               talonFill={talonFill}
+              onClick={props.onClick}
             />
           </g>
         );

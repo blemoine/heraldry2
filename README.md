@@ -39,4 +39,4 @@ Faire le "of the last"
 - use Collapse pour la configuration
 - going to quarterly is a slow click
 - gerer le onclick sur le form pour le deplier apres la prise de control 
-
+- Factoriser intelligemment le dessin des paths dans les charges (repetition du onClick et du cursor pointer)

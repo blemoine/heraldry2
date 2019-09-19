@@ -7,11 +7,12 @@ const SvgFleurDeLys = ({
   dimension,
   stroke,
   mainFill,
+  onClick,
 }: {
   dimension: Dimension;
-
   stroke: string;
   mainFill: string;
+  onClick: () => void;
 }) => {
   const leftPart = SvgPathBuilder.start([22.23, 169.17])
     .relativeArcTo([7.88, -64.69], { radius: 33.383, xAxisRotation: 0.17, sweep: 1 })
@@ -71,10 +72,10 @@ const SvgFleurDeLys = ({
       strokeLinecap="square"
       strokeMiterlimit={3}
     >
-      <PathFromBuilder pathBuilder={leftPart} fill={mainFill} stroke={stroke} />
-      <PathFromBuilder pathBuilder={rightPart} fill={mainFill} stroke={stroke} />
-      <PathFromBuilder pathBuilder={verticalMiddlePart} fill={mainFill} stroke={stroke} />
-      <PathFromBuilder pathBuilder={middlePart} fill={mainFill} stroke={stroke} />
+      <PathFromBuilder pathBuilder={leftPart} fill={mainFill} stroke={stroke} onClick={onClick} style={{cursor:'pointer'}}/>
+      <PathFromBuilder pathBuilder={rightPart} fill={mainFill} stroke={stroke} onClick={onClick} style={{cursor:'pointer'}}/>
+      <PathFromBuilder pathBuilder={verticalMiddlePart} fill={mainFill} stroke={stroke} onClick={onClick} style={{cursor:'pointer'}}/>
+      <PathFromBuilder pathBuilder={middlePart} fill={mainFill} stroke={stroke} onClick={onClick} style={{cursor:'pointer'}}/>
     </svg>
   );
 };

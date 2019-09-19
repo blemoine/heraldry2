@@ -17,24 +17,79 @@ type Props = {
   dimension: Dimension;
   shape: SimpleBlasonShape;
   fillFromTincture: (tincture: Tincture) => string;
+  onClick: () => void;
 };
-export const ChargeDisplay = ({ charge, dimension, fillFromTincture, shape }: Props) => {
+export const ChargeDisplay = ({ charge, dimension, fillFromTincture, shape, onClick }: Props) => {
   if (charge.name === 'lion') {
-    return <LionDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} shape={shape} />;
+    return (
+      <LionDisplay
+        charge={charge}
+        dimension={dimension}
+        fillFromTincture={fillFromTincture}
+        shape={shape}
+        onClick={onClick}
+      />
+    );
   } else if (charge.name === 'eagle') {
-    return <EagleDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} shape={shape} />;
+    return (
+      <EagleDisplay
+        charge={charge}
+        dimension={dimension}
+        fillFromTincture={fillFromTincture}
+        shape={shape}
+        onClick={onClick}
+      />
+    );
   } else if (charge.name === 'fleurdelys') {
     return (
-      <FleurDeLysDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} shape={shape} />
+      <FleurDeLysDisplay
+        charge={charge}
+        dimension={dimension}
+        fillFromTincture={fillFromTincture}
+        shape={shape}
+        onClick={onClick}
+      />
     );
   } else if (charge.name === 'roundel') {
-    return <RoundelDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} shape={shape} />;
+    return (
+      <RoundelDisplay
+        charge={charge}
+        dimension={dimension}
+        fillFromTincture={fillFromTincture}
+        shape={shape}
+        onClick={onClick}
+      />
+    );
   } else if (charge.name === 'lozenge') {
-    return <LozengeDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} shape={shape} />;
+    return (
+      <LozengeDisplay
+        charge={charge}
+        dimension={dimension}
+        fillFromTincture={fillFromTincture}
+        shape={shape}
+        onClick={onClick}
+      />
+    );
   } else if (charge.name === 'cross') {
-    return <CrossDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} shape={shape} />;
+    return (
+      <CrossDisplay
+        charge={charge}
+        dimension={dimension}
+        fillFromTincture={fillFromTincture}
+        shape={shape}
+        onClick={onClick}
+      />
+    );
   } else if (charge.name === 'mullet') {
-    return <MulletDisplay charge={charge} dimension={dimension} fillFromTincture={fillFromTincture} shape={shape} />;
+    return (
+      <MulletDisplay
+        charge={charge}
+        dimension={dimension}
+        fillFromTincture={fillFromTincture}
+        shape={shape}
+        onClick={onClick}
+      />
+    );
   } else {
     return cannotHappen(charge);
   }

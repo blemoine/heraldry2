@@ -16,8 +16,9 @@ type Props = {
   dimension: Dimension;
   shape: SimpleBlasonShape;
   fillFromTincture: (tincture: Tincture) => string;
+  onClick: () => void;
 };
-export const MulletDisplay = ({ charge, dimension: { width, height }, fillFromTincture, shape }: Props) => {
+export const MulletDisplay = ({ charge, dimension: { width, height }, fillFromTincture, shape, onClick }: Props) => {
   const stroke = charge.tincture.name === 'sable' ? '#777' : '#000';
   const fill = fillFromTincture(charge.tincture);
 
@@ -54,7 +55,16 @@ export const MulletDisplay = ({ charge, dimension: { width, height }, fillFromTi
 
         const pathBuilder = star.translate([centerX, centerY]);
         if (charge.inside === 'nothing') {
-          return <PathFromBuilder key={i} pathBuilder={pathBuilder} stroke={stroke} fill={fill} />;
+          return (
+            <PathFromBuilder
+              key={i}
+              pathBuilder={pathBuilder}
+              stroke={stroke}
+              fill={fill}
+              onClick={onClick}
+              style={{ cursor: 'pointer' }}
+            />
+          );
         } else if (charge.inside === 'pierced') {
           const innerRadius = externalRadius * 0.1;
           const voidedPathBuilder = pathBuilder
@@ -63,7 +73,15 @@ export const MulletDisplay = ({ charge, dimension: { width, height }, fillFromTi
             .arcTo([centerX, centerY - innerRadius], { radius: innerRadius });
 
           return (
-            <PathFromBuilder key={i} pathBuilder={voidedPathBuilder} stroke={stroke} fill={fill} fillRule="evenodd" />
+            <PathFromBuilder
+              key={i}
+              pathBuilder={voidedPathBuilder}
+              stroke={stroke}
+              fill={fill}
+              fillRule="evenodd"
+              onClick={onClick}
+              style={{ cursor: 'pointer' }}
+            />
           );
         } else {
           return cannotHappen(charge.inside);

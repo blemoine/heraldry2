@@ -20,8 +20,9 @@ type Props = {
   dimension: Dimension;
   shape: SimpleBlasonShape;
   fillFromTincture: (tincture: Tincture) => string;
+  onClick: () => void;
 };
-export const CrossDisplay = ({ charge, dimension: { width, height }, fillFromTincture, shape }: Props) => {
+export const CrossDisplay = ({ charge, dimension: { width, height }, fillFromTincture, shape, onClick }: Props) => {
   const stroke = charge.tincture.name === 'sable' ? '#777' : '#000';
   const fill = fillFromTincture(charge.tincture);
 
@@ -43,6 +44,7 @@ export const CrossDisplay = ({ charge, dimension: { width, height }, fillFromTin
               center={center}
               crossWidth={crossWidth}
               crossRadius={radius}
+              onClick={onClick}
             />
           );
         } else if (charge.limbs === 'bottony') {
@@ -54,6 +56,7 @@ export const CrossDisplay = ({ charge, dimension: { width, height }, fillFromTin
               center={center}
               crossWidth={crossWidth}
               crossRadius={radius}
+              onClick={onClick}
             />
           );
         } else if (charge.limbs === 'cercelée') {
@@ -65,6 +68,7 @@ export const CrossDisplay = ({ charge, dimension: { width, height }, fillFromTin
               center={center}
               crossWidth={crossWidth}
               crossRadius={radius * 0.85}
+              onClick={onClick}
             />
           );
         } else if (charge.limbs === 'moline') {
@@ -76,6 +80,7 @@ export const CrossDisplay = ({ charge, dimension: { width, height }, fillFromTin
               center={center}
               crossWidth={crossWidth}
               crossRadius={radius * 0.85}
+              onClick={onClick}
             />
           );
         } else if (charge.limbs === 'potent') {
@@ -87,6 +92,7 @@ export const CrossDisplay = ({ charge, dimension: { width, height }, fillFromTin
               center={center}
               crossWidth={crossWidth}
               crossRadius={radius}
+              onClick={onClick}
             />
           );
         } else if (charge.limbs === 'pattée') {
@@ -98,6 +104,7 @@ export const CrossDisplay = ({ charge, dimension: { width, height }, fillFromTin
               center={center}
               crossWidth={crossWidth}
               crossRadius={radius}
+              onClick={onClick}
             />
           );
         } else if (charge.limbs === 'crosselet') {
@@ -109,6 +116,7 @@ export const CrossDisplay = ({ charge, dimension: { width, height }, fillFromTin
               center={center}
               crossWidth={crossWidth * 0.7}
               crossRadius={radius}
+              onClick={onClick}
             />
           );
         } else if (charge.limbs === 'maltese') {
@@ -120,6 +128,7 @@ export const CrossDisplay = ({ charge, dimension: { width, height }, fillFromTin
               center={center}
               crossWidth={crossWidth * 0.7}
               crossRadius={radius}
+              onClick={onClick}
             />
           );
         } else if (charge.limbs === 'flory') {
@@ -131,6 +140,7 @@ export const CrossDisplay = ({ charge, dimension: { width, height }, fillFromTin
               center={center}
               crossWidth={crossWidth}
               crossRadius={radius}
+              onClick={onClick}
             />
           );
         } else {

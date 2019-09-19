@@ -13,8 +13,9 @@ type Props = {
   dimension: Dimension;
   shape: SimpleBlasonShape;
   fillFromTincture: (tincture: Tincture) => string;
+  onClick: () => void;
 };
-export const RoundelDisplay = ({ charge, dimension, fillFromTincture, shape }: Props) => {
+export const RoundelDisplay = ({ charge, dimension, fillFromTincture, shape, onClick }: Props) => {
   const { width, height } = dimension;
   const stroke = charge.tincture.name === 'sable' ? '#777' : '#000';
   const fill = fillFromTincture(charge.tincture);
@@ -38,9 +39,30 @@ export const RoundelDisplay = ({ charge, dimension, fillFromTincture, shape }: P
             .arcTo([centerX, centerY + innerRadius], { radius: innerRadius })
             .arcTo([centerX, centerY - innerRadius], { radius: innerRadius });
 
-          return <PathFromBuilder key={i} pathBuilder={pathBuilder} stroke={stroke} fill={fill} fillRule="evenodd" />;
+          return (
+            <PathFromBuilder
+              key={i}
+              pathBuilder={pathBuilder}
+              stroke={stroke}
+              fill={fill}
+              fillRule="evenodd"
+              onClick={onClick}
+              style={{ cursor: 'pointer' }}
+            />
+          );
         } else if (charge.inside === 'nothing') {
-          return <circle key={i} cx={centerX} cy={centerY} r={radius} stroke={stroke} fill={fill} />;
+          return (
+            <circle
+              key={i}
+              cx={centerX}
+              cy={centerY}
+              r={radius}
+              stroke={stroke}
+              fill={fill}
+              onClick={onClick}
+              style={{ cursor: 'pointer' }}
+            />
+          );
         } else {
           return cannotHappen(charge.inside);
         }

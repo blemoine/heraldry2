@@ -8,8 +8,9 @@ type Props = {
   center: readonly [number, number];
   crossWidth: number;
   crossRadius: number;
+  onClick: () => void;
 };
-export const CrossPatty = ({ fill, stroke, center, crossWidth, crossRadius }: Props) => {
+export const CrossPatty = ({ fill, stroke, center, crossWidth, crossRadius, onClick }: Props) => {
   const [centerX, centerY] = center;
 
   const wideFactor = 6;
@@ -24,5 +25,5 @@ export const CrossPatty = ({ fill, stroke, center, crossWidth, crossRadius }: Pr
       [centerX + crossWidth, (centerY - crossWidth + (centerY - crossRadius)) / 2]
     );
 
-  return <CrossFromLimb topLimb={topLimb} center={center} fill={fill} stroke={stroke} />;
+  return <CrossFromLimb topLimb={topLimb} center={center} fill={fill} stroke={stroke} onClick={onClick} />;
 };

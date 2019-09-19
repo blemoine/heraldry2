@@ -8,8 +8,9 @@ type Props = {
   center: readonly [number, number];
   crossWidth: number;
   crossRadius: number;
+  onClick: () => void;
 };
-export const CrossMoline = ({ fill, stroke, center, crossWidth, crossRadius }: Props) => {
+export const CrossMoline = ({ fill, stroke, center, crossWidth, crossRadius, onClick }: Props) => {
   const [centerX, centerY] = center;
   const wideFactor = 3;
   const topRadius = 2 * crossWidth;
@@ -24,5 +25,5 @@ export const CrossMoline = ({ fill, stroke, center, crossWidth, crossRadius }: P
     .arcTo([centerX + crossWidth, centerY - crossRadius + 2 * crossWidth], { radius: bottomRadius })
     .verticalMove(limbLength);
 
-  return <CrossFromLimb topLimb={topLimb} center={center} fill={fill} stroke={stroke} />;
+  return <CrossFromLimb topLimb={topLimb} center={center} fill={fill} stroke={stroke} onClick={onClick} />;
 };

@@ -8,8 +8,9 @@ type Props = {
   center: readonly [number, number];
   crossWidth: number;
   crossRadius: number;
+  onClick: () => void;
 };
-export const CrossCercelee = ({ fill, stroke, center, crossWidth, crossRadius }: Props) => {
+export const CrossCercelee = ({ fill, stroke, center, crossWidth, crossRadius, onClick }: Props) => {
   const [centerX, centerY] = center;
   const wideFactor = 5;
 
@@ -23,5 +24,5 @@ export const CrossCercelee = ({ fill, stroke, center, crossWidth, crossRadius }:
     .arcTo([centerX + crossWidth, centerY - crossRadius + 2 * crossWidth], { radius: bottomRadius })
     .goTo([centerX + crossWidth, centerY - crossWidth]);
 
-  return <CrossFromLimb topLimb={topLimb} center={center} fill={fill} stroke={stroke} />;
+  return <CrossFromLimb topLimb={topLimb} center={center} fill={fill} stroke={stroke} onClick={onClick} />;
 };

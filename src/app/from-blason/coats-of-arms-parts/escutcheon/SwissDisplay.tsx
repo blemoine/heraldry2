@@ -7,7 +7,9 @@ type Props = { dimension: Dimension };
 export const SwissDisplay: React.FunctionComponent<Props> = ({ dimension }) => {
   const pathBuilder = swissPathBuilder(dimension, null);
 
-  return <PathFromBuilder pathBuilder={pathBuilder} fill="transparent" stroke="#333" style={{ pointerEvents: 'none' }} />;
+  return (
+    <PathFromBuilder pathBuilder={pathBuilder} fill="transparent" stroke="#333" style={{ pointerEvents: 'none' }} />
+  );
 };
 
 export function swissPathBuilder({ width, height }: Dimension, lineOptions: LineOptions | null): SvgPathBuilder {

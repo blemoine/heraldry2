@@ -8,8 +8,9 @@ type Props = {
   center: readonly [number, number];
   crossWidth: number;
   crossRadius: number;
+  onClick: () => void;
 };
-export const CrossHummetty = ({ fill, stroke, center, crossWidth, crossRadius }: Props) => {
+export const CrossHummetty = ({ fill, stroke, center, crossWidth, crossRadius, onClick }: Props) => {
   const [centerX, centerY] = center;
 
   const topLimb = SvgPathBuilder.start([centerX - crossWidth, centerY - crossWidth])
@@ -17,5 +18,5 @@ export const CrossHummetty = ({ fill, stroke, center, crossWidth, crossRadius }:
     .goTo([centerX + crossWidth, centerY - crossRadius])
     .goTo([centerX + crossWidth, centerY - crossWidth]);
 
-  return <CrossFromLimb topLimb={topLimb} center={center} fill={fill} stroke={stroke} />;
+  return <CrossFromLimb topLimb={topLimb} center={center} fill={fill} stroke={stroke} onClick={onClick} />;
 };

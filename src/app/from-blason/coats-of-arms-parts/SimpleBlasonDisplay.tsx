@@ -82,6 +82,7 @@ export const SimpleBlasonDisplay = ({
               charge={blason.charge}
               shape={shape}
               fillFromTincture={fillFromTincture}
+              onClick={() => selectBlasonPart('charge')}
             />
           </GWrapper>
         </g>

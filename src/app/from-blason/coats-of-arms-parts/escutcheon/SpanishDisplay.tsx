@@ -7,7 +7,9 @@ type Props = { dimension: Dimension };
 export const SpanishDisplay = ({ dimension }: Props) => {
   const pathBuilder = spanishPathBuilder(dimension, null);
 
-  return <PathFromBuilder pathBuilder={pathBuilder} fill="transparent" stroke="#333" style={{ pointerEvents: 'none' }} />;
+  return (
+    <PathFromBuilder pathBuilder={pathBuilder} fill="transparent" stroke="#333" style={{ pointerEvents: 'none' }} />
+  );
 };
 export function spanishPathBuilder({ width, height }: Dimension, lineOptions: LineOptions | null): SvgPathBuilder {
   return SvgPathBuilder.start([0, 0])

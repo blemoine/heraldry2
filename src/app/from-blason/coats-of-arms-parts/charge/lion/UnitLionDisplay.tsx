@@ -20,12 +20,13 @@ type Props = {
   charge: Lion;
   dimension: Dimension;
   fillFromTincture: (tincture: Tincture) => string;
+  onClick: () => void;
 };
-export const UnitLionDisplay = ({ charge, dimension, fillFromTincture }: Props) => {
+export const UnitLionDisplay = ({ charge, dimension, fillFromTincture, onClick }: Props) => {
   const armedAndLanguedFill = fillFromTincture(charge.armedAndLangued);
   const mainFill = fillFromTincture(charge.tincture);
   const stroke = charge.tincture.name === 'sable' ? '#777' : '#000';
-  const head = lionHead(charge.head, armedAndLanguedFill, mainFill, stroke);
+  const head = lionHead(charge.head, armedAndLanguedFill, mainFill, stroke, onClick);
   if (charge.attitude === 'rampant') {
     return (
       <SvgLionRampant
@@ -34,6 +35,7 @@ export const UnitLionDisplay = ({ charge, dimension, fillFromTincture }: Props) 
         head={head}
         clawFill={armedAndLanguedFill}
         stroke={stroke}
+        onClick={onClick}
       />
     );
   } else if (charge.attitude === 'passant') {
@@ -44,6 +46,7 @@ export const UnitLionDisplay = ({ charge, dimension, fillFromTincture }: Props) 
         head={head}
         clawFill={armedAndLanguedFill}
         stroke={stroke}
+        onClick={onClick}
       />
     );
   } else if (charge.attitude === 'statant') {
@@ -54,6 +57,7 @@ export const UnitLionDisplay = ({ charge, dimension, fillFromTincture }: Props) 
         head={head}
         clawFill={armedAndLanguedFill}
         stroke={stroke}
+        onClick={onClick}
       />
     );
   } else if (charge.attitude === 'salient') {
@@ -64,6 +68,7 @@ export const UnitLionDisplay = ({ charge, dimension, fillFromTincture }: Props) 
         head={head}
         clawFill={armedAndLanguedFill}
         stroke={stroke}
+        onClick={onClick}
       />
     );
   } else if (charge.attitude === 'sejant') {
@@ -74,6 +79,7 @@ export const UnitLionDisplay = ({ charge, dimension, fillFromTincture }: Props) 
         head={head}
         clawFill={armedAndLanguedFill}
         stroke={stroke}
+        onClick={onClick}
       />
     );
   } else if (charge.attitude === 'sejant-erect') {
@@ -84,6 +90,7 @@ export const UnitLionDisplay = ({ charge, dimension, fillFromTincture }: Props) 
         head={head}
         clawFill={armedAndLanguedFill}
         stroke={stroke}
+        onClick={onClick}
       />
     );
   } else if (charge.attitude === 'couchant') {
@@ -94,22 +101,41 @@ export const UnitLionDisplay = ({ charge, dimension, fillFromTincture }: Props) 
         head={head}
         clawFill={armedAndLanguedFill}
         stroke={stroke}
+        onClick={onClick}
       />
     );
   } else if (charge.attitude === 'dormant') {
-    return <SvgLionDormant dimension={dimension} stroke={stroke} mainFill={mainFill} clawFill={armedAndLanguedFill} />;
+    return (
+      <SvgLionDormant
+        dimension={dimension}
+        stroke={stroke}
+        mainFill={mainFill}
+        clawFill={armedAndLanguedFill}
+        onClick={onClick}
+      />
+    );
   } else {
     return cannotHappen(charge.attitude);
   }
 };
 
-function lionHead(head: LionHead | null, armedAndLanguedFill: string, mainFill: string, stroke: string): ReactNode {
+function lionHead(
+  head: LionHead | null,
+  armedAndLanguedFill: string,
+  mainFill: string,
+  stroke: string,
+  onClick: () => void
+): ReactNode {
   if (head === null) {
-    return <DefaultLionHead tongueFill={armedAndLanguedFill} mainFill={mainFill} stroke={stroke} />;
+    return <DefaultLionHead tongueFill={armedAndLanguedFill} mainFill={mainFill} stroke={stroke} onClick={onClick} />;
   } else if (head === 'guardant') {
-    return <SvgGuardantLionHead tongueFill={armedAndLanguedFill} mainFill={mainFill} stroke={stroke} />;
+    return (
+      <SvgGuardantLionHead tongueFill={armedAndLanguedFill} mainFill={mainFill} stroke={stroke} onClick={onClick} />
+    );
   } else if (head === 'regardant') {
-    return <SvgRegardantLionHead tongueFill={armedAndLanguedFill} mainFill={mainFill} stroke={stroke} />;
+    return (
+      <SvgRegardantLionHead tongueFill={armedAndLanguedFill} mainFill={mainFill} stroke={stroke} onClick={onClick} />
+    );
   } else {
     return cannotHappen(head);
   }

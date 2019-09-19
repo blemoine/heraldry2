@@ -11,8 +11,9 @@ type Props = {
   dimension: Dimension;
   shape: SimpleBlasonShape;
   fillFromTincture: (tincture: Tincture) => string;
+  onClick: () => void;
 };
-export const FleurDeLysDisplay = ({ charge, dimension, fillFromTincture, shape }: Props) => {
+export const FleurDeLysDisplay = ({ charge, dimension, fillFromTincture, shape, onClick }: Props) => {
   const { width, height } = dimension;
   const stroke = charge.tincture.name === 'sable' ? '#777' : '#000';
   const fill = fillFromTincture(charge.tincture);
@@ -29,7 +30,7 @@ export const FleurDeLysDisplay = ({ charge, dimension, fillFromTincture, shape }
             transform={`translate(${cx * width - computedDimension.width / 2} ${cy * height -
               computedDimension.height / 2})`}
           >
-            <SvgFleurDeLys dimension={computedDimension} stroke={stroke} mainFill={fill} />;
+            <SvgFleurDeLys dimension={computedDimension} stroke={stroke} mainFill={fill} onClick={onClick} />;
           </g>
         );
       })}
