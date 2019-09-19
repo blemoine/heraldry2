@@ -22,6 +22,7 @@ import { BarryPilyDisplay } from './fields/BarryPilyDisplay';
 import { ChevronnyDisplay } from './fields/ChevronnyDisplay';
 import { SimpleBlasonShape } from './blasonDisplay.helper';
 import { BendyPilyDisplay } from './fields/BendyPilyDisplay';
+import { BendyPilySinisterDisplay } from './fields/BendyPilySinisterDisplay';
 
 type Props = {
   dimension: Dimension;
@@ -107,6 +108,9 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
   } else if (field.kind === 'bendy-pily') {
     const fill: [string, string] = fillFromTincturePair(field.tinctures);
     return <BendyPilyDisplay fill={fill} dimension={dimension} />;
+  } else if (field.kind === 'bendy-pily-sinister') {
+    const fill: [string, string] = fillFromTincturePair(field.tinctures);
+    return <BendyPilySinisterDisplay fill={fill} dimension={dimension} />;
   } else if (field.kind === 'chevronny') {
     const fill: [string, string] = fillFromTincturePair(field.tinctures);
     return <ChevronnyDisplay fill={fill} dimension={dimension} />;

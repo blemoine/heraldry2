@@ -130,7 +130,7 @@ describe('parseBlason', () => {
 
 Expected one of the following: 
 
-Argent, Azure, Barry, Barry pily, Bendy, Bendy Sinister, Bendy pily, Chequy, Chevronny, Counter ermine, Counter potent, Counter vair, Ermine, Erminois, Gules, Lozengy, Murrey, Or, Paly, Paly pily, Pean, Per, Potent, Potent en pale, Potent en point, Purpure, Quarterly, Sable, Sanguine, Tenné, Vair, Vair en pale, Vair en point, Vert
+Argent, Azure, Barry, Barry pily, Bendy, Bendy Sinister, Bendy pily, Bendy pily sinister, Chequy, Chevronny, Counter ermine, Counter potent, Counter vair, Ermine, Erminois, Gules, Lozengy, Murrey, Or, Paly, Paly pily, Pean, Per, Potent, Potent en pale, Potent en point, Purpure, Quarterly, Sable, Sanguine, Tenné, Vair, Vair en pale, Vair en point, Vert
 `,
     });
   });
@@ -322,6 +322,11 @@ Argent, Azure, Barry, Barry pily, Bendy, Bendy Sinister, Bendy pily, Chequy, Che
   it('should parse Bendy pily', () => {
     const expected: Blason = { kind: 'simple', field: { kind: 'bendy-pily', tinctures: [gules, azure] } };
     expect(parseBlason('Bendy pily gules and azure')).toEqual(expected);
+  });
+
+  it('should parse Bendy pily sinister', () => {
+    const expected: Blason = { kind: 'simple', field: { kind: 'bendy-pily-sinister', tinctures: [or, azure] } };
+    expect(parseBlason('Bendy pily sinister or and azure')).toEqual(expected);
   });
 
   it('should parse  Counter ermine and vair en point', () => {

@@ -27,6 +27,7 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
         newKind === 'lozengy' ||
         newKind === 'barry-pily' ||
         newKind === 'bendy-pily' ||
+        newKind === 'bendy-pily-sinister' ||
         newKind === 'chevronny'
       ) {
         fieldChange({ kind: newKind, tinctures: newColors });
@@ -55,6 +56,7 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
       field.kind === 'paly-pily' ||
       field.kind === 'barry-pily' ||
       field.kind === 'bendy-pily' ||
+      field.kind === 'bendy-pily-sinister' ||
       field.kind === 'chevronny'
     ) {
       return field.tinctures;
@@ -120,6 +122,7 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
             field.kind === 'paly-pily' ||
             field.kind === 'barry-pily' ||
             field.kind === 'bendy-pily' ||
+            field.kind === 'bendy-pily-sinister' ||
             field.kind === 'chevronny' ||
             field.kind === 'barry' ? (
             <>
