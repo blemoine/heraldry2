@@ -35,7 +35,10 @@ export const SimpleBlasonDisplay = ({
 
   const baseVerticalOffset = ordinary ? getFieldVerticalOffset(ordinary) : 0;
   const fieldHeightScale = 1 - baseVerticalOffset;
-  const fieldDimension = { width, height: height * fieldHeightScale };
+
+  const baseHorizontalOffset = ordinary ? getFieldHorizontalOffset(ordinary) : 0;
+  const fieldWidthScale = 1 - 2 * baseHorizontalOffset;
+  const fieldDimension = { width: width * fieldWidthScale, height: height * fieldHeightScale };
 
   const { horizontalScale, verticalScale, horizontalOffset, verticalOffset } = getChargeDimension(blason, shape);
 
@@ -48,7 +51,7 @@ export const SimpleBlasonDisplay = ({
         style={{ cursor: 'pointer' }}
         onClick={() => selectBlasonPart('field')}
       >
-        <GWrapper translate={[0, baseVerticalOffset * height]}>
+        <GWrapper translate={[baseHorizontalOffset * width, baseVerticalOffset * height]}>
           <FieldDisplay
             dimension={fieldDimension}
             field={blason.field}
@@ -76,7 +79,7 @@ export const SimpleBlasonDisplay = ({
           <GWrapper translate={[horizontalOffset * width, (baseVerticalOffset + verticalOffset) * height]}>
             <ChargeDisplay
               dimension={{
-                width: horizontalScale * fieldDimension.width,
+                width: horizontalScale * width,
                 height: verticalScale * fieldDimension.height,
               }}
               charge={blason.charge}
@@ -100,6 +103,18 @@ const GWrapper: React.FunctionComponent<GWrapperProps> = (props) => {
     return <>{props.children}</>;
   }
 };
+
+function getFieldHorizontalOffset(ordinary: Ordinary): number {
+  if (ordinary.name === 'bordure') {
+    if (ordinary.line === 'engrailed') {
+      return 6 / 100;
+    } else {
+      return 10 / 100;
+    }
+  } else {
+    return 0;
+  }
+}
 
 function getFieldVerticalOffset(ordinary: Ordinary): number {
   if (ordinary.name === 'chief') {
