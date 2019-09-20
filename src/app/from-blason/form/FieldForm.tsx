@@ -19,7 +19,7 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
     if (field.kind !== newKind) {
       const newColors = extractColors(field);
       if (newKind === 'party') {
-        fieldChange({ kind: 'party', per: { name: 'fess', tinctures: newColors, line: 'straight' } });
+        fieldChange({ kind: newKind, per: { name: 'fess', tinctures: newColors, line: 'straight' } });
       } else if (
         newKind === 'paly' ||
         newKind === 'paly-pily' ||
@@ -32,11 +32,11 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
       ) {
         fieldChange({ kind: newKind, tinctures: newColors });
       } else if (newKind === 'plain') {
-        fieldChange({ kind: 'plain', tincture: newColors[0] });
+        fieldChange({ kind: newKind, tincture: newColors[0] });
       } else if (newKind === 'barry' || newKind === 'bendy' || newKind === 'bendySinister') {
-        fieldChange({ kind: 'barry', number: 10, tinctures: newColors });
+        fieldChange({ kind: newKind, number: 10, tinctures: newColors });
       } else if (newKind === 'gironny') {
-        fieldChange({ kind: 'gironny', number: 8, tinctures: newColors });
+        fieldChange({ kind: newKind, number: 8, tinctures: newColors });
       } else {
         cannotHappen(newKind);
       }

@@ -43,4 +43,3 @@ Faire le "of the last"
 -  Per bend en quarterly est pas centré
 - Per bend en bordure est pas centré
 - Gyronny + bordre pas centré
-- Field select "bendy" et "bendy sinister" doesn't work
