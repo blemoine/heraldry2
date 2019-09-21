@@ -65,9 +65,9 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
     if (shape === 'default') {
       updatedDimension = dimension;
     } else if (shape === 'square' || shape === 'rightCut') {
-      updatedDimension = { width: dimension.width, height: dimension.height * 1.2 };
+      updatedDimension = { width: dimension.width, height: dimension.height * 1.4 };
     } else if (shape === 'leftCut') {
-      updatedDimension = { width: dimension.width, height: dimension.height * 0.87 };
+      updatedDimension = { width: dimension.width, height: dimension.height * 0.68 };
     } else {
       return cannotHappen(shape);
     }
@@ -80,9 +80,9 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
     if (shape === 'default') {
       updatedDimension = dimension;
     } else if (shape === 'square' || shape === 'leftCut') {
-      updatedDimension = { width: dimension.width, height: dimension.height * 1.2 };
+      updatedDimension = { width: dimension.width, height: dimension.height * 1.4 };
     } else if (shape === 'rightCut') {
-      updatedDimension = { width: dimension.width, height: dimension.height * 0.8 };
+      updatedDimension = { width: dimension.width, height: dimension.height * 0.68 };
     } else {
       return cannotHappen(shape);
     }

@@ -11,7 +11,11 @@ export const BendyDisplay: React.FunctionComponent<Props> = (props) => {
   const dimension = props.dimension;
   const height = dimension.height;
   const width = dimension.width;
-  const maxCoordinate = Math.max(height * 1.09, width);
+
+  const a =   (1.09 - 1.182)/ (1.33 - 1.066);
+  const b = 1.09 - a *1.33;
+
+  const maxCoordinate = Math.max(height * (a * height / width + b), width);
   const bendWidth = maxCoordinate / props.number;
 
   const bendPath = SvgPathBuilder.start([-maxCoordinate, 0])

@@ -8,7 +8,7 @@ type Props = { fill: [string, string]; dimension: Dimension };
 export const BendyPilyDisplay: React.FunctionComponent<Props> = ({ dimension: { width, height }, fill }) => {
   const scaledHeight = height * 0.6;
   const numberOfPale = 7;
-  const baseHeight = 0.25 * height;
+  const baseHeight = 0.35 * height;
   const pathBuilder = range(0, numberOfPale)
     .reduce((pathBuilder, i) => {
       return pathBuilder
