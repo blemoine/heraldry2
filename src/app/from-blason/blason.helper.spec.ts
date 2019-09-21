@@ -295,6 +295,21 @@ describe('stringifyBlason', () => {
       })
     ).toEqual('Quarterly, 1st and 4th or; 2nd and 3rd azure');
   });
+
+  it('should render annulets in pale', () => {
+    expect(
+      stringifyBlason({
+        kind: 'simple',
+        field: { kind: 'plain', tincture: or },
+        charge: {
+          name: 'roundel',
+          inside: 'voided',
+          tincture: gules,
+          countAndDisposition: { count: 3, disposition: 'pale' },
+        },
+      })
+    ).toEqual('Or, three annulets in pale gules');
+  });
 });
 
 describe('isThereFur', () => {

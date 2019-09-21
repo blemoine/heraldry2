@@ -263,11 +263,11 @@ function stringifyCharge(charge: Charge): string {
   } else if (charge.name === 'roundel') {
     let result = counterStr;
     if (charge.inside === 'voided') {
-      result += ' ' + pluralize('annulet', count) + ' ';
+      result += ' ' + pluralize('annulet', count);
       if (charge.countAndDisposition.count !== 1 && charge.countAndDisposition.disposition !== 'default') {
-        result += ' in ' + charge.countAndDisposition.disposition + ' ';
+        result += ' in ' + charge.countAndDisposition.disposition;
       }
-      result += stringifyTincture(charge.tincture);
+      result += ' ' + stringifyTincture(charge.tincture);
     } else if (charge.inside === 'nothing') {
       if (charge.tincture.name === or.name) {
         result += ' ' + pluralize('bezant', count);
@@ -275,11 +275,11 @@ function stringifyCharge(charge: Charge): string {
           result += ' in ' + charge.countAndDisposition.disposition + ' ';
         }
       } else {
-        result += ' ' + pluralize('roundel', count) + ' ';
+        result += ' ' + pluralize('roundel', count);
         if (charge.countAndDisposition.count !== 1 && charge.countAndDisposition.disposition !== 'default') {
-          result += ' in ' + charge.countAndDisposition.disposition + ' ';
+          result += ' in ' + charge.countAndDisposition.disposition;
         }
-        result += stringifyTincture(charge.tincture);
+        result += ' ' + stringifyTincture(charge.tincture);
       }
     } else {
       return cannotHappen(charge.inside);
