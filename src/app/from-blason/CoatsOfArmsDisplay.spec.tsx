@@ -21,6 +21,26 @@ const dimension: Dimension = {
 };
 const configuration: Configuration = { tinctureConfiguration: defaultTinctureConfiguration, shieldShape: 'heater' };
 
+function snapshotTest(blason: string) {
+  it(`should render '${blason}'`, () => {
+    const maybeBlason = parseBlason(blason);
+    if ('error' in maybeBlason) {
+      fail(maybeBlason.error);
+      return;
+    }
+
+    const component = renderer.create(
+      <CoatsOfArmsDisplay
+        blason={maybeBlason}
+        dimension={dimension}
+        configuration={configuration}
+        selectBlasonPart={() => {}}
+      />
+    );
+    expect(component.toJSON()).toMatchSnapshot();
+  });
+}
+
 describe('CoatsOfArms', () => {
   beforeEach(() => {
     value = 0;
@@ -150,23 +170,3 @@ describe('CoatsOfArms', () => {
     'Quarterly, 1st ermine, a bordure indented gules; 2nd ermine, a bordure engrailed gules; 3rd ermine, a chief engrailed vert; 4th ermine, a bordure invected gules'
   );
 });
-
-function snapshotTest(blason: string) {
-  it(`should render '${blason}'`, () => {
-    const maybeBlason = parseBlason(blason);
-    if ('error' in maybeBlason) {
-      fail(maybeBlason.error);
-      return;
-    }
-
-    const component = renderer.create(
-      <CoatsOfArmsDisplay
-        blason={maybeBlason}
-        dimension={dimension}
-        configuration={configuration}
-        selectBlasonPart={() => {}}
-      />
-    );
-    expect(component.toJSON()).toMatchSnapshot();
-  });
-}

@@ -31,7 +31,7 @@ const language: Language = {
       fieldParser(),
       P.string(',')
         .trim(P.optWhitespace)
-        .chain((_) =>
+        .chain(() =>
           P.sepBy(
             P.alt(crossParserToObj, ordinaryToObj, chargeToObj).fallback({}),
             P.string(',').trim(P.optWhitespace)

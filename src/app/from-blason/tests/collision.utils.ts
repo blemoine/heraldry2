@@ -19,11 +19,13 @@ export function getChargePoints(parentSelector: string = ''): Array<[number, num
   const chargePath = Array.from(document.querySelectorAll<SVGPathElement>(parentSelector + ' .blason-charge path'));
 
   return chargePath.flatMap((path) => {
-    const points: Array<[number, number]> = pointInSvgPolygon
-      .segments(path.getAttribute('d'))
-      .flatMap(({ coords }: any) => {
-        return [coords[0], coords[coords.length - 1]];
-      });
+    const pathAttribute = path.getAttribute('d');
+    if (!pathAttribute) {
+      return [];
+    }
+    const points: Array<[number, number]> = pointInSvgPolygon.segments(pathAttribute).flatMap(({ coords }) => {
+      return [coords[0], coords[coords.length - 1]];
+    });
     const parents = parentsUntil(path, '.coats-of-arms-display');
 
     const transformMatrix: Matrix3 = parents.reduce((accMat, el) => {

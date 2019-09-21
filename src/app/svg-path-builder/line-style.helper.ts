@@ -2,23 +2,50 @@ import { arePointEquivalent, distanceBetween, PathAbsolutePoint } from './geomet
 import { range } from '../../utils/range';
 import { EngrailedLineOptions, IndentedLineOptions, SvgPathBuilder } from './svg-path-builder';
 
-export function indentBetweenPoint(
-  path: SvgPathBuilder,
-  lineOption: IndentedLineOptions,
-  parametricPath: (t: number) => PathAbsolutePoint
-): SvgPathBuilder {
-  return drawBetweenPoint(path, lineOption.width, parametricPath, (result, to) =>
-    indentLineTo(result, to, lineOption.height)
-  );
+function getPerpendicularPointToCenter(
+  [fromX, fromY]: PathAbsolutePoint,
+  [toX, toY]: PathAbsolutePoint,
+  height: number
+): PathAbsolutePoint {
+  // H is the middle of [start, end]
+  // C is the perpendicular to [start, end], at point H with length height
+
+  const xh = (fromX + toX) / 2;
+  const yh = (fromY + toY) / 2;
+
+  const a = fromY - toY;
+  const b = toX - fromX;
+
+  const norm = Math.sqrt(a * a + b * b);
+  const xc = xh + (a / norm) * height;
+  const yc = yh + (b / norm) * height;
+
+  return [xc, yc];
 }
 
-export function engrailBetweenPoint(
+export function indentLineTo(path: SvgPathBuilder, to: PathAbsolutePoint, height: number): SvgPathBuilder {
+  const from = path.currentPoint();
+  if (!from || arePointEquivalent(from, to)) {
+    return path;
+  }
+
+  return path.goTo(getPerpendicularPointToCenter(from, to, height)).goTo(to);
+}
+
+export function engrailedLineTo(
   path: SvgPathBuilder,
-  lineOption: EngrailedLineOptions,
-  parametricPath: (t: number) => PathAbsolutePoint
+  to: PathAbsolutePoint,
+  height: number,
+  sweep: boolean
 ): SvgPathBuilder {
-  return drawBetweenPoint(path, lineOption.radius, parametricPath, (result, to) =>
-    engrailedLineTo(result, to, lineOption.radius, lineOption.sweep)
+  const from = path.currentPoint();
+  if (!from || arePointEquivalent(from, to)) {
+    return path;
+  }
+  return path.quadraticBezier(
+    to,
+    sweep ? getPerpendicularPointToCenter(to, from, height) : getPerpendicularPointToCenter(from, to, height),
+    null
   );
 }
 
@@ -67,55 +94,28 @@ function drawBetweenPoint(
   }
 
   return range(0, pointCount).reduce((result, i) => {
-    let to = dichotomizePoint(result.currentPoint()!, [i, i + 2]);
+    const to = dichotomizePoint(result.currentPoint()!, [i, i + 2]);
 
     return drawFn(result, to);
   }, path);
 }
 
-export function indentLineTo(path: SvgPathBuilder, to: PathAbsolutePoint, height: number): SvgPathBuilder {
-  const from = path.currentPoint();
-  if (!from || arePointEquivalent(from, to)) {
-    return path;
-  }
-
-  return path.goTo(getPerpendicularPointToCenter(from, to, height)).goTo(to);
-}
-
-export function engrailedLineTo(
+export function indentBetweenPoint(
   path: SvgPathBuilder,
-  to: PathAbsolutePoint,
-  height: number,
-  sweep: boolean
+  lineOption: IndentedLineOptions,
+  parametricPath: (t: number) => PathAbsolutePoint
 ): SvgPathBuilder {
-  const from = path.currentPoint();
-  if (!from || arePointEquivalent(from, to)) {
-    return path;
-  }
-  return path.quadraticBezier(
-    to,
-    sweep ? getPerpendicularPointToCenter(to, from, height) : getPerpendicularPointToCenter(from, to, height),
-    null
+  return drawBetweenPoint(path, lineOption.width, parametricPath, (result, to) =>
+    indentLineTo(result, to, lineOption.height)
   );
 }
 
-function getPerpendicularPointToCenter(
-  [fromX, fromY]: PathAbsolutePoint,
-  [toX, toY]: PathAbsolutePoint,
-  height: number
-): PathAbsolutePoint {
-  // H is the middle of [start, end]
-  // C is the perpendicular to [start, end], at point H with length height
-
-  const xh = (fromX + toX) / 2;
-  const yh = (fromY + toY) / 2;
-
-  const a = fromY - toY;
-  const b = toX - fromX;
-
-  const norm = Math.sqrt(a * a + b * b);
-  const xc = xh + (a / norm) * height;
-  const yc = yh + (b / norm) * height;
-
-  return [xc, yc];
+export function engrailBetweenPoint(
+  path: SvgPathBuilder,
+  lineOption: EngrailedLineOptions,
+  parametricPath: (t: number) => PathAbsolutePoint
+): SvgPathBuilder {
+  return drawBetweenPoint(path, lineOption.radius, parametricPath, (result, to) =>
+    engrailedLineTo(result, to, lineOption.radius, lineOption.sweep)
+  );
 }

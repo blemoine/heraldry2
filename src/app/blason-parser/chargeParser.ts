@@ -206,8 +206,12 @@ export const crossParser = (): P.Parser<Cross | OrdinaryCross> => {
   );
 };
 
+function isNotCross(c: Charge['name']): c is Exclude<Charge['name'], 'cross'> {
+  return c !== 'cross';
+}
+
 export function chargeParser(): P.Parser<Exclude<Charge, Cross>> {
-  const chareParsers: Array<P.Parser<Exclude<Charge, Cross>>> = charges.filter(isNotCross).map(
+  const chargeParsers: Array<P.Parser<Exclude<Charge, Cross>>> = charges.filter(isNotCross).map(
     (charge): P.Parser<Exclude<Charge, Cross>> => {
       if (charge === 'lion') {
         return countParser.trim(P.optWhitespace).chain<Lion>((count) => lionParser(count));
@@ -226,9 +230,5 @@ export function chargeParser(): P.Parser<Exclude<Charge, Cross>> {
       }
     }
   );
-  return P.alt(...chareParsers);
-}
-
-function isNotCross(c: Charge['name']): c is Exclude<Charge['name'], 'cross'> {
-  return c !== 'cross';
+  return P.alt(...chargeParsers);
 }

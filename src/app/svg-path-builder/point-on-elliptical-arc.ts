@@ -2,6 +2,18 @@
 
 import { angleBetween, PathAbsolutePoint, toRadians } from './geometrical.helper';
 
+function pointOnLine(p0: PathAbsolutePoint, p1: PathAbsolutePoint, t: number): PathAbsolutePoint {
+  function calculateLineParameter(x0: number, x1: number, t: number) {
+    return x0 + (x1 - x0) * t;
+  }
+
+  return [calculateLineParameter(p0[0], p1[0], t), calculateLineParameter(p0[1], p1[1], t)];
+}
+
+function mod(x: number, m: number): number {
+  return ((x % m) + m) % m;
+}
+
 // t: [0,1]
 export function pointOnEllipticalArc(
   p0: PathAbsolutePoint,
@@ -108,14 +120,6 @@ export function pointOnEllipticalArc(
   ];
 }
 
-function pointOnLine(p0: PathAbsolutePoint, p1: PathAbsolutePoint, t: number): PathAbsolutePoint {
-  function calculateLineParameter(x0: number, x1: number, t: number) {
-    return x0 + (x1 - x0) * t;
-  }
-
-  return [calculateLineParameter(p0[0], p1[0], t), calculateLineParameter(p0[1], p1[1], t)];
-}
-
 export function pointOnQuadraticBezier(
   p0: PathAbsolutePoint,
   p1: PathAbsolutePoint,
@@ -130,8 +134,4 @@ export function pointOnQuadraticBezier(
     calculateQuadraticBezierParameter(p0[0], p1[0], p2[0], t),
     calculateQuadraticBezierParameter(p0[1], p1[1], p2[1], t),
   ];
-}
-
-function mod(x: number, m: number): number {
-  return ((x % m) + m) % m;
 }

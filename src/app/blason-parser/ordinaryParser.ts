@@ -4,6 +4,12 @@ import { aParser, buildAltParser, lineParser, numberParser } from './parser.help
 import { tinctureParserFromName } from './tinctureParser';
 import { stringifyOrdinaryName } from '../from-blason/blason.helpers';
 
+function isNotPaleOrChevronOrCross(
+  o: Ordinary['name']
+): o is Exclude<Ordinary['name'], 'pale' | 'chevron' | 'chevronel' | 'cross'> {
+  return !['pale', 'chevron', 'chevronel', 'cross'].includes(o);
+}
+
 export function ordinaryParser(): P.Parser<Ordinary> {
   const paleParser: P.Parser<Pale> = P.seq(
     P.alt(
@@ -49,10 +55,4 @@ export function ordinaryParser(): P.Parser<Ordinary> {
   );
 
   return P.alt(paleParser, chevronParser, ordinaryWithLineParser);
-}
-
-function isNotPaleOrChevronOrCross(
-  o: Ordinary['name']
-): o is Exclude<Ordinary['name'], 'pale' | 'chevron' | 'chevronel' | 'cross'> {
-  return !['pale', 'chevron', 'chevronel', 'cross'].includes(o);
 }

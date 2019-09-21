@@ -34,6 +34,30 @@ const leftAndRightCutRepatitionMapping = {
   13: [4, 3, 3, 2, 1],
 } as const;
 
+function getRepartition(
+  count: SupportedNumber,
+  repartitionConfig: 'default' | 'pale' | 'fess',
+  shape: SimpleBlasonShape
+): ReadonlyArray<number> {
+  if (repartitionConfig === 'default') {
+    if (shape === 'default' || shape === 'square') {
+      return defaultRepartitionMapping[count];
+    } else if (shape === 'leftCut') {
+      return leftAndRightCutRepatitionMapping[count];
+    } else if (shape === 'rightCut') {
+      return leftAndRightCutRepatitionMapping[count];
+    } else {
+      return cannotHappen(shape);
+    }
+  } else if (repartitionConfig === 'pale') {
+    return range(0, count).map(() => 1);
+  } else if (repartitionConfig === 'fess') {
+    return [count];
+  } else {
+    return cannotHappen(repartitionConfig);
+  }
+}
+
 export function getChargePositions(
   count: SupportedNumber,
   repartitionConfig: Disposition,
@@ -74,28 +98,4 @@ export function getChargePositions(
     cellHeight: 1 / rowCount,
     positions,
   };
-}
-
-function getRepartition(
-  count: SupportedNumber,
-  repartitionConfig: 'default' | 'pale' | 'fess',
-  shape: SimpleBlasonShape
-): ReadonlyArray<number> {
-  if (repartitionConfig === 'default') {
-    if (shape === 'default' || shape === 'square') {
-      return defaultRepartitionMapping[count];
-    } else if (shape === 'leftCut') {
-      return leftAndRightCutRepatitionMapping[count];
-    } else if (shape === 'rightCut') {
-      return leftAndRightCutRepatitionMapping[count];
-    } else {
-      return cannotHappen(shape);
-    }
-  } else if (repartitionConfig === 'pale') {
-    return range(0, count).map((_i) => 1);
-  } else if (repartitionConfig === 'fess') {
-    return [count];
-  } else {
-    return cannotHappen(repartitionConfig);
-  }
 }

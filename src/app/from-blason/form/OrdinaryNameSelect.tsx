@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { isSubOrdinary, ordinaries, Ordinary } from '../../model/ordinary';
 import Select from 'react-select';
-import { GroupedOptionsType } from 'react-select/src/types';
+import { GroupedOptionsType, ValueType } from 'react-select/src/types';
 import { stringifyOrdinaryName } from '../blason.helpers';
 
 type Props = { ordinary: Ordinary['name'] | null; ordinaryChange: (t: Ordinary['name'] | null) => void };
@@ -51,7 +51,7 @@ export const OrdinaryNameSelect = ({ ordinary, ordinaryChange }: Props) => {
       classNamePrefix="ordinary-name"
       options={ordinariesWithNone}
       value={value}
-      onChange={(t: any) => ordinaryTypeChange(t.value)}
+      onChange={(t: ValueType<OrdinaryNameSelectOption>) => (t && 'value' in t ? ordinaryTypeChange(t.value) : null)}
       menuPortalTarget={document.body}
     />
   );

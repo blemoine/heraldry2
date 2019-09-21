@@ -70,7 +70,7 @@ describe('CoatsOfArms Simple collision rules', () => {
         const { clipPath, chargesParsedPoints } = assertOnCoatsOfArms(blason);
 
         const chiefPathStr = document.querySelector('.blason-ordinary path')!.getAttribute('d');
-        const chiefPath: Array<any> = getPathSegments(chiefPathStr);
+        const chiefPath = getPathSegments(chiefPathStr);
         const minY: number = chiefPath
           .flatMap(({ coords }) => coords)
           .reduce(([accX, accY], [x, y]) => (accY > y ? [accX, accY] : [x, y]))[1];
@@ -102,7 +102,7 @@ describe('CoatsOfArms Simple collision rules', () => {
         const { clipPath, chargesParsedPoints } = assertOnCoatsOfArms(blason);
 
         const basePathStr = document.querySelector('.blason-ordinary path')!.getAttribute('d');
-        const basePath: Array<any> = getPathSegments(basePathStr);
+        const basePath = getPathSegments(basePathStr);
         const maxY: number = basePath
           .flatMap(({ coords }) => coords)
           .reduce(([accX, accY], [x, y]) => (accY < y ? [accX, accY] : [x, y]))[1];
@@ -135,7 +135,7 @@ describe('CoatsOfArms Simple collision rules', () => {
 
         const bordurePathStr = document.querySelector('.blason-ordinary path')!.getAttribute('d') || '';
         const firstZIndex = bordurePathStr.indexOf('Z');
-        const bordurePath: Array<any> = getPathSegments(bordurePathStr.substr(firstZIndex + 1));
+        const bordurePath = getPathSegments(bordurePathStr.substr(firstZIndex + 1));
 
         chargesParsedPoints.forEach((point) => {
           const isInsideBordure = pointInSvgPolygon.isInside(point, bordurePath);

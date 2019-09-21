@@ -28,6 +28,58 @@ export type EngrailedLineOptions = { line: 'with-arc'; radius: number; sweep: bo
 export type IndentedLineOptions = { line: 'indented'; height: number; width: number };
 export type LineOptions = EngrailedLineOptions | IndentedLineOptions;
 
+function getX(commands: Array<PathCommand>): number | null {
+  if (commands.length === 0) {
+    return null;
+  } else {
+    const previousCommand = commands[commands.length - 1];
+
+    if (
+      previousCommand.command === 'M' ||
+      previousCommand.command === 'L' ||
+      previousCommand.command === 'A' ||
+      previousCommand.command === 'Q' ||
+      previousCommand.command === 'C'
+    ) {
+      return previousCommand.point[0];
+    } else if (previousCommand.command === 'H') {
+      return previousCommand.coordinate;
+    } else if (previousCommand.command === 'V') {
+      return getX(commands.slice(0, commands.length - 1));
+    } else if (previousCommand.command === 'Z') {
+      return getX([commands[0]]);
+    } else {
+      return cannotHappen(previousCommand);
+    }
+  }
+}
+
+function getY(commands: Array<PathCommand>): number | null {
+  if (commands.length === 0) {
+    return null;
+  } else {
+    const previousCommand = commands[commands.length - 1];
+
+    if (
+      previousCommand.command === 'M' ||
+      previousCommand.command === 'L' ||
+      previousCommand.command === 'A' ||
+      previousCommand.command === 'Q' ||
+      previousCommand.command === 'C'
+    ) {
+      return previousCommand.point[1];
+    } else if (previousCommand.command === 'V') {
+      return previousCommand.coordinate;
+    } else if (previousCommand.command === 'H') {
+      return getY(commands.slice(0, commands.length - 1));
+    } else if (previousCommand.command === 'Z') {
+      return getY([commands[0]]);
+    } else {
+      return cannotHappen(previousCommand);
+    }
+  }
+}
+
 export class SvgPathBuilder {
   static start(startingPoint: PathAbsolutePoint): SvgPathBuilder {
     return new SvgPathBuilder([{ command: 'M', point: startingPoint }]);
@@ -367,57 +419,5 @@ export class SvgPathBuilder {
   }
   private addCommand(command: PathCommand): SvgPathBuilder {
     return new SvgPathBuilder([...this.commands, command]);
-  }
-}
-
-function getX(commands: Array<PathCommand>): number | null {
-  if (commands.length === 0) {
-    return null;
-  } else {
-    const previousCommand = commands[commands.length - 1];
-
-    if (
-      previousCommand.command === 'M' ||
-      previousCommand.command === 'L' ||
-      previousCommand.command === 'A' ||
-      previousCommand.command === 'Q' ||
-      previousCommand.command === 'C'
-    ) {
-      return previousCommand.point[0];
-    } else if (previousCommand.command === 'H') {
-      return previousCommand.coordinate;
-    } else if (previousCommand.command === 'V') {
-      return getX(commands.slice(0, commands.length - 1));
-    } else if (previousCommand.command === 'Z') {
-      return getX([commands[0]]);
-    } else {
-      return cannotHappen(previousCommand);
-    }
-  }
-}
-
-function getY(commands: Array<PathCommand>): number | null {
-  if (commands.length === 0) {
-    return null;
-  } else {
-    const previousCommand = commands[commands.length - 1];
-
-    if (
-      previousCommand.command === 'M' ||
-      previousCommand.command === 'L' ||
-      previousCommand.command === 'A' ||
-      previousCommand.command === 'Q' ||
-      previousCommand.command === 'C'
-    ) {
-      return previousCommand.point[1];
-    } else if (previousCommand.command === 'V') {
-      return previousCommand.coordinate;
-    } else if (previousCommand.command === 'H') {
-      return getY(commands.slice(0, commands.length - 1));
-    } else if (previousCommand.command === 'Z') {
-      return getY([commands[0]]);
-    } else {
-      return cannotHappen(previousCommand);
-    }
   }
 }

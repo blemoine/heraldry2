@@ -2,6 +2,15 @@ import { fireEvent } from '@testing-library/dom';
 import { Tincture } from '../../app/model/tincture';
 import { act } from 'react-dom/test-utils';
 
+export function selectElement(selector: string): Element {
+  const el = document.querySelector(selector);
+  if (!el) {
+    throw new Error(`'${selector} select should be defined`);
+  } else {
+    return el;
+  }
+}
+
 export function selectTincture(topSelector: string, tincture: Tincture): Promise<void> {
   act(() => {
     fireEvent.click(selectElement(topSelector + ' .tincture-select-popover-opener'));
@@ -38,13 +47,4 @@ export function selectInReactSelect(topSelector: string, classNamePrefix: string
       resolve();
     }, 1);
   });
-}
-
-export function selectElement(selector: string): Element {
-  const el = document.querySelector(selector);
-  if (!el) {
-    throw new Error(`'${selector} select should be defined`);
-  } else {
-    return el;
-  }
 }

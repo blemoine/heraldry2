@@ -22,6 +22,29 @@ type Props = {
   fillFromTincture: (tincture: Tincture) => string;
   onClick: () => void;
 };
+
+function lionHead(
+  head: LionHead | null,
+  armedAndLanguedFill: string,
+  mainFill: string,
+  stroke: string,
+  onClick: () => void
+): ReactNode {
+  if (head === null) {
+    return <DefaultLionHead tongueFill={armedAndLanguedFill} mainFill={mainFill} stroke={stroke} onClick={onClick} />;
+  } else if (head === 'guardant') {
+    return (
+      <SvgGuardantLionHead tongueFill={armedAndLanguedFill} mainFill={mainFill} stroke={stroke} onClick={onClick} />
+    );
+  } else if (head === 'regardant') {
+    return (
+      <SvgRegardantLionHead tongueFill={armedAndLanguedFill} mainFill={mainFill} stroke={stroke} onClick={onClick} />
+    );
+  } else {
+    return cannotHappen(head);
+  }
+}
+
 export const UnitLionDisplay = ({ charge, dimension, fillFromTincture, onClick }: Props) => {
   const armedAndLanguedFill = fillFromTincture(charge.armedAndLangued);
   const mainFill = fillFromTincture(charge.tincture);
@@ -118,25 +141,3 @@ export const UnitLionDisplay = ({ charge, dimension, fillFromTincture, onClick }
     return cannotHappen(charge.attitude);
   }
 };
-
-function lionHead(
-  head: LionHead | null,
-  armedAndLanguedFill: string,
-  mainFill: string,
-  stroke: string,
-  onClick: () => void
-): ReactNode {
-  if (head === null) {
-    return <DefaultLionHead tongueFill={armedAndLanguedFill} mainFill={mainFill} stroke={stroke} onClick={onClick} />;
-  } else if (head === 'guardant') {
-    return (
-      <SvgGuardantLionHead tongueFill={armedAndLanguedFill} mainFill={mainFill} stroke={stroke} onClick={onClick} />
-    );
-  } else if (head === 'regardant') {
-    return (
-      <SvgRegardantLionHead tongueFill={armedAndLanguedFill} mainFill={mainFill} stroke={stroke} onClick={onClick} />
-    );
-  } else {
-    return cannotHappen(head);
-  }
-}

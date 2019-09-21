@@ -8,6 +8,31 @@ import { cannotHappen } from '../../../utils/cannot-happen';
 import { stringifyFieldKind } from '../blason.helpers';
 import { TinctureConfiguration } from '../../model/tincture-configuration';
 
+function extractColors(field: Field): [Tincture, Tincture] {
+  if (field.kind === 'plain') {
+    return [field.tincture, isMetal(field.tincture) ? gules : argent];
+  } else if (field.kind === 'party') {
+    return field.per.tinctures;
+  } else if (
+    field.kind === 'barry' ||
+    field.kind === 'paly' ||
+    field.kind === 'bendySinister' ||
+    field.kind === 'bendy' ||
+    field.kind === 'chequy' ||
+    field.kind === 'lozengy' ||
+    field.kind === 'paly-pily' ||
+    field.kind === 'barry-pily' ||
+    field.kind === 'bendy-pily' ||
+    field.kind === 'bendy-pily-sinister' ||
+    field.kind === 'chevronny' ||
+    field.kind === 'gironny'
+  ) {
+    return field.tinctures;
+  } else {
+    return cannotHappen(field);
+  }
+}
+
 const numberOfBars = [6, 8, 10] as const;
 type Props = { tinctureConfiguration: TinctureConfiguration; field: Field; fieldChange: (field: Field) => void };
 export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) {
@@ -40,31 +65,6 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
       } else {
         cannotHappen(newKind);
       }
-    }
-  }
-
-  function extractColors(field: Field): [Tincture, Tincture] {
-    if (field.kind === 'plain') {
-      return [field.tincture, isMetal(field.tincture) ? gules : argent];
-    } else if (field.kind === 'party') {
-      return field.per.tinctures;
-    } else if (
-      field.kind === 'barry' ||
-      field.kind === 'paly' ||
-      field.kind === 'bendySinister' ||
-      field.kind === 'bendy' ||
-      field.kind === 'chequy' ||
-      field.kind === 'lozengy' ||
-      field.kind === 'paly-pily' ||
-      field.kind === 'barry-pily' ||
-      field.kind === 'bendy-pily' ||
-      field.kind === 'bendy-pily-sinister' ||
-      field.kind === 'chevronny' ||
-      field.kind === 'gironny'
-    ) {
-      return field.tinctures;
-    } else {
-      return cannotHappen(field);
     }
   }
 

@@ -14,11 +14,20 @@ import * as pointInSvgPolygon from 'point-in-svg-polygon';
 import { stringifyBlason } from './blason.helpers';
 import { PathAbsolutePoint } from '../svg-path-builder/geometrical.helper';
 import { isNotNull } from '../../utils/isNotNull';
+import { Segment } from 'point-in-svg-polygon';
 
 const numRuns = process.env.GENERATOR_CASE_COUNT ? parseFloat(process.env.GENERATOR_CASE_COUNT) : 40;
 
 // I don't have an explanation, but the dormant lion has strange coordinate, not refleted in the way it is drawn
 const chargeArbFiltered = simplifiedChargeArb.filter((t) => t.name !== 'lion' || t.attitude !== 'dormant');
+
+function isInRect([x, y]: PathAbsolutePoint, rect: { x: number; y: number; width: number; height: number }): boolean {
+  return x > rect.x && x < rect.x + rect.width && y > rect.y && y < rect.y + rect.height;
+}
+
+function linkToBlason(blason: Blason): string {
+  return `http://localhost:1234/#/?blason=${encodeURI(stringifyBlason(blason))}`;
+}
 
 describe('CoatsOfArms quarterly collision rules', () => {
   const dimension: Dimension = { width: 360, height: 480 };
@@ -125,7 +134,7 @@ describe('CoatsOfArms quarterly collision rules', () => {
           const chiefPathStr = document
             .querySelector('.blason-quarter-' + index + ' .blason-ordinary path')!
             .getAttribute('d');
-          const chiefPath: Array<any> = getPathSegments(chiefPathStr);
+          const chiefPath = getPathSegments(chiefPathStr);
           const minY: number =
             quarterRect.y +
             chiefPath
@@ -179,7 +188,7 @@ describe('CoatsOfArms quarterly collision rules', () => {
           const chiefPathStr = document
             .querySelector('.blason-quarter-' + index + ' .blason-ordinary path')!
             .getAttribute('d');
-          const chiefPath: Array<any> = getPathSegments(chiefPathStr);
+          const chiefPath = getPathSegments(chiefPathStr);
           const maxY: number =
             quarterRect.y +
             chiefPath
@@ -256,10 +265,12 @@ describe('CoatsOfArms quarterly collision rules', () => {
           const bordurePathStr =
             document.querySelector('.blason-quarter-' + index + ' .blason-ordinary path')!.getAttribute('d') || '';
           const firstZIndex = bordurePathStr.indexOf('Z');
-          const bordurePath: Array<any> = getPathSegments(bordurePathStr.substr(firstZIndex + 1)).map((c: any) => ({
-            ...c,
-            coords: c.coords.map(([x, y]: [number, number]) => [x + quarterRect.x, y + quarterRect.y]),
-          }));
+          const bordurePath = getPathSegments(bordurePathStr.substr(firstZIndex + 1)).map(
+            (c): Segment => ({
+              ...c,
+              coords: c.coords.map(([x, y]: [number, number]) => [x + quarterRect.x, y + quarterRect.y]),
+            })
+          );
 
           chargesParsedPoints.forEach((point) => {
             const isInsideBordure = pointInSvgPolygon.isInside(point, bordurePath);
@@ -280,11 +291,3 @@ describe('CoatsOfArms quarterly collision rules', () => {
     );
   });
 });
-
-function isInRect([x, y]: PathAbsolutePoint, rect: { x: number; y: number; width: number; height: number }): boolean {
-  return x > rect.x && x < rect.x + rect.width && y > rect.y && y < rect.y + rect.height;
-}
-
-function linkToBlason(blason: Blason): string {
-  return `http://localhost:1234/#/?blason=${encodeURI(stringifyBlason(blason))}`;
-}

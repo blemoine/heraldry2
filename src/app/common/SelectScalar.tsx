@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Select from 'react-select';
+import { ValueType } from 'react-select/src/types';
 
 type Props<A extends string | number> = {
   options: ReadonlyArray<A>;
@@ -19,7 +20,7 @@ export function SelectScalar<A extends string | number>(props: Props<A>) {
       classNamePrefix={props.classNamePrefix}
       options={options}
       value={value}
-      onChange={(t: any) => props.valueChange(t.value)}
+      onChange={(t: ValueType<typeof options[number]>) => (t && 'value' in t ? props.valueChange(t.value) : null)}
       onMenuClose={props.onMenuClose}
       onMenuOpen={props.onMenuOpen}
       menuPortalTarget={document.body}

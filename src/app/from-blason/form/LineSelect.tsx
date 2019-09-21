@@ -17,7 +17,12 @@ const LineRenderer = ({ line }: { line: Line }) => {
     .goTo([0, (3 * height) / 4], lineOptions)
     .close();
   return (
-    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ margin: 'auto', display: 'block', border: '1px solid #ccc', }}>
+    <svg
+      width={width}
+      height={height}
+      viewBox={`0 0 ${width} ${height}`}
+      style={{ margin: 'auto', display: 'block', border: '1px solid #ccc' }}
+    >
       <PathFromBuilder pathBuilder={pathBuilder} fill="#333" stroke="#333" />
     </svg>
   );
@@ -25,7 +30,7 @@ const LineRenderer = ({ line }: { line: Line }) => {
 
 type Props = { line: Line; lineChange: (line: Line) => void };
 export const LineSelect = ({ line, lineChange }: Props) => {
-  const target = useRef<any>(null);
+  const target = useRef<HTMLDivElement | null>(null);
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
   function selectLine(line: Line) {
     lineChange(line);
@@ -47,7 +52,7 @@ export const LineSelect = ({ line, lineChange }: Props) => {
       </div>
 
       <Overlay
-        target={target.current}
+        target={target && target.current ? target.current : undefined}
         show={showOverlay}
         placement="top"
         rootClose={true}

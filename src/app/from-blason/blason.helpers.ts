@@ -10,53 +10,25 @@ import { Ordinary } from '../model/ordinary';
 import { stringifyNumber, SupportedNumber } from '../model/countAndDisposition';
 import { isEqual } from 'lodash';
 
-export function stringifyBlason(blason: Blason): string {
-  return stringifyBlasonWithCapitalization(blason, true);
-}
-
-function stringifyBlasonWithCapitalization(blason: Blason, shouldCapitalize: boolean): string {
-  if (blason.kind === 'simple') {
-    const field = stringifyField(blason.field, shouldCapitalize);
-
-    const addendum = [
-      blason.ordinary ? stringifyOrdinary(blason.ordinary) : null,
-      blason.charge ? stringifyCharge(blason.charge) : null,
-    ].filter(isNotNull);
-
-    if (addendum.length > 0) {
-      return field + ', ' + addendum.join(', ');
-    } else {
-      return field;
-    }
-  } else if (blason.kind === 'quarterly') {
-    const groupedBlason = blason.blasons.reduce<Array<{ blason: SimpleBlason; quarter: Array<number> }>>(
-      (acc, blason, i) => {
-        const idx = acc.findIndex((b) => isEqual(b.blason, blason));
-        if (idx < 0) {
-          acc.push({ blason, quarter: [i] });
-        } else {
-          acc[idx].quarter.push(i);
-        }
-
-        return acc;
-      },
-      []
-    );
-
-    return (
-      'Quarterly, ' +
-      groupedBlason
-        .map(({ blason, quarter }) => {
-          return (
-            quarter.map((i) => stringifyOrdinal(i + 1)).join(' and ') +
-            ' ' +
-            stringifyBlasonWithCapitalization(blason, false)
-          );
-        })
-        .join('; ')
-    );
+export function stringifyTincture(tincture: Tincture): string {
+  if (tincture.name === 'counter-ermine') {
+    return 'counter ermine';
+  } else if (tincture.name === 'counter-vair') {
+    return 'counter vair';
+  } else if (tincture.name === 'vair-en-pale') {
+    return 'vair en pale';
+  } else if (tincture.name === 'vair-en-point') {
+    return 'vair en point';
+  } else if (tincture.name === 'counter-potent') {
+    return 'counter potent';
+  } else if (tincture.name === 'potent-en-pale') {
+    return 'potent en pale';
+  } else if (tincture.name === 'potent-en-point') {
+    return 'potent en point';
+  } else if (tincture.name === 'tenne') {
+    return 'tenné';
   } else {
-    return cannotHappen(blason);
+    return tincture.name;
   }
 }
 
@@ -71,6 +43,28 @@ function stringifyOrdinal(i: number) {
     return '4th';
   } else {
     throw new Error(`Number ${i} ordinal stringification is unsupported yet`);
+  }
+}
+
+function pluralize(str: string, count: SupportedNumber): string {
+  if (count === 1) {
+    return str;
+  } else {
+    if (str === 'fleur de lys') {
+      return 'fleurs de lys';
+    } else if (str === 'cross') {
+      return 'crosses';
+    } else {
+      return str + 's';
+    }
+  }
+}
+
+export function stringifyOrdinaryName(name: Ordinary['name']): string {
+  if (name === 'bendSinister') {
+    return 'bend sinister';
+  } else {
+    return name;
   }
 }
 
@@ -105,11 +99,54 @@ function stringifyOrdinary(ordinary: Ordinary): string {
   }
 }
 
-export function stringifyOrdinaryName(name: Ordinary['name']): string {
-  if (name === 'bendSinister') {
+export function stringifyParty(partyName: Party['name']): string {
+  if (partyName === 'bendSinister') {
     return 'bend sinister';
+  } else if (
+    partyName === 'bend' ||
+    partyName === 'fess' ||
+    partyName === 'pale' ||
+    partyName === 'chevron' ||
+    partyName === 'cross' ||
+    partyName === 'saltire'
+  ) {
+    return partyName;
   } else {
-    return name;
+    return cannotHappen(partyName);
+  }
+}
+
+export function stringifyFieldKind(field: Field['kind']): string {
+  if (field === 'plain') {
+    return 'plain';
+  } else if (field === 'bendy') {
+    return 'bendy';
+  } else if (field === 'bendySinister') {
+    return 'bendy sinister';
+  } else if (field === 'paly') {
+    return 'paly';
+  } else if (field === 'barry') {
+    return 'barry';
+  } else if (field === 'party') {
+    return 'party per';
+  } else if (field === 'chequy') {
+    return 'chequy';
+  } else if (field === 'lozengy') {
+    return 'lozengy';
+  } else if (field === 'paly-pily') {
+    return 'paly pily';
+  } else if (field === 'barry-pily') {
+    return 'barry pily';
+  } else if (field === 'bendy-pily') {
+    return 'bendy pily';
+  } else if (field === 'bendy-pily-sinister') {
+    return 'bendy pily sinister';
+  } else if (field === 'chevronny') {
+    return 'chevronny';
+  } else if (field === 'gironny') {
+    return 'gironny';
+  } else {
+    return cannotHappen(field);
   }
 }
 
@@ -155,57 +192,6 @@ function stringifyField(field: Field, shouldCapitalize: boolean): string {
     } else {
       return cannotHappen(field);
     }
-  }
-}
-
-export function stringifyFieldKind(field: Field['kind']): string {
-  if (field === 'plain') {
-    return 'plain';
-  } else if (field === 'bendy') {
-    return 'bendy';
-  } else if (field === 'bendySinister') {
-    return 'bendy sinister';
-  } else if (field === 'paly') {
-    return 'paly';
-  } else if (field === 'barry') {
-    return 'barry';
-  } else if (field === 'party') {
-    return 'party per';
-  } else if (field === 'chequy') {
-    return 'chequy';
-  } else if (field === 'lozengy') {
-    return 'lozengy';
-  } else if (field === 'paly-pily') {
-    return 'paly pily';
-  } else if (field === 'barry-pily') {
-    return 'barry pily';
-  } else if (field === 'bendy-pily') {
-    return 'bendy pily';
-  } else if (field === 'bendy-pily-sinister') {
-    return 'bendy pily sinister';
-  } else if (field === 'chevronny') {
-    return 'chevronny';
-  } else if (field === 'gironny') {
-    return 'gironny';
-  } else {
-    return cannotHappen(field);
-  }
-}
-
-export function stringifyParty(partyName: Party['name']): string {
-  if (partyName === 'bendSinister') {
-    return 'bend sinister';
-  } else if (
-    partyName === 'bend' ||
-    partyName === 'fess' ||
-    partyName === 'pale' ||
-    partyName === 'chevron' ||
-    partyName === 'cross' ||
-    partyName === 'saltire'
-  ) {
-    return partyName;
-  } else {
-    return cannotHappen(partyName);
   }
 }
 
@@ -337,20 +323,6 @@ function stringifyCharge(charge: Charge): string {
   }
 }
 
-function pluralize(str: string, count: SupportedNumber): string {
-  if (count === 1) {
-    return str;
-  } else {
-    if (str === 'fleur de lys') {
-      return 'fleurs de lys';
-    } else if (str === 'cross') {
-      return 'crosses';
-    } else {
-      return str + 's';
-    }
-  }
-}
-
 export function isThereFur(blason: Blason, fur: Furs['name']): boolean {
   if (blason.kind === 'simple') {
     const field = blason.field;
@@ -429,24 +401,52 @@ export function isThereFur(blason: Blason, fur: Furs['name']): boolean {
   }
 }
 
-export function stringifyTincture(tincture: Tincture): string {
-  if (tincture.name === 'counter-ermine') {
-    return 'counter ermine';
-  } else if (tincture.name === 'counter-vair') {
-    return 'counter vair';
-  } else if (tincture.name === 'vair-en-pale') {
-    return 'vair en pale';
-  } else if (tincture.name === 'vair-en-point') {
-    return 'vair en point';
-  } else if (tincture.name === 'counter-potent') {
-    return 'counter potent';
-  } else if (tincture.name === 'potent-en-pale') {
-    return 'potent en pale';
-  } else if (tincture.name === 'potent-en-point') {
-    return 'potent en point';
-  } else if (tincture.name === 'tenne') {
-    return 'tenné';
+function stringifyBlasonWithCapitalization(blason: Blason, shouldCapitalize: boolean): string {
+  if (blason.kind === 'simple') {
+    const field = stringifyField(blason.field, shouldCapitalize);
+
+    const addendum = [
+      blason.ordinary ? stringifyOrdinary(blason.ordinary) : null,
+      blason.charge ? stringifyCharge(blason.charge) : null,
+    ].filter(isNotNull);
+
+    if (addendum.length > 0) {
+      return field + ', ' + addendum.join(', ');
+    } else {
+      return field;
+    }
+  } else if (blason.kind === 'quarterly') {
+    const groupedBlason = blason.blasons.reduce<Array<{ blason: SimpleBlason; quarter: Array<number> }>>(
+      (acc, blason, i) => {
+        const idx = acc.findIndex((b) => isEqual(b.blason, blason));
+        if (idx < 0) {
+          acc.push({ blason, quarter: [i] });
+        } else {
+          acc[idx].quarter.push(i);
+        }
+
+        return acc;
+      },
+      []
+    );
+
+    return (
+      'Quarterly, ' +
+      groupedBlason
+        .map(({ blason, quarter }) => {
+          return (
+            quarter.map((i) => stringifyOrdinal(i + 1)).join(' and ') +
+            ' ' +
+            stringifyBlasonWithCapitalization(blason, false)
+          );
+        })
+        .join('; ')
+    );
   } else {
-    return tincture.name;
+    return cannotHappen(blason);
   }
+}
+
+export function stringifyBlason(blason: Blason): string {
+  return stringifyBlasonWithCapitalization(blason, true);
 }

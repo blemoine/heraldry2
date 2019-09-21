@@ -79,7 +79,7 @@ const TinctureRenderer = ({
 };
 
 export const TinctureSelect = ({ tinctureConfiguration, tincture, tinctureChange }: Props) => {
-  const target = useRef<any>(null);
+  const target = useRef<HTMLDivElement | null>(null);
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
   function selectTincture(tincture: Tincture) {
     tinctureChange(tincture);
@@ -103,7 +103,7 @@ export const TinctureSelect = ({ tinctureConfiguration, tincture, tinctureChange
         </div>
       </div>
       <Overlay
-        target={target.current}
+        target={target && target.current ? target.current : undefined}
         show={showOverlay}
         placement="top"
         rootClose={true}

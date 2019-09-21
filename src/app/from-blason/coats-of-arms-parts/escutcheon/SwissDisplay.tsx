@@ -4,13 +4,6 @@ import { PathFromBuilder } from '../../../common/PathFromBuilder';
 import { LineOptions, SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 
 type Props = { dimension: Dimension };
-export const SwissDisplay: React.FunctionComponent<Props> = ({ dimension }) => {
-  const pathBuilder = swissPathBuilder(dimension, null);
-
-  return (
-    <PathFromBuilder pathBuilder={pathBuilder} fill="transparent" stroke="#333" style={{ pointerEvents: 'none' }} />
-  );
-};
 
 export function swissPathBuilder({ width, height }: Dimension, lineOptions: LineOptions | null): SvgPathBuilder {
   return SvgPathBuilder.start([0, 0])
@@ -23,3 +16,11 @@ export function swissPathBuilder({ width, height }: Dimension, lineOptions: Line
     .quadraticBezier([0, (3 * height) / 5], [0, height * 0.8], lineOptions)
     .goTo([0, 0], lineOptions);
 }
+
+export const SwissDisplay: React.FunctionComponent<Props> = ({ dimension }) => {
+  const pathBuilder = swissPathBuilder(dimension, null);
+
+  return (
+    <PathFromBuilder pathBuilder={pathBuilder} fill="transparent" stroke="#333" style={{ pointerEvents: 'none' }} />
+  );
+};

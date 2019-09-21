@@ -72,10 +72,34 @@ const SvgFleurDeLys = ({
       strokeLinecap="square"
       strokeMiterlimit={3}
     >
-      <PathFromBuilder pathBuilder={leftPart} fill={mainFill} stroke={stroke} onClick={onClick} style={{cursor:'pointer'}}/>
-      <PathFromBuilder pathBuilder={rightPart} fill={mainFill} stroke={stroke} onClick={onClick} style={{cursor:'pointer'}}/>
-      <PathFromBuilder pathBuilder={verticalMiddlePart} fill={mainFill} stroke={stroke} onClick={onClick} style={{cursor:'pointer'}}/>
-      <PathFromBuilder pathBuilder={middlePart} fill={mainFill} stroke={stroke} onClick={onClick} style={{cursor:'pointer'}}/>
+      <PathFromBuilder
+        pathBuilder={leftPart}
+        fill={mainFill}
+        stroke={stroke}
+        onClick={onClick}
+        style={{ cursor: 'pointer' }}
+      />
+      <PathFromBuilder
+        pathBuilder={rightPart}
+        fill={mainFill}
+        stroke={stroke}
+        onClick={onClick}
+        style={{ cursor: 'pointer' }}
+      />
+      <PathFromBuilder
+        pathBuilder={verticalMiddlePart}
+        fill={mainFill}
+        stroke={stroke}
+        onClick={onClick}
+        style={{ cursor: 'pointer' }}
+      />
+      <PathFromBuilder
+        pathBuilder={middlePart}
+        fill={mainFill}
+        stroke={stroke}
+        onClick={onClick}
+        style={{ cursor: 'pointer' }}
+      />
     </svg>
   );
 };

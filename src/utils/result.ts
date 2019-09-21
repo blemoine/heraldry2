@@ -23,20 +23,20 @@ export function zip<A, B>(r: Result<A>, r2: Result<B>): Result<[A, B]> {
   }
 }
 
-export function zip3<A, B, C>(r: Result<A>, r2: Result<B>, r3: Result<C>): Result<[A, B, C]> {
-  return map(zip(zip(r, r2), r3), ([[a, b], c]) => [a, b, c]);
-}
-
-export function zip4<A, B, C, D>(r: Result<A>, r2: Result<B>, r3: Result<C>, r4: Result<D>): Result<[A, B, C, D]> {
-  return map(zip(zip3(r, r2, r3), r4), ([[a, b, c], d]) => [a, b, c, d]);
-}
-
 export function map<A, B>(r: Result<A>, fn: (a: A) => B): Result<B> {
   if (isError(r)) {
     return r;
   } else {
     return fn(r);
   }
+}
+
+export function zip3<A, B, C>(r: Result<A>, r2: Result<B>, r3: Result<C>): Result<[A, B, C]> {
+  return map(zip(zip(r, r2), r3), ([[a, b], c]) => [a, b, c]);
+}
+
+export function zip4<A, B, C, D>(r: Result<A>, r2: Result<B>, r3: Result<C>, r4: Result<D>): Result<[A, B, C, D]> {
+  return map(zip(zip3(r, r2, r3), r4), ([[a, b, c], d]) => [a, b, c, d]);
 }
 
 export function flatMap<A, B>(r: Result<A>, fn: (a: A) => Result<B>): Result<B> {
