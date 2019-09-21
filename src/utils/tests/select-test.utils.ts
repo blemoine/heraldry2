@@ -1,8 +1,22 @@
 import { fireEvent } from '@testing-library/dom';
 import { Tincture } from '../../app/model/tincture';
+import { act } from 'react-dom/test-utils';
 
 export function selectTincture(topSelector: string, tincture: Tincture): Promise<void> {
-  return selectInReactSelect(topSelector, 'tincture-select', tincture.name);
+  act(() => {
+    fireEvent.click(selectElement(topSelector + ' .tincture-select-popover-opener'));
+  });
+  act(() => {
+    fireEvent.click(selectElement(`.popover div[title=${tincture.name}]`));
+  });
+
+  // Needs to be longer than the transition duration of the popover fade in/out
+  const timeoutDuration = 200;
+  return new Promise<void>((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, timeoutDuration);
+  });
 }
 
 export function selectInReactSelect(topSelector: string, classNamePrefix: string, value: string): Promise<void> {

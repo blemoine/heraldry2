@@ -23,7 +23,7 @@ export const VairPatternDef = ({ vair, patternId, dimension: { width }, tincture
         patternUnits="userSpaceOnUse"
         viewBox="0 0 100 200"
       >
-        <rect width="100%" height="100%" fill={fieldColor} />
+        <rect width="100px" height="200px" fill={fieldColor} />
         <use href={'#' + vair.name} x="0" y="0" width={100} height={100} />
         {vair.name === 'vair' && (
           <>

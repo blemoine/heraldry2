@@ -24,7 +24,7 @@ export const PotentPatternDef = ({ potent, patternId, dimension: { width }, tinc
         patternUnits="userSpaceOnUse"
         viewBox="0 0 200 200"
       >
-        <rect width="150%" height="100%" fill={fieldColor} />
+        <rect width="200px" height="200px" fill={fieldColor} />
         <use href={'#' + potent.name} x="0" y="0" width={150} height={100} />
         {potent.name === 'potent' && (
           <>

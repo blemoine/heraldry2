@@ -1,90 +1,130 @@
-import Select, { components } from 'react-select';
 import * as React from 'react';
-import { OptionProps } from 'react-select/src/components/Option';
 import { isErmine, isFur, isPotent, isVair, Tincture, tinctures } from '../../model/tincture';
-import { ErmineDisplay } from '../coats-of-arms-parts/ErmineDisplay';
-import { VairDisplay } from '../coats-of-arms-parts/VairDisplay';
-import { PotentDisplay } from '../coats-of-arms-parts/PotentDisplay';
 import { TinctureConfiguration } from '../../model/tincture-configuration';
-
-const Option = (tinctureConfiguration: TinctureConfiguration) => (props: OptionProps<Tincture>) => {
-  const tincture: Tincture = props.data; // cast is mandatory as data is any
-  return (
-    <components.Option {...props}>
-      <span
-        className="tincture-option"
-        style={{
-          verticalAlign: 'middle',
-        }}
-      >
-        {props.label}
-      </span>
-
-      <span
-        style={{
-          marginLeft: '5px',
-          verticalAlign: 'middle',
-          display: 'inline-block',
-          border: '1px solid #777',
-          backgroundColor: isFur(tincture) ? 'white' : tinctureConfiguration[tincture.name],
-          width: '15px',
-          height: '15px',
-          lineHeight: '15px',
-          overflow: 'hidden',
-          boxSizing: 'content-box',
-          textAlign: 'center',
-          padding: '1px',
-        }}
-      >
-        {isErmine(tincture) ? (
-          <svg width={12.5} height={15} viewBox={`0 0 200 240`}>
-            <ErmineDisplay
-              width={200}
-              height={240}
-              fill={tinctureConfiguration[tincture.field.name]}
-              spot={tinctureConfiguration[tincture.spot.name]}
-            />
-          </svg>
-        ) : isVair(tincture) ? (
-          <svg width={15} height={15} viewBox={`0 0 200 200`}>
-            <VairDisplay
-              dimension={{ width: 200, height: 200 }}
-              bell={tinctureConfiguration[tincture.bell.name]}
-              fill={tinctureConfiguration[tincture.field.name]}
-            />
-          </svg>
-        ) : isPotent(tincture) ? (
-          <svg width={15} height={15} viewBox={`0 0 300 200`}>
-            <PotentDisplay
-              dimension={{ width: 300, height: 200 }}
-              potent={tinctureConfiguration[tincture.bell.name]}
-              fill={tinctureConfiguration[tincture.field.name]}
-            />
-          </svg>
-        ) : (
-          <>&nbsp;</>
-        )}
-      </span>
-    </components.Option>
-  );
-};
+import { Overlay, Popover } from 'react-bootstrap';
+import { ErminePatternDef } from '../coats-of-arms-parts/ErminePatternDef';
+import { VairPatternDef } from '../coats-of-arms-parts/VairPatternDef';
+import { PotentPatternDef } from '../coats-of-arms-parts/PotentPatternDef';
+import { cannotHappen } from '../../../utils/cannot-happen';
+import { useRef, useState } from 'react';
+import { uuid } from '../../../utils/uuid';
 
 type Props = {
   tinctureConfiguration: TinctureConfiguration;
   tincture: Tincture;
   tinctureChange: (t: Tincture) => void;
 };
+
+const TinctureRenderer = ({
+  tincture,
+  tinctureConfiguration,
+}: {
+  tincture: Tincture;
+  tinctureConfiguration: TinctureConfiguration;
+}) => {
+  const width = 30;
+  const height = 30;
+  const id = uuid();
+  if (isFur(tincture)) {
+    const dimension = { width: width * 2, height: height * 2 };
+    return (
+      <svg
+        width={width}
+        height={height}
+        viewBox={`0 0 ${width} ${height}`}
+        style={{ margin: 'auto', display: 'block' }}
+      >
+        <defs>
+          {isErmine(tincture) ? (
+            <ErminePatternDef
+              ermine={tincture}
+              dimension={dimension}
+              patternId={tincture.name + '-field-' + id}
+              tinctureConfiguration={tinctureConfiguration}
+            />
+          ) : isVair(tincture) ? (
+            <VairPatternDef
+              vair={tincture}
+              patternId={tincture.name + '-field-' + id}
+              dimension={dimension}
+              tinctureConfiguration={tinctureConfiguration}
+            />
+          ) : isPotent(tincture) ? (
+            <PotentPatternDef
+              potent={tincture}
+              patternId={tincture.name + '-field-' + id}
+              dimension={dimension}
+              tinctureConfiguration={tinctureConfiguration}
+            />
+          ) : (
+            cannotHappen(tincture)
+          )}
+        </defs>
+        <rect x={0} y={0} width={width} height={height} fill={`url(#${tincture.name}-field-${id})`} />
+      </svg>
+    );
+  } else {
+    return <div style={{ backgroundColor: tinctureConfiguration[tincture.name], width, height, margin: 'auto' }} />;
+  }
+};
+
 export const TinctureSelect = ({ tinctureConfiguration, tincture, tinctureChange }: Props) => {
+  const target = useRef<any>(null);
+  const [showOverlay, setShowOverlay] = useState<boolean>(false);
+  function selectTincture(tincture: Tincture) {
+    tinctureChange(tincture);
+    setShowOverlay(false);
+  }
+
   return (
-    <Select
-      classNamePrefix="tincture-select"
-      options={tinctures}
-      components={{ Option: Option(tinctureConfiguration) }}
-      getOptionLabel={(t) => t.name}
-      getOptionValue={(t) => t.name}
-      value={tincture}
-      onChange={(t: any) => t && tinctureChange(t)}
-      menuPortalTarget={document.body}
-    />
+    <div>
+      <div
+        className="tincture-select-popover-opener"
+        style={{ display: 'inline-block', cursor: 'pointer' }}
+        ref={target}
+        onClick={() => setShowOverlay(!showOverlay)}
+      >
+        <TinctureRenderer tincture={tincture} tinctureConfiguration={tinctureConfiguration} />
+        <div className="tincture-select-label" style={{ textAlign: 'center' }}>
+          {tincture.name}
+        </div>
+      </div>
+      <Overlay
+        target={target.current}
+        show={showOverlay}
+        placement="top"
+        rootClose={true}
+        onHide={() => setShowOverlay(false)}
+      >
+        <Popover id="tincture-select-popover">
+          <Popover.Title as="h3">Select a tincture</Popover.Title>
+          <Popover.Content>
+            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+              {tinctures.map((tincture, i) => {
+                return (
+                  <div
+                    key={i}
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      cursor: 'pointer',
+                      width: '25%',
+                      padding: '5px',
+                      border: '1px solid #333',
+                      flexDirection: 'column',
+                    }}
+                    title={tincture.name}
+                    onClick={() => selectTincture(tincture)}
+                  >
+                    <TinctureRenderer tincture={tincture} tinctureConfiguration={tinctureConfiguration} />
+                    <div style={{ textAlign: 'center' }}>{tincture.name}</div>
+                  </div>
+                );
+              })}
+            </div>
+          </Popover.Content>
+        </Popover>
+      </Overlay>
+    </div>
   );
 };

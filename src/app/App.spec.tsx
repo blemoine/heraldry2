@@ -86,7 +86,7 @@ describe('App', () => {
       target: { value: 'Ermine, three eagles displayed in pale azure beaked and armed argent' },
     });
 
-    const field = selectElement('.field-tincture-select .tincture-select__single-value') as HTMLDivElement;
+    const field = selectElement('.field-tincture-select .tincture-select-label') as HTMLDivElement;
     const fieldValue = field.innerHTML;
     expect(fieldValue).toBe('ermine');
 

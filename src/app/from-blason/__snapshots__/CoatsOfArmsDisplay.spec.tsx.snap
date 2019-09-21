@@ -201,8 +201,8 @@ exports[`CoatsOfArms should render 'Argent, three crosses potent vair' 1`] = `
     >
       <rect
         fill="#FFFFFF"
-        height="100%"
-        width="100%"
+        height="200px"
+        width="100px"
       />
       <use
         height={100}
@@ -1001,7 +1001,7 @@ exports[`CoatsOfArms should render 'Azure, two crosses moline counter ermine' 1`
       </g>
     </symbol>
     <pattern
-      height={65.04065040650407}
+      height={64.93506493506494}
       id="field-pattern-425"
       patternUnits="userSpaceOnUse"
       viewBox="0 0 70 125"
@@ -1009,8 +1009,8 @@ exports[`CoatsOfArms should render 'Azure, two crosses moline counter ermine' 1`
     >
       <rect
         fill="#000000"
-        height="100%"
-        width="100%"
+        height="125px"
+        width="70px"
       />
       <use
         height={60}
@@ -1160,7 +1160,7 @@ exports[`CoatsOfArms should render 'Barry pily counter ermine and potent en poin
       </g>
     </symbol>
     <pattern
-      height={65.04065040650407}
+      height={64.93506493506494}
       id="field-pattern-365"
       patternUnits="userSpaceOnUse"
       viewBox="0 0 70 125"
@@ -1168,8 +1168,8 @@ exports[`CoatsOfArms should render 'Barry pily counter ermine and potent en poin
     >
       <rect
         fill="#000000"
-        height="100%"
-        width="100%"
+        height="125px"
+        width="70px"
       />
       <use
         height={60}
@@ -1219,8 +1219,8 @@ exports[`CoatsOfArms should render 'Barry pily counter ermine and potent en poin
     >
       <rect
         fill="#FFFFFF"
-        height="100%"
-        width="150%"
+        height="200px"
+        width="200px"
       />
       <use
         height={100}
@@ -1791,7 +1791,7 @@ exports[`CoatsOfArms should render 'Bendy or and argent, a lion rampant ermine' 
       </g>
     </symbol>
     <pattern
-      height={65.04065040650407}
+      height={64.93506493506494}
       id="field-pattern-244"
       patternUnits="userSpaceOnUse"
       viewBox="0 0 70 125"
@@ -1799,8 +1799,8 @@ exports[`CoatsOfArms should render 'Bendy or and argent, a lion rampant ermine' 
     >
       <rect
         fill="#FFFFFF"
-        height="100%"
-        width="100%"
+        height="125px"
+        width="70px"
       />
       <use
         height={60}
@@ -3117,7 +3117,7 @@ exports[`CoatsOfArms should render 'Chequy gules and or, a chief engrailed ermin
       </g>
     </symbol>
     <pattern
-      height={65.04065040650407}
+      height={64.93506493506494}
       id="field-pattern-76"
       patternUnits="userSpaceOnUse"
       viewBox="0 0 70 125"
@@ -3125,8 +3125,8 @@ exports[`CoatsOfArms should render 'Chequy gules and or, a chief engrailed ermin
     >
       <rect
         fill="#FFFFFF"
-        height="100%"
-        width="100%"
+        height="125px"
+        width="70px"
       />
       <use
         height={60}
@@ -4131,7 +4131,7 @@ exports[`CoatsOfArms should render 'Ermine, a bend invected vair' 1`] = `
       </g>
     </symbol>
     <pattern
-      height={65.04065040650407}
+      height={64.93506493506494}
       id="field-pattern-160"
       patternUnits="userSpaceOnUse"
       viewBox="0 0 70 125"
@@ -4139,8 +4139,8 @@ exports[`CoatsOfArms should render 'Ermine, a bend invected vair' 1`] = `
     >
       <rect
         fill="#FFFFFF"
-        height="100%"
-        width="100%"
+        height="125px"
+        width="70px"
       />
       <use
         height={60}
@@ -4183,8 +4183,8 @@ exports[`CoatsOfArms should render 'Ermine, a bend invected vair' 1`] = `
     >
       <rect
         fill="#FFFFFF"
-        height="100%"
-        width="100%"
+        height="200px"
+        width="100px"
       />
       <use
         height={100}
@@ -4322,7 +4322,7 @@ exports[`CoatsOfArms should render 'Ermine, two pallets sable' 1`] = `
       </g>
     </symbol>
     <pattern
-      height={65.04065040650407}
+      height={64.93506493506494}
       id="field-pattern-172"
       patternUnits="userSpaceOnUse"
       viewBox="0 0 70 125"
@@ -4330,8 +4330,8 @@ exports[`CoatsOfArms should render 'Ermine, two pallets sable' 1`] = `
     >
       <rect
         fill="#FFFFFF"
-        height="100%"
-        width="100%"
+        height="125px"
+        width="70px"
       />
       <use
         height={60}
@@ -4481,7 +4481,7 @@ exports[`CoatsOfArms should render 'Erminois, four crosses bottony argent' 1`] =
       </g>
     </symbol>
     <pattern
-      height={65.04065040650407}
+      height={64.93506493506494}
       id="field-pattern-462"
       patternUnits="userSpaceOnUse"
       viewBox="0 0 70 125"
@@ -4489,8 +4489,8 @@ exports[`CoatsOfArms should render 'Erminois, four crosses bottony argent' 1`] =
     >
       <rect
         fill="#FFD700"
-        height="100%"
-        width="100%"
+        height="125px"
+        width="70px"
       />
       <use
         height={60}
@@ -4760,8 +4760,8 @@ exports[`CoatsOfArms should render 'Or, a base engrailed vair' 1`] = `
     >
       <rect
         fill="#FFFFFF"
-        height="100%"
-        width="100%"
+        height="200px"
+        width="100px"
       />
       <use
         height={100}
@@ -4899,7 +4899,7 @@ exports[`CoatsOfArms should render 'Or, a bend sinister invected ermine' 1`] = `
       </g>
     </symbol>
     <pattern
-      height={65.04065040650407}
+      height={64.93506493506494}
       id="field-pattern-256"
       patternUnits="userSpaceOnUse"
       viewBox="0 0 70 125"
@@ -4907,8 +4907,8 @@ exports[`CoatsOfArms should render 'Or, a bend sinister invected ermine' 1`] = `
     >
       <rect
         fill="#FFFFFF"
-        height="100%"
-        width="100%"
+        height="125px"
+        width="70px"
       />
       <use
         height={60}
@@ -5816,7 +5816,7 @@ exports[`CoatsOfArms should render 'Paly pily vair and pean' 1`] = `
       </g>
     </symbol>
     <pattern
-      height={65.04065040650407}
+      height={64.93506493506494}
       id="field-pattern-355"
       patternUnits="userSpaceOnUse"
       viewBox="0 0 70 125"
@@ -5824,8 +5824,8 @@ exports[`CoatsOfArms should render 'Paly pily vair and pean' 1`] = `
     >
       <rect
         fill="#000000"
-        height="100%"
-        width="100%"
+        height="125px"
+        width="70px"
       />
       <use
         height={60}
@@ -5865,8 +5865,8 @@ exports[`CoatsOfArms should render 'Paly pily vair and pean' 1`] = `
     >
       <rect
         fill="#FFFFFF"
-        height="100%"
-        width="100%"
+        height="200px"
+        width="100px"
       />
       <use
         height={100}
@@ -6347,7 +6347,7 @@ exports[`CoatsOfArms should render 'Per fess or and ermine, a bordure engrailed 
       </g>
     </symbol>
     <pattern
-      height={65.04065040650407}
+      height={64.93506493506494}
       id="field-pattern-100"
       patternUnits="userSpaceOnUse"
       viewBox="0 0 70 125"
@@ -6355,8 +6355,8 @@ exports[`CoatsOfArms should render 'Per fess or and ermine, a bordure engrailed 
     >
       <rect
         fill="#FFFFFF"
-        height="100%"
-        width="100%"
+        height="125px"
+        width="70px"
       />
       <use
         height={60}
@@ -6500,7 +6500,7 @@ exports[`CoatsOfArms should render 'Per pale invected ermine and or' 1`] = `
       </g>
     </symbol>
     <pattern
-      height={65.04065040650407}
+      height={64.93506493506494}
       id="field-pattern-268"
       patternUnits="userSpaceOnUse"
       viewBox="0 0 70 125"
@@ -6508,8 +6508,8 @@ exports[`CoatsOfArms should render 'Per pale invected ermine and or' 1`] = `
     >
       <rect
         fill="#FFFFFF"
-        height="100%"
-        width="100%"
+        height="125px"
+        width="70px"
       />
       <use
         height={60}
@@ -6709,8 +6709,8 @@ exports[`CoatsOfArms should render 'Potent, a chief gules' 1`] = `
     >
       <rect
         fill="#FFFFFF"
-        height="100%"
-        width="150%"
+        height="200px"
+        width="200px"
       />
       <use
         height={100}
@@ -6968,7 +6968,7 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
       </g>
     </symbol>
     <pattern
-      height={65.04065040650407}
+      height={64.93506493506494}
       id="field-pattern-484"
       patternUnits="userSpaceOnUse"
       viewBox="0 0 70 125"
@@ -6976,8 +6976,8 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
     >
       <rect
         fill="#FFFFFF"
-        height="100%"
-        width="100%"
+        height="125px"
+        width="70px"
       />
       <use
         height={60}
@@ -7722,8 +7722,8 @@ exports[`CoatsOfArms should render 'Vert, two crosses hummetty counter potent' 1
     >
       <rect
         fill="#FFFFFF"
-        height="100%"
-        width="150%"
+        height="200px"
+        width="200px"
       />
       <use
         height={100}
@@ -7868,7 +7868,7 @@ exports[`CoatsOfArms should render a fur blason 1`] = `
       </g>
     </symbol>
     <pattern
-      height={65.04065040650407}
+      height={64.93506493506494}
       id="field-pattern-16"
       patternUnits="userSpaceOnUse"
       viewBox="0 0 70 125"
@@ -7876,8 +7876,8 @@ exports[`CoatsOfArms should render a fur blason 1`] = `
     >
       <rect
         fill="#FFFFFF"
-        height="100%"
-        width="100%"
+        height="125px"
+        width="70px"
       />
       <use
         height={60}
@@ -7987,8 +7987,8 @@ exports[`CoatsOfArms should render a party blason 1`] = `
     >
       <rect
         fill="#FFFFFF"
-        height="100%"
-        width="100%"
+        height="200px"
+        width="100px"
       />
       <use
         height={100}
@@ -8105,8 +8105,8 @@ exports[`CoatsOfArms should render a party blason with some ordinary 1`] = `
     >
       <rect
         fill="#FFFFFF"
-        height="100%"
-        width="100%"
+        height="200px"
+        width="100px"
       />
       <use
         height={100}
