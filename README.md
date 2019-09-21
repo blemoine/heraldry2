@@ -41,3 +41,5 @@ Faire le "of the last"
 - gerer le onclick sur le form pour le deplier apres la prise de control 
 - Factoriser intelligemment le dessin des paths dans les charges (repetition du onClick et du cursor pointer)
 - Gyronny + bordure pas centré
+- Bendy && Bendy Sinister && Bendy pily && Bendy pily sinister of 10  with chief est mal centr´
+- Dessiner des petits boties autour des tinctures et lines !

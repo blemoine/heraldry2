@@ -31,7 +31,7 @@ export const GironnyDisplay = (props: Props) => {
         if ((angleInDegree >= 90 && angleInDegree < 180) || angleInDegree >= 270) {
           pathBuilder = basePath.scale([width / 2, height / 2], (2 * height) / width, (2 * width) / height);
         } else {
-          pathBuilder = basePath;
+          pathBuilder = basePath.scale([width / 2, height / 2], 2, 2);
         }
 
         return (
