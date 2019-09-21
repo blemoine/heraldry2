@@ -7,7 +7,13 @@ import { parseBlason } from '../blason-parser/blasonParser';
 import { defaultTinctureConfiguration } from '../model/tincture-configuration';
 import { Configuration } from '../model/configuration';
 import { Dimension } from '../model/dimension';
-jest.mock('../../utils/uuid');
+
+let value = 1;
+jest.mock('../../utils/uuid', () => {
+  return {
+    uuid: () => value++,
+  };
+});
 
 const dimension: Dimension = {
   height: 266.6666666666667,
@@ -16,6 +22,9 @@ const dimension: Dimension = {
 const configuration: Configuration = { tinctureConfiguration: defaultTinctureConfiguration, shieldShape: 'heater' };
 
 describe('CoatsOfArms', () => {
+  beforeEach(() => {
+    value = 0;
+  });
   it('should render a plain blason', () => {
     const blason: Blason = { kind: 'simple', field: { kind: 'plain', tincture: gules } };
     const component = renderer.create(

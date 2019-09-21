@@ -41,5 +41,3 @@ Faire le "of the last"
 - gerer le onclick sur le form pour le deplier apres la prise de control 
 - Factoriser intelligemment le dessin des paths dans les charges (repetition du onClick et du cursor pointer)
 - try eslint (no console.log?)
-- uuid mock moin sensible a l'execution unique(en particulier dans les snapshot tests)
-
