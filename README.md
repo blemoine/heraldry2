@@ -40,4 +40,4 @@ Faire le "of the last"
 - going to quarterly is a slow click
 - gerer le onclick sur le form pour le deplier apres la prise de control 
 - Factoriser intelligemment le dessin des paths dans les charges (repetition du onClick et du cursor pointer)
-- try eslint (no console.log?)
+

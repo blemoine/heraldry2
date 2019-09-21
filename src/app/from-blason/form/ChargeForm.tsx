@@ -22,38 +22,42 @@ export function ChargeForm({ tinctureConfiguration, charge, chargeChange }: Prop
           attitude: 'rampant',
           head: null,
           tail: null,
-          tincture: or,
-          countAndDisposition: { count: 1, disposition: 'default' },
+          tincture: charge ? charge.tincture : or,
+          countAndDisposition: charge ? charge.countAndDisposition : { count: 1, disposition: 'default' },
         });
       } else if (chargeName === 'eagle') {
         chargeChange({
           name: chargeName,
           attitude: 'displayed',
-          tincture: sable,
+          tincture: charge ? charge.tincture : sable,
           beakedAndArmed: or,
-          countAndDisposition: { count: 1, disposition: 'default' },
+          countAndDisposition: charge ? charge.countAndDisposition : { count: 1, disposition: 'default' },
         });
       } else if (chargeName === 'fleurdelys') {
-        chargeChange({ name: chargeName, countAndDisposition: { count: 3, disposition: 'default' }, tincture: or });
+        chargeChange({
+          name: chargeName,
+          countAndDisposition: charge ? charge.countAndDisposition : { count: 3, disposition: 'default' },
+          tincture: charge ? charge.tincture : or,
+        });
       } else if (chargeName === 'roundel' || chargeName === 'lozenge') {
         chargeChange({
           name: chargeName,
-          countAndDisposition: { count: 3, disposition: 'default' },
-          tincture: or,
+          countAndDisposition: charge ? charge.countAndDisposition : { count: 3, disposition: 'default' },
+          tincture: charge ? charge.tincture : or,
           inside: 'nothing',
         });
       } else if (chargeName === 'cross') {
         chargeChange({
           name: chargeName,
-          countAndDisposition: { count: 1, disposition: 'default' },
-          tincture: or,
+          countAndDisposition: charge ? charge.countAndDisposition : { count: 1, disposition: 'default' },
+          tincture: charge ? charge.tincture : or,
           limbs: 'hummetty',
         });
       } else if (chargeName === 'mullet') {
         chargeChange({
           name: chargeName,
-          countAndDisposition: { count: 1, disposition: 'default' },
-          tincture: or,
+          countAndDisposition: charge ? charge.countAndDisposition : { count: 1, disposition: 'default' },
+          tincture: charge ? charge.tincture : or,
           inside: 'nothing',
           points: 5,
         });

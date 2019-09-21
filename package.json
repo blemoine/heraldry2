@@ -7,12 +7,12 @@
     "clean": "rm -rf dist .cache node_modules",
     "lint": "eslint './src/**/*.{ts,tsx}'",
     "start": "parcel src/index.html",
-    "test": "npm run typecheck && jest",
+    "test": "npm run lint && npm run typecheck && jest",
     "test:rules": "npm run typecheck && GENERATOR_CASE_COUNT=1000 jest",
     "test:debug": "node --inspect-brk node_modules/.bin/jest --runInBand",
     "typecheck": "tsc --noEmit"
   },
-  "author": "",
+  "author": "Benoit Lemoine",
   "license": "WTFPL",
   "devDependencies": {
     "@svgr/cli": "^4.3.2",
