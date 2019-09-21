@@ -30,7 +30,7 @@ export const RoundelForm = ({ tinctureConfiguration, charge, chargeChange }: Pro
       <div className="row">
         <div className="col">
           <div className="form-group">
-            <label>Select the tincture of the charge</label>
+            <label>Tincture of the charge</label>
             <TinctureSelect
               tinctureConfiguration={tinctureConfiguration}
               tincture={charge.tincture}

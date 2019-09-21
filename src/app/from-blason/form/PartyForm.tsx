@@ -35,7 +35,7 @@ export const PartyForm = ({ tinctureConfiguration, field, fieldChange }: Props) 
     <div className="row">
       <div className="col">
         <div className="form-group">
-          <label>Select your party</label>
+          <label>Party</label>
           <SelectScalar
             options={partiesOptions}
             formatValue={stringifyParty}
@@ -46,7 +46,7 @@ export const PartyForm = ({ tinctureConfiguration, field, fieldChange }: Props) 
       </div>
       <div className="col">
         <div className="form-group">
-          <label>Select your first tincture</label>
+          <label>First tincture</label>
           <TinctureSelect
             tinctureConfiguration={tinctureConfiguration}
             tincture={field.per.tinctures[0]}
@@ -56,7 +56,7 @@ export const PartyForm = ({ tinctureConfiguration, field, fieldChange }: Props) 
       </div>
       <div className="col">
         <div className="form-group">
-          <label>Select your second tincture</label>
+          <label>Second tincture</label>
           <TinctureSelect
             tinctureConfiguration={tinctureConfiguration}
             tincture={field.per.tinctures[1]}
@@ -66,7 +66,7 @@ export const PartyForm = ({ tinctureConfiguration, field, fieldChange }: Props) 
       </div>
       <div className="col">
         <div className="form-group">
-          <label>Select the line style</label>
+          <label>Line style</label>
           <LineSelect line={field.per.line} lineChange={lineChange} />
         </div>
       </div>

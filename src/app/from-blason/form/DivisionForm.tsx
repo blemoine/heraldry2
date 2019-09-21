@@ -26,7 +26,7 @@ export const DivisionForm = function DivisionForm({ blason, blasonChange }: Prop
   return (
     <>
       <div className="form-group field-division-select">
-        <label>Select the division of the field</label>
+        <label>Division of the field</label>
         <SelectScalar
           classNamePrefix="field-division"
           options={availableDivisions}

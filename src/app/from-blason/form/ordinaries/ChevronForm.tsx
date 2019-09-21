@@ -29,7 +29,7 @@ export const ChevronForm = ({ tinctureConfiguration, ordinary, ordinaryChange }:
   return (
     <>
       <div className="form-group">
-        <label>Select the tincture of the ordinary</label>
+        <label>Tincture</label>
         <TinctureSelect
           tinctureConfiguration={tinctureConfiguration}
           tincture={ordinary.tincture}
@@ -37,12 +37,12 @@ export const ChevronForm = ({ tinctureConfiguration, ordinary, ordinaryChange }:
         />
       </div>
       <div className="form-group">
-        <label>Select the number of chevron</label>
+        <label>Number of chevron</label>
         <SelectScalar options={countOptions} value={ordinary.count} valueChange={countChange} />
       </div>
 
       <div className="form-group">
-        <label>Select the line style</label>
+        <label>Line style</label>
         <LineSelect line={ordinary.line} lineChange={lineChange} />
       </div>
     </>

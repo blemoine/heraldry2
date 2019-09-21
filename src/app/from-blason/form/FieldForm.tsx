@@ -81,7 +81,7 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
       {field.kind === 'party' ? (
         <>
           <div className="form-group field-type-select">
-            <label>Select the field type</label>
+            <label>Field type</label>
             <SelectScalar
               classNamePrefix="field-type"
               options={fieldKinds}
@@ -96,7 +96,7 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
         <div className="row">
           <div className="col">
             <div className="form-group field-type-select">
-              <label>Select the field type</label>
+              <label>Field type</label>
               <SelectScalar
                 classNamePrefix="field-type"
                 options={fieldKinds}
@@ -109,7 +109,7 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
           {field.kind === 'plain' ? (
             <div className="col">
               <div className="form-group field-tincture-select">
-                <label>Select your field</label>
+                <label>Field</label>
                 <TinctureSelect
                   tinctureConfiguration={tinctureConfiguration}
                   tincture={field.tincture}
@@ -132,7 +132,7 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
             <>
               <div className="col">
                 <div className="form-group field-first-tincture-select">
-                  <label>Select your first tincture</label>
+                  <label>First tincture</label>
                   <TinctureSelect
                     tinctureConfiguration={tinctureConfiguration}
                     tincture={field.tinctures[0]}
@@ -142,7 +142,7 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
               </div>
               <div className="col">
                 <div className="form-group field-second-tincture-select">
-                  <label>Select your second tincture</label>
+                  <label>Second tincture</label>
                   <TinctureSelect
                     tinctureConfiguration={tinctureConfiguration}
                     tincture={field.tinctures[1]}
@@ -159,7 +159,7 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
 
       {field.kind === 'gironny' && (
         <div className="form-group">
-          <label>Select the number</label>
+          <label>Number</label>
           <SelectScalar
             options={[8, 12] as const}
             value={field.number}
@@ -170,7 +170,7 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
 
       {(field.kind === 'barry' || field.kind === 'bendy') && (
         <div className="form-group">
-          <label>Select the number of bar</label>
+          <label>Number of bar</label>
           <SelectScalar
             options={numberOfBars}
             value={field.number}

@@ -25,13 +25,13 @@ export const CountAndDispositionForm = ({ countAndDisposition, countAndDispositi
     <div className="row">
       <div className="col">
         <div className="form-group">
-          <label>Select the number</label>
+          <label>Number</label>
           <SelectScalar options={supportedNumbers} value={countAndDisposition.count} valueChange={countChange} />
         </div>
       </div>
       <div className="col">
         <div className="form-group">
-          <label>Select the disposition</label>
+          <label>Disposition</label>
           <SelectScalar
             options={countAndDisposition.count === 1 ? ['default'] : availableDispositions}
             value={countAndDisposition.disposition}

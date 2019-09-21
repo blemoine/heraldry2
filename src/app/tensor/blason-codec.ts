@@ -94,7 +94,12 @@ export function encodeField(field: Field): Uint8Array {
   result[0] = encodeFromList(fieldKinds, field.kind);
   if (field.kind === 'plain') {
     result[1] = encodeTincture(field.tincture);
-  } else if (field.kind === 'barry' || field.kind === 'bendy' || field.kind === 'bendySinister' || field.kind === 'gironny') {
+  } else if (
+    field.kind === 'barry' ||
+    field.kind === 'bendy' ||
+    field.kind === 'bendySinister' ||
+    field.kind === 'gironny'
+  ) {
     result[1] = encodeTincture(field.tinctures[0]);
     result[2] = encodeTincture(field.tinctures[1]);
     result[3] = field.number;

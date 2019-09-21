@@ -30,7 +30,7 @@ export function OrdinaryForm({ tinctureConfiguration, ordinary, ordinaryChange }
     <div className="row">
       <div className="col">
         <div className="form-group ordinary-type-select">
-          <label>Select your ordinary</label>
+          <label>Ordinary</label>
           <OrdinaryNameSelect ordinary={ordinary ? ordinary.name : null} ordinaryChange={changeOrdinary} />
         </div>
       </div>

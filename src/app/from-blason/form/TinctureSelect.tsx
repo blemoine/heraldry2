@@ -97,7 +97,7 @@ export const TinctureSelect = ({ tinctureConfiguration, tincture, tinctureChange
         onHide={() => setShowOverlay(false)}
       >
         <Popover id="tincture-select-popover">
-          <Popover.Title as="h3">Select a tincture</Popover.Title>
+          <Popover.Title as="h3">Tincture</Popover.Title>
           <Popover.Content>
             <div style={{ display: 'flex', flexWrap: 'wrap' }}>
               {tinctures.map((tincture, i) => {
