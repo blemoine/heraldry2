@@ -25,7 +25,7 @@ export const PaleForm = ({ tinctureConfiguration, ordinary, ordinaryChange }: Pr
   return (
     <>
       <div className="form-group">
-        <label>Select the tincture of the ordinary</label>
+        <label>Tincture</label>
         <TinctureSelect
           tinctureConfiguration={tinctureConfiguration}
           tincture={ordinary.tincture}
@@ -33,12 +33,12 @@ export const PaleForm = ({ tinctureConfiguration, ordinary, ordinaryChange }: Pr
         />
       </div>
       <div className="form-group">
-        <label>Select the number of pale</label>
+        <label>Number of pale</label>
         <SelectScalar options={countOptions} value={ordinary.count} valueChange={countChange} />
       </div>
 
       <div className="form-group">
-        <label>Select the line style</label>
+        <label>Line style</label>
         <LineSelect line={ordinary.line} lineChange={lineChange} />
       </div>
     </>

@@ -22,20 +22,24 @@ export const StandardOrdinaryForm = ({ tinctureConfiguration, ordinary, ordinary
   }
 
   return (
-    <>
-      <div className="form-group ordinary-tincture-select">
-        <label>Select the tincture of the ordinary</label>
-        <TinctureSelect
-          tinctureConfiguration={tinctureConfiguration}
-          tincture={ordinary.tincture}
-          tinctureChange={ordinaryTinctureChange}
-        />
+    <div className="row">
+      <div className="col">
+        <div className="form-group ordinary-tincture-select">
+          <label>Tincture</label>
+          <TinctureSelect
+            tinctureConfiguration={tinctureConfiguration}
+            tincture={ordinary.tincture}
+            tinctureChange={ordinaryTinctureChange}
+          />
+        </div>
       </div>
 
-      <div className="form-group">
-        <label>Select the line style</label>
-        <LineSelect line={ordinary.line} lineChange={lineChange} />
+      <div className="col">
+        <div className="form-group">
+          <label>Line style</label>
+          <LineSelect line={ordinary.line} lineChange={lineChange} />
+        </div>
       </div>
-    </>
+    </div>
   );
 };

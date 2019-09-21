@@ -28,7 +28,7 @@ export const MulletForm = ({ tinctureConfiguration, charge, chargeChange }: Prop
       <div className="row">
         <div className="col">
           <div className="form-group">
-            <label>Select the tincture of the charge</label>
+            <label>Tincture of the charge</label>
             <TinctureSelect
               tinctureConfiguration={tinctureConfiguration}
               tincture={charge.tincture}
@@ -38,13 +38,13 @@ export const MulletForm = ({ tinctureConfiguration, charge, chargeChange }: Prop
         </div>
         <div className="col">
           <div className="form-group">
-            <label>points</label>
+            <label>Points</label>
             <SelectScalar options={mulletPoints} value={charge.points} valueChange={pointsChange} />
           </div>
         </div>
         <div className="col">
           <div className="form-group">
-            <label>inside</label>
+            <label>Inside</label>
             <SelectScalar options={mulletInsides} value={charge.inside} valueChange={insideChange} />
           </div>
         </div>

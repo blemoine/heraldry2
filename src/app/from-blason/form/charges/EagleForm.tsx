@@ -31,7 +31,7 @@ export const EagleForm = ({ tinctureConfiguration, charge, chargeChange }: Props
       <div className="row">
         <div className="col">
           <div className="form-group">
-            <label>Select the tincture of the charge</label>
+            <label>Tincture of the charge</label>
             <TinctureSelect
               tinctureConfiguration={tinctureConfiguration}
               tincture={charge.tincture}
@@ -41,7 +41,7 @@ export const EagleForm = ({ tinctureConfiguration, charge, chargeChange }: Props
         </div>
         <div className="col">
           <div className="form-group">
-            <label>Select the tincture of the beak and talons</label>
+            <label>Tincture of the beak and talons</label>
             <TinctureSelect
               tinctureConfiguration={tinctureConfiguration}
               tincture={charge.beakedAndArmed}
@@ -53,7 +53,7 @@ export const EagleForm = ({ tinctureConfiguration, charge, chargeChange }: Props
       <div className="row">
         <div className="col">
           <div className="form-group">
-            <label>Select the attitude</label>
+            <label>Attitude</label>
             <SelectScalar options={eagleAttitudes} value={charge.attitude} valueChange={attitudeChange} />
           </div>
         </div>

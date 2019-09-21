@@ -32,7 +32,7 @@ const TinctureRenderer = ({
         width={width}
         height={height}
         viewBox={`0 0 ${width} ${height}`}
-        style={{ margin: 'auto', display: 'block' }}
+        style={{ margin: 'auto', display: 'block', border: '1px solid #ccc' }}
       >
         <defs>
           {isErmine(tincture) ? (
@@ -64,7 +64,17 @@ const TinctureRenderer = ({
       </svg>
     );
   } else {
-    return <div style={{ backgroundColor: tinctureConfiguration[tincture.name], width, height, margin: 'auto' }} />;
+    return (
+      <div
+        style={{
+          backgroundColor: tinctureConfiguration[tincture.name],
+          width,
+          height,
+          margin: 'auto',
+          border: '1px solid #ccc',
+        }}
+      />
+    );
   }
 };
 
@@ -80,7 +90,10 @@ export const TinctureSelect = ({ tinctureConfiguration, tincture, tinctureChange
     <div>
       <div
         className="tincture-select-popover-opener"
-        style={{ display: 'inline-block', cursor: 'pointer' }}
+        style={{
+          display: 'inline-block',
+          cursor: 'pointer',
+        }}
         ref={target}
         onClick={() => setShowOverlay(!showOverlay)}
       >

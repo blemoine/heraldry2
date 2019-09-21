@@ -42,7 +42,7 @@ export const LionForm = ({ tinctureConfiguration, charge, chargeChange }: Props)
       <div className="row">
         <div className="col">
           <div className="form-group charge-lion-tincture-select">
-            <label>Select the tincture of the charge</label>
+            <label>Tincture of the charge</label>
             <TinctureSelect
               tinctureConfiguration={tinctureConfiguration}
               tincture={charge.tincture}
@@ -52,7 +52,7 @@ export const LionForm = ({ tinctureConfiguration, charge, chargeChange }: Props)
         </div>
         <div className="col">
           <div className="form-group">
-            <label>Select the tincture of the claws and tongue</label>
+            <label>Tincture of the claws and tongue</label>
             <TinctureSelect
               tinctureConfiguration={tinctureConfiguration}
               tincture={charge.armedAndLangued}
@@ -68,14 +68,14 @@ export const LionForm = ({ tinctureConfiguration, charge, chargeChange }: Props)
       <div className="row">
         <div className="col">
           <div className="form-group">
-            <label>Select the attitude</label>
+            <label>Attitude</label>
             <SelectScalar options={lionAttitudes} value={charge.attitude} valueChange={attitudeChange} />
           </div>
         </div>
         {charge.attitude !== 'dormant' && (
           <div className="col">
             <div className="form-group">
-              <label>Select the head posture</label>
+              <label>Head posture</label>
               <SelectScalar options={headPostures} value={selectedHead} valueChange={headPostureChange} />
             </div>
           </div>

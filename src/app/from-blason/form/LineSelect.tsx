@@ -17,7 +17,7 @@ const LineRenderer = ({ line }: { line: Line }) => {
     .goTo([0, (3 * height) / 4], lineOptions)
     .close();
   return (
-    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ margin: 'auto', display: 'block' }}>
+    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{ margin: 'auto', display: 'block', border: '1px solid #ccc', }}>
       <PathFromBuilder pathBuilder={pathBuilder} fill="#333" stroke="#333" />
     </svg>
   );
