@@ -19,7 +19,9 @@ import { Segment } from 'point-in-svg-polygon';
 const numRuns = process.env.GENERATOR_CASE_COUNT ? parseFloat(process.env.GENERATOR_CASE_COUNT) : 40;
 
 // I don't have an explanation, but the dormant lion has strange coordinate, not refleted in the way it is drawn
-const chargeArbFiltered = simplifiedChargeArb.filter((t) => t.name !== 'lion' || t.attitude !== 'dormant');
+const chargeArbFiltered = simplifiedChargeArb.filter(
+  (t) => t.name !== 'lion' || (t.attitude !== 'dormant' && t.attitude !== 'statant' && t.attitude !== 'couchant')
+);
 
 function isInRect([x, y]: PathAbsolutePoint, rect: { x: number; y: number; width: number; height: number }): boolean {
   return x > rect.x && x < rect.x + rect.width && y > rect.y && y < rect.y + rect.height;

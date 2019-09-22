@@ -39,7 +39,7 @@ Faire le "of the last"
 - going to quarterly is a slow click
 - Factoriser intelligemment le dessin des paths dans les charges (repetition du onClick et du cursor pointer)
 - Factoriser le pattern de selection des tinctures et des lines
-- 3 mullets quarterly en bas, pas affiché correctment (Quarterly, 1st and 2nd and 3rd and 4th bendy sinister of ten or and gules, three mullets vert)
+- Pale invected has some overlap problem
 
 
 Feature to add

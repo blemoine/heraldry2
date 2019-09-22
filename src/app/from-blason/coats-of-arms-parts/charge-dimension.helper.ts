@@ -136,9 +136,9 @@ export function getChargeDimension(
         } else {
           if (chargeCount > 1) {
             return {
-              verticalScale: 0.63,
+              verticalScale: 0.61,
               horizontalScale: 0.55,
-              verticalOffset: 0.04,
+              verticalOffset: 0.041,
               horizontalOffset: shape === 'leftCut' ? 0.29 : 0.15,
             };
           } else {
@@ -149,6 +149,38 @@ export function getChargeDimension(
               horizontalOffset: shape === 'leftCut' ? 0.26 : 0.11,
             };
           }
+        }
+      } else if (ordinaryName === 'chief') {
+        if (chargeCount > 1) {
+          return {
+            verticalScale: 0.6,
+            horizontalScale: 0.7,
+            verticalOffset: 0.08,
+            horizontalOffset: shape === 'leftCut' ? 0.23 : 0.06,
+          };
+        } else {
+          return {
+            verticalScale: 0.8,
+            horizontalScale: 0.65,
+            verticalOffset: 0,
+            horizontalOffset: shape === 'leftCut' ? 0.3 : 0.05,
+          };
+        }
+      } else {
+        if (chargeCount > 1) {
+          return {
+            verticalScale: 0.7,
+            horizontalScale: 0.7,
+            verticalOffset: 0,
+            horizontalOffset: shape === 'leftCut' ? 0.2 : 0.087,
+          };
+        } else {
+          return {
+            verticalScale: 0.8,
+            horizontalScale: 0.65,
+            verticalOffset: -0.05,
+            horizontalOffset: shape === 'leftCut' ? 0.23 : 0.07,
+          };
         }
       }
     } else if (chargeDisposition === 'fess') {
@@ -190,28 +222,24 @@ export function getChargeDimension(
     let chargeVerticalOffset: number = 0;
 
     let chargeHeightOffset: number;
-    if (ordinary) {
-      if (ordinaryName === 'chief') {
-        if (ordinaryLine === 'straight') {
-          chargeHeightOffset = 0.12;
-        } else {
-          chargeHeightOffset = 0.13;
-          chargeVerticalOffset = 0.04;
-        }
-      } else if (ordinaryName === 'base') {
-        if (ordinaryLine === 'straight') {
-          chargeHeightOffset = 0.13;
-        } else {
-          chargeHeightOffset = 0.16;
-        }
-      } else if (ordinaryName === 'bordure') {
-        if (ordinaryLine === 'straight') {
-          chargeHeightOffset = 0.12;
-        } else {
-          chargeHeightOffset = 0.14;
-        }
+    if (ordinaryName === 'chief') {
+      if (ordinaryLine === 'straight') {
+        chargeHeightOffset = 0.12;
       } else {
-        chargeHeightOffset = defaultChargeHeightOffset;
+        chargeHeightOffset = 0.13;
+        chargeVerticalOffset = 0.04;
+      }
+    } else if (ordinaryName === 'base') {
+      if (ordinaryLine === 'straight') {
+        chargeHeightOffset = 0.13;
+      } else {
+        chargeHeightOffset = 0.16;
+      }
+    } else if (ordinaryName === 'bordure') {
+      if (ordinaryLine === 'straight') {
+        chargeHeightOffset = 0.12;
+      } else {
+        chargeHeightOffset = 0.14;
       }
     } else {
       chargeHeightOffset = defaultChargeHeightOffset;
