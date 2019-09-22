@@ -36,8 +36,8 @@ Faire le "of the last"
 - ecrire des tests dans app pour faire un quarterly 
 - faire le déploiement
 - gerer les erreurs provenant de l'URL 
-- use Collapse pour la configuration
+- use Collapse from bootstrap pour la configuration
 - going to quarterly is a slow click
-- gerer le onclick sur le form pour le deplier apres la prise de control 
 - Factoriser intelligemment le dessin des paths dans les charges (repetition du onClick et du cursor pointer)
-
+- Factoriser le pattern de selection des tinctures et des lines
+- 3 mullets quarterly en bas, pas affiché correctment (Quarterly, 1st and 2nd and 3rd and 4th bendy sinister of ten or and gules, three mullets vert)

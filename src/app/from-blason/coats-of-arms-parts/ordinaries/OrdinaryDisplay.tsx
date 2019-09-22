@@ -241,6 +241,31 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
         onClick={onClick}
       />
     );
+  } else if (ordinary.name === 'pall') {
+    const pallWidth = width / 5.5;
+    const projectedPallWidth = pallWidth / Math.sqrt(2);
+    const lineOptions = computeLineOptions(ordinary.line, { width: width / 1.5, height });
+    const pathBuilder = SvgPathBuilder.start([0, 0])
+      .goTo([projectedPallWidth, 0])
+      .goTo([width / 2, height / 2 - (height / width) * projectedPallWidth], lineOptions)
+      .goTo([width - projectedPallWidth, 0], lineOptions)
+      .goTo([width, 0])
+      .goTo([width, projectedPallWidth])
+      .goTo([width / 2 + pallWidth / 2, height / 2], lineOptions)
+      .goTo([width / 2 + pallWidth / 2, height], lineOptions)
+      .goTo([width / 2 - pallWidth / 2, height])
+      .goTo([width / 2 - pallWidth / 2, height / 2], lineOptions)
+      .goTo([0, projectedPallWidth], lineOptions);
+
+    return (
+      <PathFromBuilder
+        pathBuilder={pathBuilder}
+        fill={fill}
+        stroke="#333"
+        style={{ cursor: 'pointer' }}
+        onClick={onClick}
+      />
+    );
   } else {
     return cannotHappen(ordinary);
   }
