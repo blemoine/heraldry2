@@ -30,7 +30,6 @@ Faire le "of the last"
 - animate configuration 0 to auto
 - Dans la liste des boucliers, afficher un petit icone représentant la forme attendue
 
-- Supporter le clic sur une zone -> edition
 - Refondre l'UX (par defaut on affiche que le bouclier + blason, et on peut deplier le form a coté
 - etre plus lenient sur la syntaxe des quarterly (avec les : et les;)
 - ecrire des tests dans app pour faire un quarterly 
@@ -41,3 +40,12 @@ Faire le "of the last"
 - Factoriser intelligemment le dessin des paths dans les charges (repetition du onClick et du cursor pointer)
 - Factoriser le pattern de selection des tinctures et des lines
 - 3 mullets quarterly en bas, pas affiché correctment (Quarterly, 1st and 2nd and 3rd and 4th bendy sinister of ten or and gules, three mullets vert)
+
+
+Feature to add
+---
+
+* Quarterly per fess indented argent and gules  (https://en.wikipedia.org/wiki/Fulk_FitzWarin)
+* https://en.wikipedia.org/wiki/Armorial_of_the_House_of_Plantagenet
+* per-fesse gu. and arg., six martlets, three, two, one, counterchanged
+* Arg., on a chief az. two mullets or 

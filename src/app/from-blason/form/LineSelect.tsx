@@ -12,10 +12,10 @@ const LineRenderer = ({ line }: { line: Line }) => {
 
   const lineOptions = computeLineOptions(line, { width: width * 1.7, height: height * 5 });
   const pathBuilder = SvgPathBuilder.start([0, height / 4])
-    .goTo([width, height / 4], lineOptions)
-    .goTo([width, (3 * height) / 4])
-    .goTo([0, (3 * height) / 4], lineOptions)
-    .close();
+    .goTo([0, (3 * height) / 4])
+    .goTo([width, (3 * height) / 4], lineOptions)
+    .goTo([width, height / 4])
+    .goTo([0, height / 4], lineOptions);
   return (
     <svg
       width={width}
