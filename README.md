@@ -40,8 +40,7 @@ Faire le "of the last"
 - Factoriser intelligemment le dessin des paths dans les charges (repetition du onClick et du cursor pointer)
 - Factoriser le pattern de selection des tinctures et des lines
 - Pale invected has some overlap problem
-- Deduplicated CrossDisplay && SaltireDisplay (invertedLine)
-
+- Click sur svg : on focus (or on mousedown/mouseup?) increse slightly the border width and then decrese it
 
 Feature to add
 ---

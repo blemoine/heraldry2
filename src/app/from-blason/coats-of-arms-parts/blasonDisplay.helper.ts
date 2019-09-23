@@ -21,6 +21,18 @@ export function computeLineOptions(line: Line, { width, height }: Dimension): Li
   }
 }
 
+export function invertLineOptions(lineOptions: LineOptions): LineOptions {
+  if (lineOptions.line === 'indented') {
+    return { ...lineOptions, height: -lineOptions.height };
+  } else if (lineOptions.line === 'with-arc') {
+    return { ...lineOptions, sweep: !lineOptions.sweep };
+  } else if (lineOptions.line === 'wavy') {
+    return { ...lineOptions, height: lineOptions.height };
+  } else {
+    return cannotHappen(lineOptions);
+  }
+}
+
 export const chiefHeightRatio = 1 / 5;
 
 export type SimpleBlasonShape = 'default' | 'square' | 'leftCut' | 'rightCut';
