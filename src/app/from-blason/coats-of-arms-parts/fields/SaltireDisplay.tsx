@@ -2,15 +2,26 @@ import * as React from 'react';
 import { Dimension } from '../../../model/dimension';
 import { Line } from '../../../model/line';
 import { computeLineOptions } from '../blasonDisplay.helper';
-import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
+import { LineOptions, SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { PathFromBuilder } from '../../../common/PathFromBuilder';
+import { cannotHappen } from '../../../../utils/cannot-happen';
 
 type Props = { fill: [string, string]; dimension: Dimension; line: Line };
 export const SaltireDisplay: React.FunctionComponent<Props> = ({ dimension, fill, line }) => {
   const { width, height } = dimension;
   const lineOptions = computeLineOptions(line, dimension);
-  const invertedLineOptions =
-    lineOptions && lineOptions.line === 'with-arc' ? { ...lineOptions, sweep: !lineOptions.sweep } : lineOptions;
+  let invertedLineOptions: LineOptions | null;
+  if (lineOptions) {
+    if (lineOptions.line === 'indented') {
+      invertedLineOptions = { ...lineOptions, height: -lineOptions.height };
+    } else if (lineOptions.line === 'with-arc') {
+      invertedLineOptions = { ...lineOptions, sweep: !lineOptions.sweep };
+    } else {
+      return cannotHappen(lineOptions);
+    }
+  } else {
+    invertedLineOptions = null;
+  }
   const top = SvgPathBuilder.start([0, 0])
     .goTo([width, 0])
     .goTo([width / 2, height / 2], lineOptions)

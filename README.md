@@ -40,7 +40,7 @@ Faire le "of the last"
 - Factoriser intelligemment le dessin des paths dans les charges (repetition du onClick et du cursor pointer)
 - Factoriser le pattern de selection des tinctures et des lines
 - Pale invected has some overlap problem
-
+- Per cross indented azure and argent is broken
 
 Feature to add
 ---
