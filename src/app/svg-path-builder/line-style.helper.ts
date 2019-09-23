@@ -1,6 +1,6 @@
 import { arePointEquivalent, distanceBetween, PathAbsolutePoint } from './geometrical.helper';
 import { range } from '../../utils/range';
-import { EngrailedLineOptions, IndentedLineOptions, SvgPathBuilder } from './svg-path-builder';
+import { EngrailedLineOptions, IndentedLineOptions, SvgPathBuilder, WavyLineOptions } from './svg-path-builder';
 
 function getPerpendicularPointToCenter(
   [fromX, fromY]: PathAbsolutePoint,
@@ -47,6 +47,19 @@ export function engrailedLineTo(
     sweep ? getPerpendicularPointToCenter(to, from, height) : getPerpendicularPointToCenter(from, to, height),
     null
   );
+}
+
+function waveLineTo(path: SvgPathBuilder, to: PathAbsolutePoint, height: number): SvgPathBuilder {
+  const from = path.currentPoint();
+  if (!from || arePointEquivalent(from, to)) {
+    return path;
+  }
+
+  const middle = [(from[0] + to[0]) / 2, (from[1] + to[1]) / 2] as const;
+
+  return path
+    .quadraticBezier(middle, getPerpendicularPointToCenter(from, middle, height))
+    .quadraticBezier(to, getPerpendicularPointToCenter(middle, to, -height));
 }
 
 function drawBetweenPoint(
@@ -117,5 +130,15 @@ export function engrailBetweenPoint(
 ): SvgPathBuilder {
   return drawBetweenPoint(path, lineOption.radius, parametricPath, (result, to) =>
     engrailedLineTo(result, to, lineOption.radius, lineOption.sweep)
+  );
+}
+
+export function waveBetweenPoint(
+  path: SvgPathBuilder,
+  lineOption: WavyLineOptions,
+  parametricPath: (t: number) => PathAbsolutePoint
+): SvgPathBuilder {
+  return drawBetweenPoint(path, lineOption.width, parametricPath, (result, to) =>
+    waveLineTo(result, to, lineOption.height)
   );
 }

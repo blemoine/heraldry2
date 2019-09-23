@@ -14,7 +14,7 @@ import { SimpleBlasonPath } from '../../model/blason-path';
 
 function getFieldHorizontalOffset(ordinary: Ordinary): number {
   if (ordinary.name === 'bordure') {
-    if (ordinary.line === 'engrailed') {
+    if (ordinary.line === 'engrailed' || ordinary.line === 'wavy') {
       return 6 / 100;
     } else {
       return 10 / 100;
@@ -28,17 +28,17 @@ function getFieldVerticalOffset(ordinary: Ordinary): number {
   if (ordinary.name === 'chief') {
     if (ordinary.line === 'straight') {
       return 1 / 5;
-    } else if (ordinary.line === 'engrailed') {
+    } else if (ordinary.line === 'engrailed' || ordinary.line === 'indented') {
       return 11 / 50;
     } else if (ordinary.line === 'invected') {
       return 13 / 50;
-    } else if (ordinary.line === 'indented') {
-      return 11 / 50;
+    } else if (ordinary.line === 'wavy') {
+      return 9 / 50;
     } else {
       return cannotHappen(ordinary.line);
     }
   } else if (ordinary.name === 'bordure') {
-    if (ordinary.line === 'engrailed') {
+    if (ordinary.line === 'engrailed' || ordinary.line === 'wavy') {
       return 6 / 100;
     } else {
       return 10 / 100;

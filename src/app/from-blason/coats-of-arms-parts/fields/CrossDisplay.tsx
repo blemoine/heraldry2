@@ -17,6 +17,8 @@ export const CrossDisplay: React.FunctionComponent<Props> = ({ dimension, fill, 
       invertedLineOptions = { ...lineOptions, height: -lineOptions.height };
     } else if (lineOptions.line === 'with-arc') {
       invertedLineOptions = { ...lineOptions, sweep: !lineOptions.sweep };
+    } else if (lineOptions.line === 'wavy') {
+      invertedLineOptions = { ...lineOptions, height: lineOptions.height };
     } else {
       return cannotHappen(lineOptions);
     }

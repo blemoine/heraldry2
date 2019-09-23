@@ -581,4 +581,18 @@ Argent, Azure, Barry, Barry pily, Bendy, Bendy Sinister, Bendy pily, Bendy pily 
 
     expect(parseBlason('Or, three mullets of six points pierced gules ')).toEqual(expected);
   });
+
+  it('should parse wavy line', () => {
+    const expected: SimpleBlason = {
+      kind: 'simple',
+      field: { kind: 'party', per: { name: 'bendSinister', line: 'wavy', tinctures: [azure, or] } },
+      ordinary: {
+        name: 'chief',
+        line: 'wavy',
+        tincture: argent,
+      },
+    };
+
+    expect(parseBlason('Per bend sinister wavy azure and or, a chief wavy argent')).toEqual(expected);
+  });
 });

@@ -12,6 +12,8 @@ export function computeLineOptions(line: Line, { width, height }: Dimension): Li
     return { line: 'with-arc', radius, sweep: false };
   } else if (line === 'indented') {
     return { line: 'indented', height: height / 30, width: width / 10 };
+  } else if (line === 'wavy') {
+    return { line: 'wavy', height: height / 50, width: width / 9 };
   } else if (line === 'straight') {
     return null;
   } else {

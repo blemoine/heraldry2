@@ -3,7 +3,7 @@ import { arePointEquivalent, PathAbsolutePoint } from './geometrical.helper';
 import { pointOnEllipticalArc, pointOnQuadraticBezier } from './point-on-elliptical-arc';
 import { round } from '../../utils/round';
 import { raise, Result } from '../../utils/result';
-import { engrailBetweenPoint, indentBetweenPoint } from './line-style.helper';
+import { engrailBetweenPoint, indentBetweenPoint, waveBetweenPoint } from './line-style.helper';
 import { Matrix3, mul, mulVec, rotate3, scale3, translation3 } from './matrix';
 
 type MoveTo = { command: 'M'; point: PathAbsolutePoint };
@@ -25,8 +25,9 @@ type Close = { command: 'Z' };
 type PathCommand = MoveTo | GoToPoint | Arc | Vertical | Horizontal | Close | QuadraticBezier | CubicBezier;
 
 export type EngrailedLineOptions = { line: 'with-arc'; radius: number; sweep: boolean };
+export type WavyLineOptions = { line: 'wavy'; height: number; width: number };
 export type IndentedLineOptions = { line: 'indented'; height: number; width: number };
-export type LineOptions = EngrailedLineOptions | IndentedLineOptions;
+export type LineOptions = EngrailedLineOptions | IndentedLineOptions | WavyLineOptions;
 
 function getX(commands: Array<PathCommand>): number | null {
   if (commands.length === 0) {
@@ -187,6 +188,8 @@ export class SvgPathBuilder {
           return engrailBetweenPoint(this, lineOptions, nextPointFn);
         } else if (lineOptions.line === 'indented') {
           return indentBetweenPoint(this, lineOptions, nextPointFn);
+        } else if (lineOptions.line === 'wavy') {
+          return waveBetweenPoint(this, lineOptions, nextPointFn);
         } else {
           return cannotHappen(lineOptions);
         }
@@ -222,6 +225,8 @@ export class SvgPathBuilder {
           return engrailBetweenPoint(this, lineOptions, nextPointFn);
         } else if (lineOptions.line === 'indented') {
           return indentBetweenPoint(this, lineOptions, nextPointFn);
+        } else if (lineOptions.line === 'wavy') {
+          return waveBetweenPoint(this, lineOptions, nextPointFn);
         } else {
           return cannotHappen(lineOptions);
         }
@@ -298,6 +303,8 @@ export class SvgPathBuilder {
           return engrailBetweenPoint(this, lineOptions, nextPointFn);
         } else if (lineOptions.line === 'indented') {
           return indentBetweenPoint(this, lineOptions, nextPointFn);
+        } else if (lineOptions.line === 'wavy') {
+          return waveBetweenPoint(this, lineOptions, nextPointFn);
         } else {
           return cannotHappen(lineOptions);
         }
