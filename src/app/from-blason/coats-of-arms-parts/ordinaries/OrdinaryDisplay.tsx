@@ -8,6 +8,7 @@ import { PathFromBuilder } from '../../../common/PathFromBuilder';
 import { chiefHeightRatio, computeLineOptions, SimpleBlasonShape } from '../blasonDisplay.helper';
 import { ShieldShape } from '../../../model/configuration';
 import { BordureDisplay } from './BordureDisplay';
+import { toDegree } from '../../../svg-path-builder/geometrical.helper';
 
 type Props = {
   ordinary: Ordinary;
@@ -83,20 +84,22 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
       />
     );
   } else if (ordinary.name === 'bend') {
-    const basePoint = height / (8 * Math.sqrt(2));
     const length = Math.sqrt(width ** 2 + height ** 2);
+    const bendHeight = height / 4;
 
     const lineOptions = computeLineOptions(ordinary.line, dimension);
 
-    const pathBuilder = SvgPathBuilder.start([basePoint, -basePoint])
-      .goTo([-basePoint, basePoint])
-      .goTo([length - basePoint, length + basePoint], lineOptions)
-      .goTo([length + basePoint, length - basePoint])
-      .goTo([basePoint, -basePoint], lineOptions);
+    const pathBuilder2 = SvgPathBuilder.start([0, 0])
+      .goTo([0, bendHeight])
+      .goTo([length, bendHeight], lineOptions)
+      .goTo([length, 0])
+      .goTo([0, 0], lineOptions)
+      .translate([(width - length) / 2, height / 2 - bendHeight / 2])
+      .rotate([width / 2, height / 2], toDegree(Math.atan2(height, width)));
 
     return (
       <PathFromBuilder
-        pathBuilder={pathBuilder}
+        pathBuilder={pathBuilder2}
         fill={fill}
         stroke="#333"
         style={{ cursor: 'pointer' }}
@@ -104,17 +107,27 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
       />
     );
   } else if (ordinary.name === 'bendSinister') {
+    const length = Math.sqrt(width ** 2 + height ** 2);
+    const bendHeight = height / 4;
+
+    const lineOptions = computeLineOptions(ordinary.line, dimension);
+
+    const pathBuilder2 = SvgPathBuilder.start([0, 0])
+      .goTo([0, bendHeight])
+      .goTo([length, bendHeight], lineOptions)
+      .goTo([length, 0])
+      .goTo([0, 0], lineOptions)
+      .translate([(width - length) / 2, height / 2 - bendHeight / 2])
+      .rotate([width / 2, height / 2], -toDegree(Math.atan2(height, width)));
+
     return (
-      <g transform={`scale(-1,1) translate(-${width} 0)`}>
-        <OrdinaryDisplay
-          ordinary={{ ...ordinary, name: 'bend' }}
-          fill={fill}
-          dimension={dimension}
-          shape={shape}
-          shieldShape={shieldShape}
-          onClick={onClick}
-        />
-      </g>
+      <PathFromBuilder
+        pathBuilder={pathBuilder2}
+        fill={fill}
+        stroke="#333"
+        style={{ cursor: 'pointer' }}
+        onClick={onClick}
+      />
     );
   } else if (ordinary.name === 'pale') {
     const lineOptions = computeLineOptions(ordinary.line, dimension);
