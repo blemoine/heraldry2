@@ -67,10 +67,11 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
     );
   } else if (ordinary.name === 'fess') {
     const lineOptions = computeLineOptions(ordinary.line, dimension);
+    const oneSideOnly = lineOptions && 'oneSideOnly' in lineOptions ? lineOptions.oneSideOnly : false;
 
     const pathBuilder = SvgPathBuilder.start([0, height / 3])
       .goTo([0, (2 * height) / 3])
-      .goTo([width, (2 * height) / 3], lineOptions)
+      .goTo([width, (2 * height) / 3], oneSideOnly ? null : lineOptions)
       .goTo([width, height / 3])
       .goTo([0, height / 3], lineOptions);
 
@@ -88,10 +89,11 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
     const bendHeight = height / 4;
 
     const lineOptions = computeLineOptions(ordinary.line, dimension);
+    const oneSideOnly = lineOptions && 'oneSideOnly' in lineOptions ? lineOptions.oneSideOnly : false;
 
     const pathBuilder2 = SvgPathBuilder.start([0, 0])
       .goTo([0, bendHeight])
-      .goTo([length, bendHeight], lineOptions)
+      .goTo([length, bendHeight], oneSideOnly ? null : lineOptions)
       .goTo([length, 0])
       .goTo([0, 0], lineOptions)
       .translate([(width - length) / 2, height / 2 - bendHeight / 2])
@@ -111,10 +113,11 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
     const bendHeight = height / 4;
 
     const lineOptions = computeLineOptions(ordinary.line, dimension);
+    const oneSideOnly = lineOptions && 'oneSideOnly' in lineOptions ? lineOptions.oneSideOnly : false;
 
     const pathBuilder2 = SvgPathBuilder.start([0, 0])
       .goTo([0, bendHeight])
-      .goTo([length, bendHeight], lineOptions)
+      .goTo([length, bendHeight], oneSideOnly ? null : lineOptions)
       .goTo([length, 0])
       .goTo([0, 0], lineOptions)
       .translate([(width - length) / 2, height / 2 - bendHeight / 2])
@@ -131,13 +134,14 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
     );
   } else if (ordinary.name === 'pale') {
     const lineOptions = computeLineOptions(ordinary.line, dimension);
+    const oneSideOnly = lineOptions && 'oneSideOnly' in lineOptions ? lineOptions.oneSideOnly : false;
     return (
       <g>
         {range(0, ordinary.count).map((i) => {
           const startX = ((i * 2 + 1) * width) / (2 * ordinary.count + 1);
           const paleWidth = width / (2 * ordinary.count + 1);
           const pathBuilder = SvgPathBuilder.start([startX, 0])
-            .goTo([startX, height], lineOptions)
+            .goTo([startX, height], oneSideOnly ? null : lineOptions)
             .goTo([startX + paleWidth, height])
             .goTo([startX + paleWidth, 0], lineOptions);
 
@@ -156,19 +160,20 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
     );
   } else if (ordinary.name === 'cross') {
     const lineOptions = computeLineOptions(ordinary.line, dimension);
+    const oneSideOnly = lineOptions && 'oneSideOnly' in lineOptions ? lineOptions.oneSideOnly : false;
 
     const pathBuilder = SvgPathBuilder.start([(2 * width) / 5, 0])
-      .goTo([(2 * width) / 5, (2 * height) / 5], lineOptions)
+      .goTo([(2 * width) / 5, (2 * height) / 5], oneSideOnly ? null : lineOptions)
       .goTo([0, (2 * height) / 5], lineOptions)
       .goTo([0, (3 * height) / 5])
-      .goTo([(2 * width) / 5, (3 * height) / 5], lineOptions)
-      .goTo([(2 * width) / 5, height], lineOptions)
+      .goTo([(2 * width) / 5, (3 * height) / 5], oneSideOnly ? null : lineOptions)
+      .goTo([(2 * width) / 5, height], oneSideOnly ? null : lineOptions)
       .goTo([(3 * width) / 5, height])
-      .goTo([(3 * width) / 5, (3 * height) / 5], lineOptions)
-      .goTo([width, (3 * height) / 5], lineOptions)
+      .goTo([(3 * width) / 5, (3 * height) / 5], oneSideOnly ? null : lineOptions)
+      .goTo([width, (3 * height) / 5], oneSideOnly ? null : lineOptions)
       .goTo([width, (2 * height) / 5])
       .goTo([(3 * width) / 5, (2 * height) / 5], lineOptions)
-      .goTo([(3 * width) / 5, 0], lineOptions)
+      .goTo([(3 * width) / 5, 0], oneSideOnly ? null : lineOptions)
       .goTo([(2 * width) / 5, 0]);
 
     return (
@@ -182,6 +187,7 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
     );
   } else if (ordinary.name === 'saltire') {
     const lineOptions = computeLineOptions(ordinary.line, dimension);
+    const oneSideOnly = lineOptions && 'oneSideOnly' in lineOptions ? lineOptions.oneSideOnly : false;
     const basePointW = width / (10 * Math.sqrt(2));
     const basePointH = height / (10 * Math.sqrt(2));
 
@@ -191,14 +197,14 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
     const pathBuilder = SvgPathBuilder.start([w, h - basePointH])
       .goTo([(h * basePointW) / basePointH - w, -basePointH], lineOptions)
       .goTo([-basePointW, h - (w * basePointH) / basePointW])
-      .goTo([w - basePointW, h], lineOptions)
+      .goTo([w - basePointW, h], oneSideOnly ? null : lineOptions)
       .goTo([-basePointW, h + (w * basePointH) / basePointW], lineOptions)
       .goTo([(h * basePointW) / basePointH - w, 2 * h + basePointH])
-      .goTo([w, h + basePointH], lineOptions)
-      .goTo([2 * w, 2 * h + basePointH], lineOptions)
+      .goTo([w, h + basePointH], oneSideOnly ? null : lineOptions)
+      .goTo([2 * w, 2 * h + basePointH], oneSideOnly ? null : lineOptions)
       .goTo([2 * w + basePointW, h + (w * basePointH) / basePointW])
       .goTo([w + basePointW, h], lineOptions)
-      .goTo([2 * w + basePointW, h - (w * basePointH) / basePointW], lineOptions)
+      .goTo([2 * w + basePointW, h - (w * basePointH) / basePointW], oneSideOnly ? null : lineOptions)
       .goTo([2 * w, -basePointH])
       .goTo([w, h - basePointH], lineOptions);
 
@@ -213,6 +219,7 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
     );
   } else if (ordinary.name === 'chevron' || ordinary.name === 'chevronel') {
     const lineOptions = computeLineOptions(ordinary.line, dimension);
+    const oneSideOnly = lineOptions && 'oneSideOnly' in lineOptions ? lineOptions.oneSideOnly : false;
     const chevronHeight =
       ordinary.name === 'chevron' ? height / 6 : ordinary.name === 'chevronel' ? height / 12 : cannotHappen(ordinary);
 
@@ -225,8 +232,8 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
           const pathBuilder = SvgPathBuilder.start([width / 2, topPoint])
             .goTo([width, bottomPoint - chevronHeight], lineOptions)
             .goTo([width, bottomPoint])
-            .goTo([width / 2, topPoint + chevronHeight], lineOptions)
-            .goTo([0, bottomPoint], lineOptions)
+            .goTo([width / 2, topPoint + chevronHeight], oneSideOnly ? null : lineOptions)
+            .goTo([0, bottomPoint], oneSideOnly ? null : lineOptions)
             .goTo([0, bottomPoint - chevronHeight])
             .goTo([width / 2, topPoint], lineOptions);
 

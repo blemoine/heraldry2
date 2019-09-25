@@ -15,7 +15,9 @@ export function computeLineOptions(line: Line, { width, height }: Dimension): Li
   } else if (line === 'wavy') {
     return { line: 'wavy', height: height / 50, width: width / 9 };
   } else if (line === 'bretessed') {
-    return { line: 'embattled', height: height / 30, width: width / 9 };
+    return { line: 'embattled', height: height / 30, width: width / 9, oneSideOnly: false };
+  } else if (line === 'embattled') {
+    return { line: 'embattled', height: height / 30, width: width / 9, oneSideOnly: true };
   } else if (line === 'straight') {
     return null;
   } else {

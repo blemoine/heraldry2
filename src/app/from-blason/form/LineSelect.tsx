@@ -11,9 +11,10 @@ const LineRenderer = ({ line }: { line: Line }) => {
   const height = 30;
 
   const lineOptions = computeLineOptions(line, { width: width * 1.7, height: height * 5 });
+  const oneSideOnly = lineOptions && 'oneSideOnly' in lineOptions ? lineOptions.oneSideOnly : false;
   const pathBuilder = SvgPathBuilder.start([0, height / 4])
     .goTo([0, (3 * height) / 4])
-    .goTo([width, (3 * height) / 4], lineOptions)
+    .goTo([width, (3 * height) / 4], oneSideOnly ? null : lineOptions)
     .goTo([width, height / 4])
     .goTo([0, height / 4], lineOptions);
   return (

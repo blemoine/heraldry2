@@ -45,7 +45,7 @@ Faire le "of the last"
 - Cross Bretessed are displayed strangely ( Or, a cross bretessed azure)
 - Saltire Bretessed are displayed strangely ( Or, a saltire bretessed azure)
 - Displayed strangely: Or, three chevronels bretessed azure
- 
+- Pour les ordinary avec un seul coté, ne presenter que embatled, et pas les autres. 
 
 
 
