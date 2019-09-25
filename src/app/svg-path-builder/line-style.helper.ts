@@ -1,6 +1,12 @@
 import { arePointEquivalent, distanceBetween, PathAbsolutePoint } from './geometrical.helper';
 import { range } from '../../utils/range';
-import { EngrailedLineOptions, IndentedLineOptions, SvgPathBuilder, WavyLineOptions } from './svg-path-builder';
+import {
+  EmbattledLineOptions,
+  EngrailedLineOptions,
+  IndentedLineOptions,
+  SvgPathBuilder,
+  WavyLineOptions,
+} from './svg-path-builder';
 
 function getPerpendicularPointToCenter(
   [fromX, fromY]: PathAbsolutePoint,
@@ -60,6 +66,27 @@ function waveLineTo(path: SvgPathBuilder, to: PathAbsolutePoint, height: number)
   return path
     .quadraticBezier(middle, getPerpendicularPointToCenter(from, middle, height))
     .quadraticBezier(to, getPerpendicularPointToCenter(middle, to, -height));
+}
+
+function embattleLineTo(path: SvgPathBuilder, to: PathAbsolutePoint, height: number): SvgPathBuilder {
+  const from = path.currentPoint();
+  if (!from || arePointEquivalent(from, to)) {
+    return path;
+  }
+
+  const midTier1 = [(3 * from[0] + to[0]) / 4, (3 * from[1] + to[1]) / 4] as const;
+  const midTier2 = [(from[0] + 3 * to[0]) / 4, (from[1] + 3 * to[1]) / 4] as const;
+  const middle = [(from[0] + to[0]) / 2, (from[1] + to[1]) / 2] as const;
+
+  const perpendicularToTier1 = getPerpendicularPointToCenter(from, middle, height);
+  const perpendicularToTier2 = getPerpendicularPointToCenter(middle, to, height);
+
+  return path
+    .goTo(midTier1)
+    .goTo(perpendicularToTier1)
+    .goTo(perpendicularToTier2)
+    .goTo(midTier2)
+    .goTo(to);
 }
 
 function drawBetweenPoint(
@@ -140,5 +167,15 @@ export function waveBetweenPoint(
 ): SvgPathBuilder {
   return drawBetweenPoint(path, lineOption.width, parametricPath, (result, to) =>
     waveLineTo(result, to, lineOption.height)
+  );
+}
+
+export function embattleBetweenPoint(
+  path: SvgPathBuilder,
+  lineOption: EmbattledLineOptions,
+  parametricPath: (t: number) => PathAbsolutePoint
+): SvgPathBuilder {
+  return drawBetweenPoint(path, lineOption.width, parametricPath, (result, to) =>
+    embattleLineTo(result, to, lineOption.height)
   );
 }

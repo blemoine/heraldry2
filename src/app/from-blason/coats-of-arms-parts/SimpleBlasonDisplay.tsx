@@ -32,7 +32,7 @@ function getFieldVerticalOffset(ordinary: Ordinary): number {
       return 11 / 50;
     } else if (ordinary.line === 'invected') {
       return 13 / 50;
-    } else if (ordinary.line === 'wavy') {
+    } else if (ordinary.line === 'wavy' || ordinary.line === 'bretessed') {
       return 9 / 50;
     } else {
       return cannotHappen(ordinary.line);

@@ -14,6 +14,8 @@ export function computeLineOptions(line: Line, { width, height }: Dimension): Li
     return { line: 'indented', height: height / 30, width: width / 10 };
   } else if (line === 'wavy') {
     return { line: 'wavy', height: height / 50, width: width / 9 };
+  } else if (line === 'bretessed') {
+    return { line: 'embattled', height: height / 30, width: width / 9 };
   } else if (line === 'straight') {
     return null;
   } else {
@@ -22,12 +24,12 @@ export function computeLineOptions(line: Line, { width, height }: Dimension): Li
 }
 
 export function invertLineOptions(lineOptions: LineOptions): LineOptions {
-  if (lineOptions.line === 'indented') {
+  if (lineOptions.line === 'indented' || lineOptions.line === 'embattled') {
     return { ...lineOptions, height: -lineOptions.height };
   } else if (lineOptions.line === 'with-arc') {
     return { ...lineOptions, sweep: !lineOptions.sweep };
   } else if (lineOptions.line === 'wavy') {
-    return { ...lineOptions, height: lineOptions.height };
+    return lineOptions;
   } else {
     return cannotHappen(lineOptions);
   }
