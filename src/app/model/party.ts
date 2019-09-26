@@ -8,7 +8,25 @@ export type BendSinisterParty = { name: 'bendSinister'; tinctures: [Tincture, Ti
 export type ChevronParty = { name: 'chevron'; tinctures: [Tincture, Tincture]; line: Line };
 export type CrossParty = { name: 'cross'; tinctures: [Tincture, Tincture]; line: Line };
 export type SaltireParty = { name: 'saltire'; tinctures: [Tincture, Tincture]; line: Line };
+export type PallParty = { name: 'pall'; tinctures: [Tincture, Tincture, Tincture]; line: Line };
 
-export type Party = FessParty | PaleParty | BendParty | ChevronParty | BendSinisterParty | CrossParty | SaltireParty;
+export type Party =
+  | FessParty
+  | PaleParty
+  | BendParty
+  | ChevronParty
+  | BendSinisterParty
+  | CrossParty
+  | SaltireParty
+  | PallParty;
 
-export const parties: Array<Party['name']> = ['fess', 'pale', 'bend', 'bendSinister', 'chevron', 'cross', 'saltire'];
+export const parties: Array<Party['name']> = [
+  'fess',
+  'pale',
+  'bend',
+  'bendSinister',
+  'chevron',
+  'cross',
+  'saltire',
+  'pall',
+];

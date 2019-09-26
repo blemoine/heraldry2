@@ -1,7 +1,7 @@
 import fc, { Arbitrary } from 'fast-check';
 import { or, Tincture, tinctures } from '../tincture';
 import { Field, fieldKinds, PartyField } from '../field';
-import { parties, Party } from '../party';
+import { PallParty, parties, Party } from '../party';
 import { ordinaries, Ordinary } from '../ordinary';
 import {
   Charge,
@@ -30,10 +30,21 @@ import { availableDispositions, CountAndDisposition, supportedNumbers } from '..
 
 const tinctureArb: Arbitrary<Tincture> = fc.constantFrom(...tinctures);
 export const lineArb: Arbitrary<Line> = fc.constantFrom(...lines);
-const partyArb: Arbitrary<Party> = fc.record({
-  name: fc.constantFrom(...parties),
-  tinctures: fc.tuple(tinctureArb, tinctureArb),
-  line: lineArb,
+
+const partyArb: Arbitrary<Party> = fc.constantFrom<Party['name']>(...parties).chain<Party>((name) => {
+  if (name === 'pall') {
+    return fc.record<PallParty>({
+      name: fc.constant(name),
+      tinctures: fc.tuple(tinctureArb, tinctureArb, tinctureArb),
+      line: lineArb,
+    });
+  } else {
+    return fc.record({
+      name: fc.constant(name),
+      tinctures: fc.tuple(tinctureArb, tinctureArb),
+      line: lineArb,
+    });
+  }
 });
 
 export const fieldArb: Arbitrary<Field> = fc.constantFrom(...fieldKinds).chain(

@@ -1,13 +1,14 @@
 import * as React from 'react';
-import { TinctureSelect } from './TinctureSelect';
 import { parties, Party } from '../../model/party';
 import { PartyField } from '../../model/field';
-import { Tincture } from '../../model/tincture';
+import { or } from '../../model/tincture';
 import { stringifyParty } from '../blason.helpers';
 import { SelectScalar } from '../../common/SelectScalar';
 import { LineSelect } from './LineSelect';
 import { Line } from '../../model/line';
 import { TinctureConfiguration } from '../../model/tincture-configuration';
+import { TwoTinctureConfiguration } from './parties/TwoTinctureConfiguration';
+import { ThreeTinctureConfiguration } from './parties/ThreeTinctureConfiguration';
 
 const partiesOptions = parties;
 
@@ -17,18 +18,22 @@ type Props = {
   fieldChange: (field: PartyField) => void;
 };
 export const PartyForm = ({ tinctureConfiguration, field, fieldChange }: Props) => {
-  function firstTinctureChange(tincture: Tincture) {
-    fieldChange({ kind: 'party', per: { ...field.per, tinctures: [tincture, field.per.tinctures[1]] } });
-  }
+  const per = field.per;
 
-  function secondTinctureChange(tincture: Tincture) {
-    fieldChange({ kind: 'party', per: { ...field.per, tinctures: [field.per.tinctures[0], tincture] } });
-  }
   function partyChange(partyName: Party['name']) {
-    fieldChange({ kind: 'party', per: { ...field.per, name: partyName } });
+    if (per.name === 'pall' && partyName !== 'pall') {
+      fieldChange({ kind: 'party', per: { ...per, name: partyName, tinctures: [per.tinctures[0], per.tinctures[1]] } });
+    } else if (partyName === 'pall' && per.name !== 'pall') {
+      fieldChange({
+        kind: 'party',
+        per: { ...per, name: partyName, tinctures: [per.tinctures[0], per.tinctures[1], or] },
+      });
+    } else {
+      fieldChange({ kind: 'party', per: { ...per } });
+    }
   }
   function lineChange(line: Line) {
-    fieldChange({ kind: 'party', per: { ...field.per, line } });
+    fieldChange({ kind: 'party', per: { ...per, line } });
   }
 
   return (
@@ -39,37 +44,30 @@ export const PartyForm = ({ tinctureConfiguration, field, fieldChange }: Props) 
           <SelectScalar
             options={partiesOptions}
             formatValue={stringifyParty}
-            value={field.per.name}
+            value={per.name}
             valueChange={(t) => partyChange(t)}
           />
         </div>
       </div>
       <div className="col">
         <div className="form-group">
-          <label>First tincture</label>
-          <TinctureSelect
-            tinctureConfiguration={tinctureConfiguration}
-            tincture={field.per.tinctures[0]}
-            tinctureChange={firstTinctureChange}
-          />
-        </div>
-      </div>
-      <div className="col">
-        <div className="form-group">
-          <label>Second tincture</label>
-          <TinctureSelect
-            tinctureConfiguration={tinctureConfiguration}
-            tincture={field.per.tinctures[1]}
-            tinctureChange={secondTinctureChange}
-          />
-        </div>
-      </div>
-      <div className="col">
-        <div className="form-group">
           <label>Line style</label>
-          <LineSelect line={field.per.line} lineChange={lineChange} />
+          <LineSelect line={per.line} lineChange={lineChange} />
         </div>
       </div>
+      {per.name === 'pall' ? (
+        <ThreeTinctureConfiguration
+          tinctureConfiguration={tinctureConfiguration}
+          tinctures={per.tinctures}
+          tincturesChanges={(tinctures) => fieldChange({ kind: 'party', per: { ...per, tinctures } })}
+        />
+      ) : (
+        <TwoTinctureConfiguration
+          tinctureConfiguration={tinctureConfiguration}
+          tinctures={per.tinctures}
+          tincturesChanges={(tinctures) => fieldChange({ kind: 'party', per: { ...per, tinctures } })}
+        />
+      )}
     </div>
   );
 };

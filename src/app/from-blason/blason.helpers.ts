@@ -108,7 +108,8 @@ export function stringifyParty(partyName: Party['name']): string {
     partyName === 'pale' ||
     partyName === 'chevron' ||
     partyName === 'cross' ||
-    partyName === 'saltire'
+    partyName === 'saltire' ||
+    partyName === 'pall'
   ) {
     return partyName;
   } else {
@@ -153,7 +154,12 @@ export function stringifyFieldKind(field: Field['kind']): string {
 function stringifyField(field: Field, shouldCapitalize: boolean): string {
   if (field.kind === 'party') {
     const perName = stringifyParty(field.per.name);
-    const tinctures = field.per.tinctures.map((t) => stringifyTincture(t)).join(' and ');
+    const stringifiedTinctures = field.per.tinctures.map((t) => stringifyTincture(t));
+
+    const tinctures =
+      stringifiedTinctures.slice(0, stringifiedTinctures.length - 1).join(', ') +
+      ' and ' +
+      stringifiedTinctures[stringifiedTinctures.length - 1];
     let result = 'Per ' + perName + ' ';
     if (field.per.line !== 'straight') {
       result += field.per.line + ' ';

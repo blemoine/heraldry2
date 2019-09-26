@@ -21,7 +21,7 @@ import {
 import { availableDispositions, CountAndDisposition, supportedNumbers } from '../model/countAndDisposition';
 import { Blason, QuarterlyBlason, SimpleBlason } from '../model/blason';
 
-const FIELD_SIZE = 5;
+const FIELD_SIZE = 6;
 const ORDINARY_SIZE = 4;
 const CHARGE_SIZE = 8;
 const BLASON_SIZE = FIELD_SIZE + ORDINARY_SIZE + CHARGE_SIZE;
@@ -74,10 +74,13 @@ export function encodeField(field: Field): Uint8Array {
     result[2] = encodeTincture(field.tinctures[1]);
     result[3] = field.number;
   } else if (field.kind === 'party') {
-    result[1] = encodeTincture(field.per.tinctures[0]);
-    result[2] = encodeTincture(field.per.tinctures[1]);
-    result[3] = encodeLine(field.per.line);
-    result[4] = encodePartyName(field.per.name);
+    result[1] = encodePartyName(field.per.name);
+    result[2] = encodeLine(field.per.line);
+    result[3] = encodeTincture(field.per.tinctures[0]);
+    result[4] = encodeTincture(field.per.tinctures[1]);
+    if (field.per.name === 'pall') {
+      result[5] = encodeTincture(field.per.tinctures[2]);
+    }
   } else {
     result[1] = encodeTincture(field.tinctures[0]);
     result[2] = encodeTincture(field.tinctures[1]);
@@ -124,18 +127,31 @@ export function decodeField(arr: Uint8Array): Result<Field> {
   if (kind === 'plain') {
     return map(decodeTincture(arr[1]), (tincture) => ({ kind, tincture }));
   } else if (kind === 'party') {
-    const maybeTinctures = zip(decodeTincture(arr[1]), decodeTincture(arr[2]));
-    const maybeLine = decodeLine(arr[3]);
-    const maybeName = decodePartyName(arr[4]);
+    const maybeName = decodePartyName(arr[1]);
+    const maybeLine = decodeLine(arr[2]);
+    if (maybeName === 'pall') {
+      const maybeTinctures = zip3(decodeTincture(arr[3]), decodeTincture(arr[4]), decodeTincture(arr[5]));
 
-    return map(zip3(maybeTinctures, maybeLine, maybeName), ([tinctures, line, name]) => ({
-      kind,
-      per: {
-        line,
-        tinctures,
-        name,
-      },
-    }));
+      return map(zip3(maybeTinctures, maybeLine, maybeName), ([tinctures, line, name]) => ({
+        kind,
+        per: {
+          line,
+          tinctures,
+          name,
+        },
+      }));
+    } else {
+      const maybeTinctures = zip(decodeTincture(arr[3]), decodeTincture(arr[4]));
+
+      return map(zip3(maybeTinctures, maybeLine, maybeName), ([tinctures, line, name]) => ({
+        kind,
+        per: {
+          line,
+          tinctures,
+          name,
+        },
+      }));
+    }
   } else if (kind === 'barry' || kind === 'bendy' || kind === 'bendySinister') {
     const maybeTinctures = zip(decodeTincture(arr[1]), decodeTincture(arr[2]));
     const maybeNumber: Result<6 | 8 | 10> = decodeNumber([6, 8, 10], arr[3]);

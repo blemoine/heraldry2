@@ -12,7 +12,11 @@ function extractColors(field: Field): [Tincture, Tincture] {
   if (field.kind === 'plain') {
     return [field.tincture, isMetal(field.tincture) ? gules : argent];
   } else if (field.kind === 'party') {
-    return field.per.tinctures;
+    if (field.per.name === 'pall') {
+      return [field.per.tinctures[0], field.per.tinctures[1]];
+    } else {
+      return field.per.tinctures;
+    }
   } else if (
     field.kind === 'barry' ||
     field.kind === 'paly' ||

@@ -23,15 +23,29 @@ function partyParser(): P.Parser<Party> {
       .skip(P.whitespace)
       .then(partyUnit)
       .skip(P.whitespace),
-    lineParser.skip(P.whitespace).fallback('straight' as const),
-
-    P.seq(
-      tinctureParserFromName,
-      P.regex(/and/i)
-        .trim(P.whitespace)
-        .then(tinctureParserFromName)
-    )
-  ).map(([name, line, tinctures]): Party => ({ name, tinctures, line }));
+    lineParser.skip(P.whitespace).fallback('straight' as const)
+  ).chain(
+    ([name, line]): P.Parser<Party> => {
+      if (name === 'pall') {
+        return P.seq(
+          tinctureParserFromName,
+          P.string(',')
+            .then(P.optWhitespace)
+            .then(tinctureParserFromName),
+          P.regex(/and/i)
+            .trim(P.whitespace)
+            .then(tinctureParserFromName)
+        ).map((tinctures) => ({ name, tinctures, line }));
+      } else {
+        return P.seq(
+          tinctureParserFromName,
+          P.regex(/and/i)
+            .trim(P.whitespace)
+            .then(tinctureParserFromName)
+        ).map((tinctures) => ({ name, tinctures, line }));
+      }
+    }
+  );
 }
 
 export function fieldParser(): P.Parser<Field> {

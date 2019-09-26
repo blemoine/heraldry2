@@ -24,6 +24,7 @@ import { SimpleBlasonShape } from './blasonDisplay.helper';
 import { BendyPilyDisplay } from './fields/BendyPilyDisplay';
 import { BendyPilySinisterDisplay } from './fields/BendyPilySinisterDisplay';
 import { GironnyDisplay } from './fields/GironnyDisplay';
+import { PallFieldDisplay } from './fields/PallFieldDisplay';
 
 type Props = {
   dimension: Dimension;
@@ -35,28 +36,36 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
   function fillFromTincturePair(arr: [Tincture, Tincture]): [string, string] {
     return [fillFromTincture(arr[0]), fillFromTincture(arr[1])];
   }
+  function fillFromTinctureTriplet(arr: [Tincture, Tincture, Tincture]): [string, string, string] {
+    return [fillFromTincture(arr[0]), fillFromTincture(arr[1]), fillFromTincture(arr[2])];
+  }
 
   if (field.kind === 'plain') {
     return <Plain fill={fillFromTincture(field.tincture)} dimension={dimension} />;
   } else if (field.kind === 'party') {
-    const partyName = field.per.name;
-    const fill: [string, string] = fillFromTincturePair(field.per.tinctures);
-    if (partyName === 'bend') {
-      return <BendDisplay fill={fill} dimension={dimension} line={field.per.line} />;
-    } else if (partyName === 'bendSinister') {
-      return <BendSinisterDisplay fill={fill} dimension={dimension} line={field.per.line} />;
-    } else if (partyName === 'chevron') {
-      return <ChevronDisplay fill={fill} dimension={dimension} line={field.per.line} />;
-    } else if (partyName === 'fess') {
-      return <FessDisplay fill={fill} dimension={dimension} line={field.per.line} />;
-    } else if (partyName === 'pale') {
-      return <PaleDisplay fill={fill} dimension={dimension} line={field.per.line} />;
-    } else if (partyName === 'cross') {
-      return <CrossDisplay fill={fill} dimension={dimension} line={field.per.line} />;
-    } else if (partyName === 'saltire') {
-      return <SaltireDisplay fill={fill} dimension={dimension} line={field.per.line} />;
+    if (field.per.name === 'pall') {
+      const fill: [string, string, string] = fillFromTinctureTriplet(field.per.tinctures);
+      return <PallFieldDisplay fill={fill} dimension={dimension} line={field.per.line} />;
     } else {
-      return cannotHappen(partyName);
+      const partyName = field.per.name;
+      const fill: [string, string] = fillFromTincturePair(field.per.tinctures);
+      if (partyName === 'bend') {
+        return <BendDisplay fill={fill} dimension={dimension} line={field.per.line} />;
+      } else if (partyName === 'bendSinister') {
+        return <BendSinisterDisplay fill={fill} dimension={dimension} line={field.per.line} />;
+      } else if (partyName === 'chevron') {
+        return <ChevronDisplay fill={fill} dimension={dimension} line={field.per.line} />;
+      } else if (partyName === 'fess') {
+        return <FessDisplay fill={fill} dimension={dimension} line={field.per.line} />;
+      } else if (partyName === 'pale') {
+        return <PaleDisplay fill={fill} dimension={dimension} line={field.per.line} />;
+      } else if (partyName === 'cross') {
+        return <CrossDisplay fill={fill} dimension={dimension} line={field.per.line} />;
+      } else if (partyName === 'saltire') {
+        return <SaltireDisplay fill={fill} dimension={dimension} line={field.per.line} />;
+      } else {
+        return cannotHappen(partyName);
+      }
     }
   } else if (field.kind === 'bendy') {
     const fill: [string, string] = fillFromTincturePair(field.tinctures);
