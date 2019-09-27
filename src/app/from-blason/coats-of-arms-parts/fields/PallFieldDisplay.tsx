@@ -3,13 +3,14 @@ import { Dimension } from '../../../model/dimension';
 import { Line } from '../../../model/line';
 import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { PathFromBuilder } from '../../../common/PathFromBuilder';
-import { computeLineOptions } from '../blasonDisplay.helper';
+import { computeLineOptions, invertLineOptions } from '../blasonDisplay.helper';
 
 type Props = { fill: [string, string, string]; dimension: Dimension; line: Line };
 export const PallFieldDisplay = ({ fill, line, dimension: { width, height } }: Props) => {
   const middle = [width / 2, height / 2] as const;
 
   const lineOptions = computeLineOptions(line, { width, height });
+  const invertedLineOptions = lineOptions ? invertLineOptions(lineOptions) : null;
 
   const topPart = SvgPathBuilder.start([0, 0])
     .goTo(middle, lineOptions)
@@ -17,16 +18,16 @@ export const PallFieldDisplay = ({ fill, line, dimension: { width, height } }: P
     .close();
 
   const leftPart = SvgPathBuilder.start([0, 0])
-    .goTo(middle)
+    .goTo(middle, lineOptions)
     .goTo([width / 2, height], lineOptions)
     .goTo([0, height])
     .close();
 
   const rightPart = SvgPathBuilder.start([width, 0])
     .goTo([width, height])
-    .goTo([width / 2, height], lineOptions)
-    .goTo(middle)
-    .close();
+    .goTo([width / 2, height])
+    .goTo(middle, invertedLineOptions)
+    .goTo([width, 0], lineOptions);
 
   return (
     <g className="pall">
