@@ -15,7 +15,7 @@ export function getChargeDimension(
   const chargeDisposition = charge ? charge.countAndDisposition.disposition : null;
   if (shape === 'default') {
     const chargeHorizontalOffset =
-      (ordinaryName === 'bordure' ? (ordinaryLine === 'straight' ? 0.085 : 0.125) : 0.015) +
+      (ordinaryName === 'bordure' ? (ordinaryLine === 'straight' ? 0.085 : 0.13) : 0.015) +
       (chargeDisposition === 'fess' ? 0.012 : 0);
 
     const defaultChargeHeightOffset =

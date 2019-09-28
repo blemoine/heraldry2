@@ -3,14 +3,14 @@ import { Blason } from '../../model/blason';
 import { Dimension, scale } from '../../model/dimension';
 import { cannotHappen } from '../../../utils/cannot-happen';
 import { SimpleBlasonDisplay } from './SimpleBlasonDisplay';
-import { Tincture } from '../../model/tincture';
 import { ShieldShape } from '../../model/configuration';
 import { BlasonPath } from '../../model/blason-path';
+import { FillFromTincture } from '../fillFromTincture.helper';
 
 type Props = {
   blason: Blason;
   dimension: Dimension;
-  fillFromTincture: (tincture: Tincture) => string;
+  fillFromTincture: FillFromTincture;
   clipPathId: string;
   shieldShape: ShieldShape;
   selectBlasonPart: (path: BlasonPath) => void;

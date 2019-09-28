@@ -4,13 +4,13 @@ import { Dimension } from '../../model/dimension';
 import { FieldDisplay } from './FieldDisplay';
 import { OrdinaryDisplay } from './ordinaries/OrdinaryDisplay';
 import { ChargeDisplay } from './ChargeDisplay';
-import { Tincture } from '../../model/tincture';
 import { SimpleBlasonShape } from './blasonDisplay.helper';
 import { ShieldShape } from '../../model/configuration';
 import { Ordinary } from '../../model/ordinary';
 import { cannotHappen } from '../../../utils/cannot-happen';
 import { getChargeDimension } from './charge-dimension.helper';
 import { SimpleBlasonPath } from '../../model/blason-path';
+import { convertToOlfFillFronTincture, FillFromTincture } from '../fillFromTincture.helper';
 
 function getFieldHorizontalOffset(ordinary: Ordinary): number {
   if (ordinary.name === 'bordure') {
@@ -24,34 +24,40 @@ function getFieldHorizontalOffset(ordinary: Ordinary): number {
   }
 }
 
-function getFieldVerticalOffset(ordinary: Ordinary): number {
+function getFieldVerticalOffsetAndScale(ordinary: Ordinary): { verticalOffset: number; verticalScale: number } {
   if (ordinary.name === 'chief') {
     if (ordinary.line === 'straight') {
-      return 1 / 5;
+      return { verticalOffset: 1 / 5, verticalScale: 4 / 5 };
     } else if (ordinary.line === 'engrailed' || ordinary.line === 'indented') {
-      return 11 / 50;
+      return { verticalOffset: 11 / 50, verticalScale: 39 / 50 };
     } else if (ordinary.line === 'invected') {
-      return 13 / 50;
+      return { verticalOffset: 13 / 50, verticalScale: 37 / 50 };
     } else if (ordinary.line === 'wavy' || ordinary.line === 'bretessed' || ordinary.line === 'embattled') {
-      return 9 / 50;
+      return { verticalOffset: 9 / 50, verticalScale: 41 / 50 };
     } else {
       return cannotHappen(ordinary.line);
     }
   } else if (ordinary.name === 'bordure') {
     if (ordinary.line === 'engrailed' || ordinary.line === 'wavy') {
-      return 6 / 100;
+      return { verticalOffset: 6 / 100, verticalScale: 88 / 100 };
     } else {
-      return 10 / 100;
+      return { verticalOffset: 10 / 100, verticalScale: 80 / 100 };
+    }
+  } else if (ordinary.name === 'base') {
+    if (ordinary.line === 'invected') {
+      return { verticalOffset: 0, verticalScale: 38 / 50 };
+    } else {
+      return { verticalOffset: 0, verticalScale: 4 / 5 };
     }
   } else {
-    return 0;
+    return { verticalOffset: 0, verticalScale: 1 };
   }
 }
 
 type Props = {
   blason: SimpleBlason;
   dimension: Dimension;
-  fillFromTincture: (tincture: Tincture) => string;
+  fillFromTincture: FillFromTincture;
   clipPathId: string;
   shape: SimpleBlasonShape;
   shieldShape: ShieldShape;
@@ -69,8 +75,11 @@ export const SimpleBlasonDisplay = ({
   const { width, height } = dimension;
   const ordinary = blason.ordinary;
 
-  const baseVerticalOffset = ordinary ? getFieldVerticalOffset(ordinary) : 0;
-  const fieldHeightScale = 1 - baseVerticalOffset;
+  const baseVerticalOffsetAndScale = ordinary
+    ? getFieldVerticalOffsetAndScale(ordinary)
+    : { verticalScale: 1, verticalOffset: 0 };
+  const fieldHeightScale = baseVerticalOffsetAndScale.verticalScale;
+  const baseVerticalOffset = baseVerticalOffsetAndScale.verticalOffset;
 
   const baseHorizontalOffset = ordinary ? getFieldHorizontalOffset(ordinary) : 0;
   const fieldWidthScale = 1 - 2 * baseHorizontalOffset;
@@ -79,6 +88,7 @@ export const SimpleBlasonDisplay = ({
   const { horizontalScale, verticalScale, horizontalOffset, verticalOffset } = getChargeDimension(blason, shape);
 
   const clipPathUrl = `url(#${clipPathId})`;
+
   return (
     <>
       <g
@@ -102,7 +112,7 @@ export const SimpleBlasonDisplay = ({
           <OrdinaryDisplay
             dimension={dimension}
             ordinary={ordinary}
-            fill={fillFromTincture(ordinary.tincture)}
+            fill={convertToOlfFillFronTincture(fillFromTincture)(ordinary.tincture)}
             shape={shape}
             shieldShape={shieldShape}
             onClick={() => selectBlasonPart('ordinary')}
@@ -120,7 +130,7 @@ export const SimpleBlasonDisplay = ({
               }}
               charge={blason.charge}
               shape={shape}
-              fillFromTincture={fillFromTincture}
+              fillFromTincture={convertToOlfFillFronTincture(fillFromTincture)}
               onClick={() => selectBlasonPart('charge')}
             />
           </GWrapper>

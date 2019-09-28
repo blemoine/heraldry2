@@ -46,7 +46,7 @@ Faire le "of the last"
 - Saltire Bretessed are displayed strangely ( Or, a saltire bretessed azure)
 - Displayed strangely: Or, three chevronels bretessed azure
 - Pour les ordinary avec un seul coté, ne presenter que embatled, et pas les autres. 
-
+- `Per fess or and ermine, a bordure engrailed azure` sides are badly rendered
 
 
 Feature to add

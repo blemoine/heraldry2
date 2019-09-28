@@ -43,11 +43,11 @@ export function CoatsOfArmsDisplay(props: Props) {
     return `field-pattern-${patternIds[fur.name]}`;
   }
 
-  function fillFromTincture(tincture: Tincture): string {
+  function fillFromTincture(tincture: Tincture): { color: string } | { id: string } {
     if (isFur(tincture)) {
-      return `url(#${furPatternId(tincture)})`;
+      return { id: furPatternId(tincture) };
     } else {
-      return tinctureConfiguration[tincture.name];
+      return { color: tinctureConfiguration[tincture.name] };
     }
   }
 

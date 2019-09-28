@@ -25,23 +25,25 @@ import { BendyPilyDisplay } from './fields/BendyPilyDisplay';
 import { BendyPilySinisterDisplay } from './fields/BendyPilySinisterDisplay';
 import { GironnyDisplay } from './fields/GironnyDisplay';
 import { PallFieldDisplay } from './fields/PallFieldDisplay';
+import { convertToOlfFillFronTincture, FillFromTincture } from '../fillFromTincture.helper';
 
 type Props = {
   dimension: Dimension;
   field: Field;
   shape: SimpleBlasonShape;
-  fillFromTincture: (tincture: Tincture) => string;
+  fillFromTincture: FillFromTincture;
 };
 export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Props) => {
+  const oldFillFronTincture = convertToOlfFillFronTincture(fillFromTincture);
   function fillFromTincturePair(arr: [Tincture, Tincture]): [string, string] {
-    return [fillFromTincture(arr[0]), fillFromTincture(arr[1])];
+    return [oldFillFronTincture(arr[0]), oldFillFronTincture(arr[1])];
   }
   function fillFromTinctureTriplet(arr: [Tincture, Tincture, Tincture]): [string, string, string] {
-    return [fillFromTincture(arr[0]), fillFromTincture(arr[1]), fillFromTincture(arr[2])];
+    return [oldFillFronTincture(arr[0]), oldFillFronTincture(arr[1]), oldFillFronTincture(arr[2])];
   }
 
   if (field.kind === 'plain') {
-    return <Plain fill={fillFromTincture(field.tincture)} dimension={dimension} />;
+    return <Plain fill={oldFillFronTincture(field.tincture)} dimension={dimension} />;
   } else if (field.kind === 'party') {
     if (field.per.name === 'pall') {
       const fill: [string, string, string] = fillFromTinctureTriplet(field.per.tinctures);
@@ -101,8 +103,9 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
     const fill: [string, string] = fillFromTincturePair(field.tinctures);
     return <PalyDisplay fill={fill} dimension={dimension} />;
   } else if (field.kind === 'barry') {
-    const fill: [string, string] = fillFromTincturePair(field.tinctures);
-    return <BarryDisplay fill={fill} number={field.number} dimension={dimension} />;
+    return (
+      <BarryDisplay field={field} fillFromTincture={fillFromTincture} number={field.number} dimension={dimension} />
+    );
   } else if (field.kind === 'chequy') {
     const fill: [string, string] = fillFromTincturePair(field.tinctures);
     return <ChequyDisplay fill={fill} dimension={dimension} />;
