@@ -24,11 +24,11 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
   const strokeColor = ordinary.tincture.name === 'sable' ? '#777' : '#333';
 
   const fill = convertToOlfFillFronTincture(fillFromTincture)(ordinary.tincture);
+  const lineOptions = computeLineOptions(ordinary.line, dimension);
 
   const { width, height } = dimension;
   if (ordinary.name === 'chief') {
     const chiefHeight = height * chiefHeightRatio;
-    const lineOptions = computeLineOptions(ordinary.line, dimension);
     const computedHeight =
       chiefHeight +
       (lineOptions && lineOptions.line === 'with-arc'
@@ -53,7 +53,6 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
     );
   } else if (ordinary.name === 'base') {
     const baseHeight = height / 4;
-    const lineOptions = computeLineOptions(ordinary.line, dimension);
 
     const pathBuilder = SvgPathBuilder.start([0, height])
       .goTo([width, height])
@@ -71,7 +70,6 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
       />
     );
   } else if (ordinary.name === 'fess') {
-    const lineOptions = computeLineOptions(ordinary.line, dimension);
     const oneSideOnly = lineOptions && 'oneSideOnly' in lineOptions ? lineOptions.oneSideOnly : false;
 
     const pathBuilder = SvgPathBuilder.start([0, height / 3])
@@ -93,7 +91,6 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
     const length = Math.sqrt(width ** 2 + height ** 2);
     const bendHeight = height / 4;
 
-    const lineOptions = computeLineOptions(ordinary.line, dimension);
     const oneSideOnly = lineOptions && 'oneSideOnly' in lineOptions ? lineOptions.oneSideOnly : false;
 
     const pathBuilder2 = SvgPathBuilder.start([0, 0])
@@ -117,7 +114,6 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
     const length = Math.sqrt(width ** 2 + height ** 2);
     const bendHeight = height / 4;
 
-    const lineOptions = computeLineOptions(ordinary.line, dimension);
     const oneSideOnly = lineOptions && 'oneSideOnly' in lineOptions ? lineOptions.oneSideOnly : false;
 
     const pathBuilder2 = SvgPathBuilder.start([0, 0])
@@ -138,7 +134,6 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
       />
     );
   } else if (ordinary.name === 'pale') {
-    const lineOptions = computeLineOptions(ordinary.line, dimension);
     const oneSideOnly = lineOptions && 'oneSideOnly' in lineOptions ? lineOptions.oneSideOnly : false;
     return (
       <g>
@@ -164,7 +159,6 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
       </g>
     );
   } else if (ordinary.name === 'cross') {
-    const lineOptions = computeLineOptions(ordinary.line, dimension);
     const oneSideOnly = lineOptions && 'oneSideOnly' in lineOptions ? lineOptions.oneSideOnly : false;
 
     const pathBuilder = SvgPathBuilder.start([(2 * width) / 5, 0])
@@ -191,7 +185,6 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
       />
     );
   } else if (ordinary.name === 'saltire') {
-    const lineOptions = computeLineOptions(ordinary.line, dimension);
     const oneSideOnly = lineOptions && 'oneSideOnly' in lineOptions ? lineOptions.oneSideOnly : false;
     const basePointW = width / (10 * Math.sqrt(2));
     const basePointH = height / (10 * Math.sqrt(2));
@@ -223,7 +216,6 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
       />
     );
   } else if (ordinary.name === 'chevron' || ordinary.name === 'chevronel') {
-    const lineOptions = computeLineOptions(ordinary.line, dimension);
     const oneSideOnly = lineOptions && 'oneSideOnly' in lineOptions ? lineOptions.oneSideOnly : false;
     const chevronHeight =
       ordinary.name === 'chevron' ? height / 6 : ordinary.name === 'chevronel' ? height / 12 : cannotHappen(ordinary);
@@ -235,12 +227,12 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
           const bottomPoint = (((i + 1) * 2 + 1) * height) / (ordinary.count * 2 + 1);
 
           const pathBuilder = SvgPathBuilder.start([width / 2, topPoint])
-            .goTo([0, bottomPoint - chevronHeight], lineOptions)
+            .goToWithPartFlat([0, bottomPoint - chevronHeight], lineOptions, 5)
             .goTo([0, bottomPoint])
-            .goTo([width / 2, topPoint + chevronHeight], oneSideOnly ? null : lineOptions)
-            .goTo([width, bottomPoint], oneSideOnly ? null : lineOptions)
+            .goToWithPartFlat([width / 2, topPoint + chevronHeight], oneSideOnly ? null : lineOptions, 5)
+            .goToWithPartFlat([width, bottomPoint], oneSideOnly ? null : lineOptions, 5)
             .goTo([width, bottomPoint - chevronHeight])
-            .goTo([width / 2, topPoint], lineOptions);
+            .goToWithPartFlat([width / 2, topPoint], lineOptions, 5);
 
           return (
             <FocusablePathFromBuilder
