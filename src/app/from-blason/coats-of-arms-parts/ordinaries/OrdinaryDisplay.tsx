@@ -9,6 +9,7 @@ import { chiefHeightRatio, computeLineOptions, SimpleBlasonShape } from '../blas
 import { ShieldShape } from '../../../model/configuration';
 import { BordureDisplay } from './BordureDisplay';
 import { toDegree } from '../../../svg-path-builder/geometrical.helper';
+import { useState } from 'react';
 
 type Props = {
   ordinary: Ordinary;
@@ -20,6 +21,8 @@ type Props = {
 };
 
 export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape, onClick }: Props) => {
+  const [strokeWidth, setStrokeWidth] = useState(1);
+
   const { width, height } = dimension;
   if (ordinary.name === 'chief') {
     const chiefHeight = height * chiefHeightRatio;
@@ -44,6 +47,9 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
         stroke="#333"
         style={{ cursor: 'pointer' }}
         onClick={onClick}
+        strokeWidth={strokeWidth}
+        onMouseDown={() => setStrokeWidth(2)}
+        onMouseUp={() => setStrokeWidth(1)}
       />
     );
   } else if (ordinary.name === 'base') {
@@ -63,6 +69,9 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
         stroke="#333"
         style={{ cursor: 'pointer' }}
         onClick={onClick}
+        strokeWidth={strokeWidth}
+        onMouseDown={() => setStrokeWidth(2)}
+        onMouseUp={() => setStrokeWidth(1)}
       />
     );
   } else if (ordinary.name === 'fess') {
@@ -82,6 +91,9 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
         stroke="#333"
         style={{ cursor: 'pointer' }}
         onClick={onClick}
+        strokeWidth={strokeWidth}
+        onMouseDown={() => setStrokeWidth(2)}
+        onMouseUp={() => setStrokeWidth(1)}
       />
     );
   } else if (ordinary.name === 'bend') {
@@ -104,8 +116,11 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
         pathBuilder={pathBuilder2}
         fill={fill}
         stroke="#333"
+        strokeWidth={strokeWidth}
         style={{ cursor: 'pointer' }}
         onClick={onClick}
+        onMouseDown={() => setStrokeWidth(2)}
+        onMouseUp={() => setStrokeWidth(1)}
       />
     );
   } else if (ordinary.name === 'bendSinister') {
@@ -130,6 +145,9 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
         stroke="#333"
         style={{ cursor: 'pointer' }}
         onClick={onClick}
+        strokeWidth={strokeWidth}
+        onMouseDown={() => setStrokeWidth(2)}
+        onMouseUp={() => setStrokeWidth(1)}
       />
     );
   } else if (ordinary.name === 'pale') {
@@ -153,6 +171,9 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
               stroke="#333"
               style={{ cursor: 'pointer' }}
               onClick={onClick}
+              strokeWidth={strokeWidth}
+              onMouseDown={() => setStrokeWidth(2)}
+              onMouseUp={() => setStrokeWidth(1)}
             />
           );
         })}
@@ -183,6 +204,9 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
         stroke="#333"
         style={{ cursor: 'pointer' }}
         onClick={onClick}
+        strokeWidth={strokeWidth}
+        onMouseDown={() => setStrokeWidth(2)}
+        onMouseUp={() => setStrokeWidth(1)}
       />
     );
   } else if (ordinary.name === 'saltire') {
@@ -215,6 +239,9 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
         stroke="#333"
         style={{ cursor: 'pointer' }}
         onClick={onClick}
+        strokeWidth={strokeWidth}
+        onMouseDown={() => setStrokeWidth(2)}
+        onMouseUp={() => setStrokeWidth(1)}
       />
     );
   } else if (ordinary.name === 'chevron' || ordinary.name === 'chevronel') {
@@ -245,6 +272,9 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
               stroke="#333"
               style={{ cursor: 'pointer' }}
               onClick={onClick}
+              strokeWidth={strokeWidth}
+              onMouseDown={() => setStrokeWidth(2)}
+              onMouseUp={() => setStrokeWidth(1)}
             />
           );
         })}
@@ -259,6 +289,8 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
         fill={fill}
         line={ordinary.line}
         onClick={onClick}
+        strokeWidth={strokeWidth}
+        setStrokeWidth={setStrokeWidth}
       />
     );
   } else if (ordinary.name === 'pall') {
@@ -284,6 +316,9 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
         stroke="#333"
         style={{ cursor: 'pointer' }}
         onClick={onClick}
+        strokeWidth={strokeWidth}
+        onMouseDown={() => setStrokeWidth(2)}
+        onMouseUp={() => setStrokeWidth(1)}
       />
     );
   } else {

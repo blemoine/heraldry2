@@ -18,8 +18,19 @@ type Props = {
   shieldShape: ShieldShape;
   fill: string;
   onClick: () => void;
+  strokeWidth: number;
+  setStrokeWidth: (width: number) => void;
 };
-export const BordureDisplay = ({ dimension, line, shape, shieldShape, fill, onClick }: Props) => {
+export const BordureDisplay = ({
+  dimension,
+  line,
+  shape,
+  shieldShape,
+  fill,
+  onClick,
+  strokeWidth,
+  setStrokeWidth,
+}: Props) => {
   const { width, height } = dimension;
 
   const lineOptions = computeLineOptions(line, dimension);
@@ -130,6 +141,9 @@ export const BordureDisplay = ({ dimension, line, shape, shieldShape, fill, onCl
       fillRule={'evenodd'}
       style={{ cursor: 'pointer' }}
       onClick={onClick}
+      strokeWidth={strokeWidth}
+      onMouseDown={() => setStrokeWidth(2)}
+      onMouseUp={() => setStrokeWidth(1)}
     />
   );
 };

@@ -62,7 +62,10 @@ exports[`CoatsOfArms should render 'Argent, a chevron sable' 1`] = `
       d="M 100 88.88889 L 200 222.22222 V266.66667 L 100 133.33333 L 0 266.66667 V222.22222 Z"
       fill="#000000"
       onClick={[Function]}
+      onMouseDown={[Function]}
+      onMouseUp={[Function]}
       stroke="#333"
+      strokeWidth={1}
       style={
         Object {
           "cursor": "pointer",
@@ -145,7 +148,10 @@ exports[`CoatsOfArms should render 'Argent, a cross gules' 1`] = `
       d="M 80 0 V106.66667 H0 V160 H80 V266.66667 H120 V160 H200 V106.66667 H120 V0 Z"
       fill="#FF0000"
       onClick={[Function]}
+      onMouseDown={[Function]}
+      onMouseUp={[Function]}
       stroke="#333"
+      strokeWidth={1}
       style={
         Object {
           "cursor": "pointer",
@@ -3279,7 +3285,10 @@ exports[`CoatsOfArms should render 'Chequy gules and or, a chief engrailed azure
       d="M 0 0 V73.33333 Q 10 53.33333 20 73.33333 Q 30 53.33333 40 73.33333 Q 50 53.33333 60 73.33333 Q 70 53.33333 80 73.33333 Q 90 53.33333 100 73.33333 Q 110 53.33333 120 73.33333 Q 130 53.33333 140 73.33333 Q 150 53.33333 160 73.33333 Q 170 53.33333 180 73.33333 Q 190 53.33333 200 73.33333 V0 Z"
       fill="#0000FF"
       onClick={[Function]}
+      onMouseDown={[Function]}
+      onMouseUp={[Function]}
       stroke="#333"
+      strokeWidth={1}
       style={
         Object {
           "cursor": "pointer",
@@ -3709,7 +3718,10 @@ exports[`CoatsOfArms should render 'Chequy gules and or, a chief engrailed ermin
       d="M 0 0 V73.33333 Q 10 53.33333 20 73.33333 Q 30 53.33333 40 73.33333 Q 50 53.33333 60 73.33333 Q 70 53.33333 80 73.33333 Q 90 53.33333 100 73.33333 Q 110 53.33333 120 73.33333 Q 130 53.33333 140 73.33333 Q 150 53.33333 160 73.33333 Q 170 53.33333 180 73.33333 Q 190 53.33333 200 73.33333 V0 Z"
       fill="url(#field-pattern-3)"
       onClick={[Function]}
+      onMouseDown={[Function]}
+      onMouseUp={[Function]}
       stroke="#333"
+      strokeWidth={1}
       style={
         Object {
           "cursor": "pointer",
@@ -4074,7 +4086,10 @@ exports[`CoatsOfArms should render 'Chequy gules and or, a saltire argent, an ea
       d="M 100 114.47715 L 0 -18.85618 L -14.14214 0 L 85.85786 133.33333 L -14.14214 266.66667 L 0 285.52285 L 100 152.18951 L 200 285.52285 L 214.14214 266.66667 L 114.14214 133.33333 L 214.14214 0 L 200 -18.85618 Z"
       fill="#FFFFFF"
       onClick={[Function]}
+      onMouseDown={[Function]}
+      onMouseUp={[Function]}
       stroke="#333"
+      strokeWidth={1}
       style={
         Object {
           "cursor": "pointer",
@@ -4484,7 +4499,10 @@ exports[`CoatsOfArms should render 'Ermine, a bend invected vair' 1`] = `
       d="M 26.66667 -20 L -26.66667 20 Q -36.78431 39.84314 -14.90196 35.68627 Q -25.01961 55.52941 -3.13725 51.37255 Q -13.2549 71.21569 8.62745 67.05882 Q -1.4902 86.90196 20.39216 82.7451 Q 10.27451 102.58824 32.15686 98.43137 Q 22.03922 118.27451 43.92157 114.11765 Q 33.80392 133.96078 55.68627 129.80392 Q 45.56863 149.64706 67.45098 145.4902 Q 57.33333 165.33333 79.21569 161.17647 Q 69.09804 181.01961 90.98039 176.86275 Q 80.86275 196.70588 102.7451 192.54902 Q 92.62745 212.39216 114.5098 208.23529 Q 104.39216 228.07843 126.27451 223.92157 Q 116.15686 243.76471 138.03922 239.60784 Q 127.92157 259.45098 149.80392 255.29412 Q 139.68627 275.13725 161.56863 270.98039 Q 151.45098 290.82353 173.33333 286.66667 L 226.66667 246.66667 Q 236.78431 226.82353 214.90196 230.98039 Q 225.01961 211.13725 203.13725 215.29412 Q 213.2549 195.45098 191.37255 199.60784 Q 201.4902 179.76471 179.60784 183.92157 Q 189.72549 164.07843 167.84314 168.23529 Q 177.96078 148.39216 156.07843 152.54902 Q 166.19608 132.70588 144.31373 136.86275 Q 154.43137 117.01961 132.54902 121.17647 Q 142.66667 101.33333 120.78431 105.4902 Q 130.90196 85.64706 109.01961 89.80392 Q 119.13725 69.96078 97.2549 74.11765 Q 107.37255 54.27451 85.4902 58.43137 Q 95.60784 38.58824 73.72549 42.7451 Q 83.84314 22.90196 61.96078 27.05882 Q 72.07843 7.21569 50.19608 11.37255 Q 60.31373 -8.47059 38.43137 -4.31373 Q 48.54902 -24.15686 26.66667 -20"
       fill="url(#field-pattern-0)"
       onClick={[Function]}
+      onMouseDown={[Function]}
+      onMouseUp={[Function]}
       stroke="#333"
+      strokeWidth={1}
       style={
         Object {
           "cursor": "pointer",
@@ -4629,7 +4647,10 @@ exports[`CoatsOfArms should render 'Ermine, two pallets sable' 1`] = `
         d="M 40 0 V266.66667 H80 V0"
         fill="#000000"
         onClick={[Function]}
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
             "cursor": "pointer",
@@ -4640,7 +4661,10 @@ exports[`CoatsOfArms should render 'Ermine, two pallets sable' 1`] = `
         d="M 120 0 V266.66667 H160 V0"
         fill="#000000"
         onClick={[Function]}
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
             "cursor": "pointer",
@@ -5061,7 +5085,10 @@ exports[`CoatsOfArms should render 'Or, a base engrailed vair' 1`] = `
       d="M 0 266.66667 H200 V200 Q 190 220 180 200 Q 170 220 160 200 Q 150 220 140 200 Q 130 220 120 200 Q 110 220 100 200 Q 90 220 80 200 Q 70 220 60 200 Q 50 220 40 200 Q 30 220 20 200 Q 10 220 0 200 Z"
       fill="url(#field-pattern-0)"
       onClick={[Function]}
+      onMouseDown={[Function]}
+      onMouseUp={[Function]}
       stroke="#333"
+      strokeWidth={1}
       style={
         Object {
           "cursor": "pointer",
@@ -5205,7 +5232,10 @@ exports[`CoatsOfArms should render 'Or, a bend sinister invected ermine' 1`] = `
       d="M -26.66667 246.66667 L 26.66667 286.66667 Q 48.54902 290.82353 38.43137 270.98039 Q 60.31373 275.13725 50.19608 255.29412 Q 72.07843 259.45098 61.96078 239.60784 Q 83.84314 243.76471 73.72549 223.92157 Q 95.60784 228.07843 85.4902 208.23529 Q 107.37255 212.39216 97.2549 192.54902 Q 119.13725 196.70588 109.01961 176.86275 Q 130.90196 181.01961 120.78431 161.17647 Q 142.66667 165.33333 132.54902 145.4902 Q 154.43137 149.64706 144.31373 129.80392 Q 166.19608 133.96078 156.07843 114.11765 Q 177.96078 118.27451 167.84314 98.43137 Q 189.72549 102.58824 179.60784 82.7451 Q 201.4902 86.90196 191.37255 67.05882 Q 213.2549 71.21569 203.13725 51.37255 Q 225.01961 55.52941 214.90196 35.68627 Q 236.78431 39.84314 226.66667 20 L 173.33333 -20 Q 151.45098 -24.15686 161.56863 -4.31373 Q 139.68627 -8.47059 149.80392 11.37255 Q 127.92157 7.21569 138.03922 27.05882 Q 116.15686 22.90196 126.27451 42.7451 Q 104.39216 38.58824 114.5098 58.43137 Q 92.62745 54.27451 102.7451 74.11765 Q 80.86275 69.96078 90.98039 89.80392 Q 69.09804 85.64706 79.21569 105.4902 Q 57.33333 101.33333 67.45098 121.17647 Q 45.56863 117.01961 55.68627 136.86275 Q 33.80392 132.70588 43.92157 152.54902 Q 22.03922 148.39216 32.15686 168.23529 Q 10.27451 164.07843 20.39216 183.92157 Q -1.4902 179.76471 8.62745 199.60784 Q -13.2549 195.45098 -3.13725 215.29412 Q -25.01961 211.13725 -14.90196 230.98039 Q -36.78431 226.82353 -26.66667 246.66667"
       fill="url(#field-pattern-3)"
       onClick={[Function]}
+      onMouseDown={[Function]}
+      onMouseUp={[Function]}
       stroke="#333"
+      strokeWidth={1}
       style={
         Object {
           "cursor": "pointer",
@@ -5288,7 +5318,10 @@ exports[`CoatsOfArms should render 'Or, a fess murrey' 1`] = `
       d="M 0 88.88889 V177.77778 H200 V88.88889 Z"
       fill="#8A004B"
       onClick={[Function]}
+      onMouseDown={[Function]}
+      onMouseUp={[Function]}
       stroke="#333"
+      strokeWidth={1}
       style={
         Object {
           "cursor": "pointer",
@@ -6243,7 +6276,10 @@ exports[`CoatsOfArms should render 'Per bend sinister wavy azure and or, a chief
       d="M 0 0 V53.33333 Q 5.55556 58.66667 11.11111 53.33333 Q 16.66667 48 22.22222 53.33333 Q 27.77778 58.66667 33.33333 53.33333 Q 38.88889 48 44.44444 53.33333 Q 50 58.66667 55.55556 53.33333 Q 61.11111 48 66.66667 53.33333 Q 72.22222 58.66667 77.77778 53.33333 Q 83.33333 48 88.88889 53.33333 Q 94.44444 58.66667 100 53.33333 Q 105.55556 48 111.11111 53.33333 Q 116.66667 58.66667 122.22222 53.33333 Q 127.77778 48 133.33333 53.33333 Q 138.88889 58.66667 144.44444 53.33333 Q 150 48 155.55556 53.33333 Q 161.11111 58.66667 166.66667 53.33333 Q 172.22222 48 177.77778 53.33333 Q 183.33333 58.66667 188.88889 53.33333 Q 194.44444 48 200 53.33333 V0 Z"
       fill="#FFFFFF"
       onClick={[Function]}
+      onMouseDown={[Function]}
+      onMouseUp={[Function]}
       stroke="#333"
+      strokeWidth={1}
       style={
         Object {
           "cursor": "pointer",
@@ -6749,7 +6785,10 @@ exports[`CoatsOfArms should render 'Per fess or and ermine, a bordure engrailed 
       fill="#0000FF"
       fillRule="evenodd"
       onClick={[Function]}
+      onMouseDown={[Function]}
+      onMouseUp={[Function]}
       stroke="#333"
+      strokeWidth={1}
       style={
         Object {
           "cursor": "pointer",
@@ -7097,7 +7136,10 @@ exports[`CoatsOfArms should render 'Potent, a chief gules' 1`] = `
       d="M 0 0 V53.33333 H200 V0 Z"
       fill="#FF0000"
       onClick={[Function]}
+      onMouseDown={[Function]}
+      onMouseUp={[Function]}
       stroke="#333"
+      strokeWidth={1}
       style={
         Object {
           "cursor": "pointer",
@@ -7383,7 +7425,10 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
           fill="#FF0000"
           fillRule="evenodd"
           onClick={[Function]}
+          onMouseDown={[Function]}
+          onMouseUp={[Function]}
           stroke="#333"
+          strokeWidth={1}
           style={
             Object {
               "cursor": "pointer",
@@ -7428,7 +7473,10 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
           fill="#FF0000"
           fillRule="evenodd"
           onClick={[Function]}
+          onMouseDown={[Function]}
+          onMouseUp={[Function]}
           stroke="#333"
+          strokeWidth={1}
           style={
             Object {
               "cursor": "pointer",
@@ -7472,7 +7520,10 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
           d="M 0 0 V36.66667 Q 5 26.66667 10 36.66667 Q 15 26.66667 20 36.66667 Q 25 26.66667 30 36.66667 Q 35 26.66667 40 36.66667 Q 45 26.66667 50 36.66667 Q 55 26.66667 60 36.66667 Q 65 26.66667 70 36.66667 Q 75 26.66667 80 36.66667 Q 85 26.66667 90 36.66667 Q 95 26.66667 100 36.66667 V0 Z"
           fill="#008000"
           onClick={[Function]}
+          onMouseDown={[Function]}
+          onMouseUp={[Function]}
           stroke="#333"
+          strokeWidth={1}
           style={
             Object {
               "cursor": "pointer",
@@ -7517,7 +7568,10 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
           fill="#FF0000"
           fillRule="evenodd"
           onClick={[Function]}
+          onMouseDown={[Function]}
+          onMouseUp={[Function]}
           stroke="#333"
+          strokeWidth={1}
           style={
             Object {
               "cursor": "pointer",
@@ -7648,7 +7702,10 @@ exports[`CoatsOfArms should render 'Quarterly, 1st: Bendy or and purpure, a bord
           fill="#FFFFFF"
           fillRule="evenodd"
           onClick={[Function]}
+          onMouseDown={[Function]}
+          onMouseUp={[Function]}
           stroke="#333"
+          strokeWidth={1}
           style={
             Object {
               "cursor": "pointer",
@@ -7727,7 +7784,10 @@ exports[`CoatsOfArms should render 'Quarterly, 1st: Bendy or and purpure, a bord
           fill="#FFFFFF"
           fillRule="evenodd"
           onClick={[Function]}
+          onMouseDown={[Function]}
+          onMouseUp={[Function]}
           stroke="#333"
+          strokeWidth={1}
           style={
             Object {
               "cursor": "pointer",
@@ -7806,7 +7866,10 @@ exports[`CoatsOfArms should render 'Quarterly, 1st: Bendy or and purpure, a bord
           fill="#FFFFFF"
           fillRule="evenodd"
           onClick={[Function]}
+          onMouseDown={[Function]}
+          onMouseUp={[Function]}
           stroke="#333"
+          strokeWidth={1}
           style={
             Object {
               "cursor": "pointer",
@@ -7885,7 +7948,10 @@ exports[`CoatsOfArms should render 'Quarterly, 1st: Bendy or and purpure, a bord
           fill="#FFFFFF"
           fillRule="evenodd"
           onClick={[Function]}
+          onMouseDown={[Function]}
+          onMouseUp={[Function]}
           stroke="#333"
+          strokeWidth={1}
           style={
             Object {
               "cursor": "pointer",
@@ -8501,7 +8567,10 @@ exports[`CoatsOfArms should render a party blason with some ordinary 1`] = `
       d="M 0 0 V53.33333 H200 V0 Z"
       fill="#800080"
       onClick={[Function]}
+      onMouseDown={[Function]}
+      onMouseUp={[Function]}
       stroke="#333"
+      strokeWidth={1}
       style={
         Object {
           "cursor": "pointer",
