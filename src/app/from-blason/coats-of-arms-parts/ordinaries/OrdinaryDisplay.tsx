@@ -25,10 +25,16 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
 
   const fill = convertToOlfFillFronTincture(fillFromTincture)(ordinary.tincture);
   const lineOptions = computeLineOptions(ordinary.line, dimension);
+  const oneSideOnly = (lineOptions && 'oneSideOnly' in lineOptions
+  ? lineOptions.oneSideOnly
+  : false)
+    ? null
+    : lineOptions;
 
   const { width, height } = dimension;
   if (ordinary.name === 'chief') {
     const chiefHeight = height * chiefHeightRatio;
+
     const computedHeight =
       chiefHeight +
       (lineOptions && lineOptions.line === 'with-arc'
@@ -70,11 +76,9 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
       />
     );
   } else if (ordinary.name === 'fess') {
-    const oneSideOnly = lineOptions && 'oneSideOnly' in lineOptions ? lineOptions.oneSideOnly : false;
-
     const pathBuilder = SvgPathBuilder.start([0, height / 3])
       .goTo([0, (2 * height) / 3])
-      .goTo([width, (2 * height) / 3], oneSideOnly ? null : lineOptions)
+      .goTo([width, (2 * height) / 3], oneSideOnly)
       .goTo([width, height / 3])
       .goTo([0, height / 3], lineOptions);
 
@@ -91,11 +95,9 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
     const length = Math.sqrt(width ** 2 + height ** 2);
     const bendHeight = height / 4;
 
-    const oneSideOnly = lineOptions && 'oneSideOnly' in lineOptions ? lineOptions.oneSideOnly : false;
-
     const pathBuilder2 = SvgPathBuilder.start([0, 0])
       .goTo([0, bendHeight])
-      .goTo([length, bendHeight], oneSideOnly ? null : lineOptions)
+      .goTo([length, bendHeight], oneSideOnly)
       .goTo([length, 0])
       .goTo([0, 0], lineOptions)
       .translate([(width - length) / 2, height / 2 - bendHeight / 2])
@@ -114,11 +116,9 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
     const length = Math.sqrt(width ** 2 + height ** 2);
     const bendHeight = height / 4;
 
-    const oneSideOnly = lineOptions && 'oneSideOnly' in lineOptions ? lineOptions.oneSideOnly : false;
-
     const pathBuilder2 = SvgPathBuilder.start([0, 0])
       .goTo([0, bendHeight])
-      .goTo([length, bendHeight], oneSideOnly ? null : lineOptions)
+      .goTo([length, bendHeight], oneSideOnly)
       .goTo([length, 0])
       .goTo([0, 0], lineOptions)
       .translate([(width - length) / 2, height / 2 - bendHeight / 2])
@@ -134,14 +134,13 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
       />
     );
   } else if (ordinary.name === 'pale') {
-    const oneSideOnly = lineOptions && 'oneSideOnly' in lineOptions ? lineOptions.oneSideOnly : false;
     return (
       <g>
         {range(0, ordinary.count).map((i) => {
           const startX = ((i * 2 + 1) * width) / (2 * ordinary.count + 1);
           const paleWidth = width / (2 * ordinary.count + 1);
           const pathBuilder = SvgPathBuilder.start([startX, 0])
-            .goTo([startX, height], oneSideOnly ? null : lineOptions)
+            .goTo([startX, height], oneSideOnly)
             .goTo([startX + paleWidth, height])
             .goTo([startX + paleWidth, 0], lineOptions);
 
@@ -159,20 +158,18 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
       </g>
     );
   } else if (ordinary.name === 'cross') {
-    const oneSideOnly = lineOptions && 'oneSideOnly' in lineOptions ? lineOptions.oneSideOnly : false;
-
     const pathBuilder = SvgPathBuilder.start([(2 * width) / 5, 0])
-      .goTo([(2 * width) / 5, (2 * height) / 5], oneSideOnly ? null : lineOptions)
-      .goTo([0, (2 * height) / 5], lineOptions)
+      .goToWithPartFlat([(2 * width) / 5, (2 * height) / 5], oneSideOnly, 5)
+      .goToWithPartFlat([0, (2 * height) / 5], lineOptions, 5)
       .goTo([0, (3 * height) / 5])
-      .goTo([(2 * width) / 5, (3 * height) / 5], oneSideOnly ? null : lineOptions)
-      .goTo([(2 * width) / 5, height], oneSideOnly ? null : lineOptions)
+      .goToWithPartFlat([(2 * width) / 5, (3 * height) / 5], oneSideOnly, 5)
+      .goToWithPartFlat([(2 * width) / 5, height], oneSideOnly, 5)
       .goTo([(3 * width) / 5, height])
-      .goTo([(3 * width) / 5, (3 * height) / 5], oneSideOnly ? null : lineOptions)
-      .goTo([width, (3 * height) / 5], oneSideOnly ? null : lineOptions)
+      .goToWithPartFlat([(3 * width) / 5, (3 * height) / 5], oneSideOnly, 5)
+      .goToWithPartFlat([width, (3 * height) / 5], oneSideOnly, 5)
       .goTo([width, (2 * height) / 5])
-      .goTo([(3 * width) / 5, (2 * height) / 5], lineOptions)
-      .goTo([(3 * width) / 5, 0], oneSideOnly ? null : lineOptions)
+      .goToWithPartFlat([(3 * width) / 5, (2 * height) / 5], lineOptions, 5)
+      .goToWithPartFlat([(3 * width) / 5, 0], oneSideOnly, 5)
       .goTo([(2 * width) / 5, 0]);
 
     return (
@@ -185,7 +182,6 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
       />
     );
   } else if (ordinary.name === 'saltire') {
-    const oneSideOnly = lineOptions && 'oneSideOnly' in lineOptions ? lineOptions.oneSideOnly : false;
     const basePointW = width / (10 * Math.sqrt(2));
     const basePointH = height / (10 * Math.sqrt(2));
 
@@ -195,14 +191,14 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
     const pathBuilder = SvgPathBuilder.start([w, h - basePointH])
       .goTo([(h * basePointW) / basePointH - w, -basePointH], lineOptions)
       .goTo([-basePointW, h - (w * basePointH) / basePointW])
-      .goTo([w - basePointW, h], oneSideOnly ? null : lineOptions)
+      .goTo([w - basePointW, h], oneSideOnly)
       .goTo([-basePointW, h + (w * basePointH) / basePointW], lineOptions)
       .goTo([(h * basePointW) / basePointH - w, 2 * h + basePointH])
-      .goTo([w, h + basePointH], oneSideOnly ? null : lineOptions)
-      .goTo([2 * w, 2 * h + basePointH], oneSideOnly ? null : lineOptions)
+      .goTo([w, h + basePointH], oneSideOnly)
+      .goTo([2 * w, 2 * h + basePointH], oneSideOnly)
       .goTo([2 * w + basePointW, h + (w * basePointH) / basePointW])
       .goTo([w + basePointW, h], lineOptions)
-      .goTo([2 * w + basePointW, h - (w * basePointH) / basePointW], oneSideOnly ? null : lineOptions)
+      .goTo([2 * w + basePointW, h - (w * basePointH) / basePointW], oneSideOnly)
       .goTo([2 * w, -basePointH])
       .goTo([w, h - basePointH], lineOptions);
 
@@ -216,7 +212,6 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
       />
     );
   } else if (ordinary.name === 'chevron' || ordinary.name === 'chevronel') {
-    const oneSideOnly = lineOptions && 'oneSideOnly' in lineOptions ? lineOptions.oneSideOnly : false;
     const chevronHeight =
       ordinary.name === 'chevron' ? height / 6 : ordinary.name === 'chevronel' ? height / 12 : cannotHappen(ordinary);
 
@@ -229,8 +224,8 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
           const pathBuilder = SvgPathBuilder.start([width / 2, topPoint])
             .goToWithPartFlat([0, bottomPoint - chevronHeight], lineOptions, 5)
             .goTo([0, bottomPoint])
-            .goToWithPartFlat([width / 2, topPoint + chevronHeight], oneSideOnly ? null : lineOptions, 5)
-            .goToWithPartFlat([width, bottomPoint], oneSideOnly ? null : lineOptions, 5)
+            .goToWithPartFlat([width / 2, topPoint + chevronHeight], oneSideOnly, 5)
+            .goToWithPartFlat([width, bottomPoint], oneSideOnly, 5)
             .goTo([width, bottomPoint - chevronHeight])
             .goToWithPartFlat([width / 2, topPoint], lineOptions, 5);
 
@@ -263,14 +258,14 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
     const pallWidth = width / 5.5;
     const projectedPallWidth = pallWidth / Math.sqrt(2);
     const lineOptions = computeLineOptions(ordinary.line, { width: width / 1.5, height });
-    const oneSideOnly = lineOptions && 'oneSideOnly' in lineOptions ? lineOptions.oneSideOnly : false;
+
     const pathBuilder = SvgPathBuilder.start([0, 0])
       .goTo([0, projectedPallWidth])
-      .goTo([width / 2 - pallWidth / 2, height / 2], oneSideOnly ? null : lineOptions)
-      .goTo([width / 2 - pallWidth / 2, height], oneSideOnly ? null : lineOptions)
+      .goTo([width / 2 - pallWidth / 2, height / 2], oneSideOnly)
+      .goTo([width / 2 - pallWidth / 2, height], oneSideOnly)
       .goTo([width / 2 + pallWidth / 2, height])
-      .goTo([width / 2 + pallWidth / 2, height / 2], oneSideOnly ? null : lineOptions)
-      .goTo([width, projectedPallWidth], oneSideOnly ? null : lineOptions)
+      .goTo([width / 2 + pallWidth / 2, height / 2], oneSideOnly)
+      .goTo([width, projectedPallWidth], oneSideOnly)
       .goTo([width, 0])
       .goTo([width - projectedPallWidth, 0])
       .goTo([width / 2, height / 2 - (height / width) * projectedPallWidth], lineOptions)

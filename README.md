@@ -39,8 +39,6 @@ Faire le "of the last"
 - going to quarterly is a slow click
 - Factoriser intelligemment le dessin des paths dans les charges (repetition du onClick et du cursor pointer)
 - Factoriser le pattern de selection des tinctures et des lines
-- Chevron Bretessed are displayed strangely ( Or, a chevron bretessed azure)
-- Cross Bretessed are displayed strangely ( Or, a cross bretessed azure)
 - Saltire Bretessed are displayed strangely ( Or, a saltire bretessed azure)
 - Displayed strangely: Or, three chevronels bretessed azure
 - Pour les ordinary avec un seul coté, ne presenter que embatled, et pas les autres. 
