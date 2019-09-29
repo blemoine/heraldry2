@@ -87,7 +87,6 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
           <div className="form-group field-type-select">
             <label>Field type</label>
             <SelectScalar
-              classNamePrefix="field-type"
               options={fieldKinds}
               value={field.kind}
               valueChange={changeFieldKind}
@@ -102,7 +101,6 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
             <div className="form-group field-type-select">
               <label>Field type</label>
               <SelectScalar
-                classNamePrefix="field-type"
                 options={fieldKinds}
                 value={field.kind}
                 valueChange={changeFieldKind}

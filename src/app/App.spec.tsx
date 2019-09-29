@@ -1,6 +1,11 @@
 import * as React from 'react';
 import { fireEvent, render } from '@testing-library/react';
-import { selectElement, selectInReactSelect, selectTincture } from '../utils/tests/select-test.utils';
+import {
+  selectElement,
+  selectInDefaultSelect,
+  selectInReactSelect,
+  selectTincture,
+} from '../utils/tests/select-test.utils';
 import { argent, azure, ermine, gules, murrey, purpure, vair } from './model/tincture';
 import { App } from './App';
 import { MemoryRouter } from 'react-router-dom';
@@ -29,7 +34,7 @@ describe('App', () => {
       </MemoryRouter>
     );
 
-    return selectInReactSelect('.field-type-select', 'field-type', 'chequy')
+    return selectInDefaultSelect('.field-type-select', 'chequy')
       .then(() => selectTincture('.field-first-tincture-select', vair))
       .then(() => selectTincture('.field-second-tincture-select', gules))
       .then(() => {
@@ -45,10 +50,10 @@ describe('App', () => {
       </MemoryRouter>
     );
 
-    return selectInReactSelect('.field-type-select', 'field-type', 'paly')
+    return selectInDefaultSelect('.field-type-select', 'paly')
       .then(() => selectTincture('.field-first-tincture-select', argent))
       .then(() => selectTincture('.field-second-tincture-select', purpure))
-      .then(() => selectInReactSelect('.charge-type-select', 'charge-name', 'lion'))
+      .then(() => selectInDefaultSelect('.charge-type-select', 'lion'))
       .then(() => selectTincture('.charge-lion-tincture-select', azure))
       .then(() => {
         const blason = (app.getByPlaceholderText('Enter the blason here') as HTMLTextAreaElement).value;
@@ -63,7 +68,7 @@ describe('App', () => {
       </MemoryRouter>
     );
 
-    return selectInReactSelect('.field-type-select', 'field-type', 'barry')
+    return selectInDefaultSelect('.field-type-select', 'barry')
       .then(() => selectTincture('.field-first-tincture-select', argent))
       .then(() => selectTincture('.field-second-tincture-select', purpure))
       .then(() => selectInReactSelect('.ordinary-type-select', 'ordinary-name', 'bend'))
@@ -90,8 +95,9 @@ describe('App', () => {
     const fieldValue = field.innerHTML;
     expect(fieldValue).toBe('ermine');
 
-    const charge = selectElement('.charge-type-select .charge-name__single-value') as HTMLDivElement;
-    const chargeValue = charge.innerHTML;
-    expect(chargeValue).toBe('eagle');
+    const charge = selectElement('.charge-type-select select') as HTMLSelectElement;
+    const options = Array.from(document.querySelectorAll('.charge-type-select select option'));
+    const chargeValue = charge.value;
+    expect(options[parseInt(chargeValue)].innerHTML).toBe('eagle');
   });
 });

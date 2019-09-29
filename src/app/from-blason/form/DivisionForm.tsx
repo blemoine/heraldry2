@@ -4,8 +4,6 @@ import { SelectScalar } from '../../common/SelectScalar';
 import { cannotHappen } from '../../../utils/cannot-happen';
 type Props = { blason: Blason; blasonChange: (blason: Blason) => void };
 export const DivisionForm = function DivisionForm({ blason, blasonChange }: Props) {
-  // TODO test
-
   function changeBlasonKind(kind: Blason['kind']) {
     if (blason.kind === 'simple') {
       if (kind === 'quarterly') {
@@ -24,16 +22,9 @@ export const DivisionForm = function DivisionForm({ blason, blasonChange }: Prop
     }
   }
   return (
-    <>
-      <div className="form-group field-division-select">
-        <label>Division of the field</label>
-        <SelectScalar
-          classNamePrefix="field-division"
-          options={availableDivisions}
-          value={blason.kind}
-          valueChange={changeBlasonKind}
-        />
-      </div>
-    </>
+    <div className="form-group field-division-select">
+      <label>Division of the field</label>
+      <SelectScalar options={availableDivisions} value={blason.kind} valueChange={changeBlasonKind} />
+    </div>
   );
 };

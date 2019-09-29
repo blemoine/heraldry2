@@ -28,6 +28,19 @@ export function selectTincture(topSelector: string, tincture: Tincture): Promise
   });
 }
 
+export function selectInDefaultSelect(topSelector: string, value: string): Promise<void> {
+  const select = selectElement(`${topSelector} select`);
+  const options = document.querySelectorAll(`${topSelector} select option`);
+  const idx = Array.from(options).findIndex((idx) => idx.innerHTML === value);
+  fireEvent.change(select, { target: { value: idx } });
+
+  return new Promise<void>((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, 1);
+  });
+}
+
 export function selectInReactSelect(topSelector: string, classNamePrefix: string, value: string): Promise<void> {
   fireEvent.focus(selectElement(`${topSelector} .${classNamePrefix}__input input`));
   fireEvent.mouseDown(selectElement(`${topSelector} .${classNamePrefix}__control`));
