@@ -7,22 +7,19 @@ type Props<A extends string | number> = {
   formatValue?: (a: A) => string;
 };
 export function SelectScalar<A extends string | number>(props: Props<A>) {
-  const options = props.options.map((v) => ({ value: v, label: props.formatValue ? props.formatValue(v) : v }));
-  const valueIdx = options.findIndex((v) => v.value === props.value);
+  const valueIdx = props.options.findIndex((v) => v === props.value);
 
   return (
     <select
       className="form-control"
       value={valueIdx}
-      onChange={(e) => props.valueChange(options[parseInt(e.target.value)].value)}
+      onChange={(e) => props.valueChange(props.options[parseInt(e.target.value)])}
     >
-      {options.map((option, i) => {
-        return (
-          <option key={i} value={i}>
-            {option.label}
-          </option>
-        );
-      })}
+      {props.options.map((v, i) => (
+        <option key={i} value={i}>
+          {props.formatValue ? props.formatValue(v) : v}
+        </option>
+      ))}
     </select>
   );
 }
