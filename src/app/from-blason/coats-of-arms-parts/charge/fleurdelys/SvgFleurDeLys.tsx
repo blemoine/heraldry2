@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Dimension } from '../../../../model/dimension';
 import { SvgPathBuilder } from '../../../../svg-path-builder/svg-path-builder';
 import { PathFromBuilder } from '../../../../common/PathFromBuilder';
@@ -14,6 +14,10 @@ const SvgFleurDeLys = ({
   mainFill: string;
   onClick: () => void;
 }) => {
+  const [strokeWidth, setStrokeWidth] = useState(1);
+  const onMouseDown = () => setStrokeWidth(1 + 2);
+  const onMouseUp = () => setStrokeWidth(1);
+
   const leftPart = SvgPathBuilder.start([22.23, 169.17])
     .relativeArcTo([7.88, -64.69], { radius: 33.383, xAxisRotation: 0.17, sweep: 1 })
     .relativeArcTo([40.5, 43.31], { radius: 40.566, xAxisRotation: 178.91, sweep: 1 })
@@ -78,6 +82,9 @@ const SvgFleurDeLys = ({
         stroke={stroke}
         onClick={onClick}
         style={{ cursor: 'pointer' }}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
+        strokeWidth={strokeWidth}
       />
       <PathFromBuilder
         pathBuilder={rightPart}
@@ -85,6 +92,9 @@ const SvgFleurDeLys = ({
         stroke={stroke}
         onClick={onClick}
         style={{ cursor: 'pointer' }}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
+        strokeWidth={strokeWidth}
       />
       <PathFromBuilder
         pathBuilder={verticalMiddlePart}
@@ -92,6 +102,9 @@ const SvgFleurDeLys = ({
         stroke={stroke}
         onClick={onClick}
         style={{ cursor: 'pointer' }}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
+        strokeWidth={strokeWidth}
       />
       <PathFromBuilder
         pathBuilder={middlePart}
@@ -99,6 +112,9 @@ const SvgFleurDeLys = ({
         stroke={stroke}
         onClick={onClick}
         style={{ cursor: 'pointer' }}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
+        strokeWidth={strokeWidth}
       />
     </svg>
   );

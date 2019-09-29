@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { combine, isError } from '../../../../../utils/result';
-import { PathFromBuilder } from '../../../../common/PathFromBuilder';
+import { FocusablePathFromBuilder } from '../../../../common/PathFromBuilder';
 import { SvgPathBuilder } from '../../../../svg-path-builder/svg-path-builder';
 
 type Props = {
@@ -20,14 +20,6 @@ export const CrossFromLimb = ({ topLimb, center, fill, stroke, onClick }: Props)
   if (isError(maybePathBuilder)) {
     throw new Error(maybePathBuilder.error.join('\n'));
   } else {
-    return (
-      <PathFromBuilder
-        pathBuilder={maybePathBuilder}
-        fill={fill}
-        stroke={stroke}
-        onClick={onClick}
-        style={{ cursor: 'pointer' }}
-      />
-    );
+    return <FocusablePathFromBuilder pathBuilder={maybePathBuilder} fill={fill} stroke={stroke} onClick={onClick} />;
   }
 };

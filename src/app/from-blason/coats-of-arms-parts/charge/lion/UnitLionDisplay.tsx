@@ -15,6 +15,7 @@ import SvgLionSalient from './SvgLionSalient';
 import SvgLionSejant from './SvgLionSejant';
 import SvgLionSejantErect from './SvgLionSejantErect';
 import { Dimension } from '../../../../model/dimension';
+import { useState } from 'react';
 
 type Props = {
   charge: Lion;
@@ -28,17 +29,46 @@ function lionHead(
   armedAndLanguedFill: string,
   mainFill: string,
   stroke: string,
-  onClick: () => void
+  onClick: () => void,
+  onMouseDown: () => void,
+  onMouseUp: () => void,
+  strokeWidth: number
 ): ReactNode {
   if (head === null) {
-    return <DefaultLionHead tongueFill={armedAndLanguedFill} mainFill={mainFill} stroke={stroke} onClick={onClick} />;
+    return (
+      <DefaultLionHead
+        tongueFill={armedAndLanguedFill}
+        mainFill={mainFill}
+        stroke={stroke}
+        onClick={onClick}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
+        strokeWidth={strokeWidth}
+      />
+    );
   } else if (head === 'guardant') {
     return (
-      <SvgGuardantLionHead tongueFill={armedAndLanguedFill} mainFill={mainFill} stroke={stroke} onClick={onClick} />
+      <SvgGuardantLionHead
+        tongueFill={armedAndLanguedFill}
+        mainFill={mainFill}
+        stroke={stroke}
+        onClick={onClick}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
+        strokeWidth={strokeWidth}
+      />
     );
   } else if (head === 'regardant') {
     return (
-      <SvgRegardantLionHead tongueFill={armedAndLanguedFill} mainFill={mainFill} stroke={stroke} onClick={onClick} />
+      <SvgRegardantLionHead
+        tongueFill={armedAndLanguedFill}
+        mainFill={mainFill}
+        stroke={stroke}
+        onClick={onClick}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
+        strokeWidth={strokeWidth}
+      />
     );
   } else {
     return cannotHappen(head);
@@ -46,10 +76,23 @@ function lionHead(
 }
 
 export const UnitLionDisplay = ({ charge, dimension, fillFromTincture, onClick }: Props) => {
+  const [strokeWidth, setStrokeWidth] = useState(1);
+  const onMouseDown = () => setStrokeWidth(1 + 2);
+  const onMouseUp = () => setStrokeWidth(1);
+
   const armedAndLanguedFill = fillFromTincture(charge.armedAndLangued);
   const mainFill = fillFromTincture(charge.tincture);
   const stroke = charge.tincture.name === 'sable' ? '#777' : '#000';
-  const head = lionHead(charge.head, armedAndLanguedFill, mainFill, stroke, onClick);
+  const head = lionHead(
+    charge.head,
+    armedAndLanguedFill,
+    mainFill,
+    stroke,
+    onClick,
+    onMouseDown,
+    onMouseUp,
+    strokeWidth
+  );
   if (charge.attitude === 'rampant') {
     return (
       <SvgLionRampant
@@ -59,6 +102,9 @@ export const UnitLionDisplay = ({ charge, dimension, fillFromTincture, onClick }
         clawFill={armedAndLanguedFill}
         stroke={stroke}
         onClick={onClick}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
+        strokeWidth={strokeWidth}
       />
     );
   } else if (charge.attitude === 'passant') {
@@ -70,6 +116,9 @@ export const UnitLionDisplay = ({ charge, dimension, fillFromTincture, onClick }
         clawFill={armedAndLanguedFill}
         stroke={stroke}
         onClick={onClick}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
+        strokeWidth={strokeWidth}
       />
     );
   } else if (charge.attitude === 'statant') {
@@ -81,6 +130,9 @@ export const UnitLionDisplay = ({ charge, dimension, fillFromTincture, onClick }
         clawFill={armedAndLanguedFill}
         stroke={stroke}
         onClick={onClick}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
+        strokeWidth={strokeWidth}
       />
     );
   } else if (charge.attitude === 'salient') {
@@ -92,6 +144,9 @@ export const UnitLionDisplay = ({ charge, dimension, fillFromTincture, onClick }
         clawFill={armedAndLanguedFill}
         stroke={stroke}
         onClick={onClick}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
+        strokeWidth={strokeWidth}
       />
     );
   } else if (charge.attitude === 'sejant') {
@@ -103,6 +158,9 @@ export const UnitLionDisplay = ({ charge, dimension, fillFromTincture, onClick }
         clawFill={armedAndLanguedFill}
         stroke={stroke}
         onClick={onClick}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
+        strokeWidth={strokeWidth}
       />
     );
   } else if (charge.attitude === 'sejant-erect') {
@@ -114,6 +172,9 @@ export const UnitLionDisplay = ({ charge, dimension, fillFromTincture, onClick }
         clawFill={armedAndLanguedFill}
         stroke={stroke}
         onClick={onClick}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
+        strokeWidth={strokeWidth}
       />
     );
   } else if (charge.attitude === 'couchant') {
@@ -125,6 +186,9 @@ export const UnitLionDisplay = ({ charge, dimension, fillFromTincture, onClick }
         clawFill={armedAndLanguedFill}
         stroke={stroke}
         onClick={onClick}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
+        strokeWidth={strokeWidth}
       />
     );
   } else if (charge.attitude === 'dormant') {
@@ -135,6 +199,9 @@ export const UnitLionDisplay = ({ charge, dimension, fillFromTincture, onClick }
         mainFill={mainFill}
         clawFill={armedAndLanguedFill}
         onClick={onClick}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
+        strokeWidth={strokeWidth}
       />
     );
   } else {

@@ -3,7 +3,7 @@ import { Roundel } from '../../../../model/charge';
 import { Dimension } from '../../../../model/dimension';
 import { Tincture } from '../../../../model/tincture';
 import { getChargePositions } from '../charge.helper';
-import { PathFromBuilder } from '../../../../common/PathFromBuilder';
+import { FocusablePathFromBuilder } from '../../../../common/PathFromBuilder';
 import { SvgPathBuilder } from '../../../../svg-path-builder/svg-path-builder';
 import { cannotHappen } from '../../../../../utils/cannot-happen';
 import { SimpleBlasonShape } from '../../blasonDisplay.helper';
@@ -29,38 +29,38 @@ export const RoundelDisplay = ({ charge, dimension, fillFromTincture, shape, onC
       {positions.map(([cx, cy], i) => {
         const centerX = cx * width;
         const centerY = cy * height;
+
+        const externalPathBuilder = SvgPathBuilder.start([centerX, centerY - radius])
+          .arcTo([centerX, centerY + radius], { radius })
+          .arcTo([centerX, centerY - radius], { radius });
+
         if (charge.inside === 'voided') {
           const innerRadius = radius * 0.65;
 
-          const pathBuilder = SvgPathBuilder.start([centerX, centerY - radius])
-            .arcTo([centerX, centerY + radius], { radius })
-            .arcTo([centerX, centerY - radius], { radius })
+          const pathBuilder = externalPathBuilder
             .moveTo([centerX, centerY - innerRadius])
             .arcTo([centerX, centerY + innerRadius], { radius: innerRadius })
             .arcTo([centerX, centerY - innerRadius], { radius: innerRadius });
 
           return (
-            <PathFromBuilder
+            <FocusablePathFromBuilder
               key={i}
               pathBuilder={pathBuilder}
               stroke={stroke}
               fill={fill}
               fillRule="evenodd"
               onClick={onClick}
-              style={{ cursor: 'pointer' }}
             />
           );
         } else if (charge.inside === 'nothing') {
           return (
-            <circle
+            <FocusablePathFromBuilder
               key={i}
-              cx={centerX}
-              cy={centerY}
-              r={radius}
+              pathBuilder={externalPathBuilder}
               stroke={stroke}
               fill={fill}
+              fillRule="evenodd"
               onClick={onClick}
-              style={{ cursor: 'pointer' }}
             />
           );
         } else {

@@ -1,6 +1,14 @@
 import React from 'react';
 
-type Props = { tongueFill: string; mainFill: string; stroke: string; onClick: () => void };
+type Props = {
+  tongueFill: string;
+  mainFill: string;
+  stroke: string;
+  onClick: () => void;
+  onMouseDown: () => void;
+  onMouseUp: () => void;
+  strokeWidth: number;
+};
 export const DefaultLionHead = (props: Props) => {
   return (
     <g>
@@ -9,16 +17,20 @@ export const DefaultLionHead = (props: Props) => {
         fill={props.tongueFill}
         fillRule="evenodd"
         stroke={props.stroke}
-        strokeWidth={2.5}
         onClick={props.onClick}
         style={{ cursor: 'pointer' }}
+        onMouseDown={props.onMouseDown}
+        onMouseUp={props.onMouseUp}
+        strokeWidth={props.strokeWidth}
       />
       <path
         d="M157.575 65.308c.458-1.458.872-.975 2.315-1.48 1.454-.508 1.427-.784 2.578.24 1.042.927 1.335.578 1.493 1.964.41 3.577-.05 7.16-1.432 10.485-.586 1.411-2.185 3.23-2.185 3.23s-1.16-1.383-1.69-3.08c-1.118-3.59-2.205-7.772-1.079-11.359zM159.365 92.773c-.048 1.528.501 1.208 1.698 2.16 1.205.958 1.088 1.21 2.512.623 1.29-.531 1.45-.106 2.058-1.362 1.565-3.242 2.311-6.777 2.103-10.371-.089-1.526-.999-3.77-.999-3.77s-1.55.923-2.61 2.352c-2.24 3.02-4.644 6.61-4.762 10.368z"
         fill="#FFF"
         fillRule="evenodd"
         stroke={props.stroke}
-        strokeWidth={2.5}
+        onMouseDown={props.onMouseDown}
+        onMouseUp={props.onMouseUp}
+        strokeWidth={props.strokeWidth}
         onClick={props.onClick}
         style={{ cursor: 'pointer' }}
       />
@@ -27,7 +39,9 @@ export const DefaultLionHead = (props: Props) => {
         fill={props.mainFill}
         fillRule="evenodd"
         stroke={props.stroke}
-        strokeWidth={3}
+        onMouseDown={props.onMouseDown}
+        onMouseUp={props.onMouseUp}
+        strokeWidth={props.strokeWidth}
         onClick={props.onClick}
         style={{ cursor: 'pointer' }}
       />
@@ -36,7 +50,9 @@ export const DefaultLionHead = (props: Props) => {
         fill={props.mainFill}
         fillRule="evenodd"
         stroke={props.stroke}
-        strokeWidth={3}
+        onMouseDown={props.onMouseDown}
+        onMouseUp={props.onMouseUp}
+        strokeWidth={props.strokeWidth}
         onClick={props.onClick}
         style={{ cursor: 'pointer' }}
       />
@@ -49,7 +65,9 @@ export const DefaultLionHead = (props: Props) => {
           d="M193.183 43.513a7.36 12.505-66.1 1 0 22.865 10.132 7.36 12.505-66.1 1 0-22.865-10.132z"
           fill="#FFF"
           stroke={props.stroke}
-          strokeWidth={2.5}
+          onMouseDown={props.onMouseDown}
+          onMouseUp={props.onMouseUp}
+          strokeWidth={props.strokeWidth}
           overflow="visible"
           onClick={props.onClick}
         />
@@ -61,7 +79,9 @@ export const DefaultLionHead = (props: Props) => {
           d="M209.318 45.927a8.007 8.007 0 1 1-16.014-.064 8.007 8.007 0 1 1 16.014.064z"
           fill="#FFF"
           stroke={props.stroke}
-          strokeWidth={2.5}
+          onMouseDown={props.onMouseDown}
+          onMouseUp={props.onMouseUp}
+          strokeWidth={props.strokeWidth}
           overflow="visible"
           onClick={props.onClick}
         />
@@ -74,7 +94,9 @@ export const DefaultLionHead = (props: Props) => {
           d="M200.567 33.635s-2.763.42-3.905.871c-2.244.887-4.511 2.908-4.81 5.302-.157 1.252.324 2.318 1.228 3.197.973.946 2.544.836 3.899.903 1.984.098 4.453-1.455 6.39-1.216 2.789.344 6.4 2.068 8.498 3.936.982.874 1.192 3.014 2.291 3.734.988.648 2.843 1.075 3.9.548 1.087-.542 1.658-2.365 1.965-3.54.148-.566.17-1.389.008-1.95-.246-.852-.976-1.848-1.586-2.49-.763-.803-3.007-2.14-3.007-2.14"
           fill={props.mainFill}
           stroke={props.stroke}
-          strokeWidth={2.5}
+          onMouseDown={props.onMouseDown}
+          onMouseUp={props.onMouseUp}
+          strokeWidth={props.strokeWidth}
           onClick={props.onClick}
           style={{ cursor: 'pointer' }}
         />
@@ -83,7 +105,9 @@ export const DefaultLionHead = (props: Props) => {
         d="M149.678 51.196s4.88-6.447 7.113-7.361c2.233-.915 3.068-.781 3.504.014.437.795.296 2.045-1.362 3.672-1.658 1.627-9.255 3.675-9.255 3.675z"
         fill="none"
         stroke={props.stroke}
-        strokeWidth={2.5}
+        onMouseDown={props.onMouseDown}
+        onMouseUp={props.onMouseUp}
+        strokeWidth={props.strokeWidth}
         onClick={props.onClick}
         style={{ cursor: 'pointer' }}
       />
@@ -91,7 +115,9 @@ export const DefaultLionHead = (props: Props) => {
         d="M248.214 45.12s2.744-4.374 4.595-5.443c2.918-1.686 11.058-1.988 11.058-1.988s1.351 7.08-.544 9.016c-.937.957-3.496-.579-4.447.363-1.25 1.239.731 4.616-.532 5.841-.85.824-3.938.238-3.938.238s.075-5.005-1.244-6.482c-1.036-1.16-4.948-1.544-4.948-1.544z"
         fillRule="evenodd"
         stroke={props.stroke}
-        strokeWidth={2.5}
+        onMouseDown={props.onMouseDown}
+        onMouseUp={props.onMouseUp}
+        strokeWidth={props.strokeWidth}
         onClick={props.onClick}
         style={{ cursor: 'pointer' }}
       />
@@ -99,7 +125,9 @@ export const DefaultLionHead = (props: Props) => {
         d="M240.803 47.674s-5.521 11.032-9.195 14.722c-1.94 1.948-5.124 4.078-7.75 4.889-5.041 1.555-18.17 2.399-18.17 2.399l-.82 1.039s14.77-3.761 18.975.076c1.566 1.428 1.557 5.104.675 7.03-.755 1.65-2.792 3.944-4.35 4.873-2.429 1.45-8.84 3.199-8.84 3.199M236.362 103.881s.79 8.463-.048 11.948c-1.322 5.5-3.772 10.251-6.632 15.133-1.152 1.968-4.242 6.309-4.242 6.309M147.521 175.213s-6.351 4.235-8.661 6.773c-1.709 1.878-4.288 7.534-4.288 7.534M212.924 164.932s-12.246 3.833-17.324 7.264c-2.35 1.588-4.473 4.964-5.7 7.522-1.914 3.998-3.085 11.436-3.085 11.436M211.485 184s6.973-6.8 9.834-9.195c3.857-3.228 11.253-4.929 14.092-9.08 1.821-2.662 2.151-10.533 2.151-10.533M146.26 139.364s-.581 9.61-2.163 13.345c-.785 1.854-2.679 5.153-4.7 7.444-4.031 4.572-8.913 7.999-8.913 7.999M161.302 188.944s2.258-8.931 4.135-12.624c1.222-2.407 5.65-7.006 5.65-7.006"
         fill="none"
         stroke={props.stroke}
-        strokeWidth={2.5}
+        onMouseDown={props.onMouseDown}
+        onMouseUp={props.onMouseUp}
+        strokeWidth={props.strokeWidth}
         onClick={props.onClick}
         style={{ cursor: 'pointer' }}
       />

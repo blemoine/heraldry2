@@ -1,7 +1,15 @@
 import React from 'react';
 //thanks to https://upload.wikimedia.org/wikipedia/commons/5/5b/Lion_Rampant_Regaurdant.svg
 
-type Props = { tongueFill: string; mainFill: string; stroke: string; onClick: () => void };
+type Props = {
+  tongueFill: string;
+  mainFill: string;
+  stroke: string;
+  onClick: () => void;
+  onMouseDown: () => void;
+  onMouseUp: () => void;
+  strokeWidth: number;
+};
 const SvgRegardantLionHead = (props: Props) => (
   <g>
     <path
@@ -9,16 +17,20 @@ const SvgRegardantLionHead = (props: Props) => (
       fill={props.tongueFill}
       fillRule="evenodd"
       stroke={props.stroke}
-      strokeWidth={2.5}
       onClick={props.onClick}
       style={{ cursor: 'pointer' }}
+      onMouseDown={props.onMouseDown}
+      onMouseUp={props.onMouseUp}
+      strokeWidth={props.strokeWidth}
     />
     <path
       d="M262.81 88.447c.06-1.528-.492-1.212-1.682-2.172-1.198-.968-1.08-1.219-2.508-.642-1.293.522-1.451.096-2.067 1.348-1.589 3.23-2.36 6.76-2.177 10.355.078 1.527.972 3.777.972 3.777s1.557-.912 2.627-2.333c2.26-3.004 4.69-6.577 4.836-10.333zM251.89 113.71c-.469 1.455-.879.969-2.325 1.463-1.457.498-1.433.774-2.576-.257-1.036-.935-1.33-.588-1.48-1.976-.384-3.58.102-7.159 1.507-10.473.597-1.408 2.208-3.215 2.208-3.215s1.15 1.39 1.668 3.093c1.093 3.597 2.15 7.787.998 11.365z"
       fill="#fff"
       fillRule="evenodd"
       stroke={props.stroke}
-      strokeWidth={2.5}
+      onMouseDown={props.onMouseDown}
+      onMouseUp={props.onMouseUp}
+      strokeWidth={props.strokeWidth}
       onClick={props.onClick}
       style={{ cursor: 'pointer' }}
     />
@@ -27,7 +39,9 @@ const SvgRegardantLionHead = (props: Props) => (
       fill={props.mainFill}
       fillRule="evenodd"
       stroke={props.stroke}
-      strokeWidth={3}
+      onMouseDown={props.onMouseDown}
+      onMouseUp={props.onMouseUp}
+      strokeWidth={props.strokeWidth}
       onClick={props.onClick}
       style={{ cursor: 'pointer' }}
     />
@@ -36,7 +50,9 @@ const SvgRegardantLionHead = (props: Props) => (
       fill={props.mainFill}
       fillRule="evenodd"
       stroke={props.stroke}
-      strokeWidth={3}
+      onMouseDown={props.onMouseDown}
+      onMouseUp={props.onMouseUp}
+      strokeWidth={props.strokeWidth}
       onClick={props.onClick}
       style={{ cursor: 'pointer' }}
     />
@@ -49,7 +65,9 @@ const SvgRegardantLionHead = (props: Props) => (
         d="M236.605 55.946a12.505 7.36-4.25 1 1-24.94 1.854 12.505 7.36-4.25 1 1 24.94-1.854z"
         fill="#fff"
         stroke={props.stroke}
-        strokeWidth={2.5}
+        onMouseDown={props.onMouseDown}
+        onMouseUp={props.onMouseUp}
+        strokeWidth={props.strokeWidth}
         overflow="visible"
         onClick={props.onClick}
       />
@@ -61,7 +79,9 @@ const SvgRegardantLionHead = (props: Props) => (
         d="M220.598 52.795a8.007 8.007 0 1 0 15.103 5.324 8.007 8.007 0 1 0-15.103-5.324z"
         fill="#fff"
         stroke={props.stroke}
-        strokeWidth={2.5}
+        onMouseDown={props.onMouseDown}
+        onMouseUp={props.onMouseUp}
+        strokeWidth={props.strokeWidth}
         overflow="visible"
         onClick={props.onClick}
       />
@@ -70,7 +90,9 @@ const SvgRegardantLionHead = (props: Props) => (
         d="M232.973 44.16s2.461 1.325 3.385 2.135c1.815 1.59 3.27 4.255 2.747 6.61-.273 1.232-1.085 2.075-2.232 2.598-1.234.564-2.677-.068-3.975-.46-1.902-.576-3.705-2.869-5.61-3.295-2.741-.613-6.721-.203-9.326.85-1.219.492-2.136 2.437-3.413 2.746-1.149.277-3.039.056-3.857-.796-.842-.875-.767-2.784-.66-3.994.05-.583.305-1.365.648-1.84.518-.719 1.54-1.412 2.33-1.811.99-.5 3.552-1.005 3.552-1.005"
         fill={props.mainFill}
         stroke={props.stroke}
-        strokeWidth={2.5}
+        onMouseDown={props.onMouseDown}
+        onMouseUp={props.onMouseUp}
+        strokeWidth={props.strokeWidth}
         onClick={props.onClick}
         style={{ cursor: 'pointer' }}
       />
@@ -79,7 +101,9 @@ const SvgRegardantLionHead = (props: Props) => (
       d="M274.994 77.812s-2.43-7.713-4.224-9.325c-1.795-1.612-2.627-1.767-3.305-1.165-.678.602-.966 1.827.048 3.917 1.015 2.09 7.48 6.573 7.48 6.573z"
       fill="none"
       stroke={props.stroke}
-      strokeWidth={2.5}
+      onMouseDown={props.onMouseDown}
+      onMouseUp={props.onMouseUp}
+      strokeWidth={props.strokeWidth}
       onClick={props.onClick}
       style={{ cursor: 'pointer' }}
     />
@@ -87,7 +111,9 @@ const SvgRegardantLionHead = (props: Props) => (
       d="M184.238 38.956s-1.113-5.043-2.496-6.672c-2.182-2.569-9.746-5.59-9.746-5.59s-3.653 6.213-2.52 8.674c.56 1.215 3.488.63 4.066 1.837.761 1.587-2.24 4.1-1.463 5.68.523 1.061 3.629 1.548 3.629 1.548s1.613-4.74 3.352-5.687c1.365-.744 5.178.21 5.178.21z"
       fillRule="evenodd"
       stroke={props.stroke}
-      strokeWidth={2.5}
+      onMouseDown={props.onMouseDown}
+      onMouseUp={props.onMouseUp}
+      strokeWidth={props.strokeWidth}
       onClick={props.onClick}
       style={{ cursor: 'pointer' }}
     />
@@ -95,7 +121,9 @@ const SvgRegardantLionHead = (props: Props) => (
       d="M190.359 43.852s1.49 12.246 3.71 16.957c1.171 2.487 3.453 5.564 5.655 7.21 4.224 3.16 16.305 8.37 16.305 8.37l.423 1.254s-12.646-8.508-17.897-6.31c-1.954.82-3.182 4.284-3 6.395.157 1.807 1.304 4.653 2.459 6.052 1.8 2.181 7.249 5.985 7.249 5.985M175.641 98.28s-3.589 7.704-3.972 11.268c-.605 5.625.105 10.923 1.156 16.482.424 2.241 1.874 7.368 1.874 7.368M177.184 163.657s10.244 7.727 13.873 12.667c1.68 2.286 2.544 6.179 2.838 9 .46 4.409-.94 11.808-.94 11.808M172.128 182.099s-4.28-8.75-6.17-11.966c-2.546-4.337-8.94-8.426-10.218-13.29-.82-3.12 1.517-10.644 1.517-10.644M248.565 161.995s-2.685 9.246-2.451 13.295c.116 2.01.79 5.754 1.922 8.59 2.26 5.662 5.706 10.531 5.706 10.531M217.726 203.63s.877-9.17.352-13.28c-.343-2.678-2.966-8.497-2.966-8.497"
       fill="none"
       stroke={props.stroke}
-      strokeWidth={2.5}
+      onMouseDown={props.onMouseDown}
+      onMouseUp={props.onMouseUp}
+      strokeWidth={props.strokeWidth}
       onClick={props.onClick}
       style={{ cursor: 'pointer' }}
     />

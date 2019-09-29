@@ -4,7 +4,7 @@ import { Dimension } from '../../../../model/dimension';
 import { Tincture } from '../../../../model/tincture';
 import { getChargePositions } from '../charge.helper';
 import { SvgPathBuilder } from '../../../../svg-path-builder/svg-path-builder';
-import { PathFromBuilder } from '../../../../common/PathFromBuilder';
+import { FocusablePathFromBuilder } from '../../../../common/PathFromBuilder';
 import { cannotHappen } from '../../../../../utils/cannot-happen';
 import { SimpleBlasonShape } from '../../blasonDisplay.helper';
 import { toRadians } from '../../../../svg-path-builder/geometrical.helper';
@@ -56,14 +56,7 @@ export const MulletDisplay = ({ charge, dimension: { width, height }, fillFromTi
         const pathBuilder = star.translate([centerX, centerY]);
         if (charge.inside === 'nothing') {
           return (
-            <PathFromBuilder
-              key={i}
-              pathBuilder={pathBuilder}
-              stroke={stroke}
-              fill={fill}
-              onClick={onClick}
-              style={{ cursor: 'pointer' }}
-            />
+            <FocusablePathFromBuilder key={i} pathBuilder={pathBuilder} stroke={stroke} fill={fill} onClick={onClick} />
           );
         } else if (charge.inside === 'pierced') {
           const innerRadius = externalRadius * 0.1;
@@ -73,14 +66,13 @@ export const MulletDisplay = ({ charge, dimension: { width, height }, fillFromTi
             .arcTo([centerX, centerY - innerRadius], { radius: innerRadius });
 
           return (
-            <PathFromBuilder
+            <FocusablePathFromBuilder
               key={i}
               pathBuilder={voidedPathBuilder}
               stroke={stroke}
               fill={fill}
               fillRule="evenodd"
               onClick={onClick}
-              style={{ cursor: 'pointer' }}
             />
           );
         } else {

@@ -40,7 +40,6 @@ Faire le "of the last"
 - Factoriser intelligemment le dessin des paths dans les charges (repetition du onClick et du cursor pointer)
 - Factoriser le pattern de selection des tinctures et des lines
 - Pale invected has some overlap problem
-- Click sur svg : on focus (or on mousedown/mouseup?) increse slightly the border width and then decrese it
 - Chevron Bretessed are displayed strangely ( Or, a chevron bretessed azure)
 - Cross Bretessed are displayed strangely ( Or, a cross bretessed azure)
 - Saltire Bretessed are displayed strangely ( Or, a saltire bretessed azure)

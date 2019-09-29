@@ -4,7 +4,7 @@ import { Dimension } from '../../../../model/dimension';
 import { Tincture } from '../../../../model/tincture';
 import { getChargePositions } from '../charge.helper';
 import { SvgPathBuilder } from '../../../../svg-path-builder/svg-path-builder';
-import { PathFromBuilder } from '../../../../common/PathFromBuilder';
+import { FocusablePathFromBuilder } from '../../../../common/PathFromBuilder';
 import { cannotHappen } from '../../../../../utils/cannot-happen';
 import { SimpleBlasonShape } from '../../blasonDisplay.helper';
 
@@ -44,26 +44,18 @@ export const LozengeDisplay = ({ charge, dimension: { width, height }, fillFromT
             .close();
 
           return (
-            <PathFromBuilder
+            <FocusablePathFromBuilder
               key={i}
               pathBuilder={voidedPathBuilder}
               stroke={stroke}
               fill={fill}
               fillRule="evenodd"
               onClick={onClick}
-              style={{ cursor: 'pointer' }}
             />
           );
         } else if (charge.inside === 'nothing') {
           return (
-            <PathFromBuilder
-              key={i}
-              pathBuilder={pathBuilder}
-              stroke={stroke}
-              fill={fill}
-              onClick={onClick}
-              style={{ cursor: 'pointer' }}
-            />
+            <FocusablePathFromBuilder key={i} pathBuilder={pathBuilder} stroke={stroke} fill={fill} onClick={onClick} />
           );
         } else if (charge.inside === 'pierced') {
           const innerRadius = radius * 0.5;
@@ -73,14 +65,13 @@ export const LozengeDisplay = ({ charge, dimension: { width, height }, fillFromT
             .arcTo([centerX, centerY - innerRadius], { radius: innerRadius });
 
           return (
-            <PathFromBuilder
+            <FocusablePathFromBuilder
               key={i}
               pathBuilder={voidedPathBuilder}
               stroke={stroke}
               fill={fill}
               fillRule="evenodd"
               onClick={onClick}
-              style={{ cursor: 'pointer' }}
             />
           );
         } else {

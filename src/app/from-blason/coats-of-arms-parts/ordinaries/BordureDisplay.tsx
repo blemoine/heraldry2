@@ -7,7 +7,7 @@ import { spanishPathBuilder } from '../escutcheon/SpanishDisplay';
 import { heaterPathBuilder } from '../escutcheon/HeaterDisplay';
 import { cannotHappen } from '../../../../utils/cannot-happen';
 import { isError } from '../../../../utils/result';
-import { PathFromBuilder } from '../../../common/PathFromBuilder';
+import { FocusablePathFromBuilder } from '../../../common/PathFromBuilder';
 import { Line } from '../../../model/line';
 import { ShieldShape } from '../../../model/configuration';
 
@@ -19,20 +19,8 @@ type Props = {
   stroke: string;
   fill: string;
   onClick: () => void;
-  strokeWidth: number;
-  setStrokeWidth: (width: number) => void;
 };
-export const BordureDisplay = ({
-  dimension,
-  line,
-  shape,
-  shieldShape,
-  stroke,
-  fill,
-  onClick,
-  strokeWidth,
-  setStrokeWidth,
-}: Props) => {
+export const BordureDisplay = ({ dimension, line, shape, shieldShape, stroke, fill, onClick }: Props) => {
   const { width, height } = dimension;
 
   const lineOptions = computeLineOptions(line, dimension);
@@ -136,16 +124,13 @@ export const BordureDisplay = ({
   }
 
   return (
-    <PathFromBuilder
+    <FocusablePathFromBuilder
       pathBuilder={pathBuilder}
       fill={fill}
       stroke={stroke}
       fillRule={'evenodd'}
       style={{ cursor: 'pointer' }}
       onClick={onClick}
-      strokeWidth={strokeWidth}
-      onMouseDown={() => setStrokeWidth(2)}
-      onMouseUp={() => setStrokeWidth(1)}
     />
   );
 };
