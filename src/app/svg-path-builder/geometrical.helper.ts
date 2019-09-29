@@ -49,3 +49,15 @@ export function arePointEquivalent([x1, y1]: PathAbsolutePoint, [x2, y2]: PathAb
 export function matrixTransform([x, y]: PathAbsolutePoint, [[a11, a12], [a21, a22]]: Matrix2): PathAbsolutePoint {
   return [x * a11 + y * a12, x * a21 + y * a22];
 }
+
+export function pointOnLine(
+  [x1, y1]: PathAbsolutePoint,
+  [x2, y2]: PathAbsolutePoint,
+  percentage: number
+): PathAbsolutePoint {
+  return [x1 + ((x2 - x1) * percentage) / 100, y1 + ((y2 - y1) * percentage) / 100] as const;
+}
+
+export function pointBetween(p1: PathAbsolutePoint, p2: PathAbsolutePoint): PathAbsolutePoint {
+  return pointOnLine(p1, p2, 50);
+}

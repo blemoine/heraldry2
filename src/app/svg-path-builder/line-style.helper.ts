@@ -1,4 +1,10 @@
-import { arePointEquivalent, distanceBetween, PathAbsolutePoint } from './geometrical.helper';
+import {
+  arePointEquivalent,
+  distanceBetween,
+  PathAbsolutePoint,
+  pointBetween,
+  pointOnLine,
+} from './geometrical.helper';
 import { range } from '../../utils/range';
 import {
   EmbattledLineOptions,
@@ -61,7 +67,7 @@ function waveLineTo(path: SvgPathBuilder, to: PathAbsolutePoint, height: number)
     return path;
   }
 
-  const middle = [(from[0] + to[0]) / 2, (from[1] + to[1]) / 2] as const;
+  const middle = pointBetween(from, to);
 
   return path
     .quadraticBezier(middle, getPerpendicularPointToCenter(from, middle, height))
@@ -74,9 +80,9 @@ function embattleLineTo(path: SvgPathBuilder, to: PathAbsolutePoint, height: num
     return path;
   }
 
-  const midTier1 = [(3 * from[0] + to[0]) / 4, (3 * from[1] + to[1]) / 4] as const;
-  const midTier2 = [(from[0] + 3 * to[0]) / 4, (from[1] + 3 * to[1]) / 4] as const;
-  const middle = [(from[0] + to[0]) / 2, (from[1] + to[1]) / 2] as const;
+  const midTier1 = pointOnLine(from, to, 25);
+  const midTier2 = pointOnLine(from, to, 75);
+  const middle = pointBetween(from, to);
 
   const perpendicularToTier1 = getPerpendicularPointToCenter(from, middle, height);
   const perpendicularToTier2 = getPerpendicularPointToCenter(middle, to, height);

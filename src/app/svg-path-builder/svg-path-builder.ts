@@ -1,5 +1,5 @@
 import { cannotHappen } from '../../utils/cannot-happen';
-import { arePointEquivalent, PathAbsolutePoint } from './geometrical.helper';
+import { arePointEquivalent, PathAbsolutePoint, pointOnLine } from './geometrical.helper';
 import { pointOnEllipticalArc, pointOnQuadraticBezier } from './point-on-elliptical-arc';
 import { round } from '../../utils/round';
 import { raise, Result } from '../../utils/result';
@@ -228,14 +228,8 @@ export class SvgPathBuilder {
       return this;
     }
 
-    const firstPercentage = [
-      (current[0] * (100 - percentage) + point[0] * percentage) / 100,
-      (current[1] * (100 - percentage) + point[1] * percentage) / 100,
-    ] as const;
-    const lastPercentage = [
-      (current[0] * percentage + point[0] * (100 - percentage)) / 100,
-      (current[1] * percentage + point[1] * (100 - percentage)) / 100,
-    ] as const;
+    const firstPercentage = pointOnLine(current, point, percentage);
+    const lastPercentage = pointOnLine(current, point, 100 - percentage);
     if (sides === 'both') {
       return this.goTo(firstPercentage)
         .goTo(lastPercentage, lineOptions)
