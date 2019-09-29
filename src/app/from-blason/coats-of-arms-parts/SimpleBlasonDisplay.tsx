@@ -112,7 +112,7 @@ export const SimpleBlasonDisplay = ({
           <OrdinaryDisplay
             dimension={dimension}
             ordinary={ordinary}
-            fill={convertToOlfFillFronTincture(fillFromTincture)(ordinary.tincture)}
+            fillFromTincture={fillFromTincture}
             shape={shape}
             shieldShape={shieldShape}
             onClick={() => selectBlasonPart('ordinary')}

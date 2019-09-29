@@ -10,18 +10,22 @@ import { ShieldShape } from '../../../model/configuration';
 import { BordureDisplay } from './BordureDisplay';
 import { toDegree } from '../../../svg-path-builder/geometrical.helper';
 import { useState } from 'react';
+import { convertToOlfFillFronTincture, FillFromTincture } from '../../fillFromTincture.helper';
 
 type Props = {
   ordinary: Ordinary;
-  fill: string;
+  fillFromTincture: FillFromTincture;
   dimension: Dimension;
   shape: SimpleBlasonShape;
   shieldShape: ShieldShape;
   onClick: () => void;
 };
 
-export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape, onClick }: Props) => {
+export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, shieldShape, onClick }: Props) => {
   const [strokeWidth, setStrokeWidth] = useState(1);
+  const strokeColor = ordinary.tincture.name === 'sable' ? '#777' : '#333';
+
+  const fill = convertToOlfFillFronTincture(fillFromTincture)(ordinary.tincture);
 
   const { width, height } = dimension;
   if (ordinary.name === 'chief') {
@@ -44,7 +48,7 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
       <PathFromBuilder
         pathBuilder={pathBuilder}
         fill={fill}
-        stroke="#333"
+        stroke={strokeColor}
         style={{ cursor: 'pointer' }}
         onClick={onClick}
         strokeWidth={strokeWidth}
@@ -66,7 +70,7 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
       <PathFromBuilder
         pathBuilder={pathBuilder}
         fill={fill}
-        stroke="#333"
+        stroke={strokeColor}
         style={{ cursor: 'pointer' }}
         onClick={onClick}
         strokeWidth={strokeWidth}
@@ -88,7 +92,7 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
       <PathFromBuilder
         pathBuilder={pathBuilder}
         fill={fill}
-        stroke="#333"
+        stroke={strokeColor}
         style={{ cursor: 'pointer' }}
         onClick={onClick}
         strokeWidth={strokeWidth}
@@ -115,7 +119,7 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
       <PathFromBuilder
         pathBuilder={pathBuilder2}
         fill={fill}
-        stroke="#333"
+        stroke={strokeColor}
         strokeWidth={strokeWidth}
         style={{ cursor: 'pointer' }}
         onClick={onClick}
@@ -142,7 +146,7 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
       <PathFromBuilder
         pathBuilder={pathBuilder2}
         fill={fill}
-        stroke="#333"
+        stroke={strokeColor}
         style={{ cursor: 'pointer' }}
         onClick={onClick}
         strokeWidth={strokeWidth}
@@ -168,7 +172,7 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
               key={i}
               pathBuilder={pathBuilder}
               fill={fill}
-              stroke="#333"
+              stroke={strokeColor}
               style={{ cursor: 'pointer' }}
               onClick={onClick}
               strokeWidth={strokeWidth}
@@ -201,7 +205,7 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
       <PathFromBuilder
         pathBuilder={pathBuilder}
         fill={fill}
-        stroke="#333"
+        stroke={strokeColor}
         style={{ cursor: 'pointer' }}
         onClick={onClick}
         strokeWidth={strokeWidth}
@@ -236,7 +240,7 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
       <PathFromBuilder
         pathBuilder={pathBuilder}
         fill={fill}
-        stroke="#333"
+        stroke={strokeColor}
         style={{ cursor: 'pointer' }}
         onClick={onClick}
         strokeWidth={strokeWidth}
@@ -269,7 +273,7 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
               key={i}
               pathBuilder={pathBuilder}
               fill={fill}
-              stroke="#333"
+              stroke={strokeColor}
               style={{ cursor: 'pointer' }}
               onClick={onClick}
               strokeWidth={strokeWidth}
@@ -287,6 +291,7 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
         shape={shape}
         dimension={dimension}
         fill={fill}
+        stroke={strokeColor}
         line={ordinary.line}
         onClick={onClick}
         strokeWidth={strokeWidth}
@@ -315,7 +320,7 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
       <PathFromBuilder
         pathBuilder={pathBuilder}
         fill={fill}
-        stroke="#333"
+        stroke={strokeColor}
         style={{ cursor: 'pointer' }}
         onClick={onClick}
         strokeWidth={strokeWidth}

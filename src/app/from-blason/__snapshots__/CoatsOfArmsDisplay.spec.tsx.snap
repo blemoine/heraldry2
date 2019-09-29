@@ -64,7 +64,7 @@ exports[`CoatsOfArms should render 'Argent, a chevron sable' 1`] = `
       onClick={[Function]}
       onMouseDown={[Function]}
       onMouseUp={[Function]}
-      stroke="#333"
+      stroke="#777"
       strokeWidth={1}
       style={
         Object {
@@ -4649,7 +4649,7 @@ exports[`CoatsOfArms should render 'Ermine, two pallets sable' 1`] = `
         onClick={[Function]}
         onMouseDown={[Function]}
         onMouseUp={[Function]}
-        stroke="#333"
+        stroke="#777"
         strokeWidth={1}
         style={
           Object {
@@ -4663,7 +4663,7 @@ exports[`CoatsOfArms should render 'Ermine, two pallets sable' 1`] = `
         onClick={[Function]}
         onMouseDown={[Function]}
         onMouseUp={[Function]}
-        stroke="#333"
+        stroke="#777"
         strokeWidth={1}
         style={
           Object {

@@ -16,6 +16,7 @@ type Props = {
   line: Line;
   shape: SimpleBlasonShape;
   shieldShape: ShieldShape;
+  stroke: string;
   fill: string;
   onClick: () => void;
   strokeWidth: number;
@@ -26,6 +27,7 @@ export const BordureDisplay = ({
   line,
   shape,
   shieldShape,
+  stroke,
   fill,
   onClick,
   strokeWidth,
@@ -137,7 +139,7 @@ export const BordureDisplay = ({
     <PathFromBuilder
       pathBuilder={pathBuilder}
       fill={fill}
-      stroke="#333"
+      stroke={stroke}
       fillRule={'evenodd'}
       style={{ cursor: 'pointer' }}
       onClick={onClick}
