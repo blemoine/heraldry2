@@ -59,7 +59,7 @@ exports[`CoatsOfArms should render 'Argent, a chevron sable' 1`] = `
     clipPath="url(#plain-field-clip-path)"
   >
     <path
-      d="M 100 88.88889 L 200 222.22222 V266.66667 L 100 133.33333 L 0 266.66667 V222.22222 Z"
+      d="M 100 88.88889 L 0 222.22222 V266.66667 L 100 133.33333 L 200 266.66667 V222.22222 Z"
       fill="#000000"
       onClick={[Function]}
       onMouseDown={[Function]}

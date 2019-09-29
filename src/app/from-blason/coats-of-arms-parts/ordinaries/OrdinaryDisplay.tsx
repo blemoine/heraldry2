@@ -257,11 +257,11 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
           const bottomPoint = (((i + 1) * 2 + 1) * height) / (ordinary.count * 2 + 1);
 
           const pathBuilder = SvgPathBuilder.start([width / 2, topPoint])
-            .goTo([width, bottomPoint - chevronHeight], lineOptions)
-            .goTo([width, bottomPoint])
+            .goTo([0, bottomPoint - chevronHeight], lineOptions)
+            .goTo([0, bottomPoint])
             .goTo([width / 2, topPoint + chevronHeight], oneSideOnly ? null : lineOptions)
-            .goTo([0, bottomPoint], oneSideOnly ? null : lineOptions)
-            .goTo([0, bottomPoint - chevronHeight])
+            .goTo([width, bottomPoint], oneSideOnly ? null : lineOptions)
+            .goTo([width, bottomPoint - chevronHeight])
             .goTo([width / 2, topPoint], lineOptions);
 
           return (
@@ -297,17 +297,19 @@ export const OrdinaryDisplay = ({ ordinary, fill, dimension, shape, shieldShape,
     const pallWidth = width / 5.5;
     const projectedPallWidth = pallWidth / Math.sqrt(2);
     const lineOptions = computeLineOptions(ordinary.line, { width: width / 1.5, height });
+    const oneSideOnly = lineOptions && 'oneSideOnly' in lineOptions ? lineOptions.oneSideOnly : false;
     const pathBuilder = SvgPathBuilder.start([0, 0])
-      .goTo([projectedPallWidth, 0])
-      .goTo([width / 2, height / 2 - (height / width) * projectedPallWidth], lineOptions)
-      .goTo([width - projectedPallWidth, 0], lineOptions)
+      .goTo([0, projectedPallWidth])
+      .goTo([width / 2 - pallWidth / 2, height / 2], oneSideOnly ? null : lineOptions)
+      .goTo([width / 2 - pallWidth / 2, height], oneSideOnly ? null : lineOptions)
+      .goTo([width / 2 + pallWidth / 2, height])
+      .goTo([width / 2 + pallWidth / 2, height / 2], oneSideOnly ? null : lineOptions)
+      .goTo([width, projectedPallWidth], oneSideOnly ? null : lineOptions)
       .goTo([width, 0])
-      .goTo([width, projectedPallWidth])
-      .goTo([width / 2 + pallWidth / 2, height / 2], lineOptions)
-      .goTo([width / 2 + pallWidth / 2, height], lineOptions)
-      .goTo([width / 2 - pallWidth / 2, height])
-      .goTo([width / 2 - pallWidth / 2, height / 2], lineOptions)
-      .goTo([0, projectedPallWidth], lineOptions);
+      .goTo([width - projectedPallWidth, 0])
+      .goTo([width / 2, height / 2 - (height / width) * projectedPallWidth], lineOptions)
+      .goTo([projectedPallWidth, 0], lineOptions)
+      .goTo([0, 0]);
 
     return (
       <PathFromBuilder
