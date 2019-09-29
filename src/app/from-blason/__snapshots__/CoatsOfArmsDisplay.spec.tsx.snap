@@ -7223,16 +7223,16 @@ exports[`CoatsOfArms should render 'Per fess or and ermine, a bordure engrailed 
     }
   >
     <g
-      transform="translate(12 16)"
+      transform="translate(10 16)"
     >
       <g>
         <path
-          d="M 0 0 H176 V117.33333 H0 Z"
+          d="M 0 0 H180 V117.33333 H0 Z"
           fill="#FFD700"
           stroke="#333"
         />
         <path
-          d="M 0 117.33333 V234.66667 H176 V117.33333 Z"
+          d="M 0 117.33333 V234.66667 H180 V117.33333 Z"
           fill="url(#field-pattern-3)"
           stroke="#333"
         />
@@ -7927,13 +7927,13 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
         }
       >
         <g
-          transform="translate(6 8)"
+          transform="translate(5 8)"
         >
           <rect
             fill="url(#field-pattern-3)"
             height={117.33333333333334}
             stroke="#333"
-            width={88}
+            width={90}
             x={0}
             y={0}
           />

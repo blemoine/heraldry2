@@ -39,7 +39,6 @@ Faire le "of the last"
 - Factoriser intelligemment le dessin des paths dans les charges (repetition du onClick et du cursor pointer)
 - Factoriser le pattern de selection des tinctures et des lines
 - Pour les ordinary avec un seul coté, ne presenter que embatled, et pas les autres.
-- `Per fess or and ermine, a bordure engrailed azure` sides are badly rendered
 
 ## Feature to add
 
