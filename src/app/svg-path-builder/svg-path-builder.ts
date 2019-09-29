@@ -214,7 +214,12 @@ export class SvgPathBuilder {
     return this.goTo([currentPoint[0] + xOffset, currentPoint[1] + yOffset], lineOptions);
   }
 
-  goToWithPartFlat(point: PathAbsolutePoint, lineOptions: LineOptions | null, percentage: number): SvgPathBuilder {
+  goToWithPartFlat(
+    point: PathAbsolutePoint,
+    lineOptions: LineOptions | null,
+    percentage: number,
+    sides: 'start' | 'end' | 'both' = 'both'
+  ): SvgPathBuilder {
     if (!lineOptions) {
       return this.goTo(point);
     }
@@ -231,10 +236,17 @@ export class SvgPathBuilder {
       (current[0] * percentage + point[0] * (100 - percentage)) / 100,
       (current[1] * percentage + point[1] * (100 - percentage)) / 100,
     ] as const;
-
-    return this.goTo(firstPercentage)
-      .goTo(lastPercentage, lineOptions)
-      .goTo(point);
+    if (sides === 'both') {
+      return this.goTo(firstPercentage)
+        .goTo(lastPercentage, lineOptions)
+        .goTo(point);
+    } else if (sides === 'start') {
+      return this.goTo(firstPercentage).goTo(point, lineOptions);
+    } else if (sides === 'end') {
+      return this.goTo(lastPercentage, lineOptions).goTo(point);
+    } else {
+      return cannotHappen(sides);
+    }
   }
 
   goTo(point: PathAbsolutePoint, lineOptions: LineOptions | null = null): SvgPathBuilder {

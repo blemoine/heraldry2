@@ -159,17 +159,17 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
     );
   } else if (ordinary.name === 'cross') {
     const pathBuilder = SvgPathBuilder.start([(2 * width) / 5, 0])
-      .goToWithPartFlat([(2 * width) / 5, (2 * height) / 5], oneSideOnly, 5)
-      .goToWithPartFlat([0, (2 * height) / 5], lineOptions, 5)
+      .goToWithPartFlat([(2 * width) / 5, (2 * height) / 5], oneSideOnly, 5, 'end')
+      .goToWithPartFlat([0, (2 * height) / 5], lineOptions, 5, 'start')
       .goTo([0, (3 * height) / 5])
-      .goToWithPartFlat([(2 * width) / 5, (3 * height) / 5], oneSideOnly, 5)
-      .goToWithPartFlat([(2 * width) / 5, height], oneSideOnly, 5)
+      .goToWithPartFlat([(2 * width) / 5, (3 * height) / 5], oneSideOnly, 5, 'end')
+      .goToWithPartFlat([(2 * width) / 5, height], oneSideOnly, 5, 'start')
       .goTo([(3 * width) / 5, height])
-      .goToWithPartFlat([(3 * width) / 5, (3 * height) / 5], oneSideOnly, 5)
-      .goToWithPartFlat([width, (3 * height) / 5], oneSideOnly, 5)
+      .goToWithPartFlat([(3 * width) / 5, (3 * height) / 5], oneSideOnly, 5, 'end')
+      .goToWithPartFlat([width, (3 * height) / 5], oneSideOnly, 5, 'start')
       .goTo([width, (2 * height) / 5])
-      .goToWithPartFlat([(3 * width) / 5, (2 * height) / 5], lineOptions, 5)
-      .goToWithPartFlat([(3 * width) / 5, 0], oneSideOnly, 5)
+      .goToWithPartFlat([(3 * width) / 5, (2 * height) / 5], lineOptions, 5, 'end')
+      .goToWithPartFlat([(3 * width) / 5, 0], oneSideOnly, 5, 'start')
       .goTo([(2 * width) / 5, 0]);
 
     return (
@@ -189,18 +189,18 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
     const h = height / 2;
 
     const pathBuilder = SvgPathBuilder.start([w, h - basePointH])
-      .goTo([(h * basePointW) / basePointH - w, -basePointH], lineOptions)
+      .goToWithPartFlat([(h * basePointW) / basePointH - w, -basePointH], lineOptions, 5)
       .goTo([-basePointW, h - (w * basePointH) / basePointW])
-      .goTo([w - basePointW, h], oneSideOnly)
-      .goTo([-basePointW, h + (w * basePointH) / basePointW], lineOptions)
+      .goToWithPartFlat([w - basePointW, h], oneSideOnly, 5)
+      .goToWithPartFlat([-basePointW, h + (w * basePointH) / basePointW], lineOptions, 5)
       .goTo([(h * basePointW) / basePointH - w, 2 * h + basePointH])
-      .goTo([w, h + basePointH], oneSideOnly)
-      .goTo([2 * w, 2 * h + basePointH], oneSideOnly)
+      .goToWithPartFlat([w, h + basePointH], oneSideOnly, 5)
+      .goToWithPartFlat([2 * w, 2 * h + basePointH], oneSideOnly, 5)
       .goTo([2 * w + basePointW, h + (w * basePointH) / basePointW])
-      .goTo([w + basePointW, h], lineOptions)
-      .goTo([2 * w + basePointW, h - (w * basePointH) / basePointW], oneSideOnly)
+      .goToWithPartFlat([w + basePointW, h], lineOptions, 5)
+      .goToWithPartFlat([2 * w + basePointW, h - (w * basePointH) / basePointW], oneSideOnly, 5)
       .goTo([2 * w, -basePointH])
-      .goTo([w, h - basePointH], lineOptions);
+      .goToWithPartFlat([w, h - basePointH], lineOptions, 5);
 
     return (
       <FocusablePathFromBuilder
