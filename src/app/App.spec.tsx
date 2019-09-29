@@ -1,11 +1,6 @@
 import * as React from 'react';
 import { fireEvent, render } from '@testing-library/react';
-import {
-  selectElement,
-  selectInDefaultSelect,
-  selectInReactSelect,
-  selectTincture,
-} from '../utils/tests/select-test.utils';
+import { selectElement, selectInDefaultSelect, selectTincture } from '../utils/tests/select-test.utils';
 import { argent, azure, ermine, gules, murrey, purpure, vair } from './model/tincture';
 import { App } from './App';
 import { MemoryRouter } from 'react-router-dom';
@@ -71,7 +66,7 @@ describe('App', () => {
     return selectInDefaultSelect('.field-type-select', 'barry')
       .then(() => selectTincture('.field-first-tincture-select', argent))
       .then(() => selectTincture('.field-second-tincture-select', purpure))
-      .then(() => selectInReactSelect('.ordinary-type-select', 'ordinary-name', 'bend'))
+      .then(() => selectInDefaultSelect('.ordinary-type-select', 'bend'))
       .then(() => selectTincture('.ordinary-tincture-select', murrey))
       .then(() => {
         const blason = (app.getByPlaceholderText('Enter the blason here') as HTMLTextAreaElement).value;
@@ -96,8 +91,6 @@ describe('App', () => {
     expect(fieldValue).toBe('ermine');
 
     const charge = selectElement('.charge-type-select select') as HTMLSelectElement;
-    const options = Array.from(document.querySelectorAll('.charge-type-select select option'));
-    const chargeValue = charge.value;
-    expect(options[parseInt(chargeValue)].innerHTML).toBe('eagle');
+    expect(charge.value).toBe('eagle');
   });
 });

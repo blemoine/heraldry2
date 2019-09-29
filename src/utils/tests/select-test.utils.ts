@@ -30,30 +30,7 @@ export function selectTincture(topSelector: string, tincture: Tincture): Promise
 
 export function selectInDefaultSelect(topSelector: string, value: string): Promise<void> {
   const select = selectElement(`${topSelector} select`);
-  const options = document.querySelectorAll(`${topSelector} select option`);
-  const idx = Array.from(options).findIndex((idx) => idx.innerHTML === value);
-  fireEvent.change(select, { target: { value: idx } });
-
-  return new Promise<void>((resolve) => {
-    setTimeout(() => {
-      resolve();
-    }, 1);
-  });
-}
-
-export function selectInReactSelect(topSelector: string, classNamePrefix: string, value: string): Promise<void> {
-  fireEvent.focus(selectElement(`${topSelector} .${classNamePrefix}__input input`));
-  fireEvent.mouseDown(selectElement(`${topSelector} .${classNamePrefix}__control`));
-
-  const tinctures = Array.from(document.querySelectorAll(`.${classNamePrefix}__option`));
-  const selectedOption = tinctures.find((e) => e.innerHTML.includes(value));
-  if (!selectedOption) {
-    const msg = `There should be an option named ${value}`;
-    fail(msg);
-    return Promise.reject(msg);
-  }
-
-  fireEvent.click(selectedOption);
+  fireEvent.change(select, { target: { value } });
 
   return new Promise<void>((resolve) => {
     setTimeout(() => {
