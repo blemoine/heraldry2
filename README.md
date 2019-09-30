@@ -34,7 +34,7 @@ Faire le "of the last"
 - ecrire des tests dans app pour faire un quarterly
 - faire le déploiement
 - gerer les erreurs provenant de l'URL
-- going to quarterly is a slow click
+- going to quarterly is a slow click (?)
 - Factoriser intelligemment le dessin des paths dans les charges (repetition du onClick et du cursor pointer)
 - Factoriser le pattern de selection des tinctures et des lines
 - Pour les ordinary avec un seul coté, ne presenter que embatled, et pas les autres.

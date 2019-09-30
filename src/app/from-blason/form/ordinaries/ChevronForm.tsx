@@ -2,10 +2,10 @@ import * as React from 'react';
 import { Chevron, Chevronel } from '../../../model/ordinary';
 import { TinctureSelect } from '../TinctureSelect';
 import { Tincture } from '../../../model/tincture';
-import { SelectScalar } from '../../../common/SelectScalar';
 import { LineSelect } from '../LineSelect';
 import { Line } from '../../../model/line';
 import { TinctureConfiguration } from '../../../model/tincture-configuration';
+import { ButtonGroup } from '../../../common/ButtonGroup';
 
 type Props = {
   tinctureConfiguration: TinctureConfiguration;
@@ -38,7 +38,9 @@ export const ChevronForm = ({ tinctureConfiguration, ordinary, ordinaryChange }:
       </div>
       <div className="form-group">
         <label>Number of chevron</label>
-        <SelectScalar options={countOptions} value={ordinary.count} valueChange={countChange} />
+        <div>
+          <ButtonGroup options={countOptions} value={ordinary.count} valueChange={countChange} />
+        </div>
       </div>
 
       <div className="form-group">

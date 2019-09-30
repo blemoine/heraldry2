@@ -7,6 +7,7 @@ import { SelectScalar } from '../../common/SelectScalar';
 import { cannotHappen } from '../../../utils/cannot-happen';
 import { stringifyFieldKind } from '../blason.helpers';
 import { TinctureConfiguration } from '../../model/tincture-configuration';
+import { ButtonGroup } from '../../common/ButtonGroup';
 
 function extractColors(field: Field): [Tincture, Tincture] {
   if (field.kind === 'plain') {
@@ -162,22 +163,27 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
       {field.kind === 'gironny' && (
         <div className="form-group">
           <label>Number</label>
-          <SelectScalar
-            options={[8, 12] as const}
-            value={field.number}
-            valueChange={(number) => fieldChange({ ...field, number })}
-          />
+          <div>
+            <ButtonGroup
+              options={[8, 12] as const}
+              value={field.number}
+              valueChange={(number) => fieldChange({ ...field, number })}
+            />
+          </div>
         </div>
       )}
 
       {(field.kind === 'barry' || field.kind === 'bendy') && (
         <div className="form-group">
           <label>Number of bar</label>
-          <SelectScalar
-            options={numberOfBars}
-            value={field.number}
-            valueChange={(number) => fieldChange({ ...field, number })}
-          />
+
+          <div>
+            <ButtonGroup
+              options={numberOfBars}
+              value={field.number}
+              valueChange={(number) => fieldChange({ ...field, number })}
+            />
+          </div>
         </div>
       )}
     </>

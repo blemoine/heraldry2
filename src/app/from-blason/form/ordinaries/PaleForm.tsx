@@ -2,10 +2,10 @@ import * as React from 'react';
 import { Pale } from '../../../model/ordinary';
 import { TinctureSelect } from '../TinctureSelect';
 import { Tincture } from '../../../model/tincture';
-import { SelectScalar } from '../../../common/SelectScalar';
 import { LineSelect } from '../LineSelect';
 import { Line } from '../../../model/line';
 import { TinctureConfiguration } from '../../../model/tincture-configuration';
+import { ButtonGroup } from '../../../common/ButtonGroup';
 
 type Props = { tinctureConfiguration: TinctureConfiguration; ordinary: Pale; ordinaryChange: (pale: Pale) => void };
 const countOptions = [1, 2] as const;
@@ -34,7 +34,9 @@ export const PaleForm = ({ tinctureConfiguration, ordinary, ordinaryChange }: Pr
       </div>
       <div className="form-group">
         <label>Number of pale</label>
-        <SelectScalar options={countOptions} value={ordinary.count} valueChange={countChange} />
+        <div>
+          <ButtonGroup options={countOptions} value={ordinary.count} valueChange={countChange} />
+        </div>
       </div>
 
       <div className="form-group">
