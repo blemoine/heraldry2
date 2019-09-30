@@ -23,11 +23,11 @@ export const ChevronnyDisplay = (props: Props) => {
   const path3 = path2.translate([0, 2 * bendWidth]);
 
   return (
-    <g>
+    <>
       <rect x={0} y={0} width={width} height={height} fill={fill[0]} />
       <PathFromBuilder pathBuilder={path1} fill={fill[1]} stroke="#333" />
       <PathFromBuilder pathBuilder={path2} fill={fill[1]} stroke="#333" />
       <PathFromBuilder pathBuilder={path3} fill={fill[1]} stroke="#333" />
-    </g>
+    </>
   );
 };

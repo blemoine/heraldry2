@@ -135,7 +135,7 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
     );
   } else if (ordinary.name === 'pale') {
     return (
-      <g>
+      <>
         {range(0, ordinary.count).map((i) => {
           const startX = ((i * 2 + 1) * width) / (2 * ordinary.count + 1);
           const paleWidth = width / (2 * ordinary.count + 1);
@@ -155,7 +155,7 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
             />
           );
         })}
-      </g>
+      </>
     );
   } else if (ordinary.name === 'cross') {
     const pathBuilder = SvgPathBuilder.start([(2 * width) / 5, 0])

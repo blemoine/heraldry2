@@ -33,11 +33,11 @@ export const CrossDisplay: React.FunctionComponent<Props> = ({ dimension, fill, 
     .goTo([width / 2, height / 2], lineOptions);
 
   return (
-    <g>
+    <>
       <PathFromBuilder pathBuilder={svgBuilderTopLeft} fill={fill[0]} stroke="#333" />
       <PathFromBuilder pathBuilder={svgBuilderTopRight} fill={fill[1]} stroke="#333" />
       <PathFromBuilder pathBuilder={svgBuilderBottomLeft} fill={fill[1]} stroke="#333" />
       <PathFromBuilder pathBuilder={svgBuilderBottomRight} fill={fill[0]} stroke="#333" />
-    </g>
+    </>
   );
 };

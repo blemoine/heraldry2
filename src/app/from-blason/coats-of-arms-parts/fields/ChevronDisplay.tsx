@@ -15,9 +15,9 @@ export const ChevronDisplay: React.FunctionComponent<Props> = ({ dimension, fill
     .goTo([-width / 3, height], lineOptions);
 
   return (
-    <g>
+    <>
       <rect x={0} y={0} height={height} width={width} fill={fill[0]} stroke="#333" />
       <PathFromBuilder pathBuilder={pathBuilder} fill={fill[1]} stroke="#333" />
-    </g>
+    </>
   );
 };

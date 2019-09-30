@@ -18,9 +18,9 @@ export const BarryPilyDisplay: React.FunctionComponent<Props> = ({ dimension: { 
     .close();
 
   return (
-    <g>
+    <>
       <rect x={0} y={0} width={width} height={height} fill={fill[1]} />
       <PathFromBuilder pathBuilder={pathBuilder} fill={fill[0]} stroke="#333" />
-    </g>
+    </>
   );
 };

@@ -10,7 +10,7 @@ export const LozengyDisplay: React.FunctionComponent<Props> = ({ dimension: { wi
   const radiusX = width / (2 * number);
   const radiusY = height / (2 * number);
   return (
-    <g>
+    <>
       {range(0, number + 1).map((i) => {
         return range(0, number + 1).map((j) => {
           const pathBuilder = SvgPathBuilder.start([(width * i) / number - radiusX, (height * j) / number])
@@ -36,6 +36,6 @@ export const LozengyDisplay: React.FunctionComponent<Props> = ({ dimension: { wi
           return <PathFromBuilder key={i + '#' + j} pathBuilder={pathBuilder} fill={fill[1]} stroke="#333" />;
         });
       })}
-    </g>
+    </>
   );
 };

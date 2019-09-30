@@ -21,7 +21,7 @@ export const GironnyDisplay = (props: Props) => {
     .close();
 
   return (
-    <g>
+    <>
       <rect x={0} y={0} width={width} height={height} fill={fill[0]} />
 
       {range(0, props.number / 2).map((i) => {
@@ -43,6 +43,6 @@ export const GironnyDisplay = (props: Props) => {
           />
         );
       })}
-    </g>
+    </>
   );
 };

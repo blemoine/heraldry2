@@ -20,9 +20,9 @@ export const BendSinisterDisplay: React.FunctionComponent<Props> = ({ dimension,
     .goTo([0, height], lineOptions);
 
   return (
-    <g>
+    <>
       <PathFromBuilder pathBuilder={pathBuilderTopRight} fill={fill[0]} stroke="#333" />
       <PathFromBuilder pathBuilder={pathBuilderBottomLeft} fill={fill[1]} stroke="#333" />
-    </g>
+    </>
   );
 };

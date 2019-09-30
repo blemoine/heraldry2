@@ -22,9 +22,9 @@ export const BendyPilySinisterDisplay: React.FunctionComponent<Props> = ({ dimen
     .rotate([width / 2, height / 2], 45);
 
   return (
-    <g>
+    <>
       <rect x={0} y={0} width={width} height={height} fill={fill[1]} />
       <PathFromBuilder pathBuilder={pathBuilder} fill={fill[0]} stroke="#333" />
-    </g>
+    </>
   );
 };

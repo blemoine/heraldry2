@@ -29,11 +29,11 @@ export const SaltireDisplay: React.FunctionComponent<Props> = ({ dimension, fill
     .goTo([width, 0], invertedLineOptions);
 
   return (
-    <g>
+    <>
       <PathFromBuilder pathBuilder={top} fill={fill[0]} stroke="#333" />
       <PathFromBuilder pathBuilder={bottom} fill={fill[0]} stroke="#333" />
       <PathFromBuilder pathBuilder={left} fill={fill[1]} stroke="#333" />
       <PathFromBuilder pathBuilder={right} fill={fill[1]} stroke="#333" />
-    </g>
+    </>
   );
 };

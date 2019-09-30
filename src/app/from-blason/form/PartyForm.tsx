@@ -21,15 +21,24 @@ export const PartyForm = ({ tinctureConfiguration, field, fieldChange }: Props) 
   const per = field.per;
 
   function partyChange(partyName: Party['name']) {
-    if (per.name === 'pall' && partyName !== 'pall') {
-      fieldChange({ kind: 'party', per: { ...per, name: partyName, tinctures: [per.tinctures[0], per.tinctures[1]] } });
-    } else if (partyName === 'pall' && per.name !== 'pall') {
-      fieldChange({
-        kind: 'party',
-        per: { ...per, name: partyName, tinctures: [per.tinctures[0], per.tinctures[1], or] },
-      });
+    if (partyName === 'pall') {
+      if (per.name !== 'pall') {
+        fieldChange({
+          kind: 'party',
+          per: { ...per, name: partyName, tinctures: [per.tinctures[0], per.tinctures[1], or] },
+        });
+      } else {
+        fieldChange({ kind: 'party', per: { ...per } });
+      }
     } else {
-      fieldChange({ kind: 'party', per: { ...per } });
+      if (per.name === 'pall') {
+        fieldChange({
+          kind: 'party',
+          per: { ...per, name: partyName, tinctures: [per.tinctures[0], per.tinctures[1]] },
+        });
+      } else {
+        fieldChange({ kind: 'party', per: { ...per, name: partyName } });
+      }
     }
   }
   function lineChange(line: Line) {

@@ -70,7 +70,7 @@ export const BarryDisplay: React.FunctionComponent<Props> = ({
   });
 
   return (
-    <g>
+    <>
       {fillAndDef.map(({ def }) => def)}
       {range(0, number).map((i) => {
         return (
@@ -85,6 +85,6 @@ export const BarryDisplay: React.FunctionComponent<Props> = ({
           />
         );
       })}
-    </g>
+    </>
   );
 };

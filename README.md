@@ -27,19 +27,17 @@ Faire le "of the last"
 - Support de custom comme couleur conf
 - Support de "Random" comme couleur conf (implique que chaque tincture evolue dans un espace)
 - animate configuration 0 to auto
-- Dans la liste des boucliers, afficher un petit icone représentant la forme attendue
+- use Collapse from bootstrap pour la configuration
 
 - Refondre l'UX (par defaut on affiche que le bouclier + blason, et on peut deplier le form a coté
 - etre plus lenient sur la syntaxe des quarterly (avec les : et les;)
 - ecrire des tests dans app pour faire un quarterly
 - faire le déploiement
 - gerer les erreurs provenant de l'URL
-- use Collapse from bootstrap pour la configuration
 - going to quarterly is a slow click
 - Factoriser intelligemment le dessin des paths dans les charges (repetition du onClick et du cursor pointer)
 - Factoriser le pattern de selection des tinctures et des lines
 - Pour les ordinary avec un seul coté, ne presenter que embatled, et pas les autres.
-- Remove react select
 
 ## Feature to add
 

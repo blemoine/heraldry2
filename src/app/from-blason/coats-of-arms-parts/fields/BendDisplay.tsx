@@ -20,9 +20,9 @@ export const BendDisplay: React.FunctionComponent<Props> = ({ dimension, fill, l
     .goTo([0, 0], lineOptions);
 
   return (
-    <g>
+    <>
       <PathFromBuilder pathBuilder={pathBuilderTopRight} fill={fill[0]} stroke="#333" />
       <PathFromBuilder pathBuilder={pathBuilderBottomLeft} fill={fill[1]} stroke="#333" />
-    </g>
+    </>
   );
 };

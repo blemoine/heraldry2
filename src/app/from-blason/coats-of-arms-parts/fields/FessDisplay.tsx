@@ -22,9 +22,9 @@ export const FessDisplay: React.FunctionComponent<Props> = ({ dimension, fill, l
     .goTo([0, height / 2], lineOptions);
 
   return (
-    <g>
+    <>
       <PathFromBuilder pathBuilder={pathBuilderTop} fill={fill[0]} stroke="#333" />
       <PathFromBuilder pathBuilder={pathBuilderBottom} fill={fill[1]} stroke="#333" />
-    </g>
+    </>
   );
 };

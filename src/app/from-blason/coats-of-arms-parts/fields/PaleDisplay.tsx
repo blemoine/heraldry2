@@ -21,9 +21,9 @@ export const PaleDisplay: React.FunctionComponent<Props> = ({ dimension, fill, l
     .goTo([width, 0])
     .close();
   return (
-    <g>
+    <>
       <PathFromBuilder pathBuilder={pathBuilderLeft} fill={fill[0]} stroke="#333" />
       <PathFromBuilder pathBuilder={pathBuilderRight} fill={fill[1]} stroke="#333" />
-    </g>
+    </>
   );
 };

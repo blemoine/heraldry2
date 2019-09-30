@@ -27,12 +27,12 @@ export const BendyDisplay: React.FunctionComponent<Props> = (props) => {
     .translate([width, 0]);
 
   return (
-    <g>
+    <>
       {range(0, props.number).map((i) => {
         const path = bendPath.translate([-Math.sqrt(2) * bendWidth * (i + 1 / 2), 0]);
 
         return <PathFromBuilder key={i} pathBuilder={path} fill={fill[i % 2]} stroke="#333" />;
       })}
-    </g>
+    </>
   );
 };
