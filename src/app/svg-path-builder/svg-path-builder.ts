@@ -12,6 +12,7 @@ type Vertical = { command: 'V'; coordinate: number };
 type Horizontal = { command: 'H'; coordinate: number };
 type QuadraticBezier = { command: 'Q'; point: PathAbsolutePoint; controlPoint: PathAbsolutePoint };
 type CubicBezier = { command: 'C'; point: PathAbsolutePoint; controlPoints: [PathAbsolutePoint, PathAbsolutePoint] };
+type SmoothedCubicBezier = { command: 'S'; point: PathAbsolutePoint; controlPoint: PathAbsolutePoint };
 type Arc = {
   command: 'A';
   point: PathAbsolutePoint;
@@ -22,7 +23,16 @@ type Arc = {
 };
 type Close = { command: 'Z' };
 
-type PathCommand = MoveTo | GoToPoint | Arc | Vertical | Horizontal | Close | QuadraticBezier | CubicBezier;
+type PathCommand =
+  | MoveTo
+  | GoToPoint
+  | Arc
+  | Vertical
+  | Horizontal
+  | Close
+  | QuadraticBezier
+  | CubicBezier
+  | SmoothedCubicBezier;
 
 export type EngrailedLineOptions = { line: 'with-arc'; radius: number; sweep: boolean };
 export type WavyLineOptions = { line: 'wavy'; height: number; width: number };
@@ -41,7 +51,8 @@ function getX(commands: Array<PathCommand>): number | null {
       previousCommand.command === 'L' ||
       previousCommand.command === 'A' ||
       previousCommand.command === 'Q' ||
-      previousCommand.command === 'C'
+      previousCommand.command === 'C' ||
+      previousCommand.command === 'S'
     ) {
       return previousCommand.point[0];
     } else if (previousCommand.command === 'H') {
@@ -67,7 +78,8 @@ function getY(commands: Array<PathCommand>): number | null {
       previousCommand.command === 'L' ||
       previousCommand.command === 'A' ||
       previousCommand.command === 'Q' ||
-      previousCommand.command === 'C'
+      previousCommand.command === 'C' ||
+      previousCommand.command === 'S'
     ) {
       return previousCommand.point[1];
     } else if (previousCommand.command === 'V') {
@@ -99,6 +111,18 @@ export class SvgPathBuilder {
           return command.command + ' ' + round(command.point[0], precision) + ' ' + round(command.point[1], precision);
         } else if (command.command === 'Z') {
           return command.command;
+        } else if (command.command === 'S') {
+          return (
+            command.command +
+            ' ' +
+            round(command.controlPoint[0], precision) +
+            ' ' +
+            round(command.controlPoint[1], precision) +
+            ' ' +
+            round(command.point[0], precision) +
+            ' ' +
+            round(command.point[1], precision)
+          );
         } else if (command.command === 'Q') {
           return (
             command.command +
@@ -202,8 +226,51 @@ export class SvgPathBuilder {
     }
   }
 
+  relativeQuadraticBezier([relativeMoveX, relativeMoveY]: PathAbsolutePoint, c1: PathAbsolutePoint): SvgPathBuilder {
+    const currentPoint = this.currentPoint();
+    if (!currentPoint) {
+      return this;
+    }
+
+    return this.quadraticBezier(
+      [relativeMoveX + currentPoint[0], relativeMoveY + currentPoint[1]],
+      [c1[0] + currentPoint[0], c1[1] + currentPoint[1]]
+    );
+  }
+
   cubicBezier(point: PathAbsolutePoint, controlPoints: [PathAbsolutePoint, PathAbsolutePoint]): SvgPathBuilder {
     return this.addCommand({ command: 'C', controlPoints, point });
+  }
+
+  smoothCubicBezier(point: PathAbsolutePoint, controlPoint: PathAbsolutePoint): SvgPathBuilder {
+    return this.addCommand({ command: 'S', controlPoint, point });
+  }
+
+  relativeSmoothCubicBezier([relativeMoveX, relativeMoveY]: PathAbsolutePoint, c1: PathAbsolutePoint): SvgPathBuilder {
+    const currentPoint = this.currentPoint();
+    if (!currentPoint) {
+      return this;
+    }
+
+    return this.smoothCubicBezier(
+      [relativeMoveX + currentPoint[0], relativeMoveY + currentPoint[1]],
+      [c1[0] + currentPoint[0], c1[1] + currentPoint[1]]
+    );
+  }
+
+  relativeCubicBezier(
+    [relativeMoveX, relativeMoveY]: PathAbsolutePoint,
+    [c1, c2]: [PathAbsolutePoint, PathAbsolutePoint]
+  ): SvgPathBuilder {
+    const currentPoint = this.currentPoint();
+    if (!currentPoint) {
+      return this;
+    }
+
+    return this.cubicBezier(
+      [relativeMoveX + currentPoint[0], relativeMoveY + currentPoint[1]],
+      [[c1[0] + currentPoint[0], c1[1] + currentPoint[1]], [c2[0] + currentPoint[0], c2[1] + currentPoint[1]]]
+    );
   }
 
   relativeGoTo([xOffset, yOffset]: PathAbsolutePoint, lineOptions: LineOptions | null = null): SvgPathBuilder {
@@ -413,6 +480,12 @@ export class SvgPathBuilder {
               controlPoints: [transformPoint(command.controlPoints[0]), transformPoint(command.controlPoints[1])],
             };
           } else if (command.command === 'Q') {
+            return {
+              ...command,
+              point: transformPoint(command.point),
+              controlPoint: transformPoint(command.controlPoint),
+            };
+          } else if (command.command === 'S') {
             return {
               ...command,
               point: transformPoint(command.point),
