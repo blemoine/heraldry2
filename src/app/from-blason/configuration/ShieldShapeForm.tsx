@@ -5,7 +5,7 @@ import { EscutcheonDisplay } from '../coats-of-arms-parts/escutcheon/EscutcheonD
 const dimension = { width: 40, height: 56 };
 
 type Props = { shieldShape: ShieldShape; shieldShapeChange: (shieldShape: ShieldShape) => void };
-export const ShieldShapeForm = ({ shieldShape, shieldShapeChange }: Props) => {
+export const ShieldShapeForm = function ShieldShapeForm({ shieldShape, shieldShapeChange }: Props) {
   return (
     <div style={{ display: 'flex' }}>
       {shieldShapes.map((shape) => {

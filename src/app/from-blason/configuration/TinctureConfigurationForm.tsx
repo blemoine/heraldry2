@@ -18,7 +18,7 @@ type Props = {
   tinctureConfiguration: TinctureConfiguration;
   tinctureConfigurationChange: (tinctureConfiguration: TinctureConfiguration) => void;
 };
-export const TinctureConfigurationForm = (props: Props) => {
+export const TinctureConfigurationForm = function TinctureConfigurationForm(props: Props) {
   const selectedTinctureConfiguration = props.tinctureConfiguration;
   const tinctureConfigurationChange = props.tinctureConfigurationChange;
 

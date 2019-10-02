@@ -27,7 +27,7 @@ export function FromBlason({ pageState, blason, configuration, blasonChange, con
         configuration={configuration}
         configurationChange={configurationChange}
       />
-      <div className="row mt-3 ml-2 mr-2">
+      <div className="row pt-3 ml-2 mr-2">
         <div className="col-md-12 col-lg-6">
           <CoatsOfArmsDetail
             configuration={configuration}

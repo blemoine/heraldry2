@@ -26,8 +26,6 @@ Faire le "of the last"
 - Ajouter les formes de bouclier manquantes
 - Support de custom comme couleur conf
 - Support de "Random" comme couleur conf (implique que chaque tincture evolue dans un espace)
-- animate configuration 0 to auto
-- use Collapse from bootstrap pour la configuration
 
 - Refondre l'UX (par defaut on affiche que le bouclier + blason, et on peut deplier le form a coté
 - etre plus lenient sur la syntaxe des quarterly (avec les : et les;)
@@ -38,6 +36,7 @@ Faire le "of the last"
 - Factoriser intelligemment le dessin des paths dans les charges (repetition du onClick et du cursor pointer)
 - Factoriser le pattern de selection des tinctures et des lines
 - Pour les ordinary avec un seul coté, ne presenter que embatled, et pas les autres.
+- Perf du configuration open to improve!
 
 ## Feature to add
 

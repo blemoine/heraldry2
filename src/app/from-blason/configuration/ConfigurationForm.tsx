@@ -3,6 +3,7 @@ import { Configuration, ShieldShape } from '../../model/configuration';
 import { TinctureConfigurationForm } from './TinctureConfigurationForm';
 import { TinctureConfiguration } from '../../model/tincture-configuration';
 import { ShieldShapeForm } from './ShieldShapeForm';
+import { Collapse } from 'react-bootstrap';
 
 type Props = {
   isOpen: boolean;
@@ -20,16 +21,8 @@ export function ConfigurationForm({ isOpen, configuration, configurationChange }
   }
 
   return (
-    <div
-      style={{
-        border: '1px solid #999',
-        transition: 'all 0.3s',
-        overflow: 'hidden',
-        height: 'auto',
-        maxHeight: !isOpen ? 0 : '400px',
-      }}
-    >
-      <div style={{ padding: '10px 5px' }}>
+    <Collapse in={isOpen}>
+      <div style={{ border: '1px solid #999', padding: '10px 5px' }}>
         <div style={{ cursor: 'pointer' }}>
           <span style={{ margin: '0 10px', borderBottom: '1px solid #333', padding: '3px 0', fontWeight: 'bold' }}>
             Configuration
@@ -43,6 +36,6 @@ export function ConfigurationForm({ isOpen, configuration, configurationChange }
           <ShieldShapeForm shieldShape={configuration.shieldShape} shieldShapeChange={updateShieldShape} />
         </div>
       </div>
-    </div>
+    </Collapse>
   );
 }
