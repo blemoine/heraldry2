@@ -25,9 +25,6 @@ Faire le "of the last"
 - utiliser un context pour la configuration
 - Ajouter les formes de bouclier manquantes
 - Support de custom comme couleur conf
-- Support de "Random" comme couleur conf (implique que chaque tincture evolue dans un espace)
-
-- Refondre l'UX (par defaut on affiche que le bouclier + blason, et on peut deplier le form a coté
 - etre plus lenient sur la syntaxe des quarterly (avec les : et les;)
 - ecrire des tests dans app pour faire un quarterly
 - faire le déploiement
@@ -37,6 +34,7 @@ Faire le "of the last"
 - Factoriser le pattern de selection des tinctures et des lines
 - Pour les ordinary avec un seul coté, ne presenter que embatled, et pas les autres.
 - Perf du configuration open to improve!
+- le swiss n'est ps de la bonne forme ( les bords sont plats)
 
 ## Feature to add
 

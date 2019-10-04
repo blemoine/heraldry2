@@ -1,16 +1,26 @@
 import * as React from 'react';
 import {
+  colorConfigurationRange,
   defaultTinctureConfiguration,
   defaultTinctureConfiguration2,
   TinctureConfiguration,
   wappenWikiConfiguration,
 } from '../../model/tincture-configuration';
-import { isEqual } from 'lodash';
+import { generateInRange, stringifyColor, toRgb } from '../../../utils/color/color';
+import { useLocalStorage } from '../../../utils/useLocalStorage';
 
-const availableTinctureConfiguration: Array<{ name: string; tinctureConfiguration: TinctureConfiguration }> = [
-  { name: 'default', tinctureConfiguration: defaultTinctureConfiguration },
-  { name: 'default_2', tinctureConfiguration: defaultTinctureConfiguration2 },
-  { name: 'wappenWiki', tinctureConfiguration: wappenWikiConfiguration },
+const availableTinctureConfiguration: Array<(seed: string) => TinctureConfiguration> = [
+  () => defaultTinctureConfiguration,
+  () => defaultTinctureConfiguration2,
+  () => wappenWikiConfiguration,
+  (seed: string) =>
+    Object.entries(colorConfigurationRange).reduce<any>(
+      (acc, [color, hslRange]) => {
+        acc[color] = stringifyColor(toRgb(generateInRange(seed, hslRange)));
+        return acc;
+      },
+      { name: 'random' }
+    ),
 ];
 const colorBoxWidth = 20;
 
@@ -19,19 +29,36 @@ type Props = {
   tinctureConfigurationChange: (tinctureConfiguration: TinctureConfiguration) => void;
 };
 export const TinctureConfigurationForm = function TinctureConfigurationForm(props: Props) {
+  const [seed, setSeed] = useLocalStorage('seed-for-random-configuration', new Date(0).toISOString());
+
   const selectedTinctureConfiguration = props.tinctureConfiguration;
   const tinctureConfigurationChange = props.tinctureConfigurationChange;
 
+  function generateNewRandom(e: React.MouseEvent) {
+    e.stopPropagation();
+    const newSeed = new Date().toISOString();
+    setSeed(newSeed);
+
+    const randomConf = availableTinctureConfiguration
+      .map((tinctureConfigurationFn) => tinctureConfigurationFn(newSeed))
+      .find((conf) => conf.name === 'random');
+    if (!randomConf) {
+      throw new Error('A conf named random MUST exists in the list of availableTincture');
+    }
+    tinctureConfigurationChange(randomConf);
+  }
   return (
     <div style={{ marginTop: '10px' }}>
       <ul className="list-inline">
-        {availableTinctureConfiguration.map(({ name, tinctureConfiguration }) => {
+        {availableTinctureConfiguration.map((tinctureConfigurationFn) => {
+          const tinctureConf = tinctureConfigurationFn(seed);
+          const name = tinctureConf.name;
           return (
             <li
               key={name}
-              className="list-inline-item"
+              className={`list-inline-item tincture-wrapper-${name}`}
               style={{ padding: '5px 10px', cursor: 'pointer' }}
-              onClick={() => tinctureConfigurationChange(tinctureConfiguration)}
+              onClick={() => tinctureConfigurationChange(tinctureConf)}
             >
               <div
                 style={{
@@ -41,15 +68,17 @@ export const TinctureConfigurationForm = function TinctureConfigurationForm(prop
                   width: 5 * colorBoxWidth + 2 + 'px',
                 }}
               >
-                {Object.entries(tinctureConfiguration).map(([name, color], i) => {
-                  return (
-                    <div
-                      key={i}
-                      style={{ backgroundColor: color, width: colorBoxWidth + 'px', height: colorBoxWidth + 'px' }}
-                      title={name}
-                    />
-                  );
-                })}
+                {Object.entries<string>(tinctureConf)
+                  .filter(([name]) => name !== 'name')
+                  .map(([name, color], i) => {
+                    return (
+                      <div
+                        key={i}
+                        style={{ backgroundColor: color, width: colorBoxWidth + 'px', height: colorBoxWidth + 'px' }}
+                        title={name}
+                      />
+                    );
+                  })}
               </div>
               <div className="form-check">
                 <label className="form-check-label">
@@ -59,10 +88,19 @@ export const TinctureConfigurationForm = function TinctureConfigurationForm(prop
                     readOnly={true}
                     name="tincture-configuration"
                     style={{ marginRight: '5px' }}
-                    checked={isEqual(tinctureConfiguration, selectedTinctureConfiguration)}
+                    checked={tinctureConf.name === selectedTinctureConfiguration.name}
                   />
                   {name}
                 </label>
+                {name === 'random' && (
+                  <button
+                    style={{ marginLeft: '10px' }}
+                    className="btn btn-outline-dark btn-sm reload-random"
+                    onClick={(e) => generateNewRandom(e)}
+                  >
+                    <i className="fas fa-redo" />
+                  </button>
+                )}
               </div>
             </li>
           );
