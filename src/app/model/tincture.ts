@@ -25,6 +25,8 @@ export type Metal = Argent | Or;
 export type Colours = Gules | Sable | Azure | Vert | Purpure;
 export type Stains = Murrey | Sanguine | Tenne;
 
+export type TinctureName = (Metal | Colours | Stains)['name'];
+
 export const ermine = { name: 'ermine', field: argent, spot: sable } as const;
 export type Ermine = typeof ermine;
 export const counterErmine = { name: 'counter-ermine', field: sable, spot: argent } as const;

@@ -1,7 +1,7 @@
-import { Colours, Metal, Stains } from './tincture';
+import { Colours, Metal, Stains, TinctureName } from './tincture';
 import { ColorRange, HslColor } from '../../utils/color/color';
 
-export type TinctureConfiguration = { [K in (Metal | Colours | Stains)['name']]: string } & { name: string };
+export type TinctureConfiguration = { [K in TinctureName]: string } & { name: string };
 
 export const defaultTinctureConfiguration: TinctureConfiguration = {
   name: 'default',

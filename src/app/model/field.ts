@@ -68,6 +68,11 @@ export type GironnyField = {
   tinctures: [Tincture, Tincture];
 };
 
+export type QuarterlyOfNine = {
+  kind: 'quarterly-of-nine';
+  tinctures: [Tincture, Tincture];
+};
+
 export type Field =
   | PlainField
   | PartyField
@@ -82,7 +87,8 @@ export type Field =
   | BendyPilyField
   | BendyPilySinisterField
   | ChevronnyField
-  | GironnyField;
+  | GironnyField
+  | QuarterlyOfNine;
 export const fieldKinds: Array<Field['kind']> = [
   'plain',
   'bendy',
@@ -98,4 +104,5 @@ export const fieldKinds: Array<Field['kind']> = [
   'bendy-pily-sinister',
   'chevronny',
   'gironny',
+  'quarterly-of-nine',
 ];

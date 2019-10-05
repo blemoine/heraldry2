@@ -26,6 +26,7 @@ import { BendyPilySinisterDisplay } from './fields/BendyPilySinisterDisplay';
 import { GironnyDisplay } from './fields/GironnyDisplay';
 import { PallFieldDisplay } from './fields/PallFieldDisplay';
 import { convertToOlfFillFronTincture, FillFromTincture } from '../fillFromTincture.helper';
+import { QuarterlyOfNineDisplay } from './fields/QuarterlyOfNineDisplay';
 
 type Props = {
   dimension: Dimension;
@@ -130,6 +131,17 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
   } else if (field.kind === 'gironny') {
     const fill: [string, string] = fillFromTincturePair(field.tinctures);
     return <GironnyDisplay fill={fill} dimension={dimension} number={field.number} />;
+  } else if (field.kind === 'quarterly-of-nine') {
+    const fill: [string, string] = fillFromTincturePair(field.tinctures);
+    let updatedDimension: Dimension;
+    if (shape === 'square' || shape === 'default') {
+      updatedDimension = dimension;
+    } else if (shape === 'leftCut' || shape === 'rightCut') {
+      updatedDimension = { width: dimension.width, height: dimension.height * 0.8 };
+    } else {
+      return cannotHappen(shape);
+    }
+    return <QuarterlyOfNineDisplay fill={fill} dimension={updatedDimension} />;
   } else {
     return cannotHappen(field);
   }

@@ -1614,7 +1614,7 @@ exports[`CoatsOfArms should render 'Barry pily counter ermine and potent en poin
       y={0}
     />
     <path
-      d="M 0 0 L 160 33.33333 L 0 66.66667 L 160 100 L 0 133.33333 L 160 166.66667 L 0 200 L 160 233.33333 L 0 266.66667 Z"
+      d="M 0 0 L 200 33.33333 L 0 66.66667 L 200 100 L 0 133.33333 L 200 166.66667 L 0 200 L 200 233.33333 L 0 266.66667 Z"
       fill="url(#field-pattern-4)"
       stroke="#333"
     />
@@ -7708,6 +7708,373 @@ exports[`CoatsOfArms should render 'Purpure, four crosses crosselet or' 1`] = `
           }
         }
       />
+    </g>
+  </g>
+  <path
+    d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
+    fill="transparent"
+    stroke="#333"
+    style={
+      Object {
+        "pointerEvents": "none",
+      }
+    }
+  />
+</svg>
+`;
+
+exports[`CoatsOfArms should render 'Quarterly, 1st and 2nd and 3rd and 4th quarterly of nine vert and ermine' 1`] = `
+<svg
+  className="coats-of-arms-display"
+  height={266.6666666666667}
+  viewBox="0 0 200 266.6666666666667"
+  width={200}
+>
+  <defs>
+    <symbol
+      id="ermine"
+      viewBox="0 0 200 240"
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <g
+        transform="translate(100, 240)"
+      >
+        <path
+          d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
+          fill="#000000"
+        />
+        <circle
+          cy={-226}
+          fill="#000000"
+          r="14"
+        />
+        <circle
+          cx={-32}
+          cy={-194}
+          fill="#000000"
+          r={14}
+        />
+        <circle
+          cx={32}
+          cy={-194}
+          fill="#000000"
+          r={14}
+        />
+      </g>
+    </symbol>
+    <pattern
+      height={64.93506493506494}
+      id="field-pattern-3"
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 70 125"
+      width={36.36363636363637}
+    >
+      <rect
+        fill="#FFFFFF"
+        height="125px"
+        width="70px"
+      />
+      <use
+        height={60}
+        href="#ermine"
+        width={35}
+        x="0"
+        y="0"
+      />
+      <use
+        height={60}
+        href="#ermine"
+        width={35}
+        x="35"
+        y="65"
+      />
+    </pattern>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <clipPath
+      id="plain-field-clip-path"
+    >
+      <path
+        d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
+        fill="transparent"
+        stroke="#333"
+        style={
+          Object {
+            "pointerEvents": "none",
+          }
+        }
+      />
+    </clipPath>
+  </defs>
+  <clipPath
+    id="quarterly-clip-path"
+  >
+    <rect
+      height={133.33333333333334}
+      width={100}
+      x={0}
+      y={0}
+    />
+  </clipPath>
+  <g
+    clipPath="url(#plain-field-clip-path)"
+  >
+    <g
+      className="blason-quarter-1"
+      transform="translate(0 0)"
+    >
+      <g
+        className="blason-field"
+        clipPath="url(#quarterly-clip-path)"
+        onClick={[Function]}
+        style={
+          Object {
+            "cursor": "pointer",
+          }
+        }
+      >
+        <path
+          d="M 0 0 H33.33333 V44.44444 H0 Z"
+          fill="#008000"
+          stroke="#333"
+        />
+        <path
+          d="M 33.33333 0 L 66.66667 0 L 66.66667 44.44444 L 33.33333 44.44444 L 33.33333 0"
+          fill="url(#field-pattern-3)"
+          stroke="#333"
+        />
+        <path
+          d="M 66.66667 0 L 100 0 L 100 44.44444 L 66.66667 44.44444 L 66.66667 0"
+          fill="#008000"
+          stroke="#333"
+        />
+        <path
+          d="M 0 44.44444 L 33.33333 44.44444 L 33.33333 88.88889 L 0 88.88889 L 0 44.44444"
+          fill="url(#field-pattern-3)"
+          stroke="#333"
+        />
+        <path
+          d="M 33.33333 44.44444 L 66.66667 44.44444 L 66.66667 88.88889 L 33.33333 88.88889 L 33.33333 44.44444"
+          fill="#008000"
+          stroke="#333"
+        />
+        <path
+          d="M 66.66667 44.44444 L 100 44.44444 L 100 88.88889 L 66.66667 88.88889 L 66.66667 44.44444"
+          fill="url(#field-pattern-3)"
+          stroke="#333"
+        />
+        <path
+          d="M 0 88.88889 L 33.33333 88.88889 L 33.33333 177.77778 L 0 177.77778 L 0 88.88889"
+          fill="#008000"
+          stroke="#333"
+        />
+        <path
+          d="M 33.33333 88.88889 L 66.66667 88.88889 L 66.66667 177.77778 L 33.33333 177.77778 L 33.33333 88.88889"
+          fill="url(#field-pattern-3)"
+          stroke="#333"
+        />
+        <path
+          d="M 66.66667 88.88889 L 100 88.88889 L 100 177.77778 L 66.66667 177.77778 L 66.66667 88.88889"
+          fill="#008000"
+          stroke="#333"
+        />
+      </g>
+    </g>
+    <g
+      className="blason-quarter-2"
+      transform="translate(100 0)"
+    >
+      <g
+        className="blason-field"
+        clipPath="url(#quarterly-clip-path)"
+        onClick={[Function]}
+        style={
+          Object {
+            "cursor": "pointer",
+          }
+        }
+      >
+        <path
+          d="M 0 0 H33.33333 V44.44444 H0 Z"
+          fill="#008000"
+          stroke="#333"
+        />
+        <path
+          d="M 33.33333 0 L 66.66667 0 L 66.66667 44.44444 L 33.33333 44.44444 L 33.33333 0"
+          fill="url(#field-pattern-3)"
+          stroke="#333"
+        />
+        <path
+          d="M 66.66667 0 L 100 0 L 100 44.44444 L 66.66667 44.44444 L 66.66667 0"
+          fill="#008000"
+          stroke="#333"
+        />
+        <path
+          d="M 0 44.44444 L 33.33333 44.44444 L 33.33333 88.88889 L 0 88.88889 L 0 44.44444"
+          fill="url(#field-pattern-3)"
+          stroke="#333"
+        />
+        <path
+          d="M 33.33333 44.44444 L 66.66667 44.44444 L 66.66667 88.88889 L 33.33333 88.88889 L 33.33333 44.44444"
+          fill="#008000"
+          stroke="#333"
+        />
+        <path
+          d="M 66.66667 44.44444 L 100 44.44444 L 100 88.88889 L 66.66667 88.88889 L 66.66667 44.44444"
+          fill="url(#field-pattern-3)"
+          stroke="#333"
+        />
+        <path
+          d="M 0 88.88889 L 33.33333 88.88889 L 33.33333 177.77778 L 0 177.77778 L 0 88.88889"
+          fill="#008000"
+          stroke="#333"
+        />
+        <path
+          d="M 33.33333 88.88889 L 66.66667 88.88889 L 66.66667 177.77778 L 33.33333 177.77778 L 33.33333 88.88889"
+          fill="url(#field-pattern-3)"
+          stroke="#333"
+        />
+        <path
+          d="M 66.66667 88.88889 L 100 88.88889 L 100 177.77778 L 66.66667 177.77778 L 66.66667 88.88889"
+          fill="#008000"
+          stroke="#333"
+        />
+      </g>
+    </g>
+    <g
+      className="blason-quarter-3"
+      transform="translate(0 133.33333333333334)"
+    >
+      <g
+        className="blason-field"
+        clipPath="url(#quarterly-clip-path)"
+        onClick={[Function]}
+        style={
+          Object {
+            "cursor": "pointer",
+          }
+        }
+      >
+        <path
+          d="M 0 0 H33.33333 V35.55556 H0 Z"
+          fill="#008000"
+          stroke="#333"
+        />
+        <path
+          d="M 33.33333 0 L 66.66667 0 L 66.66667 35.55556 L 33.33333 35.55556 L 33.33333 0"
+          fill="url(#field-pattern-3)"
+          stroke="#333"
+        />
+        <path
+          d="M 66.66667 0 L 100 0 L 100 35.55556 L 66.66667 35.55556 L 66.66667 0"
+          fill="#008000"
+          stroke="#333"
+        />
+        <path
+          d="M 0 35.55556 L 33.33333 35.55556 L 33.33333 71.11111 L 0 71.11111 L 0 35.55556"
+          fill="url(#field-pattern-3)"
+          stroke="#333"
+        />
+        <path
+          d="M 33.33333 35.55556 L 66.66667 35.55556 L 66.66667 71.11111 L 33.33333 71.11111 L 33.33333 35.55556"
+          fill="#008000"
+          stroke="#333"
+        />
+        <path
+          d="M 66.66667 35.55556 L 100 35.55556 L 100 71.11111 L 66.66667 71.11111 L 66.66667 35.55556"
+          fill="url(#field-pattern-3)"
+          stroke="#333"
+        />
+        <path
+          d="M 0 71.11111 L 33.33333 71.11111 L 33.33333 142.22222 L 0 142.22222 L 0 71.11111"
+          fill="#008000"
+          stroke="#333"
+        />
+        <path
+          d="M 33.33333 71.11111 L 66.66667 71.11111 L 66.66667 142.22222 L 33.33333 142.22222 L 33.33333 71.11111"
+          fill="url(#field-pattern-3)"
+          stroke="#333"
+        />
+        <path
+          d="M 66.66667 71.11111 L 100 71.11111 L 100 142.22222 L 66.66667 142.22222 L 66.66667 71.11111"
+          fill="#008000"
+          stroke="#333"
+        />
+      </g>
+    </g>
+    <g
+      className="blason-quarter-4"
+      transform="translate(100 133.33333333333334)"
+    >
+      <g
+        className="blason-field"
+        clipPath="url(#quarterly-clip-path)"
+        onClick={[Function]}
+        style={
+          Object {
+            "cursor": "pointer",
+          }
+        }
+      >
+        <path
+          d="M 0 0 H33.33333 V35.55556 H0 Z"
+          fill="#008000"
+          stroke="#333"
+        />
+        <path
+          d="M 33.33333 0 L 66.66667 0 L 66.66667 35.55556 L 33.33333 35.55556 L 33.33333 0"
+          fill="url(#field-pattern-3)"
+          stroke="#333"
+        />
+        <path
+          d="M 66.66667 0 L 100 0 L 100 35.55556 L 66.66667 35.55556 L 66.66667 0"
+          fill="#008000"
+          stroke="#333"
+        />
+        <path
+          d="M 0 35.55556 L 33.33333 35.55556 L 33.33333 71.11111 L 0 71.11111 L 0 35.55556"
+          fill="url(#field-pattern-3)"
+          stroke="#333"
+        />
+        <path
+          d="M 33.33333 35.55556 L 66.66667 35.55556 L 66.66667 71.11111 L 33.33333 71.11111 L 33.33333 35.55556"
+          fill="#008000"
+          stroke="#333"
+        />
+        <path
+          d="M 66.66667 35.55556 L 100 35.55556 L 100 71.11111 L 66.66667 71.11111 L 66.66667 35.55556"
+          fill="url(#field-pattern-3)"
+          stroke="#333"
+        />
+        <path
+          d="M 0 71.11111 L 33.33333 71.11111 L 33.33333 142.22222 L 0 142.22222 L 0 71.11111"
+          fill="#008000"
+          stroke="#333"
+        />
+        <path
+          d="M 33.33333 71.11111 L 66.66667 71.11111 L 66.66667 142.22222 L 33.33333 142.22222 L 33.33333 71.11111"
+          fill="url(#field-pattern-3)"
+          stroke="#333"
+        />
+        <path
+          d="M 66.66667 71.11111 L 100 71.11111 L 100 142.22222 L 66.66667 142.22222 L 66.66667 71.11111"
+          fill="#008000"
+          stroke="#333"
+        />
+      </g>
     </g>
   </g>
   <path

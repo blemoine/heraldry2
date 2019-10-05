@@ -8,19 +8,20 @@ import {
 } from '../../model/tincture-configuration';
 import { generateInRange, stringifyColor, toRgb } from '../../../utils/color/color';
 import { useLocalStorage } from '../../../utils/useLocalStorage';
+import { TinctureName } from '../../model/tincture';
 
 const availableTinctureConfiguration: Array<(seed: string) => TinctureConfiguration> = [
   () => defaultTinctureConfiguration,
   () => defaultTinctureConfiguration2,
   () => wappenWikiConfiguration,
   (seed: string) =>
-    Object.entries(colorConfigurationRange).reduce<any>(
+    Object.entries(colorConfigurationRange).reduce<Partial<TinctureConfiguration>>(
       (acc, [color, hslRange]) => {
-        acc[color] = stringifyColor(toRgb(generateInRange(seed, hslRange)));
+        acc[color as TinctureName] = stringifyColor(toRgb(generateInRange(seed, hslRange)));
         return acc;
       },
       { name: 'random' }
-    ),
+    ) as TinctureConfiguration,
 ];
 const colorBoxWidth = 25;
 
