@@ -35,8 +35,6 @@ Faire le "of the last"
 - Pour les ordinary avec un seul coté, ne presenter que embatled, et pas les autres.
 - Perf du configuration open to improve!
 - le swiss n'est ps de la bonne forme ( les bords sont plats)
-- L'edition par le form du quarterly est broken:
-    * `Quarterly, 1st and 2nd and 3rd and 4th or`, select first field, set gules, select third field set vert, the first is lost 
 
 ## Feature to add
 

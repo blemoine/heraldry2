@@ -46,7 +46,7 @@ export const BlasonDispatcherForm = React.memo(function BlasonForm({
           blasons,
         });
       },
-      [blasonChange]
+      [blason, blasonChange]
     );
     return (
       <div>
