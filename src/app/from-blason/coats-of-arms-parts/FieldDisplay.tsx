@@ -27,6 +27,7 @@ import { GironnyDisplay } from './fields/GironnyDisplay';
 import { PallFieldDisplay } from './fields/PallFieldDisplay';
 import { convertToOlfFillFronTincture, FillFromTincture } from '../fillFromTincture.helper';
 import { QuarterlyOfNineDisplay } from './fields/QuarterlyOfNineDisplay';
+import { LozengyBendwiseDisplay } from './fields/LozengyBendwiseDisplay';
 
 type Props = {
   dimension: Dimension;
@@ -113,6 +114,9 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
   } else if (field.kind === 'lozengy') {
     const fill: [string, string] = fillFromTincturePair(field.tinctures);
     return <LozengyDisplay fill={fill} dimension={dimension} />;
+  } else if (field.kind === 'lozengy-bendwise') {
+    const fill: [string, string] = fillFromTincturePair(field.tinctures);
+    return <LozengyBendwiseDisplay fill={fill} dimension={dimension} />;
   } else if (field.kind === 'paly-pily') {
     const fill: [string, string] = fillFromTincturePair(field.tinctures);
     return <PalyPilyDisplay fill={fill} dimension={dimension} />;

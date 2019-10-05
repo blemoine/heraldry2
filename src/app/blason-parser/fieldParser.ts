@@ -107,6 +107,7 @@ export function fieldParser(): P.Parser<Field> {
       constStr('paly'),
 
       P.alt(constStr('chequy'), constStr('chequy', 'Checky')).desc('Chequy'),
+      constStr('lozengy-bendwise', 'Lozengy bendwise'),
       constStr('lozengy'),
       constStr('chevronny')
     ),

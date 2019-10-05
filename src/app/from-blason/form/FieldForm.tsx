@@ -31,7 +31,8 @@ function extractColors(field: Field): [Tincture, Tincture] {
     field.kind === 'bendy-pily-sinister' ||
     field.kind === 'chevronny' ||
     field.kind === 'gironny' ||
-    field.kind === 'quarterly-of-nine'
+    field.kind === 'quarterly-of-nine' ||
+    field.kind === 'lozengy-bendwise'
   ) {
     return field.tinctures;
   } else {
@@ -60,7 +61,8 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
         newKind === 'bendy-pily' ||
         newKind === 'bendy-pily-sinister' ||
         newKind === 'chevronny' ||
-        newKind === 'quarterly-of-nine'
+        newKind === 'quarterly-of-nine' ||
+        newKind === 'lozengy-bendwise'
       ) {
         fieldChange({ kind: newKind, tinctures: newColors });
       } else if (newKind === 'plain') {
@@ -134,7 +136,8 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
             field.kind === 'chevronny' ||
             field.kind === 'barry' ||
             field.kind === 'quarterly-of-nine' ||
-            field.kind === 'gironny' ? (
+            field.kind === 'gironny' ||
+            field.kind === 'lozengy-bendwise' ? (
             <>
               <div className="col">
                 <div className="form-group field-first-tincture-select">

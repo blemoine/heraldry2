@@ -57,6 +57,11 @@ export type LozengyField = {
   tinctures: [Tincture, Tincture];
 };
 
+export type LozengyBendwiseField = {
+  kind: 'lozengy-bendwise';
+  tinctures: [Tincture, Tincture];
+};
+
 export type ChevronnyField = {
   kind: 'chevronny';
   tinctures: [Tincture, Tincture];
@@ -68,7 +73,7 @@ export type GironnyField = {
   tinctures: [Tincture, Tincture];
 };
 
-export type QuarterlyOfNine = {
+export type QuarterlyOfNineField = {
   kind: 'quarterly-of-nine';
   tinctures: [Tincture, Tincture];
 };
@@ -88,7 +93,8 @@ export type Field =
   | BendyPilySinisterField
   | ChevronnyField
   | GironnyField
-  | QuarterlyOfNine;
+  | QuarterlyOfNineField
+  | LozengyBendwiseField;
 export const fieldKinds: Array<Field['kind']> = [
   'plain',
   'bendy',
@@ -105,4 +111,5 @@ export const fieldKinds: Array<Field['kind']> = [
   'chevronny',
   'gironny',
   'quarterly-of-nine',
+  'lozengy-bendwise',
 ];
