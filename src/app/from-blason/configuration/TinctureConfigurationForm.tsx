@@ -22,7 +22,7 @@ const availableTinctureConfiguration: Array<(seed: string) => TinctureConfigurat
       { name: 'random' }
     ),
 ];
-const colorBoxWidth = 20;
+const colorBoxWidth = 25;
 
 type Props = {
   tinctureConfiguration: TinctureConfiguration;
