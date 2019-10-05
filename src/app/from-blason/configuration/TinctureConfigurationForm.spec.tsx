@@ -44,7 +44,7 @@ describe('TinctureConfigurationForm', () => {
       />
     );
 
-    clickOnConfElement('random');
+    clickOnConfElement('custom');
 
     expect(tinctureConfigurationChange.mock.calls.length).toBe(1);
     const randomConfiguration = tinctureConfigurationChange.mock.calls[0][0];
@@ -56,8 +56,8 @@ describe('TinctureConfigurationForm', () => {
       />
     );
 
-    expectInputToBeChecked('random');
-    clickOnConfElement('random');
+    expectInputToBeChecked('custom');
+    clickOnConfElement('custom');
 
     expect(tinctureConfigurationChange.mock.calls.length).toBe(2);
     expect(tinctureConfigurationChange.mock.calls[1][0]).toEqual(randomConfiguration);
@@ -71,7 +71,7 @@ describe('TinctureConfigurationForm', () => {
       />
     );
 
-    clickOnConfElement('random');
+    clickOnConfElement('custom');
 
     expect(tinctureConfigurationChange.mock.calls.length).toBe(1);
     const randomConfiguration = tinctureConfigurationChange.mock.calls[0][0];
@@ -83,7 +83,7 @@ describe('TinctureConfigurationForm', () => {
       />
     );
 
-    expectInputToBeChecked('random');
+    expectInputToBeChecked('custom');
 
     const reloadElement = document.querySelector('.reload-random');
     if (!reloadElement) {
@@ -102,6 +102,6 @@ describe('TinctureConfigurationForm', () => {
       />
     );
 
-    expectInputToBeChecked('random');
+    expectInputToBeChecked('custom');
   });
 });

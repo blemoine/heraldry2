@@ -20,7 +20,7 @@ const availableTinctureConfiguration: Array<(seed: string) => TinctureConfigurat
         acc[color as TinctureName] = stringifyColor(toRgb(generateInRange(seed, hslRange)));
         return acc;
       },
-      { name: 'random' }
+      { name: 'custom' }
     ) as TinctureConfiguration,
 ];
 const colorBoxWidth = 25;
@@ -42,7 +42,7 @@ export const TinctureConfigurationForm = function TinctureConfigurationForm(prop
 
     const randomConf = availableTinctureConfiguration
       .map((tinctureConfigurationFn) => tinctureConfigurationFn(newSeed))
-      .find((conf) => conf.name === 'random');
+      .find((conf) => conf.name === 'custom');
     if (!randomConf) {
       throw new Error('A conf named random MUST exists in the list of availableTincture');
     }
@@ -93,11 +93,12 @@ export const TinctureConfigurationForm = function TinctureConfigurationForm(prop
                   />
                   {name}
                 </label>
-                {name === 'random' && (
+                {name === 'custom' && (
                   <button
                     style={{ marginLeft: '10px' }}
                     className="btn btn-outline-dark btn-sm reload-random"
                     onClick={(e) => generateNewRandom(e)}
+                    title="New random"
                   >
                     <i className="fas fa-redo" />
                   </button>
