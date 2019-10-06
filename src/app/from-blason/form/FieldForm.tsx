@@ -1,7 +1,7 @@
 import { Field, fieldKinds, PartyField, PlainField, TiercedField } from '../../model/field';
 import { TinctureSelect } from './TinctureSelect';
 import * as React from 'react';
-import { argent, gules, isMetal, Tincture } from '../../model/tincture';
+import { argent, gules, isMetal, Tincture, tinctures } from '../../model/tincture';
 import { PartyForm } from './PartyForm';
 import { SelectScalar } from '../../common/SelectScalar';
 import { cannotHappen } from '../../../utils/cannot-happen';
@@ -44,6 +44,7 @@ function extractColors(field: Field): [Tincture, Tincture] {
 }
 
 const numberOfBars = [6, 8, 10] as const;
+const gironnyNumberAvailable = [8, 12] as const;
 type Props = { tinctureConfiguration: TinctureConfiguration; field: Field; fieldChange: (field: Field) => void };
 export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) {
   function plainTinctureChange(tincture: Tincture) {
@@ -56,9 +57,17 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
       if (newKind === 'party') {
         fieldChange({ kind: newKind, per: { name: 'fess', tinctures: newColors, line: 'straight' } });
       } else if (newKind === 'tierced') {
+        const missingColor = tinctures.find((c) => c.name !== newColors[0].name && c.name !== newColors[1].name);
+        if (!missingColor) {
+          throw new Error(`There should be a color different than ${newColors}`);
+        }
         fieldChange({
           kind: newKind,
-          per: { name: 'fess', tinctures: [newColors[0], newColors[1], gules], line: 'straight' },
+          per: {
+            name: 'fess',
+            tinctures: [newColors[0], newColors[1], missingColor],
+            line: 'straight',
+          },
         });
       } else if (
         newKind === 'paly' ||
@@ -168,7 +177,7 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
           <label>Number</label>
           <div>
             <ButtonGroup
-              options={[8, 12] as const}
+              options={gironnyNumberAvailable}
               value={field.number}
               valueChange={(number) => fieldChange({ ...field, number })}
             />

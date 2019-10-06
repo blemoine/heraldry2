@@ -3,7 +3,8 @@ import { range } from '../../../../utils/range';
 import { Dimension } from '../../../model/dimension';
 import { BarryField } from '../../../model/field';
 import { FillFromTincture } from '../../fillFromTincture.helper';
-import { isErmine, isPotent, isVair } from '../../../model/tincture';
+import { FurPatternDefinition } from '../FurPatternDefinition';
+import { buildFurTransformProperty, FurTransformProperty, getFill } from '../FurPattern.model';
 
 type Props = {
   field: BarryField;
@@ -11,67 +12,31 @@ type Props = {
   dimension: Dimension;
   number: number;
 };
+
+const postfixId = 'barry';
+
 export const BarryDisplay: React.FunctionComponent<Props> = ({
   field,
   fillFromTincture,
   dimension: { width, height },
   number,
 }) => {
-  const fillAndDef = field.tinctures.map((tincture, i) => {
-    const fill = fillFromTincture(tincture);
-
-    if ('color' in fill) {
-      return { fill: fill.color, def: null };
-    } else {
-      const scaleRatio = 0.75 / (width / height);
-      if (isErmine(tincture)) {
-        const newPatternDef = fill.id + '-barry';
-        return {
-          fill: `url(#${newPatternDef})`,
-          def: (
-            <pattern
-              key={i}
-              id={`${newPatternDef}`}
-              xlinkHref={`#${fill.id}`}
-              patternTransform={`scale(${(4.1 * scaleRatio) / number})`}
-            />
-          ),
-        };
-      } else if (isVair(tincture)) {
-        const newPatternDef = fill.id + '-barry';
-        return {
-          fill: `url(#${newPatternDef})`,
-          def: (
-            <pattern
-              key={i}
-              id={`${newPatternDef}`}
-              xlinkHref={`#${fill.id}`}
-              patternTransform={`scale(${(3.33 * scaleRatio) / number})`}
-            />
-          ),
-        };
-      } else if (isPotent(tincture)) {
-        const newPatternDef = fill.id + '-barry';
-        return {
-          fill: `url(#${newPatternDef})`,
-          def: (
-            <pattern
-              key={i}
-              id={`${newPatternDef}`}
-              xlinkHref={`#${fill.id}`}
-              patternTransform={`scale(${(3.67 * scaleRatio) / number})`}
-            />
-          ),
-        };
-      } else {
-        return { fill: `url(#${fill.id})`, def: null };
-      }
-    }
+  const scaleRatio = 0.75 / (width / height);
+  const transformProperties: FurTransformProperty = buildFurTransformProperty(fillFromTincture, {
+    ermine: { kind: 'scale', value: (4.1 * scaleRatio) / number },
+    vair: { kind: 'scale', value: (3.33 * scaleRatio) / number },
+    potent: { kind: 'scale', value: (3.67 * scaleRatio) / number },
   });
+
+  const fills = field.tinctures.map((tincture) => getFill(fillFromTincture, tincture, postfixId));
 
   return (
     <>
-      {fillAndDef.map(({ def }) => def)}
+      <FurPatternDefinition
+        tinctures={field.tinctures}
+        postfixId={postfixId}
+        transformProperties={transformProperties}
+      />
       {range(0, number).map((i) => {
         return (
           <rect
@@ -80,7 +45,7 @@ export const BarryDisplay: React.FunctionComponent<Props> = ({
             y={(height * i) / number}
             height={height / number}
             width={width}
-            fill={fillAndDef[i % 2].fill}
+            fill={fills[i % 2]}
             stroke="#333"
           />
         );
