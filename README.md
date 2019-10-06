@@ -24,7 +24,6 @@ Faire le "of the last"
 - Meilleur support de l'optionnalité des virgules
 - utiliser un context pour la configuration
 - Ajouter les formes de bouclier manquantes
-- Support de custom comme couleur conf
 - etre plus lenient sur la syntaxe des quarterly (avec les : et les;)
 - ecrire des tests dans app pour faire un quarterly
 - faire le déploiement

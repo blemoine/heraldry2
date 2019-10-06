@@ -12,7 +12,7 @@ function clickOnConfElement(name: string) {
 }
 
 function expectInputToBeChecked(name: string) {
-  const randomInput = document.querySelector<HTMLInputElement>('.tincture-wrapper-' + name + ' input');
+  const randomInput = document.querySelector<HTMLInputElement>('.tincture-wrapper-' + name + ' input[type=radio]');
   if (!randomInput) {
     throw new Error(name + ' should exists');
   }
