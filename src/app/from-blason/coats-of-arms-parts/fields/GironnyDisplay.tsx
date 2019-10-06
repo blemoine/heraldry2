@@ -29,9 +29,9 @@ export const GironnyDisplay = (props: Props) => {
 
         let pathBuilder: SvgPathBuilder;
         if ((angleInDegree >= 90 && angleInDegree < 180) || angleInDegree >= 270) {
-          pathBuilder = basePath.scale([width / 2, height / 2], (2 * height) / width, (2 * width) / height);
+          pathBuilder = basePath.scale(center, (2 * height) / width, (2 * width) / height);
         } else {
-          pathBuilder = basePath.scale([width / 2, height / 2], 2, 2);
+          pathBuilder = basePath.scale(center, 2, 2);
         }
 
         return (
