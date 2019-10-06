@@ -33,6 +33,7 @@ Faire le "of the last"
 - Factoriser le pattern de selection des tinctures et des lines
 - Pour les ordinary avec un seul coté, ne presenter que embatled, et pas les autres.
 - le swiss n'est ps de la bonne forme ( les bords sont plats)
+- isThereFur can be rewritten with an "extract all tinctures" then "some"
 
 ## Feature to add
 

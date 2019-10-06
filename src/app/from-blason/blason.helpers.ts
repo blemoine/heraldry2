@@ -130,6 +130,8 @@ export function stringifyFieldKind(field: Field['kind']): string {
     return 'barry';
   } else if (field === 'party') {
     return 'party per';
+  } else if (field === 'tierced') {
+    return 'tierced per';
   } else if (field === 'chequy') {
     return 'chequy';
   } else if (field === 'lozengy') {
@@ -165,6 +167,20 @@ function stringifyField(field: Field, shouldCapitalize: boolean): string {
       ' and ' +
       stringifiedTinctures[stringifiedTinctures.length - 1];
     let result = 'Per ' + perName + ' ';
+    if (field.per.line !== 'straight') {
+      result += field.per.line + ' ';
+    }
+    result += tinctures;
+    return result;
+  } else if (field.kind === 'tierced') {
+    const perName = stringifyParty(field.per.name);
+    const stringifiedTinctures = field.per.tinctures.map((t) => stringifyTincture(t));
+
+    const tinctures =
+      stringifiedTinctures.slice(0, stringifiedTinctures.length - 1).join(', ') +
+      ' and ' +
+      stringifiedTinctures[stringifiedTinctures.length - 1];
+    let result = 'Tierced per ' + perName + ' ';
     if (field.per.line !== 'straight') {
       result += field.per.line + ' ';
     }
@@ -342,7 +358,7 @@ export function isThereFur(blason: Blason, fur: Furs['name']): boolean {
       if (field.tincture.name === fur) {
         return true;
       }
-    } else if (field.kind === 'party') {
+    } else if (field.kind === 'party' || field.kind === 'tierced') {
       if (field.per.tinctures.some((t) => t.name === fur)) {
         return true;
       }

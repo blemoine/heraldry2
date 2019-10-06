@@ -28,6 +28,8 @@ import { PallFieldDisplay } from './fields/PallFieldDisplay';
 import { convertToOlfFillFronTincture, FillFromTincture } from '../fillFromTincture.helper';
 import { QuarterlyOfNineDisplay } from './fields/QuarterlyOfNineDisplay';
 import { LozengyBendwiseDisplay } from './fields/LozengyBendwiseDisplay';
+import { FessTiercedDisplay } from './fields/FessTiercedDisplay';
+import { PaleTiercedDisplay } from './fields/PaleTiercedDisplay';
 
 type Props = {
   dimension: Dimension;
@@ -70,6 +72,17 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
       } else {
         return cannotHappen(partyName);
       }
+    }
+  } else if (field.kind === 'tierced') {
+    const partyName = field.per.name;
+    const fill: [string, string, string] = fillFromTinctureTriplet(field.per.tinctures);
+    const line = field.per.line;
+    if (partyName === 'fess') {
+      return <FessTiercedDisplay fill={fill} dimension={dimension} line={line} />;
+    } else if (partyName === 'pale') {
+      return <PaleTiercedDisplay fill={fill} dimension={dimension} line={line} />;
+    } else {
+      return cannotHappen(partyName);
     }
   } else if (field.kind === 'bendy') {
     const fill: [string, string] = fillFromTincturePair(field.tinctures);

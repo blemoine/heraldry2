@@ -20,6 +20,7 @@ import {
 } from '../model/charge';
 import { availableDispositions, CountAndDisposition, supportedNumbers } from '../model/countAndDisposition';
 import { Blason, QuarterlyBlason, SimpleBlason } from '../model/blason';
+import { Tierced, tierceds } from '../model/tierced';
 
 const FIELD_SIZE = 6;
 const ORDINARY_SIZE = 4;
@@ -58,6 +59,12 @@ function encodePartyName(p: Party['name']): number {
 function decodePartyName(i: number): Result<Party['name']> {
   return decodeFromList(parties, i);
 }
+function encodeTiercedName(p: Tierced['name']): number {
+  return encodeFromList(tierceds, p);
+}
+function decodeTiercedName(i: number): Result<Tierced['name']> {
+  return decodeFromList(tierceds, i);
+}
 
 export function encodeField(field: Field): Uint8Array {
   const result = new Uint8Array(FIELD_SIZE);
@@ -81,6 +88,12 @@ export function encodeField(field: Field): Uint8Array {
     if (field.per.name === 'pall') {
       result[5] = encodeTincture(field.per.tinctures[2]);
     }
+  } else if (field.kind === 'tierced') {
+    result[1] = encodeTiercedName(field.per.name);
+    result[2] = encodeLine(field.per.line);
+    result[3] = encodeTincture(field.per.tinctures[0]);
+    result[4] = encodeTincture(field.per.tinctures[1]);
+    result[5] = encodeTincture(field.per.tinctures[2]);
   } else {
     result[1] = encodeTincture(field.tinctures[0]);
     result[2] = encodeTincture(field.tinctures[1]);
@@ -152,6 +165,19 @@ export function decodeField(arr: Uint8Array): Result<Field> {
         },
       }));
     }
+  } else if (kind === 'tierced') {
+    const maybeName = decodeTiercedName(arr[1]);
+    const maybeLine = decodeLine(arr[2]);
+    const maybeTinctures = zip3(decodeTincture(arr[3]), decodeTincture(arr[4]), decodeTincture(arr[5]));
+
+    return map(zip3(maybeTinctures, maybeLine, maybeName), ([tinctures, line, name]) => ({
+      kind,
+      per: {
+        line,
+        tinctures,
+        name,
+      },
+    }));
   } else if (kind === 'barry' || kind === 'bendy' || kind === 'bendySinister') {
     const maybeTinctures = zip(decodeTincture(arr[1]), decodeTincture(arr[2]));
     const maybeNumber: Result<6 | 8 | 10> = decodeNumber([6, 8, 10], arr[3]);

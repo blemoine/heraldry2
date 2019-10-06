@@ -1,4 +1,4 @@
-import { Field, fieldKinds, PartyField, PlainField } from '../../model/field';
+import { Field, fieldKinds, PartyField, PlainField, TiercedField } from '../../model/field';
 import { TinctureSelect } from './TinctureSelect';
 import * as React from 'react';
 import { argent, gules, isMetal, Tincture } from '../../model/tincture';
@@ -8,6 +8,7 @@ import { cannotHappen } from '../../../utils/cannot-happen';
 import { stringifyFieldKind } from '../blason.helpers';
 import { TinctureConfiguration } from '../../model/tincture-configuration';
 import { ButtonGroup } from '../../common/ButtonGroup';
+import { TiercedForm } from './TiercedForm';
 
 function extractColors(field: Field): [Tincture, Tincture] {
   if (field.kind === 'plain') {
@@ -18,6 +19,8 @@ function extractColors(field: Field): [Tincture, Tincture] {
     } else {
       return field.per.tinctures;
     }
+  } else if (field.kind === 'tierced') {
+    return [field.per.tinctures[0], field.per.tinctures[1]];
   } else if (
     field.kind === 'barry' ||
     field.kind === 'paly' ||
@@ -52,6 +55,11 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
       const newColors = extractColors(field);
       if (newKind === 'party') {
         fieldChange({ kind: newKind, per: { name: 'fess', tinctures: newColors, line: 'straight' } });
+      } else if (newKind === 'tierced') {
+        fieldChange({
+          kind: newKind,
+          per: { name: 'fess', tinctures: [newColors[0], newColors[1], gules], line: 'straight' },
+        });
       } else if (
         newKind === 'paly' ||
         newKind === 'paly-pily' ||
@@ -77,42 +85,31 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
     }
   }
 
-  function firstTinctureChange(field: Exclude<Field, PlainField | PartyField>, tincture: Tincture) {
+  function firstTinctureChange(field: Exclude<Field, PlainField | PartyField | TiercedField>, tincture: Tincture) {
     fieldChange({ ...field, tinctures: [tincture, field.tinctures[1]] });
   }
 
-  function secondTinctureChange(field: Exclude<Field, PlainField | PartyField>, tincture: Tincture) {
+  function secondTinctureChange(field: Exclude<Field, PlainField | PartyField | TiercedField>, tincture: Tincture) {
     fieldChange({ ...field, tinctures: [field.tinctures[0], tincture] });
   }
 
   return (
     <>
+      <div className="form-group field-type-select">
+        <label>Field type</label>
+        <SelectScalar
+          options={fieldKinds}
+          value={field.kind}
+          valueChange={changeFieldKind}
+          formatValue={stringifyFieldKind}
+        />
+      </div>
       {field.kind === 'party' ? (
-        <>
-          <div className="form-group field-type-select">
-            <label>Field type</label>
-            <SelectScalar
-              options={fieldKinds}
-              value={field.kind}
-              valueChange={changeFieldKind}
-              formatValue={stringifyFieldKind}
-            />
-          </div>
-          <PartyForm tinctureConfiguration={tinctureConfiguration} field={field} fieldChange={fieldChange} />
-        </>
+        <PartyForm tinctureConfiguration={tinctureConfiguration} field={field} fieldChange={fieldChange} />
+      ) : field.kind === 'tierced' ? (
+        <TiercedForm tinctureConfiguration={tinctureConfiguration} field={field} fieldChange={fieldChange} />
       ) : (
         <div className="row">
-          <div className="col">
-            <div className="form-group field-type-select">
-              <label>Field type</label>
-              <SelectScalar
-                options={fieldKinds}
-                value={field.kind}
-                valueChange={changeFieldKind}
-                formatValue={stringifyFieldKind}
-              />
-            </div>
-          </div>
           {field.kind === 'plain' ? (
             <div className="col">
               <div className="form-group field-tincture-select">

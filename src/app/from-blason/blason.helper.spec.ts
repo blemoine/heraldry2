@@ -310,6 +310,22 @@ describe('stringifyBlason', () => {
       })
     ).toEqual('Or, three annulets in pale gules');
   });
+
+  it('should render tierced per pale', () => {
+    expect(
+      stringifyBlason({
+        kind: 'simple',
+        field: {
+          kind: 'tierced',
+          per: {
+            name: 'pale',
+            tinctures: [or, azure, ermine],
+            line: 'straight',
+          },
+        },
+      })
+    ).toEqual('Tierced per pale or, azure and ermine');
+  });
 });
 
 describe('isThereFur', () => {

@@ -1,9 +1,15 @@
 import { Party } from './party';
 import { Tincture } from './tincture';
+import { Tierced } from './tierced';
 
 export type PartyField = {
   kind: 'party';
   per: Party;
+};
+
+export type TiercedField = {
+  kind: 'tierced';
+  per: Tierced;
 };
 export type PlainField = {
   kind: 'plain';
@@ -81,6 +87,7 @@ export type QuarterlyOfNineField = {
 export type Field =
   | PlainField
   | PartyField
+  | TiercedField
   | PalyField
   | BendyField
   | BendySinisterField
@@ -97,10 +104,11 @@ export type Field =
   | LozengyBendwiseField;
 export const fieldKinds: Array<Field['kind']> = [
   'plain',
+  'party',
+  'tierced',
   'bendy',
   'bendySinister',
   'paly',
-  'party',
   'barry',
   'chequy',
   'lozengy',

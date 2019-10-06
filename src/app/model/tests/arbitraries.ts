@@ -1,6 +1,6 @@
 import fc, { Arbitrary } from 'fast-check';
 import { or, Tincture, tinctures } from '../tincture';
-import { Field, fieldKinds, PartyField } from '../field';
+import { Field, fieldKinds, PartyField, TiercedField } from '../field';
 import { PallParty, parties, Party } from '../party';
 import { ordinaries, Ordinary } from '../ordinary';
 import {
@@ -27,6 +27,7 @@ import { cannotHappen } from '../../../utils/cannot-happen';
 import { availableDivisions, Blason, QuarterlyBlason, SimpleBlason } from '../blason';
 import { Line, lines } from '../line';
 import { availableDispositions, CountAndDisposition, supportedNumbers } from '../countAndDisposition';
+import { Tierced, tierceds } from '../tierced';
 
 const tinctureArb: Arbitrary<Tincture> = fc.constantFrom(...tinctures);
 export const lineArb: Arbitrary<Line> = fc.constantFrom(...lines);
@@ -47,6 +48,14 @@ const partyArb: Arbitrary<Party> = fc.constantFrom<Party['name']>(...parties).ch
   }
 });
 
+const tiercedArb: Arbitrary<Tierced> = fc.constantFrom<Tierced['name']>(...tierceds).chain<Tierced>((name) => {
+  return fc.record({
+    name: fc.constant(name),
+    tinctures: fc.tuple(tinctureArb, tinctureArb, tinctureArb),
+    line: lineArb,
+  });
+});
+
 export const fieldArb: Arbitrary<Field> = fc.constantFrom(...fieldKinds).chain(
   (kind): Arbitrary<Field> => {
     if (kind === 'plain') {
@@ -61,6 +70,8 @@ export const fieldArb: Arbitrary<Field> = fc.constantFrom(...fieldKinds).chain(
         .map(([number, ...tinctures]) => ({ kind, number, tinctures }));
     } else if (kind === 'party') {
       return partyArb.map((party): PartyField => ({ kind, per: party }));
+    } else if (kind === 'tierced') {
+      return tiercedArb.map((tierced): TiercedField => ({ kind, per: tierced }));
     } else {
       return fc.tuple(tinctureArb, tinctureArb).map((tinctures) => ({ kind, tinctures }));
     }

@@ -13,6 +13,7 @@ import { StringifiableNumber, stringifyNumber } from '../model/countAndDispositi
 import { tinctureParserFromCapitalizedName, tinctureParserFromName } from './tinctureParser';
 import { parties, Party } from '../model/party';
 import { stringifyParty } from '../from-blason/blason.helpers';
+import { Tierced, tierceds } from '../model/tierced';
 
 const partyUnit: P.Parser<Party['name']> = buildAltParser(parties, stringifyParty);
 
@@ -44,6 +45,30 @@ function partyParser(): P.Parser<Party> {
             .then(tinctureParserFromName)
         ).map((tinctures) => ({ name, tinctures, line }));
       }
+    }
+  );
+}
+
+const tiercedUnit: P.Parser<Tierced['name']> = buildAltParser(tierceds, stringifyParty);
+function tiercedParser(): P.Parser<Tierced> {
+  return P.seq(
+    P.alt(constStr('tierced', 'Tierced per'))
+      .desc('Tierced per')
+      .skip(P.whitespace)
+      .then(tiercedUnit)
+      .skip(P.whitespace),
+    lineParser.skip(P.whitespace).fallback('straight' as const)
+  ).chain(
+    ([name, line]): P.Parser<Tierced> => {
+      return P.seq(
+        tinctureParserFromName,
+        P.string(',')
+          .then(P.optWhitespace)
+          .then(tinctureParserFromName),
+        P.regex(/and/i)
+          .trim(P.whitespace)
+          .then(tinctureParserFromName)
+      ).map((tinctures) => ({ name, tinctures, line }));
     }
   );
 }
@@ -126,6 +151,7 @@ export function fieldParser(): P.Parser<Field> {
       kind: 'plain',
       tincture,
     })),
+    tiercedParser().map((tierced) => ({ kind: 'tierced', per: tierced })),
     partyParser().map((party) => ({ kind: 'party', per: party })),
     gironnyParser,
     numberedFieldParser,
