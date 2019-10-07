@@ -9,8 +9,8 @@ import { CoatsOfArmsDisplay } from './CoatsOfArmsDisplay';
 import { Configuration } from '../model/configuration';
 import { defaultTinctureConfiguration } from '../model/tincture-configuration';
 import * as pointInSvgPolygon from 'point-in-svg-polygon';
-import { stringifyBlason } from './blason.helpers';
 import { getChargePoints, getPathSegments } from './tests/collision.utils';
+import { stringifyBlason } from '../model/stringify/stringify.helper';
 
 const numRuns = process.env.GENERATOR_CASE_COUNT ? parseFloat(process.env.GENERATOR_CASE_COUNT) : 40;
 

@@ -2,7 +2,7 @@ import * as P from 'parsimmon';
 import { Chevron, Chevronel, ordinaries, Ordinary, OrdinaryCross, Pale } from '../model/ordinary';
 import { aParser, buildAltParser, lineParser, numberParser } from './parser.helper';
 import { tinctureParserFromName } from './tinctureParser';
-import { stringifyOrdinaryName } from '../from-blason/blason.helpers';
+import { stringifyOrdinaryName } from '../model/stringify/stringify.helper';
 
 function isNotPaleOrChevronOrCross(
   o: Ordinary['name']

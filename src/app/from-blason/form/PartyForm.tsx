@@ -2,13 +2,13 @@ import * as React from 'react';
 import { parties, Party } from '../../model/party';
 import { PartyField } from '../../model/field';
 import { or } from '../../model/tincture';
-import { stringifyParty } from '../blason.helpers';
 import { SelectScalar } from '../../common/SelectScalar';
 import { LineSelect } from './LineSelect';
 import { Line } from '../../model/line';
 import { TinctureConfiguration } from '../../model/tincture-configuration';
 import { TwoTinctureConfiguration } from './parties/TwoTinctureConfiguration';
 import { ThreeTinctureConfiguration } from './parties/ThreeTinctureConfiguration';
+import { stringifyParty } from '../../model/stringify/stringify.helper';
 
 const partiesOptions = parties;
 

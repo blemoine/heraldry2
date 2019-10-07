@@ -12,8 +12,8 @@ import { buildAltParser, constStr, lineParser } from './parser.helper';
 import { StringifiableNumber, stringifyNumber } from '../model/countAndDisposition';
 import { tinctureParserFromCapitalizedName, tinctureParserFromName } from './tinctureParser';
 import { parties, Party } from '../model/party';
-import { stringifyParty } from '../from-blason/blason.helpers';
 import { Tierced, tierceds } from '../model/tierced';
+import { stringifyParty } from '../model/stringify/stringify.helper';
 
 const partyUnit: P.Parser<Party['name']> = buildAltParser(parties, stringifyParty);
 

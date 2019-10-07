@@ -11,7 +11,7 @@ import { gules } from './model/tincture';
 import { Route } from 'react-router-dom';
 import * as H from 'history';
 import { parseBlason } from './blason-parser/blasonParser';
-import { stringifyBlason } from './from-blason/blason.helpers';
+import { stringifyBlason } from './model/stringify/stringify.helper';
 
 const baseDefaultBlason: Blason = { kind: 'simple', field: { kind: 'plain', tincture: gules } } as const;
 const configurationLocalStorageKey = 'configuration#1';

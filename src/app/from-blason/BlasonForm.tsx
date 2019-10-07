@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useCallback, useEffect, useState } from 'react';
 import { Blason } from '../model/blason';
-import { stringifyBlason } from './blason.helpers';
 import { parseBlason } from '../blason-parser/blasonParser';
 import { isEqual } from 'lodash';
+import { stringifyBlason } from '../model/stringify/stringify.helper';
 
 type Props = { blason: Blason; blasonChange: (blason: Blason) => void };
 export function BlasonForm({ blason, blasonChange }: Props) {

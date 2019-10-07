@@ -11,10 +11,10 @@ import { CoatsOfArmsDisplay } from './CoatsOfArmsDisplay';
 import { range } from '../../utils/range';
 import { getChargePoints, getPathSegments } from './tests/collision.utils';
 import * as pointInSvgPolygon from 'point-in-svg-polygon';
-import { stringifyBlason } from './blason.helpers';
 import { PathAbsolutePoint } from '../svg-path-builder/geometrical.helper';
 import { isNotNull } from '../../utils/isNotNull';
 import { Segment } from 'point-in-svg-polygon';
+import { stringifyBlason } from '../model/stringify/stringify.helper';
 
 const numRuns = process.env.GENERATOR_CASE_COUNT ? parseFloat(process.env.GENERATOR_CASE_COUNT) : 40;
 

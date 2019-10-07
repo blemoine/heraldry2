@@ -5,10 +5,10 @@ import { argent, gules, isMetal, Tincture, tinctures } from '../../model/tinctur
 import { PartyForm } from './PartyForm';
 import { SelectScalar } from '../../common/SelectScalar';
 import { cannotHappen } from '../../../utils/cannot-happen';
-import { stringifyFieldKind } from '../blason.helpers';
 import { TinctureConfiguration } from '../../model/tincture-configuration';
 import { ButtonGroup } from '../../common/ButtonGroup';
 import { TiercedForm } from './TiercedForm';
+import { stringifyFieldKind } from '../../model/stringify/stringify.helper';
 
 function extractColors(field: Field): [Tincture, Tincture] {
   if (field.kind === 'plain') {

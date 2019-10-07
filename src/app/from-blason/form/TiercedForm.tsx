@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { TiercedField } from '../../model/field';
-import { stringifyParty } from '../blason.helpers';
 import { SelectScalar } from '../../common/SelectScalar';
 import { LineSelect } from './LineSelect';
 import { Line } from '../../model/line';
 import { TinctureConfiguration } from '../../model/tincture-configuration';
 import { ThreeTinctureConfiguration } from './parties/ThreeTinctureConfiguration';
 import { Tierced, tierceds } from '../../model/tierced';
+import { stringifyParty } from '../../model/stringify/stringify.helper';
 
 type Props = {
   tinctureConfiguration: TinctureConfiguration;

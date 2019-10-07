@@ -1,7 +1,7 @@
 import fc from 'fast-check';
-import { stringifyBlason } from '../from-blason/blason.helpers';
 import { parseBlason } from './blasonParser';
 import { blasonArb } from '../model/tests/arbitraries';
+import { stringifyBlason } from '../model/stringify/stringify.helper';
 
 const numRuns = process.env.GENERATOR_CASE_COUNT ? parseFloat(process.env.GENERATOR_CASE_COUNT) : 100;
 
