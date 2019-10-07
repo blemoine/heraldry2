@@ -354,85 +354,72 @@ function stringifyCharge(charge: Charge): string {
   }
 }
 
-export function isThereFur(blason: Blason, fur: Furs['name']): boolean {
+function allDeclaredTincturesOfCharge(charge: Charge): Array<Tincture> {
+  if (charge.name === 'lion') {
+    return [charge.tincture, charge.armedAndLangued];
+  } else if (charge.name === 'eagle') {
+    return [charge.tincture, charge.beakedAndArmed];
+  } else if (
+    charge.name === 'fleurdelys' ||
+    charge.name === 'roundel' ||
+    charge.name === 'lozenge' ||
+    charge.name === 'cross' ||
+    charge.name === 'mullet'
+  ) {
+    return [charge.tincture];
+  } else {
+    return cannotHappen(charge);
+  }
+}
+function allDeclaredTincturesOfOrdinary(ordinary: Ordinary): Array<Tincture> {
+  return [ordinary.tincture];
+}
+function allDeclaredTincturesOfField(field: Field): Array<Tincture> {
+  if (field.kind === 'plain') {
+    return [field.tincture];
+  } else if (field.kind === 'party' || field.kind === 'tierced') {
+    return field.per.tinctures;
+  } else if (
+    field.kind === 'paly' ||
+    field.kind === 'bendy' ||
+    field.kind === 'bendySinister' ||
+    field.kind === 'barry' ||
+    field.kind === 'chequy' ||
+    field.kind === 'lozengy' ||
+    field.kind === 'paly-pily' ||
+    field.kind === 'barry-pily' ||
+    field.kind === 'bendy-pily' ||
+    field.kind === 'bendy-pily-sinister' ||
+    field.kind === 'chevronny' ||
+    field.kind === 'quarterly-of-nine' ||
+    field.kind === 'gironny' ||
+    field.kind === 'lozengy-bendwise' ||
+    field.kind === 'embrassee-a-dexter'
+  ) {
+    return field.tinctures;
+  } else {
+    return cannotHappen(field);
+  }
+}
+function allDeclaredTincturesOfSimpleBlason(blason: SimpleBlason): Array<Tincture> {
+  return [
+    ...allDeclaredTincturesOfField(blason.field),
+    ...(blason.ordinary ? allDeclaredTincturesOfOrdinary(blason.ordinary) : []),
+    ...(blason.charge ? allDeclaredTincturesOfCharge(blason.charge) : []),
+  ];
+}
+function allDeclaredTinctures(blason: Blason): Array<Tincture> {
   if (blason.kind === 'simple') {
-    const field = blason.field;
-    if (field.kind === 'plain') {
-      if (field.tincture.name === fur) {
-        return true;
-      }
-    } else if (field.kind === 'party' || field.kind === 'tierced') {
-      if (field.per.tinctures.some((t) => t.name === fur)) {
-        return true;
-      }
-    } else if (
-      field.kind === 'paly' ||
-      field.kind === 'bendy' ||
-      field.kind === 'bendySinister' ||
-      field.kind === 'barry' ||
-      field.kind === 'chequy' ||
-      field.kind === 'lozengy' ||
-      field.kind === 'paly-pily' ||
-      field.kind === 'barry-pily' ||
-      field.kind === 'bendy-pily' ||
-      field.kind === 'bendy-pily-sinister' ||
-      field.kind === 'chevronny' ||
-      field.kind === 'quarterly-of-nine' ||
-      field.kind === 'gironny' ||
-      field.kind === 'lozengy-bendwise' ||
-      field.kind === 'embrassee-a-dexter'
-    ) {
-      if (field.tinctures.some((t) => t.name === fur)) {
-        return true;
-      }
-    } else {
-      return cannotHappen(field);
-    }
-
-    const ordinary = blason.ordinary;
-    if (!!ordinary) {
-      if (ordinary.tincture.name === fur) {
-        return true;
-      }
-    }
-
-    const charge = blason.charge;
-    if (!!charge) {
-      if (charge.name === 'lion') {
-        if (charge.tincture.name === fur) {
-          return true;
-        }
-        if (charge.armedAndLangued.name === fur) {
-          return true;
-        }
-      } else if (charge.name === 'eagle') {
-        if (charge.tincture.name === fur) {
-          return true;
-        }
-        if (charge.beakedAndArmed.name === fur) {
-          return true;
-        }
-      } else if (
-        charge.name === 'fleurdelys' ||
-        charge.name === 'roundel' ||
-        charge.name === 'lozenge' ||
-        charge.name === 'cross' ||
-        charge.name === 'mullet'
-      ) {
-        if (charge.tincture.name === fur) {
-          return true;
-        }
-      } else {
-        return cannotHappen(charge);
-      }
-    }
-
-    return false;
+    return allDeclaredTincturesOfSimpleBlason(blason);
   } else if (blason.kind === 'quarterly') {
-    return blason.blasons.some((b) => isThereFur(b, fur));
+    return blason.blasons.flatMap((blason) => allDeclaredTincturesOfSimpleBlason(blason));
   } else {
     return cannotHappen(blason);
   }
+}
+
+export function isThereFur(blason: Blason, fur: Furs['name']): boolean {
+  return allDeclaredTinctures(blason).some((t) => t.name === fur);
 }
 
 function stringifyBlasonWithCapitalization(blason: Blason, shouldCapitalize: boolean): string {
