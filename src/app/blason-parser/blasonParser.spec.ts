@@ -130,7 +130,7 @@ describe('parseBlason', () => {
 
 Expected one of the following: 
 
-Argent, Azure, Barry, Barry pily, Bendy, Bendy Sinister, Bendy pily, Bendy pily sinister, Chequy, Chevronny, Counter ermine, Counter potent, Counter vair, Embrassee a dexter, Ermine, Erminois, Gironny, Gules, Lozengy, Lozengy bendwise, Murrey, Or, Paly, Paly pily, Pean, Per, Potent, Potent en pale, Potent en point, Purpure, Quarterly, Quarterly of nine, Sable, Sanguine, Tenné, Tierced per, Vair, Vair en pale, Vair en point, Vert
+Argent, Azure, Barry, Barry pily, Bendy, Bendy Sinister, Bendy pily, Bendy pily sinister, Chequy, Chevronny, Counter ermine, Counter potent, Counter vair, Embrassee a dexter, Embrassee a sinister, Ermine, Erminois, Gironny, Gules, Lozengy, Lozengy bendwise, Murrey, Or, Paly, Paly pily, Pean, Per, Potent, Potent en pale, Potent en point, Purpure, Quarterly, Quarterly of nine, Sable, Sanguine, Tenné, Tierced per, Vair, Vair en pale, Vair en point, Vert
 `,
     });
   });
@@ -666,5 +666,13 @@ Argent, Azure, Barry, Barry pily, Bendy, Bendy Sinister, Bendy pily, Bendy pily 
     };
 
     expect(parseBlason('Embrassee a dexter azure and or')).toEqual(expected);
+  });
+  it('should parse a enbrassee a sinister', () => {
+    const expected: SimpleBlason = {
+      kind: 'simple',
+      field: { kind: 'embrassee-a-sinister', tinctures: [azure, or] },
+    };
+
+    expect(parseBlason('Embrassee a sinister azure and or')).toEqual(expected);
   });
 });

@@ -45,7 +45,8 @@ function allDeclaredTincturesOfField(field: Field): Array<Tincture> {
     field.kind === 'quarterly-of-nine' ||
     field.kind === 'gironny' ||
     field.kind === 'lozengy-bendwise' ||
-    field.kind === 'embrassee-a-dexter'
+    field.kind === 'embrassee-a-dexter' ||
+    field.kind === 'embrassee-a-sinister'
   ) {
     return field.tinctures;
   } else {

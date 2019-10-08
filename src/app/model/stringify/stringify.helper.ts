@@ -154,6 +154,8 @@ export function stringifyFieldKind(field: Field['kind']): string {
     return 'lozengy bendwise';
   } else if (field === 'embrassee-a-dexter') {
     return 'embrassee a dexter';
+  } else if (field === 'embrassee-a-sinister') {
+    return 'embrassee a sinister';
   } else {
     return cannotHappen(field);
   }
@@ -205,7 +207,8 @@ function stringifyField(field: Field, shouldCapitalize: boolean): string {
       field.kind === 'chevronny' ||
       field.kind === 'quarterly-of-nine' ||
       field.kind === 'lozengy-bendwise' ||
-      field.kind === 'embrassee-a-dexter'
+      field.kind === 'embrassee-a-dexter' ||
+      field.kind === 'embrassee-a-sinister'
     ) {
       return fieldStr + ` ${stringifyTincture(field.tinctures[0])} and ${stringifyTincture(field.tinctures[1])}`;
     } else if (field.kind === 'barry' || field.kind === 'bendy' || field.kind === 'bendySinister') {

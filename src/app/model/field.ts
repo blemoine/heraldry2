@@ -88,6 +88,10 @@ export type EmbraseeDexterField = {
   kind: 'embrassee-a-dexter';
   tinctures: [Tincture, Tincture];
 };
+export type EmbraseeSinisterField = {
+  kind: 'embrassee-a-sinister';
+  tinctures: [Tincture, Tincture];
+};
 
 export type Field =
   | PlainField
@@ -107,7 +111,8 @@ export type Field =
   | GironnyField
   | QuarterlyOfNineField
   | LozengyBendwiseField
-  | EmbraseeDexterField;
+  | EmbraseeDexterField
+  | EmbraseeSinisterField;
 export const fieldKinds: Array<Field['kind']> = [
   'plain',
   'party',
@@ -127,4 +132,5 @@ export const fieldKinds: Array<Field['kind']> = [
   'quarterly-of-nine',
   'lozengy-bendwise',
   'embrassee-a-dexter',
+  'embrassee-a-sinister',
 ];

@@ -31,6 +31,7 @@ import { LozengyBendwiseDisplay } from './fields/LozengyBendwiseDisplay';
 import { FessTiercedDisplay } from './fields/FessTiercedDisplay';
 import { PaleTiercedDisplay } from './fields/PaleTiercedDisplay';
 import { EmbrasseeDexterDisplay } from './fields/EmbrasseeDexterDisplay';
+import { EmbrasseeSinisterDisplay } from './fields/EmbrasseeSinisterDisplay';
 
 type Props = {
   dimension: Dimension;
@@ -149,6 +150,9 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
   } else if (field.kind === 'embrassee-a-dexter') {
     const fill: [string, string] = fillFromTincturePair(field.tinctures);
     return <EmbrasseeDexterDisplay fill={fill} dimension={dimension} />;
+  } else if (field.kind === 'embrassee-a-sinister') {
+    const fill: [string, string] = fillFromTincturePair(field.tinctures);
+    return <EmbrasseeSinisterDisplay fill={fill} dimension={dimension} />;
   } else if (field.kind === 'gironny') {
     const fill: [string, string] = fillFromTincturePair(field.tinctures);
     return <GironnyDisplay fill={fill} dimension={dimension} number={field.number} />;
