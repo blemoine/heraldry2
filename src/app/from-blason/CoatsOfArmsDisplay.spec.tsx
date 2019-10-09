@@ -172,4 +172,5 @@ describe('CoatsOfArms', () => {
   );
   snapshotTest('Barry ermine and vair');
   snapshotTest('Quarterly, 1st and 2nd and 3rd and 4th quarterly of nine vert and ermine');
+  snapshotTest('Per chevron reversed invected ermine and gules');
 });

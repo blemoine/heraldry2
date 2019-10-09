@@ -675,4 +675,12 @@ Argent, Azure, Barry, Barry pily, Bendy, Bendy Sinister, Bendy pily, Bendy pily 
 
     expect(parseBlason('Embrassee a sinister azure and or')).toEqual(expected);
   });
+  it('should parse a chevron reversed', () => {
+    const expected: SimpleBlason = {
+      kind: 'simple',
+      field: { kind: 'party', per: { name: 'chevron-reversed', tinctures: [azure, or], line: 'straight' } },
+    };
+
+    expect(parseBlason('Per chevron reversed azure and or')).toEqual(expected);
+  });
 });

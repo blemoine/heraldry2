@@ -102,6 +102,8 @@ function stringifyOrdinary(ordinary: Ordinary): string {
 export function stringifyParty(partyName: Party['name']): string {
   if (partyName === 'bendSinister') {
     return 'bend sinister';
+  } else if (partyName === 'chevron-reversed') {
+    return 'chevron reversed';
   } else if (
     partyName === 'bend' ||
     partyName === 'fess' ||

@@ -32,6 +32,7 @@ import { FessTiercedDisplay } from './fields/FessTiercedDisplay';
 import { PaleTiercedDisplay } from './fields/PaleTiercedDisplay';
 import { EmbrasseeDexterDisplay } from './fields/EmbrasseeDexterDisplay';
 import { EmbrasseeSinisterDisplay } from './fields/EmbrasseeSinisterDisplay';
+import { ChevronReversedDisplay } from './fields/ChevronReversedDisplay';
 
 type Props = {
   dimension: Dimension;
@@ -63,6 +64,8 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
         return <BendSinisterDisplay fill={fill} dimension={dimension} line={field.per.line} />;
       } else if (partyName === 'chevron') {
         return <ChevronDisplay fill={fill} dimension={dimension} line={field.per.line} />;
+      } else if (partyName === 'chevron-reversed') {
+        return <ChevronReversedDisplay fill={fill} dimension={dimension} line={field.per.line} />;
       } else if (partyName === 'fess') {
         return <FessDisplay fill={fill} dimension={dimension} line={field.per.line} />;
       } else if (partyName === 'pale') {
