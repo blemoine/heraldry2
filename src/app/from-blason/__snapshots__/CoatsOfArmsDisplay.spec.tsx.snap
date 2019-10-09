@@ -5268,6 +5268,124 @@ exports[`CoatsOfArms should render 'Gules, three crosses pattée argent' 1`] = `
 </svg>
 `;
 
+exports[`CoatsOfArms should render 'Lozenge throughout vair and gules' 1`] = `
+<svg
+  className="coats-of-arms-display"
+  height={266.6666666666667}
+  viewBox="0 0 200 266.6666666666667"
+  width={200}
+>
+  <defs>
+    
+    
+    
+    
+    <symbol
+      id="vair"
+      viewBox="0 0 200 200"
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <path
+        d="M0 200 L200 200 L150 150 L150 50 L100 0 L50 50 L50 150 Z"
+        fill="#0000FF"
+      />
+    </symbol>
+    <pattern
+      height={80}
+      id="field-pattern-0"
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 100 200"
+      width={40}
+    >
+      <rect
+        fill="#FFFFFF"
+        height="200px"
+        width="100px"
+      />
+      <use
+        height={100}
+        href="#vair"
+        width={100}
+        x="0"
+        y="0"
+      />
+      <use
+        height={100}
+        href="#vair"
+        width={100}
+        x="-50"
+        y="100"
+      />
+      <use
+        height={100}
+        href="#vair"
+        width={100}
+        x="50"
+        y="100"
+      />
+    </pattern>
+    
+    
+    
+    
+    
+    
+    
+    <clipPath
+      id="plain-field-clip-path"
+    >
+      <path
+        d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
+        fill="transparent"
+        stroke="#333"
+        style={
+          Object {
+            "pointerEvents": "none",
+          }
+        }
+      />
+    </clipPath>
+  </defs>
+  <g
+    className="blason-field"
+    clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
+  >
+    <rect
+      fill="url(#field-pattern-0)"
+      height={400}
+      width={200}
+      x={0}
+      y={0}
+    />
+    <path
+      d="M 100 0 L 200 133.33333 L 100 266.66667 L 0 133.33333"
+      fill="#FF0000"
+      stroke="#333"
+    />
+  </g>
+  <path
+    d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
+    fill="transparent"
+    stroke="#333"
+    style={
+      Object {
+        "pointerEvents": "none",
+      }
+    }
+  />
+</svg>
+`;
+
 exports[`CoatsOfArms should render 'Or, a base engrailed vair' 1`] = `
 <svg
   className="coats-of-arms-display"

@@ -160,10 +160,29 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
     return <EmbrasseeSinisterDisplay fill={fill} dimension={dimension} />;
   } else if (field.kind === 'lozenge-throughout') {
     const fill: [string, string] = fillFromTincturePair(field.tinctures);
-    return <LozengeThroughoutDisplay fill={fill} dimension={dimension} />;
+    let updatedDimension: Dimension;
+    if (shape === 'square' || shape === 'default') {
+      updatedDimension = dimension;
+    } else if (shape === 'leftCut' || shape === 'rightCut') {
+      updatedDimension = { width: dimension.width, height: dimension.height * 0.75 };
+    } else {
+      return cannotHappen(shape);
+    }
+
+    return <LozengeThroughoutDisplay fill={fill} dimension={updatedDimension} />;
   } else if (field.kind === 'lozenge-throughout-arched') {
     const fill: [string, string] = fillFromTincturePair(field.tinctures);
-    return <LozengeThroughoutArchedDisplay fill={fill} dimension={dimension} />;
+
+    let updatedDimension: Dimension;
+    if (shape === 'square' || shape === 'default') {
+      updatedDimension = dimension;
+    } else if (shape === 'leftCut' || shape === 'rightCut') {
+      updatedDimension = { width: dimension.width, height: dimension.height * 0.75 };
+    } else {
+      return cannotHappen(shape);
+    }
+
+    return <LozengeThroughoutArchedDisplay fill={fill} dimension={updatedDimension} />;
   } else if (field.kind === 'gironny') {
     const fill: [string, string] = fillFromTincturePair(field.tinctures);
     return <GironnyDisplay fill={fill} dimension={dimension} number={field.number} />;

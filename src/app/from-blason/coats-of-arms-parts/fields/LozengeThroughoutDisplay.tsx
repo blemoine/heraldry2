@@ -14,7 +14,7 @@ export const LozengeThroughoutDisplay: React.FunctionComponent<Props> = ({ dimen
 
   return (
     <>
-      <rect x={0} y={0} width={width} height={height} fill={fill[0]} />
+      <rect x={0} y={0} width={width} height={height * 1.5} fill={fill[0]} />
       <PathFromBuilder pathBuilder={pathBuilder} fill={fill[1]} stroke="#333" />
     </>
   );
