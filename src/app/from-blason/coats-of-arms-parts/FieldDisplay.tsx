@@ -34,6 +34,7 @@ import { EmbrasseeDexterDisplay } from './fields/EmbrasseeDexterDisplay';
 import { EmbrasseeSinisterDisplay } from './fields/EmbrasseeSinisterDisplay';
 import { ChevronReversedDisplay } from './fields/ChevronReversedDisplay';
 import { LozengeThroughoutDisplay } from './fields/LozengeThroughoutDisplay';
+import { LozengeThroughoutArchedDisplay } from './fields/LozengeThroughoutArchedDisplay';
 
 type Props = {
   dimension: Dimension;
@@ -160,6 +161,9 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
   } else if (field.kind === 'lozenge-throughout') {
     const fill: [string, string] = fillFromTincturePair(field.tinctures);
     return <LozengeThroughoutDisplay fill={fill} dimension={dimension} />;
+  } else if (field.kind === 'lozenge-throughout-arched') {
+    const fill: [string, string] = fillFromTincturePair(field.tinctures);
+    return <LozengeThroughoutArchedDisplay fill={fill} dimension={dimension} />;
   } else if (field.kind === 'gironny') {
     const fill: [string, string] = fillFromTincturePair(field.tinctures);
     return <GironnyDisplay fill={fill} dimension={dimension} number={field.number} />;

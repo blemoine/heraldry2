@@ -98,6 +98,11 @@ export type LozengeThroughout = {
   tinctures: [Tincture, Tincture];
 };
 
+export type LozengeThroughoutArched = {
+  kind: 'lozenge-throughout-arched';
+  tinctures: [Tincture, Tincture];
+};
+
 export type Field =
   | PlainField
   | PartyField
@@ -118,7 +123,8 @@ export type Field =
   | LozengyBendwiseField
   | EmbraseeDexterField
   | EmbraseeSinisterField
-  | LozengeThroughout;
+  | LozengeThroughout
+  | LozengeThroughoutArched;
 export const fieldKinds: Array<Field['kind']> = [
   'plain',
   'party',
@@ -140,4 +146,5 @@ export const fieldKinds: Array<Field['kind']> = [
   'embrassee-a-dexter',
   'embrassee-a-sinister',
   'lozenge-throughout',
+  'lozenge-throughout-arched',
 ];
