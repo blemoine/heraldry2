@@ -148,6 +148,8 @@ export function stringifyFieldKind(field: Field['kind']): string {
     return 'bendy pily sinister';
   } else if (field === 'chevronny') {
     return 'chevronny';
+  } else if (field === 'chevronny-reversed') {
+    return 'chevronny reversed';
   } else if (field === 'gironny') {
     return 'gironny';
   } else if (field === 'quarterly-of-nine') {
@@ -211,6 +213,7 @@ function stringifyField(field: Field, shouldCapitalize: boolean): string {
       field.kind === 'bendy-pily-sinister' ||
       field.kind === 'chequy' ||
       field.kind === 'chevronny' ||
+      field.kind === 'chevronny-reversed' ||
       field.kind === 'quarterly-of-nine' ||
       field.kind === 'lozengy-bendwise' ||
       field.kind === 'embrassee-a-dexter' ||

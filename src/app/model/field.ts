@@ -72,6 +72,10 @@ export type ChevronnyField = {
   kind: 'chevronny';
   tinctures: [Tincture, Tincture];
 };
+export type ChevronnyReversedField = {
+  kind: 'chevronny-reversed';
+  tinctures: [Tincture, Tincture];
+};
 
 export type GironnyField = {
   kind: 'gironny';
@@ -118,6 +122,7 @@ export type Field =
   | BendyPilyField
   | BendyPilySinisterField
   | ChevronnyField
+  | ChevronnyReversedField
   | GironnyField
   | QuarterlyOfNineField
   | LozengyBendwiseField
@@ -140,6 +145,7 @@ export const fieldKinds: Array<Field['kind']> = [
   'bendy-pily',
   'bendy-pily-sinister',
   'chevronny',
+  'chevronny-reversed',
   'gironny',
   'quarterly-of-nine',
   'lozengy-bendwise',

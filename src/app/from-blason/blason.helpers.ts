@@ -42,6 +42,7 @@ function allDeclaredTincturesOfField(field: Field): Array<Tincture> {
     field.kind === 'bendy-pily' ||
     field.kind === 'bendy-pily-sinister' ||
     field.kind === 'chevronny' ||
+    field.kind === 'chevronny-reversed' ||
     field.kind === 'quarterly-of-nine' ||
     field.kind === 'gironny' ||
     field.kind === 'lozengy-bendwise' ||

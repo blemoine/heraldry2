@@ -33,6 +33,7 @@ function extractColors(field: Field): [Tincture, Tincture] {
     field.kind === 'bendy-pily' ||
     field.kind === 'bendy-pily-sinister' ||
     field.kind === 'chevronny' ||
+    field.kind === 'chevronny-reversed' ||
     field.kind === 'gironny' ||
     field.kind === 'quarterly-of-nine' ||
     field.kind === 'lozengy-bendwise' ||
@@ -82,6 +83,7 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
         newKind === 'bendy-pily' ||
         newKind === 'bendy-pily-sinister' ||
         newKind === 'chevronny' ||
+        newKind === 'chevronny-reversed' ||
         newKind === 'quarterly-of-nine' ||
         newKind === 'lozengy-bendwise' ||
         newKind === 'embrassee-a-dexter' ||
@@ -148,6 +150,7 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
             field.kind === 'bendy-pily' ||
             field.kind === 'bendy-pily-sinister' ||
             field.kind === 'chevronny' ||
+            field.kind === 'chevronny-reversed' ||
             field.kind === 'barry' ||
             field.kind === 'quarterly-of-nine' ||
             field.kind === 'gironny' ||

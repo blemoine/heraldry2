@@ -141,6 +141,7 @@ export function fieldParser(): P.Parser<Field> {
       P.alt(constStr('chequy'), constStr('chequy', 'Checky')).desc('Chequy'),
       constStr('lozengy-bendwise', 'Lozengy bendwise'),
       constStr('lozengy'),
+      constStr('chevronny-reversed', 'Chevronny reversed'),
       constStr('chevronny')
     ),
     P.whitespace.then(tinctureParserFromName).skip(P.whitespace),
