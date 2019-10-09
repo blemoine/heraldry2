@@ -124,6 +124,7 @@ export function fieldParser(): P.Parser<Field> {
 
   const palyBendyParser: P.Parser<Exclude<Field, PlainField>> = P.seq(
     P.alt(
+      constStr('lozenge-throughout', 'Lozenge throughout'),
       constStr('embrassee-a-dexter', 'Embrassee a dexter'),
       constStr('embrassee-a-sinister', 'Embrassee a sinister'),
       constStr('paly-pily', 'Paly pily'),

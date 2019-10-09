@@ -37,7 +37,8 @@ function extractColors(field: Field): [Tincture, Tincture] {
     field.kind === 'quarterly-of-nine' ||
     field.kind === 'lozengy-bendwise' ||
     field.kind === 'embrassee-a-dexter' ||
-    field.kind === 'embrassee-a-sinister'
+    field.kind === 'embrassee-a-sinister' ||
+    field.kind === 'lozenge-throughout'
   ) {
     return field.tinctures;
   } else {
@@ -83,7 +84,8 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
         newKind === 'quarterly-of-nine' ||
         newKind === 'lozengy-bendwise' ||
         newKind === 'embrassee-a-dexter' ||
-        newKind === 'embrassee-a-sinister'
+        newKind === 'embrassee-a-sinister' ||
+        newKind === 'lozenge-throughout'
       ) {
         fieldChange({ kind: newKind, tinctures: newColors });
       } else if (newKind === 'plain') {
@@ -149,7 +151,8 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
             field.kind === 'gironny' ||
             field.kind === 'lozengy-bendwise' ||
             field.kind === 'embrassee-a-dexter' ||
-            field.kind === 'embrassee-a-sinister' ? (
+            field.kind === 'embrassee-a-sinister' ||
+            field.kind === 'lozenge-throughout' ? (
             <>
               <div className="col">
                 <div className="form-group field-first-tincture-select">

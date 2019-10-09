@@ -46,7 +46,8 @@ function allDeclaredTincturesOfField(field: Field): Array<Tincture> {
     field.kind === 'gironny' ||
     field.kind === 'lozengy-bendwise' ||
     field.kind === 'embrassee-a-dexter' ||
-    field.kind === 'embrassee-a-sinister'
+    field.kind === 'embrassee-a-sinister' ||
+    field.kind === 'lozenge-throughout'
   ) {
     return field.tinctures;
   } else {
