@@ -37,6 +37,7 @@ import { LozengeThroughoutDisplay } from './fields/LozengeThroughoutDisplay';
 import { LozengeThroughoutArchedDisplay } from './fields/LozengeThroughoutArchedDisplay';
 import { ChevronnyReversedDisplay } from './fields/ChevronnyReversedDisplay';
 import { PileDisplay } from './fields/PileDisplay';
+import { PileArchedDisplay } from './fields/PileArchedDisplay';
 
 type Props = {
   dimension: Dimension;
@@ -90,6 +91,16 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
             return cannotHappen(shape);
           }
           return <PileDisplay fill={fill} dimension={updatedDimension} line={line} />;
+        } else if (partyName === 'pile-arched') {
+          let updatedDimension: Dimension;
+          if (shape === 'square' || shape === 'default') {
+            updatedDimension = dimension;
+          } else if (shape === 'leftCut' || shape === 'rightCut') {
+            updatedDimension = { width: dimension.width, height: dimension.height * 0.75 };
+          } else {
+            return cannotHappen(shape);
+          }
+          return <PileArchedDisplay fill={fill} dimension={updatedDimension} line={line} />;
         } else {
           return cannotHappen(partyName);
         }

@@ -709,4 +709,12 @@ Argent, Azure, Barry, Barry pily, Bendy, Bendy Sinister, Bendy pily, Bendy pily 
 
     expect(parseBlason('Chevronny reversed azure and or')).toEqual(expected);
   });
+  it('should parse a per pile arched', () => {
+    const expected: SimpleBlason = {
+      kind: 'simple',
+      field: { kind: 'party', per: { name: 'pile-arched', tinctures: [azure, or], line: 'straight' } },
+    };
+
+    expect(parseBlason('Per pile arched azure and or')).toEqual(expected);
+  });
 });
