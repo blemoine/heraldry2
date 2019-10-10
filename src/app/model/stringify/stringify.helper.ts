@@ -111,7 +111,8 @@ export function stringifyParty(partyName: Party['name']): string {
     partyName === 'chevron' ||
     partyName === 'cross' ||
     partyName === 'saltire' ||
-    partyName === 'pall'
+    partyName === 'pall' ||
+    partyName === 'pile'
   ) {
     return partyName;
   } else {

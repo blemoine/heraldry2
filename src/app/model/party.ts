@@ -10,6 +10,7 @@ export type ChevronReversedParty = { name: 'chevron-reversed'; tinctures: [Tinct
 export type CrossParty = { name: 'cross'; tinctures: [Tincture, Tincture]; line: Line };
 export type SaltireParty = { name: 'saltire'; tinctures: [Tincture, Tincture]; line: Line };
 export type PallParty = { name: 'pall'; tinctures: [Tincture, Tincture, Tincture]; line: Line };
+export type PileParty = { name: 'pile'; tinctures: [Tincture, Tincture]; line: Line };
 
 export type Party =
   | FessParty
@@ -20,7 +21,8 @@ export type Party =
   | BendSinisterParty
   | CrossParty
   | SaltireParty
-  | PallParty;
+  | PallParty
+  | PileParty;
 
 export const parties: Array<Party['name']> = [
   'fess',
@@ -32,4 +34,5 @@ export const parties: Array<Party['name']> = [
   'cross',
   'saltire',
   'pall',
+  'pile',
 ];
