@@ -108,6 +108,8 @@ export function stringifyParty(partyName: Party['name']): string {
     return 'pile arched';
   } else if (partyName === 'pile-reversed') {
     return 'pile reversed';
+  } else if (partyName === 'pile-reversed-arched') {
+    return 'pile reversed arched';
   } else if (
     partyName === 'bend' ||
     partyName === 'fess' ||

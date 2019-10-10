@@ -39,6 +39,7 @@ import { ChevronnyReversedDisplay } from './fields/ChevronnyReversedDisplay';
 import { PileDisplay } from './fields/PileDisplay';
 import { PileArchedDisplay } from './fields/PileArchedDisplay';
 import { PileReversedDisplay } from './fields/PileReversedDisplay';
+import { PileReversedArchedDisplay } from './fields/PileReversedArchedDisplay';
 
 type Props = {
   dimension: Dimension;
@@ -94,6 +95,8 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
           return <PileDisplay fill={fill} dimension={updatedDimension} line={line} />;
         } else if (partyName === 'pile-reversed') {
           return <PileReversedDisplay fill={fill} dimension={dimension} line={line} />;
+        } else if (partyName === 'pile-reversed-arched') {
+          return <PileReversedArchedDisplay fill={fill} dimension={dimension} line={line} />;
         } else if (partyName === 'pile-arched') {
           let updatedDimension: Dimension;
           if (shape === 'square' || shape === 'default') {
