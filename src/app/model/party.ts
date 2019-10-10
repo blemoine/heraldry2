@@ -12,6 +12,7 @@ export type SaltireParty = { name: 'saltire'; tinctures: [Tincture, Tincture]; l
 export type PallParty = { name: 'pall'; tinctures: [Tincture, Tincture, Tincture]; line: Line };
 export type PileParty = { name: 'pile'; tinctures: [Tincture, Tincture]; line: Line };
 export type PileArchedParty = { name: 'pile-arched'; tinctures: [Tincture, Tincture]; line: Line };
+export type PileReversedParty = { name: 'pile-reversed'; tinctures: [Tincture, Tincture]; line: Line };
 
 export type Party =
   | FessParty
@@ -24,7 +25,8 @@ export type Party =
   | SaltireParty
   | PallParty
   | PileParty
-  | PileArchedParty;
+  | PileArchedParty
+  | PileReversedParty;
 
 export const parties: Array<Party['name']> = [
   'fess',
@@ -38,4 +40,5 @@ export const parties: Array<Party['name']> = [
   'pall',
   'pile',
   'pile-arched',
+  'pile-reversed',
 ];

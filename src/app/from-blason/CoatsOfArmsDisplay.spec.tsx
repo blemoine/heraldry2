@@ -174,4 +174,7 @@ describe('CoatsOfArms', () => {
   snapshotTest('Quarterly, 1st and 2nd and 3rd and 4th quarterly of nine vert and ermine');
   snapshotTest('Per chevron reversed invected ermine and gules');
   snapshotTest('Lozenge throughout vair and gules');
+  snapshotTest(
+    'Quarterly, 1st Per pile reversed embattled ermine and gules; 2nd Per pile reversed engrailed ermine and gules; 3rd Per pile reversed indented ermine and gules; 4th Per pile reversed wavy ermine and gules'
+  );
 });
