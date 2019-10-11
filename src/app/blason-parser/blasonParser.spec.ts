@@ -733,4 +733,12 @@ Argent, Azure, Barry, Barry pily, Bendy, Bendy Sinister, Bendy pily, Bendy pily 
 
     expect(parseBlason('Per pile reversed arched azure and or')).toEqual(expected);
   });
+  it('should parse a per pile bendwise', () => {
+    const expected: SimpleBlason = {
+      kind: 'simple',
+      field: { kind: 'party', per: { name: 'pile-bendwise', tinctures: [azure, or], line: 'straight' } },
+    };
+
+    expect(parseBlason('Per pile bendwise azure and or')).toEqual(expected);
+  });
 });
