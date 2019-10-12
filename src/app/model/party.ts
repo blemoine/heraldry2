@@ -15,6 +15,7 @@ export type PileArchedParty = { name: 'pile-arched'; tinctures: [Tincture, Tinct
 export type PileReversedParty = { name: 'pile-reversed'; tinctures: [Tincture, Tincture]; line: Line };
 export type PileReversedArchedParty = { name: 'pile-reversed-arched'; tinctures: [Tincture, Tincture]; line: Line };
 export type PileBendwiseParty = { name: 'pile-bendwise'; tinctures: [Tincture, Tincture]; line: Line };
+export type PileBendwiseSinisterParty = { name: 'pile-bendwise-sinister'; tinctures: [Tincture, Tincture]; line: Line };
 
 export type Party =
   | FessParty
@@ -30,7 +31,8 @@ export type Party =
   | PileArchedParty
   | PileReversedParty
   | PileReversedArchedParty
-  | PileBendwiseParty;
+  | PileBendwiseParty
+  | PileBendwiseSinisterParty;
 
 export const parties: Array<Party['name']> = [
   'fess',
@@ -47,4 +49,5 @@ export const parties: Array<Party['name']> = [
   'pile-reversed',
   'pile-reversed-arched',
   'pile-bendwise',
+  'pile-bendwise-sinister',
 ];
