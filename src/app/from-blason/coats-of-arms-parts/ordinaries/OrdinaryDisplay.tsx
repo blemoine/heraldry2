@@ -11,6 +11,7 @@ import { BordureDisplay } from './BordureDisplay';
 import { toDegree } from '../../../svg-path-builder/geometrical.helper';
 import { convertToOlfFillFronTincture, FillFromTincture } from '../../fillFromTincture.helper';
 import { QuarterOrdinaryDisplay } from './QuarterOrdinaryDisplay';
+import { CantonOrdinaryDisplay } from './CantonOrdinaryDisplay';
 
 type Props = {
   ordinary: Ordinary;
@@ -285,6 +286,16 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
   } else if (ordinary.name === 'quarter') {
     return (
       <QuarterOrdinaryDisplay
+        onClick={onClick}
+        stroke={strokeColor}
+        fill={fill}
+        dimension={dimension}
+        ordinary={ordinary}
+      />
+    );
+  } else if (ordinary.name === 'canton') {
+    return (
+      <CantonOrdinaryDisplay
         onClick={onClick}
         stroke={strokeColor}
         fill={fill}

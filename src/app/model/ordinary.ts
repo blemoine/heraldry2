@@ -14,12 +14,13 @@ export type Chevron = { name: 'chevron'; tincture: Tincture; line: Line; count: 
 export type Chevronel = { name: 'chevronel'; tincture: Tincture; line: Line; count: 1 | 2 | 3 };
 export type Pall = { name: 'pall'; tincture: Tincture; line: Line };
 export type Quarter = { name: 'quarter'; tincture: Tincture; line: Line };
+export type Canton = { name: 'canton'; tincture: Tincture; line: Line };
 
-export type SubOrdinary = Bordure | Base | Pall | Chevronel | Quarter;
+export type SubOrdinary = Bordure | Base | Pall | Chevronel | Quarter | Canton;
 export type Ordinary = Chief | Bend | BendSinister | Pale | Fess | Chevron | OrdinaryCross | Saltire | SubOrdinary;
 
 export function isSubOrdinary(o: Ordinary['name']): o is SubOrdinary['name'] {
-  return o === 'bordure' || o === 'base' || o === 'chevronel' || o === 'pall' || o === 'quarter';
+  return o === 'bordure' || o === 'base' || o === 'chevronel' || o === 'pall' || o === 'quarter' || o === 'canton';
 }
 
 export const ordinaries: Array<Ordinary['name']> = [
@@ -36,4 +37,5 @@ export const ordinaries: Array<Ordinary['name']> = [
   'chevronel',
   'pall',
   'quarter',
+  'canton',
 ];
