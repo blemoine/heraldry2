@@ -9,6 +9,7 @@ import { TinctureConfiguration } from '../../model/tincture-configuration';
 import { ButtonGroup } from '../../common/ButtonGroup';
 import { TiercedForm } from './TiercedForm';
 import { stringifyFieldKind } from '../../model/stringify/stringify.helper';
+import { TwoTinctureConfiguration } from './parties/TwoTinctureConfiguration';
 
 function extractColors(field: Field): [Tincture, Tincture] {
   if (field.kind === 'plain') {
@@ -104,12 +105,11 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
     }
   }
 
-  function firstTinctureChange(field: Exclude<Field, PlainField | PartyField | TiercedField>, tincture: Tincture) {
-    fieldChange({ ...field, tinctures: [tincture, field.tinctures[1]] });
-  }
-
-  function secondTinctureChange(field: Exclude<Field, PlainField | PartyField | TiercedField>, tincture: Tincture) {
-    fieldChange({ ...field, tinctures: [field.tinctures[0], tincture] });
+  function tincturesChanges(
+    field: Exclude<Field, PlainField | PartyField | TiercedField>,
+    tinctures: [Tincture, Tincture]
+  ) {
+    fieldChange({ ...field, tinctures });
   }
 
   return (
@@ -159,28 +159,11 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
             field.kind === 'embrassee-a-sinister' ||
             field.kind === 'lozenge-throughout' ||
             field.kind === 'lozenge-throughout-arched' ? (
-            <>
-              <div className="col">
-                <div className="form-group field-first-tincture-select">
-                  <label>First tincture</label>
-                  <TinctureSelect
-                    tinctureConfiguration={tinctureConfiguration}
-                    tincture={field.tinctures[0]}
-                    tinctureChange={(t) => firstTinctureChange(field, t)}
-                  />
-                </div>
-              </div>
-              <div className="col">
-                <div className="form-group field-second-tincture-select">
-                  <label>Second tincture</label>
-                  <TinctureSelect
-                    tinctureConfiguration={tinctureConfiguration}
-                    tincture={field.tinctures[1]}
-                    tinctureChange={(t) => secondTinctureChange(field, t)}
-                  />
-                </div>
-              </div>
-            </>
+            <TwoTinctureConfiguration
+              tinctures={field.tinctures}
+              tincturesChanges={(tinctures) => tincturesChanges(field, tinctures)}
+              tinctureConfiguration={tinctureConfiguration}
+            />
           ) : (
             cannotHappen(field)
           )}

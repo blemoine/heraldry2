@@ -23,7 +23,7 @@ export const ThreeTinctureConfiguration = ({ tinctures, tincturesChanges, tinctu
   return (
     <>
       <div className="col">
-        <div className="form-group">
+        <div className="form-group field-first-tincture-select">
           <label>First tincture</label>
           <TinctureSelect
             tinctureConfiguration={tinctureConfiguration}
@@ -33,7 +33,7 @@ export const ThreeTinctureConfiguration = ({ tinctures, tincturesChanges, tinctu
         </div>
       </div>
       <div className="col">
-        <div className="form-group">
+        <div className="form-group field-second-tincture-select">
           <label>Second tincture</label>
           <TinctureSelect
             tinctureConfiguration={tinctureConfiguration}
@@ -43,7 +43,7 @@ export const ThreeTinctureConfiguration = ({ tinctures, tincturesChanges, tinctu
         </div>
       </div>
       <div className="col">
-        <div className="form-group">
+        <div className="form-group field-third-tincture-select">
           <label>Third tincture</label>
           <TinctureSelect
             tinctureConfiguration={tinctureConfiguration}

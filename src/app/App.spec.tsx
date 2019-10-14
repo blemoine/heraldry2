@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import { selectElement, selectInDefaultSelect, selectTincture } from '../utils/tests/select-test.utils';
-import { argent, azure, ermine, gules, murrey, purpure, vair } from './model/tincture';
+import { argent, azure, ermine, gules, murrey, or, purpure, vair } from './model/tincture';
 import { App } from './App';
 import { MemoryRouter } from 'react-router-dom';
 
@@ -92,5 +92,23 @@ describe('App', () => {
 
     const charge = selectElement('.charge-type-select select') as HTMLSelectElement;
     expect(charge.value).toBe('eagle');
+  });
+
+  it('should be able to display a party per pall', () => {
+    const app = render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    );
+
+    return selectInDefaultSelect('.field-type-select', 'party')
+      .then(() => selectInDefaultSelect('.field-party-type-select', 'pall'))
+      .then(() => selectTincture('.field-first-tincture-select', or))
+      .then(() => selectTincture('.field-second-tincture-select', purpure))
+      .then(() => selectTincture('.field-third-tincture-select', ermine))
+      .then(() => {
+        const blason = (app.getByPlaceholderText('Enter the blason here') as HTMLTextAreaElement).value;
+        expect(blason).toBe('Per pall or, purpure and ermine');
+      });
   });
 });

@@ -48,7 +48,7 @@ export const PartyForm = ({ tinctureConfiguration, field, fieldChange }: Props) 
   return (
     <div className="row">
       <div className="col">
-        <div className="form-group">
+        <div className="form-group field-party-type-select">
           <label>Party</label>
           <SelectScalar
             options={partiesOptions}
