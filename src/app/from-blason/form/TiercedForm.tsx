@@ -4,9 +4,9 @@ import { SelectScalar } from '../../common/SelectScalar';
 import { LineSelect } from './LineSelect';
 import { Line } from '../../model/line';
 import { TinctureConfiguration } from '../../model/tincture-configuration';
-import { ThreeTinctureConfiguration } from './parties/ThreeTinctureConfiguration';
 import { Tierced, tierceds } from '../../model/tierced';
 import { stringifyParty } from '../../model/stringify/stringify.helper';
+import { TincturesConfiguration } from './TincturesConfiguration';
 
 type Props = {
   tinctureConfiguration: TinctureConfiguration;
@@ -42,10 +42,10 @@ export const TiercedForm = ({ tinctureConfiguration, field, fieldChange }: Props
           <LineSelect line={per.line} lineChange={lineChange} />
         </div>
       </div>
-      <ThreeTinctureConfiguration
-        tinctureConfiguration={tinctureConfiguration}
+      <TincturesConfiguration
         tinctures={per.tinctures}
         tincturesChanges={(tinctures) => fieldChange({ kind: 'tierced', per: { ...per, tinctures } })}
+        tinctureConfiguration={tinctureConfiguration}
       />
     </div>
   );

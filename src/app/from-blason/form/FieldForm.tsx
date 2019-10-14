@@ -9,7 +9,7 @@ import { TinctureConfiguration } from '../../model/tincture-configuration';
 import { ButtonGroup } from '../../common/ButtonGroup';
 import { TiercedForm } from './TiercedForm';
 import { stringifyFieldKind } from '../../model/stringify/stringify.helper';
-import { TwoTinctureConfiguration } from './parties/TwoTinctureConfiguration';
+import { TincturesConfiguration } from './TincturesConfiguration';
 
 function extractColors(field: Field): [Tincture, Tincture] {
   if (field.kind === 'plain') {
@@ -159,7 +159,7 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
             field.kind === 'embrassee-a-sinister' ||
             field.kind === 'lozenge-throughout' ||
             field.kind === 'lozenge-throughout-arched' ? (
-            <TwoTinctureConfiguration
+            <TincturesConfiguration
               tinctures={field.tinctures}
               tincturesChanges={(tinctures) => tincturesChanges(field, tinctures)}
               tinctureConfiguration={tinctureConfiguration}

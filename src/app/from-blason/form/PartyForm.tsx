@@ -6,9 +6,8 @@ import { SelectScalar } from '../../common/SelectScalar';
 import { LineSelect } from './LineSelect';
 import { Line } from '../../model/line';
 import { TinctureConfiguration } from '../../model/tincture-configuration';
-import { TwoTinctureConfiguration } from './parties/TwoTinctureConfiguration';
-import { ThreeTinctureConfiguration } from './parties/ThreeTinctureConfiguration';
 import { stringifyParty } from '../../model/stringify/stringify.helper';
+import { TincturesConfiguration } from './TincturesConfiguration';
 
 const partiesOptions = parties;
 
@@ -65,16 +64,16 @@ export const PartyForm = ({ tinctureConfiguration, field, fieldChange }: Props) 
         </div>
       </div>
       {per.name === 'pall' ? (
-        <ThreeTinctureConfiguration
-          tinctureConfiguration={tinctureConfiguration}
+        <TincturesConfiguration
           tinctures={per.tinctures}
           tincturesChanges={(tinctures) => fieldChange({ kind: 'party', per: { ...per, tinctures } })}
+          tinctureConfiguration={tinctureConfiguration}
         />
       ) : (
-        <TwoTinctureConfiguration
-          tinctureConfiguration={tinctureConfiguration}
+        <TincturesConfiguration
           tinctures={per.tinctures}
           tincturesChanges={(tinctures) => fieldChange({ kind: 'party', per: { ...per, tinctures } })}
+          tinctureConfiguration={tinctureConfiguration}
         />
       )}
     </div>
