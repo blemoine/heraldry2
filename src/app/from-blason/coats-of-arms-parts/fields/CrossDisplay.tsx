@@ -13,14 +13,14 @@ export const CrossDisplay: React.FunctionComponent<Props> = ({ dimension, fill, 
 
   const svgBuilderTopLeft = SvgPathBuilder.start([0, 0])
     .goTo([width / 2, 0])
-    .goTo([width / 2, height / 2], lineOptions)
+    .goToWithPartFlat([width / 2, height / 2], lineOptions, 5, 'end')
     .goTo([0, height / 2], lineOptions)
     .goTo([0, 0]);
   const svgBuilderTopRight = SvgPathBuilder.start([width / 2, 0])
     .goTo([width, 0])
     .goTo([width, height / 2])
     .goTo([width / 2, height / 2], lineOptions)
-    .goTo([width / 2, 0], invertedLineOptions);
+    .goToWithPartFlat([width / 2, 0], invertedLineOptions, 5, 'start');
   const svgBuilderBottomLeft = SvgPathBuilder.start([0, height / 2])
     .goTo([width / 2, height / 2], invertedLineOptions)
     .goTo([width / 2, height], lineOptions)
