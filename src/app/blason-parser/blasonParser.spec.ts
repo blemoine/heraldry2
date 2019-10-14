@@ -605,6 +605,15 @@ Argent, Azure, Barry, Barry pily, Bendy, Bendy Sinister, Bendy pily, Bendy pily 
     expect(parseBlason('Party per bend embattled azure and or')).toEqual(expected);
   });
 
+  it('should parse embattled counter-embattled line', () => {
+    const expected: SimpleBlason = {
+      kind: 'simple',
+      field: { kind: 'party', per: { name: 'bend', line: 'embattled-counter-embattled', tinctures: [azure, or] } },
+    };
+
+    expect(parseBlason('Party per bend embattled counter-embattled azure and or')).toEqual(expected);
+  });
+
   it('should parse party per pall', () => {
     const expected: SimpleBlason = {
       kind: 'simple',

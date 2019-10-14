@@ -74,7 +74,12 @@ function waveLineTo(path: SvgPathBuilder, to: PathAbsolutePoint, height: number)
     .quadraticBezier(to, getPerpendicularPointToCenter(middle, to, -height));
 }
 
-function embattleLineTo(path: SvgPathBuilder, to: PathAbsolutePoint, height: number): SvgPathBuilder {
+function embattleLineTo(
+  path: SvgPathBuilder,
+  to: PathAbsolutePoint,
+  height: number,
+  halfOffset: boolean
+): SvgPathBuilder {
   const from = path.currentPoint();
   if (!from || arePointEquivalent(from, to)) {
     return path;
@@ -84,15 +89,25 @@ function embattleLineTo(path: SvgPathBuilder, to: PathAbsolutePoint, height: num
   const midTier2 = pointOnLine(from, to, 75);
   const middle = pointBetween(from, to);
 
-  const perpendicularToTier1 = getPerpendicularPointToCenter(from, middle, height);
-  const perpendicularToTier2 = getPerpendicularPointToCenter(middle, to, height);
-
-  return path
-    .goTo(midTier1)
-    .goTo(perpendicularToTier1)
-    .goTo(perpendicularToTier2)
-    .goTo(midTier2)
-    .goTo(to);
+  if (halfOffset) {
+    const perpendicularToTier1 = getPerpendicularPointToCenter(from, middle, -height);
+    const perpendicularToTier2 = getPerpendicularPointToCenter(middle, to, -height);
+    return path
+      .goTo(midTier1)
+      .goTo(perpendicularToTier1)
+      .goTo(perpendicularToTier2)
+      .goTo(midTier2)
+      .goTo(to);
+  } else {
+    const perpendicularToTier1 = getPerpendicularPointToCenter(from, middle, height);
+    const perpendicularToTier2 = getPerpendicularPointToCenter(middle, to, height);
+    return path
+      .goTo(midTier1)
+      .goTo(perpendicularToTier1)
+      .goTo(perpendicularToTier2)
+      .goTo(midTier2)
+      .goTo(to);
+  }
 }
 
 function drawBetweenPoint(
@@ -182,6 +197,6 @@ export function embattleBetweenPoint(
   parametricPath: (t: number) => PathAbsolutePoint
 ): SvgPathBuilder {
   return drawBetweenPoint(path, lineOption.width, parametricPath, (result, to) =>
-    embattleLineTo(result, to, lineOption.height)
+    embattleLineTo(result, to, lineOption.height, !!lineOption.halfOffset)
   );
 }

@@ -1,8 +1,8 @@
 import * as P from 'parsimmon';
 import { capitalizeFirstLetter } from '../../utils/strings';
 import { Line, lines } from '../model/line';
-import { identity } from '../../utils/identity';
 import { numberToNameMap, StringifiableNumber } from '../model/countAndDisposition';
+import { stringifyLine } from '../model/stringify/stringify.helper';
 
 export function buildAltParser<A>(arr: ReadonlyArray<A>, stringifyFn: (a: A) => string): P.Parser<A> {
   return P.alt(
@@ -33,4 +33,4 @@ export const aParser = P.regex(/an?/i)
   .result(1 as const)
   .skip(P.whitespace);
 
-export const lineParser: P.Parser<Line> = buildAltParser(lines, identity);
+export const lineParser: P.Parser<Line> = buildAltParser(lines, stringifyLine);

@@ -37,7 +37,13 @@ type PathCommand =
 export type EngrailedLineOptions = { line: 'with-arc'; radius: number; sweep: boolean };
 export type WavyLineOptions = { line: 'wavy'; height: number; width: number };
 export type IndentedLineOptions = { line: 'indented'; height: number; width: number };
-export type EmbattledLineOptions = { line: 'embattled'; height: number; width: number; oneSideOnly: boolean };
+export type EmbattledLineOptions = {
+  line: 'embattled';
+  height: number;
+  width: number;
+  oneSideOnly: boolean;
+  halfOffset: boolean | null;
+};
 export type LineOptions = EngrailedLineOptions | IndentedLineOptions | WavyLineOptions | EmbattledLineOptions;
 
 function getX(commands: Array<PathCommand>): number | null {

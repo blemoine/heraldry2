@@ -3,7 +3,7 @@ import { Ordinary } from '../../../model/ordinary';
 import { cannotHappen } from '../../../../utils/cannot-happen';
 import { Dimension } from '../../../model/dimension';
 import { range } from '../../../../utils/range';
-import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
+import { LineOptions, SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { FocusablePathFromBuilder } from '../../../common/PathFromBuilder';
 import { chiefHeightRatio, computeLineOptions, SimpleBlasonShape } from '../blasonDisplay.helper';
 import { ShieldShape } from '../../../model/configuration';
@@ -22,16 +22,25 @@ type Props = {
   onClick: () => void;
 };
 
+function oneSideLineOption(lineOptions: LineOptions | null): LineOptions | null {
+  if (!lineOptions) {
+    return null;
+  }
+  if ('oneSideOnly' in lineOptions && lineOptions.oneSideOnly) {
+    return null;
+  } else if ('halfOffset' in lineOptions && lineOptions.halfOffset !== null) {
+    return { ...lineOptions, halfOffset: true };
+  } else {
+    return lineOptions;
+  }
+}
+
 export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, shieldShape, onClick }: Props) => {
   const strokeColor = ordinary.tincture.name === 'sable' ? '#777' : '#333';
 
   const fill = convertToOlfFillFronTincture(fillFromTincture)(ordinary.tincture);
   const lineOptions = computeLineOptions(ordinary.line, dimension);
-  const oneSideOnly = (lineOptions && 'oneSideOnly' in lineOptions
-  ? lineOptions.oneSideOnly
-  : false)
-    ? null
-    : lineOptions;
+  const oneSideOnly = oneSideLineOption(lineOptions);
 
   const { width, height } = dimension;
   if (ordinary.name === 'chief') {
@@ -216,20 +225,21 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
   } else if (ordinary.name === 'chevron' || ordinary.name === 'chevronel') {
     const chevronHeight =
       ordinary.name === 'chevron' ? height / 6 : ordinary.name === 'chevronel' ? height / 12 : cannotHappen(ordinary);
-
     return (
       <>
         {range(0, ordinary.count).map((i) => {
           const topPoint = ((i * 2 + 1) * height) / (ordinary.count * 2 + 1);
           const bottomPoint = (((i + 1) * 2 + 1) * height) / (ordinary.count * 2 + 1);
 
+          const topFlatPart = ordinary.count === 1 ? 3.8 : ordinary.count === 3 ? 12 : -1;
+
           const pathBuilder = SvgPathBuilder.start([width / 2, topPoint])
-            .goToWithPartFlat([0, bottomPoint - chevronHeight], lineOptions, 5)
+            .goToWithPartFlat([0, bottomPoint - chevronHeight], lineOptions, topFlatPart, 'start')
             .goTo([0, bottomPoint])
             .goToWithPartFlat([width / 2, topPoint + chevronHeight], oneSideOnly, 5)
             .goToWithPartFlat([width, bottomPoint], oneSideOnly, 5)
             .goTo([width, bottomPoint - chevronHeight])
-            .goToWithPartFlat([width / 2, topPoint], lineOptions, 5);
+            .goToWithPartFlat([width / 2, topPoint], lineOptions, topFlatPart, 'end');
 
           return (
             <FocusablePathFromBuilder

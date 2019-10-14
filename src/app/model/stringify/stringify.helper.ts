@@ -9,6 +9,15 @@ import { Charge } from '../charge';
 import { Blason, SimpleBlason } from '../blason';
 import { isNotNull } from '../../../utils/isNotNull';
 import { isEqual } from 'lodash';
+import { Line } from '../line';
+
+export function stringifyLine(line: Line): string {
+  if (line === 'embattled-counter-embattled') {
+    return 'embattled counter-embattled';
+  } else {
+    return line;
+  }
+}
 
 export function stringifyTincture(tincture: Tincture): string {
   if (tincture.name === 'counter-ermine') {
@@ -85,14 +94,14 @@ function stringifyOrdinary(ordinary: Ordinary): string {
       }
     }
     if (ordinary.line !== 'straight') {
-      result += ordinary.line + ' ';
+      result += stringifyLine(ordinary.line) + ' ';
     }
     result += stringifyTincture(ordinary.tincture);
     return result;
   } else {
     let result = 'a ' + stringifyOrdinaryName(ordinary.name) + ' ';
     if (ordinary.line !== 'straight') {
-      result += ordinary.line + ' ';
+      result += stringifyLine(ordinary.line) + ' ';
     }
     result += stringifyTincture(ordinary.tincture);
     return result;
@@ -191,7 +200,7 @@ function stringifyField(field: Field, shouldCapitalize: boolean): string {
       stringifiedTinctures[stringifiedTinctures.length - 1];
     let result = 'Per ' + perName + ' ';
     if (field.per.line !== 'straight') {
-      result += field.per.line + ' ';
+      result += stringifyLine(field.per.line) + ' ';
     }
     result += tinctures;
     return result;
@@ -205,7 +214,7 @@ function stringifyField(field: Field, shouldCapitalize: boolean): string {
       stringifiedTinctures[stringifiedTinctures.length - 1];
     let result = 'Tierced per ' + perName + ' ';
     if (field.per.line !== 'straight') {
-      result += field.per.line + ' ';
+      result += stringifyLine(field.per.line) + ' ';
     }
     result += tinctures;
     return result;

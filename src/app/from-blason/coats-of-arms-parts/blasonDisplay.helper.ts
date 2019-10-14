@@ -15,9 +15,11 @@ export function computeLineOptions(line: Line, { width, height }: Dimension): Li
   } else if (line === 'wavy') {
     return { line: 'wavy', height: height / 50, width: width / 9 };
   } else if (line === 'bretessed') {
-    return { line: 'embattled', height: height / 30, width: width / 9, oneSideOnly: false };
+    return { line: 'embattled', height: height / 30, width: width / 9, oneSideOnly: false, halfOffset: null };
+  } else if (line === 'embattled-counter-embattled') {
+    return { line: 'embattled', height: height / 30, width: width / 9, oneSideOnly: false, halfOffset: false };
   } else if (line === 'embattled') {
-    return { line: 'embattled', height: height / 30, width: width / 9, oneSideOnly: true };
+    return { line: 'embattled', height: height / 30, width: width / 9, oneSideOnly: true, halfOffset: null };
   } else if (line === 'straight') {
     return null;
   } else {

@@ -5,6 +5,7 @@ import { Overlay, Popover } from 'react-bootstrap';
 import { PathFromBuilder } from '../../common/PathFromBuilder';
 import { SvgPathBuilder } from '../../svg-path-builder/svg-path-builder';
 import { computeLineOptions } from '../coats-of-arms-parts/blasonDisplay.helper';
+import { stringifyLine } from '../../model/stringify/stringify.helper';
 
 const LineRenderer = ({ line }: { line: Line }) => {
   const width = 50;
@@ -80,7 +81,16 @@ export const LineSelect = ({ line, lineChange }: Props) => {
                     onClick={() => selectLine(line)}
                   >
                     <LineRenderer line={line} />
-                    <div style={{ textAlign: 'center', whiteSpace: 'nowrap' }}>{line}</div>
+                    <div
+                      style={{
+                        textAlign: 'center',
+                        whiteSpace: 'nowrap',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                      }}
+                    >
+                      {stringifyLine(line)}
+                    </div>
                   </div>
                 );
               })}

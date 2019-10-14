@@ -32,7 +32,12 @@ function getFieldVerticalOffsetAndScale(ordinary: Ordinary): { verticalOffset: n
       return { verticalOffset: 11 / 50, verticalScale: 39 / 50 };
     } else if (ordinary.line === 'invected') {
       return { verticalOffset: 13 / 50, verticalScale: 37 / 50 };
-    } else if (ordinary.line === 'wavy' || ordinary.line === 'bretessed' || ordinary.line === 'embattled') {
+    } else if (
+      ordinary.line === 'wavy' ||
+      ordinary.line === 'bretessed' ||
+      ordinary.line === 'embattled' ||
+      ordinary.line === 'embattled-counter-embattled'
+    ) {
       return { verticalOffset: 9 / 50, verticalScale: 41 / 50 };
     } else {
       return cannotHappen(ordinary.line);
