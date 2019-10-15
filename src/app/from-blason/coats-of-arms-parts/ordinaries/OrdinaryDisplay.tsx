@@ -30,6 +30,8 @@ function oneSideLineOption(lineOptions: LineOptions | null): LineOptions | null 
     return null;
   } else if ('halfOffset' in lineOptions && lineOptions.halfOffset !== null) {
     return { ...lineOptions, halfOffset: true };
+  } else if (lineOptions.line === 'urdy') {
+    return { ...lineOptions, height: -lineOptions.height };
   } else {
     return lineOptions;
   }

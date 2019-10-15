@@ -11,8 +11,8 @@ export const ChevronDisplay: React.FunctionComponent<Props> = ({ dimension, fill
   const lineOptions = computeLineOptions(line, dimension);
   const pathBuilder = SvgPathBuilder.start([-width / 3, height])
     .goTo([(width * 4) / 3, height])
-    .goTo([width / 2, height / 3], lineOptions)
-    .goTo([-width / 3, height], lineOptions);
+    .goToWithPartFlat([width / 2, height / 3], lineOptions, 5, 'end')
+    .goToWithPartFlat([-width / 3, height], lineOptions, 5, 'start');
 
   return (
     <>

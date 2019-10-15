@@ -14,7 +14,7 @@ import { convertToOlfFillFronTincture, FillFromTincture } from '../fillFromTinct
 
 function getFieldHorizontalOffset(ordinary: Ordinary): number {
   if (ordinary.name === 'bordure') {
-    if (ordinary.line === 'engrailed' || ordinary.line === 'wavy') {
+    if (ordinary.line === 'engrailed' || ordinary.line === 'wavy' || ordinary.line === 'urdy') {
       return 5 / 100;
     } else {
       return 10 / 100;
@@ -39,11 +39,13 @@ function getFieldVerticalOffsetAndScale(ordinary: Ordinary): { verticalOffset: n
       ordinary.line === 'embattled-counter-embattled'
     ) {
       return { verticalOffset: 9 / 50, verticalScale: 41 / 50 };
+    } else if (ordinary.line === 'urdy') {
+      return { verticalOffset: 8 / 50, verticalScale: 42 / 50 };
     } else {
       return cannotHappen(ordinary.line);
     }
   } else if (ordinary.name === 'bordure') {
-    if (ordinary.line === 'engrailed' || ordinary.line === 'wavy') {
+    if (ordinary.line === 'engrailed' || ordinary.line === 'wavy' || ordinary.line === 'urdy') {
       return { verticalOffset: 6 / 100, verticalScale: 88 / 100 };
     } else {
       return { verticalOffset: 10 / 100, verticalScale: 80 / 100 };

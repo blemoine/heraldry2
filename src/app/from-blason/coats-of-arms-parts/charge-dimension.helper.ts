@@ -52,6 +52,9 @@ export function getChargeDimension(
       } else if (ordinaryLine === 'wavy') {
         chargeHeightOffset = 0.14;
         chargeVerticalOffset = 0.05;
+      } else if (ordinaryLine === 'urdy') {
+        chargeHeightOffset = 0.14;
+        chargeVerticalOffset = 0.07;
       } else {
         chargeHeightOffset = 0.17;
         chargeVerticalOffset = 0.04;
@@ -142,6 +145,22 @@ export function getChargeDimension(
               verticalScale: 0.63,
               horizontalScale: 0.55,
               verticalOffset: 0.05,
+              horizontalOffset: shape === 'leftCut' ? 0.29 : 0.15,
+            };
+          } else {
+            return {
+              verticalScale: 0.72,
+              horizontalScale: 0.59,
+              verticalOffset: -0.03,
+              horizontalOffset: shape === 'leftCut' ? 0.26 : 0.11,
+            };
+          }
+        } else if (ordinaryLine === 'urdy') {
+          if (chargeCount > 1) {
+            return {
+              verticalScale: 0.63,
+              horizontalScale: 0.55,
+              verticalOffset: 0.07,
               horizontalOffset: shape === 'leftCut' ? 0.29 : 0.15,
             };
           } else {

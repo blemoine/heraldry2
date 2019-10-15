@@ -20,6 +20,8 @@ export function computeLineOptions(line: Line, { width, height }: Dimension): Li
     return { line: 'embattled', height: height / 30, width: width / 9, oneSideOnly: false, halfOffset: false };
   } else if (line === 'embattled') {
     return { line: 'embattled', height: height / 30, width: width / 9, oneSideOnly: true, halfOffset: null };
+  } else if (line === 'urdy') {
+    return { line: 'urdy', height: height / 35, width: width / 9 };
   } else if (line === 'straight') {
     return null;
   } else {
@@ -32,7 +34,7 @@ export function invertLineOptions(lineOptions: LineOptions): LineOptions {
     return { ...lineOptions, height: -lineOptions.height };
   } else if (lineOptions.line === 'with-arc') {
     return { ...lineOptions, sweep: !lineOptions.sweep };
-  } else if (lineOptions.line === 'wavy') {
+  } else if (lineOptions.line === 'wavy' || lineOptions.line === 'urdy') {
     return lineOptions;
   } else {
     return cannotHappen(lineOptions);

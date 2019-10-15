@@ -177,4 +177,5 @@ describe('CoatsOfArms', () => {
   snapshotTest(
     'Quarterly, 1st Per pile reversed embattled ermine and gules; 2nd Per pile reversed engrailed ermine and gules; 3rd Per pile reversed indented ermine and gules; 4th Per pile reversed wavy ermine and gules'
   );
+  snapshotTest('Azure, a bordure urdy or, two crosses maltese in pale argent');
 });

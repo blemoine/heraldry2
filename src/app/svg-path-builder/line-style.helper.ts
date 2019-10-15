@@ -11,19 +11,16 @@ import {
   EngrailedLineOptions,
   IndentedLineOptions,
   SvgPathBuilder,
+  UrdyLineOptions,
   WavyLineOptions,
 } from './svg-path-builder';
 
-function getPerpendicularPointToCenter(
-  [fromX, fromY]: PathAbsolutePoint,
-  [toX, toY]: PathAbsolutePoint,
+function getPerpendicularPoint(
+  [[fromX, fromY], [toX, toY]]: [PathAbsolutePoint, PathAbsolutePoint],
+  [xh, yh]: PathAbsolutePoint,
   height: number
 ): PathAbsolutePoint {
-  // H is the middle of [start, end]
   // C is the perpendicular to [start, end], at point H with length height
-
-  const xh = (fromX + toX) / 2;
-  const yh = (fromY + toY) / 2;
 
   const a = fromY - toY;
   const b = toX - fromX;
@@ -33,6 +30,21 @@ function getPerpendicularPointToCenter(
   const yc = yh + (b / norm) * height;
 
   return [xc, yc];
+}
+
+function getPerpendicularPointToCenter(
+  from: PathAbsolutePoint,
+  to: PathAbsolutePoint,
+  height: number
+): PathAbsolutePoint {
+  // H is the middle of [start, end]
+  // C is the perpendicular to [start, end], at point H with length height
+  const [fromX, fromY] = from;
+  const [toX, toY] = to;
+  const xh = (fromX + toX) / 2;
+  const yh = (fromY + toY) / 2;
+
+  return getPerpendicularPoint([from, to], [xh, yh], height);
 }
 
 export function indentLineTo(path: SvgPathBuilder, to: PathAbsolutePoint, height: number): SvgPathBuilder {
@@ -72,6 +84,24 @@ function waveLineTo(path: SvgPathBuilder, to: PathAbsolutePoint, height: number)
   return path
     .quadraticBezier(middle, getPerpendicularPointToCenter(from, middle, height))
     .quadraticBezier(to, getPerpendicularPointToCenter(middle, to, -height));
+}
+
+function urdyLineTo(path: SvgPathBuilder, to: PathAbsolutePoint, height: number): SvgPathBuilder {
+  const from = path.currentPoint();
+  if (!from || arePointEquivalent(from, to)) {
+    return path;
+  }
+  const middle = pointBetween(from, to);
+  const firstHalf = pointBetween(from, middle);
+  const lastHalf = pointBetween(middle, to);
+  return path
+    .goTo(getPerpendicularPoint([from, to], from, height / 2))
+    .goTo(getPerpendicularPoint([from, to], firstHalf, height))
+    .goTo(getPerpendicularPoint([from, to], middle, height / 2))
+    .goTo(getPerpendicularPoint([from, to], middle, -height / 2))
+    .goTo(getPerpendicularPoint([from, to], lastHalf, -height))
+    .goTo(getPerpendicularPoint([from, to], to, -height / 2))
+    .goTo(to);
 }
 
 function embattleLineTo(
@@ -198,5 +228,15 @@ export function embattleBetweenPoint(
 ): SvgPathBuilder {
   return drawBetweenPoint(path, lineOption.width, parametricPath, (result, to) =>
     embattleLineTo(result, to, lineOption.height, !!lineOption.halfOffset)
+  );
+}
+
+export function urdyBetweenPoint(
+  path: SvgPathBuilder,
+  lineOption: UrdyLineOptions,
+  parametricPath: (t: number) => PathAbsolutePoint
+): SvgPathBuilder {
+  return drawBetweenPoint(path, lineOption.width, parametricPath, (result, to) =>
+    urdyLineTo(result, to, lineOption.height)
   );
 }
