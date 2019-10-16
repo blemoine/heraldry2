@@ -8,6 +8,7 @@ export const lines = [
   'embattled',
   'embattled-counter-embattled',
   'urdy',
+  'dovetailed',
 ] as const;
 
 export type Line = typeof lines[number];

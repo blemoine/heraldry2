@@ -7,6 +7,7 @@ import {
 } from './geometrical.helper';
 import { range } from '../../utils/range';
 import {
+  DovetailedLineOptions,
   EmbattledLineOptions,
   EngrailedLineOptions,
   IndentedLineOptions,
@@ -16,7 +17,7 @@ import {
 } from './svg-path-builder';
 
 function getPerpendicularPoint(
-  [[fromX, fromY], [toX, toY]]: [PathAbsolutePoint, PathAbsolutePoint],
+  [[fromX, fromY], [toX, toY]]: readonly [PathAbsolutePoint, PathAbsolutePoint],
   [xh, yh]: PathAbsolutePoint,
   height: number
 ): PathAbsolutePoint {
@@ -94,13 +95,28 @@ function urdyLineTo(path: SvgPathBuilder, to: PathAbsolutePoint, height: number)
   const middle = pointBetween(from, to);
   const firstHalf = pointBetween(from, middle);
   const lastHalf = pointBetween(middle, to);
+  const line = [from, to] as const;
   return path
-    .goTo(getPerpendicularPoint([from, to], from, height / 2 - height / 2))
-    .goTo(getPerpendicularPoint([from, to], firstHalf, height - height / 2))
-    .goTo(getPerpendicularPoint([from, to], middle, height / 2 - height / 2))
-    .goTo(getPerpendicularPoint([from, to], middle, -height / 2 - height / 2))
-    .goTo(getPerpendicularPoint([from, to], lastHalf, -height - height / 2))
-    .goTo(getPerpendicularPoint([from, to], to, -height / 2 - height / 2))
+    .goTo(getPerpendicularPoint(line, from, height / 2 - height / 2))
+    .goTo(getPerpendicularPoint(line, firstHalf, height - height / 2))
+    .goTo(getPerpendicularPoint(line, middle, height / 2 - height / 2))
+    .goTo(getPerpendicularPoint(line, middle, -height / 2 - height / 2))
+    .goTo(getPerpendicularPoint(line, lastHalf, -height - height / 2))
+    .goTo(getPerpendicularPoint(line, to, -height / 2 - height / 2))
+    .goTo(to);
+}
+
+function dovetailedLineTo(path: SvgPathBuilder, to: PathAbsolutePoint, height: number): SvgPathBuilder {
+  const from = path.currentPoint();
+  if (!from || arePointEquivalent(from, to)) {
+    return path;
+  }
+  const line = [from, to] as const;
+  return path
+    .goTo(pointOnLine(from, to, 100 / 3))
+    .goTo(getPerpendicularPoint(line, pointOnLine(from, to, 100 / 6), height))
+    .goTo(getPerpendicularPoint(line, pointOnLine(from, to, (100 * 5) / 6), height))
+    .goTo(pointOnLine(from, to, (100 * 2) / 3))
     .goTo(to);
 }
 
@@ -238,5 +254,15 @@ export function urdyBetweenPoint(
 ): SvgPathBuilder {
   return drawBetweenPoint(path, lineOption.width, parametricPath, (result, to) =>
     urdyLineTo(result, to, lineOption.height)
+  );
+}
+
+export function dovetailedBetweenPoint(
+  path: SvgPathBuilder,
+  lineOption: DovetailedLineOptions,
+  parametricPath: (t: number) => PathAbsolutePoint
+): SvgPathBuilder {
+  return drawBetweenPoint(path, lineOption.width, parametricPath, (result, to) =>
+    dovetailedLineTo(result, to, lineOption.height)
   );
 }

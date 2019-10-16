@@ -4,6 +4,7 @@ import { pointOnEllipticalArc, pointOnQuadraticBezier } from './point-on-ellipti
 import { round } from '../../utils/round';
 import { raise, Result } from '../../utils/result';
 import {
+  dovetailedBetweenPoint,
   embattleBetweenPoint,
   engrailBetweenPoint,
   indentBetweenPoint,
@@ -44,6 +45,7 @@ export type EngrailedLineOptions = { line: 'with-arc'; radius: number; sweep: bo
 export type WavyLineOptions = { line: 'wavy'; height: number; width: number };
 export type UrdyLineOptions = { line: 'urdy'; height: number; width: number };
 export type IndentedLineOptions = { line: 'indented'; height: number; width: number };
+export type DovetailedLineOptions = { line: 'dovetailed'; height: number; width: number };
 export type EmbattledLineOptions = {
   line: 'embattled';
   height: number;
@@ -56,7 +58,8 @@ export type LineOptions =
   | IndentedLineOptions
   | WavyLineOptions
   | EmbattledLineOptions
-  | UrdyLineOptions;
+  | UrdyLineOptions
+  | DovetailedLineOptions;
 
 function getX(commands: Array<PathCommand>): number | null {
   if (commands.length === 0) {
@@ -237,6 +240,8 @@ export class SvgPathBuilder {
           return embattleBetweenPoint(this, lineOptions, nextPointFn);
         } else if (lineOptions.line === 'urdy') {
           return urdyBetweenPoint(this, lineOptions, nextPointFn);
+        } else if (lineOptions.line === 'dovetailed') {
+          return dovetailedBetweenPoint(this, lineOptions, nextPointFn);
         } else {
           return cannotHappen(lineOptions);
         }
@@ -350,6 +355,8 @@ export class SvgPathBuilder {
           return embattleBetweenPoint(this, lineOptions, nextPointFn);
         } else if (lineOptions.line === 'urdy') {
           return urdyBetweenPoint(this, lineOptions, nextPointFn);
+        } else if (lineOptions.line === 'dovetailed') {
+          return dovetailedBetweenPoint(this, lineOptions, nextPointFn);
         } else {
           return cannotHappen(lineOptions);
         }
@@ -432,6 +439,8 @@ export class SvgPathBuilder {
           return embattleBetweenPoint(this, lineOptions, nextPointFn);
         } else if (lineOptions.line === 'urdy') {
           return urdyBetweenPoint(this, lineOptions, nextPointFn);
+        } else if (lineOptions.line === 'dovetailed') {
+          return dovetailedBetweenPoint(this, lineOptions, nextPointFn);
         } else {
           return cannotHappen(lineOptions);
         }
