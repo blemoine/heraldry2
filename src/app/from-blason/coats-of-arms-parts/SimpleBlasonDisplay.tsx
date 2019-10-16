@@ -14,8 +14,10 @@ import { convertToOlfFillFronTincture, FillFromTincture } from '../fillFromTinct
 
 function getFieldHorizontalOffset(ordinary: Ordinary): number {
   if (ordinary.name === 'bordure') {
-    if (ordinary.line === 'engrailed' || ordinary.line === 'wavy' || ordinary.line === 'urdy') {
+    if (ordinary.line === 'engrailed' || ordinary.line === 'wavy') {
       return 5 / 100;
+    } else if (ordinary.line === 'urdy') {
+      return 4 / 100;
     } else {
       return 10 / 100;
     }

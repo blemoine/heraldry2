@@ -95,12 +95,12 @@ function urdyLineTo(path: SvgPathBuilder, to: PathAbsolutePoint, height: number)
   const firstHalf = pointBetween(from, middle);
   const lastHalf = pointBetween(middle, to);
   return path
-    .goTo(getPerpendicularPoint([from, to], from, height / 2))
-    .goTo(getPerpendicularPoint([from, to], firstHalf, height))
-    .goTo(getPerpendicularPoint([from, to], middle, height / 2))
-    .goTo(getPerpendicularPoint([from, to], middle, -height / 2))
-    .goTo(getPerpendicularPoint([from, to], lastHalf, -height))
-    .goTo(getPerpendicularPoint([from, to], to, -height / 2))
+    .goTo(getPerpendicularPoint([from, to], from, height / 2 - height / 2))
+    .goTo(getPerpendicularPoint([from, to], firstHalf, height - height / 2))
+    .goTo(getPerpendicularPoint([from, to], middle, height / 2 - height / 2))
+    .goTo(getPerpendicularPoint([from, to], middle, -height / 2 - height / 2))
+    .goTo(getPerpendicularPoint([from, to], lastHalf, -height - height / 2))
+    .goTo(getPerpendicularPoint([from, to], to, -height / 2 - height / 2))
     .goTo(to);
 }
 
