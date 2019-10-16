@@ -230,21 +230,7 @@ export class SvgPathBuilder {
         return this.addCommand({ command: 'Q', controlPoint, point });
       } else {
         const nextPointFn = (t: number) => pointOnQuadraticBezier(previousPoint, controlPoint, point, t);
-        if (lineOptions.line === 'with-arc') {
-          return engrailBetweenPoint(this, lineOptions, nextPointFn);
-        } else if (lineOptions.line === 'indented') {
-          return indentBetweenPoint(this, lineOptions, nextPointFn);
-        } else if (lineOptions.line === 'wavy') {
-          return waveBetweenPoint(this, lineOptions, nextPointFn);
-        } else if (lineOptions.line === 'embattled') {
-          return embattleBetweenPoint(this, lineOptions, nextPointFn);
-        } else if (lineOptions.line === 'urdy') {
-          return urdyBetweenPoint(this, lineOptions, nextPointFn);
-        } else if (lineOptions.line === 'dovetailed') {
-          return dovetailedBetweenPoint(this, lineOptions, nextPointFn);
-        } else {
-          return cannotHappen(lineOptions);
-        }
+        return this.drawWithLineStyle(lineOptions, nextPointFn);
       }
     } else {
       return this.addCommand({ command: 'Q', controlPoint, point });
@@ -345,21 +331,7 @@ export class SvgPathBuilder {
           previous[0] + step * (point[0] - previous[0]),
           previous[1] + step * (point[1] - previous[1]),
         ];
-        if (lineOptions.line === 'with-arc') {
-          return engrailBetweenPoint(this, lineOptions, nextPointFn);
-        } else if (lineOptions.line === 'indented') {
-          return indentBetweenPoint(this, lineOptions, nextPointFn);
-        } else if (lineOptions.line === 'wavy') {
-          return waveBetweenPoint(this, lineOptions, nextPointFn);
-        } else if (lineOptions.line === 'embattled') {
-          return embattleBetweenPoint(this, lineOptions, nextPointFn);
-        } else if (lineOptions.line === 'urdy') {
-          return urdyBetweenPoint(this, lineOptions, nextPointFn);
-        } else if (lineOptions.line === 'dovetailed') {
-          return dovetailedBetweenPoint(this, lineOptions, nextPointFn);
-        } else {
-          return cannotHappen(lineOptions);
-        }
+        return this.drawWithLineStyle(lineOptions, nextPointFn);
       }
     } else {
       const previousX = getX(this.commands);
@@ -429,21 +401,7 @@ export class SvgPathBuilder {
             point,
             t
           );
-        if (lineOptions.line === 'with-arc') {
-          return engrailBetweenPoint(this, lineOptions, nextPointFn);
-        } else if (lineOptions.line === 'indented') {
-          return indentBetweenPoint(this, lineOptions, nextPointFn);
-        } else if (lineOptions.line === 'wavy') {
-          return waveBetweenPoint(this, lineOptions, nextPointFn);
-        } else if (lineOptions.line === 'embattled') {
-          return embattleBetweenPoint(this, lineOptions, nextPointFn);
-        } else if (lineOptions.line === 'urdy') {
-          return urdyBetweenPoint(this, lineOptions, nextPointFn);
-        } else if (lineOptions.line === 'dovetailed') {
-          return dovetailedBetweenPoint(this, lineOptions, nextPointFn);
-        } else {
-          return cannotHappen(lineOptions);
-        }
+        return this.drawWithLineStyle(lineOptions, nextPointFn);
       }
     } else {
       return this.addCommand({
@@ -568,5 +526,23 @@ export class SvgPathBuilder {
   }
   private addCommand(command: PathCommand): SvgPathBuilder {
     return new SvgPathBuilder([...this.commands, command]);
+  }
+
+  private drawWithLineStyle(lineOptions: LineOptions, nextPointFn: (t: number) => PathAbsolutePoint): SvgPathBuilder {
+    if (lineOptions.line === 'with-arc') {
+      return engrailBetweenPoint(this, lineOptions, nextPointFn);
+    } else if (lineOptions.line === 'indented') {
+      return indentBetweenPoint(this, lineOptions, nextPointFn);
+    } else if (lineOptions.line === 'wavy') {
+      return waveBetweenPoint(this, lineOptions, nextPointFn);
+    } else if (lineOptions.line === 'embattled') {
+      return embattleBetweenPoint(this, lineOptions, nextPointFn);
+    } else if (lineOptions.line === 'urdy') {
+      return urdyBetweenPoint(this, lineOptions, nextPointFn);
+    } else if (lineOptions.line === 'dovetailed') {
+      return dovetailedBetweenPoint(this, lineOptions, nextPointFn);
+    } else {
+      return cannotHappen(lineOptions);
+    }
   }
 }
