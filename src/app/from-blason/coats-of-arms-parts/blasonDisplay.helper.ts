@@ -24,6 +24,8 @@ export function computeLineOptions(line: Line, { width, height }: Dimension): Li
     return { line: 'urdy', height: height / 35, width: width / 9 };
   } else if (line === 'dovetailed') {
     return { line: 'dovetailed', height: height / 50, width: width / 9 };
+  } else if (line === 'potenty') {
+    return { line: 'potenty', height: height / 50, width: width / 9 };
   } else if (line === 'straight') {
     return null;
   } else {
@@ -32,7 +34,12 @@ export function computeLineOptions(line: Line, { width, height }: Dimension): Li
 }
 
 export function invertLineOptions(lineOptions: LineOptions): LineOptions {
-  if (lineOptions.line === 'indented' || lineOptions.line === 'embattled' || lineOptions.line === 'dovetailed') {
+  if (
+    lineOptions.line === 'indented' ||
+    lineOptions.line === 'embattled' ||
+    lineOptions.line === 'dovetailed' ||
+    lineOptions.line === 'potenty'
+  ) {
     return { ...lineOptions, height: -lineOptions.height };
   } else if (lineOptions.line === 'with-arc') {
     return { ...lineOptions, sweep: !lineOptions.sweep };

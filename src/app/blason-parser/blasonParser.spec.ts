@@ -750,4 +750,13 @@ Argent, Azure, Barry, Barry pily, Bendy, Bendy Sinister, Bendy pily, Bendy pily 
 
     expect(parseBlason('Per pile bendwise azure and or')).toEqual(expected);
   });
+  it('should parse a cross potenty', () => {
+    const expected: SimpleBlason = {
+      kind: 'simple',
+      field: { kind: 'plain', tincture: azure },
+      ordinary: { name: 'cross', line: 'potenty', tincture: argent },
+    };
+
+    expect(parseBlason('Azure, a cross potenty argent')).toEqual(expected);
+  });
 });

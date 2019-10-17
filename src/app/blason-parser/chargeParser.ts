@@ -187,6 +187,9 @@ const mulletParser = (): P.Parser<Mullet> => {
 
 export const crossParser = (): P.Parser<Cross | OrdinaryCross> => {
   return P.alt(
+    P.seq(aParser.then(constStr('cross', 'cross potenty')).skip(P.whitespace), tinctureParserFromName).map(
+      ([name, tincture]): OrdinaryCross => ({ name, tincture, line: 'potenty' })
+    ),
     countParser.chain((count) => {
       return P.seq(
         P.alt<'cross'>(constStr('cross', 'crosses'), constStr('cross')),

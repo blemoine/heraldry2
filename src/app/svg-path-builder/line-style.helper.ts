@@ -11,6 +11,7 @@ import {
   EmbattledLineOptions,
   EngrailedLineOptions,
   IndentedLineOptions,
+  PotentyLineOptions,
   SvgPathBuilder,
   UrdyLineOptions,
   WavyLineOptions,
@@ -116,6 +117,24 @@ function dovetailedLineTo(path: SvgPathBuilder, to: PathAbsolutePoint, height: n
     .goTo(pointOnLine(from, to, 100 / 3))
     .goTo(getPerpendicularPoint(line, pointOnLine(from, to, 100 / 6), height))
     .goTo(getPerpendicularPoint(line, pointOnLine(from, to, (100 * 5) / 6), height))
+    .goTo(pointOnLine(from, to, (100 * 2) / 3))
+    .goTo(to);
+}
+
+function potentyLineTo(path: SvgPathBuilder, to: PathAbsolutePoint, height: number): SvgPathBuilder {
+  const from = path.currentPoint();
+  if (!from || arePointEquivalent(from, to)) {
+    return path;
+  }
+  const line = [from, to] as const;
+  return path
+    .goTo(pointOnLine(from, to, 100 / 3))
+    .goTo(getPerpendicularPoint(line, pointOnLine(from, to, 100 / 3), height / 2))
+    .goTo(getPerpendicularPoint(line, pointOnLine(from, to, 100 / 6), height / 2))
+    .goTo(getPerpendicularPoint(line, pointOnLine(from, to, 100 / 6), height))
+    .goTo(getPerpendicularPoint(line, pointOnLine(from, to, (100 * 5) / 6), height))
+    .goTo(getPerpendicularPoint(line, pointOnLine(from, to, (100 * 5) / 6), height / 2))
+    .goTo(getPerpendicularPoint(line, pointOnLine(from, to, (100 * 2) / 3), height / 2))
     .goTo(pointOnLine(from, to, (100 * 2) / 3))
     .goTo(to);
 }
@@ -264,5 +283,15 @@ export function dovetailedBetweenPoint(
 ): SvgPathBuilder {
   return drawBetweenPoint(path, lineOption.width, parametricPath, (result, to) =>
     dovetailedLineTo(result, to, lineOption.height)
+  );
+}
+
+export function potentyBetweenPoint(
+  path: SvgPathBuilder,
+  lineOption: PotentyLineOptions,
+  parametricPath: (t: number) => PathAbsolutePoint
+): SvgPathBuilder {
+  return drawBetweenPoint(path, lineOption.width, parametricPath, (result, to) =>
+    potentyLineTo(result, to, lineOption.height)
   );
 }
