@@ -13,6 +13,7 @@ import { convertToOlfFillFronTincture, FillFromTincture } from '../../fillFromTi
 import { QuarterOrdinaryDisplay } from './QuarterOrdinaryDisplay';
 import { CantonOrdinaryDisplay } from './CantonOrdinaryDisplay';
 import { ChiefOrdinaryDisplay } from './ChiefOrdinaryDisplay';
+import { BaseOrdinaryDisplay } from './BaseOrdinaryDisplay';
 
 type Props = {
   ordinary: Ordinary;
@@ -58,21 +59,12 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
       />
     );
   } else if (ordinary.name === 'base') {
-    const baseHeight = height / 4;
-
-    const pathBuilder = SvgPathBuilder.start([0, height])
-      .goTo([width, height])
-      .goTo([width, height - baseHeight])
-      .goTo([0, height - baseHeight], lineOptions)
-      .close();
-
     return (
-      <FocusablePathFromBuilder
-        pathBuilder={pathBuilder}
-        fill={fill}
-        stroke={strokeColor}
-        style={{ cursor: 'pointer' }}
+      <BaseOrdinaryDisplay
+        ordinary={ordinary}
+        dimension={dimension}
         onClick={onClick}
+        fillFromTincture={fillFromTincture}
       />
     );
   } else if (ordinary.name === 'fess') {

@@ -5624,9 +5624,14 @@ exports[`CoatsOfArms should render 'Or, a base engrailed vair' 1`] = `
     className="blason-ordinary"
     clipPath="url(#plain-field-clip-path)"
   >
+    <pattern
+      id="field-pattern-0-base"
+      patternTransform="scale(0.3055555555555556) translate(0,5)"
+      xlinkHref="#field-pattern-0"
+    />
     <path
       d="M 0 266.66667 H200 V200 Q 190 220 180 200 Q 170 220 160 200 Q 150 220 140 200 Q 130 220 120 200 Q 110 220 100 200 Q 90 220 80 200 Q 70 220 60 200 Q 50 220 40 200 Q 30 220 20 200 Q 10 220 0 200 Z"
-      fill="url(#field-pattern-0)"
+      fill="url(#field-pattern-0-base)"
       onClick={[Function]}
       onMouseDown={[Function]}
       onMouseUp={[Function]}

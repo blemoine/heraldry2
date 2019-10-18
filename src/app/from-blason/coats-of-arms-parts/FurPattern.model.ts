@@ -2,18 +2,26 @@ import { cannotHappen } from '../../../utils/cannot-happen';
 import { FillFromTincture } from '../fillFromTincture.helper';
 import { Furs, isErmine, isFur, isPotent, isVair, Tincture, tinctures } from '../../model/tincture';
 
-export type TransformProperty = { kind: 'scale'; value: number | [number, number] };
-export function toTransform(t: TransformProperty): string {
-  if (t.kind === 'scale') {
-    const scale = typeof t.value === 'number' ? t.value : t.value.join(',');
-    return 'scale(' + scale + ')';
-  } else {
-    return cannotHappen(t.kind);
-  }
+export type TransformProperty =
+  | { kind: 'scale'; value: number | [number, number] }
+  | { kind: 'translate'; value: [number, number] };
+export function toTransform(arr: Array<TransformProperty>): string {
+  return arr
+    .map((t) => {
+      if (t.kind === 'scale') {
+        const scale = typeof t.value === 'number' ? t.value : t.value.join(',');
+        return 'scale(' + scale + ')';
+      } else if (t.kind === 'translate') {
+        return 'translate(' + t.value.join(',') + ')';
+      } else {
+        return cannotHappen(t);
+      }
+    })
+    .join(' ');
 }
 
 export type FurTransformProperty = {
-  [fur in Furs['name']]: { property: TransformProperty; fillId: string };
+  [fur in Furs['name']]: { property: Array<TransformProperty>; fillId: string };
 };
 
 export function unsafeGetFillIdOfFur(fillFromTincture: FillFromTincture, fur: Furs): string {
@@ -27,7 +35,11 @@ export function unsafeGetFillIdOfFur(fillFromTincture: FillFromTincture, fur: Fu
 
 export function buildFurTransformProperty(
   fillFromTincture: FillFromTincture,
-  properties: { ermine: TransformProperty; vair: TransformProperty; potent: TransformProperty }
+  properties: {
+    ermine: TransformProperty | ReadonlyArray<TransformProperty>;
+    vair: TransformProperty | ReadonlyArray<TransformProperty>;
+    potent: TransformProperty | ReadonlyArray<TransformProperty>;
+  }
 ): FurTransformProperty {
   return tinctures.filter(isFur).reduce<Partial<FurTransformProperty>>((acc, fur) => {
     const property = isErmine(fur)
@@ -40,7 +52,7 @@ export function buildFurTransformProperty(
     return {
       ...acc,
       [fur.name]: {
-        property,
+        property: Array.isArray(property) ? property : [property],
         fillId: unsafeGetFillIdOfFur(fillFromTincture, fur),
       },
     };

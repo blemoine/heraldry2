@@ -1,46 +1,39 @@
-import { chiefHeightRatio, computeLineOptions } from '../blasonDisplay.helper';
 import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { FocusablePathFromBuilder } from '../../../common/PathFromBuilder';
 import * as React from 'react';
-import { Chief } from '../../../model/ordinary';
 import { Dimension } from '../../../model/dimension';
+import { Base } from '../../../model/ordinary';
 import { FillFromTincture } from '../../fillFromTincture.helper';
+import { computeLineOptions } from '../blasonDisplay.helper';
 import { buildFurTransformProperty, FurTransformProperty, getFill } from '../FurPattern.model';
 import { FurPatternDefinition } from '../FurPatternDefinition';
 
-const postfixId = 'chief';
+const postfixId = 'base';
 
 type Props = {
   dimension: Dimension;
-  ordinary: Chief;
+  ordinary: Base;
   fillFromTincture: FillFromTincture;
   onClick: () => void;
 };
-export const ChiefOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onClick }: Props) => {
+export const BaseOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onClick }: Props) => {
   const { width, height } = dimension;
-  const chiefHeight = height * chiefHeightRatio;
   const lineOptions = computeLineOptions(ordinary.line, dimension);
+  const baseHeight = height / 4;
   const strokeColor = ordinary.tincture.name === 'sable' ? '#777' : '#333';
   const fill = getFill(fillFromTincture, ordinary.tincture, postfixId);
 
-  const computedHeight =
-    chiefHeight +
-    (lineOptions && lineOptions.line === 'with-arc'
-      ? lineOptions.radius
-      : lineOptions && lineOptions.line === 'indented'
-      ? lineOptions.height
-      : 0);
-  const pathBuilder = SvgPathBuilder.start([0, 0])
-    .goTo([0, computedHeight])
-    .goTo([width, computedHeight], lineOptions)
-    .goTo([width, 0])
+  const pathBuilder = SvgPathBuilder.start([0, height])
+    .goTo([width, height])
+    .goTo([width, height - baseHeight])
+    .goTo([0, height - baseHeight], lineOptions)
     .close();
 
   const scaleRatio = height / 480;
   const transformProperties: FurTransformProperty = buildFurTransformProperty(fillFromTincture, {
-    ermine: { kind: 'scale', value: 0.55 * scaleRatio },
-    vair: { kind: 'scale', value: 0.66 * scaleRatio },
-    potent: { kind: 'scale', value: 0.8 * scaleRatio },
+    ermine: [{ kind: 'scale', value: 0.65 * scaleRatio }, { kind: 'translate', value: [0, 30] }],
+    vair: [{ kind: 'scale', value: 0.55 * scaleRatio }, { kind: 'translate', value: [0, 5] }],
+    potent: [{ kind: 'scale', value: 0.92 * scaleRatio }, { kind: 'translate', value: [0, 0] }],
   });
 
   return (
