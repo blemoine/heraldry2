@@ -4087,9 +4087,14 @@ exports[`CoatsOfArms should render 'Chequy gules and or, a chief engrailed ermin
     className="blason-ordinary"
     clipPath="url(#plain-field-clip-path)"
   >
+    <pattern
+      id="field-pattern-3-chief"
+      patternTransform="scale(0.3055555555555556)"
+      xlinkHref="#field-pattern-3"
+    />
     <path
       d="M 0 0 V73.33333 Q 10 53.33333 20 73.33333 Q 30 53.33333 40 73.33333 Q 50 53.33333 60 73.33333 Q 70 53.33333 80 73.33333 Q 90 53.33333 100 73.33333 Q 110 53.33333 120 73.33333 Q 130 53.33333 140 73.33333 Q 150 53.33333 160 73.33333 Q 170 53.33333 180 73.33333 Q 190 53.33333 200 73.33333 V0 Z"
-      fill="url(#field-pattern-3)"
+      fill="url(#field-pattern-3-chief)"
       onClick={[Function]}
       onMouseDown={[Function]}
       onMouseUp={[Function]}

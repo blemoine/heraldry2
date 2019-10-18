@@ -5,13 +5,14 @@ import { Dimension } from '../../../model/dimension';
 import { range } from '../../../../utils/range';
 import { LineOptions, SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { FocusablePathFromBuilder } from '../../../common/PathFromBuilder';
-import { chiefHeightRatio, computeLineOptions, SimpleBlasonShape } from '../blasonDisplay.helper';
+import { computeLineOptions, SimpleBlasonShape } from '../blasonDisplay.helper';
 import { ShieldShape } from '../../../model/configuration';
 import { BordureDisplay } from './BordureDisplay';
 import { toDegree } from '../../../svg-path-builder/geometrical.helper';
 import { convertToOlfFillFronTincture, FillFromTincture } from '../../fillFromTincture.helper';
 import { QuarterOrdinaryDisplay } from './QuarterOrdinaryDisplay';
 import { CantonOrdinaryDisplay } from './CantonOrdinaryDisplay';
+import { ChiefOrdinaryDisplay } from './ChiefOrdinaryDisplay';
 
 type Props = {
   ordinary: Ordinary;
@@ -48,28 +49,12 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
 
   const { width, height } = dimension;
   if (ordinary.name === 'chief') {
-    const chiefHeight = height * chiefHeightRatio;
-
-    const computedHeight =
-      chiefHeight +
-      (lineOptions && lineOptions.line === 'with-arc'
-        ? lineOptions.radius
-        : lineOptions && lineOptions.line === 'indented'
-        ? lineOptions.height
-        : 0);
-    const pathBuilder = SvgPathBuilder.start([0, 0])
-      .goTo([0, computedHeight])
-      .goTo([width, computedHeight], lineOptions)
-      .goTo([width, 0])
-      .close();
-
     return (
-      <FocusablePathFromBuilder
-        pathBuilder={pathBuilder}
-        fill={fill}
-        stroke={strokeColor}
-        style={{ cursor: 'pointer' }}
+      <ChiefOrdinaryDisplay
+        ordinary={ordinary}
+        dimension={dimension}
         onClick={onClick}
+        fillFromTincture={fillFromTincture}
       />
     );
   } else if (ordinary.name === 'base') {

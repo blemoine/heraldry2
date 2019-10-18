@@ -47,13 +47,13 @@ export function buildFurTransformProperty(
   }, {}) as FurTransformProperty;
 }
 
-export function getFill(fillFromTincture: FillFromTincture, tincture: Tincture, postfixId: string): string {
+export function getFill(fillFromTincture: FillFromTincture, tincture: Tincture, postfixId: string | null): string {
   const fill = fillFromTincture(tincture);
 
   if ('color' in fill) {
     return fill.color;
   } else if (isFur(tincture)) {
-    const newPatternDef = fill.id + '-' + postfixId;
+    const newPatternDef = fill.id + (postfixId ? '-' + postfixId : '');
     return `url(#${newPatternDef})`;
   } else {
     return `url(#${fill.id})`;
