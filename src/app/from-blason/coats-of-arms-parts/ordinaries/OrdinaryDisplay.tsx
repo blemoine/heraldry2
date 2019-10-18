@@ -32,6 +32,8 @@ function oneSideLineOption(lineOptions: LineOptions | null): LineOptions | null 
     return { ...lineOptions, halfOffset: true };
   } else if (lineOptions.line === 'urdy') {
     return { ...lineOptions, height: -lineOptions.height };
+  } else if (lineOptions.line === 'raguly') {
+    return { ...lineOptions, direction: lineOptions.direction === 'left' ? 'right' : 'left' };
   } else {
     return lineOptions;
   }

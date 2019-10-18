@@ -40,7 +40,8 @@ function getFieldVerticalOffsetAndScale(ordinary: Ordinary): { verticalOffset: n
       ordinary.line === 'embattled' ||
       ordinary.line === 'embattled-counter-embattled' ||
       ordinary.line === 'dovetailed' ||
-      ordinary.line === 'potenty'
+      ordinary.line === 'potenty' ||
+      ordinary.line === 'raguly'
     ) {
       return { verticalOffset: 9 / 50, verticalScale: 41 / 50 };
     } else if (ordinary.line === 'urdy') {

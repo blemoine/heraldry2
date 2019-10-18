@@ -26,6 +26,8 @@ export function computeLineOptions(line: Line, { width, height }: Dimension): Li
     return { line: 'dovetailed', height: height / 50, width: width / 9 };
   } else if (line === 'potenty') {
     return { line: 'potenty', height: height / 50, width: width / 9 };
+  } else if (line === 'raguly') {
+    return { line: 'raguly', height: height / 50, width: width / 9, direction: 'right' };
   } else if (line === 'straight') {
     return null;
   } else {
@@ -45,6 +47,12 @@ export function invertLineOptions(lineOptions: LineOptions): LineOptions {
     return { ...lineOptions, sweep: !lineOptions.sweep };
   } else if (lineOptions.line === 'wavy' || lineOptions.line === 'urdy') {
     return lineOptions;
+  } else if (lineOptions.line === 'raguly') {
+    return {
+      ...lineOptions,
+      height: -lineOptions.height,
+      direction: lineOptions.direction === 'left' ? 'right' : 'left',
+    };
   } else {
     return cannotHappen(lineOptions);
   }

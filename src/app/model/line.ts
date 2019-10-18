@@ -10,6 +10,7 @@ export const lines = [
   'urdy',
   'dovetailed',
   'potenty',
+  'raguly',
 ] as const;
 
 export type Line = typeof lines[number];

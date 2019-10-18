@@ -12,6 +12,7 @@ import {
   EngrailedLineOptions,
   IndentedLineOptions,
   PotentyLineOptions,
+  RagulyLineOptions,
   SvgPathBuilder,
   UrdyLineOptions,
   WavyLineOptions,
@@ -136,6 +137,28 @@ function potentyLineTo(path: SvgPathBuilder, to: PathAbsolutePoint, height: numb
     .goTo(getPerpendicularPoint(line, pointOnLine(from, to, (100 * 5) / 6), height / 2))
     .goTo(getPerpendicularPoint(line, pointOnLine(from, to, (100 * 2) / 3), height / 2))
     .goTo(pointOnLine(from, to, (100 * 2) / 3))
+    .goTo(to);
+}
+
+function ragulyLineTo(
+  path: SvgPathBuilder,
+  to: PathAbsolutePoint,
+  height: number,
+  direction: 'left' | 'right'
+): SvgPathBuilder {
+  const from = path.currentPoint();
+  if (!from || arePointEquivalent(from, to)) {
+    return path;
+  }
+  const line = [from, to] as const;
+  const firstQuarter = pointOnLine(from, to, 25);
+  const lastQuarter = pointOnLine(from, to, 75);
+  const offset = (100 / 8) * (direction === 'left' ? -1 : 1);
+  return path
+    .goTo(firstQuarter)
+    .goTo(getPerpendicularPoint(line, pointOnLine(from, to, 25 + offset), height))
+    .goTo(getPerpendicularPoint(line, pointOnLine(from, to, 75 + offset), height))
+    .goTo(lastQuarter)
     .goTo(to);
 }
 
@@ -293,5 +316,15 @@ export function potentyBetweenPoint(
 ): SvgPathBuilder {
   return drawBetweenPoint(path, lineOption.width, parametricPath, (result, to) =>
     potentyLineTo(result, to, lineOption.height)
+  );
+}
+
+export function ragulyBetweenPoint(
+  path: SvgPathBuilder,
+  lineOption: RagulyLineOptions,
+  parametricPath: (t: number) => PathAbsolutePoint
+): SvgPathBuilder {
+  return drawBetweenPoint(path, lineOption.width, parametricPath, (result, to) =>
+    ragulyLineTo(result, to, lineOption.height, lineOption.direction)
   );
 }

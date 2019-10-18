@@ -9,6 +9,7 @@ import {
   engrailBetweenPoint,
   indentBetweenPoint,
   potentyBetweenPoint,
+  ragulyBetweenPoint,
   urdyBetweenPoint,
   waveBetweenPoint,
 } from './line-style.helper';
@@ -48,6 +49,7 @@ export type UrdyLineOptions = { line: 'urdy'; height: number; width: number };
 export type IndentedLineOptions = { line: 'indented'; height: number; width: number };
 export type DovetailedLineOptions = { line: 'dovetailed'; height: number; width: number };
 export type PotentyLineOptions = { line: 'potenty'; height: number; width: number };
+export type RagulyLineOptions = { line: 'raguly'; height: number; width: number; direction: 'left' | 'right' };
 export type EmbattledLineOptions = {
   line: 'embattled';
   height: number;
@@ -62,7 +64,8 @@ export type LineOptions =
   | EmbattledLineOptions
   | UrdyLineOptions
   | DovetailedLineOptions
-  | PotentyLineOptions;
+  | PotentyLineOptions
+  | RagulyLineOptions;
 
 function getX(commands: Array<PathCommand>): number | null {
   if (commands.length === 0) {
@@ -546,6 +549,8 @@ export class SvgPathBuilder {
       return dovetailedBetweenPoint(this, lineOptions, nextPointFn);
     } else if (lineOptions.line === 'potenty') {
       return potentyBetweenPoint(this, lineOptions, nextPointFn);
+    } else if (lineOptions.line === 'raguly') {
+      return ragulyBetweenPoint(this, lineOptions, nextPointFn);
     } else {
       return cannotHappen(lineOptions);
     }
