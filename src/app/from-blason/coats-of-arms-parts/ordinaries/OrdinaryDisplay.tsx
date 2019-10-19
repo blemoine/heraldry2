@@ -15,6 +15,7 @@ import { ChiefOrdinaryDisplay } from './ChiefOrdinaryDisplay';
 import { BaseOrdinaryDisplay } from './BaseOrdinaryDisplay';
 import { FessOrdinaryDisplay } from './FessOrdinaryDisplay';
 import { BendOrdinaryDisplay } from './BendOrdinaryDisplay';
+import { PaleOrdinaryDisplay } from './PaleOrdinaryDisplay';
 
 type Props = {
   ordinary: Ordinary;
@@ -82,27 +83,12 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
     );
   } else if (ordinary.name === 'pale') {
     return (
-      <>
-        {range(0, ordinary.count).map((i) => {
-          const startX = ((i * 2 + 1) * width) / (2 * ordinary.count + 1);
-          const paleWidth = width / (2 * ordinary.count + 1);
-          const pathBuilder = SvgPathBuilder.start([startX, 0])
-            .goTo([startX, height], oneSideOnly)
-            .goTo([startX + paleWidth, height])
-            .goTo([startX + paleWidth, 0], lineOptions);
-
-          return (
-            <FocusablePathFromBuilder
-              key={i}
-              pathBuilder={pathBuilder}
-              fill={fill}
-              stroke={strokeColor}
-              style={{ cursor: 'pointer' }}
-              onClick={onClick}
-            />
-          );
-        })}
-      </>
+      <PaleOrdinaryDisplay
+        ordinary={ordinary}
+        dimension={dimension}
+        onClick={onClick}
+        fillFromTincture={fillFromTincture}
+      />
     );
   } else if (ordinary.name === 'cross') {
     const pathBuilder = SvgPathBuilder.start([(2 * width) / 5, 0])
