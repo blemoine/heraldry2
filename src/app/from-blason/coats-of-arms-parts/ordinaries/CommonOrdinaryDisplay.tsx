@@ -12,7 +12,7 @@ type Props = {
   transformProperties: FurTransformProperty;
   fillFromTincture: FillFromTincture;
   onClick: () => void;
-  pathBuilder: SvgPathBuilder;
+  pathBuilder: SvgPathBuilder | Array<SvgPathBuilder>;
 };
 export const CommonOrdinaryDisplay = ({
   tincture,
@@ -25,10 +25,20 @@ export const CommonOrdinaryDisplay = ({
   const strokeColor = tincture.name === 'sable' ? '#777' : '#333';
   const fill = getFill(fillFromTincture, tincture, postfixId);
 
+  const pathBuilders = Array.isArray(pathBuilder) ? pathBuilder : [pathBuilder];
+
   return (
     <>
       <FurPatternDefinition tinctures={[tincture]} postfixId={postfixId} transformProperties={transformProperties} />
-      <FocusablePathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke={strokeColor} onClick={onClick} />
+      {pathBuilders.map((pathBuilder, i) => (
+        <FocusablePathFromBuilder
+          key={i}
+          pathBuilder={pathBuilder}
+          fill={fill}
+          stroke={strokeColor}
+          onClick={onClick}
+        />
+      ))}
     </>
   );
 };
