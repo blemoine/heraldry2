@@ -8,6 +8,7 @@ import {
   gules,
   or,
   potent,
+  potentEnPoint,
   sable,
   vair,
   vairEnPale,
@@ -130,7 +131,7 @@ describe('parseBlason', () => {
 
 Expected one of the following: 
 
-Argent, Azure, Barry, Barry pily, Bendy, Bendy Sinister, Bendy pily, Bendy pily sinister, Chequy, Chevronny, Chevronny reversed, Counter ermine, Counter potent, Counter vair, Embrassee a dexter, Embrassee a sinister, Ermine, Erminois, Gironny, Gules, Lozenge throughout, Lozenge throughout arched, Lozengy, Lozengy bendwise, Murrey, Or, Paly, Paly pily, Pean, Per, Potent, Potent en pale, Potent en point, Purpure, Quarterly, Quarterly of nine, Sable, Sanguine, Tenné, Tierced per, Vair, Vair en pale, Vair en point, Vert
+Argent, Azure, Barry, Barry pily, Bendy, Bendy Sinister, Bendy pily, Bendy pily sinister, Chequy, Chevronny, Chevronny reversed, Counter ermine, Counter potent, Counter vair, Counter-ermine, Counter-potent, Counter-vair, Embrassee a dexter, Embrassee a sinister, Ermine, Erminois, Gironny, Gules, Lozenge throughout, Lozenge throughout arched, Lozengy, Lozengy bendwise, Murrey, Or, Paly, Paly pily, Pean, Per, Potent, Potent en pale, Potent en point, Potent-en-pale, Potent-en-point, Purpure, Quarterly, Quarterly of nine, Sable, Sanguine, Tenne, Tenné, Tierced per, Vair, Vair en pale, Vair en point, Vair-en-pale, Vair-en-point, Vert
 `,
     });
   });
@@ -332,6 +333,14 @@ Argent, Azure, Barry, Barry pily, Bendy, Bendy Sinister, Bendy pily, Bendy pily 
   it('should parse  Counter ermine and vair en point', () => {
     const expected: Blason = { kind: 'simple', field: { kind: 'chequy', tinctures: [counterErmine, vairEnPoint] } };
     expect(parseBlason('Chequy counter ermine and vair en point')).toEqual(expected);
+  });
+
+  it('should parse  Per pale potent-en-point and Vair-en-point', () => {
+    const expected: Blason = {
+      kind: 'simple',
+      field: { kind: 'party', per: { name: 'pale', tinctures: [potentEnPoint, vairEnPoint], line: 'straight' } },
+    };
+    expect(parseBlason('Per pale potent-en-point and Vair-en-point')).toEqual(expected);
   });
 
   it('should parse gironny', () => {

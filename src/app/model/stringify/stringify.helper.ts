@@ -19,26 +19,30 @@ export function stringifyLine(line: Line): string {
   }
 }
 
-export function stringifyTincture(tincture: Tincture): string {
+export function stringifyTinctureWithAlternative(tincture: Tincture): Array<string> {
   if (tincture.name === 'counter-ermine') {
-    return 'counter ermine';
+    return ['counter ermine', tincture.name];
   } else if (tincture.name === 'counter-vair') {
-    return 'counter vair';
+    return ['counter vair', tincture.name];
   } else if (tincture.name === 'vair-en-pale') {
-    return 'vair en pale';
+    return ['vair en pale', tincture.name];
   } else if (tincture.name === 'vair-en-point') {
-    return 'vair en point';
+    return ['vair en point', tincture.name];
   } else if (tincture.name === 'counter-potent') {
-    return 'counter potent';
+    return ['counter potent', tincture.name];
   } else if (tincture.name === 'potent-en-pale') {
-    return 'potent en pale';
+    return ['potent en pale', tincture.name];
   } else if (tincture.name === 'potent-en-point') {
-    return 'potent en point';
+    return ['potent en point', tincture.name];
   } else if (tincture.name === 'tenne') {
-    return 'tenné';
+    return ['tenné', 'tenne'];
   } else {
-    return tincture.name;
+    return [tincture.name];
   }
+}
+
+export function stringifyTincture(tincture: Tincture): string {
+  return stringifyTinctureWithAlternative(tincture)[0];
 }
 
 function stringifyOrdinal(i: number) {

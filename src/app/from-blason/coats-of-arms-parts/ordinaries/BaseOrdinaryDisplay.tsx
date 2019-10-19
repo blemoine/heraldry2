@@ -30,7 +30,7 @@ export const BaseOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onC
   const transformProperties: FurTransformProperty = buildFurTransformProperty(fillFromTincture, {
     ermine: [{ kind: 'scale', value: 0.65 * scaleRatio }, { kind: 'translate', value: [0, 30] }],
     vair: [{ kind: 'scale', value: 0.55 * scaleRatio }, { kind: 'translate', value: [0, 5] }],
-    potent: [{ kind: 'scale', value: 0.92 * scaleRatio }, { kind: 'translate', value: [0, 0] }],
+    potent: [{ kind: 'scale', value: 0.92 * scaleRatio }],
   });
 
   return (

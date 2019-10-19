@@ -4,10 +4,17 @@ import { Line, lines } from '../model/line';
 import { numberToNameMap, StringifiableNumber } from '../model/countAndDisposition';
 import { stringifyLine } from '../model/stringify/stringify.helper';
 
-export function buildAltParser<A>(arr: ReadonlyArray<A>, stringifyFn: (a: A) => string): P.Parser<A> {
+export function buildAltParser<A>(arr: ReadonlyArray<A>, stringifyFn: (a: A) => string | Array<string>): P.Parser<A> {
   return P.alt(
     ...arr
-      .map((a) => [a, stringifyFn(a)] as const)
+      .flatMap((a) => {
+        const strs = stringifyFn(a);
+        if (Array.isArray(strs)) {
+          return strs.map((str) => [a, str] as const);
+        } else {
+          return [[a, strs] as const];
+        }
+      })
       .sort(([, a1], [, a2]) => a2.length - a1.length)
       .map(([a, aStr]) =>
         P.regex(new RegExp(aStr, 'i'))
