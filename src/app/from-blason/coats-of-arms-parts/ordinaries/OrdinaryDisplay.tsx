@@ -8,13 +8,13 @@ import { FocusablePathFromBuilder } from '../../../common/PathFromBuilder';
 import { computeLineOptions, oneSideLineOption, SimpleBlasonShape } from '../blasonDisplay.helper';
 import { ShieldShape } from '../../../model/configuration';
 import { BordureDisplay } from './BordureDisplay';
-import { toDegree } from '../../../svg-path-builder/geometrical.helper';
 import { convertToOlfFillFronTincture, FillFromTincture } from '../../fillFromTincture.helper';
 import { QuarterOrdinaryDisplay } from './QuarterOrdinaryDisplay';
 import { CantonOrdinaryDisplay } from './CantonOrdinaryDisplay';
 import { ChiefOrdinaryDisplay } from './ChiefOrdinaryDisplay';
 import { BaseOrdinaryDisplay } from './BaseOrdinaryDisplay';
 import { FessOrdinaryDisplay } from './FessOrdinaryDisplay';
+import { BendOrdinaryDisplay } from './BendOrdinaryDisplay';
 
 type Props = {
   ordinary: Ordinary;
@@ -61,45 +61,23 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
       />
     );
   } else if (ordinary.name === 'bend') {
-    const length = Math.sqrt(width ** 2 + height ** 2);
-    const bendHeight = height / 4;
-
-    const pathBuilder2 = SvgPathBuilder.start([0, 0])
-      .goTo([0, bendHeight])
-      .goTo([length, bendHeight], oneSideOnly)
-      .goTo([length, 0])
-      .goTo([0, 0], lineOptions)
-      .translate([(width - length) / 2, height / 2 - bendHeight / 2])
-      .rotate([width / 2, height / 2], toDegree(Math.atan2(height, width)));
-
     return (
-      <FocusablePathFromBuilder
-        pathBuilder={pathBuilder2}
-        fill={fill}
-        stroke={strokeColor}
-        style={{ cursor: 'pointer' }}
+      <BendOrdinaryDisplay
+        ordinary={ordinary}
+        dimension={dimension}
         onClick={onClick}
+        fillFromTincture={fillFromTincture}
+        direction="dexter"
       />
     );
   } else if (ordinary.name === 'bendSinister') {
-    const length = Math.sqrt(width ** 2 + height ** 2);
-    const bendHeight = height / 4;
-
-    const pathBuilder2 = SvgPathBuilder.start([0, 0])
-      .goTo([0, bendHeight])
-      .goTo([length, bendHeight], oneSideOnly)
-      .goTo([length, 0])
-      .goTo([0, 0], lineOptions)
-      .translate([(width - length) / 2, height / 2 - bendHeight / 2])
-      .rotate([width / 2, height / 2], -toDegree(Math.atan2(height, width)));
-
     return (
-      <FocusablePathFromBuilder
-        pathBuilder={pathBuilder2}
-        fill={fill}
-        stroke={strokeColor}
-        style={{ cursor: 'pointer' }}
+      <BendOrdinaryDisplay
+        ordinary={ordinary}
+        dimension={dimension}
         onClick={onClick}
+        fillFromTincture={fillFromTincture}
+        direction="sinister"
       />
     );
   } else if (ordinary.name === 'pale') {
