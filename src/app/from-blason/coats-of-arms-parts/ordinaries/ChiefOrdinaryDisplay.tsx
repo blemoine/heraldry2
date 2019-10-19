@@ -1,12 +1,11 @@
 import { chiefHeightRatio, computeLineOptions } from '../blasonDisplay.helper';
 import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
-import { FocusablePathFromBuilder } from '../../../common/PathFromBuilder';
 import * as React from 'react';
 import { Chief } from '../../../model/ordinary';
 import { Dimension } from '../../../model/dimension';
 import { FillFromTincture } from '../../fillFromTincture.helper';
-import { buildFurTransformProperty, FurTransformProperty, getFill } from '../FurPattern.model';
-import { FurPatternDefinition } from '../FurPatternDefinition';
+import { buildFurTransformProperty, FurTransformProperty } from '../FurPattern.model';
+import { CommonOrdinaryDisplay } from './CommonOrdinaryDisplay';
 
 const postfixId = 'chief';
 
@@ -20,8 +19,6 @@ export const ChiefOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, on
   const { width, height } = dimension;
   const chiefHeight = height * chiefHeightRatio;
   const lineOptions = computeLineOptions(ordinary.line, dimension);
-  const strokeColor = ordinary.tincture.name === 'sable' ? '#777' : '#333';
-  const fill = getFill(fillFromTincture, ordinary.tincture, postfixId);
 
   const computedHeight =
     chiefHeight +
@@ -44,13 +41,13 @@ export const ChiefOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, on
   });
 
   return (
-    <>
-      <FurPatternDefinition
-        tinctures={[ordinary.tincture]}
-        postfixId={postfixId}
-        transformProperties={transformProperties}
-      />
-      <FocusablePathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke={strokeColor} onClick={onClick} />
-    </>
+    <CommonOrdinaryDisplay
+      tincture={ordinary.tincture}
+      fillFromTincture={fillFromTincture}
+      onClick={onClick}
+      transformProperties={transformProperties}
+      pathBuilder={pathBuilder}
+      postfixId={postfixId}
+    />
   );
 };

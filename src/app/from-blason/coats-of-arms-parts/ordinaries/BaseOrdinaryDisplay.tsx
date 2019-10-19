@@ -1,12 +1,11 @@
 import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
-import { FocusablePathFromBuilder } from '../../../common/PathFromBuilder';
 import * as React from 'react';
 import { Dimension } from '../../../model/dimension';
 import { Base } from '../../../model/ordinary';
 import { FillFromTincture } from '../../fillFromTincture.helper';
 import { computeLineOptions } from '../blasonDisplay.helper';
-import { buildFurTransformProperty, FurTransformProperty, getFill } from '../FurPattern.model';
-import { FurPatternDefinition } from '../FurPatternDefinition';
+import { buildFurTransformProperty, FurTransformProperty } from '../FurPattern.model';
+import { CommonOrdinaryDisplay } from './CommonOrdinaryDisplay';
 
 const postfixId = 'base';
 
@@ -20,8 +19,6 @@ export const BaseOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onC
   const { width, height } = dimension;
   const lineOptions = computeLineOptions(ordinary.line, dimension);
   const baseHeight = height / 4;
-  const strokeColor = ordinary.tincture.name === 'sable' ? '#777' : '#333';
-  const fill = getFill(fillFromTincture, ordinary.tincture, postfixId);
 
   const pathBuilder = SvgPathBuilder.start([0, height])
     .goTo([width, height])
@@ -37,13 +34,13 @@ export const BaseOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onC
   });
 
   return (
-    <>
-      <FurPatternDefinition
-        tinctures={[ordinary.tincture]}
-        postfixId={postfixId}
-        transformProperties={transformProperties}
-      />
-      <FocusablePathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke={strokeColor} onClick={onClick} />
-    </>
+    <CommonOrdinaryDisplay
+      tincture={ordinary.tincture}
+      fillFromTincture={fillFromTincture}
+      onClick={onClick}
+      transformProperties={transformProperties}
+      pathBuilder={pathBuilder}
+      postfixId={postfixId}
+    />
   );
 };
