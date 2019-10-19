@@ -3,9 +3,9 @@ import { Ordinary } from '../../../model/ordinary';
 import { cannotHappen } from '../../../../utils/cannot-happen';
 import { Dimension } from '../../../model/dimension';
 import { range } from '../../../../utils/range';
-import { LineOptions, SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
+import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { FocusablePathFromBuilder } from '../../../common/PathFromBuilder';
-import { computeLineOptions, SimpleBlasonShape } from '../blasonDisplay.helper';
+import { computeLineOptions, oneSideLineOption, SimpleBlasonShape } from '../blasonDisplay.helper';
 import { ShieldShape } from '../../../model/configuration';
 import { BordureDisplay } from './BordureDisplay';
 import { toDegree } from '../../../svg-path-builder/geometrical.helper';
@@ -14,6 +14,7 @@ import { QuarterOrdinaryDisplay } from './QuarterOrdinaryDisplay';
 import { CantonOrdinaryDisplay } from './CantonOrdinaryDisplay';
 import { ChiefOrdinaryDisplay } from './ChiefOrdinaryDisplay';
 import { BaseOrdinaryDisplay } from './BaseOrdinaryDisplay';
+import { FessOrdinaryDisplay } from './FessOrdinaryDisplay';
 
 type Props = {
   ordinary: Ordinary;
@@ -23,23 +24,6 @@ type Props = {
   shieldShape: ShieldShape;
   onClick: () => void;
 };
-
-function oneSideLineOption(lineOptions: LineOptions | null): LineOptions | null {
-  if (!lineOptions) {
-    return null;
-  }
-  if ('oneSideOnly' in lineOptions && lineOptions.oneSideOnly) {
-    return null;
-  } else if ('halfOffset' in lineOptions && lineOptions.halfOffset !== null) {
-    return { ...lineOptions, halfOffset: true };
-  } else if (lineOptions.line === 'urdy') {
-    return { ...lineOptions, height: -lineOptions.height };
-  } else if (lineOptions.line === 'raguly') {
-    return { ...lineOptions, direction: lineOptions.direction === 'left' ? 'right' : 'left' };
-  } else {
-    return lineOptions;
-  }
-}
 
 export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, shieldShape, onClick }: Props) => {
   const strokeColor = ordinary.tincture.name === 'sable' ? '#777' : '#333';
@@ -68,19 +52,12 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
       />
     );
   } else if (ordinary.name === 'fess') {
-    const pathBuilder = SvgPathBuilder.start([0, height / 3])
-      .goTo([0, (2 * height) / 3])
-      .goTo([width, (2 * height) / 3], oneSideOnly)
-      .goTo([width, height / 3])
-      .goTo([0, height / 3], lineOptions);
-
     return (
-      <FocusablePathFromBuilder
-        pathBuilder={pathBuilder}
-        fill={fill}
-        stroke={strokeColor}
-        style={{ cursor: 'pointer' }}
+      <FessOrdinaryDisplay
+        ordinary={ordinary}
+        dimension={dimension}
         onClick={onClick}
+        fillFromTincture={fillFromTincture}
       />
     );
   } else if (ordinary.name === 'bend') {

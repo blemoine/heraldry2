@@ -5890,6 +5890,148 @@ exports[`CoatsOfArms should render 'Or, a fess murrey' 1`] = `
 </svg>
 `;
 
+exports[`CoatsOfArms should render 'Or, a fess vair en point' 1`] = `
+<svg
+  className="coats-of-arms-display"
+  height={266.6666666666667}
+  viewBox="0 0 200 266.6666666666667"
+  width={200}
+>
+  <defs>
+    
+    
+    
+    
+    
+    
+    
+    <symbol
+      id="vair-en-point"
+      viewBox="0 0 200 200"
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <path
+        d="M0 200 L200 200 L150 150 L150 50 L100 0 L50 50 L50 150 Z"
+        fill="#0000FF"
+      />
+    </symbol>
+    <pattern
+      height={80}
+      id="field-pattern-11"
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 100 200"
+      width={40}
+    >
+      <rect
+        fill="#FFFFFF"
+        height="200px"
+        width="100px"
+      />
+      <use
+        height={100}
+        href="#vair-en-point"
+        width={100}
+        x="0"
+        y="0"
+      />
+      <g
+        transform="scale(1,-1) translate(0 -300)"
+      >
+        <use
+          height={100}
+          href="#vair-en-point"
+          width={100}
+          x="50"
+          y="100"
+        />
+        <use
+          height={100}
+          href="#vair-en-point"
+          width={100}
+          x="-50"
+          y="100"
+        />
+      </g>
+    </pattern>
+    
+    
+    
+    
+    <clipPath
+      id="plain-field-clip-path"
+    >
+      <path
+        d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
+        fill="transparent"
+        stroke="#333"
+        style={
+          Object {
+            "pointerEvents": "none",
+          }
+        }
+      />
+    </clipPath>
+  </defs>
+  <g
+    className="blason-field"
+    clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
+  >
+    <rect
+      fill="#FFD700"
+      height={266.6666666666667}
+      stroke="#333"
+      width={200}
+      x={0}
+      y={0}
+    />
+  </g>
+  <g
+    className="blason-ordinary"
+    clipPath="url(#plain-field-clip-path)"
+  >
+    <pattern
+      id="field-pattern-11-fess"
+      patternTransform="scale(0.31111111111111117) translate(0,70)"
+      xlinkHref="#field-pattern-11"
+    />
+    <path
+      d="M 0 88.88889 V177.77778 H200 V88.88889 Z"
+      fill="url(#field-pattern-11-fess)"
+      onClick={[Function]}
+      onMouseDown={[Function]}
+      onMouseUp={[Function]}
+      stroke="#333"
+      strokeWidth={1}
+      style={
+        Object {
+          "cursor": "pointer",
+        }
+      }
+    />
+  </g>
+  <path
+    d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
+    fill="transparent"
+    stroke="#333"
+    style={
+      Object {
+        "pointerEvents": "none",
+      }
+    }
+  />
+</svg>
+`;
+
 exports[`CoatsOfArms should render 'Or, eleven rustres sable' 1`] = `
 <svg
   className="coats-of-arms-display"

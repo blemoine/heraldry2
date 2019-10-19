@@ -58,6 +58,23 @@ export function invertLineOptions(lineOptions: LineOptions): LineOptions {
   }
 }
 
+export function oneSideLineOption(lineOptions: LineOptions | null): LineOptions | null {
+  if (!lineOptions) {
+    return null;
+  }
+  if ('oneSideOnly' in lineOptions && lineOptions.oneSideOnly) {
+    return null;
+  } else if ('halfOffset' in lineOptions && lineOptions.halfOffset !== null) {
+    return { ...lineOptions, halfOffset: true };
+  } else if (lineOptions.line === 'urdy') {
+    return { ...lineOptions, height: -lineOptions.height };
+  } else if (lineOptions.line === 'raguly') {
+    return { ...lineOptions, direction: lineOptions.direction === 'left' ? 'right' : 'left' };
+  } else {
+    return lineOptions;
+  }
+}
+
 export const chiefHeightRatio = 1 / 5;
 
 export type SimpleBlasonShape = 'default' | 'square' | 'leftCut' | 'rightCut';
