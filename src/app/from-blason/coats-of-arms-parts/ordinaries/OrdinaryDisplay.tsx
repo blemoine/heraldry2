@@ -16,6 +16,7 @@ import { BaseOrdinaryDisplay } from './BaseOrdinaryDisplay';
 import { FessOrdinaryDisplay } from './FessOrdinaryDisplay';
 import { BendOrdinaryDisplay } from './BendOrdinaryDisplay';
 import { PaleOrdinaryDisplay } from './PaleOrdinaryDisplay';
+import { CrossOrdinaryDisplay } from './CrossOrdinaryDisplay';
 
 type Props = {
   ordinary: Ordinary;
@@ -91,27 +92,12 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
       />
     );
   } else if (ordinary.name === 'cross') {
-    const pathBuilder = SvgPathBuilder.start([(2 * width) / 5, 0])
-      .goToWithPartFlat([(2 * width) / 5, (2 * height) / 5], oneSideOnly, 5, 'end')
-      .goToWithPartFlat([0, (2 * height) / 5], lineOptions, 5, 'start')
-      .goTo([0, (3 * height) / 5])
-      .goToWithPartFlat([(2 * width) / 5, (3 * height) / 5], oneSideOnly, 5, 'end')
-      .goToWithPartFlat([(2 * width) / 5, height], oneSideOnly, 5, 'start')
-      .goTo([(3 * width) / 5, height])
-      .goToWithPartFlat([(3 * width) / 5, (3 * height) / 5], oneSideOnly, 5, 'end')
-      .goToWithPartFlat([width, (3 * height) / 5], oneSideOnly, 5, 'start')
-      .goTo([width, (2 * height) / 5])
-      .goToWithPartFlat([(3 * width) / 5, (2 * height) / 5], lineOptions, 5, 'end')
-      .goToWithPartFlat([(3 * width) / 5, 0], oneSideOnly, 5, 'start')
-      .goTo([(2 * width) / 5, 0]);
-
     return (
-      <FocusablePathFromBuilder
-        pathBuilder={pathBuilder}
-        fill={fill}
-        stroke={strokeColor}
-        style={{ cursor: 'pointer' }}
+      <CrossOrdinaryDisplay
+        ordinary={ordinary}
+        dimension={dimension}
         onClick={onClick}
+        fillFromTincture={fillFromTincture}
       />
     );
   } else if (ordinary.name === 'saltire') {
