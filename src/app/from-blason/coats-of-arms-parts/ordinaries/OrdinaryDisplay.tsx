@@ -2,9 +2,7 @@ import * as React from 'react';
 import { Ordinary } from '../../../model/ordinary';
 import { cannotHappen } from '../../../../utils/cannot-happen';
 import { Dimension } from '../../../model/dimension';
-import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
-import { FocusablePathFromBuilder } from '../../../common/PathFromBuilder';
-import { computeLineOptions, oneSideLineOption, SimpleBlasonShape } from '../blasonDisplay.helper';
+import { SimpleBlasonShape } from '../blasonDisplay.helper';
 import { ShieldShape } from '../../../model/configuration';
 import { BordureDisplay } from './BordureDisplay';
 import { convertToOlfFillFronTincture, FillFromTincture } from '../../fillFromTincture.helper';
@@ -18,6 +16,7 @@ import { PaleOrdinaryDisplay } from './PaleOrdinaryDisplay';
 import { CrossOrdinaryDisplay } from './CrossOrdinaryDisplay';
 import { SaltireOrdinaryDisplay } from './SaltireOrdinaryDisplay';
 import { ChevronOrdinaryDisplay } from './ChevronOrdinaryDisplay';
+import { PallOrdinaryDisplay } from './PallOrdinaryDisplay';
 
 type Props = {
   ordinary: Ordinary;
@@ -30,12 +29,7 @@ type Props = {
 
 export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, shieldShape, onClick }: Props) => {
   const strokeColor = ordinary.tincture.name === 'sable' ? '#777' : '#333';
-
   const fill = convertToOlfFillFronTincture(fillFromTincture)(ordinary.tincture);
-  const lineOptions = computeLineOptions(ordinary.line, dimension);
-  const oneSideOnly = oneSideLineOption(lineOptions);
-
-  const { width, height } = dimension;
   if (ordinary.name === 'chief') {
     return (
       <ChiefOrdinaryDisplay
@@ -132,29 +126,11 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
       />
     );
   } else if (ordinary.name === 'pall') {
-    const pallWidth = width / 5.5;
-    const projectedPallWidth = pallWidth / Math.sqrt(2);
-    const lineOptions = computeLineOptions(ordinary.line, { width: width / 1.5, height });
-
-    const pathBuilder = SvgPathBuilder.start([0, 0])
-      .goTo([0, projectedPallWidth])
-      .goTo([width / 2 - pallWidth / 2, height / 2], oneSideOnly)
-      .goTo([width / 2 - pallWidth / 2, height], oneSideOnly)
-      .goTo([width / 2 + pallWidth / 2, height])
-      .goTo([width / 2 + pallWidth / 2, height / 2], oneSideOnly)
-      .goTo([width, projectedPallWidth], oneSideOnly)
-      .goTo([width, 0])
-      .goTo([width - projectedPallWidth, 0])
-      .goTo([width / 2, height / 2 - (height / width) * projectedPallWidth], lineOptions)
-      .goTo([projectedPallWidth, 0], lineOptions)
-      .goTo([0, 0]);
-
     return (
-      <FocusablePathFromBuilder
-        pathBuilder={pathBuilder}
-        fill={fill}
-        stroke={strokeColor}
-        style={{ cursor: 'pointer' }}
+      <PallOrdinaryDisplay
+        dimension={dimension}
+        ordinary={ordinary}
+        fillFromTincture={fillFromTincture}
         onClick={onClick}
       />
     );
