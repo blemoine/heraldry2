@@ -20,5 +20,13 @@ export function swissPathBuilder({ width, height }: Dimension, lineOptions: Line
 export const SwissDisplay: React.FunctionComponent<Props> = ({ dimension, stroke, fill, onClick }) => {
   const pathBuilder = swissPathBuilder(dimension, null);
 
-  return <FocusablePathFromBuilder pathBuilder={pathBuilder} stroke={stroke} fill={fill} onClick={onClick} />;
+  return (
+    <FocusablePathFromBuilder
+      pathBuilder={pathBuilder}
+      stroke={stroke}
+      fill={fill}
+      onClick={onClick}
+      style={{ pointerEvents: 'none' }}
+    />
+  );
 };

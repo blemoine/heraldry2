@@ -4,6 +4,7 @@ import { PaleForm } from './PaleForm';
 import { StandardOrdinaryForm } from './StandardOrdinaryForm';
 import { ChevronForm } from './ChevronForm';
 import { TinctureConfiguration } from '../../../model/tincture-configuration';
+import { ChapePloyeForm } from './ChapePloyeForm';
 
 type Props = {
   tinctureConfiguration: TinctureConfiguration;
@@ -14,6 +15,14 @@ export const OrdinaryDispatcherForm = ({ tinctureConfiguration, ordinary, ordina
   if (ordinary.name === 'pale') {
     return (
       <PaleForm tinctureConfiguration={tinctureConfiguration} ordinary={ordinary} ordinaryChange={ordinaryChange} />
+    );
+  } else if (ordinary.name === 'chape-ploye') {
+    return (
+      <ChapePloyeForm
+        tinctureConfiguration={tinctureConfiguration}
+        ordinary={ordinary}
+        ordinaryChange={ordinaryChange}
+      />
     );
   } else if (ordinary.name === 'chevron' || ordinary.name === 'chevronel') {
     return (

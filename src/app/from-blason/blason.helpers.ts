@@ -24,7 +24,11 @@ function allDeclaredTincturesOfCharge(charge: Charge): Array<Tincture> {
   }
 }
 function allDeclaredTincturesOfOrdinary(ordinary: Ordinary): Array<Tincture> {
-  return [ordinary.tincture];
+  if (ordinary.name === 'chape-ploye') {
+    return ordinary.tinctures;
+  } else {
+    return [ordinary.tincture];
+  }
 }
 function allDeclaredTincturesOfField(field: Field): Array<Tincture> {
   if (field.kind === 'plain') {

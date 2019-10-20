@@ -19,5 +19,13 @@ export function heaterPathBuilder({ width, height }: Dimension, lineOptions: Lin
 export const HeaterDisplay: React.FunctionComponent<Props> = ({ dimension, stroke, fill, onClick }) => {
   const pathBuilder = heaterPathBuilder(dimension, null);
 
-  return <FocusablePathFromBuilder pathBuilder={pathBuilder} stroke={stroke} fill={fill} onClick={onClick} />;
+  return (
+    <FocusablePathFromBuilder
+      pathBuilder={pathBuilder}
+      stroke={stroke}
+      fill={fill}
+      onClick={onClick}
+      style={{ pointerEvents: 'none' }}
+    />
+  );
 };

@@ -2,7 +2,7 @@ import fc, { Arbitrary } from 'fast-check';
 import { or, Tincture, tinctures } from '../tincture';
 import { Field, fieldKinds, PartyField, TiercedField } from '../field';
 import { PallParty, parties, Party } from '../party';
-import { ordinaries, Ordinary } from '../ordinary';
+import { ChapePloye, ordinaries, Ordinary } from '../ordinary';
 import {
   Charge,
   charges,
@@ -90,6 +90,14 @@ export const ordinaryArb: Arbitrary<Ordinary> = fc
           line: obj.line,
         } as const;
         return fc.constantFrom(1 as const, 2 as const).map((count) => ({ ...countableOrdinary, count }));
+      } else if (obj.name === 'chape-ploye') {
+        const name = obj.name;
+
+        return tinctureArb.map(
+          (tincture2): ChapePloye => {
+            return { name, tinctures: [obj.tincture, tincture2], line: obj.line };
+          }
+        );
       } else {
         const name = obj.name;
         return fc.constant({ name, tincture: obj.tincture, line: obj.line });

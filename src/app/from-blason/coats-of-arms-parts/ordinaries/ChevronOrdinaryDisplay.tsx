@@ -41,13 +41,16 @@ export const ChevronOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, 
 
     const topFlatPart = ordinary.count === 1 ? 3.8 : ordinary.count === 3 ? 12 : -1;
 
-    return SvgPathBuilder.start([width / 2, topPoint])
-      .goToWithPartFlat([0, bottomPoint - chevronHeight], lineOptions, topFlatPart, 'start')
-      .goTo([0, bottomPoint])
-      .goToWithPartFlat([width / 2, topPoint + chevronHeight], oneSideOnly, 5)
-      .goToWithPartFlat([width, bottomPoint], oneSideOnly, 5)
-      .goTo([width, bottomPoint - chevronHeight])
-      .goToWithPartFlat([width / 2, topPoint], lineOptions, topFlatPart, 'end');
+    return {
+      pathBuilder: SvgPathBuilder.start([width / 2, topPoint])
+        .goToWithPartFlat([0, bottomPoint - chevronHeight], lineOptions, topFlatPart, 'start')
+        .goTo([0, bottomPoint])
+        .goToWithPartFlat([width / 2, topPoint + chevronHeight], oneSideOnly, 5)
+        .goToWithPartFlat([width, bottomPoint], oneSideOnly, 5)
+        .goTo([width, bottomPoint - chevronHeight])
+        .goToWithPartFlat([width / 2, topPoint], lineOptions, topFlatPart, 'end'),
+      tincture: ordinary.tincture,
+    };
   });
 
   return (

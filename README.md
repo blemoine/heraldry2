@@ -42,6 +42,7 @@ Faire le "of the last"
 - Chevronny et Chevronny reversed en quarterly sont mal affiché
 - Réfléchir a une autre facon de faire les fields :
     * vu comme la composition d'un fond rectanglaire (et grand) + d'un truc par dessus ? 
+- Click on Escutcheon doesn't work. 
 
 ## Feature to add
 

@@ -1,20 +1,20 @@
 import * as React from 'react';
-import { ChapePloye, Ordinary, Pale } from '../../../model/ordinary';
-import { TinctureSelect } from '../TinctureSelect';
+import { ChapePloye } from '../../../model/ordinary';
 import { Tincture } from '../../../model/tincture';
 import { LineSelect } from '../LineSelect';
 import { Line } from '../../../model/line';
 import { TinctureConfiguration } from '../../../model/tincture-configuration';
+import { TincturesConfiguration } from '../TincturesConfiguration';
 
-type SupportedOrdinary = Exclude<Ordinary, Pale | ChapePloye>;
+type SupportedOrdinary = ChapePloye;
 type Props = {
   tinctureConfiguration: TinctureConfiguration;
   ordinary: SupportedOrdinary;
   ordinaryChange: (ordinary: SupportedOrdinary) => void;
 };
-export const StandardOrdinaryForm = ({ tinctureConfiguration, ordinary, ordinaryChange }: Props) => {
-  function ordinaryTinctureChange(tincture: Tincture) {
-    ordinaryChange({ ...ordinary, tincture });
+export const ChapePloyeForm = ({ tinctureConfiguration, ordinary, ordinaryChange }: Props) => {
+  function tincturesChanges(tinctures: [Tincture, Tincture]) {
+    ordinaryChange({ ...ordinary, tinctures });
   }
 
   function lineChange(line: Line) {
@@ -23,16 +23,11 @@ export const StandardOrdinaryForm = ({ tinctureConfiguration, ordinary, ordinary
 
   return (
     <div className="row">
-      <div className="col">
-        <div className="form-group ordinary-tincture-select">
-          <label>Tincture</label>
-          <TinctureSelect
-            tinctureConfiguration={tinctureConfiguration}
-            tincture={ordinary.tincture}
-            tinctureChange={ordinaryTinctureChange}
-          />
-        </div>
-      </div>
+      <TincturesConfiguration
+        tinctures={ordinary.tinctures}
+        tincturesChanges={(tinctures) => tincturesChanges(tinctures)}
+        tinctureConfiguration={tinctureConfiguration}
+      />
 
       <div className="col">
         <div className="form-group">

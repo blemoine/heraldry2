@@ -18,5 +18,13 @@ export function spanishPathBuilder({ width, height }: Dimension, lineOptions: Li
 export const SpanishDisplay = ({ dimension, stroke, fill, onClick }: Props) => {
   const pathBuilder = spanishPathBuilder(dimension, null);
 
-  return <FocusablePathFromBuilder pathBuilder={pathBuilder} stroke={stroke} fill={fill} onClick={onClick} />;
+  return (
+    <FocusablePathFromBuilder
+      pathBuilder={pathBuilder}
+      stroke={stroke}
+      fill={fill}
+      onClick={onClick}
+      style={{ pointerEvents: 'none' }}
+    />
+  );
 };

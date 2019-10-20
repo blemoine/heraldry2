@@ -201,10 +201,16 @@ export function encodeOrdinary(ordinary: Ordinary | null): Uint8Array {
   }
   result[0] = encodeOrdinaryName(ordinary.name);
   result[1] = encodeLine(ordinary.line);
-  result[2] = encodeTincture(ordinary.tincture);
-  if (ordinary.name === 'pale' || ordinary.name === 'chevron' || ordinary.name === 'chevronel') {
-    result[3] = ordinary.count;
+  if (ordinary.name === 'chape-ploye') {
+    result[2] = encodeTincture(ordinary.tinctures[0]);
+    result[3] = encodeTincture(ordinary.tinctures[1]);
+  } else {
+    result[2] = encodeTincture(ordinary.tincture);
+    if (ordinary.name === 'pale' || ordinary.name === 'chevron' || ordinary.name === 'chevronel') {
+      result[3] = ordinary.count;
+    }
   }
+
   return result;
 }
 
@@ -222,6 +228,8 @@ export function decodeOrdinary(arr: Uint8Array): Result<Ordinary | null> {
       if (name === 'pale') {
         const maybeCount: Result<1 | 2> = decodeNumber([1, 2], arr[3]);
         return map(maybeCount, (count) => ({ name, line, tincture, count }));
+      } else if (name === 'chape-ploye') {
+        return map(decodeTincture(arr[3]), (tincture2) => ({ name, line, tinctures: [tincture, tincture2] }));
       } else if (name === 'chevron' || name === 'chevronel') {
         const maybeCount: Result<1 | 2 | 3> = decodeNumber([1, 2, 3], arr[3]);
         return map(maybeCount, (count) => ({ name, line, tincture, count }));

@@ -76,6 +76,8 @@ function pluralize(str: string, count: SupportedNumber): string {
 export function stringifyOrdinaryName(name: Ordinary['name']): string {
   if (name === 'bendSinister') {
     return 'bend sinister';
+  } else if (name === 'chape-ploye') {
+    return 'chapé ployé';
   } else {
     return name;
   }
@@ -101,6 +103,16 @@ function stringifyOrdinary(ordinary: Ordinary): string {
       result += stringifyLine(ordinary.line) + ' ';
     }
     result += stringifyTincture(ordinary.tincture);
+    return result;
+  } else if (ordinary.name === 'chape-ploye') {
+    let result = stringifyOrdinaryName(ordinary.name) + ' ';
+    if (ordinary.line !== 'straight') {
+      result += stringifyLine(ordinary.line) + ' ';
+    }
+    result += ' per pale ';
+    result += stringifyTincture(ordinary.tinctures[0]);
+    result += ' and ';
+    result += stringifyTincture(ordinary.tinctures[1]);
     return result;
   } else {
     let result = 'a ' + stringifyOrdinaryName(ordinary.name) + ' ';

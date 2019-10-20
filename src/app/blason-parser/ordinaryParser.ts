@@ -1,13 +1,13 @@
 import * as P from 'parsimmon';
-import { Chevron, Chevronel, ordinaries, Ordinary, OrdinaryCross, Pale } from '../model/ordinary';
+import { ChapePloye, Chevron, Chevronel, ordinaries, Ordinary, OrdinaryCross, Pale } from '../model/ordinary';
 import { aParser, buildAltParser, lineParser, numberParser } from './parser.helper';
 import { tinctureParserFromName } from './tinctureParser';
 import { stringifyOrdinaryName } from '../model/stringify/stringify.helper';
 
 function isNotPaleOrChevronOrCross(
   o: Ordinary['name']
-): o is Exclude<Ordinary['name'], 'pale' | 'chevron' | 'chevronel' | 'cross'> {
-  return !['pale', 'chevron', 'chevronel', 'cross'].includes(o);
+): o is Exclude<Ordinary['name'], 'pale' | 'chevron' | 'chevronel' | 'cross' | 'chape-ploye'> {
+  return !['pale', 'chevron', 'chevronel', 'cross', 'chape-ploye'].includes(o);
 }
 
 export function ordinaryParser(): P.Parser<Ordinary> {
@@ -40,19 +40,37 @@ export function ordinaryParser(): P.Parser<Ordinary> {
     tinctureParserFromName
   ).map(([count, name, line, tincture]): Chevron | Chevronel => ({ name, count, line, tincture }));
 
-  const ordinaryWithLineParser: P.Parser<Exclude<Ordinary, Pale | Chevron | OrdinaryCross>> = P.seq(
+  const chapePloyerParser: P.Parser<ChapePloye> = P.seq(
+    P.regexp(/chapé ployé/i)
+      .result('chape-ploye' as const)
+      .skip(P.whitespace),
+    lineParser.skip(P.whitespace).fallback('straight' as const),
+
+    P.string('per pale ')
+      .then(tinctureParserFromName)
+      .skip(P.string(' and ')),
+    tinctureParserFromName
+  ).map(
+    ([name, line, tincture1, tincture2]): ChapePloye => ({
+      name,
+      line,
+      tinctures: [tincture1, tincture2],
+    })
+  );
+
+  const ordinaryWithLineParser: P.Parser<Exclude<Ordinary, Pale | Chevron | OrdinaryCross | ChapePloye>> = P.seq(
     aParser
       .then(buildAltParser(ordinaries.filter(isNotPaleOrChevronOrCross), stringifyOrdinaryName))
       .skip(P.whitespace),
     lineParser.skip(P.whitespace).fallback('straight' as const),
     tinctureParserFromName
   ).map(
-    ([name, line, tincture]): Exclude<Ordinary, Pale | Chevron | Chevronel | OrdinaryCross> => ({
+    ([name, line, tincture]): Exclude<Ordinary, Pale | Chevron | Chevronel | OrdinaryCross | ChapePloye> => ({
       name,
       line,
       tincture,
     })
   );
 
-  return P.alt(paleParser, chevronParser, ordinaryWithLineParser);
+  return P.alt(paleParser, chevronParser, chapePloyerParser, ordinaryWithLineParser);
 }

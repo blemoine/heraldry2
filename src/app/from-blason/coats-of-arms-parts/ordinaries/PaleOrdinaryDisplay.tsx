@@ -24,10 +24,13 @@ export const PaleOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onC
   const pathBuilders = range(0, ordinary.count).map((i) => {
     const startX = ((i * 2 + 1) * width) / (2 * ordinary.count + 1);
     const paleWidth = width / (2 * ordinary.count + 1);
-    return SvgPathBuilder.start([startX, 0])
-      .goTo([startX, height], oneSideOnly)
-      .goTo([startX + paleWidth, height])
-      .goTo([startX + paleWidth, 0], lineOptions);
+    return {
+      pathBuilder: SvgPathBuilder.start([startX, 0])
+        .goTo([startX, height], oneSideOnly)
+        .goTo([startX + paleWidth, height])
+        .goTo([startX + paleWidth, 0], lineOptions),
+      tincture: ordinary.tincture,
+    };
   });
 
   const scaleRatio = height / 480;
