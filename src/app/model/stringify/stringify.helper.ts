@@ -293,6 +293,14 @@ function stringifyCharge(charge: Charge): string {
     result += stringifyTincture(charge.tincture);
 
     return result;
+  } else if (charge.name === 'escutcheon') {
+    let result = counterStr + ' ' + pluralize('escutcheon', count) + ' ';
+    if (charge.countAndDisposition.count !== 1 && charge.countAndDisposition.disposition !== 'default') {
+      result += ' in ' + charge.countAndDisposition.disposition + ' ';
+    }
+    result += stringifyTincture(charge.tincture);
+
+    return result;
   } else if (charge.name === 'lion') {
     let result = counterStr;
     result += ' ' + pluralize('lion', count);

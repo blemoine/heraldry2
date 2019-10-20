@@ -24,7 +24,7 @@ export const ShieldShapeForm = function ShieldShapeForm({ shieldShape, shieldSha
           >
             <div>
               <svg width={dimension.width} height={dimension.height}>
-                <EscutcheonDisplay dimension={dimension} shieldShape={shape} />
+                <EscutcheonDisplay dimension={dimension} shieldShape={shape} fill="transparent" stroke="#333" />
               </svg>
             </div>
             <span>{shape}</span>

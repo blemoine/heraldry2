@@ -7,6 +7,7 @@ import {
   Eagle,
   EagleAttitude,
   eagleAttitudes,
+  Escutcheon,
   FleurDeLys,
   Lion,
   LionAttitude,
@@ -119,6 +120,16 @@ const fleurDeLysParser = (): P.Parser<FleurDeLys> => {
   });
 };
 
+const escutcheonParser = (): P.Parser<Escutcheon> => {
+  return countParser.chain((count) => {
+    return P.seq(
+      P.regexp(/escutcheons?/i).result('escutcheon' as const),
+      countAndDispositionParser(count),
+      P.whitespace.then(tinctureParserFromName)
+    ).map(([name, countAndDisposition, tincture]): Escutcheon => ({ name, countAndDisposition, tincture }));
+  });
+};
+
 const roundelParser = (): P.Parser<Roundel> => {
   return countParser.chain((count) => {
     return P.seq(
@@ -222,6 +233,8 @@ export function chargeParser(): P.Parser<Exclude<Charge, Cross>> {
         return countParser.trim(P.optWhitespace).chain<Eagle>((count) => eagleParser(count));
       } else if (charge === 'fleurdelys') {
         return fleurDeLysParser();
+      } else if (charge === 'escutcheon') {
+        return escutcheonParser();
       } else if (charge === 'roundel') {
         return roundelParser();
       } else if (charge === 'lozenge') {

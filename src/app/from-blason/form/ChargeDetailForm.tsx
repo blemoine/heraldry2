@@ -9,6 +9,7 @@ import { LozengeForm } from './charges/LozengeForm';
 import { CrossForm } from './charges/CrossForm';
 import { TinctureConfiguration } from '../../model/tincture-configuration';
 import { MulletForm } from './charges/MulletForm';
+import { EscutcheonForm } from './charges/EscutcheonForm';
 
 type Props = { tinctureConfiguration: TinctureConfiguration; charge: Charge; chargeChange: (charge: Charge) => void };
 export function ChargeDetailForm({ tinctureConfiguration, charge, chargeChange }: Props) {
@@ -18,6 +19,8 @@ export function ChargeDetailForm({ tinctureConfiguration, charge, chargeChange }
     return <EagleForm tinctureConfiguration={tinctureConfiguration} charge={charge} chargeChange={chargeChange} />;
   } else if (charge.name === 'fleurdelys') {
     return <FleurDeLysForm tinctureConfiguration={tinctureConfiguration} charge={charge} chargeChange={chargeChange} />;
+  } else if (charge.name === 'escutcheon') {
+    return <EscutcheonForm tinctureConfiguration={tinctureConfiguration} charge={charge} chargeChange={chargeChange} />;
   } else if (charge.name === 'roundel') {
     return <RoundelForm tinctureConfiguration={tinctureConfiguration} charge={charge} chargeChange={chargeChange} />;
   } else if (charge.name === 'lozenge') {

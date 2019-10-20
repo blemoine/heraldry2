@@ -254,7 +254,7 @@ export function encodeCharge(charge: Charge | null): Uint8Array {
     result[4] = encodeFromList(lozengeInsides, charge.inside);
   } else if (charge.name === 'roundel') {
     result[4] = encodeFromList(roundelInsides, charge.inside);
-  } else if (charge.name === 'fleurdelys') {
+  } else if (charge.name === 'fleurdelys' || charge.name === 'escutcheon') {
     // nothing to do for now
   } else if (charge.name === 'cross') {
     result[4] = encodeFromList(crossLimbs, charge.limbs);
@@ -312,7 +312,7 @@ export function decodeCharge(arr: Uint8Array): Result<Charge | null> {
       } else if (name === 'roundel') {
         const maybeInside = decodeFromList(roundelInsides, arr[4]);
         return map(maybeInside, (inside) => ({ name, tincture, countAndDisposition, inside }));
-      } else if (name === 'fleurdelys') {
+      } else if (name === 'fleurdelys' || name === 'escutcheon') {
         return { name, tincture, countAndDisposition };
       } else if (name === 'cross') {
         const maybeLimbs = decodeFromList(crossLimbs, arr[4]);

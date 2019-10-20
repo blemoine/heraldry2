@@ -97,7 +97,12 @@ export function CoatsOfArmsDisplay(props: Props) {
         })}
 
         <clipPath id="plain-field-clip-path">
-          <EscutcheonDisplay dimension={dimension} shieldShape={configuration.shieldShape} />
+          <EscutcheonDisplay
+            dimension={dimension}
+            shieldShape={configuration.shieldShape}
+            fill="transparent"
+            stroke="#333"
+          />
         </clipPath>
       </defs>
 
@@ -109,7 +114,12 @@ export function CoatsOfArmsDisplay(props: Props) {
         shieldShape={configuration.shieldShape}
         selectBlasonPart={props.selectBlasonPart}
       />
-      <EscutcheonDisplay dimension={dimension} shieldShape={configuration.shieldShape} />
+      <EscutcheonDisplay
+        dimension={dimension}
+        shieldShape={configuration.shieldShape}
+        fill="transparent"
+        stroke="#333"
+      />
     </svg>
   );
 }

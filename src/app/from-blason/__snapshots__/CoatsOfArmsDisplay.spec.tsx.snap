@@ -26,10 +26,13 @@ exports[`CoatsOfArms should render 'Argent, a chevron sable' 1`] = `
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -76,10 +79,13 @@ exports[`CoatsOfArms should render 'Argent, a chevron sable' 1`] = `
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -112,10 +118,13 @@ exports[`CoatsOfArms should render 'Argent, a cross gules' 1`] = `
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -162,10 +171,13 @@ exports[`CoatsOfArms should render 'Argent, a cross gules' 1`] = `
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -245,10 +257,13 @@ exports[`CoatsOfArms should render 'Argent, three crosses potent vair' 1`] = `
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -327,10 +342,13 @@ exports[`CoatsOfArms should render 'Argent, three crosses potent vair' 1`] = `
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -363,10 +381,13 @@ exports[`CoatsOfArms should render 'Azure, a bordure urdy or, two crosses maltes
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -455,10 +476,13 @@ exports[`CoatsOfArms should render 'Azure, a bordure urdy or, two crosses maltes
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -491,10 +515,13 @@ exports[`CoatsOfArms should render 'Azure, nineteen annulets argent' 1`] = `
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -816,10 +843,13 @@ exports[`CoatsOfArms should render 'Azure, nineteen annulets argent' 1`] = `
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -852,10 +882,13 @@ exports[`CoatsOfArms should render 'Azure, twelve roundels argent' 1`] = `
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -1072,10 +1105,13 @@ exports[`CoatsOfArms should render 'Azure, twelve roundels argent' 1`] = `
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -1108,10 +1144,13 @@ exports[`CoatsOfArms should render 'Azure, two crosses crosselet vert' 1`] = `
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -1176,10 +1215,13 @@ exports[`CoatsOfArms should render 'Azure, two crosses crosselet vert' 1`] = `
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -1273,10 +1315,13 @@ exports[`CoatsOfArms should render 'Azure, two crosses moline counter ermine' 1`
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -1341,10 +1386,13 @@ exports[`CoatsOfArms should render 'Azure, two crosses moline counter ermine' 1`
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -1485,10 +1533,13 @@ exports[`CoatsOfArms should render 'Barry ermine and vair' 1`] = `
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -1566,10 +1617,13 @@ exports[`CoatsOfArms should render 'Barry ermine and vair' 1`] = `
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -1715,10 +1769,13 @@ exports[`CoatsOfArms should render 'Barry pily counter ermine and potent en poin
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -1750,10 +1807,13 @@ exports[`CoatsOfArms should render 'Barry pily counter ermine and potent en poin
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -1786,10 +1846,13 @@ exports[`CoatsOfArms should render 'Bendy or and argent, a lion dormant gules' 1
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -2248,10 +2311,13 @@ exports[`CoatsOfArms should render 'Bendy or and argent, a lion dormant gules' 1
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -2345,10 +2411,13 @@ exports[`CoatsOfArms should render 'Bendy or and argent, a lion rampant ermine' 
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -2915,10 +2984,13 @@ exports[`CoatsOfArms should render 'Bendy or and argent, a lion rampant ermine' 
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -2951,10 +3023,13 @@ exports[`CoatsOfArms should render 'Bendy sinister or and argent, a lion sejant 
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -3304,10 +3379,13 @@ exports[`CoatsOfArms should render 'Bendy sinister or and argent, a lion sejant 
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -3340,10 +3418,13 @@ exports[`CoatsOfArms should render 'Chequy gules and or, a chief engrailed azure
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -3674,10 +3755,13 @@ exports[`CoatsOfArms should render 'Chequy gules and or, a chief engrailed azure
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -3771,10 +3855,13 @@ exports[`CoatsOfArms should render 'Chequy gules and or, a chief engrailed ermin
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -4110,10 +4197,13 @@ exports[`CoatsOfArms should render 'Chequy gules and or, a chief engrailed ermin
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -4146,10 +4236,13 @@ exports[`CoatsOfArms should render 'Chequy gules and or, a saltire argent, an ea
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -4725,10 +4818,13 @@ exports[`CoatsOfArms should render 'Chequy gules and or, a saltire argent, an ea
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -4869,10 +4965,13 @@ exports[`CoatsOfArms should render 'Ermine, a bend invected vair' 1`] = `
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -4924,10 +5023,13 @@ exports[`CoatsOfArms should render 'Ermine, a bend invected vair' 1`] = `
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -5021,10 +5123,13 @@ exports[`CoatsOfArms should render 'Ermine, two pallets sable' 1`] = `
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -5085,10 +5190,13 @@ exports[`CoatsOfArms should render 'Ermine, two pallets sable' 1`] = `
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -5182,10 +5290,13 @@ exports[`CoatsOfArms should render 'Erminois, four crosses bottony argent' 1`] =
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -5278,10 +5389,13 @@ exports[`CoatsOfArms should render 'Erminois, four crosses bottony argent' 1`] =
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -5314,10 +5428,13 @@ exports[`CoatsOfArms should render 'Gules, three crosses pattée argent' 1`] = `
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -5396,10 +5513,13 @@ exports[`CoatsOfArms should render 'Gules, three crosses pattée argent' 1`] = `
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -5479,10 +5599,13 @@ exports[`CoatsOfArms should render 'Lozenge throughout vair and gules' 1`] = `
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -5514,10 +5637,13 @@ exports[`CoatsOfArms should render 'Lozenge throughout vair and gules' 1`] = `
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -5597,10 +5723,13 @@ exports[`CoatsOfArms should render 'Or, a base engrailed vair' 1`] = `
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -5652,10 +5781,13 @@ exports[`CoatsOfArms should render 'Or, a base engrailed vair' 1`] = `
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -5749,10 +5881,13 @@ exports[`CoatsOfArms should render 'Or, a bend sinister invected ermine' 1`] = `
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -5804,10 +5939,13 @@ exports[`CoatsOfArms should render 'Or, a bend sinister invected ermine' 1`] = `
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -5840,10 +5978,13 @@ exports[`CoatsOfArms should render 'Or, a fess murrey' 1`] = `
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -5890,10 +6031,13 @@ exports[`CoatsOfArms should render 'Or, a fess murrey' 1`] = `
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -5977,10 +6121,13 @@ exports[`CoatsOfArms should render 'Or, a fess vair en point' 1`] = `
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -6032,10 +6179,13 @@ exports[`CoatsOfArms should render 'Or, a fess vair en point' 1`] = `
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -6068,10 +6218,13 @@ exports[`CoatsOfArms should render 'Or, eleven rustres sable' 1`] = `
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -6273,10 +6426,13 @@ exports[`CoatsOfArms should render 'Or, eleven rustres sable' 1`] = `
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -6309,10 +6465,13 @@ exports[`CoatsOfArms should render 'Or, fifteen mascles sable' 1`] = `
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -6574,10 +6733,13 @@ exports[`CoatsOfArms should render 'Or, fifteen mascles sable' 1`] = `
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -6610,10 +6772,13 @@ exports[`CoatsOfArms should render 'Or, thirteen lozenge or' 1`] = `
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -6832,10 +6997,13 @@ exports[`CoatsOfArms should render 'Or, thirteen lozenge or' 1`] = `
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -6976,10 +7144,13 @@ exports[`CoatsOfArms should render 'Paly pily vair and pean' 1`] = `
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -7011,10 +7182,13 @@ exports[`CoatsOfArms should render 'Paly pily vair and pean' 1`] = `
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -7047,10 +7221,13 @@ exports[`CoatsOfArms should render 'Per bend sinister wavy azure and or, a chief
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -7103,10 +7280,13 @@ exports[`CoatsOfArms should render 'Per bend sinister wavy azure and or, a chief
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -7139,10 +7319,13 @@ exports[`CoatsOfArms should render 'Per chevron Sable and Or, three fleurs de ly
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -7409,10 +7592,13 @@ exports[`CoatsOfArms should render 'Per chevron Sable and Or, three fleurs de ly
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -7506,10 +7692,13 @@ exports[`CoatsOfArms should render 'Per chevron reversed invected ermine and gul
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -7542,10 +7731,13 @@ exports[`CoatsOfArms should render 'Per chevron reversed invected ermine and gul
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -7578,10 +7770,13 @@ exports[`CoatsOfArms should render 'Per cross or and argent' 1`] = `
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -7621,10 +7816,13 @@ exports[`CoatsOfArms should render 'Per cross or and argent' 1`] = `
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -7718,10 +7916,13 @@ exports[`CoatsOfArms should render 'Per fess or and ermine, a bordure engrailed 
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -7775,10 +7976,13 @@ exports[`CoatsOfArms should render 'Per fess or and ermine, a bordure engrailed 
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -7872,10 +8076,13 @@ exports[`CoatsOfArms should render 'Per pale invected ermine and or' 1`] = `
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -7905,10 +8112,13 @@ exports[`CoatsOfArms should render 'Per pale invected ermine and or' 1`] = `
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -7941,10 +8151,13 @@ exports[`CoatsOfArms should render 'Per saltire or and argent' 1`] = `
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -7984,10 +8197,13 @@ exports[`CoatsOfArms should render 'Per saltire or and argent' 1`] = `
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -8068,10 +8284,13 @@ exports[`CoatsOfArms should render 'Potent, a chief gules' 1`] = `
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -8122,10 +8341,13 @@ exports[`CoatsOfArms should render 'Potent, a chief gules' 1`] = `
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -8158,10 +8380,13 @@ exports[`CoatsOfArms should render 'Purpure, four crosses crosselet or' 1`] = `
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -8254,10 +8479,13 @@ exports[`CoatsOfArms should render 'Purpure, four crosses crosselet or' 1`] = `
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -8351,10 +8579,13 @@ exports[`CoatsOfArms should render 'Quarterly, 1st Per pile reversed embattled e
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -8493,10 +8724,13 @@ exports[`CoatsOfArms should render 'Quarterly, 1st Per pile reversed embattled e
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -8590,10 +8824,13 @@ exports[`CoatsOfArms should render 'Quarterly, 1st and 2nd and 3rd and 4th quart
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -8860,10 +9097,13 @@ exports[`CoatsOfArms should render 'Quarterly, 1st and 2nd and 3rd and 4th quart
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -8957,10 +9197,13 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -9174,10 +9417,13 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -9210,10 +9456,13 @@ exports[`CoatsOfArms should render 'Quarterly, 1st: Bendy or and purpure, a bord
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -9546,10 +9795,13 @@ exports[`CoatsOfArms should render 'Quarterly, 1st: Bendy or and purpure, a bord
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -9582,10 +9834,13 @@ exports[`CoatsOfArms should render 'Sable, a cross maltese argent' 1`] = `
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -9636,10 +9891,13 @@ exports[`CoatsOfArms should render 'Sable, a cross maltese argent' 1`] = `
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -9717,10 +9975,13 @@ exports[`CoatsOfArms should render 'Vert, two crosses hummetty counter potent' 1
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -9785,10 +10046,13 @@ exports[`CoatsOfArms should render 'Vert, two crosses hummetty counter potent' 1
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -9882,10 +10146,13 @@ exports[`CoatsOfArms should render a fur blason 1`] = `
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -9913,10 +10180,13 @@ exports[`CoatsOfArms should render a fur blason 1`] = `
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -9996,10 +10266,13 @@ exports[`CoatsOfArms should render a party blason 1`] = `
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -10029,10 +10302,13 @@ exports[`CoatsOfArms should render a party blason 1`] = `
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -10112,10 +10388,13 @@ exports[`CoatsOfArms should render a party blason with some ordinary 1`] = `
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -10168,10 +10447,13 @@ exports[`CoatsOfArms should render a party blason with some ordinary 1`] = `
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -10204,10 +10486,13 @@ exports[`CoatsOfArms should render a plain blason 1`] = `
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -10235,10 +10520,13 @@ exports[`CoatsOfArms should render a plain blason 1`] = `
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />
@@ -10271,10 +10559,13 @@ exports[`CoatsOfArms should render a the england royal arms 1`] = `
       <path
         d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
         fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
         stroke="#333"
+        strokeWidth={1}
         style={
           Object {
-            "pointerEvents": "none",
+            "cursor": "pointer",
           }
         }
       />
@@ -11451,10 +11742,13 @@ exports[`CoatsOfArms should render a the england royal arms 1`] = `
   <path
     d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
     fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
     stroke="#333"
+    strokeWidth={1}
     style={
       Object {
-        "pointerEvents": "none",
+        "cursor": "pointer",
       }
     }
   />

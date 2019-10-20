@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Dimension } from '../../../model/dimension';
 import { LineOptions, SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
-import { PathFromBuilder } from '../../../common/PathFromBuilder';
+import { FocusablePathFromBuilder } from '../../../common/PathFromBuilder';
 
-type Props = { dimension: Dimension };
+type Props = { dimension: Dimension; stroke: string; fill: string; onClick?: () => void };
 export function spanishPathBuilder({ width, height }: Dimension, lineOptions: LineOptions | null): SvgPathBuilder {
   return SvgPathBuilder.start([0, 0])
     .goTo([width / 20, 0], null)
@@ -15,10 +15,8 @@ export function spanishPathBuilder({ width, height }: Dimension, lineOptions: Li
     .goTo([0, 0], lineOptions);
 }
 
-export const SpanishDisplay = ({ dimension }: Props) => {
+export const SpanishDisplay = ({ dimension, stroke, fill, onClick }: Props) => {
   const pathBuilder = spanishPathBuilder(dimension, null);
 
-  return (
-    <PathFromBuilder pathBuilder={pathBuilder} fill="transparent" stroke="#333" style={{ pointerEvents: 'none' }} />
-  );
+  return <FocusablePathFromBuilder pathBuilder={pathBuilder} stroke={stroke} fill={fill} onClick={onClick} />;
 };

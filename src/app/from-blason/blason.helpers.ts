@@ -12,6 +12,7 @@ function allDeclaredTincturesOfCharge(charge: Charge): Array<Tincture> {
     return [charge.tincture, charge.beakedAndArmed];
   } else if (
     charge.name === 'fleurdelys' ||
+    charge.name === 'escutcheon' ||
     charge.name === 'roundel' ||
     charge.name === 'lozenge' ||
     charge.name === 'cross' ||

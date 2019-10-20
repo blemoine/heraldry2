@@ -94,6 +94,21 @@ export type Mullet = {
   points: MulletPoints;
 };
 
-export type Charge = Lion | Eagle | FleurDeLys | Roundel | Lozenge | Cross | Mullet;
+export type Escutcheon = {
+  name: 'escutcheon';
+  tincture: Tincture;
+  countAndDisposition: CountAndDisposition;
+};
 
-export const charges: Array<Charge['name']> = ['lion', 'eagle', 'fleurdelys', 'roundel', 'lozenge', 'cross', 'mullet'];
+export type Charge = Lion | Eagle | FleurDeLys | Roundel | Lozenge | Cross | Mullet | Escutcheon;
+
+export const charges: Array<Charge['name']> = [
+  'lion',
+  'eagle',
+  'fleurdelys',
+  'roundel',
+  'lozenge',
+  'cross',
+  'mullet',
+  'escutcheon',
+];

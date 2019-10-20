@@ -11,6 +11,7 @@ import { LozengeDisplay } from './charge/lozenge/LozengeDisplay';
 import { CrossDisplay } from './charge/cross/CrossDisplay';
 import { MulletDisplay } from './charge/mullet/MulletDisplay';
 import { SimpleBlasonShape } from './blasonDisplay.helper';
+import { EscutcheonChargeDisplay } from './charge/escutcheon/EscutcheonChargeDisplay';
 
 type Props = {
   charge: Charge;
@@ -43,6 +44,16 @@ export const ChargeDisplay = ({ charge, dimension, fillFromTincture, shape, onCl
   } else if (charge.name === 'fleurdelys') {
     return (
       <FleurDeLysDisplay
+        charge={charge}
+        dimension={dimension}
+        fillFromTincture={fillFromTincture}
+        shape={shape}
+        onClick={onClick}
+      />
+    );
+  } else if (charge.name === 'escutcheon') {
+    return (
+      <EscutcheonChargeDisplay
         charge={charge}
         dimension={dimension}
         fillFromTincture={fillFromTincture}

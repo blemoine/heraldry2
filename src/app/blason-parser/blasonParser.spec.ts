@@ -768,4 +768,18 @@ Argent, Azure, Barry, Barry pily, Bendy, Bendy Sinister, Bendy pily, Bendy pily 
 
     expect(parseBlason('Azure, a cross potenty argent')).toEqual(expected);
   });
+
+  it('should parse Argent, three escutcheons gules', () => {
+    const expected: SimpleBlason = {
+      kind: 'simple',
+      field: { kind: 'plain', tincture: argent },
+      charge: {
+        countAndDisposition: { disposition: 'default', count: 3 },
+        name: 'escutcheon',
+        tincture: gules,
+      },
+    };
+
+    expect(parseBlason(' Argent, three escutcheons gules')).toEqual(expected);
+  });
 });

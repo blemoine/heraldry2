@@ -10,6 +10,7 @@ import {
   crossLimbs,
   Eagle,
   eagleAttitudes,
+  Escutcheon,
   FleurDeLys,
   Lion,
   lionAttitudes,
@@ -142,6 +143,12 @@ function createChargeArb(tinctureArb: Arbitrary<Tincture>): Arbitrary<Charge> {
         .map((i): Charge => i);
     } else if (chargeName === 'fleurdelys') {
       return fc.record<FleurDeLys>({
+        name: fc.constant(chargeName),
+        tincture: tinctureArb,
+        countAndDisposition: countAndDistionArb,
+      });
+    } else if (chargeName === 'escutcheon') {
+      return fc.record<Escutcheon>({
         name: fc.constant(chargeName),
         tincture: tinctureArb,
         countAndDisposition: countAndDistionArb,

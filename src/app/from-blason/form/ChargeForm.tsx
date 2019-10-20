@@ -33,7 +33,7 @@ export function ChargeForm({ tinctureConfiguration, charge, chargeChange }: Prop
           beakedAndArmed: or,
           countAndDisposition: charge ? charge.countAndDisposition : { count: 1, disposition: 'default' },
         });
-      } else if (chargeName === 'fleurdelys') {
+      } else if (chargeName === 'fleurdelys' || chargeName === 'escutcheon') {
         chargeChange({
           name: chargeName,
           countAndDisposition: charge ? charge.countAndDisposition : { count: 3, disposition: 'default' },
