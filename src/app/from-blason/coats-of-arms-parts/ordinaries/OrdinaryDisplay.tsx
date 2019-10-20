@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Ordinary } from '../../../model/ordinary';
 import { cannotHappen } from '../../../../utils/cannot-happen';
 import { Dimension } from '../../../model/dimension';
-import { range } from '../../../../utils/range';
 import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { FocusablePathFromBuilder } from '../../../common/PathFromBuilder';
 import { computeLineOptions, oneSideLineOption, SimpleBlasonShape } from '../blasonDisplay.helper';
@@ -18,6 +17,7 @@ import { BendOrdinaryDisplay } from './BendOrdinaryDisplay';
 import { PaleOrdinaryDisplay } from './PaleOrdinaryDisplay';
 import { CrossOrdinaryDisplay } from './CrossOrdinaryDisplay';
 import { SaltireOrdinaryDisplay } from './SaltireOrdinaryDisplay';
+import { ChevronOrdinaryDisplay } from './ChevronOrdinaryDisplay';
 
 type Props = {
   ordinary: Ordinary;
@@ -111,36 +111,13 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
       />
     );
   } else if (ordinary.name === 'chevron' || ordinary.name === 'chevronel') {
-    const chevronHeight =
-      ordinary.name === 'chevron' ? height / 6 : ordinary.name === 'chevronel' ? height / 12 : cannotHappen(ordinary);
     return (
-      <>
-        {range(0, ordinary.count).map((i) => {
-          const topPoint = ((i * 2 + 1) * height) / (ordinary.count * 2 + 1);
-          const bottomPoint = (((i + 1) * 2 + 1) * height) / (ordinary.count * 2 + 1);
-
-          const topFlatPart = ordinary.count === 1 ? 3.8 : ordinary.count === 3 ? 12 : -1;
-
-          const pathBuilder = SvgPathBuilder.start([width / 2, topPoint])
-            .goToWithPartFlat([0, bottomPoint - chevronHeight], lineOptions, topFlatPart, 'start')
-            .goTo([0, bottomPoint])
-            .goToWithPartFlat([width / 2, topPoint + chevronHeight], oneSideOnly, 5)
-            .goToWithPartFlat([width, bottomPoint], oneSideOnly, 5)
-            .goTo([width, bottomPoint - chevronHeight])
-            .goToWithPartFlat([width / 2, topPoint], lineOptions, topFlatPart, 'end');
-
-          return (
-            <FocusablePathFromBuilder
-              key={i}
-              pathBuilder={pathBuilder}
-              fill={fill}
-              stroke={strokeColor}
-              style={{ cursor: 'pointer' }}
-              onClick={onClick}
-            />
-          );
-        })}
-      </>
+      <ChevronOrdinaryDisplay
+        dimension={dimension}
+        ordinary={ordinary}
+        fillFromTincture={fillFromTincture}
+        onClick={onClick}
+      />
     );
   } else if (ordinary.name === 'bordure') {
     return (
