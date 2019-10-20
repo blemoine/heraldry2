@@ -36,8 +36,8 @@ export const CrossOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, on
 
   const scaleRatio = height / 480;
   const transformProperties: FurTransformProperty = buildFurTransformProperty(fillFromTincture, {
-    ermine: [{ kind: 'scale', value: 0.38 * scaleRatio }, { kind: 'translate', value: [0, 0] }],
-    vair: [{ kind: 'scale', value: 0.335 * scaleRatio }, { kind: 'translate', value: [0, 0] }],
+    ermine: [{ kind: 'scale', value: 0.38 * scaleRatio }],
+    vair: [{ kind: 'scale', value: 0.335 * scaleRatio }],
     potent: [{ kind: 'scale', value: 0.3 * scaleRatio }, { kind: 'translate', value: [28, 0] }],
   });
 

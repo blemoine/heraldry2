@@ -3,12 +3,15 @@ import { Dimension } from '../../../model/dimension';
 import { Bend, BendSinister } from '../../../model/ordinary';
 import { FillFromTincture } from '../../fillFromTincture.helper';
 import { CommonOrdinaryDisplay } from './CommonOrdinaryDisplay';
-import { computeBendTransformProperty } from './bendPath.helper';
 import { computeLineOptions, oneSideLineOption } from '../blasonDisplay.helper';
 import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { toDegree } from '../../../svg-path-builder/geometrical.helper';
+import { buildFurTransformProperty } from '../FurPattern.model';
 
 const postfixId = 'fess';
+const ermineScale = 0.66;
+const vairScale = 0.56;
+const potentScale = 0.35;
 
 type Props = {
   dimension: Dimension;
@@ -18,9 +21,15 @@ type Props = {
   direction: 'dexter' | 'sinister';
 };
 export const BendOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onClick, direction }: Props) => {
-  const transformProperties = computeBendTransformProperty(dimension, fillFromTincture);
-
   const { width, height } = dimension;
+  const scaleRatio = height / 480;
+
+  const transformProperties = buildFurTransformProperty(fillFromTincture, {
+    ermine: [{ kind: 'scale', value: [ermineScale * scaleRatio, ermineScale * 0.75 * scaleRatio] }],
+    vair: [{ kind: 'scale', value: [vairScale * scaleRatio, vairScale * 0.6785 * scaleRatio] }],
+    potent: [{ kind: 'scale', value: [potentScale * scaleRatio, potentScale * 1.35 * scaleRatio] }],
+  });
+
   const bendHeight = height / 4;
   const lineOptions = computeLineOptions(ordinary.line, dimension);
   const oneSideOnly = oneSideLineOption(lineOptions);

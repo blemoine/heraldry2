@@ -17,6 +17,7 @@ import { FessOrdinaryDisplay } from './FessOrdinaryDisplay';
 import { BendOrdinaryDisplay } from './BendOrdinaryDisplay';
 import { PaleOrdinaryDisplay } from './PaleOrdinaryDisplay';
 import { CrossOrdinaryDisplay } from './CrossOrdinaryDisplay';
+import { SaltireOrdinaryDisplay } from './SaltireOrdinaryDisplay';
 
 type Props = {
   ordinary: Ordinary;
@@ -101,33 +102,12 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
       />
     );
   } else if (ordinary.name === 'saltire') {
-    const basePointW = width / (10 * Math.sqrt(2));
-    const basePointH = height / (10 * Math.sqrt(2));
-
-    const w = width / 2;
-    const h = height / 2;
-
-    const pathBuilder = SvgPathBuilder.start([w, h - basePointH])
-      .goToWithPartFlat([(h * basePointW) / basePointH - w, -basePointH], lineOptions, 5)
-      .goTo([-basePointW, h - (w * basePointH) / basePointW])
-      .goToWithPartFlat([w - basePointW, h], oneSideOnly, 5)
-      .goToWithPartFlat([-basePointW, h + (w * basePointH) / basePointW], lineOptions, 5)
-      .goTo([(h * basePointW) / basePointH - w, 2 * h + basePointH])
-      .goToWithPartFlat([w, h + basePointH], oneSideOnly, 5)
-      .goToWithPartFlat([2 * w, 2 * h + basePointH], oneSideOnly, 5)
-      .goTo([2 * w + basePointW, h + (w * basePointH) / basePointW])
-      .goToWithPartFlat([w + basePointW, h], lineOptions, 5)
-      .goToWithPartFlat([2 * w + basePointW, h - (w * basePointH) / basePointW], oneSideOnly, 5)
-      .goTo([2 * w, -basePointH])
-      .goToWithPartFlat([w, h - basePointH], lineOptions, 5);
-
     return (
-      <FocusablePathFromBuilder
-        pathBuilder={pathBuilder}
-        fill={fill}
-        stroke={strokeColor}
-        style={{ cursor: 'pointer' }}
+      <SaltireOrdinaryDisplay
+        ordinary={ordinary}
+        dimension={dimension}
         onClick={onClick}
+        fillFromTincture={fillFromTincture}
       />
     );
   } else if (ordinary.name === 'chevron' || ordinary.name === 'chevronel') {
