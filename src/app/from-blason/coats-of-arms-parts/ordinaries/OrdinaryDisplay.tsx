@@ -18,6 +18,7 @@ import { SaltireOrdinaryDisplay } from './SaltireOrdinaryDisplay';
 import { ChevronOrdinaryDisplay } from './ChevronOrdinaryDisplay';
 import { PallOrdinaryDisplay } from './PallOrdinaryDisplay';
 import { ChapePloyeOrdinaryDisplay } from './ChapePloyeOrdinaryDisplay';
+import { PallInvertedOrdinaryDisplay } from './PallInvertedOrdinaryDisplay';
 
 type Props = {
   ordinary: Ordinary;
@@ -139,6 +140,15 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
     } else if (ordinary.name === 'pall') {
       return (
         <PallOrdinaryDisplay
+          dimension={dimension}
+          ordinary={ordinary}
+          fillFromTincture={fillFromTincture}
+          onClick={onClick}
+        />
+      );
+    } else if (ordinary.name === 'pall-inverted') {
+      return (
+        <PallInvertedOrdinaryDisplay
           dimension={dimension}
           ordinary={ordinary}
           fillFromTincture={fillFromTincture}

@@ -810,4 +810,18 @@ Argent, Azure, Barry, Barry pily, Bendy, Bendy Sinister, Bendy pily, Bendy pily 
 
     expect(parseBlason('Argent, chapé ployé sable')).toEqual(expected);
   });
+
+  it('should parse pall inverted', () => {
+    const expected: SimpleBlason = {
+      kind: 'simple',
+      field: { kind: 'plain', tincture: argent },
+      ordinary: {
+        name: 'pall-inverted',
+        tincture: gules,
+        line: 'straight',
+      },
+    };
+
+    expect(parseBlason('Argent, a pall inverted gules')).toEqual(expected);
+  });
 });
