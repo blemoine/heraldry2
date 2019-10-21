@@ -4,7 +4,7 @@ import { Tincture, tinctures } from '../model/tincture';
 import { Line, lines } from '../model/line';
 import { parties, Party } from '../model/party';
 import { flatMap, isError, map, raise, Result, zip, zip3, zip4 } from '../../utils/result';
-import { ordinaries, Ordinary } from '../model/ordinary';
+import { ChapePloye, chapePloyeTincturesKind, ordinaries, Ordinary } from '../model/ordinary';
 import {
   Charge,
   charges,
@@ -23,7 +23,7 @@ import { Blason, QuarterlyBlason, SimpleBlason } from '../model/blason';
 import { Tierced, tierceds } from '../model/tierced';
 
 const FIELD_SIZE = 6;
-const ORDINARY_SIZE = 4;
+const ORDINARY_SIZE = 5;
 const CHARGE_SIZE = 8;
 const BLASON_SIZE = FIELD_SIZE + ORDINARY_SIZE + CHARGE_SIZE;
 
@@ -202,8 +202,15 @@ export function encodeOrdinary(ordinary: Ordinary | null): Uint8Array {
   result[0] = encodeOrdinaryName(ordinary.name);
   result[1] = encodeLine(ordinary.line);
   if (ordinary.name === 'chape-ploye') {
-    result[2] = encodeTincture(ordinary.tinctures[0]);
-    result[3] = encodeTincture(ordinary.tinctures[1]);
+    result[3] = encodeFromList(chapePloyeTincturesKind, ordinary.tinctures.kind);
+    if (ordinary.tinctures.kind === 'party') {
+      result[2] = encodeTincture(ordinary.tinctures.tinctures[0]);
+      result[4] = encodeTincture(ordinary.tinctures.tinctures[1]);
+    } else if (ordinary.tinctures.kind === 'simple') {
+      result[2] = encodeTincture(ordinary.tinctures.tincture);
+    } else {
+      return cannotHappen(ordinary.tinctures);
+    }
   } else {
     result[2] = encodeTincture(ordinary.tincture);
     if (ordinary.name === 'pale' || ordinary.name === 'chevron' || ordinary.name === 'chevronel') {
@@ -229,7 +236,25 @@ export function decodeOrdinary(arr: Uint8Array): Result<Ordinary | null> {
         const maybeCount: Result<1 | 2> = decodeNumber([1, 2], arr[3]);
         return map(maybeCount, (count) => ({ name, line, tincture, count }));
       } else if (name === 'chape-ploye') {
-        return map(decodeTincture(arr[3]), (tincture2) => ({ name, line, tinctures: [tincture, tincture2] }));
+        return flatMap(
+          decodeFromList(chapePloyeTincturesKind, arr[3]),
+          (kind): Result<ChapePloye> => {
+            if (kind === 'simple') {
+              return { name, line, tinctures: { kind: 'simple', tincture } };
+            } else if (kind === 'party') {
+              return map(
+                decodeTincture(arr[4]),
+                (tincture2): ChapePloye => ({
+                  name,
+                  line,
+                  tinctures: { kind: 'party', per: 'pale', tinctures: [tincture, tincture2] },
+                })
+              );
+            } else {
+              return cannotHappen(kind);
+            }
+          }
+        );
       } else if (name === 'chevron' || name === 'chevronel') {
         const maybeCount: Result<1 | 2 | 3> = decodeNumber([1, 2, 3], arr[3]);
         return map(maybeCount, (count) => ({ name, line, tincture, count }));

@@ -46,15 +46,28 @@ export function ordinaryParser(): P.Parser<Ordinary> {
       .skip(P.whitespace),
     lineParser.skip(P.whitespace).fallback('straight' as const),
 
-    P.string('per pale ')
-      .then(tinctureParserFromName)
-      .skip(P.string(' and ')),
-    tinctureParserFromName
+    P.alt(
+      P.string('per pale ')
+        .then(P.seq(tinctureParserFromName.skip(P.string(' and ')), tinctureParserFromName))
+        .map((tinctures): ChapePloye['tinctures'] => {
+          return {
+            kind: 'party',
+            per: 'pale',
+            tinctures,
+          };
+        }),
+      tinctureParserFromName.map((tincture): ChapePloye['tinctures'] => {
+        return {
+          kind: 'simple',
+          tincture,
+        };
+      })
+    )
   ).map(
-    ([name, line, tincture1, tincture2]): ChapePloye => ({
+    ([name, line, tinctures]): ChapePloye => ({
       name,
       line,
-      tinctures: [tincture1, tincture2],
+      tinctures,
     })
   );
 

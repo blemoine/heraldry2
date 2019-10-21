@@ -15,7 +15,12 @@ export type Chevronel = { name: 'chevronel'; tincture: Tincture; line: Line; cou
 export type Pall = { name: 'pall'; tincture: Tincture; line: Line };
 export type Quarter = { name: 'quarter'; tincture: Tincture; line: Line };
 export type Canton = { name: 'canton'; tincture: Tincture; line: Line };
-export type ChapePloye = { name: 'chape-ploye'; tinctures: [Tincture, Tincture]; line: Line };
+export type ChapePloye = {
+  name: 'chape-ploye';
+  tinctures: { kind: 'party'; per: 'pale'; tinctures: [Tincture, Tincture] } | { kind: 'simple'; tincture: Tincture };
+  line: Line;
+};
+export const chapePloyeTincturesKind: ReadonlyArray<ChapePloye['tinctures']['kind']> = ['party', 'simple'] as const;
 
 export type SubOrdinary = Bordure | Base | Pall | Chevronel | Quarter | Canton | ChapePloye;
 export type Ordinary = Chief | Bend | BendSinister | Pale | Fess | Chevron | OrdinaryCross | Saltire | SubOrdinary;

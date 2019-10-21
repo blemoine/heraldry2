@@ -2,7 +2,7 @@ import fc, { Arbitrary } from 'fast-check';
 import { or, Tincture, tinctures } from '../tincture';
 import { Field, fieldKinds, PartyField, TiercedField } from '../field';
 import { PallParty, parties, Party } from '../party';
-import { ChapePloye, ordinaries, Ordinary } from '../ordinary';
+import { ChapePloye, chapePloyeTincturesKind, ordinaries, Ordinary } from '../ordinary';
 import {
   Charge,
   charges,
@@ -93,11 +93,27 @@ export const ordinaryArb: Arbitrary<Ordinary> = fc
       } else if (obj.name === 'chape-ploye') {
         const name = obj.name;
 
-        return tinctureArb.map(
-          (tincture2): ChapePloye => {
-            return { name, tinctures: [obj.tincture, tincture2], line: obj.line };
+        return fc.constantFrom(...chapePloyeTincturesKind).chain((kind) => {
+          if (kind === 'party') {
+            return tinctureArb.map(
+              (tincture2): ChapePloye => {
+                return {
+                  name,
+                  tinctures: { kind: 'party', per: 'pale', tinctures: [obj.tincture, tincture2] },
+                  line: obj.line,
+                };
+              }
+            );
+          } else if (kind === 'simple') {
+            return fc.constant({
+              name,
+              tinctures: { kind: 'simple', tincture: obj.tincture },
+              line: obj.line,
+            });
+          } else {
+            return cannotHappen(kind);
           }
-        );
+        });
       } else {
         const name = obj.name;
         return fc.constant({ name, tincture: obj.tincture, line: obj.line });

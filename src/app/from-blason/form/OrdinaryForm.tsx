@@ -5,6 +5,7 @@ import { argent, tinctures } from '../../model/tincture';
 import { OrdinaryDispatcherForm } from './ordinaries/OrdinaryDispatcherForm';
 import { TinctureConfiguration } from '../../model/tincture-configuration';
 import { Line } from '../../model/line';
+import { allDeclaredTincturesOfOrdinary } from '../blason.helpers';
 
 type Props = {
   tinctureConfiguration: TinctureConfiguration;
@@ -14,11 +15,7 @@ type Props = {
 export function OrdinaryForm({ tinctureConfiguration, ordinary, ordinaryChange }: Props) {
   function changeOrdinary(ordinaryName: Ordinary['name'] | null) {
     if (ordinaryName) {
-      const tincture = ordinary
-        ? ordinary.name === 'chape-ploye'
-          ? ordinary.tinctures[0]
-          : ordinary.tincture
-        : argent;
+      const tincture = ordinary ? allDeclaredTincturesOfOrdinary(ordinary)[0] : argent;
       const line: Line = ordinary ? ordinary.line : 'straight';
       if (ordinaryName === 'pale' || ordinaryName === 'chevron' || ordinaryName === 'chevronel') {
         ordinaryChange({ name: ordinaryName, tincture, count: 1, line });
@@ -29,7 +26,7 @@ export function OrdinaryForm({ tinctureConfiguration, ordinary, ordinaryChange }
         }
         ordinaryChange({
           name: ordinaryName,
-          tinctures: [tincture, missingColor],
+          tinctures: { kind: 'simple', tincture },
           line,
         });
       } else {

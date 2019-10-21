@@ -783,17 +783,31 @@ Argent, Azure, Barry, Barry pily, Bendy, Bendy Sinister, Bendy pily, Bendy pily 
     expect(parseBlason(' Argent, three escutcheons gules')).toEqual(expected);
   });
 
-  it('should parse chapé ployé', () => {
+  it('should parse chapé ployé per pale', () => {
     const expected: SimpleBlason = {
       kind: 'simple',
       field: { kind: 'plain', tincture: argent },
       ordinary: {
         name: 'chape-ploye',
-        tinctures: [gules, sable],
+        tinctures: { kind: 'party', per: 'pale', tinctures: [gules, sable] },
         line: 'straight',
       },
     };
 
     expect(parseBlason('Argent, chapé ployé per pale gules and sable')).toEqual(expected);
+  });
+
+  it('should parse chapé ployé per pale', () => {
+    const expected: SimpleBlason = {
+      kind: 'simple',
+      field: { kind: 'plain', tincture: argent },
+      ordinary: {
+        name: 'chape-ploye',
+        tinctures: { kind: 'simple', tincture: sable },
+        line: 'straight',
+      },
+    };
+
+    expect(parseBlason('Argent, chapé ployé sable')).toEqual(expected);
   });
 });

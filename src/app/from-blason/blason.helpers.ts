@@ -23,9 +23,16 @@ function allDeclaredTincturesOfCharge(charge: Charge): Array<Tincture> {
     return cannotHappen(charge);
   }
 }
-function allDeclaredTincturesOfOrdinary(ordinary: Ordinary): Array<Tincture> {
+export function allDeclaredTincturesOfOrdinary(ordinary: Ordinary): Array<Tincture> {
   if (ordinary.name === 'chape-ploye') {
-    return ordinary.tinctures;
+    const tinctures = ordinary.tinctures;
+    if (tinctures.kind === 'party') {
+      return tinctures.tinctures;
+    } else if (tinctures.kind === 'simple') {
+      return [tinctures.tincture];
+    } else {
+      return cannotHappen(tinctures);
+    }
   } else {
     return [ordinary.tincture];
   }

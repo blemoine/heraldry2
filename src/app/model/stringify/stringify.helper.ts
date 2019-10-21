@@ -109,10 +109,16 @@ function stringifyOrdinary(ordinary: Ordinary): string {
     if (ordinary.line !== 'straight') {
       result += stringifyLine(ordinary.line) + ' ';
     }
-    result += ' per pale ';
-    result += stringifyTincture(ordinary.tinctures[0]);
-    result += ' and ';
-    result += stringifyTincture(ordinary.tinctures[1]);
+    if (ordinary.tinctures.kind === 'party') {
+      result += ' per pale ';
+      result += stringifyTincture(ordinary.tinctures.tinctures[0]);
+      result += ' and ';
+      result += stringifyTincture(ordinary.tinctures.tinctures[1]);
+    } else if (ordinary.tinctures.kind === 'simple') {
+      result += stringifyTincture(ordinary.tinctures.tincture);
+    } else {
+      return cannotHappen(ordinary.tinctures);
+    }
     return result;
   } else {
     let result = 'a ' + stringifyOrdinaryName(ordinary.name) + ' ';
