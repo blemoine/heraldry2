@@ -39,10 +39,10 @@ Faire le "of the last"
 - Factoriser le pattern de selection des tinctures et des lines
 - Pour les ordinary avec un seul coté, ne presenter que embatled, et pas les autres.
 - le swiss n'est ps de la bonne forme ( les bords sont plats)
-- Chevronny et Chevronny reversed en quarterly sont mal affiché
 - Réfléchir a une autre facon de faire les fields :
     * vu comme la composition d'un fond rectanglaire (et grand) + d'un truc par dessus ? 
 - Click on Escutcheon doesn't work. 
+- Couter embattled marche pas bien vs BRetessed
 
 ## Feature to add
 

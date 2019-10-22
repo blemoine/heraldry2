@@ -56,6 +56,14 @@ export const BlasonDisplay = ({
             const shape = row > 0 ? (col === 0 ? 'leftCut' : 'rightCut') : 'square';
             return (
               <g key={i} className={'blason-quarter-' + (i + 1)} transform={`translate(${xTranslate} ${yTranslate})`}>
+                <rect
+                  x={0}
+                  y={0}
+                  width={quarterDimension.width}
+                  height={quarterDimension.height}
+                  fill="transparent"
+                  stroke="#333"
+                />
                 <SimpleBlasonDisplay
                   blason={b}
                   dimension={quarterDimension}

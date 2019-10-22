@@ -188,10 +188,27 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
       return <BendyPilySinisterDisplay fill={fill} dimension={dimension} />;
     } else if (field.kind === 'chevronny') {
       const fill: [string, string] = fillFromTincturePair(field.tinctures);
-      return <ChevronnyDisplay fill={fill} dimension={dimension} />;
+      let updatedDimension: Dimension;
+      if (shape === 'square' || shape === 'default') {
+        updatedDimension = dimension;
+      } else if (shape === 'leftCut' || shape === 'rightCut') {
+        updatedDimension = { width: dimension.width, height: dimension.height * 0.8 };
+      } else {
+        return cannotHappen(shape);
+      }
+
+      return <ChevronnyDisplay fill={fill} dimension={updatedDimension} />;
     } else if (field.kind === 'chevronny-reversed') {
       const fill: [string, string] = fillFromTincturePair(field.tinctures);
-      return <ChevronnyReversedDisplay fill={fill} dimension={dimension} />;
+      let updatedDimension: Dimension;
+      if (shape === 'square' || shape === 'default') {
+        updatedDimension = dimension;
+      } else if (shape === 'leftCut' || shape === 'rightCut') {
+        updatedDimension = { width: dimension.width, height: dimension.height * 0.8 };
+      } else {
+        return cannotHappen(shape);
+      }
+      return <ChevronnyReversedDisplay fill={fill} dimension={updatedDimension} />;
     } else if (field.kind === 'embrassee-a-dexter') {
       const fill: [string, string] = fillFromTincturePair(field.tinctures);
       return <EmbrasseeDexterDisplay fill={fill} dimension={dimension} />;

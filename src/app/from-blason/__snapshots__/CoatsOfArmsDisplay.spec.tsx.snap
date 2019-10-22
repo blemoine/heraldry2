@@ -8685,6 +8685,14 @@ exports[`CoatsOfArms should render 'Quarterly, 1st Per pile reversed embattled e
       className="blason-quarter-1"
       transform="translate(0 0)"
     >
+      <rect
+        fill="transparent"
+        height={133.33333333333334}
+        stroke="#333"
+        width={100}
+        x={0}
+        y={0}
+      />
       <g
         className="blason-field"
         clipPath="url(#quarterly-clip-path)"
@@ -8714,6 +8722,14 @@ exports[`CoatsOfArms should render 'Quarterly, 1st Per pile reversed embattled e
       className="blason-quarter-2"
       transform="translate(100 0)"
     >
+      <rect
+        fill="transparent"
+        height={133.33333333333334}
+        stroke="#333"
+        width={100}
+        x={0}
+        y={0}
+      />
       <g
         className="blason-field"
         clipPath="url(#quarterly-clip-path)"
@@ -8743,6 +8759,14 @@ exports[`CoatsOfArms should render 'Quarterly, 1st Per pile reversed embattled e
       className="blason-quarter-3"
       transform="translate(0 133.33333333333334)"
     >
+      <rect
+        fill="transparent"
+        height={133.33333333333334}
+        stroke="#333"
+        width={100}
+        x={0}
+        y={0}
+      />
       <g
         className="blason-field"
         clipPath="url(#quarterly-clip-path)"
@@ -8772,6 +8796,14 @@ exports[`CoatsOfArms should render 'Quarterly, 1st Per pile reversed embattled e
       className="blason-quarter-4"
       transform="translate(100 133.33333333333334)"
     >
+      <rect
+        fill="transparent"
+        height={133.33333333333334}
+        stroke="#333"
+        width={100}
+        x={0}
+        y={0}
+      />
       <g
         className="blason-field"
         clipPath="url(#quarterly-clip-path)"
@@ -8932,6 +8964,14 @@ exports[`CoatsOfArms should render 'Quarterly, 1st and 2nd and 3rd and 4th quart
       className="blason-quarter-1"
       transform="translate(0 0)"
     >
+      <rect
+        fill="transparent"
+        height={133.33333333333334}
+        stroke="#333"
+        width={100}
+        x={0}
+        y={0}
+      />
       <g
         className="blason-field"
         clipPath="url(#quarterly-clip-path)"
@@ -8993,6 +9033,14 @@ exports[`CoatsOfArms should render 'Quarterly, 1st and 2nd and 3rd and 4th quart
       className="blason-quarter-2"
       transform="translate(100 0)"
     >
+      <rect
+        fill="transparent"
+        height={133.33333333333334}
+        stroke="#333"
+        width={100}
+        x={0}
+        y={0}
+      />
       <g
         className="blason-field"
         clipPath="url(#quarterly-clip-path)"
@@ -9054,6 +9102,14 @@ exports[`CoatsOfArms should render 'Quarterly, 1st and 2nd and 3rd and 4th quart
       className="blason-quarter-3"
       transform="translate(0 133.33333333333334)"
     >
+      <rect
+        fill="transparent"
+        height={133.33333333333334}
+        stroke="#333"
+        width={100}
+        x={0}
+        y={0}
+      />
       <g
         className="blason-field"
         clipPath="url(#quarterly-clip-path)"
@@ -9115,6 +9171,14 @@ exports[`CoatsOfArms should render 'Quarterly, 1st and 2nd and 3rd and 4th quart
       className="blason-quarter-4"
       transform="translate(100 133.33333333333334)"
     >
+      <rect
+        fill="transparent"
+        height={133.33333333333334}
+        stroke="#333"
+        width={100}
+        x={0}
+        y={0}
+      />
       <g
         className="blason-field"
         clipPath="url(#quarterly-clip-path)"
@@ -9307,6 +9371,14 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
       className="blason-quarter-1"
       transform="translate(0 0)"
     >
+      <rect
+        fill="transparent"
+        height={133.33333333333334}
+        stroke="#333"
+        width={100}
+        x={0}
+        y={0}
+      />
       <g
         className="blason-field"
         clipPath="url(#quarterly-clip-path)"
@@ -9355,6 +9427,14 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
       className="blason-quarter-2"
       transform="translate(100 0)"
     >
+      <rect
+        fill="transparent"
+        height={133.33333333333334}
+        stroke="#333"
+        width={100}
+        x={0}
+        y={0}
+      />
       <g
         className="blason-field"
         clipPath="url(#quarterly-clip-path)"
@@ -9403,6 +9483,14 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
       className="blason-quarter-3"
       transform="translate(0 133.33333333333334)"
     >
+      <rect
+        fill="transparent"
+        height={133.33333333333334}
+        stroke="#333"
+        width={100}
+        x={0}
+        y={0}
+      />
       <g
         className="blason-field"
         clipPath="url(#quarterly-clip-path)"
@@ -9450,6 +9538,14 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
       className="blason-quarter-4"
       transform="translate(100 133.33333333333334)"
     >
+      <rect
+        fill="transparent"
+        height={133.33333333333334}
+        stroke="#333"
+        width={100}
+        x={0}
+        y={0}
+      />
       <g
         className="blason-field"
         clipPath="url(#quarterly-clip-path)"
@@ -9568,6 +9664,14 @@ exports[`CoatsOfArms should render 'Quarterly, 1st: Bendy or and purpure, a bord
       className="blason-quarter-1"
       transform="translate(0 0)"
     >
+      <rect
+        fill="transparent"
+        height={133.33333333333334}
+        stroke="#333"
+        width={100}
+        x={0}
+        y={0}
+      />
       <g
         className="blason-field"
         clipPath="url(#quarterly-clip-path)"
@@ -9638,6 +9742,14 @@ exports[`CoatsOfArms should render 'Quarterly, 1st: Bendy or and purpure, a bord
       className="blason-quarter-2"
       transform="translate(100 0)"
     >
+      <rect
+        fill="transparent"
+        height={133.33333333333334}
+        stroke="#333"
+        width={100}
+        x={0}
+        y={0}
+      />
       <g
         className="blason-field"
         clipPath="url(#quarterly-clip-path)"
@@ -9718,6 +9830,14 @@ exports[`CoatsOfArms should render 'Quarterly, 1st: Bendy or and purpure, a bord
       className="blason-quarter-3"
       transform="translate(0 133.33333333333334)"
     >
+      <rect
+        fill="transparent"
+        height={133.33333333333334}
+        stroke="#333"
+        width={100}
+        x={0}
+        y={0}
+      />
       <g
         className="blason-field"
         clipPath="url(#quarterly-clip-path)"
@@ -9798,6 +9918,14 @@ exports[`CoatsOfArms should render 'Quarterly, 1st: Bendy or and purpure, a bord
       className="blason-quarter-4"
       transform="translate(100 133.33333333333334)"
     >
+      <rect
+        fill="transparent"
+        height={133.33333333333334}
+        stroke="#333"
+        width={100}
+        x={0}
+        y={0}
+      />
       <g
         className="blason-field"
         clipPath="url(#quarterly-clip-path)"

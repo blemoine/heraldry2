@@ -26,7 +26,7 @@ export const ChevronnyReversedDisplay = (props: Props) => {
 
   return (
     <>
-      <rect x={0} y={0} width={width} height={height} fill={fill[0]} />
+      <rect x={0} y={0} width={width} height={height * 1.5} fill={fill[0]} />
       <PathFromBuilder pathBuilder={path1} fill={fill[1]} stroke="#333" />
       <PathFromBuilder pathBuilder={path2} fill={fill[1]} stroke="#333" />
       <PathFromBuilder pathBuilder={path3} fill={fill[1]} stroke="#333" />
