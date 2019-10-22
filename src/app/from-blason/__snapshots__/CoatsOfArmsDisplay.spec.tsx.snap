@@ -7667,6 +7667,166 @@ exports[`CoatsOfArms should render 'Per chevron Sable and Or, three fleurs de ly
 </svg>
 `;
 
+exports[`CoatsOfArms should render 'Per chevron ermine and gules, a shakefork or' 1`] = `
+<svg
+  className="coats-of-arms-display"
+  height={266.6666666666667}
+  viewBox="0 0 200 266.6666666666667"
+  width={200}
+>
+  <defs>
+    <symbol
+      id="ermine"
+      viewBox="0 0 200 240"
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <g
+        transform="translate(100, 240)"
+      >
+        <path
+          d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
+          fill="#000000"
+        />
+        <circle
+          cy={-226}
+          fill="#000000"
+          r="14"
+        />
+        <circle
+          cx={-32}
+          cy={-194}
+          fill="#000000"
+          r={14}
+        />
+        <circle
+          cx={32}
+          cy={-194}
+          fill="#000000"
+          r={14}
+        />
+      </g>
+    </symbol>
+    <pattern
+      height={64.93506493506494}
+      id="field-pattern-3"
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 70 125"
+      width={36.36363636363637}
+    >
+      <rect
+        fill="#FFFFFF"
+        height="125px"
+        width="70px"
+      />
+      <use
+        height={60}
+        href="#ermine"
+        width={35}
+        x="0"
+        y="0"
+      />
+      <use
+        height={60}
+        href="#ermine"
+        width={35}
+        x="35"
+        y="65"
+      />
+    </pattern>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <clipPath
+      id="plain-field-clip-path"
+    >
+      <path
+        d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
+        fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
+        stroke="#333"
+        strokeWidth={1}
+        style={
+          Object {
+            "cursor": "pointer",
+            "pointerEvents": "none",
+          }
+        }
+      />
+    </clipPath>
+  </defs>
+  <g
+    className="blason-field"
+    clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
+  >
+    <rect
+      fill="url(#field-pattern-3)"
+      height={266.6666666666667}
+      stroke="#333"
+      width={200}
+      x={0}
+      y={0}
+    />
+    <path
+      d="M -66.66667 266.66667 H266.66667 L 100 88.88889 Z"
+      fill="#FF0000"
+      stroke="#333"
+    />
+  </g>
+  <g
+    className="blason-ordinary"
+    clipPath="url(#plain-field-clip-path)"
+  >
+    <path
+      d="M 15 20 L 15 41.85603 L 84.54545 133.33333 L 84.54545 231.21212 L 100 246.66667 L 115.45455 231.21212 L 115.45455 133.33333 L 185 41.85603 L 185 20 L 163.14397 20 L 100 104.19196 L 36.85603 20 L 15 20"
+      fill="#FFD700"
+      onClick={[Function]}
+      onMouseDown={[Function]}
+      onMouseUp={[Function]}
+      stroke="#333"
+      strokeWidth={1}
+      style={
+        Object {
+          "cursor": "pointer",
+        }
+      }
+    />
+  </g>
+  <path
+    d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
+    fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
+    stroke="#333"
+    strokeWidth={1}
+    style={
+      Object {
+        "cursor": "pointer",
+        "pointerEvents": "none",
+      }
+    }
+  />
+</svg>
+`;
+
 exports[`CoatsOfArms should render 'Per chevron reversed invected ermine and gules' 1`] = `
 <svg
   className="coats-of-arms-display"

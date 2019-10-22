@@ -179,4 +179,5 @@ describe('CoatsOfArms', () => {
   );
   snapshotTest('Azure, a bordure urdy or, two crosses maltese in pale argent');
   snapshotTest('Or, a fess vair en point');
+  snapshotTest('Per chevron ermine and gules, a shakefork or');
 });
