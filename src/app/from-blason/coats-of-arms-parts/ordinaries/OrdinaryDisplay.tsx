@@ -20,6 +20,7 @@ import { PallOrdinaryDisplay } from './PallOrdinaryDisplay';
 import { ChapePloyeOrdinaryDisplay } from './ChapePloyeOrdinaryDisplay';
 import { PallInvertedOrdinaryDisplay } from './PallInvertedOrdinaryDisplay';
 import { ShakeforkOrdinaryDisplay } from './ShakeforkOrdinaryDisplay';
+import { GyronOrdinaryDisplay } from './GyronOrdinaryDisplay';
 
 type Props = {
   ordinary: Ordinary;
@@ -159,6 +160,15 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
     } else if (ordinary.name === 'shakefork') {
       return (
         <ShakeforkOrdinaryDisplay
+          dimension={dimension}
+          ordinary={ordinary}
+          fillFromTincture={fillFromTincture}
+          onClick={onClick}
+        />
+      );
+    } else if (ordinary.name === 'gyron') {
+      return (
+        <GyronOrdinaryDisplay
           dimension={dimension}
           ordinary={ordinary}
           fillFromTincture={fillFromTincture}

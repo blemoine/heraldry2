@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Dimension } from '../../../model/dimension';
-import { Shakefork } from '../../../model/ordinary';
+import { Gyron } from '../../../model/ordinary';
 import { FillFromTincture } from '../../fillFromTincture.helper';
 import { CommonOrdinaryDisplay } from './CommonOrdinaryDisplay';
-import { computeLineOptions, oneSideLineOption } from '../blasonDisplay.helper';
-import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
+import { LineOptions, SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { buildFurTransformProperty } from '../FurPattern.model';
+import { computeLineOptions, invertLineOptions } from '../blasonDisplay.helper';
 
 const postfixId = 'pall';
 const ermineScale = 0.3;
@@ -14,11 +14,11 @@ const potentScale = 0.16;
 
 type Props = {
   dimension: Dimension;
-  ordinary: Shakefork;
+  ordinary: Gyron;
   fillFromTincture: FillFromTincture;
   onClick: () => void;
 };
-export const ShakeforkOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onClick }: Props) => {
+export const GyronOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onClick }: Props) => {
   const { width, height } = dimension;
   const scaleRatio = height / 480;
 
@@ -29,24 +29,11 @@ export const ShakeforkOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture
   });
 
   const lineOptions = computeLineOptions(ordinary.line, dimension);
-  const oneSideOnly = oneSideLineOption(lineOptions);
-
-  const pallWidth = width / 5.5;
-  const projectedPallWidth = pallWidth / Math.sqrt(2);
+  const invertedLineOptions: LineOptions | null = lineOptions ? invertLineOptions(lineOptions) : null;
   const pathBuilder = SvgPathBuilder.start([0, 0])
-    .goTo([0, projectedPallWidth])
-    .goTo([width / 2 - pallWidth / 2, height / 2], oneSideOnly)
-    .goTo([width / 2 - pallWidth / 2, height - pallWidth / 2], oneSideOnly)
-    .goTo([width / 2, height], oneSideOnly)
-    .goTo([width / 2 + pallWidth / 2, height - pallWidth / 2])
-    .goTo([width / 2 + pallWidth / 2, height / 2], oneSideOnly)
-    .goTo([width, projectedPallWidth], oneSideOnly)
-    .goTo([width, 0])
-    .goTo([width - projectedPallWidth, 0])
-    .goTo([width / 2, height / 2 - (height / width) * projectedPallWidth], lineOptions)
-    .goTo([projectedPallWidth, 0], lineOptions)
-    .goTo([0, 0])
-    .scale([width / 2, height / 2], 0.85, 0.85);
+    .goTo([width / 2, height / 2], invertedLineOptions)
+    .goTo([0, height / 2], invertedLineOptions)
+    .close();
 
   return (
     <CommonOrdinaryDisplay

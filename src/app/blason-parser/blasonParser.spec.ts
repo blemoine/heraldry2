@@ -824,4 +824,18 @@ Argent, Azure, Barry, Barry pily, Bendy, Bendy Sinister, Bendy pily, Bendy pily 
 
     expect(parseBlason('Argent, a pall inverted gules')).toEqual(expected);
   });
+
+  it('should parse gyron', () => {
+    const expected: SimpleBlason = {
+      kind: 'simple',
+      field: { kind: 'plain', tincture: argent },
+      ordinary: {
+        name: 'gyron',
+        tincture: gules,
+        line: 'straight',
+      },
+    };
+
+    expect(parseBlason('Argent, a gyron gules')).toEqual(expected);
+  });
 });

@@ -10278,6 +10278,147 @@ exports[`CoatsOfArms should render 'Sable, a cross maltese argent' 1`] = `
 </svg>
 `;
 
+exports[`CoatsOfArms should render 'Vair, a gyron or' 1`] = `
+<svg
+  className="coats-of-arms-display"
+  height={266.6666666666667}
+  viewBox="0 0 200 266.6666666666667"
+  width={200}
+>
+  <defs>
+    
+    
+    
+    
+    <symbol
+      id="vair"
+      viewBox="0 0 200 200"
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <path
+        d="M0 200 L200 200 L150 150 L150 50 L100 0 L50 50 L50 150 Z"
+        fill="#0000FF"
+      />
+    </symbol>
+    <pattern
+      height={80}
+      id="field-pattern-0"
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 100 200"
+      width={40}
+    >
+      <rect
+        fill="#FFFFFF"
+        height="200px"
+        width="100px"
+      />
+      <use
+        height={100}
+        href="#vair"
+        width={100}
+        x="0"
+        y="0"
+      />
+      <use
+        height={100}
+        href="#vair"
+        width={100}
+        x="-50"
+        y="100"
+      />
+      <use
+        height={100}
+        href="#vair"
+        width={100}
+        x="50"
+        y="100"
+      />
+    </pattern>
+    
+    
+    
+    
+    
+    
+    
+    <clipPath
+      id="plain-field-clip-path"
+    >
+      <path
+        d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
+        fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
+        stroke="#333"
+        strokeWidth={1}
+        style={
+          Object {
+            "cursor": "pointer",
+            "pointerEvents": "none",
+          }
+        }
+      />
+    </clipPath>
+  </defs>
+  <g
+    className="blason-field"
+    clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
+  >
+    <rect
+      fill="url(#field-pattern-0)"
+      height={266.6666666666667}
+      stroke="#333"
+      width={200}
+      x={0}
+      y={0}
+    />
+  </g>
+  <g
+    className="blason-ordinary"
+    clipPath="url(#plain-field-clip-path)"
+  >
+    <path
+      d="M 0 0 L 100 133.33333 H0 Z"
+      fill="#FFD700"
+      onClick={[Function]}
+      onMouseDown={[Function]}
+      onMouseUp={[Function]}
+      stroke="#333"
+      strokeWidth={1}
+      style={
+        Object {
+          "cursor": "pointer",
+        }
+      }
+    />
+  </g>
+  <path
+    d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
+    fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
+    stroke="#333"
+    strokeWidth={1}
+    style={
+      Object {
+        "cursor": "pointer",
+        "pointerEvents": "none",
+      }
+    }
+  />
+</svg>
+`;
+
 exports[`CoatsOfArms should render 'Vert, two crosses hummetty counter potent' 1`] = `
 <svg
   className="coats-of-arms-display"
