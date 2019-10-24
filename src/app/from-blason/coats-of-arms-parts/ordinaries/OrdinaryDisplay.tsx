@@ -179,8 +179,7 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
       return (
         <QuarterOrdinaryDisplay
           onClick={onClick}
-          stroke={strokeColor}
-          fill={fill}
+          fillFromTincture={fillFromTincture}
           dimension={dimension}
           ordinary={ordinary}
         />
@@ -189,8 +188,7 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
       return (
         <CantonOrdinaryDisplay
           onClick={onClick}
-          stroke={strokeColor}
-          fill={fill}
+          fillFromTincture={fillFromTincture}
           dimension={dimension}
           ordinary={ordinary}
         />

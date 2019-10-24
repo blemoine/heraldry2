@@ -1,20 +1,49 @@
 import * as React from 'react';
-import { FocusablePathFromBuilder } from '../../../common/PathFromBuilder';
-import { Canton } from '../../../model/ordinary';
-import { LineOptions, SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { Dimension } from '../../../model/dimension';
+import { Canton } from '../../../model/ordinary';
+import { FillFromTincture } from '../../fillFromTincture.helper';
+import { CommonOrdinaryDisplay } from './CommonOrdinaryDisplay';
+import { LineOptions, SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
+import { buildFurTransformProperty } from '../FurPattern.model';
 import { computeLineOptions, invertLineOptions } from '../blasonDisplay.helper';
 
-type Props = { ordinary: Canton; dimension: Dimension; onClick: () => void; stroke: string; fill: string };
-export const CantonOrdinaryDisplay = ({ ordinary, dimension, onClick, fill, stroke }: Props) => {
+const postfixId = 'canton';
+const ermineScale = 0.3;
+const vairScale = 0.23;
+const potentScale = 0.16;
+
+type Props = {
+  dimension: Dimension;
+  ordinary: Canton;
+  fillFromTincture: FillFromTincture;
+  onClick: () => void;
+};
+export const CantonOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onClick }: Props) => {
+  const { width, height } = dimension;
+  const scaleRatio = height / 480;
+
+  const transformProperties = buildFurTransformProperty(fillFromTincture, {
+    ermine: [{ kind: 'scale', value: [ermineScale * scaleRatio, ermineScale * 0.75 * scaleRatio] }],
+    vair: [{ kind: 'scale', value: [vairScale * scaleRatio, vairScale * 0.6785 * scaleRatio] }],
+    potent: [{ kind: 'scale', value: [potentScale * scaleRatio, potentScale * 1.35 * scaleRatio] }],
+  });
+
   const lineOptions = computeLineOptions(ordinary.line, dimension);
   const invertedLineOptions: LineOptions | null = lineOptions ? invertLineOptions(lineOptions) : null;
-
-  const { width, height } = dimension;
   const pathBuilder = SvgPathBuilder.start([0, 0])
     .goTo([width / 3, 0])
     .goToWithPartFlat([width / 3, height / 3], invertedLineOptions, 5, 'end')
     .goToWithPartFlat([0, height / 3], invertedLineOptions, 5, 'start')
     .close();
-  return <FocusablePathFromBuilder pathBuilder={pathBuilder} fill={fill} stroke={stroke} onClick={onClick} />;
+
+  return (
+    <CommonOrdinaryDisplay
+      tincture={ordinary.tincture}
+      fillFromTincture={fillFromTincture}
+      onClick={onClick}
+      transformProperties={transformProperties}
+      pathBuilder={pathBuilder}
+      postfixId={postfixId}
+    />
+  );
 };

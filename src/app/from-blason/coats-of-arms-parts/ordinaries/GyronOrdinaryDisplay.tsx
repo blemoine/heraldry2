@@ -7,7 +7,7 @@ import { LineOptions, SvgPathBuilder } from '../../../svg-path-builder/svg-path-
 import { buildFurTransformProperty } from '../FurPattern.model';
 import { computeLineOptions, invertLineOptions } from '../blasonDisplay.helper';
 
-const postfixId = 'pall';
+const postfixId = 'gyron';
 const ermineScale = 0.3;
 const vairScale = 0.23;
 const potentScale = 0.16;
