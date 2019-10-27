@@ -3,9 +3,9 @@ import { Dimension } from '../../../model/dimension';
 import { Quarter } from '../../../model/ordinary';
 import { FillFromTincture } from '../../fillFromTincture.helper';
 import { CommonOrdinaryDisplay } from './CommonOrdinaryDisplay';
-import { LineOptions, SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
+import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { buildFurTransformProperty } from '../FurPattern.model';
-import { computeLineOptions, invertLineOptions } from '../blasonDisplay.helper';
+import { computeLineOptions, invertLineOptionNullable } from '../blasonDisplay.helper';
 
 const postfixId = 'quarter';
 const ermineScale = 0.3;
@@ -29,12 +29,12 @@ export const QuarterOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, 
   });
 
   const lineOptions = computeLineOptions(ordinary.line, dimension);
-  const invertedLineOptions: LineOptions | null = lineOptions ? invertLineOptions(lineOptions) : null;
-  const pathBuilder = SvgPathBuilder.start([0, 0])
-    .goTo([width / 2, 0])
-    .goToWithPartFlat([width / 2, height / 2], invertedLineOptions, 5, 'end')
-    .goToWithPartFlat([0, height / 2], invertedLineOptions, 5, 'start')
-    .close();
+  const invertedLineOptions = invertLineOptionNullable(lineOptions);
+  const pathBuilder = SvgPathBuilder.rectangle(
+    [0, 0],
+    { width: width / 2, height: height / 2 },
+    { right: invertedLineOptions, bottom: invertedLineOptions }
+  );
 
   return (
     <CommonOrdinaryDisplay

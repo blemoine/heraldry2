@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Dimension } from '../../../model/dimension';
 import { Base } from '../../../model/ordinary';
 import { FillFromTincture } from '../../fillFromTincture.helper';
-import { computeLineOptions } from '../blasonDisplay.helper';
+import { computeLineOptions, invertLineOptionNullable } from '../blasonDisplay.helper';
 import { buildFurTransformProperty, FurTransformProperty } from '../FurPattern.model';
 import { CommonOrdinaryDisplay } from './CommonOrdinaryDisplay';
 
@@ -18,13 +18,14 @@ type Props = {
 export const BaseOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onClick }: Props) => {
   const { width, height } = dimension;
   const lineOptions = computeLineOptions(ordinary.line, dimension);
+  const invertedLineOptions = invertLineOptionNullable(lineOptions);
   const baseHeight = height / 4;
 
-  const pathBuilder = SvgPathBuilder.start([0, height])
-    .goTo([width, height])
-    .goTo([width, height - baseHeight])
-    .goTo([0, height - baseHeight], lineOptions)
-    .close();
+  const pathBuilder = SvgPathBuilder.rectangle(
+    [0, height - baseHeight],
+    { width, height: baseHeight },
+    { top: invertedLineOptions }
+  );
 
   const scaleRatio = height / 480;
   const transformProperties: FurTransformProperty = buildFurTransformProperty(fillFromTincture, {

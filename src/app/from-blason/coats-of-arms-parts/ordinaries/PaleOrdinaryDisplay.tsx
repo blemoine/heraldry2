@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Dimension } from '../../../model/dimension';
 import { Pale } from '../../../model/ordinary';
 import { FillFromTincture } from '../../fillFromTincture.helper';
-import { computeLineOptions, oneSideLineOption } from '../blasonDisplay.helper';
+import { computeLineOptions, invertLineOptionNullable, oneSideLineOption } from '../blasonDisplay.helper';
 import { CommonOrdinaryDisplay } from './CommonOrdinaryDisplay';
 import { buildFurTransformProperty, FurTransformProperty } from '../FurPattern.model';
 import { range } from '../../../../utils/range';
@@ -19,16 +19,19 @@ type Props = {
 export const PaleOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onClick }: Props) => {
   const { width, height } = dimension;
   const lineOptions = computeLineOptions(ordinary.line, dimension);
-  const oneSideOnly = oneSideLineOption(lineOptions);
+  const invertedLineOptions = invertLineOptionNullable(lineOptions);
+  const oneSideOnly = oneSideLineOption(invertedLineOptions);
 
   const pathBuilders = range(0, ordinary.count).map((i) => {
     const startX = ((i * 2 + 1) * width) / (2 * ordinary.count + 1);
     const paleWidth = width / (2 * ordinary.count + 1);
     return {
-      pathBuilder: SvgPathBuilder.start([startX, 0])
-        .goTo([startX, height], oneSideOnly)
-        .goTo([startX + paleWidth, height])
-        .goTo([startX + paleWidth, 0], lineOptions),
+      pathBuilder: SvgPathBuilder.rectangle(
+        [startX, 0],
+        { width: paleWidth, height },
+        { left: oneSideOnly, right: invertedLineOptions }
+      ),
+
       tincture: ordinary.tincture,
     };
   });

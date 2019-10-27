@@ -3,7 +3,7 @@ import { Dimension } from '../../../model/dimension';
 import { Bend, BendSinister } from '../../../model/ordinary';
 import { FillFromTincture } from '../../fillFromTincture.helper';
 import { CommonOrdinaryDisplay } from './CommonOrdinaryDisplay';
-import { computeLineOptions, oneSideLineOption } from '../blasonDisplay.helper';
+import { computeLineOptions, invertLineOptionNullable, oneSideLineOption } from '../blasonDisplay.helper';
 import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { toDegree } from '../../../svg-path-builder/geometrical.helper';
 import { buildFurTransformProperty } from '../FurPattern.model';
@@ -32,18 +32,18 @@ export const BendOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onC
 
   const bendHeight = height / 4;
   const lineOptions = computeLineOptions(ordinary.line, dimension);
-  const oneSideOnly = oneSideLineOption(lineOptions);
+  const invertedLineOptions = invertLineOptionNullable(lineOptions);
+  const oneSideOnly = oneSideLineOption(invertedLineOptions);
   const length = Math.sqrt(width ** 2 + height ** 2);
 
   const rotationDirection = direction === 'dexter' ? 1 : -1;
-  const pathBuilder = SvgPathBuilder.start([0, 0])
-    .goTo([0, bendHeight])
-    .goTo([length, bendHeight], oneSideOnly)
-    .goTo([length, 0])
-    .goTo([0, 0], lineOptions)
+  const pathBuilder = SvgPathBuilder.rectangle(
+    [0, 0],
+    { width: length, height: bendHeight },
+    { top: invertedLineOptions, bottom: oneSideOnly }
+  )
     .translate([(width - length) / 2, height / 2 - bendHeight / 2])
     .rotate([width / 2, height / 2], rotationDirection * toDegree(Math.atan2(height, width)));
-
   return (
     <CommonOrdinaryDisplay
       tincture={ordinary.tincture}

@@ -14,6 +14,7 @@ import {
   waveBetweenPoint,
 } from './line-style.helper';
 import { Matrix3, mul, mulVec, rotate3, scale3, translation3 } from './matrix';
+import { Dimension } from '../model/dimension';
 
 type MoveTo = { command: 'M'; point: PathAbsolutePoint };
 type GoToPoint = { command: 'L'; point: PathAbsolutePoint };
@@ -124,6 +125,66 @@ function getY(commands: Array<PathCommand>): number | null {
 export class SvgPathBuilder {
   static start(startingPoint: PathAbsolutePoint): SvgPathBuilder {
     return new SvgPathBuilder([{ command: 'M', point: startingPoint }]);
+  }
+
+  static rectangle(
+    startingPoint: PathAbsolutePoint,
+    dimension: Dimension,
+    sideOptions?: {
+      top?: LineOptions | null;
+      bottom?: LineOptions | null;
+      left?: LineOptions | null;
+      right?: LineOptions | null;
+    }
+  ): SvgPathBuilder {
+    const [x, y] = startingPoint;
+    const topOptions = sideOptions && sideOptions.top ? sideOptions.top : null;
+    const rightOptions = sideOptions && sideOptions.right ? sideOptions.right : null;
+    const bottomOptions = sideOptions && sideOptions.bottom ? sideOptions.bottom : null;
+    const leftOptions = sideOptions && sideOptions.left ? sideOptions.left : null;
+
+    const topSideOption =
+      topOptions && rightOptions && leftOptions
+        ? 'both'
+        : topOptions && rightOptions
+        ? 'end'
+        : topOptions && leftOptions
+        ? 'start'
+        : 'none';
+    const rightSideOption =
+      topOptions && rightOptions && bottomOptions
+        ? 'both'
+        : rightOptions && bottomOptions
+        ? 'end'
+        : topOptions && rightOptions
+        ? 'start'
+        : 'none';
+    const bottomSideOption =
+      bottomOptions && rightOptions && leftOptions
+        ? 'both'
+        : bottomOptions && leftOptions
+        ? 'end'
+        : bottomOptions && rightOptions
+        ? 'start'
+        : 'none';
+    const leftSideOption =
+      bottomOptions && topOptions && leftOptions
+        ? 'both'
+        : topOptions && leftOptions
+        ? 'end'
+        : bottomOptions && leftOptions
+        ? 'start'
+        : 'none';
+    return SvgPathBuilder.start(startingPoint)
+      .goToWithPartFlat([x + dimension.width, y], topOptions, topSideOption !== 'none' ? 5 : 0, topSideOption)
+      .goToWithPartFlat(
+        [x + dimension.width, y + dimension.height],
+        rightOptions,
+        rightSideOption !== 'none' ? 5 : 0,
+        rightSideOption
+      )
+      .goToWithPartFlat([x, y + dimension.height], bottomOptions, bottomSideOption !== 'none' ? 5 : 0, bottomSideOption)
+      .goToWithPartFlat(startingPoint, leftOptions, leftSideOption !== 'none' ? 5 : 0, leftSideOption);
   }
 
   private constructor(private commands: Array<PathCommand>) {}
@@ -302,10 +363,10 @@ export class SvgPathBuilder {
     point: PathAbsolutePoint,
     lineOptions: LineOptions | null,
     percentage: number,
-    sides: 'start' | 'end' | 'both' = 'both'
+    sides: 'start' | 'end' | 'both' | 'none' = 'both'
   ): SvgPathBuilder {
-    if (!lineOptions) {
-      return this.goTo(point);
+    if (!lineOptions || percentage === 0 || sides === 'none') {
+      return this.goTo(point, lineOptions);
     }
     const current = this.currentPoint();
     if (!current) {

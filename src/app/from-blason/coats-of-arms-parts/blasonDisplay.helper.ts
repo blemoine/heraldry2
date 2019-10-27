@@ -58,6 +58,14 @@ export function invertLineOptions(lineOptions: LineOptions): LineOptions {
   }
 }
 
+export function invertLineOptionNullable(lineOptions: LineOptions | null): LineOptions | null {
+  if (!lineOptions) {
+    return null;
+  } else {
+    return invertLineOptions(lineOptions);
+  }
+}
+
 export function oneSideLineOption(lineOptions: LineOptions | null): LineOptions | null {
   if (!lineOptions) {
     return null;

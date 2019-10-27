@@ -1,5 +1,5 @@
-import { computeLineOptions, invertLineOptions } from '../blasonDisplay.helper';
-import { LineOptions, SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
+import { computeLineOptions, invertLineOptionNullable } from '../blasonDisplay.helper';
+import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import * as React from 'react';
 import { ChapePloye } from '../../../model/ordinary';
 import { Dimension } from '../../../model/dimension';
@@ -18,7 +18,7 @@ type Props = {
 export const ChapePloyeOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onClick }: Props) => {
   const { width, height } = dimension;
   const lineOptions = computeLineOptions(ordinary.line, dimension);
-  const invertedLineOptions: LineOptions | null = lineOptions ? invertLineOptions(lineOptions) : null;
+  const invertedLineOptions = invertLineOptionNullable(lineOptions);
 
   const pathBuilders =
     ordinary.tinctures.kind === 'party'

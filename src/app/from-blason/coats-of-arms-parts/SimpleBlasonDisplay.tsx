@@ -45,7 +45,7 @@ function getFieldVerticalOffsetAndScale(ordinary: Ordinary): { verticalOffset: n
     ) {
       return { verticalOffset: 9 / 50, verticalScale: 41 / 50 };
     } else if (ordinary.line === 'urdy') {
-      return { verticalOffset: 8 / 50, verticalScale: 42 / 50 };
+      return { verticalOffset: 9 / 50, verticalScale: 41 / 50 };
     } else {
       return cannotHappen(ordinary.line);
     }

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Dimension } from '../../../model/dimension';
 import { Fess } from '../../../model/ordinary';
 import { FillFromTincture } from '../../fillFromTincture.helper';
-import { computeLineOptions, oneSideLineOption } from '../blasonDisplay.helper';
+import { computeLineOptions, invertLineOptionNullable, oneSideLineOption } from '../blasonDisplay.helper';
 import { CommonOrdinaryDisplay } from './CommonOrdinaryDisplay';
 import { buildFurTransformProperty, FurTransformProperty } from '../FurPattern.model';
 
@@ -18,13 +18,14 @@ type Props = {
 export const FessOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onClick }: Props) => {
   const { width, height } = dimension;
   const lineOptions = computeLineOptions(ordinary.line, dimension);
-  const oneSideOnly = oneSideLineOption(lineOptions);
+  const invertedLineOptions = invertLineOptionNullable(lineOptions);
+  const oneSideOnly = oneSideLineOption(invertedLineOptions);
 
-  const pathBuilder = SvgPathBuilder.start([0, height / 3])
-    .goTo([0, (2 * height) / 3])
-    .goTo([width, (2 * height) / 3], oneSideOnly)
-    .goTo([width, height / 3])
-    .goTo([0, height / 3], lineOptions);
+  const pathBuilder = SvgPathBuilder.rectangle(
+    [0, height / 3],
+    { width, height: height / 3 },
+    { top: invertedLineOptions, bottom: oneSideOnly }
+  );
 
   const scaleRatio = height / 480;
   const transformProperties: FurTransformProperty = buildFurTransformProperty(fillFromTincture, {

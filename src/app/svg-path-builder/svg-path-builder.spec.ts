@@ -216,4 +216,24 @@ describe('SvgPathBuilder', () => {
 
     expect((result as SvgPathBuilder).toPathAttribute()).toEqual('M 12 24 L 65 78 Z');
   });
+
+  describe('rectangle', () => {
+    it('should build a rectangle', () => {
+      const result = SvgPathBuilder.rectangle([10, 20], { width: 50, height: 20 });
+
+      expect(result.toPathAttribute()).toEqual('M 10 20 H60 V40 H10 Z');
+    });
+
+    it('should build a rectangle with specified line style on top', () => {
+      const result = SvgPathBuilder.rectangle(
+        [10, 20],
+        { width: 50, height: 20 },
+        { top: { line: 'with-arc', radius: 15, sweep: false } }
+      );
+
+      expect(result.toPathAttribute()).toEqual(
+        'M 10 20 Q 16.25 35 22.5 20 Q 28.75 35 35 20 Q 41.25 35 47.5 20 Q 53.75 35 60 20 V40 H10 Z'
+      );
+    });
+  });
 });

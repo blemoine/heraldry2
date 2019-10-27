@@ -1,4 +1,4 @@
-import { chiefHeightRatio, computeLineOptions } from '../blasonDisplay.helper';
+import { chiefHeightRatio, computeLineOptions, invertLineOptionNullable } from '../blasonDisplay.helper';
 import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import * as React from 'react';
 import { Chief } from '../../../model/ordinary';
@@ -19,6 +19,7 @@ export const ChiefOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, on
   const { width, height } = dimension;
   const chiefHeight = height * chiefHeightRatio;
   const lineOptions = computeLineOptions(ordinary.line, dimension);
+  const invertedLineOptions = invertLineOptionNullable(lineOptions);
 
   const computedHeight =
     chiefHeight +
@@ -27,11 +28,12 @@ export const ChiefOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, on
       : lineOptions && lineOptions.line === 'indented'
       ? lineOptions.height
       : 0);
-  const pathBuilder = SvgPathBuilder.start([0, 0])
-    .goTo([0, computedHeight])
-    .goTo([width, computedHeight], lineOptions)
-    .goTo([width, 0])
-    .close();
+
+  const pathBuilder = SvgPathBuilder.rectangle(
+    [0, 0],
+    { width, height: computedHeight },
+    { bottom: invertedLineOptions }
+  );
 
   const scaleRatio = height / 480;
   const transformProperties: FurTransformProperty = buildFurTransformProperty(fillFromTincture, {
