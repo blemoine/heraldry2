@@ -107,6 +107,11 @@ export type LozengeThroughoutArched = {
   tinctures: [Tincture, Tincture];
 };
 
+export type BarryAndPerPaleField = {
+  kind: 'barry-and-per-pale';
+  tinctures: [Tincture, Tincture];
+};
+
 export type Field =
   | PlainField
   | PartyField
@@ -115,6 +120,7 @@ export type Field =
   | BendyField
   | BendySinisterField
   | BarryField
+  | BarryAndPerPaleField
   | ChequyField
   | LozengyField
   | PalyPilyField
@@ -138,6 +144,7 @@ export const fieldKinds: Array<Field['kind']> = [
   'bendySinister',
   'paly',
   'barry',
+  'barry-and-per-pale',
   'chequy',
   'lozengy',
   'paly-pily',

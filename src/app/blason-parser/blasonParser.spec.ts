@@ -131,7 +131,7 @@ describe('parseBlason', () => {
 
 Expected one of the following: 
 
-Argent, Azure, Barry, Barry pily, Bendy, Bendy Sinister, Bendy pily, Bendy pily sinister, Chequy, Chevronny, Chevronny reversed, Counter ermine, Counter potent, Counter vair, Counter-ermine, Counter-potent, Counter-vair, Embrassee a dexter, Embrassee a sinister, Ermine, Erminois, Gironny, Gules, Lozenge throughout, Lozenge throughout arched, Lozengy, Lozengy bendwise, Murrey, Or, Paly, Paly pily, Pean, Per, Potent, Potent en pale, Potent en point, Potent-en-pale, Potent-en-point, Purpure, Quarterly, Quarterly of nine, Sable, Sanguine, Tenne, Tenné, Tierced per, Vair, Vair en pale, Vair en point, Vair-en-pale, Vair-en-point, Vert
+Argent, Azure, Barry, Barry and per pale, Barry pily, Bendy, Bendy Sinister, Bendy pily, Bendy pily sinister, Chequy, Chevronny, Chevronny reversed, Counter ermine, Counter potent, Counter vair, Counter-ermine, Counter-potent, Counter-vair, Embrassee a dexter, Embrassee a sinister, Ermine, Erminois, Gironny, Gules, Lozenge throughout, Lozenge throughout arched, Lozengy, Lozengy bendwise, Murrey, Or, Paly, Paly pily, Pean, Per, Potent, Potent en pale, Potent en point, Potent-en-pale, Potent-en-point, Purpure, Quarterly, Quarterly of nine, Sable, Sanguine, Tenne, Tenné, Tierced per, Vair, Vair en pale, Vair en point, Vair-en-pale, Vair-en-point, Vert
 `,
     });
   });
@@ -837,5 +837,14 @@ Argent, Azure, Barry, Barry pily, Bendy, Bendy Sinister, Bendy pily, Bendy pily 
     };
 
     expect(parseBlason('Argent, a gyron gules')).toEqual(expected);
+  });
+
+  it('should parse barry and per pale', () => {
+    const expected: SimpleBlason = {
+      kind: 'simple',
+      field: { kind: 'barry-and-per-pale', tinctures: [sable, argent] },
+    };
+
+    expect(parseBlason('Barry and per pale sable and argent')).toEqual(expected);
   });
 });

@@ -14,7 +14,6 @@ import { BendyDisplay } from './fields/BendyDisplay';
 import { PalyDisplay } from './fields/PalyDisplay';
 import { BarryDisplay } from './fields/BarryDisplay';
 import { BendySinisterDisplay } from './fields/BendySinisterDisplay';
-import { ChequyDisplay } from './fields/ChequyDisplay';
 import { Dimension } from '../../model/dimension';
 import { LozengyDisplay } from './fields/LozengyDisplay';
 import { PalyPilyDisplay } from './fields/PalyPilyDisplay';
@@ -42,6 +41,7 @@ import { PileReversedDisplay } from './fields/PileReversedDisplay';
 import { PileReversedArchedDisplay } from './fields/PileReversedArchedDisplay';
 import { PileBendwiseDisplay } from './fields/PileBendwiseDisplay';
 import { PileBendwiseSinisterDisplay } from './fields/PileSinisterBendwiseDisplay';
+import { AlternatingSquareDisplay } from './fields/AlternatingSquareDisplay';
 
 type Props = {
   dimension: Dimension;
@@ -165,9 +165,12 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
       return (
         <BarryDisplay field={field} fillFromTincture={fillFromTincture} number={field.number} dimension={dimension} />
       );
+    } else if (field.kind === 'barry-and-per-pale') {
+      const fill: [string, string] = fillFromTincturePair(field.tinctures);
+      return <AlternatingSquareDisplay fill={fill} dimension={dimension} columns={2} rows={6} />;
     } else if (field.kind === 'chequy') {
       const fill: [string, string] = fillFromTincturePair(field.tinctures);
-      return <ChequyDisplay fill={fill} dimension={dimension} />;
+      return <AlternatingSquareDisplay fill={fill} dimension={dimension} rows={6} columns={6} />;
     } else if (field.kind === 'lozengy') {
       const fill: [string, string] = fillFromTincturePair(field.tinctures);
       return <LozengyDisplay fill={fill} dimension={dimension} />;

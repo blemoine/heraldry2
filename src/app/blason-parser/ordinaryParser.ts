@@ -11,6 +11,7 @@ function isNotPaleOrChevronOrCross(
 }
 
 export function ordinaryParser(): P.Parser<Ordinary> {
+  const lineOrStraightParser = lineParser.skip(P.whitespace).fallback('straight' as const);
   const paleParser: P.Parser<Pale> = P.seq(
     P.alt(
       aParser
@@ -22,7 +23,7 @@ export function ordinaryParser(): P.Parser<Ordinary> {
         .map((count) => ({ name: 'pale', count } as const))
         .skip(P.whitespace)
     ),
-    lineParser.skip(P.whitespace).fallback('straight' as const),
+    lineOrStraightParser,
     tinctureParserFromName
   ).map(([{ name, count }, line, tincture]): Pale => ({ name, count, line, tincture }));
 
@@ -36,7 +37,7 @@ export function ordinaryParser(): P.Parser<Ordinary> {
         .result('chevronel' as const)
         .skip(P.whitespace)
     ),
-    lineParser.skip(P.whitespace).fallback('straight' as const),
+    lineOrStraightParser,
     tinctureParserFromName
   ).map(([count, name, line, tincture]): Chevron | Chevronel => ({ name, count, line, tincture }));
 
@@ -44,7 +45,7 @@ export function ordinaryParser(): P.Parser<Ordinary> {
     P.regexp(/chapé ployé/i)
       .result('chape-ploye' as const)
       .skip(P.whitespace),
-    lineParser.skip(P.whitespace).fallback('straight' as const),
+    lineOrStraightParser,
 
     P.alt(
       P.string('per pale ')
@@ -75,15 +76,9 @@ export function ordinaryParser(): P.Parser<Ordinary> {
     aParser
       .then(buildAltParser(ordinaries.filter(isNotPaleOrChevronOrCross), stringifyOrdinaryName))
       .skip(P.whitespace),
-    lineParser.skip(P.whitespace).fallback('straight' as const),
+    lineOrStraightParser,
     tinctureParserFromName
-  ).map(
-    ([name, line, tincture]): Exclude<Ordinary, Pale | Chevron | Chevronel | OrdinaryCross | ChapePloye> => ({
-      name,
-      line,
-      tincture,
-    })
-  );
+  ).map(([name, line, tincture]) => ({ name, line, tincture }));
 
   return P.alt(paleParser, chevronParser, chapePloyerParser, ordinaryWithLineParser);
 }

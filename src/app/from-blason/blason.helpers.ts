@@ -61,7 +61,8 @@ function allDeclaredTincturesOfField(field: Field): Array<Tincture> {
     field.kind === 'embrassee-a-dexter' ||
     field.kind === 'embrassee-a-sinister' ||
     field.kind === 'lozenge-throughout' ||
-    field.kind === 'lozenge-throughout-arched'
+    field.kind === 'lozenge-throughout-arched' ||
+    field.kind === 'barry-and-per-pale'
   ) {
     return field.tinctures;
   } else {

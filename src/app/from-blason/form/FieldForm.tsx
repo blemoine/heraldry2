@@ -41,7 +41,8 @@ function extractColors(field: Field): [Tincture, Tincture] {
     field.kind === 'embrassee-a-dexter' ||
     field.kind === 'embrassee-a-sinister' ||
     field.kind === 'lozenge-throughout' ||
-    field.kind === 'lozenge-throughout-arched'
+    field.kind === 'lozenge-throughout-arched' ||
+    field.kind === 'barry-and-per-pale'
   ) {
     return field.tinctures;
   } else {
@@ -90,7 +91,8 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
         newKind === 'embrassee-a-dexter' ||
         newKind === 'embrassee-a-sinister' ||
         newKind === 'lozenge-throughout' ||
-        newKind === 'lozenge-throughout-arched'
+        newKind === 'lozenge-throughout-arched' ||
+        newKind === 'barry-and-per-pale'
       ) {
         fieldChange({ kind: newKind, tinctures: newColors });
       } else if (newKind === 'plain') {
@@ -158,7 +160,8 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
             field.kind === 'embrassee-a-dexter' ||
             field.kind === 'embrassee-a-sinister' ||
             field.kind === 'lozenge-throughout' ||
-            field.kind === 'lozenge-throughout-arched' ? (
+            field.kind === 'lozenge-throughout-arched' ||
+            field.kind === 'barry-and-per-pale' ? (
             <TincturesConfiguration
               tinctures={field.tinctures}
               tincturesChanges={(tinctures) => tincturesChanges(field, tinctures)}
