@@ -5,6 +5,9 @@ import { BarryField } from '../../../model/field';
 import { FillFromTincture } from '../../fillFromTincture.helper';
 import { FurPatternDefinition } from '../FurPatternDefinition';
 import { buildFurTransformProperty, FurTransformProperty, getFill } from '../FurPattern.model';
+import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
+import { PathFromBuilder } from '../../../common/PathFromBuilder';
+import { computeLineOptions, invertLineOptionNullable, oneSideLineOption } from '../blasonDisplay.helper';
 
 type Props = {
   field: BarryField;
@@ -15,12 +18,8 @@ type Props = {
 
 const postfixId = 'barry';
 
-export const BarryDisplay: React.FunctionComponent<Props> = ({
-  field,
-  fillFromTincture,
-  dimension: { width, height },
-  number,
-}) => {
+export const BarryDisplay: React.FunctionComponent<Props> = ({ field, fillFromTincture, dimension, number }) => {
+  const { width, height } = dimension;
   const scaleRatio = 0.75 / (width / height);
   const transformProperties: FurTransformProperty = buildFurTransformProperty(fillFromTincture, {
     ermine: { kind: 'scale', value: (4.1 * scaleRatio) / number },
@@ -38,17 +37,25 @@ export const BarryDisplay: React.FunctionComponent<Props> = ({
         transformProperties={transformProperties}
       />
       {range(0, number).map((i) => {
-        return (
-          <rect
-            key={i}
-            x={0}
-            y={(height * i) / number}
-            height={height / number}
-            width={width}
-            fill={fills[i % 2]}
-            stroke="#333"
-          />
+        const barHeight = height / number;
+
+        const startOffset = i === 0 ? barHeight : 0;
+        const endOffset = i === number - 1 ? barHeight : 0;
+        const lineOptions = computeLineOptions(field.line, dimension);
+        const invertLineOptions = invertLineOptionNullable(lineOptions);
+        const oneSideOnly = oneSideLineOption(lineOptions);
+        const invertedOneSideOnly = oneSideLineOption(invertLineOptions);
+
+        const pathBuilder = SvgPathBuilder.rectangle(
+          [0, i * barHeight - startOffset],
+          { width, height: barHeight + startOffset + endOffset },
+          {
+            bottom: i % 2 === 1 ? oneSideOnly : lineOptions,
+            top: i % 2 === 0 ? invertedOneSideOnly : invertLineOptions,
+          }
         );
+
+        return <PathFromBuilder key={i} pathBuilder={pathBuilder} fill={fills[i % 2]} stroke="#333" />;
       })}
     </>
   );

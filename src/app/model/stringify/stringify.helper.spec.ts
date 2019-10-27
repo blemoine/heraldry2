@@ -185,7 +185,7 @@ describe('stringifyBlason', () => {
     expect(
       stringifyBlason({
         kind: 'simple',
-        field: { kind: 'barry', number: 10, tinctures: [vert, purpure] },
+        field: { kind: 'barry', number: 10, tinctures: [vert, purpure], line: 'straight' },
       })
     ).toBe('Barry of ten vert and purpure');
   });
@@ -194,7 +194,7 @@ describe('stringifyBlason', () => {
     expect(
       stringifyBlason({
         kind: 'simple',
-        field: { kind: 'barry', number: 6, tinctures: [vert, purpure] },
+        field: { kind: 'barry', number: 6, tinctures: [vert, purpure], line: 'straight' },
       })
     ).toBe('Barry vert and purpure');
   });
@@ -202,9 +202,17 @@ describe('stringifyBlason', () => {
     expect(
       stringifyBlason({
         kind: 'simple',
-        field: { kind: 'barry', number: 8, tinctures: [vert, ermine] },
+        field: { kind: 'barry', number: 8, tinctures: [vert, ermine], line: 'straight' },
       })
     ).toBe('Barry of eight vert and ermine');
+  });
+  it('should stringify 8 barry field wavy', () => {
+    expect(
+      stringifyBlason({
+        kind: 'simple',
+        field: { kind: 'barry', number: 8, tinctures: [vert, ermine], line: 'wavy' },
+      })
+    ).toBe('Barry of eight wavy vert and ermine');
   });
 
   it('should stringify an eagle charge', () => {

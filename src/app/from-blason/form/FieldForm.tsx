@@ -10,6 +10,7 @@ import { ButtonGroup } from '../../common/ButtonGroup';
 import { TiercedForm } from './TiercedForm';
 import { stringifyFieldKind } from '../../model/stringify/stringify.helper';
 import { TincturesConfiguration } from './TincturesConfiguration';
+import { LineSelect } from './LineSelect';
 
 function extractColors(field: Field): [Tincture, Tincture] {
   if (field.kind === 'plain') {
@@ -98,7 +99,7 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
       } else if (newKind === 'plain') {
         fieldChange({ kind: newKind, tincture: newColors[0] });
       } else if (newKind === 'barry' || newKind === 'bendy' || newKind === 'bendySinister') {
-        fieldChange({ kind: newKind, number: 10, tinctures: newColors });
+        fieldChange({ kind: newKind, number: 10, tinctures: newColors, line: 'straight' });
       } else if (newKind === 'gironny') {
         fieldChange({ kind: newKind, number: 8, tinctures: newColors });
       } else {
@@ -196,6 +197,16 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
               value={field.number}
               valueChange={(number) => fieldChange({ ...field, number })}
             />
+          </div>
+        </div>
+      )}
+
+      {field.kind === 'barry' && (
+        <div className="form-group">
+          <label>Line</label>
+
+          <div>
+            <LineSelect line={field.line} lineChange={(line) => fieldChange({ ...field, line })} />
           </div>
         </div>
       )}

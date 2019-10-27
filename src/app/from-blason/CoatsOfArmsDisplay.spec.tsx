@@ -3,10 +3,10 @@ import * as React from 'react';
 import { CoatsOfArmsDisplay } from './CoatsOfArmsDisplay';
 import { Blason } from '../model/blason';
 import { azure, ermine, gules, or, purpure, vair } from '../model/tincture';
-import { parseBlason } from '../blason-parser/blasonParser';
 import { defaultTinctureConfiguration } from '../model/tincture-configuration';
 import { Configuration } from '../model/configuration';
 import { Dimension } from '../model/dimension';
+import { snapshotTest } from './tests/CoatsOfArms.render';
 
 let value = 1;
 jest.mock('../../utils/uuid', () => {
@@ -20,26 +20,6 @@ const dimension: Dimension = {
   width: 200,
 };
 const configuration: Configuration = { tinctureConfiguration: defaultTinctureConfiguration, shieldShape: 'heater' };
-
-function snapshotTest(blason: string) {
-  it(`should render '${blason}'`, () => {
-    const maybeBlason = parseBlason(blason);
-    if ('error' in maybeBlason) {
-      fail(maybeBlason.error);
-      return;
-    }
-
-    const component = renderer.create(
-      <CoatsOfArmsDisplay
-        blason={maybeBlason}
-        dimension={dimension}
-        configuration={configuration}
-        selectBlasonPart={() => {}}
-      />
-    );
-    expect(component.toJSON()).toMatchSnapshot();
-  });
-}
 
 describe('CoatsOfArms', () => {
   beforeEach(() => {
@@ -181,4 +161,5 @@ describe('CoatsOfArms', () => {
   snapshotTest('Or, a fess vair en point');
   snapshotTest('Per chevron ermine and gules, a shakefork or');
   snapshotTest('Vair, a gyron or');
+  snapshotTest('Barry and per pale or and gules');
 });

@@ -61,7 +61,11 @@ export const fieldArb: Arbitrary<Field> = fc.constantFrom(...fieldKinds).chain(
   (kind): Arbitrary<Field> => {
     if (kind === 'plain') {
       return tinctureArb.map((tincture) => ({ kind, tincture }));
-    } else if (kind === 'barry' || kind === 'bendy' || kind === 'bendySinister') {
+    } else if (kind === 'barry') {
+      return fc
+        .tuple(fc.constantFrom(...([6, 8, 10] as const)), lineArb, tinctureArb, tinctureArb)
+        .map(([number, line, ...tinctures]) => ({ kind, line, number, tinctures }));
+    } else if (kind === 'bendy' || kind === 'bendySinister') {
       return fc
         .tuple(fc.constantFrom(...([6, 8, 10] as const)), tinctureArb, tinctureArb)
         .map(([number, ...tinctures]) => ({ kind, number, tinctures }));

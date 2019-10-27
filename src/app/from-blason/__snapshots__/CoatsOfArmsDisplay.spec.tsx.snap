@@ -1415,6 +1415,169 @@ exports[`CoatsOfArms should render 'Azure, two crosses moline counter ermine' 1`
 </svg>
 `;
 
+exports[`CoatsOfArms should render 'Barry and per pale or and gules' 1`] = `
+<svg
+  className="coats-of-arms-display"
+  height={266.6666666666667}
+  viewBox="0 0 200 266.6666666666667"
+  width={200}
+>
+  <defs>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <clipPath
+      id="plain-field-clip-path"
+    >
+      <path
+        d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
+        fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
+        stroke="#333"
+        strokeWidth={1}
+        style={
+          Object {
+            "cursor": "pointer",
+            "pointerEvents": "none",
+          }
+        }
+      />
+    </clipPath>
+  </defs>
+  <g
+    className="blason-field"
+    clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
+  >
+    <rect
+      fill="#FFD700"
+      height={44.44444444444445}
+      stroke="#333"
+      width={100}
+      x={0}
+      y={0}
+    />
+    <rect
+      fill="#FF0000"
+      height={44.44444444444445}
+      stroke="#333"
+      width={100}
+      x={0}
+      y={44.44444444444445}
+    />
+    <rect
+      fill="#FFD700"
+      height={44.44444444444445}
+      stroke="#333"
+      width={100}
+      x={0}
+      y={88.8888888888889}
+    />
+    <rect
+      fill="#FF0000"
+      height={44.44444444444445}
+      stroke="#333"
+      width={100}
+      x={0}
+      y={133.33333333333334}
+    />
+    <rect
+      fill="#FFD700"
+      height={44.44444444444445}
+      stroke="#333"
+      width={100}
+      x={0}
+      y={177.7777777777778}
+    />
+    <rect
+      fill="#FF0000"
+      height={44.44444444444445}
+      stroke="#333"
+      width={100}
+      x={0}
+      y={222.22222222222226}
+    />
+    <rect
+      fill="#FF0000"
+      height={44.44444444444445}
+      stroke="#333"
+      width={100}
+      x={100}
+      y={0}
+    />
+    <rect
+      fill="#FFD700"
+      height={44.44444444444445}
+      stroke="#333"
+      width={100}
+      x={100}
+      y={44.44444444444445}
+    />
+    <rect
+      fill="#FF0000"
+      height={44.44444444444445}
+      stroke="#333"
+      width={100}
+      x={100}
+      y={88.8888888888889}
+    />
+    <rect
+      fill="#FFD700"
+      height={44.44444444444445}
+      stroke="#333"
+      width={100}
+      x={100}
+      y={133.33333333333334}
+    />
+    <rect
+      fill="#FF0000"
+      height={44.44444444444445}
+      stroke="#333"
+      width={100}
+      x={100}
+      y={177.7777777777778}
+    />
+    <rect
+      fill="#FFD700"
+      height={44.44444444444445}
+      stroke="#333"
+      width={100}
+      x={100}
+      y={222.22222222222226}
+    />
+  </g>
+  <path
+    d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
+    fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
+    stroke="#333"
+    strokeWidth={1}
+    style={
+      Object {
+        "cursor": "pointer",
+        "pointerEvents": "none",
+      }
+    }
+  />
+</svg>
+`;
+
 exports[`CoatsOfArms should render 'Barry ermine and vair' 1`] = `
 <svg
   className="coats-of-arms-display"
@@ -1582,53 +1745,35 @@ exports[`CoatsOfArms should render 'Barry ermine and vair' 1`] = `
       patternTransform="scale(0.555)"
       xlinkHref="#field-pattern-0"
     />
-    <rect
+    <path
+      d="M 0 -44.44444 H200 V44.44444 H0 Z"
       fill="url(#field-pattern-3-barry)"
-      height={44.44444444444445}
       stroke="#333"
-      width={200}
-      x={0}
-      y={0}
     />
-    <rect
+    <path
+      d="M 0 44.44444 H200 V88.88889 H0 Z"
       fill="url(#field-pattern-0-barry)"
-      height={44.44444444444445}
       stroke="#333"
-      width={200}
-      x={0}
-      y={44.44444444444445}
     />
-    <rect
+    <path
+      d="M 0 88.88889 H200 V133.33333 H0 Z"
       fill="url(#field-pattern-3-barry)"
-      height={44.44444444444445}
       stroke="#333"
-      width={200}
-      x={0}
-      y={88.8888888888889}
     />
-    <rect
+    <path
+      d="M 0 133.33333 H200 V177.77778 H0 Z"
       fill="url(#field-pattern-0-barry)"
-      height={44.44444444444445}
       stroke="#333"
-      width={200}
-      x={0}
-      y={133.33333333333334}
     />
-    <rect
+    <path
+      d="M 0 177.77778 H200 V222.22222 H0 Z"
       fill="url(#field-pattern-3-barry)"
-      height={44.44444444444445}
       stroke="#333"
-      width={200}
-      x={0}
-      y={177.7777777777778}
     />
-    <rect
+    <path
+      d="M 0 222.22222 H200 V311.11111 H0 Z"
       fill="url(#field-pattern-0-barry)"
-      height={44.44444444444445}
       stroke="#333"
-      width={200}
-      x={0}
-      y={222.22222222222226}
     />
   </g>
   <path

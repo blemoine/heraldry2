@@ -1,6 +1,7 @@
 import { Party } from './party';
 import { Tincture } from './tincture';
 import { Tierced } from './tierced';
+import { Line } from './line';
 
 export type PartyField = {
   kind: 'party';
@@ -51,6 +52,7 @@ export type BarryField = {
   kind: 'barry';
   number: 6 | 8 | 10;
   tinctures: [Tincture, Tincture];
+  line: Line;
 };
 
 export type ChequyField = {

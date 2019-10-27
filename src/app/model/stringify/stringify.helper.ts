@@ -273,6 +273,7 @@ function stringifyField(field: Field, shouldCapitalize: boolean): string {
       return (
         fieldStr +
         (field.number !== 6 ? ` of ${stringifyNumber(field.number)}` : '') +
+        ('line' in field && field.line !== 'straight' ? ' ' + stringifyLine(field.line) : '') +
         ` ${stringifyTincture(field.tinctures[0])} and ${stringifyTincture(field.tinctures[1])}`
       );
     } else if (field.kind === 'gironny') {
