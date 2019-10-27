@@ -46,13 +46,14 @@ export const PallOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onC
     .goTo([projectedPallWidth, 0], lineOptions)
     .goTo([0, 0]);
 
+  const pathBuilderAndTincture = [{ pathBuilder, tincture: ordinary.tincture }];
+
   return (
     <CommonOrdinaryDisplay
-      tincture={ordinary.tincture}
       fillFromTincture={fillFromTincture}
       onClick={onClick}
       transformProperties={transformProperties}
-      pathBuilder={pathBuilder}
+      pathBuilderAndTincture={pathBuilderAndTincture}
       postfixId={postfixId}
     />
   );

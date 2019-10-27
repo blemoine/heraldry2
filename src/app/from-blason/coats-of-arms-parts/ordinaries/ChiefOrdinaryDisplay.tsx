@@ -41,14 +41,14 @@ export const ChiefOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, on
     vair: { kind: 'scale', value: 0.66 * scaleRatio },
     potent: { kind: 'scale', value: 0.8 * scaleRatio },
   });
+  const pathBuilderAndTincture = [{ pathBuilder, tincture: ordinary.tincture }];
 
   return (
     <CommonOrdinaryDisplay
-      tincture={ordinary.tincture}
       fillFromTincture={fillFromTincture}
       onClick={onClick}
       transformProperties={transformProperties}
-      pathBuilder={pathBuilder}
+      pathBuilderAndTincture={pathBuilderAndTincture}
       postfixId={postfixId}
     />
   );

@@ -34,14 +34,14 @@ export const GyronOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, on
     .goTo([width / 2, height / 2], invertedLineOptions)
     .goTo([0, height / 2], invertedLineOptions)
     .close();
+  const pathBuilderAndTincture = [{ pathBuilder, tincture: ordinary.tincture }];
 
   return (
     <CommonOrdinaryDisplay
-      tincture={ordinary.tincture}
       fillFromTincture={fillFromTincture}
       onClick={onClick}
       transformProperties={transformProperties}
-      pathBuilder={pathBuilder}
+      pathBuilderAndTincture={pathBuilderAndTincture}
       postfixId={postfixId}
     />
   );

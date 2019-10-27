@@ -20,7 +20,7 @@ export const ChapePloyeOrdinaryDisplay = ({ dimension, ordinary, fillFromTinctur
   const lineOptions = computeLineOptions(ordinary.line, dimension);
   const invertedLineOptions = invertLineOptionNullable(lineOptions);
 
-  const pathBuilders =
+  const pathBuilderAndTincture =
     ordinary.tinctures.kind === 'party'
       ? [
           {
@@ -61,11 +61,10 @@ export const ChapePloyeOrdinaryDisplay = ({ dimension, ordinary, fillFromTinctur
 
   return (
     <CommonOrdinaryDisplay
-      tincture={pathBuilders[0].tincture}
       fillFromTincture={fillFromTincture}
       onClick={onClick}
       transformProperties={transformProperties}
-      pathBuilder={pathBuilders}
+      pathBuilderAndTincture={pathBuilderAndTincture}
       postfixId={postfixId}
     />
   );

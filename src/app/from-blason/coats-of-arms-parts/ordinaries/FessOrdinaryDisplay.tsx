@@ -33,14 +33,14 @@ export const FessOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onC
     vair: [{ kind: 'scale', value: 0.56 * scaleRatio }, { kind: 'translate', value: [0, 70] }],
     potent: [{ kind: 'scale', value: 0.815 * scaleRatio }],
   });
+  const pathBuilderAndTincture = [{ pathBuilder, tincture: ordinary.tincture }];
 
   return (
     <CommonOrdinaryDisplay
-      tincture={ordinary.tincture}
       fillFromTincture={fillFromTincture}
       onClick={onClick}
       transformProperties={transformProperties}
-      pathBuilder={pathBuilder}
+      pathBuilderAndTincture={pathBuilderAndTincture}
       postfixId={postfixId}
     />
   );

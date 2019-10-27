@@ -47,14 +47,13 @@ export const PallInvertedOrdinaryDisplay = ({ dimension, ordinary, fillFromTinct
     .goTo([projectedPallWidth, 0], lineOptions)
     .goTo([0, 0])
     .rotate([width / 2, height / 2], 180);
-
+  const pathBuilderAndTincture = [{ pathBuilder, tincture: ordinary.tincture }];
   return (
     <CommonOrdinaryDisplay
-      tincture={ordinary.tincture}
       fillFromTincture={fillFromTincture}
       onClick={onClick}
       transformProperties={transformProperties}
-      pathBuilder={pathBuilder}
+      pathBuilderAndTincture={pathBuilderAndTincture}
       postfixId={postfixId}
     />
   );

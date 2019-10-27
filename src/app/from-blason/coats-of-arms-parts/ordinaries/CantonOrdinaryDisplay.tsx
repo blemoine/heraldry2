@@ -35,14 +35,14 @@ export const CantonOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, o
     { width: width / 3, height: height / 3 },
     { right: invertedLineOptions, bottom: invertedLineOptions }
   );
+  const pathBuilderAndTincture = [{ pathBuilder, tincture: ordinary.tincture }];
 
   return (
     <CommonOrdinaryDisplay
-      tincture={ordinary.tincture}
       fillFromTincture={fillFromTincture}
       onClick={onClick}
       transformProperties={transformProperties}
-      pathBuilder={pathBuilder}
+      pathBuilderAndTincture={pathBuilderAndTincture}
       postfixId={postfixId}
     />
   );

@@ -35,14 +35,14 @@ export const QuarterOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, 
     { width: width / 2, height: height / 2 },
     { right: invertedLineOptions, bottom: invertedLineOptions }
   );
+  const pathBuilderAndTincture = [{ pathBuilder, tincture: ordinary.tincture }];
 
   return (
     <CommonOrdinaryDisplay
-      tincture={ordinary.tincture}
       fillFromTincture={fillFromTincture}
       onClick={onClick}
       transformProperties={transformProperties}
-      pathBuilder={pathBuilder}
+      pathBuilderAndTincture={pathBuilderAndTincture}
       postfixId={postfixId}
     />
   );

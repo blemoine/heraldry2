@@ -26,6 +26,7 @@ export const BaseOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onC
     { width, height: baseHeight },
     { top: invertedLineOptions }
   );
+  const pathBuilderAndTincture = [{ pathBuilder, tincture: ordinary.tincture }];
 
   const scaleRatio = height / 480;
   const transformProperties: FurTransformProperty = buildFurTransformProperty(fillFromTincture, {
@@ -36,11 +37,10 @@ export const BaseOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onC
 
   return (
     <CommonOrdinaryDisplay
-      tincture={ordinary.tincture}
       fillFromTincture={fillFromTincture}
       onClick={onClick}
       transformProperties={transformProperties}
-      pathBuilder={pathBuilder}
+      pathBuilderAndTincture={pathBuilderAndTincture}
       postfixId={postfixId}
     />
   );

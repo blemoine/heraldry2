@@ -44,13 +44,13 @@ export const BendOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onC
   )
     .translate([(width - length) / 2, height / 2 - bendHeight / 2])
     .rotate([width / 2, height / 2], rotationDirection * toDegree(Math.atan2(height, width)));
+  const pathBuilderAndTincture = [{ pathBuilder, tincture: ordinary.tincture }];
   return (
     <CommonOrdinaryDisplay
-      tincture={ordinary.tincture}
       fillFromTincture={fillFromTincture}
       onClick={onClick}
       transformProperties={transformProperties}
-      pathBuilder={pathBuilder}
+      pathBuilderAndTincture={pathBuilderAndTincture}
       postfixId={postfixId}
     />
   );

@@ -48,13 +48,14 @@ export const ShakeforkOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture
     .goTo([0, 0])
     .scale([width / 2, height / 2], 0.85, 0.85);
 
+  const pathBuilderAndTincture = [{ pathBuilder, tincture: ordinary.tincture }];
+
   return (
     <CommonOrdinaryDisplay
-      tincture={ordinary.tincture}
       fillFromTincture={fillFromTincture}
       onClick={onClick}
       transformProperties={transformProperties}
-      pathBuilder={pathBuilder}
+      pathBuilderAndTincture={pathBuilderAndTincture}
       postfixId={postfixId}
     />
   );

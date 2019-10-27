@@ -35,7 +35,7 @@ export const ChevronOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, 
 
   const chevronHeight =
     ordinary.name === 'chevron' ? height / 6 : ordinary.name === 'chevronel' ? height / 12 : cannotHappen(ordinary);
-  const pathBuilder = range(0, ordinary.count).map((i) => {
+  const pathBuilderAndTincture = range(0, ordinary.count).map((i) => {
     const topPoint = ((i * 2 + 1) * height) / (ordinary.count * 2 + 1);
     const bottomPoint = (((i + 1) * 2 + 1) * height) / (ordinary.count * 2 + 1);
 
@@ -55,11 +55,10 @@ export const ChevronOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, 
 
   return (
     <CommonOrdinaryDisplay
-      tincture={ordinary.tincture}
       fillFromTincture={fillFromTincture}
       onClick={onClick}
       transformProperties={transformProperties}
-      pathBuilder={pathBuilder}
+      pathBuilderAndTincture={pathBuilderAndTincture}
       postfixId={postfixId}
     />
   );

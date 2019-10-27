@@ -22,7 +22,7 @@ export const PaleOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onC
   const invertedLineOptions = invertLineOptionNullable(lineOptions);
   const oneSideOnly = oneSideLineOption(invertedLineOptions);
 
-  const pathBuilders = range(0, ordinary.count).map((i) => {
+  const pathBuilderAndTincture = range(0, ordinary.count).map((i) => {
     const startX = ((i * 2 + 1) * width) / (2 * ordinary.count + 1);
     const paleWidth = width / (2 * ordinary.count + 1);
     return {
@@ -45,11 +45,10 @@ export const PaleOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onC
 
   return (
     <CommonOrdinaryDisplay
-      tincture={ordinary.tincture}
       fillFromTincture={fillFromTincture}
       onClick={onClick}
       transformProperties={transformProperties}
-      pathBuilder={pathBuilders}
+      pathBuilderAndTincture={pathBuilderAndTincture}
       postfixId={postfixId}
     />
   );
