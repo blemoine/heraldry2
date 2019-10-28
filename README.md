@@ -31,7 +31,6 @@ Faire le "of the last"
 - utiliser un context pour la configuration
 - Ajouter les formes de bouclier manquantes
 - etre plus lenient sur la syntaxe des quarterly (avec les : et les;)
-- ecrire des tests dans app pour faire un quarterly
 - faire le déploiement
 - gerer les erreurs provenant de l'URL
 - going to quarterly is a slow click (?)

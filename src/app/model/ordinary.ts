@@ -23,6 +23,11 @@ export type ChapePloye = {
   tinctures: { kind: 'party'; per: 'pale'; tinctures: [Tincture, Tincture] } | { kind: 'simple'; tincture: Tincture };
   line: Line;
 };
+export type Chausse = {
+  name: 'chausse';
+  tincture: Tincture;
+  line: Line;
+};
 export const chapePloyeTincturesKind: ReadonlyArray<ChapePloye['tinctures']['kind']> = ['party', 'simple'] as const;
 
 export type SubOrdinary =
@@ -35,7 +40,8 @@ export type SubOrdinary =
   | Canton
   | ChapePloye
   | Shakefork
-  | Gyron;
+  | Gyron
+  | Chausse;
 export type Ordinary = Chief | Bend | BendSinister | Pale | Fess | Chevron | OrdinaryCross | Saltire | SubOrdinary;
 
 export function isSubOrdinary(o: Ordinary['name']): o is SubOrdinary['name'] {
@@ -49,7 +55,8 @@ export function isSubOrdinary(o: Ordinary['name']): o is SubOrdinary['name'] {
     o === 'canton' ||
     o === 'chape-ploye' ||
     o === 'shakefork' ||
-    o === 'gyron'
+    o === 'gyron' ||
+    o === 'chausse'
   );
 }
 
@@ -72,4 +79,5 @@ export const ordinaries: Array<Ordinary['name']> = [
   'canton',
   'chape-ploye',
   'gyron',
+  'chausse',
 ];

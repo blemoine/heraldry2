@@ -80,6 +80,8 @@ export function stringifyOrdinaryName(name: Ordinary['name']): string {
     return 'chapé ployé';
   } else if (name === 'pall-inverted') {
     return 'pall inverted';
+  } else if (name === 'chausse') {
+    return 'chaussé';
   } else {
     return name;
   }
@@ -121,6 +123,13 @@ function stringifyOrdinary(ordinary: Ordinary): string {
     } else {
       return cannotHappen(ordinary.tinctures);
     }
+    return result;
+  } else if (ordinary.name === 'chausse') {
+    let result = stringifyOrdinaryName(ordinary.name) + ' ';
+    if (ordinary.line !== 'straight') {
+      result += stringifyLine(ordinary.line) + ' ';
+    }
+    result += stringifyTincture(ordinary.tincture);
     return result;
   } else {
     let result = 'a ' + stringifyOrdinaryName(ordinary.name) + ' ';

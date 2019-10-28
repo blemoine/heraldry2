@@ -867,4 +867,13 @@ Argent, Azure, Barry, Barry and per pale, Barry pily, Bendy, Bendy Sinister, Ben
 
     expect(parseBlason('Barry of ten wavy azure and gules')).toEqual(expected);
   });
+  it('should parse chaussé', () => {
+    const expected: SimpleBlason = {
+      kind: 'simple',
+      field: { kind: 'plain', tincture: or },
+      ordinary: { name: 'chausse', tincture: gules, line: 'straight' },
+    };
+
+    expect(parseBlason('Or, chaussé gules')).toEqual(expected);
+  });
 });

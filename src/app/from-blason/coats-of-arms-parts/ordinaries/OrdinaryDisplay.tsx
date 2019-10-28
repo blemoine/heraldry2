@@ -21,6 +21,7 @@ import { ChapePloyeOrdinaryDisplay } from './ChapePloyeOrdinaryDisplay';
 import { PallInvertedOrdinaryDisplay } from './PallInvertedOrdinaryDisplay';
 import { ShakeforkOrdinaryDisplay } from './ShakeforkOrdinaryDisplay';
 import { GyronOrdinaryDisplay } from './GyronOrdinaryDisplay';
+import { ChausseOrdinaryDisplay } from './ChausseOrdinaryDisplay';
 
 type Props = {
   ordinary: Ordinary;
@@ -187,6 +188,15 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
     } else if (ordinary.name === 'canton') {
       return (
         <CantonOrdinaryDisplay
+          onClick={onClick}
+          fillFromTincture={fillFromTincture}
+          dimension={dimension}
+          ordinary={ordinary}
+        />
+      );
+    } else if (ordinary.name === 'chausse') {
+      return (
+        <ChausseOrdinaryDisplay
           onClick={onClick}
           fillFromTincture={fillFromTincture}
           dimension={dimension}

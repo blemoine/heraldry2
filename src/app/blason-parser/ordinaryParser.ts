@@ -1,13 +1,13 @@
 import * as P from 'parsimmon';
-import { ChapePloye, Chevron, Chevronel, ordinaries, Ordinary, OrdinaryCross, Pale } from '../model/ordinary';
+import { ChapePloye, Chausse, Chevron, Chevronel, ordinaries, Ordinary, OrdinaryCross, Pale } from '../model/ordinary';
 import { aParser, buildAltParser, lineParser, numberParser } from './parser.helper';
 import { tinctureParserFromName } from './tinctureParser';
 import { stringifyOrdinaryName } from '../model/stringify/stringify.helper';
 
 function isNotPaleOrChevronOrCross(
   o: Ordinary['name']
-): o is Exclude<Ordinary['name'], 'pale' | 'chevron' | 'chevronel' | 'cross' | 'chape-ploye'> {
-  return !['pale', 'chevron', 'chevronel', 'cross', 'chape-ploye'].includes(o);
+): o is Exclude<Ordinary['name'], 'pale' | 'chevron' | 'chevronel' | 'cross' | 'chape-ploye' | 'chausse'> {
+  return !['pale', 'chevron', 'chevronel', 'cross', 'chape-ploye', 'chausse'].includes(o);
 }
 
 export function ordinaryParser(): P.Parser<Ordinary> {
@@ -72,7 +72,17 @@ export function ordinaryParser(): P.Parser<Ordinary> {
     })
   );
 
-  const ordinaryWithLineParser: P.Parser<Exclude<Ordinary, Pale | Chevron | OrdinaryCross | ChapePloye>> = P.seq(
+  const chausseParser: P.Parser<Chausse> = P.seq(
+    P.regexp(/chaussé/i)
+      .result('chausse' as const)
+      .skip(P.whitespace),
+    lineOrStraightParser,
+    tinctureParserFromName
+  ).map(([name, line, tincture]) => ({ name, line, tincture }));
+
+  const ordinaryWithLineParser: P.Parser<
+    Exclude<Ordinary, Pale | Chevron | OrdinaryCross | ChapePloye | Chausse>
+  > = P.seq(
     aParser
       .then(buildAltParser(ordinaries.filter(isNotPaleOrChevronOrCross), stringifyOrdinaryName))
       .skip(P.whitespace),
@@ -80,5 +90,5 @@ export function ordinaryParser(): P.Parser<Ordinary> {
     tinctureParserFromName
   ).map(([name, line, tincture]) => ({ name, line, tincture }));
 
-  return P.alt(paleParser, chevronParser, chapePloyerParser, ordinaryWithLineParser);
+  return P.alt(paleParser, chevronParser, chapePloyerParser, chausseParser, ordinaryWithLineParser);
 }
