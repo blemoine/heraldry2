@@ -31,11 +31,11 @@ export const ChausseOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, 
   const lineOptions = computeLineOptions(ordinary.line, dimension);
   const invertedLineOptions = invertLineOptionNullable(lineOptions);
   const pathBuilderLeft = SvgPathBuilder.start([0, 0])
-    .goTo([width / 2, height], lineOptions)
+    .goTo([width / 2, height], invertedLineOptions)
     .goTo([0, height])
     .close();
   const pathBuilderRight = SvgPathBuilder.start([width, 0])
-    .goTo([width / 2, height], invertedLineOptions)
+    .goTo([width / 2, height], lineOptions)
     .goTo([width, height])
     .close();
   const pathBuilderAndTincture = [
