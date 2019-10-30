@@ -42,9 +42,9 @@ export const BarryDisplay: React.FunctionComponent<Props> = ({ field, fillFromTi
         const startOffset = i === 0 ? barHeight : 0;
         const endOffset = i === number - 1 ? barHeight : 0;
         const lineOptions = computeLineOptions(field.line, dimension);
-        const invertLineOptions = invertLineOptionNullable(lineOptions);
+        const invertLineOptions = field.line === 'dancetty' ? lineOptions : invertLineOptionNullable(lineOptions);
         const oneSideOnly = oneSideLineOption(lineOptions);
-        const invertedOneSideOnly = oneSideLineOption(invertLineOptions);
+        const invertedOneSideOnly = field.line === 'dancetty' ? lineOptions : oneSideLineOption(invertLineOptions);
 
         const pathBuilder = SvgPathBuilder.rectangle(
           [0, i * barHeight - startOffset],
