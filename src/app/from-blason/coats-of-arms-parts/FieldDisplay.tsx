@@ -42,6 +42,7 @@ import { PileReversedArchedDisplay } from './fields/PileReversedArchedDisplay';
 import { PileBendwiseDisplay } from './fields/PileBendwiseDisplay';
 import { PileBendwiseSinisterDisplay } from './fields/PileSinisterBendwiseDisplay';
 import { AlternatingSquareDisplay } from './fields/AlternatingSquareDisplay';
+import { BarryAndPerChevronThrougoutDisplay } from './fields/BarryAndPerChevronThrougoutDisplay';
 
 type Props = {
   dimension: Dimension;
@@ -171,6 +172,9 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
     } else if (field.kind === 'chequy') {
       const fill: [string, string] = fillFromTincturePair(field.tinctures);
       return <AlternatingSquareDisplay fill={fill} dimension={dimension} rows={6} columns={6} />;
+    } else if (field.kind === 'barry-and-per-chevron-throughout') {
+      const fill: [string, string] = fillFromTincturePair(field.tinctures);
+      return <BarryAndPerChevronThrougoutDisplay fill={fill} dimension={dimension} rows={6} />;
     } else if (field.kind === 'lozengy') {
       const fill: [string, string] = fillFromTincturePair(field.tinctures);
       return <LozengyDisplay fill={fill} dimension={dimension} />;

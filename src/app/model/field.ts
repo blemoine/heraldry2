@@ -113,6 +113,10 @@ export type BarryAndPerPaleField = {
   kind: 'barry-and-per-pale';
   tinctures: [Tincture, Tincture];
 };
+export type BarryAndPerChevronThroughoutField = {
+  kind: 'barry-and-per-chevron-throughout';
+  tinctures: [Tincture, Tincture];
+};
 
 export type Field =
   | PlainField
@@ -123,6 +127,7 @@ export type Field =
   | BendySinisterField
   | BarryField
   | BarryAndPerPaleField
+  | BarryAndPerChevronThroughoutField
   | ChequyField
   | LozengyField
   | PalyPilyField
@@ -147,6 +152,7 @@ export const fieldKinds: Array<Field['kind']> = [
   'paly',
   'barry',
   'barry-and-per-pale',
+  'barry-and-per-chevron-throughout',
   'chequy',
   'lozengy',
   'paly-pily',

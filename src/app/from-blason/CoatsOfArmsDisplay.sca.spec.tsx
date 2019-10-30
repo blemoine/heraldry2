@@ -16,7 +16,7 @@ describe('CoatsOfArms', () => {
 
   snapshotTest('Argent, chapé ployé per pale gules and sable');
   //snapshotTest('Azure, chaussé ployé per pale gules and sable frimbriated or');
-  //snapshotTest('Barry and per chevron throughout pean and erminois');
+  snapshotTest('Barry and per chevron throughout pean and erminois');
   snapshotTest('Barry and per pale sable and argent, chaussé gules');
   snapshotTest('Barry azure and ermine');
   snapshotTest('Barry dancetty argent and azure');

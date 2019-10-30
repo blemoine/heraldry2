@@ -64,7 +64,7 @@ export function getChargeDimension(
         chargeHeightOffset = 0.14;
         chargeVerticalOffset = 0.07;
       } else if (ordinaryLine === 'dancetty') {
-        chargeHeightOffset = 0.14;
+        chargeHeightOffset = 0.16;
         chargeVerticalOffset = 0.11;
       } else {
         chargeHeightOffset = 0.17;
@@ -194,10 +194,10 @@ export function getChargeDimension(
         } else if (ordinaryLine === 'dancetty') {
           if (chargeCount > 1) {
             return {
-              verticalScale: 0.63,
-              horizontalScale: 0.55,
+              verticalScale: 0.59,
+              horizontalScale: 0.53,
               verticalOffset: 0.11,
-              horizontalOffset: shape === 'leftCut' ? 0.25 : 0.19,
+              horizontalOffset: shape === 'leftCut' ? 0.27 : 0.19,
             };
           } else {
             return {

@@ -108,6 +108,305 @@ exports[`CoatsOfArms should render 'Argent, chapé ployé per pale gules and sab
 </svg>
 `;
 
+exports[`CoatsOfArms should render 'Barry and per chevron throughout pean and erminois' 1`] = `
+<svg
+  className="coats-of-arms-display"
+  height={266.6666666666667}
+  viewBox="0 0 200 266.6666666666667"
+  width={200}
+>
+  <defs>
+    
+    
+    <symbol
+      id="erminois"
+      viewBox="0 0 200 240"
+    >
+      <rect
+        fill="#FFD700"
+        height="100%"
+        width="100%"
+      />
+      <g
+        transform="translate(100, 240)"
+      >
+        <path
+          d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
+          fill="#000000"
+        />
+        <circle
+          cy={-226}
+          fill="#000000"
+          r="14"
+        />
+        <circle
+          cx={-32}
+          cy={-194}
+          fill="#000000"
+          r={14}
+        />
+        <circle
+          cx={32}
+          cy={-194}
+          fill="#000000"
+          r={14}
+        />
+      </g>
+    </symbol>
+    <pattern
+      height={64.93506493506494}
+      id="field-pattern-5"
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 70 125"
+      width={36.36363636363637}
+    >
+      <rect
+        fill="#FFD700"
+        height="125px"
+        width="70px"
+      />
+      <use
+        height={60}
+        href="#erminois"
+        width={35}
+        x="0"
+        y="0"
+      />
+      <use
+        height={60}
+        href="#erminois"
+        width={35}
+        x="35"
+        y="65"
+      />
+    </pattern>
+    <symbol
+      id="pean"
+      viewBox="0 0 200 240"
+    >
+      <rect
+        fill="#000000"
+        height="100%"
+        width="100%"
+      />
+      <g
+        transform="translate(100, 240)"
+      >
+        <path
+          d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
+          fill="#FFD700"
+        />
+        <circle
+          cy={-226}
+          fill="#FFD700"
+          r="14"
+        />
+        <circle
+          cx={-32}
+          cy={-194}
+          fill="#FFD700"
+          r={14}
+        />
+        <circle
+          cx={32}
+          cy={-194}
+          fill="#FFD700"
+          r={14}
+        />
+      </g>
+    </symbol>
+    <pattern
+      height={64.93506493506494}
+      id="field-pattern-6"
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 70 125"
+      width={36.36363636363637}
+    >
+      <rect
+        fill="#000000"
+        height="125px"
+        width="70px"
+      />
+      <use
+        height={60}
+        href="#pean"
+        width={35}
+        x="0"
+        y="0"
+      />
+      <use
+        height={60}
+        href="#pean"
+        width={35}
+        x="35"
+        y="65"
+      />
+    </pattern>
+    
+    
+    
+    
+    
+    
+    
+    
+    <clipPath
+      id="plain-field-clip-path"
+    >
+      <path
+        d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
+        fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
+        stroke="#333"
+        strokeWidth={1}
+        style={
+          Object {
+            "cursor": "pointer",
+            "pointerEvents": "none",
+          }
+        }
+      />
+    </clipPath>
+  </defs>
+  <g
+    className="blason-field"
+    clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
+  >
+    <rect
+      fill="url(#field-pattern-6)"
+      height={44.44444444444445}
+      stroke="#333"
+      width={200}
+      x={0}
+      y={0}
+    />
+    <rect
+      fill="url(#field-pattern-5)"
+      height={44.44444444444445}
+      stroke="#333"
+      width={200}
+      x={0}
+      y={44.44444444444445}
+    />
+    <rect
+      fill="url(#field-pattern-6)"
+      height={44.44444444444445}
+      stroke="#333"
+      width={200}
+      x={0}
+      y={88.8888888888889}
+    />
+    <rect
+      fill="url(#field-pattern-5)"
+      height={44.44444444444445}
+      stroke="#333"
+      width={200}
+      x={0}
+      y={133.33333333333334}
+    />
+    <rect
+      fill="url(#field-pattern-6)"
+      height={44.44444444444445}
+      stroke="#333"
+      width={200}
+      x={0}
+      y={177.7777777777778}
+    />
+    <rect
+      fill="url(#field-pattern-5)"
+      height={44.44444444444445}
+      stroke="#333"
+      width={200}
+      x={0}
+      y={222.22222222222226}
+    />
+    <clipPath
+      clipPathUnits="userSpaceOnUse"
+      id="chevron-throughout-clip-path"
+    >
+      <path
+        d="M 100 0 L 200 266.66667 H0 Z"
+        fill="blue"
+        stroke="#333"
+      />
+    </clipPath>
+    <g
+      clipPath="url(#chevron-throughout-clip-path)"
+    >
+      <rect
+        fill="url(#field-pattern-5)"
+        height={44.44444444444445}
+        stroke="#333"
+        width={200}
+        x={0}
+        y={0}
+      />
+      <rect
+        fill="url(#field-pattern-6)"
+        height={44.44444444444445}
+        stroke="#333"
+        width={200}
+        x={0}
+        y={44.44444444444445}
+      />
+      <rect
+        fill="url(#field-pattern-5)"
+        height={44.44444444444445}
+        stroke="#333"
+        width={200}
+        x={0}
+        y={88.8888888888889}
+      />
+      <rect
+        fill="url(#field-pattern-6)"
+        height={44.44444444444445}
+        stroke="#333"
+        width={200}
+        x={0}
+        y={133.33333333333334}
+      />
+      <rect
+        fill="url(#field-pattern-5)"
+        height={44.44444444444445}
+        stroke="#333"
+        width={200}
+        x={0}
+        y={177.7777777777778}
+      />
+      <rect
+        fill="url(#field-pattern-6)"
+        height={44.44444444444445}
+        stroke="#333"
+        width={200}
+        x={0}
+        y={222.22222222222226}
+      />
+    </g>
+  </g>
+  <path
+    d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
+    fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
+    stroke="#333"
+    strokeWidth={1}
+    style={
+      Object {
+        "cursor": "pointer",
+        "pointerEvents": "none",
+      }
+    }
+  />
+</svg>
+`;
+
 exports[`CoatsOfArms should render 'Barry and per pale sable and argent, chaussé gules' 1`] = `
 <svg
   className="coats-of-arms-display"
