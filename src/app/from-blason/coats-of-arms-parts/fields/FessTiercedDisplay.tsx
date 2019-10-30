@@ -9,7 +9,7 @@ type Props = { fill: [string, string, string]; dimension: Dimension; line: Line 
 export const FessTiercedDisplay: React.FunctionComponent<Props> = ({ dimension, fill, line }) => {
   const { width, height } = dimension;
   const lineOptions = computeLineOptions(line, dimension);
-  const invertedLineOptions = invertLineOptionNullable(lineOptions);
+  const invertedLineOptions = line === 'dancetty' ? lineOptions : invertLineOptionNullable(lineOptions);
 
   const tierDimension = { width, height: height / 3 };
   const top = SvgPathBuilder.rectangle([0, 0], tierDimension, { bottom: lineOptions });

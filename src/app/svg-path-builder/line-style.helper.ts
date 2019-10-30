@@ -50,13 +50,29 @@ function getPerpendicularPointToCenter(
   return getPerpendicularPoint([from, to], [xh, yh], height);
 }
 
-export function indentLineTo(path: SvgPathBuilder, to: PathAbsolutePoint, height: number): SvgPathBuilder {
+export function indentLineTo(
+  path: SvgPathBuilder,
+  to: PathAbsolutePoint,
+  height: number,
+  verticalOffset: number
+): SvgPathBuilder {
   const from = path.currentPoint();
   if (!from || arePointEquivalent(from, to)) {
     return path;
   }
 
-  return path.goTo(getPerpendicularPointToCenter(from, to, height)).goTo(to);
+  if (verticalOffset === 100) {
+    return path.goTo(getPerpendicularPointToCenter(from, to, height)).goTo(to);
+  } else {
+    const percentage = verticalOffset;
+    const baseLine = [from, to] as const;
+
+    const height1 = (percentage / 100) * height;
+    return path
+      .goTo(getPerpendicularPoint(baseLine, pointOnLine(from, to, percentage / 2), height1))
+      .goTo(getPerpendicularPoint(baseLine, pointOnLine(from, to, 50 + percentage / 2), height1 - height))
+      .goTo(to);
+  }
 }
 
 export function engrailedLineTo(
@@ -255,7 +271,7 @@ export function indentBetweenPoint(
   parametricPath: (t: number) => PathAbsolutePoint
 ): SvgPathBuilder {
   return drawBetweenPoint(path, lineOption.width, parametricPath, (result, to) =>
-    indentLineTo(result, to, lineOption.height)
+    indentLineTo(result, to, lineOption.height, lineOption.verticalOffset)
   );
 }
 

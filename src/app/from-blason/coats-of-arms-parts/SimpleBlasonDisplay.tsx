@@ -14,7 +14,7 @@ import { convertToOlfFillFronTincture, FillFromTincture } from '../fillFromTinct
 
 function getFieldHorizontalOffset(ordinary: Ordinary): number {
   if (ordinary.name === 'bordure') {
-    if (ordinary.line === 'engrailed' || ordinary.line === 'wavy') {
+    if (ordinary.line === 'engrailed' || ordinary.line === 'wavy' || ordinary.line === 'dancetty') {
       return 5 / 100;
     } else if (ordinary.line === 'urdy') {
       return 4 / 100;
@@ -41,7 +41,8 @@ function getFieldVerticalOffsetAndScale(ordinary: Ordinary): { verticalOffset: n
       ordinary.line === 'embattled-counter-embattled' ||
       ordinary.line === 'dovetailed' ||
       ordinary.line === 'potenty' ||
-      ordinary.line === 'raguly'
+      ordinary.line === 'raguly' ||
+      ordinary.line === 'dancetty'
     ) {
       return { verticalOffset: 9 / 50, verticalScale: 41 / 50 };
     } else if (ordinary.line === 'urdy') {
@@ -50,7 +51,12 @@ function getFieldVerticalOffsetAndScale(ordinary: Ordinary): { verticalOffset: n
       return cannotHappen(ordinary.line);
     }
   } else if (ordinary.name === 'bordure') {
-    if (ordinary.line === 'engrailed' || ordinary.line === 'wavy' || ordinary.line === 'urdy') {
+    if (
+      ordinary.line === 'engrailed' ||
+      ordinary.line === 'wavy' ||
+      ordinary.line === 'urdy' ||
+      ordinary.line === 'dancetty'
+    ) {
       return { verticalOffset: 6 / 100, verticalScale: 88 / 100 };
     } else {
       return { verticalOffset: 10 / 100, verticalScale: 80 / 100 };
@@ -58,6 +64,8 @@ function getFieldVerticalOffsetAndScale(ordinary: Ordinary): { verticalOffset: n
   } else if (ordinary.name === 'base') {
     if (ordinary.line === 'invected') {
       return { verticalOffset: 0, verticalScale: 38 / 50 };
+    } else if (ordinary.line === 'dancetty') {
+      return { verticalOffset: 0, verticalScale: 42 / 50 };
     } else {
       return { verticalOffset: 0, verticalScale: 4 / 5 };
     }

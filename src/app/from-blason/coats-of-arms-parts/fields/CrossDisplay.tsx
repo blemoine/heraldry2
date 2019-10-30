@@ -9,7 +9,7 @@ type Props = { fill: [string, string]; dimension: Dimension; line: Line };
 export const CrossDisplay: React.FunctionComponent<Props> = ({ dimension, fill, line }) => {
   const { width, height } = dimension;
   const lineOptions = computeLineOptions(line, dimension);
-  const invertedLineOptions = invertLineOptionNullable(lineOptions);
+  const invertedLineOptions = line === 'dancetty' ? lineOptions : invertLineOptionNullable(lineOptions);
 
   const quarterDimension = { width: width / 2, height: height / 2 };
   const svgBuilderTopLeft = SvgPathBuilder.rectangle([0, 0], quarterDimension, {

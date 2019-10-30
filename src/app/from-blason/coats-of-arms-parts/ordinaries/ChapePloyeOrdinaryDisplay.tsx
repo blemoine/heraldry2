@@ -1,5 +1,5 @@
 import { computeLineOptions, invertLineOptionNullable } from '../blasonDisplay.helper';
-import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
+import { LineOptions, SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import * as React from 'react';
 import { ChapePloye } from '../../../model/ordinary';
 import { Dimension } from '../../../model/dimension';
@@ -17,8 +17,14 @@ type Props = {
 };
 export const ChapePloyeOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onClick }: Props) => {
   const { width, height } = dimension;
-  const lineOptions = computeLineOptions(ordinary.line, dimension);
-  const invertedLineOptions = invertLineOptionNullable(lineOptions);
+  const lineOptions: LineOptions | null =
+    ordinary.line === 'dancetty'
+      ? { line: 'indented', height: height / 10, width: width / 5, verticalOffset: 50 }
+      : computeLineOptions(ordinary.line, dimension);
+  const invertedLineOptions: LineOptions | null =
+    ordinary.line === 'dancetty'
+      ? { line: 'indented', height: height / 10, width: width / 5, verticalOffset: 100 }
+      : invertLineOptionNullable(lineOptions);
 
   const pathBuilderAndTincture =
     ordinary.tinctures.kind === 'party'

@@ -9,7 +9,7 @@ type Props = { fill: [string, string]; dimension: Dimension; line: Line };
 export const PaleDisplay: React.FunctionComponent<Props> = ({ dimension, fill, line }) => {
   const { width, height } = dimension;
   const lineOptions = computeLineOptions(line, dimension);
-  const invertedLineOptions = invertLineOptionNullable(lineOptions);
+  const invertedLineOptions = line === 'dancetty' ? lineOptions : invertLineOptionNullable(lineOptions);
 
   const pathBuilderLeft = SvgPathBuilder.rectangle([0, 0], { width: width / 2, height }, { right: lineOptions });
   const pathBuilderRight = SvgPathBuilder.rectangle(

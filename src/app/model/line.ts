@@ -11,6 +11,7 @@ export const lines = [
   'dovetailed',
   'potenty',
   'raguly',
+  'dancetty',
 ] as const;
 
 export type Line = typeof lines[number];

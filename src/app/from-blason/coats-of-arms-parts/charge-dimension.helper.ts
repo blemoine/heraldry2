@@ -15,8 +15,13 @@ export function getChargeDimension(
   const chargeDisposition = charge ? charge.countAndDisposition.disposition : null;
   if (shape === 'default') {
     const chargeHorizontalOffset =
-      (ordinaryName === 'bordure' ? (ordinaryLine === 'straight' ? 0.085 : 0.13) : 0.015) +
-      (chargeDisposition === 'fess' ? 0.012 : 0);
+      (ordinaryName === 'bordure'
+        ? ordinaryLine === 'straight'
+          ? 0.085
+          : ordinaryLine === 'dancetty'
+          ? 0.22
+          : 0.13
+        : 0.015) + (chargeDisposition === 'fess' ? 0.012 : 0);
 
     const defaultChargeHeightOffset =
       chargeDisposition === 'pale'
@@ -35,6 +40,9 @@ export function getChargeDimension(
     if (ordinaryName === 'chief') {
       if (ordinaryLine === 'straight') {
         chargeHeightOffset = 0.1;
+      } else if (ordinaryLine === 'dancetty') {
+        chargeHeightOffset = 0.17;
+        chargeVerticalOffset = 0.15;
       } else {
         chargeHeightOffset = 0.16;
         chargeVerticalOffset = 0.08;
@@ -55,6 +63,9 @@ export function getChargeDimension(
       } else if (ordinaryLine === 'urdy') {
         chargeHeightOffset = 0.14;
         chargeVerticalOffset = 0.07;
+      } else if (ordinaryLine === 'dancetty') {
+        chargeHeightOffset = 0.14;
+        chargeVerticalOffset = 0.11;
       } else {
         chargeHeightOffset = 0.17;
         chargeVerticalOffset = 0.04;
@@ -78,7 +89,9 @@ export function getChargeDimension(
     let chargeHeightOffset: number;
     if (ordinaryName === 'chief') {
       chargeHeightOffset = 0.12;
-      if (ordinaryLine !== 'straight') {
+      if (ordinaryLine === 'dancetty') {
+        chargeVerticalOffset = 0.14;
+      } else if (ordinaryLine !== 'straight') {
         chargeVerticalOffset = 0.08;
       }
     } else if (ordinaryName === 'base') {
@@ -90,6 +103,9 @@ export function getChargeDimension(
     } else if (ordinaryName === 'bordure') {
       if (ordinaryLine === 'straight') {
         chargeHeightOffset = 0.07;
+      } else if (ordinaryLine === 'dancetty') {
+        chargeVerticalOffset = 0.09;
+        chargeHeightOffset = 0.15;
       } else {
         chargeHeightOffset = 0.15;
       }
@@ -113,6 +129,10 @@ export function getChargeDimension(
 
     if (ordinaryName === 'bordure' && ordinaryLine !== 'straight') {
       chargeVerticalOffset += 0.035;
+    }
+    if (ordinaryName === 'bordure' && ordinaryLine === 'dancetty') {
+      chargeHorizontalOffset += 0.03;
+      chargeDimension.horizontalScale = chargeDimension.horizontalScale * 0.9;
     }
 
     return {
@@ -171,6 +191,22 @@ export function getChargeDimension(
               horizontalOffset: shape === 'leftCut' ? 0.26 : 0.11,
             };
           }
+        } else if (ordinaryLine === 'dancetty') {
+          if (chargeCount > 1) {
+            return {
+              verticalScale: 0.63,
+              horizontalScale: 0.55,
+              verticalOffset: 0.11,
+              horizontalOffset: shape === 'leftCut' ? 0.25 : 0.19,
+            };
+          } else {
+            return {
+              verticalScale: 0.66,
+              horizontalScale: 0.59,
+              verticalOffset: 0.05,
+              horizontalOffset: shape === 'leftCut' ? 0.26 : 0.12,
+            };
+          }
         } else {
           if (chargeCount > 1) {
             return {
@@ -189,20 +225,38 @@ export function getChargeDimension(
           }
         }
       } else if (ordinaryName === 'chief') {
-        if (chargeCount > 1) {
-          return {
-            verticalScale: 0.6,
-            horizontalScale: 0.7,
-            verticalOffset: 0.08,
-            horizontalOffset: shape === 'leftCut' ? 0.23 : 0.06,
-          };
+        if (ordinaryLine === 'dancetty') {
+          if (chargeCount > 1) {
+            return {
+              verticalScale: 0.57,
+              horizontalScale: 0.7,
+              verticalOffset: 0.14,
+              horizontalOffset: shape === 'leftCut' ? 0.23 : 0.06,
+            };
+          } else {
+            return {
+              verticalScale: 0.73,
+              horizontalScale: 0.65,
+              verticalOffset: 0.07,
+              horizontalOffset: shape === 'leftCut' ? 0.3 : 0.03,
+            };
+          }
         } else {
-          return {
-            verticalScale: 0.8,
-            horizontalScale: 0.65,
-            verticalOffset: 0,
-            horizontalOffset: shape === 'leftCut' ? 0.3 : 0.03,
-          };
+          if (chargeCount > 1) {
+            return {
+              verticalScale: 0.6,
+              horizontalScale: 0.7,
+              verticalOffset: 0.08,
+              horizontalOffset: shape === 'leftCut' ? 0.23 : 0.06,
+            };
+          } else {
+            return {
+              verticalScale: 0.8,
+              horizontalScale: 0.65,
+              verticalOffset: 0,
+              horizontalOffset: shape === 'leftCut' ? 0.3 : 0.03,
+            };
+          }
         }
       } else {
         if (chargeCount > 1) {
@@ -230,6 +284,13 @@ export function getChargeDimension(
             verticalOffset: -0.15,
             horizontalOffset: shape === 'leftCut' ? 0.23 : 0.15,
           };
+        } else if (ordinaryLine === 'dancetty') {
+          return {
+            verticalScale: 1,
+            horizontalScale: 0.56,
+            verticalOffset: -0.18,
+            horizontalOffset: shape === 'leftCut' ? 0.25 : 0.19,
+          };
         } else {
           return {
             verticalScale: 1,
@@ -252,6 +313,17 @@ export function getChargeDimension(
           verticalOffset: -0.15,
           horizontalOffset: shape === 'leftCut' ? 0.2 : 0,
         };
+      }
+    } else if (chargeDisposition === 'pale') {
+      if (ordinaryName === 'chief') {
+        if (ordinaryLine === 'dancetty') {
+          return {
+            verticalScale: 0.47,
+            horizontalScale: 0.8,
+            verticalOffset: 0.18,
+            horizontalOffset: shape === 'leftCut' ? 0.2 : 0,
+          };
+        }
       }
     }
 
@@ -299,6 +371,9 @@ export function getChargeDimension(
     if (ordinaryName === 'chief' && ordinaryLine !== 'straight') {
       chargeVerticalOffset += 0.045;
       chargeDimension.verticalScale = chargeDimension.verticalScale * 0.9;
+      if (ordinaryLine === 'dancetty') {
+        chargeVerticalOffset += 0.04;
+      }
     }
 
     if (ordinaryName === 'bordure' && ordinaryLine !== 'straight') {

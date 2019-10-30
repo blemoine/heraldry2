@@ -23,7 +23,10 @@ type Props = {
 export const BordureDisplay = ({ dimension, line, shape, shieldShape, stroke, fill, onClick }: Props) => {
   const { width, height } = dimension;
 
-  const lineOptions = computeLineOptions(line, dimension);
+  const lineOptions: LineOptions | null =
+    line === 'dancetty'
+      ? { line: 'indented', height: height / 10, width: width / 5, verticalOffset: 75 }
+      : computeLineOptions(line, dimension);
 
   const bordureWidth = width / 10;
   const bordureHeight = height / 10;

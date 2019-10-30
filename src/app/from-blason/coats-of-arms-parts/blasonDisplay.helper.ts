@@ -11,7 +11,9 @@ export function computeLineOptions(line: Line, { width, height }: Dimension): Li
     const radius = width / 10;
     return { line: 'with-arc', radius, sweep: false };
   } else if (line === 'indented') {
-    return { line: 'indented', height: height / 30, width: width / 10 };
+    return { line: 'indented', height: height / 30, width: width / 10, verticalOffset: 100 };
+  } else if (line === 'dancetty') {
+    return { line: 'indented', height: height / 10, width: width / 5, verticalOffset: 25 };
   } else if (line === 'wavy') {
     return { line: 'wavy', height: height / 50, width: width / 9 };
   } else if (line === 'bretessed') {
@@ -78,6 +80,8 @@ export function oneSideLineOption(lineOptions: LineOptions | null): LineOptions 
     return { ...lineOptions, height: -lineOptions.height };
   } else if (lineOptions.line === 'raguly') {
     return { ...lineOptions, direction: lineOptions.direction === 'left' ? 'right' : 'left' };
+  } else if (lineOptions.line === 'indented' && lineOptions.verticalOffset !== 100) {
+    return { ...lineOptions, verticalOffset: 75 };
   } else {
     return lineOptions;
   }
