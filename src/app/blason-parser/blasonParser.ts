@@ -5,6 +5,7 @@ import { Charge, Cross } from '../model/charge';
 import { ordinaryParser } from './ordinaryParser';
 import { chargeParser, crossParser } from './chargeParser';
 import { fieldParser } from './fieldParser';
+import { constStr } from './parser.helper';
 
 type Language = {
   Blason: (r: AppliedLanguage) => P.Parser<Blason>;
@@ -98,8 +99,8 @@ const language: Language = {
       }
     });
     return P.alt(
-      P.regexp(/quarterly,/i)
-        .desc('Quarterly')
+      constStr('quarterly')
+        .then(P.string(','))
         .then(P.whitespace)
         .then(quarterlyParser),
       r.SimpleBlason

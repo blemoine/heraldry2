@@ -1,6 +1,6 @@
 import * as P from 'parsimmon';
 import { ChapePloye, Chausse, Chevron, Chevronel, ordinaries, Ordinary, OrdinaryCross, Pale } from '../model/ordinary';
-import { aParser, buildAltParser, lineParser, numberParser } from './parser.helper';
+import { aParser, buildAltParser, constStr, lineParser, numberParser } from './parser.helper';
 import { tinctureParserFromName } from './tinctureParser';
 import { stringifyOrdinaryName } from '../model/stringify/stringify.helper';
 
@@ -42,9 +42,7 @@ export function ordinaryParser(): P.Parser<Ordinary> {
   ).map(([count, name, line, tincture]): Chevron | Chevronel => ({ name, count, line, tincture }));
 
   const chapePloyerParser: P.Parser<ChapePloye> = P.seq(
-    P.regexp(/chapé ployé/i)
-      .result('chape-ploye' as const)
-      .skip(P.whitespace),
+    constStr('chape-ploye', 'chapé ployé').skip(P.whitespace),
     lineOrStraightParser,
 
     P.alt(
@@ -73,9 +71,7 @@ export function ordinaryParser(): P.Parser<Ordinary> {
   );
 
   const chausseParser: P.Parser<Chausse> = P.seq(
-    P.regexp(/chaussé/i)
-      .result('chausse' as const)
-      .skip(P.whitespace),
+    constStr('chausse', 'chaussé').skip(P.whitespace),
     lineOrStraightParser,
     tinctureParserFromName
   ).map(([name, line, tincture]) => ({ name, line, tincture }));

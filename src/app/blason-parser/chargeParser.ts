@@ -37,7 +37,7 @@ const countAndDispositionParser = (count: SupportedNumber): P.Parser<CountAndDis
     return P.of({ count, disposition: 'default' });
   } else {
     return P.whitespace
-      .then(P.alt(P.regex(/in pale/i).result('pale' as const), P.regex(/in fess/i).result('fess' as const)))
+      .then(P.alt(constStr('pale', 'in pale'), constStr('fess', 'in fess')))
       .fallback('default' as const)
       .map((disposition) => ({ count, disposition }));
   }

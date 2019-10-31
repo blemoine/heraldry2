@@ -53,7 +53,6 @@ const tiercedUnit: P.Parser<Tierced['name']> = buildAltParser(tierceds, stringif
 function tiercedParser(): P.Parser<Tierced> {
   return P.seq(
     P.alt(constStr('tierced', 'Tierced per'))
-      .desc('Tierced per')
       .skip(P.whitespace)
       .then(tiercedUnit)
       .skip(P.whitespace),
