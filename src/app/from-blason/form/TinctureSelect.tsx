@@ -1,5 +1,14 @@
 import * as React from 'react';
-import { isErmine, isFur, isPotent, isVair, Tincture, tinctures } from '../../model/tincture';
+import {
+  isErmine,
+  isFur,
+  isPotent,
+  isVair,
+  metalAndColours,
+  MetalsAndColours,
+  Tincture,
+  tinctures,
+} from '../../model/tincture';
 import { TinctureConfiguration } from '../../model/tincture-configuration';
 import { Overlay, Popover } from 'react-bootstrap';
 import { ErminePatternDef } from '../coats-of-arms-parts/ErminePatternDef';
@@ -8,12 +17,6 @@ import { PotentPatternDef } from '../coats-of-arms-parts/PotentPatternDef';
 import { cannotHappen } from '../../../utils/cannot-happen';
 import { useRef, useState } from 'react';
 import { uuid } from '../../../utils/uuid';
-
-type Props = {
-  tinctureConfiguration: TinctureConfiguration;
-  tincture: Tincture;
-  tinctureChange: (t: Tincture) => void;
-};
 
 const TinctureRenderer = ({
   tincture,
@@ -78,10 +81,22 @@ const TinctureRenderer = ({
   }
 };
 
-export const TinctureSelect = ({ tinctureConfiguration, tincture, tinctureChange }: Props) => {
+type AbstractProps<T extends Tincture | null> = {
+  tinctureConfiguration: TinctureConfiguration;
+  tincture: T;
+  tinctureChange: (t: T) => void;
+  tinctureList: Array<T>;
+};
+
+const AbstractTinctureSelect = <T extends Tincture | null>({
+  tinctureConfiguration,
+  tincture,
+  tinctureChange,
+  tinctureList,
+}: AbstractProps<T>) => {
   const target = useRef<HTMLDivElement | null>(null);
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
-  function selectTincture(tincture: Tincture) {
+  function selectTincture(tincture: T) {
     tinctureChange(tincture);
     setShowOverlay(false);
   }
@@ -97,10 +112,18 @@ export const TinctureSelect = ({ tinctureConfiguration, tincture, tinctureChange
         ref={target}
         onClick={() => setShowOverlay(!showOverlay)}
       >
-        <TinctureRenderer tincture={tincture} tinctureConfiguration={tinctureConfiguration} />
-        <div className="tincture-select-label" style={{ textAlign: 'center' }}>
-          {tincture.name}
-        </div>
+        {tincture ? (
+          <>
+            <TinctureRenderer tincture={tincture as Tincture} tinctureConfiguration={tinctureConfiguration} />
+            <div className="tincture-select-label" style={{ textAlign: 'center' }}>
+              {tincture.name}
+            </div>
+          </>
+        ) : (
+          <div className="tincture-select-label" style={{ textAlign: 'center' }}>
+            None
+          </div>
+        )}
       </div>
       <Overlay
         target={target && target.current ? target.current : undefined}
@@ -113,31 +136,87 @@ export const TinctureSelect = ({ tinctureConfiguration, tincture, tinctureChange
           <Popover.Title as="h3">Tincture</Popover.Title>
           <Popover.Content>
             <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-              {tinctures.map((tincture, i) => {
-                return (
-                  <div
-                    key={i}
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                      cursor: 'pointer',
-                      width: '25%',
-                      padding: '5px',
-                      border: '1px solid #333',
-                      flexDirection: 'column',
-                    }}
-                    title={tincture.name}
-                    onClick={() => selectTincture(tincture)}
-                  >
-                    <TinctureRenderer tincture={tincture} tinctureConfiguration={tinctureConfiguration} />
-                    <div style={{ textAlign: 'center' }}>{tincture.name}</div>
-                  </div>
-                );
+              {tinctureList.map((tincture, i) => {
+                if (tincture === null) {
+                  return (
+                    <div
+                      key={i}
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        cursor: 'pointer',
+                        width: '25%',
+                        padding: '5px',
+                        border: '1px solid #333',
+                        flexDirection: 'column',
+                      }}
+                      title="None"
+                      onClick={() => selectTincture(tincture)}
+                    >
+                      <div style={{ textAlign: 'center' }}>None</div>
+                    </div>
+                  );
+                } else {
+                  return (
+                    <div
+                      key={i}
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        cursor: 'pointer',
+                        width: '25%',
+                        padding: '5px',
+                        border: '1px solid #333',
+                        flexDirection: 'column',
+                      }}
+                      title={tincture.name}
+                      onClick={() => selectTincture(tincture)}
+                    >
+                      <TinctureRenderer tincture={tincture as Tincture} tinctureConfiguration={tinctureConfiguration} />
+                      <div style={{ textAlign: 'center' }}>{tincture.name}</div>
+                    </div>
+                  );
+                }
               })}
             </div>
           </Popover.Content>
         </Popover>
       </Overlay>
     </div>
+  );
+};
+
+type TinctureProps = {
+  tinctureConfiguration: TinctureConfiguration;
+  tincture: Tincture;
+  tinctureChange: (t: Tincture) => void;
+};
+
+export const TinctureSelect = ({ tinctureConfiguration, tincture, tinctureChange }: TinctureProps) => {
+  return (
+    <AbstractTinctureSelect
+      tinctureConfiguration={tinctureConfiguration}
+      tincture={tincture}
+      tinctureChange={tinctureChange}
+      tinctureList={tinctures}
+    />
+  );
+};
+
+type MetalAndColoursProps = {
+  tinctureConfiguration: TinctureConfiguration;
+  tincture: MetalsAndColours | null;
+  tinctureChange: (t: MetalsAndColours | null) => void;
+};
+
+const metalAndColoursAndNull = [...metalAndColours, null];
+export const MetalAndColoursSelect = ({ tinctureConfiguration, tincture, tinctureChange }: MetalAndColoursProps) => {
+  return (
+    <AbstractTinctureSelect
+      tinctureConfiguration={tinctureConfiguration}
+      tincture={tincture}
+      tinctureChange={tinctureChange}
+      tinctureList={metalAndColoursAndNull}
+    />
   );
 };

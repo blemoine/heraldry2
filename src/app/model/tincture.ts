@@ -74,7 +74,8 @@ export function isPotent(t: Tincture): t is Potents {
 
 export type Furs = Ermines | Vairs | Potents;
 
-export type Tincture = Metal | Colours | Stains | Furs;
+export type MetalsAndColours = Metal | Colours;
+export type Tincture = MetalsAndColours | Stains | Furs;
 
 export function isFur(tincture: Tincture): tincture is Furs {
   return isErmine(tincture) || isVair(tincture) || isPotent(tincture);
@@ -84,14 +85,10 @@ export function isMetal(tincture: Tincture): tincture is Metal {
   return tincture.name === 'argent' || tincture.name === 'or';
 }
 
+export const metalAndColours: Array<MetalsAndColours> = [argent, or, gules, sable, azure, vert, purpure];
+
 export const tinctures: Array<Tincture> = [
-  argent,
-  or,
-  gules,
-  sable,
-  azure,
-  vert,
-  purpure,
+  ...metalAndColours,
   murrey,
   sanguine,
   tenne,

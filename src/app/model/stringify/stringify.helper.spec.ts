@@ -12,21 +12,21 @@ describe('stringifyBlason', () => {
       stringifyBlason({
         kind: 'simple',
         field: { kind: 'plain', tincture: vair },
-        ordinary: { name: 'bend', tincture: azure, line: 'straight' },
+        ordinary: { name: 'bend', tincture: azure, line: 'straight', fimbriated: null },
       })
     ).toBe('Vair, a bend azure');
     expect(
       stringifyBlason({
         kind: 'simple',
         field: { kind: 'plain', tincture: sable },
-        ordinary: { name: 'fess', tincture: gules, line: 'straight' },
+        ordinary: { name: 'fess', tincture: gules, line: 'straight', fimbriated: null },
       })
     ).toBe('Sable, a fess gules');
     expect(
       stringifyBlason({
         kind: 'simple',
         field: { kind: 'plain', tincture: or },
-        ordinary: { name: 'chief', tincture: argent, line: 'straight' },
+        ordinary: { name: 'chief', tincture: argent, line: 'straight', fimbriated: null },
       })
     ).toBe('Or, a chief argent');
   });
@@ -65,7 +65,7 @@ describe('stringifyBlason', () => {
       stringifyBlason({
         kind: 'simple',
         field: { kind: 'party', per: { name: 'pale', tinctures: [sable, argent], line: 'straight' } },
-        ordinary: { name: 'pale', tincture: purpure, count: 1, line: 'straight' },
+        ordinary: { name: 'pale', tincture: purpure, count: 1, line: 'straight', fimbriated: null },
       })
     ).toBe('Per pale sable and argent, a pale purpure');
   });
@@ -75,7 +75,7 @@ describe('stringifyBlason', () => {
       stringifyBlason({
         kind: 'simple',
         field: { kind: 'plain', tincture: vair },
-        ordinary: { name: 'pale', tincture: purpure, count: 2, line: 'straight' },
+        ordinary: { name: 'pale', tincture: purpure, count: 2, line: 'straight', fimbriated: null },
       })
     ).toBe('Vair, two pallets purpure');
   });
@@ -121,7 +121,7 @@ describe('stringifyBlason', () => {
       stringifyBlason({
         kind: 'simple',
         field: { kind: 'party', per: { name: 'pale', tinctures: [ermine, azure], line: 'straight' } },
-        ordinary: { name: 'chief', tincture: ermine, line: 'straight' },
+        ordinary: { name: 'chief', tincture: ermine, line: 'straight', fimbriated: null },
         charge: {
           name: 'lion',
           tincture: gules,
@@ -240,6 +240,7 @@ describe('stringifyBlason', () => {
           name: 'base',
           tincture: sable,
           line: 'straight',
+          fimbriated: null,
         },
       })
     ).toBe('Or, a base sable');
@@ -333,5 +334,47 @@ describe('stringifyBlason', () => {
         },
       })
     ).toEqual('Tierced per pale or, azure and ermine');
+  });
+
+  it('should stringify chevron fimbriated', () => {
+    expect(
+      stringifyBlason({
+        kind: 'simple',
+        field: { kind: 'plain', tincture: or },
+        ordinary: { name: 'chevron', tincture: azure, count: 3, line: 'straight', fimbriated: argent },
+      })
+    ).toBe('Or, three chevrons azure fimbriated argent');
+  });
+  it('should stringify chape ploye fimbriated', () => {
+    expect(
+      stringifyBlason({
+        kind: 'simple',
+        field: { kind: 'plain', tincture: or },
+        ordinary: {
+          name: 'chape-ploye',
+          fimbriated: argent,
+          line: 'straight',
+          tinctures: { kind: 'simple', tincture: azure },
+        },
+      })
+    ).toBe('Or, chapé ployé azure fimbriated argent');
+  });
+  it('should stringify bend fimbriated', () => {
+    expect(
+      stringifyBlason({
+        kind: 'simple',
+        field: { kind: 'plain', tincture: or },
+        ordinary: { name: 'bend', tincture: azure, line: 'straight', fimbriated: argent },
+      })
+    ).toBe('Or, a bend azure fimbriated argent');
+  });
+  it('should stringify chausse fimbriated', () => {
+    expect(
+      stringifyBlason({
+        kind: 'simple',
+        field: { kind: 'plain', tincture: or },
+        ordinary: { name: 'chausse', tincture: azure, line: 'straight', fimbriated: argent },
+      })
+    ).toBe('Or, chaussé azure fimbriated argent');
   });
 });

@@ -24,9 +24,9 @@ import {
 } from '../model/charge';
 import { aParser, buildAltParser, constStr, lineParser, numberParser } from './parser.helper';
 import { identity } from '../../utils/identity';
-import { gules, or } from '../model/tincture';
+import { gules, MetalsAndColours, or } from '../model/tincture';
 import { cannotHappen } from '../../utils/cannot-happen';
-import { tinctureParserFromName } from './tinctureParser';
+import { metalOrColourParserFromName, tinctureParserFromName } from './tinctureParser';
 import { CountAndDisposition, isNotOne, SupportedNumber, supportedNumbers } from '../model/countAndDisposition';
 import { OrdinaryCross } from '../model/ordinary';
 
@@ -196,11 +196,19 @@ const mulletParser = (): P.Parser<Mullet> => {
   });
 };
 
+const fimbriatedParser: P.Parser<MetalsAndColours | null> = P.whitespace
+  .then(P.string('fimbriated'))
+  .then(P.whitespace)
+  .then(metalOrColourParserFromName)
+  .fallback(null);
+
 export const crossParser = (): P.Parser<Cross | OrdinaryCross> => {
   return P.alt(
-    P.seq(aParser.then(constStr('cross', 'cross potenty')).skip(P.whitespace), tinctureParserFromName).map(
-      ([name, tincture]): OrdinaryCross => ({ name, tincture, line: 'potenty' })
-    ),
+    P.seq(
+      aParser.then(constStr('cross', 'cross potenty')).skip(P.whitespace),
+      tinctureParserFromName,
+      fimbriatedParser
+    ).map(([name, tincture, fimbriated]): OrdinaryCross => ({ name, tincture, line: 'potenty', fimbriated })),
     countParser.chain((count) => {
       return P.seq(
         P.alt<'cross'>(constStr('cross', 'crosses'), constStr('cross')),
@@ -209,14 +217,15 @@ export const crossParser = (): P.Parser<Cross | OrdinaryCross> => {
         P.whitespace.then(tinctureParserFromName)
       ).map(([name, limbs, countAndDisposition, tincture]): Cross => ({ name, countAndDisposition, tincture, limbs }));
     }),
-    P.seq(aParser.then(constStr('cross')).skip(P.whitespace), tinctureParserFromName).map(
-      ([name, tincture]): OrdinaryCross => ({ name, tincture, line: 'straight' })
+    P.seq(aParser.then(constStr('cross')).skip(P.whitespace), tinctureParserFromName, fimbriatedParser).map(
+      ([name, tincture, fimbriated]): OrdinaryCross => ({ name, tincture, line: 'straight', fimbriated })
     ),
     P.seq(
       aParser.then(constStr('cross')).skip(P.whitespace),
       lineParser.skip(P.whitespace),
-      tinctureParserFromName
-    ).map(([name, line, tincture]): OrdinaryCross => ({ name, tincture, line }))
+      tinctureParserFromName,
+      fimbriatedParser
+    ).map(([name, line, tincture, fimbriated]): OrdinaryCross => ({ name, tincture, line, fimbriated }))
   );
 };
 

@@ -1,7 +1,7 @@
 import { OrdinaryNameSelect } from './OrdinaryNameSelect';
 import * as React from 'react';
 import { Ordinary } from '../../model/ordinary';
-import { argent, tinctures } from '../../model/tincture';
+import { argent, MetalsAndColours, tinctures } from '../../model/tincture';
 import { OrdinaryDispatcherForm } from './ordinaries/OrdinaryDispatcherForm';
 import { TinctureConfiguration } from '../../model/tincture-configuration';
 import { Line } from '../../model/line';
@@ -17,8 +17,9 @@ export function OrdinaryForm({ tinctureConfiguration, ordinary, ordinaryChange }
     if (ordinaryName) {
       const tincture = ordinary ? allDeclaredTincturesOfOrdinary(ordinary)[0] : argent;
       const line: Line = ordinary ? ordinary.line : 'straight';
+      const fimbriated: MetalsAndColours | null = ordinary ? ordinary.fimbriated : null;
       if (ordinaryName === 'pale' || ordinaryName === 'chevron' || ordinaryName === 'chevronel') {
-        ordinaryChange({ name: ordinaryName, tincture, count: 1, line });
+        ordinaryChange({ name: ordinaryName, tincture, count: 1, line, fimbriated });
       } else if (ordinaryName === 'chape-ploye') {
         const missingColor = tinctures.find((t) => t.name !== tincture.name);
         if (!missingColor) {
@@ -28,9 +29,10 @@ export function OrdinaryForm({ tinctureConfiguration, ordinary, ordinaryChange }
           name: ordinaryName,
           tinctures: { kind: 'simple', tincture },
           line,
+          fimbriated,
         });
       } else {
-        ordinaryChange({ name: ordinaryName, tincture, line });
+        ordinaryChange({ name: ordinaryName, tincture, line, fimbriated });
       }
     } else {
       ordinaryChange(null);

@@ -42,6 +42,7 @@ export const BaseOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onC
       transformProperties={transformProperties}
       pathBuilderAndTincture={pathBuilderAndTincture}
       postfixId={postfixId}
+      stroke={ordinary.fimbriated}
     />
   );
 };

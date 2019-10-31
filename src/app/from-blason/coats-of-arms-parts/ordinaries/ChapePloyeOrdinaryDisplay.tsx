@@ -72,6 +72,7 @@ export const ChapePloyeOrdinaryDisplay = ({ dimension, ordinary, fillFromTinctur
       transformProperties={transformProperties}
       pathBuilderAndTincture={pathBuilderAndTincture}
       postfixId={postfixId}
+      stroke={ordinary.fimbriated}
     />
   );
 };

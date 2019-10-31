@@ -14,7 +14,7 @@ describe('isThereFur', () => {
         {
           kind: 'simple',
           field: { kind: 'plain', tincture: ermine },
-          ordinary: { name: 'bend', tincture: vair, line: 'straight' },
+          ordinary: { name: 'bend', tincture: vair, line: 'straight', fimbriated: null },
         },
         'vair'
       )
@@ -26,7 +26,7 @@ describe('isThereFur', () => {
         {
           kind: 'simple',
           field: { kind: 'plain', tincture: ermine },
-          ordinary: { name: 'bend', tincture: ermine, line: 'straight' },
+          ordinary: { name: 'bend', tincture: ermine, line: 'straight', fimbriated: null },
         },
         'vair'
       )
@@ -38,7 +38,7 @@ describe('isThereFur', () => {
         {
           kind: 'simple',
           field: { kind: 'plain', tincture: azure },
-          ordinary: { name: 'bend', tincture: argent, line: 'straight' },
+          ordinary: { name: 'bend', tincture: argent, line: 'straight', fimbriated: null },
         },
         'vair'
       )
@@ -48,7 +48,7 @@ describe('isThereFur', () => {
         {
           kind: 'simple',
           field: { kind: 'plain', tincture: azure },
-          ordinary: { name: 'bend', tincture: argent, line: 'straight' },
+          ordinary: { name: 'bend', tincture: argent, line: 'straight', fimbriated: null },
         },
         'ermine'
       )
@@ -61,7 +61,7 @@ describe('isThereFur', () => {
         {
           kind: 'simple',
           field: { kind: 'plain', tincture: gules },
-          ordinary: { name: 'bend', tincture: azure, line: 'straight' },
+          ordinary: { name: 'bend', tincture: azure, line: 'straight', fimbriated: null },
           charge: {
             name: 'lion',
             head: null,
@@ -83,7 +83,7 @@ describe('isThereFur', () => {
         {
           kind: 'simple',
           field: { kind: 'plain', tincture: gules },
-          ordinary: { name: 'bend', tincture: azure, line: 'straight' },
+          ordinary: { name: 'bend', tincture: azure, line: 'straight', fimbriated: null },
           charge: {
             name: 'lion',
             head: null,

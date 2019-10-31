@@ -10,17 +10,32 @@ import { isError } from '../../../../utils/result';
 import { FocusablePathFromBuilder } from '../../../common/PathFromBuilder';
 import { Line } from '../../../model/line';
 import { ShieldShape } from '../../../model/configuration';
+import { getFill } from '../FurPattern.model';
+import { FillFromTincture } from '../../fillFromTincture.helper';
+import { MetalsAndColours, Tincture } from '../../../model/tincture';
+
+const postfixId = 'bordure';
 
 type Props = {
   dimension: Dimension;
   line: Line;
   shape: SimpleBlasonShape;
   shieldShape: ShieldShape;
-  stroke: string;
-  fill: string;
+  fillFromTincture: FillFromTincture;
+  tincture: Tincture;
+  stroke: MetalsAndColours | null;
   onClick: () => void;
 };
-export const BordureDisplay = ({ dimension, line, shape, shieldShape, stroke, fill, onClick }: Props) => {
+export const BordureDisplay = ({
+  dimension,
+  line,
+  shape,
+  shieldShape,
+  fillFromTincture,
+  onClick,
+  tincture,
+  stroke,
+}: Props) => {
   const { width, height } = dimension;
 
   const lineOptions: LineOptions | null =
@@ -126,11 +141,19 @@ export const BordureDisplay = ({ dimension, line, shape, shieldShape, stroke, fi
     throw new Error(`Got ${JSON.stringify(pathBuilder)} error`);
   }
 
+  const strokeColor = stroke
+    ? getFill(fillFromTincture, stroke, postfixId)
+    : tincture.name === 'sable'
+    ? '#777'
+    : '#333';
+  const strokeWidth = stroke ? 3 : 1;
+  const fill = getFill(fillFromTincture, tincture, postfixId);
   return (
     <FocusablePathFromBuilder
       pathBuilder={pathBuilder}
       fill={fill}
-      stroke={stroke}
+      stroke={strokeColor}
+      strokeWidth={strokeWidth}
       fillRule={'evenodd'}
       style={{ cursor: 'pointer' }}
       onClick={onClick}

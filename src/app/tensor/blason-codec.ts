@@ -1,6 +1,6 @@
 import { Field, fieldKinds } from '../model/field';
 import { cannotHappen } from '../../utils/cannot-happen';
-import { Tincture, tinctures } from '../model/tincture';
+import { metalAndColours, MetalsAndColours, Tincture, tinctures } from '../model/tincture';
 import { Line, lines } from '../model/line';
 import { parties, Party } from '../model/party';
 import { flatMap, isError, map, raise, Result, zip, zip3, zip4 } from '../../utils/result';
@@ -23,7 +23,7 @@ import { Blason, QuarterlyBlason, SimpleBlason } from '../model/blason';
 import { Tierced, tierceds } from '../model/tierced';
 
 const FIELD_SIZE = 6;
-const ORDINARY_SIZE = 5;
+const ORDINARY_SIZE = 6;
 const CHARGE_SIZE = 8;
 const BLASON_SIZE = FIELD_SIZE + ORDINARY_SIZE + CHARGE_SIZE;
 
@@ -37,6 +37,13 @@ function decodeFromList<A>(list: ReadonlyArray<A>, i: number): Result<A> {
     return raise(`Cannot decode index ${i} for list ${list}`);
   }
   return result;
+}
+
+function encodeMetalAndColours(tincture: MetalsAndColours): number {
+  return metalAndColours.findIndex((t) => t.name === tincture.name) + 1;
+}
+function decodeMetalAndColours(i: number): Result<MetalsAndColours> {
+  return metalAndColours[i - 1] || raise(`Cannot decode metalAndColours ${i}`);
 }
 
 function encodeTincture(tincture: Tincture): number {
@@ -211,6 +218,7 @@ export function encodeOrdinary(ordinary: Ordinary | null): Uint8Array {
   }
   result[0] = encodeOrdinaryName(ordinary.name);
   result[1] = encodeLine(ordinary.line);
+  result[5] = ordinary.fimbriated ? encodeMetalAndColours(ordinary.fimbriated) : 0;
   if (ordinary.name === 'chape-ploye') {
     result[3] = encodeFromList(chapePloyeTincturesKind, ordinary.tinctures.kind);
     if (ordinary.tinctures.kind === 'party') {
@@ -238,19 +246,20 @@ export function decodeOrdinary(arr: Uint8Array): Result<Ordinary | null> {
   const maybeName = decodeOrdinaryName(arr[0]);
   const maybeLine = decodeLine(arr[1]);
   const maybeTincture = decodeTincture(arr[2]);
+  const maybeFimbriated = arr[5] === 0 ? null : decodeMetalAndColours(arr[5]);
 
   return flatMap(
-    zip3(maybeName, maybeLine, maybeTincture),
-    ([name, line, tincture]): Result<Ordinary> => {
+    zip4(maybeName, maybeLine, maybeTincture, maybeFimbriated),
+    ([name, line, tincture, fimbriated]): Result<Ordinary> => {
       if (name === 'pale') {
         const maybeCount: Result<1 | 2> = decodeNumber([1, 2], arr[3]);
-        return map(maybeCount, (count) => ({ name, line, tincture, count }));
+        return map(maybeCount, (count) => ({ name, line, tincture, count, fimbriated }));
       } else if (name === 'chape-ploye') {
         return flatMap(
           decodeFromList(chapePloyeTincturesKind, arr[3]),
           (kind): Result<ChapePloye> => {
             if (kind === 'simple') {
-              return { name, line, tinctures: { kind: 'simple', tincture } };
+              return { name, line, tinctures: { kind: 'simple', tincture }, fimbriated };
             } else if (kind === 'party') {
               return map(
                 decodeTincture(arr[4]),
@@ -258,6 +267,7 @@ export function decodeOrdinary(arr: Uint8Array): Result<Ordinary | null> {
                   name,
                   line,
                   tinctures: { kind: 'party', per: 'pale', tinctures: [tincture, tincture2] },
+                  fimbriated,
                 })
               );
             } else {
@@ -267,9 +277,9 @@ export function decodeOrdinary(arr: Uint8Array): Result<Ordinary | null> {
         );
       } else if (name === 'chevron' || name === 'chevronel') {
         const maybeCount: Result<1 | 2 | 3> = decodeNumber([1, 2, 3], arr[3]);
-        return map(maybeCount, (count) => ({ name, line, tincture, count }));
+        return map(maybeCount, (count) => ({ name, line, tincture, count, fimbriated }));
       } else {
-        return { name, line, tincture };
+        return { name, line, tincture, fimbriated };
       }
     }
   );

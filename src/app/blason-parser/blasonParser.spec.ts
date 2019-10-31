@@ -9,6 +9,7 @@ import {
   or,
   potent,
   potentEnPoint,
+  purpure,
   sable,
   vair,
   vairEnPale,
@@ -62,7 +63,7 @@ describe('parseBlason', () => {
     const expected: Blason = {
       kind: 'simple',
       field: { kind: 'plain', tincture: or },
-      ordinary: { name: 'chief', tincture: argent, line: 'straight' },
+      ordinary: { name: 'chief', tincture: argent, line: 'straight', fimbriated: null },
     };
     expect(result).toEqual(expected);
   });
@@ -144,7 +145,7 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
     const expected: Blason = {
       kind: 'simple',
       field: { kind: 'plain', tincture: azure },
-      ordinary: { name: 'cross', tincture: argent, line: 'straight' },
+      ordinary: { name: 'cross', tincture: argent, line: 'straight', fimbriated: null },
     };
 
     expect(result).toEqual(expected);
@@ -155,7 +156,7 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
     const expected: Blason = {
       kind: 'simple',
       field: { kind: 'plain', tincture: argent },
-      ordinary: { name: 'pale', tincture: sable, count: 2, line: 'straight' },
+      ordinary: { name: 'pale', tincture: sable, count: 2, line: 'straight', fimbriated: null },
     };
 
     expect(result).toEqual(expected);
@@ -191,6 +192,7 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
         line: 'engrailed',
         name: 'bordure',
         tincture: azure,
+        fimbriated: null,
       },
     };
 
@@ -220,7 +222,7 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
     const expected: Blason = {
       kind: 'simple',
       field: { kind: 'plain', tincture: azure },
-      ordinary: { name: 'chief', line: 'engrailed', tincture: or },
+      ordinary: { name: 'chief', line: 'engrailed', tincture: or, fimbriated: null },
     };
     expect(result).toEqual(expected);
   });
@@ -230,7 +232,7 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
     const expected: Blason = {
       kind: 'simple',
       field: { kind: 'plain', tincture: azure },
-      ordinary: { name: 'base', line: 'invected', tincture: ermine },
+      ordinary: { name: 'base', line: 'invected', tincture: ermine, fimbriated: null },
     };
     expect(result).toEqual(expected);
   });
@@ -240,7 +242,7 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
     const expected: Blason = {
       kind: 'simple',
       field: { kind: 'plain', tincture: or },
-      ordinary: { name: 'base', line: 'straight', tincture: vair },
+      ordinary: { name: 'base', line: 'straight', tincture: vair, fimbriated: null },
     };
     expect(result).toEqual(expected);
   });
@@ -250,7 +252,7 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
     const expected: Blason = {
       kind: 'simple',
       field: { kind: 'plain', tincture: or },
-      ordinary: { name: 'bendSinister', line: 'engrailed', tincture: gules },
+      ordinary: { name: 'bendSinister', line: 'engrailed', tincture: gules, fimbriated: null },
     };
     expect(result).toEqual(expected);
   });
@@ -296,7 +298,7 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
     const expected: Blason = {
       kind: 'simple',
       field: { kind: 'paly', tinctures: [argent, gules] },
-      ordinary: { name: 'chief', line: 'engrailed', tincture: sable },
+      ordinary: { name: 'chief', line: 'engrailed', tincture: sable, fimbriated: null },
       charge: {
         name: 'lozenge',
         tincture: azure,
@@ -313,7 +315,7 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
     const expected: Blason = {
       kind: 'simple',
       field: { kind: 'plain', tincture: potent },
-      ordinary: { name: 'chief', line: 'straight', tincture: gules },
+      ordinary: { name: 'chief', line: 'straight', tincture: gules, fimbriated: null },
     };
     expect(parseBlason('Potent,  a chief gules')).toEqual(expected);
   });
@@ -602,6 +604,7 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
         name: 'chief',
         line: 'wavy',
         tincture: argent,
+        fimbriated: null,
       },
     };
 
@@ -766,7 +769,7 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
     const expected: SimpleBlason = {
       kind: 'simple',
       field: { kind: 'plain', tincture: azure },
-      ordinary: { name: 'cross', line: 'potenty', tincture: argent },
+      ordinary: { name: 'cross', line: 'potenty', tincture: argent, fimbriated: null },
     };
 
     expect(parseBlason('Azure, a cross potenty argent')).toEqual(expected);
@@ -794,6 +797,7 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
         name: 'chape-ploye',
         tinctures: { kind: 'party', per: 'pale', tinctures: [gules, sable] },
         line: 'straight',
+        fimbriated: null,
       },
     };
 
@@ -808,6 +812,7 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
         name: 'chape-ploye',
         tinctures: { kind: 'simple', tincture: sable },
         line: 'straight',
+        fimbriated: null,
       },
     };
 
@@ -822,6 +827,7 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
         name: 'pall-inverted',
         tincture: gules,
         line: 'straight',
+        fimbriated: null,
       },
     };
 
@@ -836,6 +842,7 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
         name: 'gyron',
         tincture: gules,
         line: 'straight',
+        fimbriated: null,
       },
     };
 
@@ -871,7 +878,7 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
     const expected: SimpleBlason = {
       kind: 'simple',
       field: { kind: 'plain', tincture: or },
-      ordinary: { name: 'chausse', tincture: gules, line: 'straight' },
+      ordinary: { name: 'chausse', tincture: gules, line: 'straight', fimbriated: null },
     };
 
     expect(parseBlason('Or, chaussé gules')).toEqual(expected);
@@ -883,5 +890,25 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
     };
 
     expect(parseBlason('Barry and per chevron throughout or and gules')).toEqual(expected);
+  });
+
+  it('should parse a bend fimbriated', () => {
+    const expected: SimpleBlason = {
+      kind: 'simple',
+      field: { kind: 'plain', tincture: or },
+      ordinary: { name: 'bend', line: 'straight', fimbriated: azure, tincture: argent },
+    };
+
+    expect(parseBlason('Or, a bend argent fimbriated azure')).toEqual(expected);
+  });
+
+  it('should parse a bend fimbriated with a line', () => {
+    const expected: SimpleBlason = {
+      kind: 'simple',
+      field: { kind: 'plain', tincture: or },
+      ordinary: { name: 'bend', line: 'invected', fimbriated: purpure, tincture: gules },
+    };
+
+    expect(parseBlason('Or, a bend invected gules fimbriated purpure')).toEqual(expected);
   });
 });

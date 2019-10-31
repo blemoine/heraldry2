@@ -1,5 +1,5 @@
 import fc, { Arbitrary } from 'fast-check';
-import { or, Tincture, tinctures } from '../tincture';
+import { metalAndColours, MetalsAndColours, or, Tincture, tinctures } from '../tincture';
 import { Field, fieldKinds, PartyField, TiercedField } from '../field';
 import { PallParty, parties, Party } from '../party';
 import { ChapePloye, chapePloyeTincturesKind, ordinaries, Ordinary } from '../ordinary';
@@ -31,6 +31,7 @@ import { availableDispositions, CountAndDisposition, supportedNumbers } from '..
 import { Tierced, tierceds } from '../tierced';
 
 const tinctureArb: Arbitrary<Tincture> = fc.constantFrom(...tinctures);
+const metalAndColoursArb: Arbitrary<MetalsAndColours> = fc.constantFrom(...metalAndColours);
 export const lineArb: Arbitrary<Line> = fc.constantFrom(...lines);
 
 const partyArb: Arbitrary<Party> = fc.constantFrom<Party['name']>(...parties).chain<Party>((name) => {
@@ -84,7 +85,12 @@ export const fieldArb: Arbitrary<Field> = fc.constantFrom(...fieldKinds).chain(
 );
 
 export const ordinaryArb: Arbitrary<Ordinary> = fc
-  .record({ name: fc.constantFrom(...ordinaries), tincture: tinctureArb, line: lineArb })
+  .record({
+    name: fc.constantFrom(...ordinaries),
+    tincture: tinctureArb,
+    line: lineArb,
+    fimbriated: fc.oneof(metalAndColoursArb, fc.constant(null)),
+  })
   .chain(
     (obj): Arbitrary<Ordinary> => {
       if (obj.name === 'pale' || obj.name === 'chevron' || obj.name === 'chevronel') {
@@ -92,6 +98,7 @@ export const ordinaryArb: Arbitrary<Ordinary> = fc
           name: obj.name,
           tincture: obj.tincture,
           line: obj.line,
+          fimbriated: obj.fimbriated,
         } as const;
         return fc.constantFrom(1 as const, 2 as const).map((count) => ({ ...countableOrdinary, count }));
       } else if (obj.name === 'chape-ploye') {
@@ -105,6 +112,7 @@ export const ordinaryArb: Arbitrary<Ordinary> = fc
                   name,
                   tinctures: { kind: 'party', per: 'pale', tinctures: [obj.tincture, tincture2] },
                   line: obj.line,
+                  fimbriated: obj.fimbriated,
                 };
               }
             );
@@ -113,6 +121,7 @@ export const ordinaryArb: Arbitrary<Ordinary> = fc
               name,
               tinctures: { kind: 'simple', tincture: obj.tincture },
               line: obj.line,
+              fimbriated: obj.fimbriated,
             });
           } else {
             return cannotHappen(kind);
@@ -120,7 +129,7 @@ export const ordinaryArb: Arbitrary<Ordinary> = fc
         });
       } else {
         const name = obj.name;
-        return fc.constant({ name, tincture: obj.tincture, line: obj.line });
+        return fc.constant({ name, tincture: obj.tincture, line: obj.line, fimbriated: obj.fimbriated });
       }
     }
   );

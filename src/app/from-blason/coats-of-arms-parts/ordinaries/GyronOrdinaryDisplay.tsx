@@ -46,6 +46,7 @@ export const GyronOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, on
       transformProperties={transformProperties}
       pathBuilderAndTincture={pathBuilderAndTincture}
       postfixId={postfixId}
+      stroke={ordinary.fimbriated}
     />
   );
 };

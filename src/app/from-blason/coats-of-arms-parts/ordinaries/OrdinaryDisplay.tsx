@@ -5,7 +5,7 @@ import { Dimension } from '../../../model/dimension';
 import { SimpleBlasonShape } from '../blasonDisplay.helper';
 import { ShieldShape } from '../../../model/configuration';
 import { BordureDisplay } from './BordureDisplay';
-import { convertToOlfFillFronTincture, FillFromTincture } from '../../fillFromTincture.helper';
+import { FillFromTincture } from '../../fillFromTincture.helper';
 import { QuarterOrdinaryDisplay } from './QuarterOrdinaryDisplay';
 import { CantonOrdinaryDisplay } from './CantonOrdinaryDisplay';
 import { ChiefOrdinaryDisplay } from './ChiefOrdinaryDisplay';
@@ -43,8 +43,6 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
       />
     );
   } else {
-    const strokeColor = ordinary.tincture.name === 'sable' ? '#777' : '#333';
-    const fill = convertToOlfFillFronTincture(fillFromTincture)(ordinary.tincture);
     if (ordinary.name === 'chief') {
       return (
         <ChiefOrdinaryDisplay
@@ -134,9 +132,10 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
           shieldShape={shieldShape}
           shape={shape}
           dimension={dimension}
-          fill={fill}
-          stroke={strokeColor}
           line={ordinary.line}
+          fillFromTincture={fillFromTincture}
+          stroke={ordinary.fimbriated}
+          tincture={ordinary.tincture}
           onClick={onClick}
         />
       );

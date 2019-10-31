@@ -44,6 +44,7 @@ export const CantonOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, o
       transformProperties={transformProperties}
       pathBuilderAndTincture={pathBuilderAndTincture}
       postfixId={postfixId}
+      stroke={ordinary.fimbriated}
     />
   );
 };

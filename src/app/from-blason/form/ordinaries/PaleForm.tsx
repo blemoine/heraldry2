@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Pale } from '../../../model/ordinary';
-import { TinctureSelect } from '../TinctureSelect';
-import { Tincture } from '../../../model/tincture';
+import { MetalAndColoursSelect, TinctureSelect } from '../TinctureSelect';
+import { MetalsAndColours, Tincture } from '../../../model/tincture';
 import { LineSelect } from '../LineSelect';
 import { Line } from '../../../model/line';
 import { TinctureConfiguration } from '../../../model/tincture-configuration';
@@ -12,6 +12,9 @@ const countOptions = [1, 2] as const;
 export const PaleForm = ({ tinctureConfiguration, ordinary, ordinaryChange }: Props) => {
   function ordinaryTinctureChange(tincture: Tincture) {
     ordinaryChange({ ...ordinary, tincture });
+  }
+  function ordinaryFimbriatedChange(fimbriated: MetalsAndColours | null) {
+    ordinaryChange({ ...ordinary, fimbriated });
   }
 
   function countChange(count: 1 | 2) {
@@ -42,6 +45,15 @@ export const PaleForm = ({ tinctureConfiguration, ordinary, ordinaryChange }: Pr
       <div className="form-group">
         <label>Line style</label>
         <LineSelect line={ordinary.line} lineChange={lineChange} />
+      </div>
+
+      <div className="form-group">
+        <label>Fimbriated</label>
+        <MetalAndColoursSelect
+          tinctureConfiguration={tinctureConfiguration}
+          tincture={ordinary.fimbriated}
+          tinctureChange={ordinaryFimbriatedChange}
+        />
       </div>
     </>
   );

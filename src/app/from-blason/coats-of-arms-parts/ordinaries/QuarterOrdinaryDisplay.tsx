@@ -44,6 +44,7 @@ export const QuarterOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, 
       transformProperties={transformProperties}
       pathBuilderAndTincture={pathBuilderAndTincture}
       postfixId={postfixId}
+      stroke={ordinary.fimbriated}
     />
   );
 };

@@ -55,6 +55,7 @@ export const PallInvertedOrdinaryDisplay = ({ dimension, ordinary, fillFromTinct
       transformProperties={transformProperties}
       pathBuilderAndTincture={pathBuilderAndTincture}
       postfixId={postfixId}
+      stroke={ordinary.fimbriated}
     />
   );
 };

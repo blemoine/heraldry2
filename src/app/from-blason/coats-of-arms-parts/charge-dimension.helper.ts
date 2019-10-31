@@ -64,8 +64,8 @@ export function getChargeDimension(
         chargeHeightOffset = 0.14;
         chargeVerticalOffset = 0.07;
       } else if (ordinaryLine === 'dancetty') {
-        chargeHeightOffset = 0.16;
-        chargeVerticalOffset = 0.11;
+        chargeHeightOffset = 0.18;
+        chargeVerticalOffset = 0.135;
       } else {
         chargeHeightOffset = 0.17;
         chargeVerticalOffset = 0.04;

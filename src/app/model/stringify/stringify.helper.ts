@@ -107,6 +107,9 @@ function stringifyOrdinary(ordinary: Ordinary): string {
       result += stringifyLine(ordinary.line) + ' ';
     }
     result += stringifyTincture(ordinary.tincture);
+    if (ordinary.fimbriated) {
+      result += ' fimbriated ' + stringifyTincture(ordinary.fimbriated);
+    }
     return result;
   } else if (ordinary.name === 'chape-ploye') {
     let result = stringifyOrdinaryName(ordinary.name) + ' ';
@@ -123,6 +126,9 @@ function stringifyOrdinary(ordinary: Ordinary): string {
     } else {
       return cannotHappen(ordinary.tinctures);
     }
+    if (ordinary.fimbriated) {
+      result += ' fimbriated ' + stringifyTincture(ordinary.fimbriated);
+    }
     return result;
   } else if (ordinary.name === 'chausse') {
     let result = stringifyOrdinaryName(ordinary.name) + ' ';
@@ -130,6 +136,9 @@ function stringifyOrdinary(ordinary: Ordinary): string {
       result += stringifyLine(ordinary.line) + ' ';
     }
     result += stringifyTincture(ordinary.tincture);
+    if (ordinary.fimbriated) {
+      result += ' fimbriated ' + stringifyTincture(ordinary.fimbriated);
+    }
     return result;
   } else {
     let result = 'a ' + stringifyOrdinaryName(ordinary.name) + ' ';
@@ -137,6 +146,9 @@ function stringifyOrdinary(ordinary: Ordinary): string {
       result += stringifyLine(ordinary.line) + ' ';
     }
     result += stringifyTincture(ordinary.tincture);
+    if (ordinary.fimbriated) {
+      result += ' fimbriated ' + stringifyTincture(ordinary.fimbriated);
+    }
     return result;
   }
 }

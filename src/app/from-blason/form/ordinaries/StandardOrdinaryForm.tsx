@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ChapePloye, Ordinary, Pale } from '../../../model/ordinary';
-import { TinctureSelect } from '../TinctureSelect';
-import { Tincture } from '../../../model/tincture';
+import { MetalAndColoursSelect, TinctureSelect } from '../TinctureSelect';
+import { MetalsAndColours, Tincture } from '../../../model/tincture';
 import { LineSelect } from '../LineSelect';
 import { Line } from '../../../model/line';
 import { TinctureConfiguration } from '../../../model/tincture-configuration';
@@ -15,6 +15,10 @@ type Props = {
 export const StandardOrdinaryForm = ({ tinctureConfiguration, ordinary, ordinaryChange }: Props) => {
   function ordinaryTinctureChange(tincture: Tincture) {
     ordinaryChange({ ...ordinary, tincture });
+  }
+
+  function ordinaryFimbriatedChange(fimbriated: MetalsAndColours | null) {
+    ordinaryChange({ ...ordinary, fimbriated });
   }
 
   function lineChange(line: Line) {
@@ -39,6 +43,15 @@ export const StandardOrdinaryForm = ({ tinctureConfiguration, ordinary, ordinary
           <label>Line style</label>
           <LineSelect line={ordinary.line} lineChange={lineChange} />
         </div>
+      </div>
+
+      <div className="form-group">
+        <label>Fimbriated</label>
+        <MetalAndColoursSelect
+          tinctureConfiguration={tinctureConfiguration}
+          tincture={ordinary.fimbriated}
+          tinctureChange={ordinaryFimbriatedChange}
+        />
       </div>
     </div>
   );

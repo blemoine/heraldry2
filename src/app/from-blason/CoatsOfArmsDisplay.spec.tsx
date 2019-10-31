@@ -71,7 +71,7 @@ describe('CoatsOfArms', () => {
     const blason: Blason = {
       kind: 'simple',
       field: { kind: 'party', per: { name: 'bend', tinctures: [vair, azure], line: 'straight' } },
-      ordinary: { name: 'chief', tincture: purpure, line: 'straight' },
+      ordinary: { name: 'chief', tincture: purpure, line: 'straight', fimbriated: null },
     };
     const component = renderer.create(
       <CoatsOfArmsDisplay

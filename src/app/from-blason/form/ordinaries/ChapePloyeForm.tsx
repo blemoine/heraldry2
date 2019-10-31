@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ChapePloye, chapePloyeTincturesKind } from '../../../model/ordinary';
-import { or, Tincture } from '../../../model/tincture';
+import { MetalsAndColours, or, Tincture } from '../../../model/tincture';
 import { LineSelect } from '../LineSelect';
 import { Line } from '../../../model/line';
 import { TinctureConfiguration } from '../../../model/tincture-configuration';
@@ -8,6 +8,7 @@ import { TincturesConfiguration } from '../TincturesConfiguration';
 import { allDeclaredTincturesOfOrdinary } from '../../blason.helpers';
 import { cannotHappen } from '../../../../utils/cannot-happen';
 import { SelectScalar } from '../../../common/SelectScalar';
+import { MetalAndColoursSelect } from '../TinctureSelect';
 
 type SupportedOrdinary = ChapePloye;
 type Props = {
@@ -36,6 +37,10 @@ export const ChapePloyeForm = ({ tinctureConfiguration, ordinary, ordinaryChange
     } else {
       cannotHappen(ordinary.tinctures);
     }
+  }
+
+  function ordinaryFimbriatedChange(fimbriated: MetalsAndColours | null) {
+    ordinaryChange({ ...ordinary, fimbriated });
   }
 
   function kindChange(kind: ChapePloye['tinctures']['kind']) {
@@ -74,6 +79,14 @@ export const ChapePloyeForm = ({ tinctureConfiguration, ordinary, ordinaryChange
           <label>Type</label>
           <SelectScalar value={ordinary.tinctures.kind} valueChange={kindChange} options={chapePloyeTincturesKind} />
         </div>
+      </div>
+      <div className="form-group">
+        <label>Fimbriated</label>
+        <MetalAndColoursSelect
+          tinctureConfiguration={tinctureConfiguration}
+          tincture={ordinary.fimbriated}
+          tinctureChange={ordinaryFimbriatedChange}
+        />
       </div>
     </div>
   );

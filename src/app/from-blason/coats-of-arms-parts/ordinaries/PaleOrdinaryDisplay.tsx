@@ -50,6 +50,7 @@ export const PaleOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onC
       transformProperties={transformProperties}
       pathBuilderAndTincture={pathBuilderAndTincture}
       postfixId={postfixId}
+      stroke={ordinary.fimbriated}
     />
   );
 };

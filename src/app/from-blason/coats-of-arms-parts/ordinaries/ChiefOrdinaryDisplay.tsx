@@ -50,6 +50,7 @@ export const ChiefOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, on
       transformProperties={transformProperties}
       pathBuilderAndTincture={pathBuilderAndTincture}
       postfixId={postfixId}
+      stroke={ordinary.fimbriated}
     />
   );
 };

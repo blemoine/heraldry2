@@ -120,7 +120,7 @@ describe('CoatsOfArms quarterly collision rules', () => {
         const baseBlason: SimpleBlason = {
           kind: 'simple',
           field: { kind: 'plain', tincture: azure },
-          ordinary: { name: 'chief', line, tincture: or },
+          ordinary: { name: 'chief', line, tincture: or, fimbriated: null },
           charge,
         };
 
@@ -174,7 +174,7 @@ describe('CoatsOfArms quarterly collision rules', () => {
         const baseBlason: SimpleBlason = {
           kind: 'simple',
           field: { kind: 'plain', tincture: azure },
-          ordinary: { name: 'base', line, tincture: or },
+          ordinary: { name: 'base', line, tincture: or, fimbriated: null },
           charge,
         };
 
@@ -251,7 +251,7 @@ describe('CoatsOfArms quarterly collision rules', () => {
         const baseBlason: SimpleBlason = {
           kind: 'simple',
           field: { kind: 'plain', tincture: azure },
-          ordinary: { name: 'bordure', line, tincture: or },
+          ordinary: { name: 'bordure', line, tincture: or, fimbriated: null },
           charge,
         };
 
