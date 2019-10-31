@@ -11,12 +11,9 @@ export const PaleDisplay: React.FunctionComponent<Props> = ({ dimension, fill, l
   const lineOptions = computeLineOptions(line, dimension);
   const invertedLineOptions = line === 'dancetty' ? lineOptions : invertLineOptionNullable(lineOptions);
 
-  const pathBuilderLeft = SvgPathBuilder.rectangle([0, 0], { width: width / 2, height }, { right: lineOptions });
-  const pathBuilderRight = SvgPathBuilder.rectangle(
-    [width / 2, 0],
-    { width: width / 2, height },
-    { left: invertedLineOptions }
-  );
+  const partDimension = { width: width / 2, height };
+  const pathBuilderLeft = SvgPathBuilder.rectangle([0, 0], partDimension, { right: lineOptions });
+  const pathBuilderRight = SvgPathBuilder.rectangle([width / 2, 0], partDimension, { left: invertedLineOptions });
   return (
     <>
       <PathFromBuilder pathBuilder={pathBuilderLeft} fill={fill[0]} stroke="#333" />

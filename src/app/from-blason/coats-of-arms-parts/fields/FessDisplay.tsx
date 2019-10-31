@@ -11,12 +11,9 @@ export const FessDisplay: React.FunctionComponent<Props> = ({ dimension, fill, l
   const lineOptions = computeLineOptions(line, dimension);
   const invertedLineOptions = line === 'dancetty' ? lineOptions : invertLineOptionNullable(lineOptions);
 
-  const pathBuilderTop = SvgPathBuilder.rectangle([0, 0], { width, height: height / 2 }, { bottom: lineOptions });
-  const pathBuilderBottom = SvgPathBuilder.rectangle(
-    [0, height / 2],
-    { width, height: height / 2 },
-    { top: invertedLineOptions }
-  );
+  const partDimension = { width, height: height / 2 };
+  const pathBuilderTop = SvgPathBuilder.rectangle([0, 0], partDimension, { bottom: lineOptions });
+  const pathBuilderBottom = SvgPathBuilder.rectangle([0, height / 2], partDimension, { top: invertedLineOptions });
 
   return (
     <>

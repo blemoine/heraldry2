@@ -19,9 +19,7 @@ export const FessTiercedDisplay: React.FunctionComponent<Props> = ({ dimension, 
     top: invertedLineOptions,
   });
 
-  const bottom = SvgPathBuilder.rectangle([0, (2 * height) / 3], tierDimension, {
-    top: invertedLineOptions,
-  });
+  const bottom = SvgPathBuilder.rectangle([0, (2 * height) / 3], tierDimension, { top: invertedLineOptions });
 
   return (
     <>
