@@ -1,7 +1,7 @@
 import { Field, fieldKinds, PartyField, PlainField, TiercedField } from '../../model/field';
 import { TinctureSelect } from './TinctureSelect';
 import * as React from 'react';
-import { argent, gules, isMetal, Tincture, tinctures } from '../../model/tincture';
+import { Tincture, tinctures } from '../../model/tincture';
 import { PartyForm } from './PartyForm';
 import { SelectScalar } from '../../common/SelectScalar';
 import { cannotHappen } from '../../../utils/cannot-happen';
@@ -11,46 +11,7 @@ import { TiercedForm } from './TiercedForm';
 import { stringifyFieldKind } from '../../model/stringify/stringify.helper';
 import { TincturesConfiguration } from './TincturesConfiguration';
 import { LineSelect } from './LineSelect';
-
-function extractColors(field: Field): [Tincture, Tincture] {
-  if (field.kind === 'plain') {
-    return [field.tincture, isMetal(field.tincture) ? gules : argent];
-  } else if (field.kind === 'party') {
-    if (field.per.name === 'pall') {
-      return [field.per.tinctures[0], field.per.tinctures[1]];
-    } else {
-      return field.per.tinctures;
-    }
-  } else if (field.kind === 'tierced') {
-    return [field.per.tinctures[0], field.per.tinctures[1]];
-  } else if (
-    field.kind === 'barry' ||
-    field.kind === 'paly' ||
-    field.kind === 'bendySinister' ||
-    field.kind === 'bendy' ||
-    field.kind === 'chequy' ||
-    field.kind === 'lozengy' ||
-    field.kind === 'paly-pily' ||
-    field.kind === 'barry-pily' ||
-    field.kind === 'bendy-pily' ||
-    field.kind === 'bendy-pily-sinister' ||
-    field.kind === 'chevronny' ||
-    field.kind === 'chevronny-reversed' ||
-    field.kind === 'gironny' ||
-    field.kind === 'quarterly-of-nine' ||
-    field.kind === 'lozengy-bendwise' ||
-    field.kind === 'embrassee-a-dexter' ||
-    field.kind === 'embrassee-a-sinister' ||
-    field.kind === 'lozenge-throughout' ||
-    field.kind === 'lozenge-throughout-arched' ||
-    field.kind === 'barry-and-per-pale' ||
-    field.kind === 'barry-and-per-chevron-throughout'
-  ) {
-    return field.tinctures;
-  } else {
-    return cannotHappen(field);
-  }
-}
+import { allDeclaredTincturesOfField } from '../blason.helpers';
 
 const numberOfBars = [6, 8, 10] as const;
 const gironnyNumberAvailable = [8, 12] as const;
@@ -62,19 +23,23 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
 
   function changeFieldKind(newKind: Field['kind']) {
     if (field.kind !== newKind) {
-      const newColors = extractColors(field);
+      const exitingTinctures = allDeclaredTincturesOfField(field);
+      const firstTincture = exitingTinctures[0] || tinctures[0];
+      const secondTincture = exitingTinctures[1] || tinctures.find((c) => c.name !== firstTincture.name);
+      const thirdTincture =
+        exitingTinctures[2] || tinctures.find((c) => c.name !== firstTincture.name && c.name !== secondTincture.name);
+
       if (newKind === 'party') {
-        fieldChange({ kind: newKind, per: { name: 'fess', tinctures: newColors, line: 'straight' } });
+        fieldChange({
+          kind: newKind,
+          per: { name: 'fess', tinctures: [firstTincture, secondTincture], line: 'straight' },
+        });
       } else if (newKind === 'tierced') {
-        const missingColor = tinctures.find((c) => c.name !== newColors[0].name && c.name !== newColors[1].name);
-        if (!missingColor) {
-          throw new Error(`There should be a color different than ${newColors}`);
-        }
         fieldChange({
           kind: newKind,
           per: {
             name: 'fess',
-            tinctures: [newColors[0], newColors[1], missingColor],
+            tinctures: [firstTincture, secondTincture, thirdTincture],
             line: 'straight',
           },
         });
@@ -97,13 +62,13 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
         newKind === 'barry-and-per-pale' ||
         newKind === 'barry-and-per-chevron-throughout'
       ) {
-        fieldChange({ kind: newKind, tinctures: newColors });
+        fieldChange({ kind: newKind, tinctures: [firstTincture, secondTincture] });
       } else if (newKind === 'plain') {
-        fieldChange({ kind: newKind, tincture: newColors[0] });
+        fieldChange({ kind: newKind, tincture: firstTincture });
       } else if (newKind === 'barry' || newKind === 'bendy' || newKind === 'bendySinister') {
-        fieldChange({ kind: newKind, number: 10, tinctures: newColors, line: 'straight' });
+        fieldChange({ kind: newKind, number: 10, tinctures: [firstTincture, secondTincture], line: 'straight' });
       } else if (newKind === 'gironny') {
-        fieldChange({ kind: newKind, number: 8, tinctures: newColors });
+        fieldChange({ kind: newKind, number: 8, tinctures: [firstTincture, secondTincture] });
       } else {
         cannotHappen(newKind);
       }

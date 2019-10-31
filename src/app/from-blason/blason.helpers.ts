@@ -37,7 +37,7 @@ export function allDeclaredTincturesOfOrdinary(ordinary: Ordinary): Array<Tinctu
     return [ordinary.tincture];
   }
 }
-function allDeclaredTincturesOfField(field: Field): Array<Tincture> {
+export function allDeclaredTincturesOfField(field: Field): Array<Tincture> {
   if (field.kind === 'plain') {
     return [field.tincture];
   } else if (field.kind === 'party' || field.kind === 'tierced') {
