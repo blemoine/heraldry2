@@ -130,8 +130,6 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
         return cannotHappen(partyName);
       }
     } else if (field.kind === 'bendy') {
-      const fill: [string, string] = fillFromTincturePair(field.tinctures);
-
       let updatedDimension: Dimension;
       if (shape === 'default') {
         updatedDimension = dimension;
@@ -143,10 +141,15 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
         return cannotHappen(shape);
       }
 
-      return <BendyDisplay fill={fill} dimension={updatedDimension} number={field.number} />;
+      return (
+        <BendyDisplay
+          field={field}
+          fillFromTincture={fillFromTincture}
+          dimension={updatedDimension}
+          number={field.number}
+        />
+      );
     } else if (field.kind === 'bendySinister') {
-      const fill: [string, string] = fillFromTincturePair(field.tinctures);
-
       let updatedDimension: Dimension;
       if (shape === 'default') {
         updatedDimension = dimension;
@@ -158,7 +161,14 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
         return cannotHappen(shape);
       }
 
-      return <BendySinisterDisplay fill={fill} dimension={updatedDimension} number={field.number} />;
+      return (
+        <BendySinisterDisplay
+          field={field}
+          fillFromTincture={fillFromTincture}
+          dimension={updatedDimension}
+          number={field.number}
+        />
+      );
     } else if (field.kind === 'paly') {
       const fill: [string, string] = fillFromTincturePair(field.tinctures);
       return <PalyDisplay fill={fill} dimension={dimension} />;

@@ -34,4 +34,14 @@ describe('CoatsOfArms', () => {
   //snapshotTest('Bendy sinister embattled or and gules');
   //snapshotTest('Bendy sinister of four, vert, argent, purpure and argent');
   snapshotTest('Bendy sinister sable and gules');
+
+  snapshotTest('Bendy sinister vert and erminois');
+  //snapshotTest('Barry wavy argent and sable');
+  //snapshotTest('Checky sable and ermine');
+  //snapshotTest('Chevronelly azure and argent');
+  //snapshotTest('Chevronelly erminois and pean');
+  //snapshotTest('Chevronelly inverted gules and or');
+  //snapshotTest('Chevronelly inverted vert and or');
+  //snapshotTest('Gules scaly or');
+  //snapshotTest('Gules mailed or');
 });
