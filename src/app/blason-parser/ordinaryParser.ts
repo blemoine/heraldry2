@@ -1,5 +1,15 @@
 import * as P from 'parsimmon';
-import { ChapePloye, Chausse, Chevron, Chevronel, ordinaries, Ordinary, OrdinaryCross, Pale } from '../model/ordinary';
+import {
+  ChapePloye,
+  Chausse,
+  ChaussePloye,
+  Chevron,
+  Chevronel,
+  ordinaries,
+  Ordinary,
+  OrdinaryCross,
+  Pale,
+} from '../model/ordinary';
 import { aParser, buildAltParser, constStr, lineParser, numberParser } from './parser.helper';
 import { metalOrColourParserFromName, tinctureParserFromName } from './tinctureParser';
 import { stringifyOrdinaryName } from '../model/stringify/stringify.helper';
@@ -93,6 +103,12 @@ export function ordinaryParser(): P.Parser<Ordinary> {
     tinctureParserFromName,
     fimbriatedParser
   ).map(([name, line, tincture, fimbriated]) => ({ name, line, tincture, fimbriated }));
+  const chaussePloyeParser: P.Parser<ChaussePloye> = P.seq(
+    constStr('chausse-ploye', 'chaussé ployé').skip(P.whitespace),
+    lineOrStraightParser,
+    tinctureParserFromName,
+    fimbriatedParser
+  ).map(([name, line, tincture, fimbriated]) => ({ name, line, tincture, fimbriated }));
 
   const ordinaryWithLineParser: P.Parser<
     Exclude<Ordinary, Pale | Chevron | OrdinaryCross | ChapePloye | Chausse>
@@ -105,5 +121,5 @@ export function ordinaryParser(): P.Parser<Ordinary> {
     fimbriatedParser
   ).map(([name, line, tincture, fimbriated]) => ({ name, line, tincture, fimbriated }));
 
-  return P.alt(paleParser, chevronParser, chapePloyerParser, chausseParser, ordinaryWithLineParser);
+  return P.alt(paleParser, chevronParser, chapePloyerParser, chaussePloyeParser, chausseParser, ordinaryWithLineParser);
 }

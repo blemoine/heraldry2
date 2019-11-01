@@ -82,6 +82,8 @@ export function stringifyOrdinaryName(name: Ordinary['name']): string {
     return 'pall inverted';
   } else if (name === 'chausse') {
     return 'chaussé';
+  } else if (name === 'chausse-ploye') {
+    return 'chaussé ployé';
   } else {
     return name;
   }
