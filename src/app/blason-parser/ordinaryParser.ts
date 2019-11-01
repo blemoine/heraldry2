@@ -97,14 +97,8 @@ export function ordinaryParser(): P.Parser<Ordinary> {
     })
   );
 
-  const chausseParser: P.Parser<Chausse> = P.seq(
-    constStr('chausse', 'chaussé').skip(P.whitespace),
-    lineOrStraightParser,
-    tinctureParserFromName,
-    fimbriatedParser
-  ).map(([name, line, tincture, fimbriated]) => ({ name, line, tincture, fimbriated }));
-  const chaussePloyeParser: P.Parser<ChaussePloye> = P.seq(
-    constStr('chausse-ploye', 'chaussé ployé').skip(P.whitespace),
+  const chausseParser: P.Parser<Chausse | ChaussePloye> = P.seq(
+    P.alt(constStr('chausse-ploye', 'chaussé ployé'), constStr('chausse', 'chaussé')).skip(P.whitespace),
     lineOrStraightParser,
     tinctureParserFromName,
     fimbriatedParser
@@ -121,5 +115,5 @@ export function ordinaryParser(): P.Parser<Ordinary> {
     fimbriatedParser
   ).map(([name, line, tincture, fimbriated]) => ({ name, line, tincture, fimbriated }));
 
-  return P.alt(paleParser, chevronParser, chapePloyerParser, chaussePloyeParser, chausseParser, ordinaryWithLineParser);
+  return P.alt(paleParser, chevronParser, chapePloyerParser, chausseParser, ordinaryWithLineParser);
 }

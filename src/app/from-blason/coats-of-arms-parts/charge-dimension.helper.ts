@@ -228,9 +228,9 @@ export function getChargeDimension(
         if (ordinaryLine === 'dancetty') {
           if (chargeCount > 1) {
             return {
-              verticalScale: 0.57,
+              verticalScale: 0.55,
               horizontalScale: 0.7,
-              verticalOffset: 0.14,
+              verticalOffset: 0.17,
               horizontalOffset: shape === 'leftCut' ? 0.23 : 0.06,
             };
           } else {
