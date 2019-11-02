@@ -1,5 +1,5 @@
 import { Blason, SimpleBlason } from '../model/blason';
-import { Furs, Tincture } from '../model/tincture';
+import { areTinctureEquals, Furs, Tincture } from '../model/tincture';
 import { cannotHappen } from '../../utils/cannot-happen';
 import { Charge } from '../model/charge';
 import { Field } from '../model/field';
@@ -77,7 +77,7 @@ function allDeclaredTincturesOfSimpleBlason(blason: SimpleBlason): Array<Tinctur
     ...(blason.charge ? allDeclaredTincturesOfCharge(blason.charge) : []),
   ];
 }
-function allDeclaredTinctures(blason: Blason): Array<Tincture> {
+export function allDeclaredTinctures(blason: Blason): Array<Tincture> {
   if (blason.kind === 'simple') {
     return allDeclaredTincturesOfSimpleBlason(blason);
   } else if (blason.kind === 'quarterly') {
@@ -87,6 +87,6 @@ function allDeclaredTinctures(blason: Blason): Array<Tincture> {
   }
 }
 
-export function isThereFur(blason: Blason, fur: Furs['name']): boolean {
-  return allDeclaredTinctures(blason).some((t) => t.name === fur);
+export function isThereFur(blason: Blason, fur: Furs): boolean {
+  return allDeclaredTinctures(blason).some((t) => areTinctureEquals(t, fur));
 }

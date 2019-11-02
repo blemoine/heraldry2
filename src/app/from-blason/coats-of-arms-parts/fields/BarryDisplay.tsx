@@ -8,6 +8,7 @@ import { buildFurTransformProperty, FurTransformProperty, getFill } from '../Fur
 import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { PathFromBuilder } from '../../../common/PathFromBuilder';
 import { computeLineOptions, invertLineOptionNullable, oneSideLineOption } from '../blasonDisplay.helper';
+import { allDeclaredTincturesOfField } from '../../blason.helpers';
 
 type Props = {
   field: BarryField;
@@ -21,11 +22,15 @@ const postfixId = 'barry';
 export const BarryDisplay: React.FunctionComponent<Props> = ({ field, fillFromTincture, dimension, number }) => {
   const { width, height } = dimension;
   const scaleRatio = 0.75 / (width / height);
-  const transformProperties: FurTransformProperty = buildFurTransformProperty(fillFromTincture, {
-    ermine: { kind: 'scale', value: (4.1 * scaleRatio) / number },
-    vair: { kind: 'scale', value: (3.33 * scaleRatio) / number },
-    potent: { kind: 'scale', value: (3.67 * scaleRatio) / number },
-  });
+  const transformProperties: FurTransformProperty = buildFurTransformProperty(
+    fillFromTincture,
+    allDeclaredTincturesOfField(field),
+    {
+      ermine: { kind: 'scale', value: (4.1 * scaleRatio) / number },
+      vair: { kind: 'scale', value: (3.33 * scaleRatio) / number },
+      potent: { kind: 'scale', value: (3.67 * scaleRatio) / number },
+    }
+  );
 
   const fills = field.tinctures.map((tincture) => getFill(fillFromTincture, tincture, postfixId));
 

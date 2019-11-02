@@ -1,7 +1,7 @@
 import { Field, fieldKinds, PartyField, PlainField, TiercedField } from '../../model/field';
 import { TinctureSelect } from './TinctureSelect';
 import * as React from 'react';
-import { Tincture, tinctures } from '../../model/tincture';
+import { areTinctureEquals, Tincture, tinctures } from '../../model/tincture';
 import { PartyForm } from './PartyForm';
 import { SelectScalar } from '../../common/SelectScalar';
 import { cannotHappen } from '../../../utils/cannot-happen';
@@ -25,9 +25,10 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
     if (field.kind !== newKind) {
       const exitingTinctures = allDeclaredTincturesOfField(field);
       const firstTincture = exitingTinctures[0] || tinctures[0];
-      const secondTincture = exitingTinctures[1] || tinctures.find((c) => c.name !== firstTincture.name);
+      const secondTincture = exitingTinctures[1] || tinctures.find((c) => !areTinctureEquals(c, firstTincture));
       const thirdTincture =
-        exitingTinctures[2] || tinctures.find((c) => c.name !== firstTincture.name && c.name !== secondTincture.name);
+        exitingTinctures[2] ||
+        tinctures.find((c) => !areTinctureEquals(c, firstTincture) && !areTinctureEquals(c, secondTincture));
 
       if (newKind === 'party') {
         fieldChange({

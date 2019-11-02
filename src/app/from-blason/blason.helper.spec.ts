@@ -3,10 +3,10 @@ import { argent, azure, ermine, gules, vair } from '../model/tincture';
 
 describe('isThereFur', () => {
   it('should return true if the field is vair and the fur search is vair', () => {
-    expect(isThereFur({ kind: 'simple', field: { kind: 'plain', tincture: vair } }, 'vair')).toBe(true);
+    expect(isThereFur({ kind: 'simple', field: { kind: 'plain', tincture: vair } }, vair)).toBe(true);
   });
   it('should return false if the field is ermine and the fur search is vair', () => {
-    expect(isThereFur({ kind: 'simple', field: { kind: 'plain', tincture: ermine } }, 'vair')).toBe(false);
+    expect(isThereFur({ kind: 'simple', field: { kind: 'plain', tincture: ermine } }, vair)).toBe(false);
   });
   it('should return true if the field is ermine, and the ordinary is vair and the fur search is vair', () => {
     expect(
@@ -16,7 +16,7 @@ describe('isThereFur', () => {
           field: { kind: 'plain', tincture: ermine },
           ordinary: { name: 'bend', tincture: vair, line: 'straight', fimbriated: null },
         },
-        'vair'
+        vair
       )
     ).toBe(true);
   });
@@ -28,7 +28,7 @@ describe('isThereFur', () => {
           field: { kind: 'plain', tincture: ermine },
           ordinary: { name: 'bend', tincture: ermine, line: 'straight', fimbriated: null },
         },
-        'vair'
+        vair
       )
     ).toBe(false);
   });
@@ -40,7 +40,7 @@ describe('isThereFur', () => {
           field: { kind: 'plain', tincture: azure },
           ordinary: { name: 'bend', tincture: argent, line: 'straight', fimbriated: null },
         },
-        'vair'
+        vair
       )
     ).toBe(false);
     expect(
@@ -50,7 +50,7 @@ describe('isThereFur', () => {
           field: { kind: 'plain', tincture: azure },
           ordinary: { name: 'bend', tincture: argent, line: 'straight', fimbriated: null },
         },
-        'ermine'
+        ermine
       )
     ).toBe(false);
   });
@@ -72,7 +72,7 @@ describe('isThereFur', () => {
             countAndDisposition: { count: 1, disposition: 'default' },
           },
         },
-        'ermine'
+        ermine
       )
     ).toBe(true);
   });
@@ -94,13 +94,13 @@ describe('isThereFur', () => {
             countAndDisposition: { count: 1, disposition: 'default' },
           },
         },
-        'vair'
+        vair
       )
     ).toBe(true);
   });
 
   it('should return true if the field  is bendy vair', () => {
-    expect(isThereFur({ kind: 'simple', field: { kind: 'bendy', tinctures: [gules, vair], number: 6 } }, 'vair')).toBe(
+    expect(isThereFur({ kind: 'simple', field: { kind: 'bendy', tinctures: [gules, vair], number: 6 } }, vair)).toBe(
       true
     );
   });

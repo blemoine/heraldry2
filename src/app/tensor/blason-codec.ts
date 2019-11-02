@@ -46,11 +46,22 @@ function decodeMetalAndColours(i: number): Result<MetalsAndColours> {
   return metalAndColours[i - 1] || raise(`Cannot decode metalAndColours ${i}`);
 }
 
-function encodeTincture(tincture: Tincture): number {
-  return tinctures.findIndex((t) => t.name === tincture.name) + 1;
+export function encodeTincture(tincture: Tincture): number {
+  if (tincture.name === 'ermined') {
+    const shiftedSpot = encodeMetalAndColours(tincture.spot) << 5;
+    return encodeMetalAndColours(tincture.field) + shiftedSpot;
+  } else {
+    return tinctures.findIndex((t) => t.name === tincture.name) + 1;
+  }
 }
-function decodeTincture(i: number): Result<Tincture> {
-  return tinctures[i - 1] || raise(`Cannot decode tincture ${i}`);
+export function decodeTincture(i: number): Result<Tincture> {
+  if (i >= 2 ** 5) {
+    const field = decodeMetalAndColours(i & (2 ** 5 - 1));
+    const spot = decodeMetalAndColours(i >> 5);
+    return map(zip(field, spot), ([field, spot]) => ({ name: 'ermined', field, spot }));
+  } else {
+    return tinctures[i - 1] || raise(`Cannot decode tincture ${i}`);
+  }
 }
 
 function encodeLine(line: Line): number {

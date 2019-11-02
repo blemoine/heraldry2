@@ -1,6 +1,7 @@
 import { fireEvent } from '@testing-library/dom';
 import { Tincture } from '../../app/model/tincture';
 import { act } from 'react-dom/test-utils';
+import { stringifyTincture } from '../../app/model/stringify/stringify.helper';
 
 export function selectElement(selector: string): Element {
   const el = document.querySelector(selector);
@@ -16,7 +17,7 @@ export function selectTincture(topSelector: string, tincture: Tincture): Promise
     fireEvent.click(selectElement(topSelector + ' .tincture-select-popover-opener'));
   });
   act(() => {
-    fireEvent.click(selectElement(`.popover div[title=${tincture.name}]`));
+    fireEvent.click(selectElement(`.popover div[title=${stringifyTincture(tincture)}]`));
   });
 
   // Needs to be longer than the transition duration of the popover fade in/out

@@ -920,4 +920,12 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
 
     expect(parseBlason('Or, a bend invected gules fimbriated purpure')).toEqual(expected);
   });
+  it('should parse ermined', () => {
+    const expected: SimpleBlason = {
+      kind: 'simple',
+      field: { kind: 'plain', tincture: { name: 'ermined', field: or, spot: gules } },
+    };
+
+    expect(parseBlason('Or ermined gules')).toEqual(expected);
+  });
 });

@@ -6,6 +6,7 @@ import { Dimension } from '../../../model/dimension';
 import { FillFromTincture } from '../../fillFromTincture.helper';
 import { buildFurTransformProperty, FurTransformProperty } from '../FurPattern.model';
 import { CommonOrdinaryDisplay } from './CommonOrdinaryDisplay';
+import { allDeclaredTincturesOfOrdinary } from '../../blason.helpers';
 
 const postfixId = 'chape-ploye';
 
@@ -59,11 +60,15 @@ export const ChapePloyeOrdinaryDisplay = ({ dimension, ordinary, fillFromTinctur
         ];
 
   const scaleRatio = height / 480;
-  const transformProperties: FurTransformProperty = buildFurTransformProperty(fillFromTincture, {
-    ermine: { kind: 'scale', value: 0.275 * scaleRatio },
-    vair: { kind: 'scale', value: 0.33 * scaleRatio },
-    potent: { kind: 'scale', value: 0.4 * scaleRatio },
-  });
+  const transformProperties: FurTransformProperty = buildFurTransformProperty(
+    fillFromTincture,
+    allDeclaredTincturesOfOrdinary(ordinary),
+    {
+      ermine: { kind: 'scale', value: 0.275 * scaleRatio },
+      vair: { kind: 'scale', value: 0.33 * scaleRatio },
+      potent: { kind: 'scale', value: 0.4 * scaleRatio },
+    }
+  );
 
   return (
     <CommonOrdinaryDisplay

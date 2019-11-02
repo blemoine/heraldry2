@@ -7,6 +7,7 @@ import { computeLineOptions, invertLineOptionNullable, oneSideLineOption } from 
 import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { toDegree } from '../../../svg-path-builder/geometrical.helper';
 import { buildFurTransformProperty } from '../FurPattern.model';
+import { allDeclaredTincturesOfOrdinary } from '../../blason.helpers';
 
 const postfixId = 'bend';
 const ermineScale = 0.66;
@@ -24,7 +25,7 @@ export const BendOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onC
   const { width, height } = dimension;
   const scaleRatio = height / 480;
 
-  const transformProperties = buildFurTransformProperty(fillFromTincture, {
+  const transformProperties = buildFurTransformProperty(fillFromTincture, allDeclaredTincturesOfOrdinary(ordinary), {
     ermine: [{ kind: 'scale', value: [ermineScale * scaleRatio, ermineScale * 0.75 * scaleRatio] }],
     vair: [{ kind: 'scale', value: [vairScale * scaleRatio, vairScale * 0.6785 * scaleRatio] }],
     potent: [{ kind: 'scale', value: [potentScale * scaleRatio, potentScale * 1.35 * scaleRatio] }],

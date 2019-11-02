@@ -6,6 +6,7 @@ import { Dimension } from '../../../model/dimension';
 import { FillFromTincture } from '../../fillFromTincture.helper';
 import { buildFurTransformProperty, FurTransformProperty } from '../FurPattern.model';
 import { CommonOrdinaryDisplay } from './CommonOrdinaryDisplay';
+import { allDeclaredTincturesOfOrdinary } from '../../blason.helpers';
 
 const postfixId = 'chief';
 
@@ -36,11 +37,15 @@ export const ChiefOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, on
   );
 
   const scaleRatio = height / 480;
-  const transformProperties: FurTransformProperty = buildFurTransformProperty(fillFromTincture, {
-    ermine: { kind: 'scale', value: 0.55 * scaleRatio },
-    vair: { kind: 'scale', value: 0.66 * scaleRatio },
-    potent: { kind: 'scale', value: 0.8 * scaleRatio },
-  });
+  const transformProperties: FurTransformProperty = buildFurTransformProperty(
+    fillFromTincture,
+    allDeclaredTincturesOfOrdinary(ordinary),
+    {
+      ermine: { kind: 'scale', value: 0.55 * scaleRatio },
+      vair: { kind: 'scale', value: 0.66 * scaleRatio },
+      potent: { kind: 'scale', value: 0.8 * scaleRatio },
+    }
+  );
   const pathBuilderAndTincture = [{ pathBuilder, tincture: ordinary.tincture }];
 
   return (

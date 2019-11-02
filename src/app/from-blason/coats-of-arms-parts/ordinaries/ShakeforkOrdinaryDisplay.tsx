@@ -6,6 +6,7 @@ import { CommonOrdinaryDisplay } from './CommonOrdinaryDisplay';
 import { computeLineOptions, oneSideLineOption } from '../blasonDisplay.helper';
 import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { buildFurTransformProperty } from '../FurPattern.model';
+import { allDeclaredTincturesOfOrdinary } from '../../blason.helpers';
 
 const postfixId = 'pall';
 const ermineScale = 0.3;
@@ -22,7 +23,7 @@ export const ShakeforkOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture
   const { width, height } = dimension;
   const scaleRatio = height / 480;
 
-  const transformProperties = buildFurTransformProperty(fillFromTincture, {
+  const transformProperties = buildFurTransformProperty(fillFromTincture, allDeclaredTincturesOfOrdinary(ordinary), {
     ermine: [{ kind: 'scale', value: [ermineScale * scaleRatio, ermineScale * 0.75 * scaleRatio] }],
     vair: [{ kind: 'scale', value: [vairScale * scaleRatio, vairScale * 0.6785 * scaleRatio] }],
     potent: [{ kind: 'scale', value: [potentScale * scaleRatio, potentScale * 1.35 * scaleRatio] }],

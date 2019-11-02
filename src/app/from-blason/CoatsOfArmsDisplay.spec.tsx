@@ -38,7 +38,7 @@ describe('CoatsOfArms', () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it('should render a fur blason', () => {
+  it('should render a fur blason: Ermine', () => {
     const blason: Blason = { kind: 'simple', field: { kind: 'plain', tincture: ermine } };
     const component = renderer.create(
       <CoatsOfArmsDisplay
@@ -51,7 +51,7 @@ describe('CoatsOfArms', () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it('should render a party blason', () => {
+  it('should render a party blason: Per bend vair and azure', () => {
     const blason: Blason = {
       kind: 'simple',
       field: { kind: 'party', per: { name: 'bend', tinctures: [vair, azure], line: 'straight' } },
@@ -67,7 +67,7 @@ describe('CoatsOfArms', () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  it('should render a party blason with some ordinary', () => {
+  it('should render a party blason with some ordinary: Per bend vair and azure, a chief purpure', () => {
     const blason: Blason = {
       kind: 'simple',
       field: { kind: 'party', per: { name: 'bend', tinctures: [vair, azure], line: 'straight' } },
@@ -162,4 +162,5 @@ describe('CoatsOfArms', () => {
   snapshotTest('Per chevron ermine and gules, a shakefork or');
   snapshotTest('Vair, a gyron or');
   snapshotTest('Barry and per pale or and gules');
+  snapshotTest('Or, a cross gules ermined argent');
 });

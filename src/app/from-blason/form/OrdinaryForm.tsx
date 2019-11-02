@@ -1,7 +1,7 @@
 import { OrdinaryNameSelect } from './OrdinaryNameSelect';
 import * as React from 'react';
 import { Ordinary } from '../../model/ordinary';
-import { argent, MetalsAndColours, tinctures } from '../../model/tincture';
+import { areTinctureEquals, argent, MetalsAndColours, tinctures } from '../../model/tincture';
 import { OrdinaryDispatcherForm } from './ordinaries/OrdinaryDispatcherForm';
 import { TinctureConfiguration } from '../../model/tincture-configuration';
 import { Line } from '../../model/line';
@@ -21,7 +21,7 @@ export function OrdinaryForm({ tinctureConfiguration, ordinary, ordinaryChange }
       if (ordinaryName === 'pale' || ordinaryName === 'chevron' || ordinaryName === 'chevronel') {
         ordinaryChange({ name: ordinaryName, tincture, count: 1, line, fimbriated });
       } else if (ordinaryName === 'chape-ploye') {
-        const missingColor = tinctures.find((t) => t.name !== tincture.name);
+        const missingColor = tinctures.find((t) => !areTinctureEquals(t, tincture));
         if (!missingColor) {
           throw new Error(`There should be a tincture different from ${tincture.name}`);
         }

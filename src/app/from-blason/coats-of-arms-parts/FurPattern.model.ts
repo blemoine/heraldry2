@@ -1,6 +1,6 @@
 import { cannotHappen } from '../../../utils/cannot-happen';
 import { FillFromTincture } from '../fillFromTincture.helper';
-import { Furs, isErmine, isFur, isPotent, isVair, Tincture, tinctures } from '../../model/tincture';
+import { Furs, isErmine, isFur, isPotent, isVair, Tincture } from '../../model/tincture';
 
 export type TransformProperty =
   | { kind: 'scale'; value: number | [number, number] }
@@ -21,7 +21,7 @@ export function toTransform(arr: Array<TransformProperty>): string {
 }
 
 export type FurTransformProperty = {
-  [fur in Furs['name']]: { property: Array<TransformProperty>; fillId: string };
+  [fur: string]: { property: Array<TransformProperty>; fillId: string };
 };
 
 export function unsafeGetFillIdOfFur(fillFromTincture: FillFromTincture, fur: Furs): string {
@@ -33,8 +33,13 @@ export function unsafeGetFillIdOfFur(fillFromTincture: FillFromTincture, fur: Fu
   }
 }
 
+export function getFurName(fur: Furs): string {
+  return fur.name + (isErmine(fur) ? '-' + fur.field.name + '-' + fur.spot.name : '');
+}
+
 export function buildFurTransformProperty(
   fillFromTincture: FillFromTincture,
+  tinctures: Array<Tincture>,
   properties: {
     ermine: TransformProperty | ReadonlyArray<TransformProperty>;
     vair: TransformProperty | ReadonlyArray<TransformProperty>;
@@ -49,9 +54,10 @@ export function buildFurTransformProperty(
       : isPotent(fur)
       ? properties.potent
       : cannotHappen(fur);
+    const name = getFurName(fur);
     return {
       ...acc,
-      [fur.name]: {
+      [name]: {
         property: Array.isArray(property) ? property : [property],
         fillId: unsafeGetFillIdOfFur(fillFromTincture, fur),
       },

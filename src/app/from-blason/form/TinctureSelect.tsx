@@ -17,6 +17,7 @@ import { PotentPatternDef } from '../coats-of-arms-parts/PotentPatternDef';
 import { cannotHappen } from '../../../utils/cannot-happen';
 import { useRef, useState } from 'react';
 import { uuid } from '../../../utils/uuid';
+import { stringifyTincture } from '../../model/stringify/stringify.helper';
 
 const TinctureRenderer = ({
   tincture,
@@ -116,7 +117,7 @@ const AbstractTinctureSelect = <T extends Tincture | null>({
           <>
             <TinctureRenderer tincture={tincture as Tincture} tinctureConfiguration={tinctureConfiguration} />
             <div className="tincture-select-label" style={{ textAlign: 'center' }}>
-              {tincture.name}
+              {stringifyTincture(tincture as Tincture)}
             </div>
           </>
         ) : (
@@ -169,11 +170,11 @@ const AbstractTinctureSelect = <T extends Tincture | null>({
                         border: '1px solid #333',
                         flexDirection: 'column',
                       }}
-                      title={tincture.name}
+                      title={stringifyTincture(tincture as Tincture)}
                       onClick={() => selectTincture(tincture)}
                     >
                       <TinctureRenderer tincture={tincture as Tincture} tinctureConfiguration={tinctureConfiguration} />
-                      <div style={{ textAlign: 'center' }}>{tincture.name}</div>
+                      <div style={{ textAlign: 'center' }}>{stringifyTincture(tincture as Tincture)}</div>
                     </div>
                   );
                 }

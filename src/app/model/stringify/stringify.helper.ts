@@ -1,4 +1,4 @@
-import { gules, or, Tincture } from '../tincture';
+import { areTinctureEquals, counterErmine, ermine, erminois, gules, isErmine, or, pean, Tincture } from '../tincture';
 import { stringifyNumber, SupportedNumber } from '../countAndDisposition';
 import { Ordinary } from '../ordinary';
 import { cannotHappen } from '../../../utils/cannot-happen';
@@ -20,8 +20,18 @@ export function stringifyLine(line: Line): string {
 }
 
 export function stringifyTinctureWithAlternative(tincture: Tincture): Array<string> {
-  if (tincture.name === 'counter-ermine') {
-    return ['counter ermine', tincture.name];
+  if (isErmine(tincture)) {
+    if (areTinctureEquals(tincture, ermine)) {
+      return ['ermine'];
+    } else if (areTinctureEquals(tincture, counterErmine)) {
+      return ['counter ermine', 'counter-ermine'];
+    } else if (areTinctureEquals(tincture, pean)) {
+      return ['pean'];
+    } else if (areTinctureEquals(tincture, erminois)) {
+      return ['erminois'];
+    } else {
+      return [`${tincture.field.name} ermined ${tincture.spot.name}`];
+    }
   } else if (tincture.name === 'counter-vair') {
     return ['counter vair', tincture.name];
   } else if (tincture.name === 'vair-en-pale') {
@@ -329,7 +339,7 @@ function stringifyCharge(charge: Charge): string {
 
     result += ' ' + stringifyTincture(charge.tincture);
 
-    if (charge.beakedAndArmed.name != charge.tincture.name) {
+    if (!areTinctureEquals(charge.beakedAndArmed, charge.tincture)) {
       result += ' beaked and armed ' + stringifyTincture(charge.beakedAndArmed);
     }
     return result;
@@ -368,7 +378,7 @@ function stringifyCharge(charge: Charge): string {
     }
 
     result += ' ' + stringifyTincture(charge.tincture);
-    if (charge.armedAndLangued.name !== gules.name) {
+    if (!areTinctureEquals(charge.armedAndLangued, gules)) {
       result += ' armed and langued ' + stringifyTincture(charge.armedAndLangued);
     }
 
@@ -382,7 +392,7 @@ function stringifyCharge(charge: Charge): string {
       }
       result += ' ' + stringifyTincture(charge.tincture);
     } else if (charge.inside === 'nothing') {
-      if (charge.tincture.name === or.name) {
+      if (areTinctureEquals(charge.tincture, or)) {
         result += ' ' + pluralize('bezant', count);
         if (charge.countAndDisposition.count !== 1 && charge.countAndDisposition.disposition !== 'default') {
           result += ' in ' + charge.countAndDisposition.disposition + ' ';

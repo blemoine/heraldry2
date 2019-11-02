@@ -8,6 +8,7 @@ import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { buildFurTransformProperty } from '../FurPattern.model';
 import { cannotHappen } from '../../../../utils/cannot-happen';
 import { range } from '../../../../utils/range';
+import { allDeclaredTincturesOfOrdinary } from '../../blason.helpers';
 
 const postfixId = 'chevron';
 const ermineScale = 0.3;
@@ -24,7 +25,7 @@ export const ChevronOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, 
   const { width, height } = dimension;
   const scaleRatio = height / 480;
 
-  const transformProperties = buildFurTransformProperty(fillFromTincture, {
+  const transformProperties = buildFurTransformProperty(fillFromTincture, allDeclaredTincturesOfOrdinary(ordinary), {
     ermine: [{ kind: 'scale', value: [ermineScale * scaleRatio, ermineScale * 0.75 * scaleRatio] }],
     vair: [{ kind: 'scale', value: [vairScale * scaleRatio, vairScale * 0.6785 * scaleRatio] }],
     potent: [{ kind: 'scale', value: [potentScale * scaleRatio, potentScale * 1.35 * scaleRatio] }],

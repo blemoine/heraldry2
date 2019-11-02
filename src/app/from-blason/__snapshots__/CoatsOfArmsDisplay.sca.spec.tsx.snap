@@ -16,10 +16,6 @@ exports[`CoatsOfArms should render 'Argent, chapé ployé per pale gules and sab
     
     
     
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -116,14 +112,12 @@ exports[`CoatsOfArms should render 'Barry and per chevron throughout pean and er
   width={200}
 >
   <defs>
-    
-    
     <symbol
-      id="erminois"
+      id="ermined-sable-or"
       viewBox="0 0 200 240"
     >
       <rect
-        fill="#FFD700"
+        fill="#000000"
         height="100%"
         width="100%"
       />
@@ -132,60 +126,60 @@ exports[`CoatsOfArms should render 'Barry and per chevron throughout pean and er
       >
         <path
           d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
-          fill="#000000"
+          fill="#FFD700"
         />
         <circle
           cy={-226}
-          fill="#000000"
+          fill="#FFD700"
           r="14"
         />
         <circle
           cx={-32}
           cy={-194}
-          fill="#000000"
+          fill="#FFD700"
           r={14}
         />
         <circle
           cx={32}
           cy={-194}
-          fill="#000000"
+          fill="#FFD700"
           r={14}
         />
       </g>
     </symbol>
     <pattern
       height={64.93506493506494}
-      id="field-pattern-5"
+      id="field-pattern-3-sable-or"
       patternUnits="userSpaceOnUse"
       viewBox="0 0 70 125"
       width={36.36363636363637}
     >
       <rect
-        fill="#FFD700"
+        fill="#000000"
         height="125px"
         width="70px"
       />
       <use
         height={60}
-        href="#erminois"
+        href="#ermined-sable-or"
         width={35}
         x="0"
         y="0"
       />
       <use
         height={60}
-        href="#erminois"
+        href="#ermined-sable-or"
         width={35}
         x="35"
         y="65"
       />
     </pattern>
     <symbol
-      id="pean"
+      id="ermined-or-sable"
       viewBox="0 0 200 240"
     >
       <rect
-        fill="#000000"
+        fill="#FFD700"
         height="100%"
         width="100%"
       />
@@ -194,49 +188,49 @@ exports[`CoatsOfArms should render 'Barry and per chevron throughout pean and er
       >
         <path
           d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
-          fill="#FFD700"
+          fill="#000000"
         />
         <circle
           cy={-226}
-          fill="#FFD700"
+          fill="#000000"
           r="14"
         />
         <circle
           cx={-32}
           cy={-194}
-          fill="#FFD700"
+          fill="#000000"
           r={14}
         />
         <circle
           cx={32}
           cy={-194}
-          fill="#FFD700"
+          fill="#000000"
           r={14}
         />
       </g>
     </symbol>
     <pattern
       height={64.93506493506494}
-      id="field-pattern-6"
+      id="field-pattern-3-or-sable"
       patternUnits="userSpaceOnUse"
       viewBox="0 0 70 125"
       width={36.36363636363637}
     >
       <rect
-        fill="#000000"
+        fill="#FFD700"
         height="125px"
         width="70px"
       />
       <use
         height={60}
-        href="#pean"
+        href="#ermined-or-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
         height={60}
-        href="#pean"
+        href="#ermined-or-sable"
         width={35}
         x="35"
         y="65"
@@ -280,7 +274,7 @@ exports[`CoatsOfArms should render 'Barry and per chevron throughout pean and er
     }
   >
     <rect
-      fill="url(#field-pattern-6)"
+      fill="url(#field-pattern-3-sable-or)"
       height={44.44444444444445}
       stroke="#333"
       width={200}
@@ -288,7 +282,7 @@ exports[`CoatsOfArms should render 'Barry and per chevron throughout pean and er
       y={0}
     />
     <rect
-      fill="url(#field-pattern-5)"
+      fill="url(#field-pattern-3-or-sable)"
       height={44.44444444444445}
       stroke="#333"
       width={200}
@@ -296,7 +290,7 @@ exports[`CoatsOfArms should render 'Barry and per chevron throughout pean and er
       y={44.44444444444445}
     />
     <rect
-      fill="url(#field-pattern-6)"
+      fill="url(#field-pattern-3-sable-or)"
       height={44.44444444444445}
       stroke="#333"
       width={200}
@@ -304,7 +298,7 @@ exports[`CoatsOfArms should render 'Barry and per chevron throughout pean and er
       y={88.8888888888889}
     />
     <rect
-      fill="url(#field-pattern-5)"
+      fill="url(#field-pattern-3-or-sable)"
       height={44.44444444444445}
       stroke="#333"
       width={200}
@@ -312,7 +306,7 @@ exports[`CoatsOfArms should render 'Barry and per chevron throughout pean and er
       y={133.33333333333334}
     />
     <rect
-      fill="url(#field-pattern-6)"
+      fill="url(#field-pattern-3-sable-or)"
       height={44.44444444444445}
       stroke="#333"
       width={200}
@@ -320,7 +314,7 @@ exports[`CoatsOfArms should render 'Barry and per chevron throughout pean and er
       y={177.7777777777778}
     />
     <rect
-      fill="url(#field-pattern-5)"
+      fill="url(#field-pattern-3-or-sable)"
       height={44.44444444444445}
       stroke="#333"
       width={200}
@@ -341,7 +335,7 @@ exports[`CoatsOfArms should render 'Barry and per chevron throughout pean and er
       clipPath="url(#chevron-throughout-clip-path)"
     >
       <rect
-        fill="url(#field-pattern-5)"
+        fill="url(#field-pattern-3-or-sable)"
         height={44.44444444444445}
         stroke="#333"
         width={200}
@@ -349,7 +343,7 @@ exports[`CoatsOfArms should render 'Barry and per chevron throughout pean and er
         y={0}
       />
       <rect
-        fill="url(#field-pattern-6)"
+        fill="url(#field-pattern-3-sable-or)"
         height={44.44444444444445}
         stroke="#333"
         width={200}
@@ -357,7 +351,7 @@ exports[`CoatsOfArms should render 'Barry and per chevron throughout pean and er
         y={44.44444444444445}
       />
       <rect
-        fill="url(#field-pattern-5)"
+        fill="url(#field-pattern-3-or-sable)"
         height={44.44444444444445}
         stroke="#333"
         width={200}
@@ -365,7 +359,7 @@ exports[`CoatsOfArms should render 'Barry and per chevron throughout pean and er
         y={88.8888888888889}
       />
       <rect
-        fill="url(#field-pattern-6)"
+        fill="url(#field-pattern-3-sable-or)"
         height={44.44444444444445}
         stroke="#333"
         width={200}
@@ -373,7 +367,7 @@ exports[`CoatsOfArms should render 'Barry and per chevron throughout pean and er
         y={133.33333333333334}
       />
       <rect
-        fill="url(#field-pattern-5)"
+        fill="url(#field-pattern-3-or-sable)"
         height={44.44444444444445}
         stroke="#333"
         width={200}
@@ -381,7 +375,7 @@ exports[`CoatsOfArms should render 'Barry and per chevron throughout pean and er
         y={177.7777777777778}
       />
       <rect
-        fill="url(#field-pattern-6)"
+        fill="url(#field-pattern-3-sable-or)"
         height={44.44444444444445}
         stroke="#333"
         width={200}
@@ -415,10 +409,6 @@ exports[`CoatsOfArms should render 'Barry and per pale sable and argent, chauss�
   width={200}
 >
   <defs>
-    
-    
-    
-    
     
     
     
@@ -612,7 +602,7 @@ exports[`CoatsOfArms should render 'Barry azure and ermine' 1`] = `
 >
   <defs>
     <symbol
-      id="ermine"
+      id="ermined-argent-sable"
       viewBox="0 0 200 240"
     >
       <rect
@@ -648,7 +638,7 @@ exports[`CoatsOfArms should render 'Barry azure and ermine' 1`] = `
     </symbol>
     <pattern
       height={64.93506493506494}
-      id="field-pattern-3"
+      id="field-pattern-3-argent-sable"
       patternUnits="userSpaceOnUse"
       viewBox="0 0 70 125"
       width={36.36363636363637}
@@ -660,22 +650,19 @@ exports[`CoatsOfArms should render 'Barry azure and ermine' 1`] = `
       />
       <use
         height={60}
-        href="#ermine"
+        href="#ermined-argent-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
         height={60}
-        href="#ermine"
+        href="#ermined-argent-sable"
         width={35}
         x="35"
         y="65"
       />
     </pattern>
-    
-    
-    
     
     
     
@@ -714,9 +701,9 @@ exports[`CoatsOfArms should render 'Barry azure and ermine' 1`] = `
     }
   >
     <pattern
-      id="field-pattern-3-barry"
+      id="field-pattern-3-argent-sable-barry"
       patternTransform="scale(0.6833333333333332)"
-      xlinkHref="#field-pattern-3"
+      xlinkHref="#field-pattern-3-argent-sable"
     />
     <path
       d="M 0 -44.44444 H200 V44.44444 H0 Z"
@@ -725,7 +712,7 @@ exports[`CoatsOfArms should render 'Barry azure and ermine' 1`] = `
     />
     <path
       d="M 0 44.44444 H200 V88.88889 H0 Z"
-      fill="url(#field-pattern-3-barry)"
+      fill="url(#field-pattern-3-argent-sable-barry)"
       stroke="#333"
     />
     <path
@@ -735,7 +722,7 @@ exports[`CoatsOfArms should render 'Barry azure and ermine' 1`] = `
     />
     <path
       d="M 0 133.33333 H200 V177.77778 H0 Z"
-      fill="url(#field-pattern-3-barry)"
+      fill="url(#field-pattern-3-argent-sable-barry)"
       stroke="#333"
     />
     <path
@@ -745,7 +732,7 @@ exports[`CoatsOfArms should render 'Barry azure and ermine' 1`] = `
     />
     <path
       d="M 0 222.22222 H200 V311.11111 H0 Z"
-      fill="url(#field-pattern-3-barry)"
+      fill="url(#field-pattern-3-argent-sable-barry)"
       stroke="#333"
     />
   </g>
@@ -774,10 +761,6 @@ exports[`CoatsOfArms should render 'Barry dancetty argent and azure' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
     
     
     
@@ -872,7 +855,7 @@ exports[`CoatsOfArms should render 'Barry ermine and vert' 1`] = `
 >
   <defs>
     <symbol
-      id="ermine"
+      id="ermined-argent-sable"
       viewBox="0 0 200 240"
     >
       <rect
@@ -908,7 +891,7 @@ exports[`CoatsOfArms should render 'Barry ermine and vert' 1`] = `
     </symbol>
     <pattern
       height={64.93506493506494}
-      id="field-pattern-3"
+      id="field-pattern-3-argent-sable"
       patternUnits="userSpaceOnUse"
       viewBox="0 0 70 125"
       width={36.36363636363637}
@@ -920,22 +903,19 @@ exports[`CoatsOfArms should render 'Barry ermine and vert' 1`] = `
       />
       <use
         height={60}
-        href="#ermine"
+        href="#ermined-argent-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
         height={60}
-        href="#ermine"
+        href="#ermined-argent-sable"
         width={35}
         x="35"
         y="65"
       />
     </pattern>
-    
-    
-    
     
     
     
@@ -974,13 +954,13 @@ exports[`CoatsOfArms should render 'Barry ermine and vert' 1`] = `
     }
   >
     <pattern
-      id="field-pattern-3-barry"
+      id="field-pattern-3-argent-sable-barry"
       patternTransform="scale(0.6833333333333332)"
-      xlinkHref="#field-pattern-3"
+      xlinkHref="#field-pattern-3-argent-sable"
     />
     <path
       d="M 0 -44.44444 H200 V44.44444 H0 Z"
-      fill="url(#field-pattern-3-barry)"
+      fill="url(#field-pattern-3-argent-sable-barry)"
       stroke="#333"
     />
     <path
@@ -990,7 +970,7 @@ exports[`CoatsOfArms should render 'Barry ermine and vert' 1`] = `
     />
     <path
       d="M 0 88.88889 H200 V133.33333 H0 Z"
-      fill="url(#field-pattern-3-barry)"
+      fill="url(#field-pattern-3-argent-sable-barry)"
       stroke="#333"
     />
     <path
@@ -1000,7 +980,7 @@ exports[`CoatsOfArms should render 'Barry ermine and vert' 1`] = `
     />
     <path
       d="M 0 177.77778 H200 V222.22222 H0 Z"
-      fill="url(#field-pattern-3-barry)"
+      fill="url(#field-pattern-3-argent-sable-barry)"
       stroke="#333"
     />
     <path
@@ -1034,10 +1014,6 @@ exports[`CoatsOfArms should render 'Barry of six or and sable' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
     
     
     
@@ -1132,7 +1108,7 @@ exports[`CoatsOfArms should render 'Barry wavy ermine and sable' 1`] = `
 >
   <defs>
     <symbol
-      id="ermine"
+      id="ermined-argent-sable"
       viewBox="0 0 200 240"
     >
       <rect
@@ -1168,7 +1144,7 @@ exports[`CoatsOfArms should render 'Barry wavy ermine and sable' 1`] = `
     </symbol>
     <pattern
       height={64.93506493506494}
-      id="field-pattern-3"
+      id="field-pattern-3-argent-sable"
       patternUnits="userSpaceOnUse"
       viewBox="0 0 70 125"
       width={36.36363636363637}
@@ -1180,22 +1156,19 @@ exports[`CoatsOfArms should render 'Barry wavy ermine and sable' 1`] = `
       />
       <use
         height={60}
-        href="#ermine"
+        href="#ermined-argent-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
         height={60}
-        href="#ermine"
+        href="#ermined-argent-sable"
         width={35}
         x="35"
         y="65"
       />
     </pattern>
-    
-    
-    
     
     
     
@@ -1234,13 +1207,13 @@ exports[`CoatsOfArms should render 'Barry wavy ermine and sable' 1`] = `
     }
   >
     <pattern
-      id="field-pattern-3-barry"
+      id="field-pattern-3-argent-sable-barry"
       patternTransform="scale(0.6833333333333332)"
-      xlinkHref="#field-pattern-3"
+      xlinkHref="#field-pattern-3-argent-sable"
     />
     <path
       d="M 0 -44.44444 Q 5.55556 -39.11111 11.11111 -44.44444 Q 16.66667 -49.77778 22.22222 -44.44444 Q 27.77778 -39.11111 33.33333 -44.44444 Q 38.88889 -49.77778 44.44444 -44.44444 Q 50 -39.11111 55.55556 -44.44444 Q 61.11111 -49.77778 66.66667 -44.44444 Q 72.22222 -39.11111 77.77778 -44.44444 Q 83.33333 -49.77778 88.88889 -44.44444 Q 94.44444 -39.11111 100 -44.44444 Q 105.55556 -49.77778 111.11111 -44.44444 Q 116.66667 -39.11111 122.22222 -44.44444 Q 127.77778 -49.77778 133.33333 -44.44444 Q 138.88889 -39.11111 144.44444 -44.44444 Q 150 -49.77778 155.55556 -44.44444 Q 161.11111 -39.11111 166.66667 -44.44444 Q 172.22222 -49.77778 177.77778 -44.44444 Q 183.33333 -39.11111 188.88889 -44.44444 Q 194.44444 -49.77778 200 -44.44444 V44.44444 Q 194.44444 39.11111 188.88889 44.44444 Q 183.33333 49.77778 177.77778 44.44444 Q 172.22222 39.11111 166.66667 44.44444 Q 161.11111 49.77778 155.55556 44.44444 Q 150 39.11111 144.44444 44.44444 Q 138.88889 49.77778 133.33333 44.44444 Q 127.77778 39.11111 122.22222 44.44444 Q 116.66667 49.77778 111.11111 44.44444 Q 105.55556 39.11111 100 44.44444 Q 94.44444 49.77778 88.88889 44.44444 Q 83.33333 39.11111 77.77778 44.44444 Q 72.22222 49.77778 66.66667 44.44444 Q 61.11111 39.11111 55.55556 44.44444 Q 50 49.77778 44.44444 44.44444 Q 38.88889 39.11111 33.33333 44.44444 Q 27.77778 49.77778 22.22222 44.44444 Q 16.66667 39.11111 11.11111 44.44444 Q 5.55556 49.77778 0 44.44444 Z"
-      fill="url(#field-pattern-3-barry)"
+      fill="url(#field-pattern-3-argent-sable-barry)"
       stroke="#333"
     />
     <path
@@ -1250,7 +1223,7 @@ exports[`CoatsOfArms should render 'Barry wavy ermine and sable' 1`] = `
     />
     <path
       d="M 0 88.88889 Q 5.55556 94.22222 11.11111 88.88889 Q 16.66667 83.55556 22.22222 88.88889 Q 27.77778 94.22222 33.33333 88.88889 Q 38.88889 83.55556 44.44444 88.88889 Q 50 94.22222 55.55556 88.88889 Q 61.11111 83.55556 66.66667 88.88889 Q 72.22222 94.22222 77.77778 88.88889 Q 83.33333 83.55556 88.88889 88.88889 Q 94.44444 94.22222 100 88.88889 Q 105.55556 83.55556 111.11111 88.88889 Q 116.66667 94.22222 122.22222 88.88889 Q 127.77778 83.55556 133.33333 88.88889 Q 138.88889 94.22222 144.44444 88.88889 Q 150 83.55556 155.55556 88.88889 Q 161.11111 94.22222 166.66667 88.88889 Q 172.22222 83.55556 177.77778 88.88889 Q 183.33333 94.22222 188.88889 88.88889 Q 194.44444 83.55556 200 88.88889 V133.33333 Q 194.44444 128 188.88889 133.33333 Q 183.33333 138.66667 177.77778 133.33333 Q 172.22222 128 166.66667 133.33333 Q 161.11111 138.66667 155.55556 133.33333 Q 150 128 144.44444 133.33333 Q 138.88889 138.66667 133.33333 133.33333 Q 127.77778 128 122.22222 133.33333 Q 116.66667 138.66667 111.11111 133.33333 Q 105.55556 128 100 133.33333 Q 94.44444 138.66667 88.88889 133.33333 Q 83.33333 128 77.77778 133.33333 Q 72.22222 138.66667 66.66667 133.33333 Q 61.11111 128 55.55556 133.33333 Q 50 138.66667 44.44444 133.33333 Q 38.88889 128 33.33333 133.33333 Q 27.77778 138.66667 22.22222 133.33333 Q 16.66667 128 11.11111 133.33333 Q 5.55556 138.66667 0 133.33333 Z"
-      fill="url(#field-pattern-3-barry)"
+      fill="url(#field-pattern-3-argent-sable-barry)"
       stroke="#333"
     />
     <path
@@ -1260,12 +1233,172 @@ exports[`CoatsOfArms should render 'Barry wavy ermine and sable' 1`] = `
     />
     <path
       d="M 0 177.77778 Q 5.55556 183.11111 11.11111 177.77778 Q 16.66667 172.44444 22.22222 177.77778 Q 27.77778 183.11111 33.33333 177.77778 Q 38.88889 172.44444 44.44444 177.77778 Q 50 183.11111 55.55556 177.77778 Q 61.11111 172.44444 66.66667 177.77778 Q 72.22222 183.11111 77.77778 177.77778 Q 83.33333 172.44444 88.88889 177.77778 Q 94.44444 183.11111 100 177.77778 Q 105.55556 172.44444 111.11111 177.77778 Q 116.66667 183.11111 122.22222 177.77778 Q 127.77778 172.44444 133.33333 177.77778 Q 138.88889 183.11111 144.44444 177.77778 Q 150 172.44444 155.55556 177.77778 Q 161.11111 183.11111 166.66667 177.77778 Q 172.22222 172.44444 177.77778 177.77778 Q 183.33333 183.11111 188.88889 177.77778 Q 194.44444 172.44444 200 177.77778 V222.22222 Q 194.44444 216.88889 188.88889 222.22222 Q 183.33333 227.55556 177.77778 222.22222 Q 172.22222 216.88889 166.66667 222.22222 Q 161.11111 227.55556 155.55556 222.22222 Q 150 216.88889 144.44444 222.22222 Q 138.88889 227.55556 133.33333 222.22222 Q 127.77778 216.88889 122.22222 222.22222 Q 116.66667 227.55556 111.11111 222.22222 Q 105.55556 216.88889 100 222.22222 Q 94.44444 227.55556 88.88889 222.22222 Q 83.33333 216.88889 77.77778 222.22222 Q 72.22222 227.55556 66.66667 222.22222 Q 61.11111 216.88889 55.55556 222.22222 Q 50 227.55556 44.44444 222.22222 Q 38.88889 216.88889 33.33333 222.22222 Q 27.77778 227.55556 22.22222 222.22222 Q 16.66667 216.88889 11.11111 222.22222 Q 5.55556 227.55556 0 222.22222 Z"
-      fill="url(#field-pattern-3-barry)"
+      fill="url(#field-pattern-3-argent-sable-barry)"
       stroke="#333"
     />
     <path
       d="M 0 222.22222 Q 5.55556 227.55556 11.11111 222.22222 Q 16.66667 216.88889 22.22222 222.22222 Q 27.77778 227.55556 33.33333 222.22222 Q 38.88889 216.88889 44.44444 222.22222 Q 50 227.55556 55.55556 222.22222 Q 61.11111 216.88889 66.66667 222.22222 Q 72.22222 227.55556 77.77778 222.22222 Q 83.33333 216.88889 88.88889 222.22222 Q 94.44444 227.55556 100 222.22222 Q 105.55556 216.88889 111.11111 222.22222 Q 116.66667 227.55556 122.22222 222.22222 Q 127.77778 216.88889 133.33333 222.22222 Q 138.88889 227.55556 144.44444 222.22222 Q 150 216.88889 155.55556 222.22222 Q 161.11111 227.55556 166.66667 222.22222 Q 172.22222 216.88889 177.77778 222.22222 Q 183.33333 227.55556 188.88889 222.22222 Q 194.44444 216.88889 200 222.22222 V311.11111 Q 194.44444 305.77778 188.88889 311.11111 Q 183.33333 316.44444 177.77778 311.11111 Q 172.22222 305.77778 166.66667 311.11111 Q 161.11111 316.44444 155.55556 311.11111 Q 150 305.77778 144.44444 311.11111 Q 138.88889 316.44444 133.33333 311.11111 Q 127.77778 305.77778 122.22222 311.11111 Q 116.66667 316.44444 111.11111 311.11111 Q 105.55556 305.77778 100 311.11111 Q 94.44444 316.44444 88.88889 311.11111 Q 83.33333 305.77778 77.77778 311.11111 Q 72.22222 316.44444 66.66667 311.11111 Q 61.11111 305.77778 55.55556 311.11111 Q 50 316.44444 44.44444 311.11111 Q 38.88889 305.77778 33.33333 311.11111 Q 27.77778 316.44444 22.22222 311.11111 Q 16.66667 305.77778 11.11111 311.11111 Q 5.55556 316.44444 0 311.11111 Z"
       fill="#000000"
+      stroke="#333"
+    />
+  </g>
+  <path
+    d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
+    fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
+    stroke="#333"
+    strokeWidth={1}
+    style={
+      Object {
+        "cursor": "pointer",
+        "pointerEvents": "none",
+      }
+    }
+  />
+</svg>
+`;
+
+exports[`CoatsOfArms should render 'Barry wavy vert and argent ermined vert' 1`] = `
+<svg
+  className="coats-of-arms-display"
+  height={266.6666666666667}
+  viewBox="0 0 200 266.6666666666667"
+  width={200}
+>
+  <defs>
+    <symbol
+      id="ermined-argent-vert"
+      viewBox="0 0 200 240"
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <g
+        transform="translate(100, 240)"
+      >
+        <path
+          d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
+          fill="#008000"
+        />
+        <circle
+          cy={-226}
+          fill="#008000"
+          r="14"
+        />
+        <circle
+          cx={-32}
+          cy={-194}
+          fill="#008000"
+          r={14}
+        />
+        <circle
+          cx={32}
+          cy={-194}
+          fill="#008000"
+          r={14}
+        />
+      </g>
+    </symbol>
+    <pattern
+      height={64.93506493506494}
+      id="field-pattern-3-argent-vert"
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 70 125"
+      width={36.36363636363637}
+    >
+      <rect
+        fill="#FFFFFF"
+        height="125px"
+        width="70px"
+      />
+      <use
+        height={60}
+        href="#ermined-argent-vert"
+        width={35}
+        x="0"
+        y="0"
+      />
+      <use
+        height={60}
+        href="#ermined-argent-vert"
+        width={35}
+        x="35"
+        y="65"
+      />
+    </pattern>
+    
+    
+    
+    
+    
+    
+    
+    
+    <clipPath
+      id="plain-field-clip-path"
+    >
+      <path
+        d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
+        fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
+        stroke="#333"
+        strokeWidth={1}
+        style={
+          Object {
+            "cursor": "pointer",
+            "pointerEvents": "none",
+          }
+        }
+      />
+    </clipPath>
+  </defs>
+  <g
+    className="blason-field"
+    clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
+  >
+    <pattern
+      id="field-pattern-3-argent-vert-barry"
+      patternTransform="scale(0.6833333333333332)"
+      xlinkHref="#field-pattern-3-argent-vert"
+    />
+    <path
+      d="M 0 -44.44444 Q 5.55556 -39.11111 11.11111 -44.44444 Q 16.66667 -49.77778 22.22222 -44.44444 Q 27.77778 -39.11111 33.33333 -44.44444 Q 38.88889 -49.77778 44.44444 -44.44444 Q 50 -39.11111 55.55556 -44.44444 Q 61.11111 -49.77778 66.66667 -44.44444 Q 72.22222 -39.11111 77.77778 -44.44444 Q 83.33333 -49.77778 88.88889 -44.44444 Q 94.44444 -39.11111 100 -44.44444 Q 105.55556 -49.77778 111.11111 -44.44444 Q 116.66667 -39.11111 122.22222 -44.44444 Q 127.77778 -49.77778 133.33333 -44.44444 Q 138.88889 -39.11111 144.44444 -44.44444 Q 150 -49.77778 155.55556 -44.44444 Q 161.11111 -39.11111 166.66667 -44.44444 Q 172.22222 -49.77778 177.77778 -44.44444 Q 183.33333 -39.11111 188.88889 -44.44444 Q 194.44444 -49.77778 200 -44.44444 V44.44444 Q 194.44444 39.11111 188.88889 44.44444 Q 183.33333 49.77778 177.77778 44.44444 Q 172.22222 39.11111 166.66667 44.44444 Q 161.11111 49.77778 155.55556 44.44444 Q 150 39.11111 144.44444 44.44444 Q 138.88889 49.77778 133.33333 44.44444 Q 127.77778 39.11111 122.22222 44.44444 Q 116.66667 49.77778 111.11111 44.44444 Q 105.55556 39.11111 100 44.44444 Q 94.44444 49.77778 88.88889 44.44444 Q 83.33333 39.11111 77.77778 44.44444 Q 72.22222 49.77778 66.66667 44.44444 Q 61.11111 39.11111 55.55556 44.44444 Q 50 49.77778 44.44444 44.44444 Q 38.88889 39.11111 33.33333 44.44444 Q 27.77778 49.77778 22.22222 44.44444 Q 16.66667 39.11111 11.11111 44.44444 Q 5.55556 49.77778 0 44.44444 Z"
+      fill="#008000"
+      stroke="#333"
+    />
+    <path
+      d="M 0 44.44444 Q 5.55556 49.77778 11.11111 44.44444 Q 16.66667 39.11111 22.22222 44.44444 Q 27.77778 49.77778 33.33333 44.44444 Q 38.88889 39.11111 44.44444 44.44444 Q 50 49.77778 55.55556 44.44444 Q 61.11111 39.11111 66.66667 44.44444 Q 72.22222 49.77778 77.77778 44.44444 Q 83.33333 39.11111 88.88889 44.44444 Q 94.44444 49.77778 100 44.44444 Q 105.55556 39.11111 111.11111 44.44444 Q 116.66667 49.77778 122.22222 44.44444 Q 127.77778 39.11111 133.33333 44.44444 Q 138.88889 49.77778 144.44444 44.44444 Q 150 39.11111 155.55556 44.44444 Q 161.11111 49.77778 166.66667 44.44444 Q 172.22222 39.11111 177.77778 44.44444 Q 183.33333 49.77778 188.88889 44.44444 Q 194.44444 39.11111 200 44.44444 V88.88889 Q 194.44444 83.55556 188.88889 88.88889 Q 183.33333 94.22222 177.77778 88.88889 Q 172.22222 83.55556 166.66667 88.88889 Q 161.11111 94.22222 155.55556 88.88889 Q 150 83.55556 144.44444 88.88889 Q 138.88889 94.22222 133.33333 88.88889 Q 127.77778 83.55556 122.22222 88.88889 Q 116.66667 94.22222 111.11111 88.88889 Q 105.55556 83.55556 100 88.88889 Q 94.44444 94.22222 88.88889 88.88889 Q 83.33333 83.55556 77.77778 88.88889 Q 72.22222 94.22222 66.66667 88.88889 Q 61.11111 83.55556 55.55556 88.88889 Q 50 94.22222 44.44444 88.88889 Q 38.88889 83.55556 33.33333 88.88889 Q 27.77778 94.22222 22.22222 88.88889 Q 16.66667 83.55556 11.11111 88.88889 Q 5.55556 94.22222 0 88.88889 Z"
+      fill="url(#field-pattern-3-argent-vert-barry)"
+      stroke="#333"
+    />
+    <path
+      d="M 0 88.88889 Q 5.55556 94.22222 11.11111 88.88889 Q 16.66667 83.55556 22.22222 88.88889 Q 27.77778 94.22222 33.33333 88.88889 Q 38.88889 83.55556 44.44444 88.88889 Q 50 94.22222 55.55556 88.88889 Q 61.11111 83.55556 66.66667 88.88889 Q 72.22222 94.22222 77.77778 88.88889 Q 83.33333 83.55556 88.88889 88.88889 Q 94.44444 94.22222 100 88.88889 Q 105.55556 83.55556 111.11111 88.88889 Q 116.66667 94.22222 122.22222 88.88889 Q 127.77778 83.55556 133.33333 88.88889 Q 138.88889 94.22222 144.44444 88.88889 Q 150 83.55556 155.55556 88.88889 Q 161.11111 94.22222 166.66667 88.88889 Q 172.22222 83.55556 177.77778 88.88889 Q 183.33333 94.22222 188.88889 88.88889 Q 194.44444 83.55556 200 88.88889 V133.33333 Q 194.44444 128 188.88889 133.33333 Q 183.33333 138.66667 177.77778 133.33333 Q 172.22222 128 166.66667 133.33333 Q 161.11111 138.66667 155.55556 133.33333 Q 150 128 144.44444 133.33333 Q 138.88889 138.66667 133.33333 133.33333 Q 127.77778 128 122.22222 133.33333 Q 116.66667 138.66667 111.11111 133.33333 Q 105.55556 128 100 133.33333 Q 94.44444 138.66667 88.88889 133.33333 Q 83.33333 128 77.77778 133.33333 Q 72.22222 138.66667 66.66667 133.33333 Q 61.11111 128 55.55556 133.33333 Q 50 138.66667 44.44444 133.33333 Q 38.88889 128 33.33333 133.33333 Q 27.77778 138.66667 22.22222 133.33333 Q 16.66667 128 11.11111 133.33333 Q 5.55556 138.66667 0 133.33333 Z"
+      fill="#008000"
+      stroke="#333"
+    />
+    <path
+      d="M 0 133.33333 Q 5.55556 138.66667 11.11111 133.33333 Q 16.66667 128 22.22222 133.33333 Q 27.77778 138.66667 33.33333 133.33333 Q 38.88889 128 44.44444 133.33333 Q 50 138.66667 55.55556 133.33333 Q 61.11111 128 66.66667 133.33333 Q 72.22222 138.66667 77.77778 133.33333 Q 83.33333 128 88.88889 133.33333 Q 94.44444 138.66667 100 133.33333 Q 105.55556 128 111.11111 133.33333 Q 116.66667 138.66667 122.22222 133.33333 Q 127.77778 128 133.33333 133.33333 Q 138.88889 138.66667 144.44444 133.33333 Q 150 128 155.55556 133.33333 Q 161.11111 138.66667 166.66667 133.33333 Q 172.22222 128 177.77778 133.33333 Q 183.33333 138.66667 188.88889 133.33333 Q 194.44444 128 200 133.33333 V177.77778 Q 194.44444 172.44444 188.88889 177.77778 Q 183.33333 183.11111 177.77778 177.77778 Q 172.22222 172.44444 166.66667 177.77778 Q 161.11111 183.11111 155.55556 177.77778 Q 150 172.44444 144.44444 177.77778 Q 138.88889 183.11111 133.33333 177.77778 Q 127.77778 172.44444 122.22222 177.77778 Q 116.66667 183.11111 111.11111 177.77778 Q 105.55556 172.44444 100 177.77778 Q 94.44444 183.11111 88.88889 177.77778 Q 83.33333 172.44444 77.77778 177.77778 Q 72.22222 183.11111 66.66667 177.77778 Q 61.11111 172.44444 55.55556 177.77778 Q 50 183.11111 44.44444 177.77778 Q 38.88889 172.44444 33.33333 177.77778 Q 27.77778 183.11111 22.22222 177.77778 Q 16.66667 172.44444 11.11111 177.77778 Q 5.55556 183.11111 0 177.77778 Z"
+      fill="url(#field-pattern-3-argent-vert-barry)"
+      stroke="#333"
+    />
+    <path
+      d="M 0 177.77778 Q 5.55556 183.11111 11.11111 177.77778 Q 16.66667 172.44444 22.22222 177.77778 Q 27.77778 183.11111 33.33333 177.77778 Q 38.88889 172.44444 44.44444 177.77778 Q 50 183.11111 55.55556 177.77778 Q 61.11111 172.44444 66.66667 177.77778 Q 72.22222 183.11111 77.77778 177.77778 Q 83.33333 172.44444 88.88889 177.77778 Q 94.44444 183.11111 100 177.77778 Q 105.55556 172.44444 111.11111 177.77778 Q 116.66667 183.11111 122.22222 177.77778 Q 127.77778 172.44444 133.33333 177.77778 Q 138.88889 183.11111 144.44444 177.77778 Q 150 172.44444 155.55556 177.77778 Q 161.11111 183.11111 166.66667 177.77778 Q 172.22222 172.44444 177.77778 177.77778 Q 183.33333 183.11111 188.88889 177.77778 Q 194.44444 172.44444 200 177.77778 V222.22222 Q 194.44444 216.88889 188.88889 222.22222 Q 183.33333 227.55556 177.77778 222.22222 Q 172.22222 216.88889 166.66667 222.22222 Q 161.11111 227.55556 155.55556 222.22222 Q 150 216.88889 144.44444 222.22222 Q 138.88889 227.55556 133.33333 222.22222 Q 127.77778 216.88889 122.22222 222.22222 Q 116.66667 227.55556 111.11111 222.22222 Q 105.55556 216.88889 100 222.22222 Q 94.44444 227.55556 88.88889 222.22222 Q 83.33333 216.88889 77.77778 222.22222 Q 72.22222 227.55556 66.66667 222.22222 Q 61.11111 216.88889 55.55556 222.22222 Q 50 227.55556 44.44444 222.22222 Q 38.88889 216.88889 33.33333 222.22222 Q 27.77778 227.55556 22.22222 222.22222 Q 16.66667 216.88889 11.11111 222.22222 Q 5.55556 227.55556 0 222.22222 Z"
+      fill="#008000"
+      stroke="#333"
+    />
+    <path
+      d="M 0 222.22222 Q 5.55556 227.55556 11.11111 222.22222 Q 16.66667 216.88889 22.22222 222.22222 Q 27.77778 227.55556 33.33333 222.22222 Q 38.88889 216.88889 44.44444 222.22222 Q 50 227.55556 55.55556 222.22222 Q 61.11111 216.88889 66.66667 222.22222 Q 72.22222 227.55556 77.77778 222.22222 Q 83.33333 216.88889 88.88889 222.22222 Q 94.44444 227.55556 100 222.22222 Q 105.55556 216.88889 111.11111 222.22222 Q 116.66667 227.55556 122.22222 222.22222 Q 127.77778 216.88889 133.33333 222.22222 Q 138.88889 227.55556 144.44444 222.22222 Q 150 216.88889 155.55556 222.22222 Q 161.11111 227.55556 166.66667 222.22222 Q 172.22222 216.88889 177.77778 222.22222 Q 183.33333 227.55556 188.88889 222.22222 Q 194.44444 216.88889 200 222.22222 V311.11111 Q 194.44444 305.77778 188.88889 311.11111 Q 183.33333 316.44444 177.77778 311.11111 Q 172.22222 305.77778 166.66667 311.11111 Q 161.11111 316.44444 155.55556 311.11111 Q 150 305.77778 144.44444 311.11111 Q 138.88889 316.44444 133.33333 311.11111 Q 127.77778 305.77778 122.22222 311.11111 Q 116.66667 316.44444 111.11111 311.11111 Q 105.55556 305.77778 100 311.11111 Q 94.44444 316.44444 88.88889 311.11111 Q 83.33333 305.77778 77.77778 311.11111 Q 72.22222 316.44444 66.66667 311.11111 Q 61.11111 305.77778 55.55556 311.11111 Q 50 316.44444 44.44444 311.11111 Q 38.88889 305.77778 33.33333 311.11111 Q 27.77778 316.44444 22.22222 311.11111 Q 16.66667 305.77778 11.11111 311.11111 Q 5.55556 316.44444 0 311.11111 Z"
+      fill="url(#field-pattern-3-argent-vert-barry)"
       stroke="#333"
     />
   </g>
@@ -1295,7 +1428,7 @@ exports[`CoatsOfArms should render 'Bendy ermine and sable' 1`] = `
 >
   <defs>
     <symbol
-      id="ermine"
+      id="ermined-argent-sable"
       viewBox="0 0 200 240"
     >
       <rect
@@ -1331,7 +1464,7 @@ exports[`CoatsOfArms should render 'Bendy ermine and sable' 1`] = `
     </symbol>
     <pattern
       height={64.93506493506494}
-      id="field-pattern-3"
+      id="field-pattern-3-argent-sable"
       patternUnits="userSpaceOnUse"
       viewBox="0 0 70 125"
       width={36.36363636363637}
@@ -1343,22 +1476,19 @@ exports[`CoatsOfArms should render 'Bendy ermine and sable' 1`] = `
       />
       <use
         height={60}
-        href="#ermine"
+        href="#ermined-argent-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
         height={60}
-        href="#ermine"
+        href="#ermined-argent-sable"
         width={35}
         x="35"
         y="65"
       />
     </pattern>
-    
-    
-    
     
     
     
@@ -1397,13 +1527,13 @@ exports[`CoatsOfArms should render 'Bendy ermine and sable' 1`] = `
     }
   >
     <pattern
-      id="field-pattern-3-bendy-field"
+      id="field-pattern-3-argent-sable-bendy-field"
       patternTransform="scale(0.3666666666666667,0.2016666666666667)"
-      xlinkHref="#field-pattern-3"
+      xlinkHref="#field-pattern-3-argent-sable"
     />
     <path
       d="M -12.4003 -222.42278 L 603.53971 393.51722 L 569.32082 427.73611 L -46.61919 -188.20389 L -12.4003 -222.42278"
-      fill="url(#field-pattern-3-bendy-field)"
+      fill="url(#field-pattern-3-argent-sable-bendy-field)"
       stroke="#333"
     />
     <path
@@ -1413,7 +1543,7 @@ exports[`CoatsOfArms should render 'Bendy ermine and sable' 1`] = `
     />
     <path
       d="M -149.27586 -222.42278 L 466.66415 393.51722 L 432.44526 427.73611 L -183.49474 -188.20389 L -149.27586 -222.42278"
-      fill="url(#field-pattern-3-bendy-field)"
+      fill="url(#field-pattern-3-argent-sable-bendy-field)"
       stroke="#333"
     />
     <path
@@ -1423,7 +1553,7 @@ exports[`CoatsOfArms should render 'Bendy ermine and sable' 1`] = `
     />
     <path
       d="M -286.15141 -222.42278 L 329.78859 393.51722 L 295.5697 427.73611 L -320.3703 -188.20389 L -286.15141 -222.42278"
-      fill="url(#field-pattern-3-bendy-field)"
+      fill="url(#field-pattern-3-argent-sable-bendy-field)"
       stroke="#333"
     />
     <path
@@ -1457,10 +1587,6 @@ exports[`CoatsOfArms should render 'Bendy or and gules' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
     
     
     
@@ -1562,10 +1688,6 @@ exports[`CoatsOfArms should render 'Bendy sinister sable and gules' 1`] = `
     
     
     
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -1655,10 +1777,8 @@ exports[`CoatsOfArms should render 'Bendy sinister vert and erminois' 1`] = `
   width={200}
 >
   <defs>
-    
-    
     <symbol
-      id="erminois"
+      id="ermined-or-sable"
       viewBox="0 0 200 240"
     >
       <rect
@@ -1694,7 +1814,7 @@ exports[`CoatsOfArms should render 'Bendy sinister vert and erminois' 1`] = `
     </symbol>
     <pattern
       height={64.93506493506494}
-      id="field-pattern-5"
+      id="field-pattern-3-or-sable"
       patternUnits="userSpaceOnUse"
       viewBox="0 0 70 125"
       width={36.36363636363637}
@@ -1706,20 +1826,19 @@ exports[`CoatsOfArms should render 'Bendy sinister vert and erminois' 1`] = `
       />
       <use
         height={60}
-        href="#erminois"
+        href="#ermined-or-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
         height={60}
-        href="#erminois"
+        href="#ermined-or-sable"
         width={35}
         x="35"
         y="65"
       />
     </pattern>
-    
     
     
     
@@ -1761,9 +1880,9 @@ exports[`CoatsOfArms should render 'Bendy sinister vert and erminois' 1`] = `
       transform="scale(-1,1) translate(-200 0)"
     >
       <pattern
-        id="field-pattern-5-bendy-field"
+        id="field-pattern-3-or-sable-bendy-field"
         patternTransform="scale(0.3666666666666667,0.2016666666666667)"
-        xlinkHref="#field-pattern-5"
+        xlinkHref="#field-pattern-3-or-sable"
       />
       <path
         d="M -12.4003 -222.42278 L 603.53971 393.51722 L 569.32082 427.73611 L -46.61919 -188.20389 L -12.4003 -222.42278"
@@ -1772,7 +1891,7 @@ exports[`CoatsOfArms should render 'Bendy sinister vert and erminois' 1`] = `
       />
       <path
         d="M -80.83808 -222.42278 L 535.10193 393.51722 L 500.88304 427.73611 L -115.05697 -188.20389 L -80.83808 -222.42278"
-        fill="url(#field-pattern-5-bendy-field)"
+        fill="url(#field-pattern-3-or-sable-bendy-field)"
         stroke="#333"
       />
       <path
@@ -1782,7 +1901,7 @@ exports[`CoatsOfArms should render 'Bendy sinister vert and erminois' 1`] = `
       />
       <path
         d="M -217.71363 -222.42278 L 398.22637 393.51722 L 364.00748 427.73611 L -251.93252 -188.20389 L -217.71363 -222.42278"
-        fill="url(#field-pattern-5-bendy-field)"
+        fill="url(#field-pattern-3-or-sable-bendy-field)"
         stroke="#333"
       />
       <path
@@ -1792,7 +1911,7 @@ exports[`CoatsOfArms should render 'Bendy sinister vert and erminois' 1`] = `
       />
       <path
         d="M -354.58919 -222.42278 L 261.35081 393.51722 L 227.13193 427.73611 L -388.80808 -188.20389 L -354.58919 -222.42278"
-        fill="url(#field-pattern-5-bendy-field)"
+        fill="url(#field-pattern-3-or-sable-bendy-field)"
         stroke="#333"
       />
     </g>

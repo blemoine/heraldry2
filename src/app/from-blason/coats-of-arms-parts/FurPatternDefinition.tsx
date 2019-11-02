@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { isErmine, isPotent, isVair, Tincture } from '../../model/tincture';
 import { isNotNull } from '../../../utils/isNotNull';
-import { FurTransformProperty, toTransform } from './FurPattern.model';
+import { FurTransformProperty, getFurName, toTransform } from './FurPattern.model';
 
 type Props = {
   tinctures: Array<Tincture>;
@@ -15,33 +15,39 @@ export const FurPatternDefinition = ({ tinctures, postfixId, transformProperties
       {tinctures
         .map((tincture, i) => {
           if (isErmine(tincture)) {
-            const newPatternDef = transformProperties[tincture.name].fillId + '-' + postfixId;
+            const furName = getFurName(tincture);
+            const fillId = transformProperties[furName].fillId;
+            const newPatternDef = fillId + '-' + postfixId;
             return (
               <pattern
                 key={i}
                 id={`${newPatternDef}`}
-                xlinkHref={`#${transformProperties[tincture.name].fillId}`}
-                patternTransform={toTransform(transformProperties[tincture.name].property)}
+                xlinkHref={`#${fillId}`}
+                patternTransform={toTransform(transformProperties[furName].property)}
               />
             );
           } else if (isVair(tincture)) {
-            const newPatternDef = transformProperties[tincture.name].fillId + '-' + postfixId;
+            const furName = getFurName(tincture);
+            const fillId = transformProperties[furName].fillId;
+            const newPatternDef = fillId + '-' + postfixId;
             return (
               <pattern
                 key={i}
                 id={`${newPatternDef}`}
-                xlinkHref={`#${transformProperties[tincture.name].fillId}`}
-                patternTransform={toTransform(transformProperties[tincture.name].property)}
+                xlinkHref={`#${fillId}`}
+                patternTransform={toTransform(transformProperties[furName].property)}
               />
             );
           } else if (isPotent(tincture)) {
-            const newPatternDef = transformProperties[tincture.name].fillId + '-' + postfixId;
+            const furName = getFurName(tincture);
+            const fillId = transformProperties[furName].fillId;
+            const newPatternDef = fillId + '-' + postfixId;
             return (
               <pattern
                 key={i}
                 id={`${newPatternDef}`}
-                xlinkHref={`#${transformProperties[tincture.name].fillId}`}
-                patternTransform={toTransform(transformProperties[tincture.name].property)}
+                xlinkHref={`#${fillId}`}
+                patternTransform={toTransform(transformProperties[furName].property)}
               />
             );
           } else {

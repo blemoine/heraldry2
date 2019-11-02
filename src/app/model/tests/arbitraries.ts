@@ -30,8 +30,20 @@ import { Line, lines } from '../line';
 import { availableDispositions, CountAndDisposition, supportedNumbers } from '../countAndDisposition';
 import { Tierced, tierceds } from '../tierced';
 
-const tinctureArb: Arbitrary<Tincture> = fc.constantFrom(...tinctures);
 const metalAndColoursArb: Arbitrary<MetalsAndColours> = fc.constantFrom(...metalAndColours);
+export const tinctureArb: Arbitrary<Tincture> = fc.constantFrom(...tinctures).chain(
+  (t): Arbitrary<Tincture> => {
+    if (t.name === 'ermined') {
+      return fc.record({
+        name: fc.constant(t.name),
+        field: metalAndColoursArb,
+        spot: metalAndColoursArb,
+      });
+    } else {
+      return fc.constant(t);
+    }
+  }
+);
 export const lineArb: Arbitrary<Line> = fc.constantFrom(...lines);
 
 const partyArb: Arbitrary<Party> = fc.constantFrom<Party['name']>(...parties).chain<Party>((name) => {

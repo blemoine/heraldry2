@@ -6,6 +6,7 @@ import { FillFromTincture } from '../../fillFromTincture.helper';
 import { computeLineOptions, oneSideLineOption } from '../blasonDisplay.helper';
 import { CommonOrdinaryDisplay } from './CommonOrdinaryDisplay';
 import { buildFurTransformProperty, FurTransformProperty } from '../FurPattern.model';
+import { allDeclaredTincturesOfOrdinary } from '../../blason.helpers';
 
 const postfixId = 'cross';
 
@@ -35,11 +36,15 @@ export const CrossOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, on
     .goTo([(2 * width) / 5, 0]);
 
   const scaleRatio = height / 480;
-  const transformProperties: FurTransformProperty = buildFurTransformProperty(fillFromTincture, {
-    ermine: [{ kind: 'scale', value: 0.38 * scaleRatio }],
-    vair: [{ kind: 'scale', value: 0.335 * scaleRatio }],
-    potent: [{ kind: 'scale', value: 0.3 * scaleRatio }, { kind: 'translate', value: [28, 0] }],
-  });
+  const transformProperties: FurTransformProperty = buildFurTransformProperty(
+    fillFromTincture,
+    allDeclaredTincturesOfOrdinary(ordinary),
+    {
+      ermine: [{ kind: 'scale', value: 0.38 * scaleRatio }],
+      vair: [{ kind: 'scale', value: 0.335 * scaleRatio }],
+      potent: [{ kind: 'scale', value: 0.3 * scaleRatio }, { kind: 'translate', value: [28, 0] }],
+    }
+  );
   const pathBuilderAndTincture = [{ pathBuilder, tincture: ordinary.tincture }];
 
   return (

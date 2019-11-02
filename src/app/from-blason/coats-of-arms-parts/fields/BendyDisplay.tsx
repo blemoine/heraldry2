@@ -7,6 +7,7 @@ import { range } from '../../../../utils/range';
 import { FurPatternDefinition } from '../FurPatternDefinition';
 import { buildFurTransformProperty, getFill } from '../FurPattern.model';
 import { FillFromTincture } from '../../fillFromTincture.helper';
+import { allDeclaredTincturesOfField } from '../../blason.helpers';
 
 const postfixId = 'bendy-field';
 const ermineScale = 0.66;
@@ -41,11 +42,15 @@ export const BendyDisplay: React.FunctionComponent<Props> = (props) => {
   const fills = props.field.tinctures.map((tincture) => getFill(props.fillFromTincture, tincture, postfixId));
 
   const scaleRatio = height / 480;
-  const transformProperties = buildFurTransformProperty(props.fillFromTincture, {
-    ermine: [{ kind: 'scale', value: [ermineScale * scaleRatio, ermineScale * 0.55 * scaleRatio] }],
-    vair: [{ kind: 'scale', value: [vairScale * scaleRatio, vairScale * 0.6785 * scaleRatio] }],
-    potent: [{ kind: 'scale', value: [potentScale * scaleRatio, potentScale * 1.35 * scaleRatio] }],
-  });
+  const transformProperties = buildFurTransformProperty(
+    props.fillFromTincture,
+    allDeclaredTincturesOfField(props.field),
+    {
+      ermine: [{ kind: 'scale', value: [ermineScale * scaleRatio, ermineScale * 0.55 * scaleRatio] }],
+      vair: [{ kind: 'scale', value: [vairScale * scaleRatio, vairScale * 0.6785 * scaleRatio] }],
+      potent: [{ kind: 'scale', value: [potentScale * scaleRatio, potentScale * 1.35 * scaleRatio] }],
+    }
+  );
 
   return (
     <>

@@ -27,14 +27,20 @@ export type Stains = Murrey | Sanguine | Tenne;
 
 export type TinctureName = (Metal | Colours | Stains)['name'];
 
-export const ermine = { name: 'ermine', field: argent, spot: sable } as const;
-export type Ermine = typeof ermine;
-export const counterErmine = { name: 'counter-ermine', field: sable, spot: argent } as const;
-export type CounterErmine = typeof counterErmine;
-export const erminois = { name: 'erminois', field: or, spot: sable } as const;
-export type Erminois = typeof erminois;
-export const pean = { name: 'pean', field: sable, spot: or } as const;
-export type Pean = typeof pean;
+export type Ermined = { name: 'ermined'; field: MetalsAndColours; spot: MetalsAndColours };
+function mkErmined(field: MetalsAndColours, spot: MetalsAndColours): Ermined {
+  return { name: 'ermined', field, spot };
+}
+
+export const ermine = mkErmined(argent, sable);
+export const counterErmine = mkErmined(sable, argent);
+export const erminois = mkErmined(or, sable);
+export const pean = mkErmined(sable, or);
+export const ermines: ReadonlyArray<Ermined> = [ermine, counterErmine, erminois, pean] as const;
+export function isErmine(t: Tincture): t is Ermined {
+  return t.name === 'ermined';
+}
+
 export const vair = { name: 'vair', field: argent, bell: azure } as const;
 export type Vair = typeof vair;
 export const counterVair = { name: 'counter-vair', field: argent, bell: azure } as const;
@@ -53,13 +59,6 @@ export type PotentEnPale = typeof potentEnPale;
 export const potentEnPoint = { name: 'potent-en-point', field: argent, bell: azure } as const;
 export type PotentEnPoint = typeof potentEnPoint;
 
-export type Ermines = Ermine | CounterErmine | Erminois | Pean;
-export const ermines: ReadonlyArray<Ermines> = [ermine, counterErmine, erminois, pean] as const;
-
-export function isErmine(t: Tincture): t is Ermines {
-  return ermines.some((e) => e.name === t.name);
-}
-
 export type Vairs = Vair | CounterVair | VairEnPale | VairEnPoint;
 export const vairs: ReadonlyArray<Vairs> = [vair, counterVair, vairEnPale, vairEnPoint] as const;
 export function isVair(t: Tincture): t is Vairs {
@@ -72,7 +71,7 @@ export function isPotent(t: Tincture): t is Potents {
   return potents.some((e) => e.name === t.name);
 }
 
-export type Furs = Ermines | Vairs | Potents;
+export type Furs = Ermined | Vairs | Potents;
 
 export type MetalsAndColours = Metal | Colours;
 export type Tincture = MetalsAndColours | Stains | Furs;
@@ -96,3 +95,11 @@ export const tinctures: Array<Tincture> = [
   ...vairs,
   ...potents,
 ];
+
+export function areTinctureEquals(t1: Tincture, t2: Tincture): boolean {
+  if (t1.name === 'ermined' && t2.name === 'ermined') {
+    return areTinctureEquals(t1.spot, t2.spot) && areTinctureEquals(t1.field, t2.field);
+  } else {
+    return t1.name === t2.name;
+  }
+}

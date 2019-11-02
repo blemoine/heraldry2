@@ -7,6 +7,7 @@ import { computeLineOptions, invertLineOptionNullable, oneSideLineOption } from 
 import { CommonOrdinaryDisplay } from './CommonOrdinaryDisplay';
 import { buildFurTransformProperty, FurTransformProperty } from '../FurPattern.model';
 import { range } from '../../../../utils/range';
+import { allDeclaredTincturesOfOrdinary } from '../../blason.helpers';
 
 const postfixId = 'pale';
 
@@ -37,11 +38,15 @@ export const PaleOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onC
   });
 
   const scaleRatio = height / 480;
-  const transformProperties: FurTransformProperty = buildFurTransformProperty(fillFromTincture, {
-    ermine: [{ kind: 'scale', value: 0.4 * scaleRatio }, { kind: 'translate', value: [0, 0] }],
-    vair: [{ kind: 'scale', value: 0.33 * scaleRatio }, { kind: 'translate', value: [0, 0] }],
-    potent: [{ kind: 'scale', value: 0.25 * scaleRatio }, { kind: 'translate', value: [25, 0] }],
-  });
+  const transformProperties: FurTransformProperty = buildFurTransformProperty(
+    fillFromTincture,
+    allDeclaredTincturesOfOrdinary(ordinary),
+    {
+      ermine: [{ kind: 'scale', value: 0.4 * scaleRatio }, { kind: 'translate', value: [0, 0] }],
+      vair: [{ kind: 'scale', value: 0.33 * scaleRatio }, { kind: 'translate', value: [0, 0] }],
+      potent: [{ kind: 'scale', value: 0.25 * scaleRatio }, { kind: 'translate', value: [25, 0] }],
+    }
+  );
 
   return (
     <CommonOrdinaryDisplay

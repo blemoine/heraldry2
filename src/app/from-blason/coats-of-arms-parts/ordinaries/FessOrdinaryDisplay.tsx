@@ -6,6 +6,7 @@ import { FillFromTincture } from '../../fillFromTincture.helper';
 import { computeLineOptions, invertLineOptionNullable, oneSideLineOption } from '../blasonDisplay.helper';
 import { CommonOrdinaryDisplay } from './CommonOrdinaryDisplay';
 import { buildFurTransformProperty, FurTransformProperty } from '../FurPattern.model';
+import { allDeclaredTincturesOfOrdinary } from '../../blason.helpers';
 
 const postfixId = 'fess';
 
@@ -28,11 +29,15 @@ export const FessOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onC
   );
 
   const scaleRatio = height / 480;
-  const transformProperties: FurTransformProperty = buildFurTransformProperty(fillFromTincture, {
-    ermine: [{ kind: 'scale', value: 0.66 * scaleRatio }, { kind: 'translate', value: [0, 10] }],
-    vair: [{ kind: 'scale', value: 0.56 * scaleRatio }, { kind: 'translate', value: [0, 70] }],
-    potent: [{ kind: 'scale', value: 0.815 * scaleRatio }],
-  });
+  const transformProperties: FurTransformProperty = buildFurTransformProperty(
+    fillFromTincture,
+    allDeclaredTincturesOfOrdinary(ordinary),
+    {
+      ermine: [{ kind: 'scale', value: 0.66 * scaleRatio }, { kind: 'translate', value: [0, 10] }],
+      vair: [{ kind: 'scale', value: 0.56 * scaleRatio }, { kind: 'translate', value: [0, 70] }],
+      potent: [{ kind: 'scale', value: 0.815 * scaleRatio }],
+    }
+  );
   const pathBuilderAndTincture = [{ pathBuilder, tincture: ordinary.tincture }];
 
   return (
