@@ -89,37 +89,22 @@ export function fieldParser(): P.Parser<Field> {
       .map((i) => [value, i] as const);
   };
 
-  const barryParser: P.Parser<BarryField> = P.seq(
-    P.alt(numberedFieldParserGenerator('Barry', 'barry', [6, 8, 10] as const, 6)),
-    P.whitespace.then(lineParser).fallback('straight' as const),
-    P.whitespace.then(tinctureParserFromName).skip(P.whitespace),
-    P.regex(/and/i)
-      .skip(P.whitespace)
-      .then(tinctureParserFromName)
-  ).map(
-    ([[kind, number], line, tincture1, tincture2]): BarryField => ({
-      kind,
-      number,
-      line,
-      tinctures: [tincture1, tincture2],
-    })
-  );
-
-  const numberedFieldParser: P.Parser<BendyField | BendySinisterField> = P.seq(
+  const numberedFieldParser: P.Parser<BarryField | BendyField | BendySinisterField> = P.seq(
     P.alt(
       numberedFieldParserGenerator('Bendy Sinister', 'bendySinister', [6, 8, 10] as const, 6),
       numberedFieldParserGenerator('Bendy', 'bendy', [6, 8, 10] as const, 6),
       numberedFieldParserGenerator('Barry', 'barry', [6, 8, 10] as const, 6)
     ),
-
+    P.whitespace.then(lineParser).fallback('straight' as const),
     P.whitespace.then(tinctureParserFromName).skip(P.whitespace),
     P.regex(/and/i)
       .skip(P.whitespace)
       .then(tinctureParserFromName)
-  ).map(([[kind, number], tincture1, tincture2]): BendyField | BendySinisterField => ({
+  ).map(([[kind, number], line, tincture1, tincture2]): BendyField | BendySinisterField => ({
     kind,
     number,
     tinctures: [tincture1, tincture2],
+    line,
   }));
 
   const gironnyParser: P.Parser<GironnyField> = P.seq(
@@ -179,7 +164,6 @@ export function fieldParser(): P.Parser<Field> {
     tiercedParser().map((tierced) => ({ kind: 'tierced', per: tierced })),
     partyParser().map((party) => ({ kind: 'party', per: party })),
     gironnyParser,
-    barryParser,
     numberedFieldParser,
     palyBendyParser
   );

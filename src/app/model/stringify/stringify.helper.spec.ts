@@ -167,7 +167,7 @@ describe('stringifyBlason', () => {
     expect(
       stringifyBlason({
         kind: 'simple',
-        field: { kind: 'bendy', tinctures: [ermine, vert], number: 6 },
+        field: { kind: 'bendy', tinctures: [ermine, vert], number: 6, line: 'straight' },
       })
     ).toBe('Bendy ermine and vert');
   });
@@ -176,7 +176,7 @@ describe('stringifyBlason', () => {
     expect(
       stringifyBlason({
         kind: 'simple',
-        field: { kind: 'bendy', tinctures: [ermine, vert], number: 10 },
+        field: { kind: 'bendy', tinctures: [ermine, vert], number: 10, line: 'straight' },
       })
     ).toBe('Bendy of ten ermine and vert');
   });

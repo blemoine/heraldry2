@@ -108,7 +108,10 @@ describe('parseBlason', () => {
 
   it('should parse correctly a bendy field', () => {
     const result = parseBlason('Bendy argent and sable');
-    const expected: Blason = { kind: 'simple', field: { kind: 'bendy', tinctures: [argent, sable], number: 6 } };
+    const expected: Blason = {
+      kind: 'simple',
+      field: { kind: 'bendy', tinctures: [argent, sable], number: 6, line: 'straight' },
+    };
 
     expect(result).toEqual(expected);
   });
@@ -456,14 +459,17 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
   });
 
   it('should parse a bendy of ten field', () => {
-    const expected: SimpleBlason = { kind: 'simple', field: { kind: 'bendy', number: 10, tinctures: [or, gules] } };
+    const expected: SimpleBlason = {
+      kind: 'simple',
+      field: { kind: 'bendy', number: 10, tinctures: [or, gules], line: 'straight' },
+    };
 
     expect(parseBlason('Bendy of ten or and gules')).toEqual(expected);
   });
   it('should parse a bendy sinister of ten field', () => {
     const expected: SimpleBlason = {
       kind: 'simple',
-      field: { kind: 'bendySinister', number: 10, tinctures: [or, gules] },
+      field: { kind: 'bendySinister', number: 10, tinctures: [or, gules], line: 'straight' },
     };
 
     expect(parseBlason('Bendy sinister of ten or and gules')).toEqual(expected);
@@ -487,7 +493,7 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
           },
         },
         { kind: 'simple', field: { kind: 'chequy', tinctures: [or, gules] } },
-        { kind: 'simple', field: { kind: 'bendy', number: 10, tinctures: [or, gules] } },
+        { kind: 'simple', field: { kind: 'bendy', number: 10, tinctures: [or, gules], line: 'straight' } },
         {
           kind: 'simple',
           field: { kind: 'plain', tincture: or },

@@ -33,7 +33,11 @@ export const BarryDisplay: React.FunctionComponent<Props> = ({ field, fillFromTi
   );
 
   const fills = field.tinctures.map((tincture) => getFill(fillFromTincture, tincture, postfixId));
+  const lineOptions = computeLineOptions(field.line, dimension);
+  const invertLineOptions = field.line === 'dancetty' ? lineOptions : invertLineOptionNullable(lineOptions);
 
+  const oneSideOnly = oneSideLineOption(lineOptions);
+  const invertedOneSideOnly = field.line === 'dancetty' ? lineOptions : oneSideLineOption(invertLineOptions);
   return (
     <>
       <FurPatternDefinition
@@ -46,14 +50,10 @@ export const BarryDisplay: React.FunctionComponent<Props> = ({ field, fillFromTi
 
         const startOffset = i === 0 ? barHeight : 0;
         const endOffset = i === number - 1 ? barHeight : 0;
-        const lineOptions = computeLineOptions(field.line, dimension);
-        const invertLineOptions = field.line === 'dancetty' ? lineOptions : invertLineOptionNullable(lineOptions);
-        const oneSideOnly = oneSideLineOption(lineOptions);
-        const invertedOneSideOnly = field.line === 'dancetty' ? lineOptions : oneSideLineOption(invertLineOptions);
-
+        const lineOffset = field.line === 'urdy' ? barHeight : 0;
         const pathBuilder = SvgPathBuilder.rectangle(
           [0, i * barHeight - startOffset],
-          { width, height: barHeight + startOffset + endOffset },
+          { width, height: barHeight + lineOffset + startOffset + endOffset },
           {
             bottom: i % 2 === 1 ? oneSideOnly : lineOptions,
             top: i % 2 === 0 ? invertedOneSideOnly : invertLineOptions,

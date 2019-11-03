@@ -41,11 +41,13 @@ export type BendyField = {
   kind: 'bendy';
   number: 6 | 8 | 10;
   tinctures: [Tincture, Tincture];
+  line: Line;
 };
 export type BendySinisterField = {
   kind: 'bendySinister';
   number: 6 | 8 | 10;
   tinctures: [Tincture, Tincture];
+  line: Line;
 };
 
 export type BarryField = {

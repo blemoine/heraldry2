@@ -156,28 +156,27 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
         </div>
       )}
 
-      {(field.kind === 'barry' || field.kind === 'bendy') && (
-        <div className="form-group">
-          <label>Number of bar</label>
+      {(field.kind === 'barry' || field.kind === 'bendy' || field.kind === 'bendySinister') && (
+        <>
+          <div className="form-group">
+            <label>Number of bar</label>
 
-          <div>
-            <ButtonGroup
-              options={numberOfBars}
-              value={field.number}
-              valueChange={(number) => fieldChange({ ...field, number })}
-            />
+            <div>
+              <ButtonGroup
+                options={numberOfBars}
+                value={field.number}
+                valueChange={(number) => fieldChange({ ...field, number })}
+              />
+            </div>
           </div>
-        </div>
-      )}
+          <div className="form-group">
+            <label>Line</label>
 
-      {field.kind === 'barry' && (
-        <div className="form-group">
-          <label>Line</label>
-
-          <div>
-            <LineSelect line={field.line} lineChange={(line) => fieldChange({ ...field, line })} />
+            <div>
+              <LineSelect line={field.line} lineChange={(line) => fieldChange({ ...field, line })} />
+            </div>
           </div>
-        </div>
+        </>
       )}
     </>
   );

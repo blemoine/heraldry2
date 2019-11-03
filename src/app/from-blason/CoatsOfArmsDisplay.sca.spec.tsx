@@ -31,12 +31,12 @@ describe('CoatsOfArms', () => {
   //snapshotTest('Barry and per bend sinister sable and Or');
   snapshotTest('Bendy or and gules');
   //snapshotTest('Bendy sinister and per bend azure and ermine');
-  //snapshotTest('Bendy sinister embattled or and gules');
+  snapshotTest('Bendy sinister embattled or and gules');
   //snapshotTest('Bendy sinister of four, vert, argent, purpure and argent');
   snapshotTest('Bendy sinister sable and gules');
 
   snapshotTest('Bendy sinister vert and erminois');
-  //snapshotTest('Barry wavy argent and sable');
+  snapshotTest('Bendy wavy argent and sable');
   //snapshotTest('Checky sable and ermine');
   //snapshotTest('Chevronelly azure and argent');
   //snapshotTest('Chevronelly erminois and pean');

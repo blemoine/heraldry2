@@ -8,6 +8,7 @@ import { FurPatternDefinition } from '../FurPatternDefinition';
 import { buildFurTransformProperty, getFill } from '../FurPattern.model';
 import { FillFromTincture } from '../../fillFromTincture.helper';
 import { allDeclaredTincturesOfField } from '../../blason.helpers';
+import { computeLineOptions, invertLineOptionNullable, oneSideLineOption } from '../blasonDisplay.helper';
 
 const postfixId = 'bendy-field';
 const ermineScale = 0.66;
@@ -29,38 +30,44 @@ export const BendyDisplay: React.FunctionComponent<Props> = (props) => {
   const b = 1.09 - a * 1.33;
 
   const maxCoordinate = Math.max(height * ((a * height) / width + b), width);
-  const bendWidth = maxCoordinate / props.number;
+  const bendHeight = maxCoordinate / props.number;
 
-  const bendPath = SvgPathBuilder.start([-maxCoordinate, 0])
-    .goTo([maxCoordinate * 2, 0])
-    .goTo([maxCoordinate * 2, bendWidth])
-    .goTo([-maxCoordinate, bendWidth])
-    .close()
-    .rotate([(Math.sqrt(2) * bendWidth) / 2, bendWidth / 2], 45)
-    .translate([width, 0]);
+  const field = props.field;
+  const lineOptions = computeLineOptions(field.line, dimension);
+  const invertLineOptions = field.line === 'dancetty' ? lineOptions : invertLineOptionNullable(lineOptions);
 
-  const fills = props.field.tinctures.map((tincture) => getFill(props.fillFromTincture, tincture, postfixId));
+  const oneSideOnly = oneSideLineOption(lineOptions);
+  const invertedOneSideOnly = field.line === 'dancetty' ? lineOptions : oneSideLineOption(invertLineOptions);
+
+  const fills = field.tinctures.map((tincture) => getFill(props.fillFromTincture, tincture, postfixId));
 
   const scaleRatio = height / 480;
-  const transformProperties = buildFurTransformProperty(
-    props.fillFromTincture,
-    allDeclaredTincturesOfField(props.field),
-    {
-      ermine: [{ kind: 'scale', value: [ermineScale * scaleRatio, ermineScale * 0.55 * scaleRatio] }],
-      vair: [{ kind: 'scale', value: [vairScale * scaleRatio, vairScale * 0.6785 * scaleRatio] }],
-      potent: [{ kind: 'scale', value: [potentScale * scaleRatio, potentScale * 1.35 * scaleRatio] }],
-    }
-  );
+  const transformProperties = buildFurTransformProperty(props.fillFromTincture, allDeclaredTincturesOfField(field), {
+    ermine: [{ kind: 'scale', value: [ermineScale * scaleRatio, ermineScale * 0.55 * scaleRatio] }],
+    vair: [{ kind: 'scale', value: [vairScale * scaleRatio, vairScale * 0.6785 * scaleRatio] }],
+    potent: [{ kind: 'scale', value: [potentScale * scaleRatio, potentScale * 1.35 * scaleRatio] }],
+  });
 
+  const lineOffset = field.line === 'urdy' ? bendHeight : 0;
   return (
     <>
       <FurPatternDefinition
-        tinctures={props.field.tinctures}
+        tinctures={field.tinctures}
         postfixId={postfixId}
         transformProperties={transformProperties}
       />
       {range(0, props.number).map((i) => {
-        const path = bendPath.translate([-Math.sqrt(2) * bendWidth * (i + 1 / 2), 0]);
+        const startOffset = i === 0 ? bendHeight : 0;
+        const endOffset = i === props.number - 1 ? bendHeight : 0;
+        const bendPath = SvgPathBuilder.rectangle(
+          [-maxCoordinate, -startOffset],
+          { width: 3 * maxCoordinate, height: bendHeight + lineOffset + endOffset + startOffset },
+          {
+            bottom: i % 2 === 1 ? oneSideOnly : lineOptions,
+            top: i % 2 === 0 ? invertedOneSideOnly : invertLineOptions,
+          }
+        );
+        const path = bendPath.translate([0, (i - 1) * bendHeight]).rotate([width / 2, height / 2], 45);
 
         return <PathFromBuilder key={i} pathBuilder={path} fill={fills[i % 2]} stroke="#333" />;
       })}

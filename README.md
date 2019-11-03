@@ -43,6 +43,7 @@ Faire le "of the last"
 - Click on Escutcheon doesn't work. 
 - Couter embattled marche pas bien vs BRetessed
 - changeFieldKind -> peut etre mieux fait en extrayant les tinctures
+- Faire un formulaire pour ermined
 
 ## Feature to add
 

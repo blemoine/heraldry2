@@ -100,8 +100,11 @@ describe('isThereFur', () => {
   });
 
   it('should return true if the field  is bendy vair', () => {
-    expect(isThereFur({ kind: 'simple', field: { kind: 'bendy', tinctures: [gules, vair], number: 6 } }, vair)).toBe(
-      true
-    );
+    expect(
+      isThereFur(
+        { kind: 'simple', field: { kind: 'bendy', tinctures: [gules, vair], number: 6, line: 'straight' } },
+        vair
+      )
+    ).toBe(true);
   });
 });
