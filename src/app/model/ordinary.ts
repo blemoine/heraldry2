@@ -13,6 +13,7 @@ export type BendSinister = {
 export type OrdinaryCross = { name: 'cross'; tincture: Tincture; line: Line; fimbriated: MetalsAndColours | null };
 export type Saltire = { name: 'saltire'; tincture: Tincture; line: Line; fimbriated: MetalsAndColours | null };
 export type Bordure = { name: 'bordure'; tincture: Tincture; line: Line; fimbriated: MetalsAndColours | null };
+export type Orle = { name: 'orle'; tincture: Tincture; line: Line; fimbriated: MetalsAndColours | null };
 export type Base = { name: 'base'; tincture: Tincture; line: Line; fimbriated: MetalsAndColours | null };
 export type Pale = { name: 'pale'; tincture: Tincture; line: Line; count: 1 | 2; fimbriated: MetalsAndColours | null };
 export type Chevron = {
@@ -62,6 +63,7 @@ export const chapePloyeTincturesKind: ReadonlyArray<ChapePloye['tinctures']['kin
 
 export type SubOrdinary =
   | Bordure
+  | Orle
   | Base
   | Pall
   | PallInverted
@@ -75,21 +77,23 @@ export type SubOrdinary =
   | ChaussePloye;
 export type Ordinary = Chief | Bend | BendSinister | Pale | Fess | Chevron | OrdinaryCross | Saltire | SubOrdinary;
 
+const subOrdinaries: Array<SubOrdinary['name']> = [
+  'bordure',
+  'orle',
+  'base',
+  'chevronel',
+  'pall',
+  'pall-inverted',
+  'quarter',
+  'canton',
+  'chape-ploye',
+  'shakefork',
+  'gyron',
+  'chausse',
+  'chausse-ploye',
+];
 export function isSubOrdinary(o: Ordinary['name']): o is SubOrdinary['name'] {
-  return (
-    o === 'bordure' ||
-    o === 'base' ||
-    o === 'chevronel' ||
-    o === 'pall' ||
-    o === 'pall-inverted' ||
-    o === 'quarter' ||
-    o === 'canton' ||
-    o === 'chape-ploye' ||
-    o === 'shakefork' ||
-    o === 'gyron' ||
-    o === 'chausse' ||
-    o === 'chausse-ploye'
-  );
+  return subOrdinaries.includes(o as SubOrdinary['name']);
 }
 
 export const ordinaries: Array<Ordinary['name']> = [
@@ -101,16 +105,5 @@ export const ordinaries: Array<Ordinary['name']> = [
   'chevron',
   'cross',
   'saltire',
-  'bordure',
-  'base',
-  'chevronel',
-  'pall',
-  'pall-inverted',
-  'shakefork',
-  'quarter',
-  'canton',
-  'chape-ploye',
-  'gyron',
-  'chausse',
-  'chausse-ploye',
+  ...subOrdinaries,
 ];

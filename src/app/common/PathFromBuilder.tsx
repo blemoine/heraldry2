@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { SvgPathBuilder } from '../svg-path-builder/svg-path-builder';
-import { CSSProperties, useState } from 'react';
+import { CSSProperties, useEffect, useState } from 'react';
 
 type Props = {
   pathBuilder: SvgPathBuilder;
@@ -42,6 +42,9 @@ export const PathFromBuilder = ({
 export const FocusablePathFromBuilder = (props: Props) => {
   const baseStrokeWidth = props.strokeWidth || 1;
   const [strokeWidth, setStrokeWidth] = useState(baseStrokeWidth);
+  useEffect(() => {
+    setStrokeWidth(baseStrokeWidth);
+  }, [baseStrokeWidth]);
 
   const onMouseDown = () => {
     setStrokeWidth(baseStrokeWidth + 2);

@@ -23,7 +23,7 @@ export const CommonOrdinaryDisplay = ({
   stroke,
 }: Props) => {
   const tinctures = pathBuilderAndTincture.map(({ tincture }) => tincture);
-
+  const strokeWidth = stroke ? 3 : 1;
   return (
     <>
       <FurPatternDefinition tinctures={tinctures} postfixId={postfixId} transformProperties={transformProperties} />
@@ -33,7 +33,7 @@ export const CommonOrdinaryDisplay = ({
           : tincture.name === 'sable'
           ? '#777'
           : '#333';
-        const strokeWidth = stroke ? 3 : 1;
+
         const fill = getFill(fillFromTincture, tincture, postfixId);
         return (
           <FocusablePathFromBuilder

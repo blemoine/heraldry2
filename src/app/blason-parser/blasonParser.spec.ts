@@ -934,4 +934,14 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
 
     expect(parseBlason('Or ermined gules')).toEqual(expected);
   });
+
+  it('should parse orle', () => {
+    const expected: SimpleBlason = {
+      kind: 'simple',
+      field: { kind: 'plain', tincture: or },
+      ordinary: { name: 'orle', line: 'straight', tincture: azure, fimbriated: null },
+    };
+
+    expect(parseBlason('Or, an orle azure')).toEqual(expected);
+  });
 });

@@ -51,15 +51,12 @@ function getFieldVerticalOffsetAndScale(ordinary: Ordinary): { verticalOffset: n
       return cannotHappen(ordinary.line);
     }
   } else if (ordinary.name === 'bordure') {
-    if (
-      ordinary.line === 'engrailed' ||
-      ordinary.line === 'wavy' ||
-      ordinary.line === 'urdy' ||
-      ordinary.line === 'dancetty'
-    ) {
+    if (ordinary.line === 'engrailed' || ordinary.line === 'urdy') {
+      return { verticalOffset: 3 / 100, verticalScale: 93 / 100 };
+    } else if (ordinary.line === 'wavy' || ordinary.line === 'dancetty' || ordinary.line === 'potenty') {
       return { verticalOffset: 6 / 100, verticalScale: 88 / 100 };
     } else {
-      return { verticalOffset: 10 / 100, verticalScale: 80 / 100 };
+      return { verticalOffset: 8 / 100, verticalScale: 85 / 100 };
     }
   } else if (ordinary.name === 'base') {
     if (ordinary.line === 'invected') {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { computeLineOptions, SimpleBlasonShape } from '../blasonDisplay.helper';
+import { computeLineOptions, invertLineOptionNullable, SimpleBlasonShape } from '../blasonDisplay.helper';
 import { Dimension } from '../../../model/dimension';
 import { LineOptions, SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { swissPathBuilder } from '../escutcheon/SwissDisplay';
@@ -25,6 +25,8 @@ type Props = {
   tincture: Tincture;
   stroke: MetalsAndColours | null;
   onClick: () => void;
+  lineDimension: Dimension;
+  styleOnlyInner: boolean;
 };
 export const BordureDisplay = ({
   dimension,
@@ -35,16 +37,23 @@ export const BordureDisplay = ({
   onClick,
   tincture,
   stroke,
+  lineDimension,
+  styleOnlyInner,
 }: Props) => {
   const { width, height } = dimension;
 
+  const lineOptionScale = styleOnlyInner ? 1 : 0.5;
   const lineOptions: LineOptions | null =
     line === 'dancetty'
       ? { line: 'indented', height: height / 10, width: width / 5, verticalOffset: 75 }
-      : computeLineOptions(line, dimension);
+      : computeLineOptions(line, {
+          width: dimension.width * lineOptionScale,
+          height: dimension.height * lineOptionScale,
+        });
+  const invertedLineOptions = invertLineOptionNullable(lineOptions);
 
-  const bordureWidth = width / 10;
-  const bordureHeight = height / 10;
+  const bordureWidth = lineDimension.width;
+  const bordureHeight = lineDimension.height;
   const translateVector = [bordureWidth, bordureHeight] as const;
 
   let basePathBuilderFn: (dimension: Dimension, lineOptions: LineOptions | null) => SvgPathBuilder;
@@ -130,7 +139,10 @@ export const BordureDisplay = ({
     return cannotHappen(shape);
   }
 
-  const pathBuilder = basePathBuilderFn({ height, width }, null)
+  const pathBuilder = basePathBuilderFn(
+    { height, width },
+    styleOnlyInner || line === 'embattled' ? null : invertedLineOptions
+  )
     .moveTo(translateVector)
     .concat(
       basePathBuilderFn({ width: width - 2 * bordureWidth, height: height - 2 * bordureHeight }, lineOptions).translate(

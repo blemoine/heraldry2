@@ -44,6 +44,8 @@ Faire le "of the last"
 - Couter embattled marche pas bien vs BRetessed
 - changeFieldKind -> peut etre mieux fait en extrayant les tinctures
 - Faire un formulaire pour ermined
+- Swiss Bordure/Orle mal affiché
+
 
 ## Feature to add
 

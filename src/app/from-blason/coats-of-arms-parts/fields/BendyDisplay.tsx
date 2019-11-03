@@ -58,7 +58,7 @@ export const BendyDisplay: React.FunctionComponent<Props> = (props) => {
       />
       {range(0, props.number).map((i) => {
         const startOffset = i === 0 ? bendHeight : 0;
-        const endOffset = i === props.number - 1 ? bendHeight : 0;
+        const endOffset = i === props.number - 1 ? bendHeight * 2 : 0;
         const bendPath = SvgPathBuilder.rectangle(
           [-maxCoordinate, -startOffset],
           { width: 3 * maxCoordinate, height: bendHeight + lineOffset + endOffset + startOffset },

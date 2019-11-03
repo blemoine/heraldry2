@@ -138,7 +138,27 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
           stroke={ordinary.fimbriated}
           tincture={ordinary.tincture}
           onClick={onClick}
+          lineDimension={{ width: dimension.width / 10, height: dimension.width / 10 }}
+          styleOnlyInner={true}
         />
+      );
+    } else if (ordinary.name === 'orle') {
+      const scale = 0.03;
+      return (
+        <g transform={`scale(${1 - scale * 2}) translate(${scale * dimension.width} ${scale * dimension.height})`}>
+          <BordureDisplay
+            shieldShape={shieldShape}
+            shape={shape}
+            dimension={dimension}
+            line={ordinary.line}
+            fillFromTincture={fillFromTincture}
+            stroke={ordinary.fimbriated}
+            tincture={ordinary.tincture}
+            onClick={onClick}
+            lineDimension={{ width: dimension.width / 13, height: dimension.width / 13 }}
+            styleOnlyInner={false}
+          />
+        </g>
       );
     } else if (ordinary.name === 'pall') {
       return (
