@@ -194,8 +194,8 @@ export function getChargeDimension(
         } else if (ordinaryLine === 'dancetty') {
           if (chargeCount > 1) {
             return {
-              verticalScale: 0.59,
-              horizontalScale: 0.53,
+              verticalScale: 0.56,
+              horizontalScale: 0.51,
               verticalOffset: 0.11,
               horizontalOffset: shape === 'leftCut' ? 0.27 : 0.19,
             };
