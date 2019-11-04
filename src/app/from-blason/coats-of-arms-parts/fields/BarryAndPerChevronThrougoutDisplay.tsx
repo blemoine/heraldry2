@@ -10,8 +10,6 @@ export const BarryAndPerChevronThrougoutDisplay: React.FunctionComponent<Props> 
   fill,
   rows,
 }) => {
-  //TODO
-
   const chevronPathBuilder = SvgPathBuilder.start([width / 2, 0])
     .goTo([width, height])
     .goTo([0, height])

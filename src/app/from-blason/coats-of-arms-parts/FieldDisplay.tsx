@@ -43,6 +43,7 @@ import { PileBendwiseDisplay } from './fields/PileBendwiseDisplay';
 import { PileBendwiseSinisterDisplay } from './fields/PileSinisterBendwiseDisplay';
 import { AlternatingSquareDisplay } from './fields/AlternatingSquareDisplay';
 import { BarryAndPerChevronThrougoutDisplay } from './fields/BarryAndPerChevronThrougoutDisplay';
+import { BendyAndPerBendSinisterDisplay } from './fields/BendyAndPerBendSinisterDisplay';
 
 type Props = {
   dimension: Dimension;
@@ -185,6 +186,15 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
     } else if (field.kind === 'barry-and-per-chevron-throughout') {
       const fill: [string, string] = fillFromTincturePair(field.tinctures);
       return <BarryAndPerChevronThrougoutDisplay fill={fill} dimension={dimension} rows={6} />;
+    } else if (field.kind === 'bendy-and-per-bend-sinister') {
+      return (
+        <BendyAndPerBendSinisterDisplay
+          field={field}
+          dimension={dimension}
+          rows={10}
+          fillFromTincture={fillFromTincture}
+        />
+      );
     } else if (field.kind === 'lozengy') {
       const fill: [string, string] = fillFromTincturePair(field.tinctures);
       return <LozengyDisplay fill={fill} dimension={dimension} />;

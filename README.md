@@ -45,6 +45,7 @@ Faire le "of the last"
 - changeFieldKind -> peut etre mieux fait en extrayant les tinctures
 - Faire un formulaire pour ermined
 - Swiss Bordure/Orle mal affiché
+- A "pellet" est un "roundel sable"
 
 
 ## Feature to add
