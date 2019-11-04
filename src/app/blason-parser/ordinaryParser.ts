@@ -107,9 +107,10 @@ export function ordinaryParser(): P.Parser<Ordinary> {
   const ordinaryWithLineParser: P.Parser<
     Exclude<Ordinary, Pale | Chevron | OrdinaryCross | ChapePloye | Chausse>
   > = P.seq(
-    aParser
-      .then(buildAltParser(ordinaries.filter(isNotPaleOrChevronOrCross), stringifyOrdinaryName))
-      .skip(P.whitespace),
+    P.alt(
+      aParser.then(buildAltParser(ordinaries.filter(isNotPaleOrChevronOrCross), stringifyOrdinaryName)),
+      constStr('flaunches')
+    ).skip(P.whitespace),
     lineOrStraightParser,
     tinctureParserFromName,
     fimbriatedParser

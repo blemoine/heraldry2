@@ -153,8 +153,8 @@ function stringifyOrdinary(ordinary: Ordinary): string {
     }
     return result;
   } else {
-    const article = ordinary.name === 'orle' ? 'an' : 'a';
-    let result = article + ' ' + stringifyOrdinaryName(ordinary.name) + ' ';
+    const article = ordinary.name === 'orle' ? 'an ' : ordinary.name === 'flaunches' ? '' : 'a ';
+    let result = article + stringifyOrdinaryName(ordinary.name) + ' ';
     if (ordinary.line !== 'straight') {
       result += stringifyLine(ordinary.line) + ' ';
     }

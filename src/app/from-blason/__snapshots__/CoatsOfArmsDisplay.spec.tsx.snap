@@ -11202,6 +11202,110 @@ exports[`CoatsOfArms should render 'Vair, a gyron or' 1`] = `
 </svg>
 `;
 
+exports[`CoatsOfArms should render 'Vert, flaunches argent' 1`] = `
+<svg
+  className="coats-of-arms-display"
+  height={266.6666666666667}
+  viewBox="0 0 200 266.6666666666667"
+  width={200}
+>
+  <defs>
+    
+    
+    
+    
+    
+    
+    
+    
+    <clipPath
+      id="plain-field-clip-path"
+    >
+      <path
+        d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
+        fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
+        stroke="#333"
+        strokeWidth={1}
+        style={
+          Object {
+            "cursor": "pointer",
+            "pointerEvents": "none",
+          }
+        }
+      />
+    </clipPath>
+  </defs>
+  <g
+    className="blason-field"
+    clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
+  >
+    <rect
+      fill="#008000"
+      height={266.6666666666667}
+      stroke="#333"
+      width={200}
+      x={0}
+      y={0}
+    />
+  </g>
+  <g
+    className="blason-ordinary"
+    clipPath="url(#plain-field-clip-path)"
+  >
+    <path
+      d="M 0 0 A180 180 0 0 1 0 266.66667 Z"
+      fill="#FFFFFF"
+      onClick={[Function]}
+      onMouseDown={[Function]}
+      onMouseUp={[Function]}
+      stroke="#333"
+      strokeWidth={1}
+      style={
+        Object {
+          "cursor": "pointer",
+        }
+      }
+    />
+    <path
+      d="M 200 0 A180 180 0 0 0 200 266.66667 Z"
+      fill="#FFFFFF"
+      onClick={[Function]}
+      onMouseDown={[Function]}
+      onMouseUp={[Function]}
+      stroke="#333"
+      strokeWidth={1}
+      style={
+        Object {
+          "cursor": "pointer",
+        }
+      }
+    />
+  </g>
+  <path
+    d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
+    fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
+    stroke="#333"
+    strokeWidth={1}
+    style={
+      Object {
+        "cursor": "pointer",
+        "pointerEvents": "none",
+      }
+    }
+  />
+</svg>
+`;
+
 exports[`CoatsOfArms should render 'Vert, two crosses hummetty counter potent' 1`] = `
 <svg
   className="coats-of-arms-display"
