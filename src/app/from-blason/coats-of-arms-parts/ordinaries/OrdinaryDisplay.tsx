@@ -23,6 +23,7 @@ import { ShakeforkOrdinaryDisplay } from './ShakeforkOrdinaryDisplay';
 import { GyronOrdinaryDisplay } from './GyronOrdinaryDisplay';
 import { ChausseOrdinaryDisplay } from './ChausseOrdinaryDisplay';
 import { ChaussePloyeOrdinaryDisplay } from './ChaussePloyeOrdinaryDisplay';
+import { GoreOrdinaryDisplay } from './GoreOrdinaryDisplay';
 
 type Props = {
   ordinary: Ordinary;
@@ -226,6 +227,15 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
     } else if (ordinary.name === 'chausse-ploye') {
       return (
         <ChaussePloyeOrdinaryDisplay
+          onClick={onClick}
+          fillFromTincture={fillFromTincture}
+          dimension={dimension}
+          ordinary={ordinary}
+        />
+      );
+    } else if (ordinary.name === 'gore') {
+      return (
+        <GoreOrdinaryDisplay
           onClick={onClick}
           fillFromTincture={fillFromTincture}
           dimension={dimension}

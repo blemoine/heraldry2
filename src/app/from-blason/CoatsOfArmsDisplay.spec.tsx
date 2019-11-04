@@ -163,4 +163,5 @@ describe('CoatsOfArms', () => {
   snapshotTest('Vair, a gyron or');
   snapshotTest('Barry and per pale or and gules');
   snapshotTest('Or, a cross gules ermined argent');
+  snapshotTest('Argent, a gore vert');
 });

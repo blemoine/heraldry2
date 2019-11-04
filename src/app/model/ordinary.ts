@@ -41,6 +41,7 @@ export type Shakefork = { name: 'shakefork'; tincture: Tincture; line: Line; fim
 export type Quarter = { name: 'quarter'; tincture: Tincture; line: Line; fimbriated: MetalsAndColours | null };
 export type Canton = { name: 'canton'; tincture: Tincture; line: Line; fimbriated: MetalsAndColours | null };
 export type Gyron = { name: 'gyron'; tincture: Tincture; line: Line; fimbriated: MetalsAndColours | null };
+export type Gore = { name: 'gore'; tincture: Tincture; line: Line; fimbriated: MetalsAndColours | null };
 export type ChapePloye = {
   name: 'chape-ploye';
   tinctures: { kind: 'party'; per: 'pale'; tinctures: [Tincture, Tincture] } | { kind: 'simple'; tincture: Tincture };
@@ -74,7 +75,8 @@ export type SubOrdinary =
   | Shakefork
   | Gyron
   | Chausse
-  | ChaussePloye;
+  | ChaussePloye
+  | Gore;
 export type Ordinary = Chief | Bend | BendSinister | Pale | Fess | Chevron | OrdinaryCross | Saltire | SubOrdinary;
 
 const subOrdinaries: Array<SubOrdinary['name']> = [
@@ -91,6 +93,7 @@ const subOrdinaries: Array<SubOrdinary['name']> = [
   'gyron',
   'chausse',
   'chausse-ploye',
+  'gore',
 ];
 export function isSubOrdinary(o: Ordinary['name']): o is SubOrdinary['name'] {
   return subOrdinaries.includes(o as SubOrdinary['name']);
