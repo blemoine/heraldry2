@@ -13,6 +13,7 @@ type Props = {
   onClick: () => void;
   pathBuilderAndTincture: Array<{ pathBuilder: SvgPathBuilder; tincture: Tincture }>;
   stroke: MetalsAndColours | null;
+  baseStrokeWith?: number;
 };
 export const CommonOrdinaryDisplay = ({
   postfixId,
@@ -21,9 +22,10 @@ export const CommonOrdinaryDisplay = ({
   onClick,
   pathBuilderAndTincture,
   stroke,
+  baseStrokeWith,
 }: Props) => {
   const tinctures = pathBuilderAndTincture.map(({ tincture }) => tincture);
-  const strokeWidth = stroke ? 3 : 1;
+  const strokeWidth = baseStrokeWith || (stroke ? 3 : 1);
   return (
     <>
       <FurPatternDefinition tinctures={tinctures} postfixId={postfixId} transformProperties={transformProperties} />

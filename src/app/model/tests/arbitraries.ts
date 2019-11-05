@@ -2,7 +2,7 @@ import fc, { Arbitrary } from 'fast-check';
 import { metalAndColours, MetalsAndColours, or, Tincture, tinctures } from '../tincture';
 import { Field, fieldKinds, PartyField, TiercedField } from '../field';
 import { PallParty, parties, Party } from '../party';
-import { ChapePloye, chapePloyeTincturesKind, ordinaries, Ordinary } from '../ordinary';
+import { ChapePloye, chapePloyeTincturesKind, ChaussePloye, ordinaries, Ordinary } from '../ordinary';
 import {
   Charge,
   charges,
@@ -109,21 +109,19 @@ export const ordinaryArb: Arbitrary<Ordinary> = fc
           fimbriated: obj.fimbriated,
         } as const;
         return fc.constantFrom(1 as const, 2 as const).map((count) => ({ ...countableOrdinary, count }));
-      } else if (obj.name === 'chape-ploye') {
+      } else if (obj.name === 'chape-ploye' || obj.name === 'chausse-ploye') {
         const name = obj.name;
 
         return fc.constantFrom(...chapePloyeTincturesKind).chain((kind) => {
           if (kind === 'party') {
-            return tinctureArb.map(
-              (tincture2): ChapePloye => {
-                return {
-                  name,
-                  tinctures: { kind: 'party', per: 'pale', tinctures: [obj.tincture, tincture2] },
-                  line: obj.line,
-                  fimbriated: obj.fimbriated,
-                };
-              }
-            );
+            return tinctureArb.map((tincture2): ChapePloye | ChaussePloye => {
+              return {
+                name,
+                tinctures: { kind: 'party', per: 'pale', tinctures: [obj.tincture, tincture2] },
+                line: obj.line,
+                fimbriated: obj.fimbriated,
+              };
+            });
           } else if (kind === 'simple') {
             return fc.constant({
               name,

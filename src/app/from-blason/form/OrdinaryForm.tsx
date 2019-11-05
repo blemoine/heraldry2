@@ -20,7 +20,7 @@ export function OrdinaryForm({ tinctureConfiguration, ordinary, ordinaryChange }
       const fimbriated: MetalsAndColours | null = ordinary ? ordinary.fimbriated : null;
       if (ordinaryName === 'pale' || ordinaryName === 'chevron' || ordinaryName === 'chevronel') {
         ordinaryChange({ name: ordinaryName, tincture, count: 1, line, fimbriated });
-      } else if (ordinaryName === 'chape-ploye') {
+      } else if (ordinaryName === 'chape-ploye' || ordinaryName === 'chausse-ploye') {
         const missingColor = tinctures.find((t) => !areTinctureEquals(t, tincture));
         if (!missingColor) {
           throw new Error(`There should be a tincture different from ${tincture.name}`);

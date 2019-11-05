@@ -17,8 +17,11 @@ import { MetalsAndColours } from '../model/tincture';
 
 function isNotPaleOrChevronOrCross(
   o: Ordinary['name']
-): o is Exclude<Ordinary['name'], 'pale' | 'chevron' | 'chevronel' | 'cross' | 'chape-ploye' | 'chausse'> {
-  return !['pale', 'chevron', 'chevronel', 'cross', 'chape-ploye', 'chausse'].includes(o);
+): o is Exclude<
+  Ordinary['name'],
+  'pale' | 'chevron' | 'chevronel' | 'cross' | 'chape-ploye' | 'chausse' | 'chausse-ploye'
+> {
+  return !['pale', 'chevron', 'chevronel', 'cross', 'chape-ploye', 'chausse', 'chausse-ploye'].includes(o);
 }
 
 const fimbriatedParser: P.Parser<MetalsAndColours | null> = P.whitespace
@@ -66,8 +69,8 @@ export function ordinaryParser(): P.Parser<Ordinary> {
     fimbriated,
   }));
 
-  const chapePloyerParser: P.Parser<ChapePloye> = P.seq(
-    constStr('chape-ploye', 'chapé ployé').skip(P.whitespace),
+  const chapePloyerParser: P.Parser<ChapePloye | ChaussePloye> = P.seq(
+    P.alt(constStr('chape-ploye', 'chapé ployé'), constStr('chausse-ploye', 'chaussé ployé')).skip(P.whitespace),
     lineOrStraightParser,
 
     P.alt(
@@ -88,24 +91,22 @@ export function ordinaryParser(): P.Parser<Ordinary> {
       })
     ),
     fimbriatedParser
-  ).map(
-    ([name, line, tinctures, fimbriated]): ChapePloye => ({
-      name,
-      line,
-      tinctures,
-      fimbriated,
-    })
-  );
+  ).map(([name, line, tinctures, fimbriated]): ChapePloye | ChaussePloye => ({
+    name,
+    line,
+    tinctures,
+    fimbriated,
+  }));
 
-  const chausseParser: P.Parser<Chausse | ChaussePloye> = P.seq(
-    P.alt(constStr('chausse-ploye', 'chaussé ployé'), constStr('chausse', 'chaussé')).skip(P.whitespace),
+  const chausseParser: P.Parser<Chausse> = P.seq(
+    P.alt(constStr('chausse', 'chaussé')).skip(P.whitespace),
     lineOrStraightParser,
     tinctureParserFromName,
     fimbriatedParser
   ).map(([name, line, tincture, fimbriated]) => ({ name, line, tincture, fimbriated }));
 
   const ordinaryWithLineParser: P.Parser<
-    Exclude<Ordinary, Pale | Chevron | OrdinaryCross | ChapePloye | Chausse>
+    Exclude<Ordinary, Pale | Chevron | OrdinaryCross | ChapePloye | ChaussePloye | Chausse>
   > = P.seq(
     P.alt(
       aParser.then(buildAltParser(ordinaries.filter(isNotPaleOrChevronOrCross), stringifyOrdinaryName)),

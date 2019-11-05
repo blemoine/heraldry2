@@ -57,7 +57,7 @@ export type Chausse = {
 };
 export type ChaussePloye = {
   name: 'chausse-ploye';
-  tincture: Tincture;
+  tinctures: { kind: 'party'; per: 'pale'; tinctures: [Tincture, Tincture] } | { kind: 'simple'; tincture: Tincture };
   line: Line;
   fimbriated: MetalsAndColours | null;
 };

@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { ChapePloye, Ordinary, Pale } from '../../../model/ordinary';
+import { ChapePloye, ChaussePloye, Ordinary, Pale } from '../../../model/ordinary';
 import { MetalAndColoursSelect, TinctureSelect } from '../TinctureSelect';
 import { MetalsAndColours, Tincture } from '../../../model/tincture';
 import { LineSelect } from '../LineSelect';
 import { Line } from '../../../model/line';
 import { TinctureConfiguration } from '../../../model/tincture-configuration';
 
-type SupportedOrdinary = Exclude<Ordinary, Pale | ChapePloye>;
+type SupportedOrdinary = Exclude<Ordinary, Pale | ChapePloye | ChaussePloye>;
 type Props = {
   tinctureConfiguration: TinctureConfiguration;
   ordinary: SupportedOrdinary;

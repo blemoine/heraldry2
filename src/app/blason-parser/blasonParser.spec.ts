@@ -893,10 +893,30 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
     const expected: SimpleBlason = {
       kind: 'simple',
       field: { kind: 'plain', tincture: or },
-      ordinary: { name: 'chausse-ploye', tincture: gules, line: 'straight', fimbriated: null },
+      ordinary: {
+        name: 'chausse-ploye',
+        tinctures: { kind: 'simple', tincture: gules },
+        line: 'straight',
+        fimbriated: null,
+      },
     };
 
     expect(parseBlason('Or, chaussé ployé gules')).toEqual(expected);
+  });
+
+  it('should parse chaussé ployé per pale', () => {
+    const expected: SimpleBlason = {
+      kind: 'simple',
+      field: { kind: 'plain', tincture: or },
+      ordinary: {
+        name: 'chausse-ploye',
+        tinctures: { kind: 'party', per: 'pale', tinctures: [gules, azure] },
+        line: 'straight',
+        fimbriated: null,
+      },
+    };
+
+    expect(parseBlason('Or, chaussé ployé per pale gules and azure')).toEqual(expected);
   });
   it('should parse barry and per chevron throughout', () => {
     const expected: SimpleBlason = {

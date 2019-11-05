@@ -4,7 +4,7 @@ import { metalAndColours, MetalsAndColours, Tincture, tinctures } from '../model
 import { Line, lines } from '../model/line';
 import { parties, Party } from '../model/party';
 import { flatMap, isError, map, raise, Result, zip, zip3, zip4 } from '../../utils/result';
-import { ChapePloye, chapePloyeTincturesKind, ordinaries, Ordinary } from '../model/ordinary';
+import { ChapePloye, chapePloyeTincturesKind, ChaussePloye, ordinaries, Ordinary } from '../model/ordinary';
 import {
   Charge,
   charges,
@@ -226,7 +226,7 @@ export function encodeOrdinary(ordinary: Ordinary | null): Uint8Array {
   result[0] = encodeOrdinaryName(ordinary.name);
   result[1] = encodeLine(ordinary.line);
   result[5] = ordinary.fimbriated ? encodeMetalAndColours(ordinary.fimbriated) : 0;
-  if (ordinary.name === 'chape-ploye') {
+  if (ordinary.name === 'chape-ploye' || ordinary.name === 'chausse-ploye') {
     result[3] = encodeFromList(chapePloyeTincturesKind, ordinary.tinctures.kind);
     if (ordinary.tinctures.kind === 'party') {
       result[2] = encodeTincture(ordinary.tinctures.tinctures[0]);
@@ -261,22 +261,19 @@ export function decodeOrdinary(arr: Uint8Array): Result<Ordinary | null> {
       if (name === 'pale') {
         const maybeCount: Result<1 | 2> = decodeNumber([1, 2], arr[3]);
         return map(maybeCount, (count) => ({ name, line, tincture, count, fimbriated }));
-      } else if (name === 'chape-ploye') {
+      } else if (name === 'chape-ploye' || name === 'chausse-ploye') {
         return flatMap(
           decodeFromList(chapePloyeTincturesKind, arr[3]),
-          (kind): Result<ChapePloye> => {
+          (kind): Result<ChapePloye | ChaussePloye> => {
             if (kind === 'simple') {
               return { name, line, tinctures: { kind: 'simple', tincture }, fimbriated };
             } else if (kind === 'party') {
-              return map(
-                decodeTincture(arr[4]),
-                (tincture2): ChapePloye => ({
-                  name,
-                  line,
-                  tinctures: { kind: 'party', per: 'pale', tinctures: [tincture, tincture2] },
-                  fimbriated,
-                })
-              );
+              return map(decodeTincture(arr[4]), (tincture2): ChapePloye | ChaussePloye => ({
+                name,
+                line,
+                tinctures: { kind: 'party', per: 'pale', tinctures: [tincture, tincture2] },
+                fimbriated,
+              }));
             } else {
               return cannotHappen(kind);
             }

@@ -5,10 +5,10 @@ import { FillFromTincture } from '../../fillFromTincture.helper';
 import { CommonOrdinaryDisplay } from './CommonOrdinaryDisplay';
 import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { buildFurTransformProperty } from '../FurPattern.model';
-import { computeLineOptions, invertLineOptionNullable } from '../blasonDisplay.helper';
+import { computeLineOptions } from '../blasonDisplay.helper';
 import { allDeclaredTincturesOfOrdinary } from '../../blason.helpers';
 
-const postfixId = 'canton';
+const postfixId = 'chausse-ploye';
 const ermineScale = 0.3;
 const vairScale = 0.23;
 const potentScale = 0.16;
@@ -30,28 +30,63 @@ export const ChaussePloyeOrdinaryDisplay = ({ dimension, ordinary, fillFromTinct
   });
 
   const lineOptions = computeLineOptions(ordinary.line, dimension);
-  const invertedLineOptions = invertLineOptionNullable(lineOptions);
-  const pathBuilderLeft = SvgPathBuilder.start([0, 0])
-    .arcTo([width / 2, height], { radius: height * 2.5, sweep: 1 }, invertedLineOptions)
-    .goTo([0, height])
-    .close();
-  const pathBuilderRight = SvgPathBuilder.start([width, 0])
-    .arcTo([width / 2, height], { radius: height * 2.5 }, lineOptions)
-    .goTo([width, height])
-    .close();
-  const pathBuilderAndTincture = [
-    { pathBuilder: pathBuilderLeft, tincture: ordinary.tincture },
-    { pathBuilder: pathBuilderRight, tincture: ordinary.tincture },
-  ];
 
-  return (
-    <CommonOrdinaryDisplay
-      fillFromTincture={fillFromTincture}
-      onClick={onClick}
-      transformProperties={transformProperties}
-      pathBuilderAndTincture={pathBuilderAndTincture}
-      postfixId={postfixId}
-      stroke={ordinary.fimbriated}
-    />
-  );
+  const pathBuilder = SvgPathBuilder.start([0, 0])
+    .arcTo([width / 2, height], { radius: height * 2.5, sweep: 1 }, lineOptions)
+    .arcTo([width, 0], { radius: height * 2.5, sweep: 1 }, lineOptions)
+    .close();
+  if (ordinary.tinctures.kind === 'simple') {
+    const basePathBuilderAndTincture = [{ pathBuilder, tincture: ordinary.tinctures.tincture }];
+    return (
+      <CommonOrdinaryDisplay
+        fillFromTincture={fillFromTincture}
+        onClick={onClick}
+        transformProperties={transformProperties}
+        pathBuilderAndTincture={basePathBuilderAndTincture}
+        postfixId={postfixId}
+        stroke={ordinary.fimbriated}
+      />
+    );
+  } else {
+    const pathBuilderLeft = SvgPathBuilder.start([0, 0])
+      .arcTo([width / 2, height], { radius: height * 2.5, sweep: 1 }, lineOptions)
+      .goTo([width / 2, 0])
+      .close();
+    const pathBuilderRight = SvgPathBuilder.start([width / 2, 0])
+      .goTo([width / 2, height])
+      .arcTo([width, 0], { radius: height * 2.5, sweep: 1 }, lineOptions)
+      .close();
+    const pathBuilderAndTincture = [
+      {
+        pathBuilder: pathBuilderLeft,
+        tincture: ordinary.tinctures.tinctures[0],
+      },
+      {
+        pathBuilder: pathBuilderRight,
+        tincture: ordinary.tinctures.tinctures[1],
+      },
+    ];
+    const basePathBuilderAndTincture = [{ pathBuilder, tincture: ordinary.tinctures.tinctures[0] }];
+    return (
+      <>
+        <CommonOrdinaryDisplay
+          fillFromTincture={fillFromTincture}
+          onClick={onClick}
+          transformProperties={transformProperties}
+          pathBuilderAndTincture={basePathBuilderAndTincture}
+          postfixId={postfixId}
+          stroke={ordinary.fimbriated}
+          baseStrokeWith={6}
+        />
+        <CommonOrdinaryDisplay
+          fillFromTincture={fillFromTincture}
+          onClick={onClick}
+          transformProperties={transformProperties}
+          pathBuilderAndTincture={pathBuilderAndTincture}
+          postfixId={postfixId}
+          stroke={null}
+        />
+      </>
+    );
+  }
 };

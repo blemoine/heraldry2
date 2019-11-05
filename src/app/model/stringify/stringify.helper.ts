@@ -123,7 +123,7 @@ function stringifyOrdinary(ordinary: Ordinary): string {
       result += ' fimbriated ' + stringifyTincture(ordinary.fimbriated);
     }
     return result;
-  } else if (ordinary.name === 'chape-ploye') {
+  } else if (ordinary.name === 'chape-ploye' || ordinary.name === 'chausse-ploye') {
     let result = stringifyOrdinaryName(ordinary.name) + ' ';
     if (ordinary.line !== 'straight') {
       result += stringifyLine(ordinary.line) + ' ';

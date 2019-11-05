@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ChapePloye, chapePloyeTincturesKind } from '../../../model/ordinary';
+import { ChapePloye, chapePloyeTincturesKind, ChaussePloye } from '../../../model/ordinary';
 import { MetalsAndColours, or, Tincture } from '../../../model/tincture';
 import { LineSelect } from '../LineSelect';
 import { Line } from '../../../model/line';
@@ -10,7 +10,7 @@ import { cannotHappen } from '../../../../utils/cannot-happen';
 import { SelectScalar } from '../../../common/SelectScalar';
 import { MetalAndColoursSelect } from '../TinctureSelect';
 
-type SupportedOrdinary = ChapePloye;
+type SupportedOrdinary = ChapePloye | ChaussePloye;
 type Props = {
   tinctureConfiguration: TinctureConfiguration;
   ordinary: SupportedOrdinary;

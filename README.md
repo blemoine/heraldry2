@@ -46,6 +46,8 @@ Faire le "of the last"
 - Faire un formulaire pour ermined
 - Swiss Bordure/Orle mal affiché
 - A "pellet" est un "roundel sable"
+- Engrailed chaussé ployé est moche
+- Chaussé ployé per pale fimbriated devrait pas avoir le milieu fimbriated
 
 
 ## Feature to add

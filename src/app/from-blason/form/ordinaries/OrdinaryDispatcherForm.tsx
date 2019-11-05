@@ -16,7 +16,7 @@ export const OrdinaryDispatcherForm = ({ tinctureConfiguration, ordinary, ordina
     return (
       <PaleForm tinctureConfiguration={tinctureConfiguration} ordinary={ordinary} ordinaryChange={ordinaryChange} />
     );
-  } else if (ordinary.name === 'chape-ploye') {
+  } else if (ordinary.name === 'chape-ploye' || ordinary.name === 'chausse-ploye') {
     return (
       <ChapePloyeForm
         tinctureConfiguration={tinctureConfiguration}

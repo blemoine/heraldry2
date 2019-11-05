@@ -24,7 +24,7 @@ function allDeclaredTincturesOfCharge(charge: Charge): Array<Tincture> {
   }
 }
 export function allDeclaredTincturesOfOrdinary(ordinary: Ordinary): Array<Tincture> {
-  if (ordinary.name === 'chape-ploye') {
+  if (ordinary.name === 'chape-ploye' || ordinary.name === 'chausse-ploye') {
     const tinctures = ordinary.tinctures;
     if (tinctures.kind === 'party') {
       return tinctures.tinctures;
