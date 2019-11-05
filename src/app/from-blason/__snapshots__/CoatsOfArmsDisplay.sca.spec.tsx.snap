@@ -1720,6 +1720,189 @@ exports[`CoatsOfArms should render 'Bendy and per bend sinister sable and Or' 1`
 </svg>
 `;
 
+exports[`CoatsOfArms should render 'Bendy and per pale sable and argent' 1`] = `
+<svg
+  className="coats-of-arms-display"
+  height={266.6666666666667}
+  viewBox="0 0 200 266.6666666666667"
+  width={200}
+>
+  <defs>
+    
+    
+    
+    
+    
+    
+    
+    
+    <clipPath
+      id="plain-field-clip-path"
+    >
+      <path
+        d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
+        fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
+        stroke="#333"
+        strokeWidth={1}
+        style={
+          Object {
+            "cursor": "pointer",
+            "pointerEvents": "none",
+          }
+        }
+      />
+    </clipPath>
+  </defs>
+  <g
+    className="blason-field"
+    clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
+  >
+    <g>
+      <path
+        d="M 0 -29.62963 L 100 0 V29.62963 L 0 0 Z"
+        fill="#000000"
+        stroke="#333"
+      />
+      <path
+        d="M 100 -29.62963 L 200 0 L 200 29.62963 L 100 0 L 100 -29.62963"
+        fill="#000000"
+        stroke="#333"
+      />
+    </g>
+    <g>
+      <path
+        d="M 0 0 L 100 29.62963 V59.25926 L 0 29.62963 Z"
+        fill="#FFFFFF"
+        stroke="#333"
+      />
+      <path
+        d="M 100 0 L 200 29.62963 L 200 59.25926 L 100 29.62963 L 100 0"
+        fill="#FFFFFF"
+        stroke="#333"
+      />
+    </g>
+    <g>
+      <path
+        d="M 0 29.62963 L 100 59.25926 V88.88889 L 0 59.25926 Z"
+        fill="#000000"
+        stroke="#333"
+      />
+      <path
+        d="M 100 29.62963 L 200 59.25926 L 200 88.88889 L 100 59.25926 L 100 29.62963"
+        fill="#000000"
+        stroke="#333"
+      />
+    </g>
+    <g>
+      <path
+        d="M 0 59.25926 L 100 88.88889 V118.51852 L 0 88.88889 Z"
+        fill="#FFFFFF"
+        stroke="#333"
+      />
+      <path
+        d="M 100 59.25926 L 200 88.88889 L 200 118.51852 L 100 88.88889 L 100 59.25926"
+        fill="#FFFFFF"
+        stroke="#333"
+      />
+    </g>
+    <g>
+      <path
+        d="M 0 88.88889 L 100 118.51852 V148.14815 L 0 118.51852 Z"
+        fill="#000000"
+        stroke="#333"
+      />
+      <path
+        d="M 100 88.88889 L 200 118.51852 L 200 148.14815 L 100 118.51852 L 100 88.88889"
+        fill="#000000"
+        stroke="#333"
+      />
+    </g>
+    <g>
+      <path
+        d="M 0 118.51852 L 100 148.14815 V177.77778 L 0 148.14815 Z"
+        fill="#FFFFFF"
+        stroke="#333"
+      />
+      <path
+        d="M 100 118.51852 L 200 148.14815 L 200 177.77778 L 100 148.14815 L 100 118.51852"
+        fill="#FFFFFF"
+        stroke="#333"
+      />
+    </g>
+    <g>
+      <path
+        d="M 0 148.14815 L 100 177.77778 V207.40741 L 0 177.77778 Z"
+        fill="#000000"
+        stroke="#333"
+      />
+      <path
+        d="M 100 148.14815 L 200 177.77778 L 200 207.40741 L 100 177.77778 L 100 148.14815"
+        fill="#000000"
+        stroke="#333"
+      />
+    </g>
+    <g>
+      <path
+        d="M 0 177.77778 L 100 207.40741 V237.03704 L 0 207.40741 Z"
+        fill="#FFFFFF"
+        stroke="#333"
+      />
+      <path
+        d="M 100 177.77778 L 200 207.40741 L 200 237.03704 L 100 207.40741 L 100 177.77778"
+        fill="#FFFFFF"
+        stroke="#333"
+      />
+    </g>
+    <g>
+      <path
+        d="M 0 207.40741 L 100 237.03704 V266.66667 L 0 237.03704 Z"
+        fill="#000000"
+        stroke="#333"
+      />
+      <path
+        d="M 100 207.40741 L 200 237.03704 L 200 266.66667 L 100 237.03704 L 100 207.40741"
+        fill="#000000"
+        stroke="#333"
+      />
+    </g>
+    <g>
+      <path
+        d="M 0 237.03704 L 100 266.66667 V296.2963 L 0 266.66667 Z"
+        fill="#FFFFFF"
+        stroke="#333"
+      />
+      <path
+        d="M 100 237.03704 L 200 266.66667 L 200 296.2963 L 100 266.66667 L 100 237.03704"
+        fill="#FFFFFF"
+        stroke="#333"
+      />
+    </g>
+  </g>
+  <path
+    d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
+    fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
+    stroke="#333"
+    strokeWidth={1}
+    style={
+      Object {
+        "cursor": "pointer",
+        "pointerEvents": "none",
+      }
+    }
+  />
+</svg>
+`;
+
 exports[`CoatsOfArms should render 'Bendy ermine and sable' 1`] = `
 <svg
   className="coats-of-arms-display"

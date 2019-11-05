@@ -246,6 +246,8 @@ export function stringifyFieldKind(field: Field['kind']): string {
     return 'barry and per pale';
   } else if (field === 'bendy-and-per-bend-sinister') {
     return 'bendy and per bend sinister';
+  } else if (field === 'bendy-and-per-pale') {
+    return 'bendy and per pale';
   } else if (field === 'barry-and-per-chevron-throughout') {
     return 'barry and per chevron throughout';
   } else {
@@ -306,6 +308,7 @@ function stringifyField(field: Field, shouldCapitalize: boolean): string {
       field.kind === 'lozenge-throughout-arched' ||
       field.kind === 'barry-and-per-pale' ||
       field.kind === 'bendy-and-per-bend-sinister' ||
+      field.kind === 'bendy-and-per-pale' ||
       field.kind === 'barry-and-per-chevron-throughout'
     ) {
       return fieldStr + ` ${stringifyTincture(field.tinctures[0])} and ${stringifyTincture(field.tinctures[1])}`;
