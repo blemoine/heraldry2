@@ -136,9 +136,9 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
       if (shape === 'default') {
         updatedDimension = dimension;
       } else if (shape === 'square' || shape === 'rightCut') {
-        updatedDimension = { width: dimension.width, height: dimension.height * 1.4 };
+        updatedDimension = { width: dimension.width, height: dimension.height * 1.1 };
       } else if (shape === 'leftCut') {
-        updatedDimension = { width: dimension.width, height: dimension.height * 0.68 };
+        updatedDimension = { width: dimension.width, height: dimension.height * 0.9 };
       } else {
         return cannotHappen(shape);
       }
@@ -156,13 +156,12 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
       if (shape === 'default') {
         updatedDimension = dimension;
       } else if (shape === 'square' || shape === 'leftCut') {
-        updatedDimension = { width: dimension.width, height: dimension.height * 1.4 };
+        updatedDimension = { width: dimension.width, height: dimension.height * 1.1 };
       } else if (shape === 'rightCut') {
-        updatedDimension = { width: dimension.width, height: dimension.height * 0.68 };
+        updatedDimension = { width: dimension.width, height: dimension.height * 0.9 };
       } else {
         return cannotHappen(shape);
       }
-
       return (
         <BendySinisterDisplay
           field={field}

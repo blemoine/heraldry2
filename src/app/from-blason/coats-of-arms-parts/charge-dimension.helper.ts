@@ -299,7 +299,7 @@ export function getChargeDimension(
         return {
           verticalScale: 0.85,
           horizontalScale: 0.8,
-          verticalOffset: -0.07,
+          verticalOffset: -0.04,
           horizontalOffset: shape === 'leftCut' ? 0.2 : 0,
         };
       } else {
