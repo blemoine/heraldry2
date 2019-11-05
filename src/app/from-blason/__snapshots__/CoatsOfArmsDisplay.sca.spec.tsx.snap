@@ -1767,7 +1767,7 @@ exports[`CoatsOfArms should render 'Bendy and per pale sable and argent' 1`] = `
   >
     <g>
       <path
-        d="M 0 -29.62963 L 100 0 V29.62963 L 0 0 Z"
+        d="M 0 -29.62963 L 100 0 L 100 29.62963 L 0 0 L 0 -29.62963"
         fill="#000000"
         stroke="#333"
       />
@@ -1779,7 +1779,7 @@ exports[`CoatsOfArms should render 'Bendy and per pale sable and argent' 1`] = `
     </g>
     <g>
       <path
-        d="M 0 0 L 100 29.62963 V59.25926 L 0 29.62963 Z"
+        d="M 0 0 L 100 29.62963 L 100 59.25926 L 0 29.62963 L 0 0"
         fill="#FFFFFF"
         stroke="#333"
       />
@@ -1791,7 +1791,7 @@ exports[`CoatsOfArms should render 'Bendy and per pale sable and argent' 1`] = `
     </g>
     <g>
       <path
-        d="M 0 29.62963 L 100 59.25926 V88.88889 L 0 59.25926 Z"
+        d="M 0 29.62963 L 100 59.25926 L 100 88.88889 L 0 59.25926 L 0 29.62963"
         fill="#000000"
         stroke="#333"
       />
@@ -1803,7 +1803,7 @@ exports[`CoatsOfArms should render 'Bendy and per pale sable and argent' 1`] = `
     </g>
     <g>
       <path
-        d="M 0 59.25926 L 100 88.88889 V118.51852 L 0 88.88889 Z"
+        d="M 0 59.25926 L 100 88.88889 L 100 118.51852 L 0 88.88889 L 0 59.25926"
         fill="#FFFFFF"
         stroke="#333"
       />
@@ -1815,7 +1815,7 @@ exports[`CoatsOfArms should render 'Bendy and per pale sable and argent' 1`] = `
     </g>
     <g>
       <path
-        d="M 0 88.88889 L 100 118.51852 V148.14815 L 0 118.51852 Z"
+        d="M 0 88.88889 L 100 118.51852 L 100 148.14815 L 0 118.51852 L 0 88.88889"
         fill="#000000"
         stroke="#333"
       />
@@ -1827,7 +1827,7 @@ exports[`CoatsOfArms should render 'Bendy and per pale sable and argent' 1`] = `
     </g>
     <g>
       <path
-        d="M 0 118.51852 L 100 148.14815 V177.77778 L 0 148.14815 Z"
+        d="M 0 118.51852 L 100 148.14815 L 100 177.77778 L 0 148.14815 L 0 118.51852"
         fill="#FFFFFF"
         stroke="#333"
       />
@@ -1839,7 +1839,7 @@ exports[`CoatsOfArms should render 'Bendy and per pale sable and argent' 1`] = `
     </g>
     <g>
       <path
-        d="M 0 148.14815 L 100 177.77778 V207.40741 L 0 177.77778 Z"
+        d="M 0 148.14815 L 100 177.77778 L 100 207.40741 L 0 177.77778 L 0 148.14815"
         fill="#000000"
         stroke="#333"
       />
@@ -1851,7 +1851,7 @@ exports[`CoatsOfArms should render 'Bendy and per pale sable and argent' 1`] = `
     </g>
     <g>
       <path
-        d="M 0 177.77778 L 100 207.40741 V237.03704 L 0 207.40741 Z"
+        d="M 0 177.77778 L 100 207.40741 L 100 237.03704 L 0 207.40741 L 0 177.77778"
         fill="#FFFFFF"
         stroke="#333"
       />
@@ -1863,7 +1863,7 @@ exports[`CoatsOfArms should render 'Bendy and per pale sable and argent' 1`] = `
     </g>
     <g>
       <path
-        d="M 0 207.40741 L 100 237.03704 V266.66667 L 0 237.03704 Z"
+        d="M 0 207.40741 L 100 237.03704 L 100 266.66667 L 0 237.03704 L 0 207.40741"
         fill="#000000"
         stroke="#333"
       />
@@ -1875,7 +1875,7 @@ exports[`CoatsOfArms should render 'Bendy and per pale sable and argent' 1`] = `
     </g>
     <g>
       <path
-        d="M 0 237.03704 L 100 266.66667 V296.2963 L 0 266.66667 Z"
+        d="M 0 237.03704 L 100 266.66667 L 100 296.2963 L 0 266.66667 L 0 237.03704"
         fill="#FFFFFF"
         stroke="#333"
       />

@@ -13,7 +13,7 @@ import {
   urdyBetweenPoint,
   waveBetweenPoint,
 } from './line-style.helper';
-import { Matrix3, mul, mulVec, rotate3, scale3, translation3 } from './matrix';
+import { Matrix3, mul, mulVec, rotate3, scale3, skew3, translation3 } from './matrix';
 import { Dimension } from '../model/dimension';
 
 type MoveTo = { command: 'M'; point: PathAbsolutePoint };
@@ -505,6 +505,10 @@ export class SvgPathBuilder {
       mul(translation3(center[0], center[1]), scale3(scaleX, scaleY), translation3(-center[0], -center[1])),
       true
     );
+  }
+
+  skew(x: number, y: number): SvgPathBuilder {
+    return this.transform(skew3(x, y), false);
   }
 
   private transform(transformMatrix: Matrix3, sweepInversion: boolean): SvgPathBuilder {

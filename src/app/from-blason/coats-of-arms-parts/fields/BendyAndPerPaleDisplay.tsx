@@ -9,7 +9,7 @@ import { FurPatternDefinition } from '../FurPatternDefinition';
 import { BendyAndPerPaleField } from '../../../model/field';
 import { FillFromTincture } from '../../fillFromTincture.helper';
 
-const postfixId = 'bendy-and-per-bend-sinister';
+const postfixId = 'bendy-and-per-pale';
 const ermineScale = 0.66;
 const vairScale = 0.56;
 const potentScale = 0.35;
@@ -45,13 +45,11 @@ export const BendyAndPerPaleDisplay: React.FunctionComponent<Props> = ({
         transformProperties={transformProperties}
       />
       {range(0, rows).map((i) => {
-        const angle = bendHeight / (width / 2);
-        const path = SvgPathBuilder.start([0, (i - 1) * bendHeight])
-          .goTo([width / 2, (i - 1) * bendHeight + (angle * width) / 2])
-          .goTo([width / 2, i * bendHeight + (angle * width) / 2])
-          .goTo([0, i * bendHeight])
-          .close();
-        const rightPath = path.translate([width / 2, 0]);
+        const bendWidth = width / 2;
+        const bendDimension = { width: bendWidth, height: bendHeight };
+        const path = SvgPathBuilder.rectangle([0, (i - 1) * bendHeight], bendDimension).skew(0, bendHeight / bendWidth);
+
+        const rightPath = path.translate([bendWidth, 0]);
         return (
           <g key={i}>
             <PathFromBuilder pathBuilder={path} fill={fills[i % 2]} stroke="#333" />

@@ -48,6 +48,7 @@ Faire le "of the last"
 - A "pellet" est un "roundel sable"
 - Engrailed chaussé ployé est moche
 - Chaussé ployé per pale fimbriated devrait pas avoir le milieu fimbriated
+- Réecrire les bendy en s'inspirant de bendy per pale.
 
 
 ## Feature to add
