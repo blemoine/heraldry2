@@ -37,7 +37,7 @@ export function computeLineOptions(line: Line, { width, height }: Dimension): Li
   }
 }
 
-export function invertLineOptions(lineOptions: LineOptions): LineOptions {
+function invertLineOptions(lineOptions: LineOptions): LineOptions {
   if (
     lineOptions.line === 'indented' ||
     lineOptions.line === 'embattled' ||
