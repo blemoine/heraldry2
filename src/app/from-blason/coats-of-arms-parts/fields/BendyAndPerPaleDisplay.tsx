@@ -32,7 +32,7 @@ export const BendyAndPerPaleDisplay: React.FunctionComponent<Props> = ({
 
   const scaleRatio = height / 480;
   const transformProperties = buildFurTransformProperty(fillFromTincture, allDeclaredTincturesOfField(field), {
-    ermine: [{ kind: 'scale', value: [ermineScale * scaleRatio, ermineScale * 0.55 * scaleRatio] }],
+    ermine: [{ kind: 'scale', value: [ermineScale * scaleRatio * 1.5, ermineScale * (3 / rows - 0.05) * scaleRatio] }],
     vair: [{ kind: 'scale', value: [vairScale * scaleRatio, vairScale * 0.6785 * scaleRatio] }],
     potent: [{ kind: 'scale', value: [potentScale * scaleRatio, potentScale * 1.35 * scaleRatio] }],
   });
