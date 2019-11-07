@@ -7,8 +7,11 @@ import { Ermined } from '../../model/tincture';
 type Props = { ermine: Ermined; patternId: string; dimension: Dimension; tinctureConfiguration: TinctureConfiguration };
 export const ErminePatternDef = ({ ermine, patternId, dimension: { width }, tinctureConfiguration }: Props) => {
   const fieldColor = tinctureConfiguration[ermine.field.name];
+  const patternUnitWidth = 70;
+  const patternUnitHeight = 125;
+  const patternHeightMargin = 5;
   const patternWidth = width / 5.5;
-  const patternHeight = (patternWidth * 125) / 70;
+  const patternHeight = (patternWidth * patternUnitHeight) / patternUnitWidth;
   const id = ermine.name + '-' + ermine.field.name + '-' + ermine.spot.name;
   return (
     <>
@@ -21,11 +24,23 @@ export const ErminePatternDef = ({ ermine, patternId, dimension: { width }, tinc
         width={patternWidth}
         height={patternHeight}
         patternUnits="userSpaceOnUse"
-        viewBox="0 0 70 125"
+        viewBox={`0 0 ${patternUnitWidth} ${patternUnitHeight}`}
       >
-        <rect width="70px" height="125px" fill={fieldColor} />
-        <use href={'#' + id} x="0" y="0" width={35} height={60} />
-        <use href={'#' + id} x="35" y="65" width={35} height={60} />
+        <rect width={patternUnitWidth} height={patternUnitHeight} fill={fieldColor} />
+        <use
+          href={'#' + id}
+          x="0"
+          y="0"
+          width={patternUnitWidth / 2}
+          height={(patternUnitHeight - patternHeightMargin) / 2}
+        />
+        <use
+          href={'#' + id}
+          x={patternUnitWidth / 2}
+          y={(patternUnitHeight + patternHeightMargin) / 2}
+          width={patternUnitWidth / 2}
+          height={(patternUnitHeight - patternHeightMargin) / 2}
+        />
       </pattern>
     </>
   );
