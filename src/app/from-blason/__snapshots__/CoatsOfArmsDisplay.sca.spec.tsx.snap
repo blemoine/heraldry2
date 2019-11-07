@@ -278,18 +278,18 @@ exports[`CoatsOfArms should render 'Barry and per chevron throughout pean and er
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-sable-or"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-sable-or"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     <symbol
@@ -340,18 +340,18 @@ exports[`CoatsOfArms should render 'Barry and per chevron throughout pean and er
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-or-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-or-sable"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     
@@ -767,18 +767,18 @@ exports[`CoatsOfArms should render 'Barry azure and ermine' 1`] = `
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     
@@ -1020,18 +1020,18 @@ exports[`CoatsOfArms should render 'Barry ermine and vert' 1`] = `
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     
@@ -1273,18 +1273,18 @@ exports[`CoatsOfArms should render 'Barry wavy ermine and sable' 1`] = `
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     
@@ -1433,18 +1433,18 @@ exports[`CoatsOfArms should render 'Barry wavy vert and argent ermined vert' 1`]
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-vert"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-vert"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     
@@ -1959,18 +1959,18 @@ exports[`CoatsOfArms should render 'Bendy ermine and sable' 1`] = `
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     
@@ -2406,18 +2406,18 @@ exports[`CoatsOfArms should render 'Bendy sinister vert and erminois' 1`] = `
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-or-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-or-sable"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     

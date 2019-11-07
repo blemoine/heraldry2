@@ -1360,18 +1360,18 @@ exports[`CoatsOfArms should render 'Azure, two crosses moline counter ermine' 1`
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-sable-argent"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-sable-argent"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     
@@ -1689,18 +1689,18 @@ exports[`CoatsOfArms should render 'Barry ermine and vair' 1`] = `
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     <symbol
@@ -1901,18 +1901,18 @@ exports[`CoatsOfArms should render 'Barry pily counter ermine and potent en poin
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-sable-argent"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-sable-argent"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     
@@ -2592,18 +2592,18 @@ exports[`CoatsOfArms should render 'Bendy or and argent, a lion rampant ermine' 
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     
@@ -4031,18 +4031,18 @@ exports[`CoatsOfArms should render 'Chequy gules and or, a chief engrailed ermin
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     
@@ -5091,18 +5091,18 @@ exports[`CoatsOfArms should render 'Ermine, a bend invected vair' 1`] = `
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     <symbol
@@ -5295,18 +5295,18 @@ exports[`CoatsOfArms should render 'Ermine, two pallets sable' 1`] = `
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     
@@ -5461,18 +5461,18 @@ exports[`CoatsOfArms should render 'Erminois, four crosses bottony argent' 1`] =
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-or-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-or-sable"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     
@@ -6045,18 +6045,18 @@ exports[`CoatsOfArms should render 'Or, a bend sinister invected ermine' 1`] = `
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     
@@ -6202,18 +6202,18 @@ exports[`CoatsOfArms should render 'Or, a cross gules ermined argent' 1`] = `
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-gules-argent"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-gules-argent"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     
@@ -7407,18 +7407,18 @@ exports[`CoatsOfArms should render 'Paly pily vair and pean' 1`] = `
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-sable-or"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-sable-or"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     <symbol
@@ -7997,18 +7997,18 @@ exports[`CoatsOfArms should render 'Per chevron ermine and gules, a shakefork or
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     
@@ -8154,18 +8154,18 @@ exports[`CoatsOfArms should render 'Per chevron reversed invected ermine and gul
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     
@@ -8375,18 +8375,18 @@ exports[`CoatsOfArms should render 'Per fess or and ermine, a bordure engrailed 
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     
@@ -8534,18 +8534,18 @@ exports[`CoatsOfArms should render 'Per pale invected ermine and or' 1`] = `
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     
@@ -9030,18 +9030,18 @@ exports[`CoatsOfArms should render 'Quarterly, 1st Per pile reversed embattled e
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     <symbol
@@ -9092,18 +9092,18 @@ exports[`CoatsOfArms should render 'Quarterly, 1st Per pile reversed embattled e
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     <symbol
@@ -9154,18 +9154,18 @@ exports[`CoatsOfArms should render 'Quarterly, 1st Per pile reversed embattled e
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     <symbol
@@ -9216,18 +9216,18 @@ exports[`CoatsOfArms should render 'Quarterly, 1st Per pile reversed embattled e
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     
@@ -9492,18 +9492,18 @@ exports[`CoatsOfArms should render 'Quarterly, 1st and 2nd and 3rd and 4th quart
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     <symbol
@@ -9554,18 +9554,18 @@ exports[`CoatsOfArms should render 'Quarterly, 1st and 2nd and 3rd and 4th quart
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     <symbol
@@ -9616,18 +9616,18 @@ exports[`CoatsOfArms should render 'Quarterly, 1st and 2nd and 3rd and 4th quart
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     <symbol
@@ -9678,18 +9678,18 @@ exports[`CoatsOfArms should render 'Quarterly, 1st and 2nd and 3rd and 4th quart
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     
@@ -10082,18 +10082,18 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     <symbol
@@ -10144,18 +10144,18 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     <symbol
@@ -10206,18 +10206,18 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     <symbol
@@ -10268,18 +10268,18 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     
@@ -11515,18 +11515,18 @@ exports[`CoatsOfArms should render a fur blason: Ermine 1`] = `
         width={70}
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x="0"
         y="0"
       />
       <use
-        height={60}
+        height={62.5}
         href="#ermined-argent-sable"
         width={35}
         x={35}
-        y={65}
+        y={62.5}
       />
     </pattern>
     
