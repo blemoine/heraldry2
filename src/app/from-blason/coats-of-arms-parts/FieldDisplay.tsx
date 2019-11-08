@@ -195,6 +195,17 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
           fillFromTincture={fillFromTincture}
         />
       );
+    } else if (field.kind === 'bendy-sinister-and-per-bend') {
+      return (
+        <g transform={`scale(-1,1) translate(-${dimension.width} 0)`}>
+          <BendyAndPerBendSinisterDisplay
+            field={field}
+            dimension={dimension}
+            rows={10}
+            fillFromTincture={fillFromTincture}
+          />
+        </g>
+      );
     } else if (field.kind === 'bendy-and-per-pale') {
       return (
         <BendyAndPerPaleDisplay field={field} dimension={dimension} rows={10} fillFromTincture={fillFromTincture} />

@@ -62,6 +62,7 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
         newKind === 'lozenge-throughout-arched' ||
         newKind === 'barry-and-per-pale' ||
         newKind === 'bendy-and-per-bend-sinister' ||
+        newKind === 'bendy-sinister-and-per-bend' ||
         newKind === 'bendy-and-per-pale' ||
         newKind === 'barry-and-per-chevron-throughout'
       ) {
@@ -134,6 +135,7 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
             field.kind === 'lozenge-throughout-arched' ||
             field.kind === 'barry-and-per-pale' ||
             field.kind === 'bendy-and-per-bend-sinister' ||
+            field.kind === 'bendy-sinister-and-per-bend' ||
             field.kind === 'bendy-and-per-pale' ||
             field.kind === 'barry-and-per-chevron-throughout' ? (
             <TincturesConfiguration

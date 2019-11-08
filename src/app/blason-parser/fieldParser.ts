@@ -133,6 +133,7 @@ export function fieldParser(): P.Parser<Field> {
       constStr('embrassee-a-sinister', 'Embrassee a sinister'),
       constStr('paly-pily', 'Paly pily'),
       constStr('bendy-and-per-pale', 'Bendy and per pale'),
+      constStr('bendy-sinister-and-per-bend', 'Bendy sinister and per bend'),
       constStr('bendy-and-per-bend-sinister', 'Bendy and per bend sinister'),
       constStr('barry-and-per-pale', 'Barry and per pale'),
       constStr('barry-and-per-chevron-throughout', 'Barry and per chevron throughout'),

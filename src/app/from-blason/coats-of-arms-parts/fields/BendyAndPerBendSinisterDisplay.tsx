@@ -6,7 +6,7 @@ import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { buildFurTransformProperty, getFill } from '../FurPattern.model';
 import { allDeclaredTincturesOfField } from '../../blason.helpers';
 import { FurPatternDefinition } from '../FurPatternDefinition';
-import { BendyAndPerBendSinisterField } from '../../../model/field';
+import { BendyAndPerBendSinisterField, BendySinisterAndPerBendField } from '../../../model/field';
 import { FillFromTincture } from '../../fillFromTincture.helper';
 
 const postfixId = 'bendy-and-per-bend-sinister';
@@ -14,7 +14,7 @@ const ermineScale = 0.66;
 const vairScale = 0.56;
 const potentScale = 0.35;
 type Props = {
-  field: BendyAndPerBendSinisterField;
+  field: BendyAndPerBendSinisterField | BendySinisterAndPerBendField;
   dimension: Dimension;
   rows: number;
   fillFromTincture: FillFromTincture;
