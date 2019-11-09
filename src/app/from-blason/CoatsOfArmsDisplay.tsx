@@ -64,9 +64,11 @@ export function CoatsOfArmsDisplay(props: Props) {
               <ErminePatternDef
                 key={ermine.name + i}
                 ermine={ermine}
-                dimension={dimension}
                 patternId={furPatternId(ermine)}
                 tinctureConfiguration={tinctureConfiguration}
+                spotWidth={width / 9}
+                heightMarginScale={0.45}
+                widthMarginScale={0}
               />
             );
           })}

@@ -42,9 +42,11 @@ const TinctureRenderer = ({
           {isErmine(tincture) ? (
             <ErminePatternDef
               ermine={tincture}
-              dimension={dimension}
               patternId={tincture.name + '-field-' + id}
               tinctureConfiguration={tinctureConfiguration}
+              spotWidth={width / 4}
+              heightMarginScale={0}
+              widthMarginScale={0}
             />
           ) : isVair(tincture) ? (
             <VairPatternDef

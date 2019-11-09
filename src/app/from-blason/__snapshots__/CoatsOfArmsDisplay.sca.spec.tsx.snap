@@ -266,30 +266,30 @@ exports[`CoatsOfArms should render 'Barry and per chevron throughout pean and er
       </g>
     </symbol>
     <pattern
-      height={64.93506493506494}
+      height={65.33333333333333}
       id="field-pattern-3-sable-or"
       patternUnits="userSpaceOnUse"
-      viewBox="0 0 70 125"
-      width={36.36363636363637}
+      viewBox="0 0 44.44444444444444 65.33333333333333"
+      width={44.44444444444444}
     >
       <rect
         fill="#000000"
-        height={125}
-        width={70}
+        height={65.33333333333333}
+        width={44.44444444444444}
       />
       <use
-        height={62.5}
+        height={26.666666666666664}
         href="#ermined-sable-or"
-        width={35}
-        x="0"
-        y="0"
+        width={22.22222222222222}
+        x={0}
+        y={3}
       />
       <use
-        height={62.5}
+        height={26.666666666666664}
         href="#ermined-sable-or"
-        width={35}
-        x={35}
-        y={62.5}
+        width={22.22222222222222}
+        x={22.22222222222222}
+        y={35.666666666666664}
       />
     </pattern>
     <symbol
@@ -328,30 +328,30 @@ exports[`CoatsOfArms should render 'Barry and per chevron throughout pean and er
       </g>
     </symbol>
     <pattern
-      height={64.93506493506494}
+      height={65.33333333333333}
       id="field-pattern-3-or-sable"
       patternUnits="userSpaceOnUse"
-      viewBox="0 0 70 125"
-      width={36.36363636363637}
+      viewBox="0 0 44.44444444444444 65.33333333333333"
+      width={44.44444444444444}
     >
       <rect
         fill="#FFD700"
-        height={125}
-        width={70}
+        height={65.33333333333333}
+        width={44.44444444444444}
       />
       <use
-        height={62.5}
+        height={26.666666666666664}
         href="#ermined-or-sable"
-        width={35}
-        x="0"
-        y="0"
+        width={22.22222222222222}
+        x={0}
+        y={3}
       />
       <use
-        height={62.5}
+        height={26.666666666666664}
         href="#ermined-or-sable"
-        width={35}
-        x={35}
-        y={62.5}
+        width={22.22222222222222}
+        x={22.22222222222222}
+        y={35.666666666666664}
       />
     </pattern>
     
@@ -755,30 +755,30 @@ exports[`CoatsOfArms should render 'Barry azure and ermine' 1`] = `
       </g>
     </symbol>
     <pattern
-      height={64.93506493506494}
+      height={65.33333333333333}
       id="field-pattern-3-argent-sable"
       patternUnits="userSpaceOnUse"
-      viewBox="0 0 70 125"
-      width={36.36363636363637}
+      viewBox="0 0 44.44444444444444 65.33333333333333"
+      width={44.44444444444444}
     >
       <rect
         fill="#FFFFFF"
-        height={125}
-        width={70}
+        height={65.33333333333333}
+        width={44.44444444444444}
       />
       <use
-        height={62.5}
+        height={26.666666666666664}
         href="#ermined-argent-sable"
-        width={35}
-        x="0"
-        y="0"
+        width={22.22222222222222}
+        x={0}
+        y={3}
       />
       <use
-        height={62.5}
+        height={26.666666666666664}
         href="#ermined-argent-sable"
-        width={35}
-        x={35}
-        y={62.5}
+        width={22.22222222222222}
+        x={22.22222222222222}
+        y={35.666666666666664}
       />
     </pattern>
     
@@ -1008,30 +1008,30 @@ exports[`CoatsOfArms should render 'Barry ermine and vert' 1`] = `
       </g>
     </symbol>
     <pattern
-      height={64.93506493506494}
+      height={65.33333333333333}
       id="field-pattern-3-argent-sable"
       patternUnits="userSpaceOnUse"
-      viewBox="0 0 70 125"
-      width={36.36363636363637}
+      viewBox="0 0 44.44444444444444 65.33333333333333"
+      width={44.44444444444444}
     >
       <rect
         fill="#FFFFFF"
-        height={125}
-        width={70}
+        height={65.33333333333333}
+        width={44.44444444444444}
       />
       <use
-        height={62.5}
+        height={26.666666666666664}
         href="#ermined-argent-sable"
-        width={35}
-        x="0"
-        y="0"
+        width={22.22222222222222}
+        x={0}
+        y={3}
       />
       <use
-        height={62.5}
+        height={26.666666666666664}
         href="#ermined-argent-sable"
-        width={35}
-        x={35}
-        y={62.5}
+        width={22.22222222222222}
+        x={22.22222222222222}
+        y={35.666666666666664}
       />
     </pattern>
     
@@ -1261,30 +1261,30 @@ exports[`CoatsOfArms should render 'Barry wavy ermine and sable' 1`] = `
       </g>
     </symbol>
     <pattern
-      height={64.93506493506494}
+      height={65.33333333333333}
       id="field-pattern-3-argent-sable"
       patternUnits="userSpaceOnUse"
-      viewBox="0 0 70 125"
-      width={36.36363636363637}
+      viewBox="0 0 44.44444444444444 65.33333333333333"
+      width={44.44444444444444}
     >
       <rect
         fill="#FFFFFF"
-        height={125}
-        width={70}
+        height={65.33333333333333}
+        width={44.44444444444444}
       />
       <use
-        height={62.5}
+        height={26.666666666666664}
         href="#ermined-argent-sable"
-        width={35}
-        x="0"
-        y="0"
+        width={22.22222222222222}
+        x={0}
+        y={3}
       />
       <use
-        height={62.5}
+        height={26.666666666666664}
         href="#ermined-argent-sable"
-        width={35}
-        x={35}
-        y={62.5}
+        width={22.22222222222222}
+        x={22.22222222222222}
+        y={35.666666666666664}
       />
     </pattern>
     
@@ -1421,30 +1421,30 @@ exports[`CoatsOfArms should render 'Barry wavy vert and argent ermined vert' 1`]
       </g>
     </symbol>
     <pattern
-      height={64.93506493506494}
+      height={65.33333333333333}
       id="field-pattern-3-argent-vert"
       patternUnits="userSpaceOnUse"
-      viewBox="0 0 70 125"
-      width={36.36363636363637}
+      viewBox="0 0 44.44444444444444 65.33333333333333"
+      width={44.44444444444444}
     >
       <rect
         fill="#FFFFFF"
-        height={125}
-        width={70}
+        height={65.33333333333333}
+        width={44.44444444444444}
       />
       <use
-        height={62.5}
+        height={26.666666666666664}
         href="#ermined-argent-vert"
-        width={35}
-        x="0"
-        y="0"
+        width={22.22222222222222}
+        x={0}
+        y={3}
       />
       <use
-        height={62.5}
+        height={26.666666666666664}
         href="#ermined-argent-vert"
-        width={35}
-        x={35}
-        y={62.5}
+        width={22.22222222222222}
+        x={22.22222222222222}
+        y={35.666666666666664}
       />
     </pattern>
     
@@ -1947,30 +1947,30 @@ exports[`CoatsOfArms should render 'Bendy ermine and sable' 1`] = `
       </g>
     </symbol>
     <pattern
-      height={64.93506493506494}
+      height={65.33333333333333}
       id="field-pattern-3-argent-sable"
       patternUnits="userSpaceOnUse"
-      viewBox="0 0 70 125"
-      width={36.36363636363637}
+      viewBox="0 0 44.44444444444444 65.33333333333333"
+      width={44.44444444444444}
     >
       <rect
         fill="#FFFFFF"
-        height={125}
-        width={70}
+        height={65.33333333333333}
+        width={44.44444444444444}
       />
       <use
-        height={62.5}
+        height={26.666666666666664}
         href="#ermined-argent-sable"
-        width={35}
-        x="0"
-        y="0"
+        width={22.22222222222222}
+        x={0}
+        y={3}
       />
       <use
-        height={62.5}
+        height={26.666666666666664}
         href="#ermined-argent-sable"
-        width={35}
-        x={35}
-        y={62.5}
+        width={22.22222222222222}
+        x={22.22222222222222}
+        y={35.666666666666664}
       />
     </pattern>
     
@@ -2200,30 +2200,30 @@ exports[`CoatsOfArms should render 'Bendy sinister and per bend azure and ermine
       </g>
     </symbol>
     <pattern
-      height={64.93506493506494}
+      height={65.33333333333333}
       id="field-pattern-3-argent-sable"
       patternUnits="userSpaceOnUse"
-      viewBox="0 0 70 125"
-      width={36.36363636363637}
+      viewBox="0 0 44.44444444444444 65.33333333333333"
+      width={44.44444444444444}
     >
       <rect
         fill="#FFFFFF"
-        height={125}
-        width={70}
+        height={65.33333333333333}
+        width={44.44444444444444}
       />
       <use
-        height={62.5}
+        height={26.666666666666664}
         href="#ermined-argent-sable"
-        width={35}
-        x="0"
-        y="0"
+        width={22.22222222222222}
+        x={0}
+        y={3}
       />
       <use
-        height={62.5}
+        height={26.666666666666664}
         href="#ermined-argent-sable"
-        width={35}
-        x={35}
-        y={62.5}
+        width={22.22222222222222}
+        x={22.22222222222222}
+        y={35.666666666666664}
       />
     </pattern>
     
@@ -2648,30 +2648,30 @@ exports[`CoatsOfArms should render 'Bendy sinister vert and erminois' 1`] = `
       </g>
     </symbol>
     <pattern
-      height={64.93506493506494}
+      height={65.33333333333333}
       id="field-pattern-3-or-sable"
       patternUnits="userSpaceOnUse"
-      viewBox="0 0 70 125"
-      width={36.36363636363637}
+      viewBox="0 0 44.44444444444444 65.33333333333333"
+      width={44.44444444444444}
     >
       <rect
         fill="#FFD700"
-        height={125}
-        width={70}
+        height={65.33333333333333}
+        width={44.44444444444444}
       />
       <use
-        height={62.5}
+        height={26.666666666666664}
         href="#ermined-or-sable"
-        width={35}
-        x="0"
-        y="0"
+        width={22.22222222222222}
+        x={0}
+        y={3}
       />
       <use
-        height={62.5}
+        height={26.666666666666664}
         href="#ermined-or-sable"
-        width={35}
-        x={35}
-        y={62.5}
+        width={22.22222222222222}
+        x={22.22222222222222}
+        y={35.666666666666664}
       />
     </pattern>
     

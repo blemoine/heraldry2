@@ -1,38 +1,63 @@
 import * as React from 'react';
 import { ErmineDisplay } from './ErmineDisplay';
-import { Dimension } from '../../model/dimension';
 import { TinctureConfiguration } from '../../model/tincture-configuration';
 import { Ermined } from '../../model/tincture';
 
-type Props = { ermine: Ermined; patternId: string; dimension: Dimension; tinctureConfiguration: TinctureConfiguration };
-export const ErminePatternDef = ({ ermine, patternId, dimension: { width }, tinctureConfiguration }: Props) => {
+type Props = {
+  ermine: Ermined;
+  patternId: string;
+  tinctureConfiguration: TinctureConfiguration;
+  spotWidth: number;
+  widthMarginScale: number;
+  heightMarginScale: number;
+};
+export const ErminePatternDef = ({
+  ermine,
+  patternId,
+  tinctureConfiguration,
+  spotWidth,
+  widthMarginScale,
+  heightMarginScale,
+}: Props) => {
   const fieldColor = tinctureConfiguration[ermine.field.name];
-  const patternUnitWidth = 70;
-  const patternUnitHeight = 125;
-  const patternWidth = width / 5.5;
-  const patternHeight = (patternWidth * patternUnitHeight) / patternUnitWidth;
+
+  const ermineSpotWidth = 200;
+  const ermineSpotHeight = 240;
+  const spotHeight = (ermineSpotHeight * spotWidth) / ermineSpotWidth;
+
+  const widthMargin = widthMarginScale * spotWidth;
+  const heightMargin = heightMarginScale * spotHeight;
+  const patternUnitWidth = spotWidth * 2 + widthMargin;
+  const patternUnitHeight = spotHeight * 2 + heightMargin;
+
   const id = ermine.name + '-' + ermine.field.name + '-' + ermine.spot.name;
+
   return (
     <>
-      <symbol viewBox="0 0 200 240" id={id}>
-        <ErmineDisplay width={200} height={240} fill={fieldColor} spot={tinctureConfiguration[ermine.spot.name]} />
+      <symbol viewBox={`0 0 ${ermineSpotWidth} ${ermineSpotHeight}`} id={id}>
+        <ErmineDisplay
+          width={ermineSpotWidth}
+          height={ermineSpotHeight}
+          fill={fieldColor}
+          spot={tinctureConfiguration[ermine.spot.name]}
+        />
       </symbol>
 
       <pattern
         id={patternId}
-        width={patternWidth}
-        height={patternHeight}
+        width={patternUnitWidth}
+        height={patternUnitHeight}
         patternUnits="userSpaceOnUse"
         viewBox={`0 0 ${patternUnitWidth} ${patternUnitHeight}`}
       >
         <rect width={patternUnitWidth} height={patternUnitHeight} fill={fieldColor} />
-        <use href={'#' + id} x="0" y="0" width={patternUnitWidth / 2} height={patternUnitHeight / 2} />
+        <use href={'#' + id} x={widthMargin / 4} y={heightMargin / 4} width={spotWidth} height={spotHeight} />
         <use
           href={'#' + id}
-          x={patternUnitWidth / 2}
-          y={patternUnitHeight / 2}
-          width={patternUnitWidth / 2}
-          height={patternUnitHeight / 2}
+          x={spotWidth + (3 * widthMargin) / 4}
+          y={spotHeight + (3 * heightMargin) / 4}
+          width={spotWidth}
+          height={spotHeight}
         />
       </pattern>
     </>
