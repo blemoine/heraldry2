@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ErmineDisplay } from './ErmineDisplay';
 import { TinctureConfiguration } from '../../model/tincture-configuration';
 import { Ermined } from '../../model/tincture';
+import { fillMetalOrColoursFromConfiguration } from '../configuration/ConfigurationContext';
 
 type Props = {
   ermine: Ermined;
@@ -19,7 +20,8 @@ export const ErminePatternDef = ({
   widthMarginScale,
   heightMarginScale,
 }: Props) => {
-  const fieldColor = tinctureConfiguration[ermine.field.name];
+  const fieldColor = fillMetalOrColoursFromConfiguration(tinctureConfiguration, ermine.field);
+  const spotColor = fillMetalOrColoursFromConfiguration(tinctureConfiguration, ermine.spot);
 
   const ermineSpotWidth = 200;
   const ermineSpotHeight = 240;
@@ -35,12 +37,7 @@ export const ErminePatternDef = ({
   return (
     <>
       <symbol viewBox={`0 0 ${ermineSpotWidth} ${ermineSpotHeight}`} id={id}>
-        <ErmineDisplay
-          width={ermineSpotWidth}
-          height={ermineSpotHeight}
-          fill={fieldColor}
-          spot={tinctureConfiguration[ermine.spot.name]}
-        />
+        <ErmineDisplay width={ermineSpotWidth} height={ermineSpotHeight} fill={fieldColor} spot={spotColor} />
       </symbol>
 
       <pattern
