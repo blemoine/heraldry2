@@ -6,25 +6,26 @@ import { SimpleBlasonShape } from '../blasonDisplay.helper';
 import { ShieldShape } from '../../../model/configuration';
 import { BordureDisplay } from './BordureDisplay';
 import { FillFromTincture } from '../../fillFromTincture.helper';
-import { QuarterOrdinaryDisplay } from './QuarterOrdinaryDisplay';
-import { CantonOrdinaryDisplay } from './CantonOrdinaryDisplay';
-import { ChiefOrdinaryDisplay } from './ChiefOrdinaryDisplay';
-import { BaseOrdinaryDisplay } from './BaseOrdinaryDisplay';
-import { FessOrdinaryDisplay } from './FessOrdinaryDisplay';
-import { BendOrdinaryDisplay } from './BendOrdinaryDisplay';
-import { PaleOrdinaryDisplay } from './PaleOrdinaryDisplay';
-import { CrossOrdinaryDisplay } from './CrossOrdinaryDisplay';
-import { SaltireOrdinaryDisplay } from './SaltireOrdinaryDisplay';
-import { ChevronOrdinaryDisplay } from './ChevronOrdinaryDisplay';
-import { PallOrdinaryDisplay } from './PallOrdinaryDisplay';
-import { ChapePloyeOrdinaryDisplay } from './ChapePloyeOrdinaryDisplay';
-import { PallInvertedOrdinaryDisplay } from './PallInvertedOrdinaryDisplay';
-import { ShakeforkOrdinaryDisplay } from './ShakeforkOrdinaryDisplay';
-import { GyronOrdinaryDisplay } from './GyronOrdinaryDisplay';
-import { ChausseOrdinaryDisplay } from './ChausseOrdinaryDisplay';
 import { ChaussePloyeOrdinaryDisplay } from './ChaussePloyeOrdinaryDisplay';
-import { GoreOrdinaryDisplay } from './GoreOrdinaryDisplay';
-import { FlaunchesOrdinaryDisplay } from './FlaunchesOrdinaryDisplay';
+import { baseOrdinaryConfiguration } from './baseOrdinaryConfiguration';
+import { CommonOrdinaryDisplay } from './CommonOrdinaryDisplay';
+import { bendOrdinaryConfiguration } from './bendOrdinaryConfiguration';
+import { cantonOrdinaryConfiguration } from './cantonOrdinaryConfiguration';
+import { chapePloyeOrdinaryConfiguration } from './chapePloyeOrdinaryConfiguration';
+import { chausseOrdinaryConfiguration } from './chausseOrdinaryConfiguration';
+import { chevronOrdinaryConfiguration } from './chevronOrdinaryConfiguration';
+import { chiefOrdinaryConfiguration } from './chiefOrdinaryConfiguration';
+import { fessOrdinaryConfiguration } from './fessOrdinaryConfiguration';
+import { paleOrdinaryConfiguration } from './paleOrdinaryConfiguration';
+import { crossOrdinaryConfiguration } from './crossOrdinaryConfiguration';
+import { saltireOrdinaryConfiguration } from './saltireOrdinaryConfiguration';
+import { pallOrdinaryConfiguration } from './pallOrdinaryConfiguration';
+import { pallInvertedOrdinaryConfiguration } from './pallInvertedOrdinaryConfiguration';
+import { shakeforkOrdinaryConfiguration } from './shakeforkOrdinaryConfiguration';
+import { gyronOrdinaryConfiguration } from './gyronOrdinaryConfiguration';
+import { quarterOrdinaryConfiguration } from './quarterOrdinaryConfiguration';
+import { goreOrdinaryConfiguration } from './goreOrdinaryConfiguration';
+import { flaunchesOrdinaryConfiguration } from './flaunchesOrdinaryConfiguration';
 
 type Props = {
   ordinary: Ordinary;
@@ -38,95 +39,103 @@ type Props = {
 export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, shieldShape, onClick }: Props) => {
   if (ordinary.name === 'chape-ploye') {
     return (
-      <ChapePloyeOrdinaryDisplay
-        ordinary={ordinary}
-        dimension={dimension}
-        onClick={onClick}
+      <CommonOrdinaryDisplay
         fillFromTincture={fillFromTincture}
+        onClick={onClick}
+        dimension={dimension}
+        ordinary={ordinary}
+        ordinaryConfiguration={chapePloyeOrdinaryConfiguration}
       />
     );
   } else {
     if (ordinary.name === 'chief') {
       return (
-        <ChiefOrdinaryDisplay
-          ordinary={ordinary}
-          dimension={dimension}
-          onClick={onClick}
+        <CommonOrdinaryDisplay
           fillFromTincture={fillFromTincture}
+          onClick={onClick}
+          dimension={dimension}
+          ordinary={ordinary}
+          ordinaryConfiguration={chiefOrdinaryConfiguration}
         />
       );
     } else if (ordinary.name === 'base') {
       return (
-        <BaseOrdinaryDisplay
-          ordinary={ordinary}
-          dimension={dimension}
-          onClick={onClick}
+        <CommonOrdinaryDisplay
           fillFromTincture={fillFromTincture}
+          onClick={onClick}
+          dimension={dimension}
+          ordinary={ordinary}
+          ordinaryConfiguration={baseOrdinaryConfiguration}
         />
       );
     } else if (ordinary.name === 'fess') {
       return (
-        <FessOrdinaryDisplay
-          ordinary={ordinary}
-          dimension={dimension}
-          onClick={onClick}
+        <CommonOrdinaryDisplay
           fillFromTincture={fillFromTincture}
+          onClick={onClick}
+          dimension={dimension}
+          ordinary={ordinary}
+          ordinaryConfiguration={fessOrdinaryConfiguration}
         />
       );
     } else if (ordinary.name === 'bend') {
       return (
-        <BendOrdinaryDisplay
-          ordinary={ordinary}
-          dimension={dimension}
-          onClick={onClick}
+        <CommonOrdinaryDisplay
           fillFromTincture={fillFromTincture}
-          direction="dexter"
+          onClick={onClick}
+          dimension={dimension}
+          ordinary={ordinary}
+          ordinaryConfiguration={bendOrdinaryConfiguration('dexter')}
         />
       );
     } else if (ordinary.name === 'bendSinister') {
       return (
-        <BendOrdinaryDisplay
-          ordinary={ordinary}
-          dimension={dimension}
-          onClick={onClick}
+        <CommonOrdinaryDisplay
           fillFromTincture={fillFromTincture}
-          direction="sinister"
+          onClick={onClick}
+          dimension={dimension}
+          ordinary={ordinary}
+          ordinaryConfiguration={bendOrdinaryConfiguration('sinister')}
         />
       );
     } else if (ordinary.name === 'pale') {
       return (
-        <PaleOrdinaryDisplay
-          ordinary={ordinary}
-          dimension={dimension}
-          onClick={onClick}
+        <CommonOrdinaryDisplay
           fillFromTincture={fillFromTincture}
+          onClick={onClick}
+          dimension={dimension}
+          ordinary={ordinary}
+          ordinaryConfiguration={paleOrdinaryConfiguration}
         />
       );
     } else if (ordinary.name === 'cross') {
       return (
-        <CrossOrdinaryDisplay
-          ordinary={ordinary}
-          dimension={dimension}
-          onClick={onClick}
+        <CommonOrdinaryDisplay
           fillFromTincture={fillFromTincture}
+          onClick={onClick}
+          dimension={dimension}
+          ordinary={ordinary}
+          ordinaryConfiguration={crossOrdinaryConfiguration}
         />
       );
     } else if (ordinary.name === 'saltire') {
       return (
-        <SaltireOrdinaryDisplay
-          ordinary={ordinary}
-          dimension={dimension}
-          onClick={onClick}
+        <CommonOrdinaryDisplay
           fillFromTincture={fillFromTincture}
+          onClick={onClick}
+          dimension={dimension}
+          ordinary={ordinary}
+          ordinaryConfiguration={saltireOrdinaryConfiguration}
         />
       );
     } else if (ordinary.name === 'chevron' || ordinary.name === 'chevronel') {
       return (
-        <ChevronOrdinaryDisplay
-          dimension={dimension}
-          ordinary={ordinary}
+        <CommonOrdinaryDisplay
           fillFromTincture={fillFromTincture}
           onClick={onClick}
+          dimension={dimension}
+          ordinary={ordinary}
+          ordinaryConfiguration={chevronOrdinaryConfiguration}
         />
       );
     } else if (ordinary.name === 'bordure') {
@@ -164,65 +173,72 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
       );
     } else if (ordinary.name === 'pall') {
       return (
-        <PallOrdinaryDisplay
-          dimension={dimension}
-          ordinary={ordinary}
+        <CommonOrdinaryDisplay
           fillFromTincture={fillFromTincture}
           onClick={onClick}
+          dimension={dimension}
+          ordinary={ordinary}
+          ordinaryConfiguration={pallOrdinaryConfiguration}
         />
       );
     } else if (ordinary.name === 'pall-inverted') {
       return (
-        <PallInvertedOrdinaryDisplay
-          dimension={dimension}
-          ordinary={ordinary}
+        <CommonOrdinaryDisplay
           fillFromTincture={fillFromTincture}
           onClick={onClick}
+          dimension={dimension}
+          ordinary={ordinary}
+          ordinaryConfiguration={pallInvertedOrdinaryConfiguration}
         />
       );
     } else if (ordinary.name === 'shakefork') {
       return (
-        <ShakeforkOrdinaryDisplay
-          dimension={dimension}
-          ordinary={ordinary}
+        <CommonOrdinaryDisplay
           fillFromTincture={fillFromTincture}
           onClick={onClick}
+          dimension={dimension}
+          ordinary={ordinary}
+          ordinaryConfiguration={shakeforkOrdinaryConfiguration}
         />
       );
     } else if (ordinary.name === 'gyron') {
       return (
-        <GyronOrdinaryDisplay
-          dimension={dimension}
-          ordinary={ordinary}
+        <CommonOrdinaryDisplay
           fillFromTincture={fillFromTincture}
           onClick={onClick}
+          dimension={dimension}
+          ordinary={ordinary}
+          ordinaryConfiguration={gyronOrdinaryConfiguration}
         />
       );
     } else if (ordinary.name === 'quarter') {
       return (
-        <QuarterOrdinaryDisplay
-          onClick={onClick}
+        <CommonOrdinaryDisplay
           fillFromTincture={fillFromTincture}
+          onClick={onClick}
           dimension={dimension}
           ordinary={ordinary}
+          ordinaryConfiguration={quarterOrdinaryConfiguration}
         />
       );
     } else if (ordinary.name === 'canton') {
       return (
-        <CantonOrdinaryDisplay
-          onClick={onClick}
+        <CommonOrdinaryDisplay
           fillFromTincture={fillFromTincture}
+          onClick={onClick}
           dimension={dimension}
           ordinary={ordinary}
+          ordinaryConfiguration={cantonOrdinaryConfiguration}
         />
       );
     } else if (ordinary.name === 'chausse') {
       return (
-        <ChausseOrdinaryDisplay
-          onClick={onClick}
+        <CommonOrdinaryDisplay
           fillFromTincture={fillFromTincture}
+          onClick={onClick}
           dimension={dimension}
           ordinary={ordinary}
+          ordinaryConfiguration={chausseOrdinaryConfiguration}
         />
       );
     } else if (ordinary.name === 'chausse-ploye') {
@@ -236,20 +252,22 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
       );
     } else if (ordinary.name === 'gore') {
       return (
-        <GoreOrdinaryDisplay
-          onClick={onClick}
+        <CommonOrdinaryDisplay
           fillFromTincture={fillFromTincture}
+          onClick={onClick}
           dimension={dimension}
           ordinary={ordinary}
+          ordinaryConfiguration={goreOrdinaryConfiguration}
         />
       );
     } else if (ordinary.name === 'flaunches') {
       return (
-        <FlaunchesOrdinaryDisplay
-          onClick={onClick}
+        <CommonOrdinaryDisplay
           fillFromTincture={fillFromTincture}
+          onClick={onClick}
           dimension={dimension}
           ordinary={ordinary}
+          ordinaryConfiguration={flaunchesOrdinaryConfiguration}
         />
       );
     } else {

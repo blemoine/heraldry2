@@ -1,22 +1,9 @@
 import { computeLineOptions, invertLineOptionNullable } from '../blasonDisplay.helper';
 import { LineOptions, SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
-import * as React from 'react';
 import { ChapePloye } from '../../../model/ordinary';
 import { Dimension } from '../../../model/dimension';
-import { FillFromTincture } from '../../fillFromTincture.helper';
-import { buildFurTransformProperty, FurTransformProperty } from '../FurPattern.model';
-import { CommonOrdinaryDisplay } from './CommonOrdinaryDisplay';
-import { allDeclaredTincturesOfOrdinary } from '../../blason.helpers';
 
-const postfixId = 'chape-ploye';
-
-type Props = {
-  dimension: Dimension;
-  ordinary: ChapePloye;
-  fillFromTincture: FillFromTincture;
-  onClick: () => void;
-};
-export const ChapePloyeOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onClick }: Props) => {
+export const chapePloyeOrdinaryConfiguration = (dimension: Dimension, ordinary: ChapePloye) => {
   const { width, height } = dimension;
   const lineOptions: LineOptions | null =
     ordinary.line === 'dancetty'
@@ -60,24 +47,10 @@ export const ChapePloyeOrdinaryDisplay = ({ dimension, ordinary, fillFromTinctur
         ];
 
   const scaleRatio = height / 480;
-  const transformProperties: FurTransformProperty = buildFurTransformProperty(
-    fillFromTincture,
-    allDeclaredTincturesOfOrdinary(ordinary),
-    {
-      ermine: { kind: 'scale', value: 0.275 * scaleRatio },
-      vair: { kind: 'scale', value: 0.33 * scaleRatio },
-      potent: { kind: 'scale', value: 0.4 * scaleRatio },
-    }
-  );
-
-  return (
-    <CommonOrdinaryDisplay
-      fillFromTincture={fillFromTincture}
-      onClick={onClick}
-      transformProperties={transformProperties}
-      pathBuilderAndTincture={pathBuilderAndTincture}
-      postfixId={postfixId}
-      stroke={ordinary.fimbriated}
-    />
-  );
+  const transformPropertiesConfiguration = {
+    ermine: { kind: 'scale', value: 0.275 * scaleRatio },
+    vair: { kind: 'scale', value: 0.33 * scaleRatio },
+    potent: { kind: 'scale', value: 0.4 * scaleRatio },
+  } as const;
+  return { pathBuilderAndTincture, transformPropertiesConfiguration };
 };

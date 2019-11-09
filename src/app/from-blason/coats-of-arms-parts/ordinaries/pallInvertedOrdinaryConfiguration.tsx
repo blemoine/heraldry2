@@ -1,39 +1,28 @@
-import * as React from 'react';
 import { Dimension } from '../../../model/dimension';
-import { Pall } from '../../../model/ordinary';
-import { FillFromTincture } from '../../fillFromTincture.helper';
-import { CommonOrdinaryDisplay } from './CommonOrdinaryDisplay';
+import { PallInverted } from '../../../model/ordinary';
 import { computeLineOptions, oneSideLineOption } from '../blasonDisplay.helper';
 import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
-import { buildFurTransformProperty } from '../FurPattern.model';
-import { allDeclaredTincturesOfOrdinary } from '../../blason.helpers';
 
-const postfixId = 'pall';
 const ermineScale = 0.3;
 const vairScale = 0.23;
 const potentScale = 0.16;
 
-type Props = {
-  dimension: Dimension;
-  ordinary: Pall;
-  fillFromTincture: FillFromTincture;
-  onClick: () => void;
-};
-export const PallOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onClick }: Props) => {
+export const pallInvertedOrdinaryConfiguration = (dimension: Dimension, ordinary: PallInverted) => {
   const { width, height } = dimension;
   const scaleRatio = height / 480;
 
-  const transformProperties = buildFurTransformProperty(fillFromTincture, allDeclaredTincturesOfOrdinary(ordinary), {
+  const transformPropertiesConfiguration = {
     ermine: [{ kind: 'scale', value: [ermineScale * scaleRatio, ermineScale * 0.75 * scaleRatio] }],
     vair: [{ kind: 'scale', value: [vairScale * scaleRatio, vairScale * 0.6785 * scaleRatio] }],
     potent: [{ kind: 'scale', value: [potentScale * scaleRatio, potentScale * 1.35 * scaleRatio] }],
-  });
+  } as const;
 
   const lineOptions = computeLineOptions(ordinary.line, dimension);
   const oneSideOnly = oneSideLineOption(lineOptions);
 
   const pallWidth = width / 5.5;
   const projectedPallWidth = pallWidth / Math.sqrt(2);
+
   const pathBuilder = SvgPathBuilder.start([0, 0])
     .goTo([0, projectedPallWidth])
     .goTo([width / 2 - pallWidth / 2, height / 2], oneSideOnly)
@@ -45,18 +34,9 @@ export const PallOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onC
     .goTo([width - projectedPallWidth, 0])
     .goTo([width / 2, height / 2 - (height / width) * projectedPallWidth], lineOptions)
     .goTo([projectedPallWidth, 0], lineOptions)
-    .goTo([0, 0]);
-
+    .goTo([0, 0])
+    .rotate([width / 2, height / 2], 180);
   const pathBuilderAndTincture = [{ pathBuilder, tincture: ordinary.tincture }];
 
-  return (
-    <CommonOrdinaryDisplay
-      fillFromTincture={fillFromTincture}
-      onClick={onClick}
-      transformProperties={transformProperties}
-      pathBuilderAndTincture={pathBuilderAndTincture}
-      postfixId={postfixId}
-      stroke={ordinary.fimbriated}
-    />
-  );
+  return { pathBuilderAndTincture, transformPropertiesConfiguration };
 };

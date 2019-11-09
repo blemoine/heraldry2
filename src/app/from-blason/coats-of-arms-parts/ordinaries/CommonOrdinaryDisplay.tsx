@@ -1,31 +1,48 @@
 import { FurPatternDefinition } from '../FurPatternDefinition';
 import { FocusablePathFromBuilder } from '../../../common/PathFromBuilder';
 import * as React from 'react';
-import { MetalsAndColours, Tincture } from '../../../model/tincture';
-import { FurTransformProperty, getFill } from '../FurPattern.model';
+import { Tincture } from '../../../model/tincture';
+import { buildFurTransformProperty, FurTransformPropertyConfiguration, getFill } from '../FurPattern.model';
 import { FillFromTincture } from '../../fillFromTincture.helper';
 import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
+import { allDeclaredTincturesOfOrdinary } from '../../blason.helpers';
+import { Dimension } from '../../../model/dimension';
+import { Ordinary } from '../../../model/ordinary';
 
-type Props = {
-  postfixId: string;
-  transformProperties: FurTransformProperty;
+type Props<T extends Ordinary> = {
+  ordinary: T;
   fillFromTincture: FillFromTincture;
   onClick: () => void;
-  pathBuilderAndTincture: Array<{ pathBuilder: SvgPathBuilder; tincture: Tincture }>;
-  stroke: MetalsAndColours | null;
+  dimension: Dimension;
   baseStrokeWith?: number;
+  ordinaryConfiguration: (
+    dimension: Dimension,
+    ordinary: T
+  ) => {
+    pathBuilderAndTincture: ReadonlyArray<{ pathBuilder: SvgPathBuilder; tincture: Tincture }>;
+    transformPropertiesConfiguration: FurTransformPropertyConfiguration;
+  };
 };
-export const CommonOrdinaryDisplay = ({
-  postfixId,
-  transformProperties,
+export const CommonOrdinaryDisplay = <T extends Ordinary>({
+  ordinary,
+  ordinaryConfiguration,
+  dimension,
   fillFromTincture,
   onClick,
-  pathBuilderAndTincture,
-  stroke,
   baseStrokeWith,
-}: Props) => {
-  const tinctures = pathBuilderAndTincture.map(({ tincture }) => tincture);
+}: Props<T>) => {
+  const stroke = ordinary.fimbriated;
   const strokeWidth = baseStrokeWith || (stroke ? 3 : 1);
+  const postfixId = ordinary.name;
+
+  const { pathBuilderAndTincture, transformPropertiesConfiguration } = ordinaryConfiguration(dimension, ordinary);
+  const transformProperties = buildFurTransformProperty(
+    fillFromTincture,
+    allDeclaredTincturesOfOrdinary(ordinary),
+    transformPropertiesConfiguration
+  );
+  const tinctures = pathBuilderAndTincture.map(({ tincture }) => tincture);
+
   return (
     <>
       <FurPatternDefinition tinctures={tinctures} postfixId={postfixId} transformProperties={transformProperties} />

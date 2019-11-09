@@ -1,25 +1,13 @@
 import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
-import * as React from 'react';
 import { Dimension } from '../../../model/dimension';
 import { Saltire } from '../../../model/ordinary';
-import { FillFromTincture } from '../../fillFromTincture.helper';
 import { computeLineOptions, oneSideLineOption } from '../blasonDisplay.helper';
-import { CommonOrdinaryDisplay } from './CommonOrdinaryDisplay';
-import { buildFurTransformProperty } from '../FurPattern.model';
-import { allDeclaredTincturesOfOrdinary } from '../../blason.helpers';
 
-const postfixId = 'cross';
 const ermineScale = 0.3;
 const vairScale = 0.23;
 const potentScale = 0.16;
 
-type Props = {
-  dimension: Dimension;
-  ordinary: Saltire;
-  fillFromTincture: FillFromTincture;
-  onClick: () => void;
-};
-export const SaltireOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onClick }: Props) => {
+export const saltireOrdinaryConfiguration = (dimension: Dimension, ordinary: Saltire) => {
   const { width, height } = dimension;
   const lineOptions = computeLineOptions(ordinary.line, dimension);
   const oneSideOnly = oneSideLineOption(lineOptions);
@@ -45,21 +33,11 @@ export const SaltireOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, 
     .goToWithPartFlat([w, h - basePointH], lineOptions, 5);
 
   const scaleRatio = height / 480;
-  const transformProperties = buildFurTransformProperty(fillFromTincture, allDeclaredTincturesOfOrdinary(ordinary), {
+  const transformPropertiesConfiguration = {
     ermine: [{ kind: 'scale', value: [ermineScale * scaleRatio, ermineScale * 0.75 * scaleRatio] }],
     vair: [{ kind: 'scale', value: [vairScale * scaleRatio, vairScale * 0.6785 * scaleRatio] }],
     potent: [{ kind: 'scale', value: [potentScale * scaleRatio, potentScale * 1.35 * scaleRatio] }],
-  });
+  } as const;
   const pathBuilderAndTincture = [{ pathBuilder, tincture: ordinary.tincture }];
-
-  return (
-    <CommonOrdinaryDisplay
-      fillFromTincture={fillFromTincture}
-      onClick={onClick}
-      transformProperties={transformProperties}
-      pathBuilderAndTincture={pathBuilderAndTincture}
-      postfixId={postfixId}
-      stroke={ordinary.fimbriated}
-    />
-  );
+  return { pathBuilderAndTincture, transformPropertiesConfiguration };
 };

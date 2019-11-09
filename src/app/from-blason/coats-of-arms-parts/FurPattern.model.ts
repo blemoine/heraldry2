@@ -3,8 +3,8 @@ import { FillFromTincture } from '../fillFromTincture.helper';
 import { Furs, isErmine, isFur, isPotent, isVair, Tincture } from '../../model/tincture';
 
 export type TransformProperty =
-  | { kind: 'scale'; value: number | [number, number] }
-  | { kind: 'translate'; value: [number, number] };
+  | { kind: 'scale'; value: number | readonly [number, number] }
+  | { kind: 'translate'; value: readonly [number, number] };
 export function toTransform(arr: Array<TransformProperty>): string {
   return arr
     .map((t) => {
@@ -37,14 +37,16 @@ export function getFurName(fur: Furs): string {
   return fur.name + (isErmine(fur) ? '-' + fur.field.name + '-' + fur.spot.name : '');
 }
 
+export type FurTransformPropertyConfiguration = {
+  ermine: TransformProperty | ReadonlyArray<TransformProperty>;
+  vair: TransformProperty | ReadonlyArray<TransformProperty>;
+  potent: TransformProperty | ReadonlyArray<TransformProperty>;
+};
+
 export function buildFurTransformProperty(
   fillFromTincture: FillFromTincture,
   tinctures: Array<Tincture>,
-  properties: {
-    ermine: TransformProperty | ReadonlyArray<TransformProperty>;
-    vair: TransformProperty | ReadonlyArray<TransformProperty>;
-    potent: TransformProperty | ReadonlyArray<TransformProperty>;
-  }
+  properties: FurTransformPropertyConfiguration
 ): FurTransformProperty {
   return tinctures.filter(isFur).reduce<Partial<FurTransformProperty>>((acc, fur) => {
     const property = isErmine(fur)

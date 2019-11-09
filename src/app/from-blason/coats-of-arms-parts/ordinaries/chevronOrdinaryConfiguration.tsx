@@ -1,35 +1,23 @@
-import * as React from 'react';
 import { Dimension } from '../../../model/dimension';
 import { Chevron, Chevronel } from '../../../model/ordinary';
-import { FillFromTincture } from '../../fillFromTincture.helper';
-import { CommonOrdinaryDisplay } from './CommonOrdinaryDisplay';
 import { computeLineOptions, oneSideLineOption } from '../blasonDisplay.helper';
 import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
-import { buildFurTransformProperty } from '../FurPattern.model';
 import { cannotHappen } from '../../../../utils/cannot-happen';
 import { range } from '../../../../utils/range';
-import { allDeclaredTincturesOfOrdinary } from '../../blason.helpers';
 
-const postfixId = 'chevron';
 const ermineScale = 0.3;
 const vairScale = 0.23;
 const potentScale = 0.16;
 
-type Props = {
-  dimension: Dimension;
-  ordinary: Chevron | Chevronel;
-  fillFromTincture: FillFromTincture;
-  onClick: () => void;
-};
-export const ChevronOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, onClick }: Props) => {
+export const chevronOrdinaryConfiguration = (dimension: Dimension, ordinary: Chevron | Chevronel) => {
   const { width, height } = dimension;
   const scaleRatio = height / 480;
 
-  const transformProperties = buildFurTransformProperty(fillFromTincture, allDeclaredTincturesOfOrdinary(ordinary), {
+  const transformPropertiesConfiguration = {
     ermine: [{ kind: 'scale', value: [ermineScale * scaleRatio, ermineScale * 0.75 * scaleRatio] }],
     vair: [{ kind: 'scale', value: [vairScale * scaleRatio, vairScale * 0.6785 * scaleRatio] }],
     potent: [{ kind: 'scale', value: [potentScale * scaleRatio, potentScale * 1.35 * scaleRatio] }],
-  });
+  } as const;
 
   const lineOptions = computeLineOptions(ordinary.line, dimension);
   const oneSideOnly = oneSideLineOption(lineOptions);
@@ -108,14 +96,5 @@ export const ChevronOrdinaryDisplay = ({ dimension, ordinary, fillFromTincture, 
     };
   });
 
-  return (
-    <CommonOrdinaryDisplay
-      fillFromTincture={fillFromTincture}
-      onClick={onClick}
-      transformProperties={transformProperties}
-      pathBuilderAndTincture={pathBuilderAndTincture}
-      postfixId={postfixId}
-      stroke={ordinary.fimbriated}
-    />
-  );
+  return { pathBuilderAndTincture, transformPropertiesConfiguration };
 };
