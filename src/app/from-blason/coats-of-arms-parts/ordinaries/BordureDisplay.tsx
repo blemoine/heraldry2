@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useContext } from 'react';
 import { computeLineOptions, invertLineOptionNullable, SimpleBlasonShape } from '../blasonDisplay.helper';
 import { Dimension } from '../../../model/dimension';
 import { LineOptions, SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
@@ -9,10 +10,10 @@ import { cannotHappen } from '../../../../utils/cannot-happen';
 import { isError } from '../../../../utils/result';
 import { FocusablePathFromBuilder } from '../../../common/PathFromBuilder';
 import { Line } from '../../../model/line';
-import { ShieldShape } from '../../../model/configuration';
 import { getFill } from '../FurPattern.model';
 import { FillFromTincture } from '../../fillFromTincture.helper';
 import { MetalsAndColours, Tincture } from '../../../model/tincture';
+import { ConfigurationContext } from '../../configuration/ConfigurationContext';
 
 const postfixId = 'bordure';
 
@@ -20,7 +21,6 @@ type Props = {
   dimension: Dimension;
   line: Line;
   shape: SimpleBlasonShape;
-  shieldShape: ShieldShape;
   fillFromTincture: FillFromTincture;
   tincture: Tincture;
   stroke: MetalsAndColours | null;
@@ -32,7 +32,6 @@ export const BordureDisplay = ({
   dimension,
   line,
   shape,
-  shieldShape,
   fillFromTincture,
   onClick,
   tincture,
@@ -40,6 +39,7 @@ export const BordureDisplay = ({
   lineDimension,
   styleOnlyInner,
 }: Props) => {
+  const { shieldShape } = useContext(ConfigurationContext);
   const { width, height } = dimension;
 
   const lineOptionScale = styleOnlyInner ? 1 : 0.5;

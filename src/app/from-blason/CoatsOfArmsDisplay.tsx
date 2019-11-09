@@ -114,7 +114,6 @@ export function CoatsOfArmsDisplay(props: Props) {
         dimension={dimension}
         fillFromTincture={fillFromTincture}
         clipPathId="plain-field-clip-path"
-        shieldShape={configuration.shieldShape}
         selectBlasonPart={props.selectBlasonPart}
       />
       <EscutcheonDisplay

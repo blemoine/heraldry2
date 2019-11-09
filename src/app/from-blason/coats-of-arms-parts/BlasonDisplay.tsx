@@ -3,7 +3,6 @@ import { Blason } from '../../model/blason';
 import { Dimension, scale } from '../../model/dimension';
 import { cannotHappen } from '../../../utils/cannot-happen';
 import { SimpleBlasonDisplay } from './SimpleBlasonDisplay';
-import { ShieldShape } from '../../model/configuration';
 import { BlasonPath } from '../../model/blason-path';
 import { FillFromTincture } from '../fillFromTincture.helper';
 
@@ -12,17 +11,9 @@ type Props = {
   dimension: Dimension;
   fillFromTincture: FillFromTincture;
   clipPathId: string;
-  shieldShape: ShieldShape;
   selectBlasonPart: (path: BlasonPath) => void;
 };
-export const BlasonDisplay = ({
-  blason,
-  dimension,
-  fillFromTincture,
-  clipPathId,
-  shieldShape,
-  selectBlasonPart,
-}: Props) => {
+export const BlasonDisplay = ({ blason, dimension, fillFromTincture, clipPathId, selectBlasonPart }: Props) => {
   if (blason.kind === 'simple') {
     return (
       <SimpleBlasonDisplay
@@ -31,7 +22,6 @@ export const BlasonDisplay = ({
         fillFromTincture={fillFromTincture}
         clipPathId={clipPathId}
         shape="default"
-        shieldShape={shieldShape}
         selectBlasonPart={selectBlasonPart}
       />
     );
@@ -70,7 +60,6 @@ export const BlasonDisplay = ({
                   fillFromTincture={fillFromTincture}
                   clipPathId="quarterly-clip-path"
                   shape={shape}
-                  shieldShape={shieldShape}
                   selectBlasonPart={(path) => selectBlasonPart([i, path])}
                 />
               </g>

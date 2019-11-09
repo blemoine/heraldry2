@@ -5,7 +5,6 @@ import { FieldDisplay } from './FieldDisplay';
 import { OrdinaryDisplay } from './ordinaries/OrdinaryDisplay';
 import { ChargeDisplay } from './ChargeDisplay';
 import { SimpleBlasonShape } from './blasonDisplay.helper';
-import { ShieldShape } from '../../model/configuration';
 import { Ordinary } from '../../model/ordinary';
 import { cannotHappen } from '../../../utils/cannot-happen';
 import { getChargeDimension } from './charge-dimension.helper';
@@ -77,7 +76,6 @@ type Props = {
   fillFromTincture: FillFromTincture;
   clipPathId: string;
   shape: SimpleBlasonShape;
-  shieldShape: ShieldShape;
   selectBlasonPart: (path: SimpleBlasonPath) => void;
 };
 export const SimpleBlasonDisplay = ({
@@ -86,7 +84,6 @@ export const SimpleBlasonDisplay = ({
   fillFromTincture,
   clipPathId,
   shape,
-  shieldShape,
   selectBlasonPart,
 }: Props) => {
   const { width, height } = dimension;
@@ -131,7 +128,6 @@ export const SimpleBlasonDisplay = ({
             ordinary={ordinary}
             fillFromTincture={fillFromTincture}
             shape={shape}
-            shieldShape={shieldShape}
             onClick={() => selectBlasonPart('ordinary')}
           />
         </g>

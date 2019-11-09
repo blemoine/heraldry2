@@ -3,7 +3,6 @@ import { Ordinary } from '../../../model/ordinary';
 import { cannotHappen } from '../../../../utils/cannot-happen';
 import { Dimension } from '../../../model/dimension';
 import { SimpleBlasonShape } from '../blasonDisplay.helper';
-import { ShieldShape } from '../../../model/configuration';
 import { BordureDisplay } from './BordureDisplay';
 import { FillFromTincture } from '../../fillFromTincture.helper';
 import { ChaussePloyeOrdinaryDisplay } from './ChaussePloyeOrdinaryDisplay';
@@ -32,11 +31,10 @@ type Props = {
   fillFromTincture: FillFromTincture;
   dimension: Dimension;
   shape: SimpleBlasonShape;
-  shieldShape: ShieldShape;
   onClick: () => void;
 };
 
-export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, shieldShape, onClick }: Props) => {
+export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, onClick }: Props) => {
   if (ordinary.name === 'chape-ploye') {
     return (
       <CommonOrdinaryDisplay
@@ -141,7 +139,6 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
     } else if (ordinary.name === 'bordure') {
       return (
         <BordureDisplay
-          shieldShape={shieldShape}
           shape={shape}
           dimension={dimension}
           line={ordinary.line}
@@ -158,7 +155,6 @@ export const OrdinaryDisplay = ({ ordinary, fillFromTincture, dimension, shape, 
       return (
         <g transform={`scale(${1 - scale * 2}) translate(${scale * dimension.width} ${scale * dimension.height})`}>
           <BordureDisplay
-            shieldShape={shieldShape}
             shape={shape}
             dimension={dimension}
             line={ordinary.line}
