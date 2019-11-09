@@ -1,8 +1,9 @@
 import * as React from 'react';
+import { useContext } from 'react';
 import { Blason } from '../model/blason';
-import { allDeclaredTinctures, isThereFur } from './blason.helpers';
+import { allDeclaredTinctures } from './blason.helpers';
 import { uuid } from '../../utils/uuid';
-import { Furs, isErmine, isFur, potents, Tincture, vairs } from '../model/tincture';
+import { Furs, isErmine, isFur, isPotent, isVair, Tincture } from '../model/tincture';
 import { Dimension } from '../model/dimension';
 import { ErminePatternDef } from './coats-of-arms-parts/ErminePatternDef';
 import { VairPatternDef } from './coats-of-arms-parts/VairPatternDef';
@@ -10,7 +11,6 @@ import { PotentPatternDef } from './coats-of-arms-parts/PotentPatternDef';
 import { EscutcheonDisplay } from './coats-of-arms-parts/escutcheon/EscutcheonDisplay';
 import { BlasonDisplay } from './coats-of-arms-parts/BlasonDisplay';
 import { BlasonPath } from '../model/blason-path';
-import { useContext } from 'react';
 import { ConfigurationContext } from './configuration/ConfigurationContext';
 
 type Props = {
@@ -54,26 +54,25 @@ export function CoatsOfArmsDisplay(props: Props) {
 
   const blason = props.blason;
 
+  const allTinctures = allDeclaredTinctures(blason);
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} className="coats-of-arms-display">
       <defs>
-        {allDeclaredTinctures(blason)
-          .filter(isErmine)
-          .map((ermine, i) => {
-            return (
-              <ErminePatternDef
-                key={ermine.name + i}
-                ermine={ermine}
-                patternId={furPatternId(ermine)}
-                tinctureConfiguration={tinctureConfiguration}
-                spotWidth={width / 9}
-                heightMarginScale={0.45}
-                widthMarginScale={0}
-              />
-            );
-          })}
-        {vairs.map((vair, i) => {
-          return isThereFur(blason, vair) ? (
+        {allTinctures.filter(isErmine).map((ermine, i) => {
+          return (
+            <ErminePatternDef
+              key={ermine.name + i}
+              ermine={ermine}
+              patternId={furPatternId(ermine)}
+              tinctureConfiguration={tinctureConfiguration}
+              spotWidth={width / 9}
+              heightMarginScale={0.45}
+              widthMarginScale={0}
+            />
+          );
+        })}
+        {allTinctures.filter(isVair).map((vair, i) => {
+          return (
             <VairPatternDef
               key={vair.name + i}
               vair={vair}
@@ -81,12 +80,10 @@ export function CoatsOfArmsDisplay(props: Props) {
               dimension={dimension}
               tinctureConfiguration={tinctureConfiguration}
             />
-          ) : (
-            ''
           );
         })}
-        {potents.map((potent, i) => {
-          return isThereFur(blason, potent) ? (
+        {allTinctures.filter(isPotent).map((potent, i) => {
+          return (
             <PotentPatternDef
               key={potent.name + i}
               potent={potent}
@@ -94,8 +91,6 @@ export function CoatsOfArmsDisplay(props: Props) {
               dimension={dimension}
               tinctureConfiguration={tinctureConfiguration}
             />
-          ) : (
-            ''
           );
         })}
 

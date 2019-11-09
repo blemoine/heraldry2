@@ -4,6 +4,7 @@ import { cannotHappen } from '../../utils/cannot-happen';
 import { Charge } from '../model/charge';
 import { Field } from '../model/field';
 import { Ordinary } from '../model/ordinary';
+import { uniq } from 'lodash';
 
 function allDeclaredTincturesOfCharge(charge: Charge): Array<Tincture> {
   if (charge.name === 'lion') {
@@ -74,17 +75,17 @@ export function allDeclaredTincturesOfField(field: Field): Array<Tincture> {
   }
 }
 function allDeclaredTincturesOfSimpleBlason(blason: SimpleBlason): Array<Tincture> {
-  return [
+  return uniq([
     ...allDeclaredTincturesOfField(blason.field),
     ...(blason.ordinary ? allDeclaredTincturesOfOrdinary(blason.ordinary) : []),
     ...(blason.charge ? allDeclaredTincturesOfCharge(blason.charge) : []),
-  ];
+  ]);
 }
 export function allDeclaredTinctures(blason: Blason): Array<Tincture> {
   if (blason.kind === 'simple') {
     return allDeclaredTincturesOfSimpleBlason(blason);
   } else if (blason.kind === 'quarterly') {
-    return blason.blasons.flatMap((blason) => allDeclaredTincturesOfSimpleBlason(blason));
+    return uniq(blason.blasons.flatMap((blason) => allDeclaredTincturesOfSimpleBlason(blason)));
   } else {
     return cannotHappen(blason);
   }

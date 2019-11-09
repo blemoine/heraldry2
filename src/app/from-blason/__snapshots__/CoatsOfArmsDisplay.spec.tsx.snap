@@ -8,14 +8,6 @@ exports[`CoatsOfArms should render 'Argent, a chevron sable' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -98,14 +90,6 @@ exports[`CoatsOfArms should render 'Argent, a cross gules' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -188,14 +172,6 @@ exports[`CoatsOfArms should render 'Argent, a gore vert' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -326,13 +302,6 @@ exports[`CoatsOfArms should render 'Argent, three crosses potent vair' 1`] = `
         y="100"
       />
     </pattern>
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -447,14 +416,6 @@ exports[`CoatsOfArms should render 'Azure, a bordure urdy or, two crosses maltes
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -579,14 +540,6 @@ exports[`CoatsOfArms should render 'Azure, nineteen annulets argent' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -944,14 +897,6 @@ exports[`CoatsOfArms should render 'Azure, twelve roundels argent' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -1204,14 +1149,6 @@ exports[`CoatsOfArms should render 'Azure, two crosses crosselet vert' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -1374,14 +1311,6 @@ exports[`CoatsOfArms should render 'Azure, two crosses moline counter ermine' 1`
         y={35.666666666666664}
       />
     </pattern>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -1482,14 +1411,6 @@ exports[`CoatsOfArms should render 'Barry and per pale or and gules' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -1751,13 +1672,6 @@ exports[`CoatsOfArms should render 'Barry ermine and vair' 1`] = `
         y="100"
       />
     </pattern>
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -1915,13 +1829,6 @@ exports[`CoatsOfArms should render 'Barry pily counter ermine and potent en poin
         y={35.666666666666664}
       />
     </pattern>
-    
-    
-    
-    
-    
-    
-    
     <symbol
       id="potent-en-point"
       viewBox="0 0 300 200"
@@ -2042,14 +1949,6 @@ exports[`CoatsOfArms should render 'Bendy or and argent, a lion dormant gules' 1
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -2606,14 +2505,6 @@ exports[`CoatsOfArms should render 'Bendy or and argent, a lion rampant ermine' 
         y={35.666666666666664}
       />
     </pattern>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -3216,14 +3107,6 @@ exports[`CoatsOfArms should render 'Bendy sinister or and argent, a lion sejant 
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -3609,14 +3492,6 @@ exports[`CoatsOfArms should render 'Chequy gules and or, a chief engrailed azure
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -4045,14 +3920,6 @@ exports[`CoatsOfArms should render 'Chequy gules and or, a chief engrailed ermin
         y={35.666666666666664}
       />
     </pattern>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -4424,14 +4291,6 @@ exports[`CoatsOfArms should render 'Chequy gules and or, a saltire argent, an ea
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -5153,13 +5012,6 @@ exports[`CoatsOfArms should render 'Ermine, a bend invected vair' 1`] = `
         y="100"
       />
     </pattern>
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -5309,14 +5161,6 @@ exports[`CoatsOfArms should render 'Ermine, two pallets sable' 1`] = `
         y={35.666666666666664}
       />
     </pattern>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -5475,14 +5319,6 @@ exports[`CoatsOfArms should render 'Erminois, four crosses bottony argent' 1`] =
         y={35.666666666666664}
       />
     </pattern>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -5611,14 +5447,6 @@ exports[`CoatsOfArms should render 'Gules, three crosses pattée argent' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -5781,13 +5609,6 @@ exports[`CoatsOfArms should render 'Lozenge throughout vair and gules' 1`] = `
         y="100"
       />
     </pattern>
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -5903,13 +5724,6 @@ exports[`CoatsOfArms should render 'Or, a base engrailed vair' 1`] = `
         y="100"
       />
     </pattern>
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -6059,14 +5873,6 @@ exports[`CoatsOfArms should render 'Or, a bend sinister invected ermine' 1`] = `
         y={35.666666666666664}
       />
     </pattern>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -6216,14 +6022,6 @@ exports[`CoatsOfArms should render 'Or, a cross gules ermined argent' 1`] = `
         y={35.666666666666664}
       />
     </pattern>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -6311,14 +6109,6 @@ exports[`CoatsOfArms should render 'Or, a fess murrey' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -6401,9 +6191,6 @@ exports[`CoatsOfArms should render 'Or, a fess vair en point' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
     <symbol
       id="vair-en-point"
       viewBox="0 0 200 200"
@@ -6456,10 +6243,6 @@ exports[`CoatsOfArms should render 'Or, a fess vair en point' 1`] = `
         />
       </g>
     </pattern>
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -6547,14 +6330,6 @@ exports[`CoatsOfArms should render 'Or, eleven rustres sable' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -6792,14 +6567,6 @@ exports[`CoatsOfArms should render 'Or, fifteen mascles sable' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -7097,14 +6864,6 @@ exports[`CoatsOfArms should render 'Or, thirteen lozenge or' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -7469,13 +7228,6 @@ exports[`CoatsOfArms should render 'Paly pily vair and pean' 1`] = `
         y="100"
       />
     </pattern>
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -7543,14 +7295,6 @@ exports[`CoatsOfArms should render 'Per bend sinister wavy azure and or, a chief
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -7639,14 +7383,6 @@ exports[`CoatsOfArms should render 'Per chevron Sable and Or, three fleurs de ly
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -8011,14 +7747,6 @@ exports[`CoatsOfArms should render 'Per chevron ermine and gules, a shakefork or
         y={35.666666666666664}
       />
     </pattern>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -8168,14 +7896,6 @@ exports[`CoatsOfArms should render 'Per chevron reversed invected ermine and gul
         y={35.666666666666664}
       />
     </pattern>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -8244,14 +7964,6 @@ exports[`CoatsOfArms should render 'Per cross or and argent' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -8389,14 +8101,6 @@ exports[`CoatsOfArms should render 'Per fess or and ermine, a bordure engrailed 
         y={35.666666666666664}
       />
     </pattern>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -8548,14 +8252,6 @@ exports[`CoatsOfArms should render 'Per pale invected ermine and or' 1`] = `
         y={35.666666666666664}
       />
     </pattern>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -8621,14 +8317,6 @@ exports[`CoatsOfArms should render 'Per saltire or and argent' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -8704,10 +8392,6 @@ exports[`CoatsOfArms should render 'Potent, a chief gules' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
     <symbol
       id="potent"
       viewBox="0 0 300 200"
@@ -8757,9 +8441,6 @@ exports[`CoatsOfArms should render 'Potent, a chief gules' 1`] = `
         y="100"
       />
     </pattern>
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -8846,14 +8527,6 @@ exports[`CoatsOfArms should render 'Purpure, four crosses crosselet or' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -9044,200 +8717,6 @@ exports[`CoatsOfArms should render 'Quarterly, 1st Per pile reversed embattled e
         y={35.666666666666664}
       />
     </pattern>
-    <symbol
-      id="ermined-argent-sable"
-      viewBox="0 0 200 240"
-    >
-      <rect
-        fill="#FFFFFF"
-        height="100%"
-        width="100%"
-      />
-      <g
-        transform="translate(100, 240)"
-      >
-        <path
-          d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
-          fill="#000000"
-        />
-        <circle
-          cy={-226}
-          fill="#000000"
-          r="14"
-        />
-        <circle
-          cx={-32}
-          cy={-194}
-          fill="#000000"
-          r={14}
-        />
-        <circle
-          cx={32}
-          cy={-194}
-          fill="#000000"
-          r={14}
-        />
-      </g>
-    </symbol>
-    <pattern
-      height={65.33333333333333}
-      id="field-pattern-3-argent-sable"
-      patternUnits="userSpaceOnUse"
-      viewBox="0 0 44.44444444444444 65.33333333333333"
-      width={44.44444444444444}
-    >
-      <rect
-        fill="#FFFFFF"
-        height={65.33333333333333}
-        width={44.44444444444444}
-      />
-      <use
-        height={26.666666666666664}
-        href="#ermined-argent-sable"
-        width={22.22222222222222}
-        x={0}
-        y={3}
-      />
-      <use
-        height={26.666666666666664}
-        href="#ermined-argent-sable"
-        width={22.22222222222222}
-        x={22.22222222222222}
-        y={35.666666666666664}
-      />
-    </pattern>
-    <symbol
-      id="ermined-argent-sable"
-      viewBox="0 0 200 240"
-    >
-      <rect
-        fill="#FFFFFF"
-        height="100%"
-        width="100%"
-      />
-      <g
-        transform="translate(100, 240)"
-      >
-        <path
-          d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
-          fill="#000000"
-        />
-        <circle
-          cy={-226}
-          fill="#000000"
-          r="14"
-        />
-        <circle
-          cx={-32}
-          cy={-194}
-          fill="#000000"
-          r={14}
-        />
-        <circle
-          cx={32}
-          cy={-194}
-          fill="#000000"
-          r={14}
-        />
-      </g>
-    </symbol>
-    <pattern
-      height={65.33333333333333}
-      id="field-pattern-3-argent-sable"
-      patternUnits="userSpaceOnUse"
-      viewBox="0 0 44.44444444444444 65.33333333333333"
-      width={44.44444444444444}
-    >
-      <rect
-        fill="#FFFFFF"
-        height={65.33333333333333}
-        width={44.44444444444444}
-      />
-      <use
-        height={26.666666666666664}
-        href="#ermined-argent-sable"
-        width={22.22222222222222}
-        x={0}
-        y={3}
-      />
-      <use
-        height={26.666666666666664}
-        href="#ermined-argent-sable"
-        width={22.22222222222222}
-        x={22.22222222222222}
-        y={35.666666666666664}
-      />
-    </pattern>
-    <symbol
-      id="ermined-argent-sable"
-      viewBox="0 0 200 240"
-    >
-      <rect
-        fill="#FFFFFF"
-        height="100%"
-        width="100%"
-      />
-      <g
-        transform="translate(100, 240)"
-      >
-        <path
-          d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
-          fill="#000000"
-        />
-        <circle
-          cy={-226}
-          fill="#000000"
-          r="14"
-        />
-        <circle
-          cx={-32}
-          cy={-194}
-          fill="#000000"
-          r={14}
-        />
-        <circle
-          cx={32}
-          cy={-194}
-          fill="#000000"
-          r={14}
-        />
-      </g>
-    </symbol>
-    <pattern
-      height={65.33333333333333}
-      id="field-pattern-3-argent-sable"
-      patternUnits="userSpaceOnUse"
-      viewBox="0 0 44.44444444444444 65.33333333333333"
-      width={44.44444444444444}
-    >
-      <rect
-        fill="#FFFFFF"
-        height={65.33333333333333}
-        width={44.44444444444444}
-      />
-      <use
-        height={26.666666666666664}
-        href="#ermined-argent-sable"
-        width={22.22222222222222}
-        x={0}
-        y={3}
-      />
-      <use
-        height={26.666666666666664}
-        href="#ermined-argent-sable"
-        width={22.22222222222222}
-        x={22.22222222222222}
-        y={35.666666666666664}
-      />
-    </pattern>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -9506,200 +8985,6 @@ exports[`CoatsOfArms should render 'Quarterly, 1st and 2nd and 3rd and 4th quart
         y={35.666666666666664}
       />
     </pattern>
-    <symbol
-      id="ermined-argent-sable"
-      viewBox="0 0 200 240"
-    >
-      <rect
-        fill="#FFFFFF"
-        height="100%"
-        width="100%"
-      />
-      <g
-        transform="translate(100, 240)"
-      >
-        <path
-          d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
-          fill="#000000"
-        />
-        <circle
-          cy={-226}
-          fill="#000000"
-          r="14"
-        />
-        <circle
-          cx={-32}
-          cy={-194}
-          fill="#000000"
-          r={14}
-        />
-        <circle
-          cx={32}
-          cy={-194}
-          fill="#000000"
-          r={14}
-        />
-      </g>
-    </symbol>
-    <pattern
-      height={65.33333333333333}
-      id="field-pattern-3-argent-sable"
-      patternUnits="userSpaceOnUse"
-      viewBox="0 0 44.44444444444444 65.33333333333333"
-      width={44.44444444444444}
-    >
-      <rect
-        fill="#FFFFFF"
-        height={65.33333333333333}
-        width={44.44444444444444}
-      />
-      <use
-        height={26.666666666666664}
-        href="#ermined-argent-sable"
-        width={22.22222222222222}
-        x={0}
-        y={3}
-      />
-      <use
-        height={26.666666666666664}
-        href="#ermined-argent-sable"
-        width={22.22222222222222}
-        x={22.22222222222222}
-        y={35.666666666666664}
-      />
-    </pattern>
-    <symbol
-      id="ermined-argent-sable"
-      viewBox="0 0 200 240"
-    >
-      <rect
-        fill="#FFFFFF"
-        height="100%"
-        width="100%"
-      />
-      <g
-        transform="translate(100, 240)"
-      >
-        <path
-          d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
-          fill="#000000"
-        />
-        <circle
-          cy={-226}
-          fill="#000000"
-          r="14"
-        />
-        <circle
-          cx={-32}
-          cy={-194}
-          fill="#000000"
-          r={14}
-        />
-        <circle
-          cx={32}
-          cy={-194}
-          fill="#000000"
-          r={14}
-        />
-      </g>
-    </symbol>
-    <pattern
-      height={65.33333333333333}
-      id="field-pattern-3-argent-sable"
-      patternUnits="userSpaceOnUse"
-      viewBox="0 0 44.44444444444444 65.33333333333333"
-      width={44.44444444444444}
-    >
-      <rect
-        fill="#FFFFFF"
-        height={65.33333333333333}
-        width={44.44444444444444}
-      />
-      <use
-        height={26.666666666666664}
-        href="#ermined-argent-sable"
-        width={22.22222222222222}
-        x={0}
-        y={3}
-      />
-      <use
-        height={26.666666666666664}
-        href="#ermined-argent-sable"
-        width={22.22222222222222}
-        x={22.22222222222222}
-        y={35.666666666666664}
-      />
-    </pattern>
-    <symbol
-      id="ermined-argent-sable"
-      viewBox="0 0 200 240"
-    >
-      <rect
-        fill="#FFFFFF"
-        height="100%"
-        width="100%"
-      />
-      <g
-        transform="translate(100, 240)"
-      >
-        <path
-          d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
-          fill="#000000"
-        />
-        <circle
-          cy={-226}
-          fill="#000000"
-          r="14"
-        />
-        <circle
-          cx={-32}
-          cy={-194}
-          fill="#000000"
-          r={14}
-        />
-        <circle
-          cx={32}
-          cy={-194}
-          fill="#000000"
-          r={14}
-        />
-      </g>
-    </symbol>
-    <pattern
-      height={65.33333333333333}
-      id="field-pattern-3-argent-sable"
-      patternUnits="userSpaceOnUse"
-      viewBox="0 0 44.44444444444444 65.33333333333333"
-      width={44.44444444444444}
-    >
-      <rect
-        fill="#FFFFFF"
-        height={65.33333333333333}
-        width={44.44444444444444}
-      />
-      <use
-        height={26.666666666666664}
-        href="#ermined-argent-sable"
-        width={22.22222222222222}
-        x={0}
-        y={3}
-      />
-      <use
-        height={26.666666666666664}
-        href="#ermined-argent-sable"
-        width={22.22222222222222}
-        x={22.22222222222222}
-        y={35.666666666666664}
-      />
-    </pattern>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -10096,200 +9381,6 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
         y={35.666666666666664}
       />
     </pattern>
-    <symbol
-      id="ermined-argent-sable"
-      viewBox="0 0 200 240"
-    >
-      <rect
-        fill="#FFFFFF"
-        height="100%"
-        width="100%"
-      />
-      <g
-        transform="translate(100, 240)"
-      >
-        <path
-          d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
-          fill="#000000"
-        />
-        <circle
-          cy={-226}
-          fill="#000000"
-          r="14"
-        />
-        <circle
-          cx={-32}
-          cy={-194}
-          fill="#000000"
-          r={14}
-        />
-        <circle
-          cx={32}
-          cy={-194}
-          fill="#000000"
-          r={14}
-        />
-      </g>
-    </symbol>
-    <pattern
-      height={65.33333333333333}
-      id="field-pattern-3-argent-sable"
-      patternUnits="userSpaceOnUse"
-      viewBox="0 0 44.44444444444444 65.33333333333333"
-      width={44.44444444444444}
-    >
-      <rect
-        fill="#FFFFFF"
-        height={65.33333333333333}
-        width={44.44444444444444}
-      />
-      <use
-        height={26.666666666666664}
-        href="#ermined-argent-sable"
-        width={22.22222222222222}
-        x={0}
-        y={3}
-      />
-      <use
-        height={26.666666666666664}
-        href="#ermined-argent-sable"
-        width={22.22222222222222}
-        x={22.22222222222222}
-        y={35.666666666666664}
-      />
-    </pattern>
-    <symbol
-      id="ermined-argent-sable"
-      viewBox="0 0 200 240"
-    >
-      <rect
-        fill="#FFFFFF"
-        height="100%"
-        width="100%"
-      />
-      <g
-        transform="translate(100, 240)"
-      >
-        <path
-          d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
-          fill="#000000"
-        />
-        <circle
-          cy={-226}
-          fill="#000000"
-          r="14"
-        />
-        <circle
-          cx={-32}
-          cy={-194}
-          fill="#000000"
-          r={14}
-        />
-        <circle
-          cx={32}
-          cy={-194}
-          fill="#000000"
-          r={14}
-        />
-      </g>
-    </symbol>
-    <pattern
-      height={65.33333333333333}
-      id="field-pattern-3-argent-sable"
-      patternUnits="userSpaceOnUse"
-      viewBox="0 0 44.44444444444444 65.33333333333333"
-      width={44.44444444444444}
-    >
-      <rect
-        fill="#FFFFFF"
-        height={65.33333333333333}
-        width={44.44444444444444}
-      />
-      <use
-        height={26.666666666666664}
-        href="#ermined-argent-sable"
-        width={22.22222222222222}
-        x={0}
-        y={3}
-      />
-      <use
-        height={26.666666666666664}
-        href="#ermined-argent-sable"
-        width={22.22222222222222}
-        x={22.22222222222222}
-        y={35.666666666666664}
-      />
-    </pattern>
-    <symbol
-      id="ermined-argent-sable"
-      viewBox="0 0 200 240"
-    >
-      <rect
-        fill="#FFFFFF"
-        height="100%"
-        width="100%"
-      />
-      <g
-        transform="translate(100, 240)"
-      >
-        <path
-          d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
-          fill="#000000"
-        />
-        <circle
-          cy={-226}
-          fill="#000000"
-          r="14"
-        />
-        <circle
-          cx={-32}
-          cy={-194}
-          fill="#000000"
-          r={14}
-        />
-        <circle
-          cx={32}
-          cy={-194}
-          fill="#000000"
-          r={14}
-        />
-      </g>
-    </symbol>
-    <pattern
-      height={65.33333333333333}
-      id="field-pattern-3-argent-sable"
-      patternUnits="userSpaceOnUse"
-      viewBox="0 0 44.44444444444444 65.33333333333333"
-      width={44.44444444444444}
-    >
-      <rect
-        fill="#FFFFFF"
-        height={65.33333333333333}
-        width={44.44444444444444}
-      />
-      <use
-        height={26.666666666666664}
-        href="#ermined-argent-sable"
-        width={22.22222222222222}
-        x={0}
-        y={3}
-      />
-      <use
-        height={26.666666666666664}
-        href="#ermined-argent-sable"
-        width={22.22222222222222}
-        x={22.22222222222222}
-        y={35.666666666666664}
-      />
-    </pattern>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -10571,14 +9662,6 @@ exports[`CoatsOfArms should render 'Quarterly, 1st: Bendy or and purpure, a bord
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -10979,14 +10062,6 @@ exports[`CoatsOfArms should render 'Sable, a cross maltese argent' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -11121,13 +10196,6 @@ exports[`CoatsOfArms should render 'Vair, a gyron or' 1`] = `
         y="100"
       />
     </pattern>
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -11210,14 +10278,6 @@ exports[`CoatsOfArms should render 'Vert, flaunches argent' 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -11314,11 +10374,6 @@ exports[`CoatsOfArms should render 'Vert, two crosses hummetty counter potent' 1
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
     <symbol
       id="counter-potent"
       viewBox="0 0 300 200"
@@ -11365,8 +10420,6 @@ exports[`CoatsOfArms should render 'Vert, two crosses hummetty counter potent' 1
         />
       </g>
     </pattern>
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -11529,14 +10582,6 @@ exports[`CoatsOfArms should render a fur blason: Ermine 1`] = `
         y={35.666666666666664}
       />
     </pattern>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -11648,13 +10693,6 @@ exports[`CoatsOfArms should render a party blason with some ordinary: Per bend v
         y="100"
       />
     </pattern>
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -11791,13 +10829,6 @@ exports[`CoatsOfArms should render a party blason: Per bend vair and azure 1`] =
         y="100"
       />
     </pattern>
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -11863,14 +10894,6 @@ exports[`CoatsOfArms should render a plain blason 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
@@ -11934,14 +10957,6 @@ exports[`CoatsOfArms should render a the england royal arms 1`] = `
   width={200}
 >
   <defs>
-    
-    
-    
-    
-    
-    
-    
-    
     <clipPath
       id="plain-field-clip-path"
     >
