@@ -5,7 +5,6 @@ import { areTinctureEquals, Tincture, tinctures } from '../../model/tincture';
 import { PartyForm } from './PartyForm';
 import { SelectScalar } from '../../common/SelectScalar';
 import { cannotHappen } from '../../../utils/cannot-happen';
-import { TinctureConfiguration } from '../../model/tincture-configuration';
 import { ButtonGroup } from '../../common/ButtonGroup';
 import { TiercedForm } from './TiercedForm';
 import { stringifyFieldKind } from '../../model/stringify/stringify.helper';
@@ -15,8 +14,8 @@ import { allDeclaredTincturesOfField } from '../blason.helpers';
 
 const numberOfBars = [6, 8, 10] as const;
 const gironnyNumberAvailable = [8, 12] as const;
-type Props = { tinctureConfiguration: TinctureConfiguration; field: Field; fieldChange: (field: Field) => void };
-export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) {
+type Props = { field: Field; fieldChange: (field: Field) => void };
+export function FieldForm({ field, fieldChange }: Props) {
   function plainTinctureChange(tincture: Tincture) {
     fieldChange({ kind: 'plain', tincture });
   }
@@ -98,20 +97,16 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
         />
       </div>
       {field.kind === 'party' ? (
-        <PartyForm tinctureConfiguration={tinctureConfiguration} field={field} fieldChange={fieldChange} />
+        <PartyForm field={field} fieldChange={fieldChange} />
       ) : field.kind === 'tierced' ? (
-        <TiercedForm tinctureConfiguration={tinctureConfiguration} field={field} fieldChange={fieldChange} />
+        <TiercedForm field={field} fieldChange={fieldChange} />
       ) : (
         <div className="row">
           {field.kind === 'plain' ? (
             <div className="col">
               <div className="form-group field-tincture-select">
                 <label>Field</label>
-                <TinctureSelect
-                  tinctureConfiguration={tinctureConfiguration}
-                  tincture={field.tincture}
-                  tinctureChange={plainTinctureChange}
-                />
+                <TinctureSelect tincture={field.tincture} tinctureChange={plainTinctureChange} />
               </div>
             </div>
           ) : field.kind === 'bendy' ||
@@ -141,7 +136,6 @@ export function FieldForm({ tinctureConfiguration, field, fieldChange }: Props) 
             <TincturesConfiguration
               tinctures={field.tinctures}
               tincturesChanges={(tinctures) => tincturesChanges(field, tinctures)}
-              tinctureConfiguration={tinctureConfiguration}
             />
           ) : (
             cannotHappen(field)

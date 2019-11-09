@@ -6,8 +6,6 @@ import { cleanup, render } from '@testing-library/react';
 import * as React from 'react';
 import { Dimension } from '../model/dimension';
 import { CoatsOfArmsDisplay } from './CoatsOfArmsDisplay';
-import { Configuration } from '../model/configuration';
-import { defaultTinctureConfiguration } from '../model/tincture-configuration';
 import * as pointInSvgPolygon from 'point-in-svg-polygon';
 import { getChargePoints, getPathSegments } from './tests/collision.utils';
 import { stringifyBlason } from '../model/stringify/stringify.helper';
@@ -16,18 +14,10 @@ const numRuns = process.env.GENERATOR_CASE_COUNT ? parseFloat(process.env.GENERA
 
 describe('CoatsOfArms Simple collision rules', () => {
   const dimension: Dimension = { width: 360, height: 480 };
-  const configuration: Configuration = { shieldShape: 'heater', tinctureConfiguration: defaultTinctureConfiguration };
 
   function assertOnCoatsOfArms(blason: Blason) {
     cleanup();
-    render(
-      <CoatsOfArmsDisplay
-        blason={blason}
-        dimension={dimension}
-        configuration={configuration}
-        selectBlasonPart={() => {}}
-      />
-    );
+    render(<CoatsOfArmsDisplay blason={blason} dimension={dimension} selectBlasonPart={() => {}} />);
 
     const clipPathStr = document.querySelector('#plain-field-clip-path path')!.getAttribute('d');
     const clipPath = getPathSegments(clipPathStr);

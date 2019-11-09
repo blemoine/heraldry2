@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Tincture } from '../../model/tincture';
 import { TinctureSelect } from './TinctureSelect';
 import { capitalizeFirstLetter } from '../../../utils/strings';
-import { TinctureConfiguration } from '../../model/tincture-configuration';
 
 function toOrdinal(i: number): string {
   if (i === 1) {
@@ -21,12 +20,10 @@ function toOrdinal(i: number): string {
 type Props<T extends ReadonlyArray<Tincture>> = {
   tinctures: T;
   tincturesChanges: (t: T) => void;
-  tinctureConfiguration: TinctureConfiguration;
 };
 export const TincturesConfiguration = <T extends ReadonlyArray<Tincture>>({
   tinctures,
   tincturesChanges,
-  tinctureConfiguration,
 }: Props<T>) => {
   function updateTincture(tincture: Tincture, index: number) {
     if (index >= tinctures.length) {
@@ -46,11 +43,7 @@ export const TincturesConfiguration = <T extends ReadonlyArray<Tincture>>({
           <div className="col" key={i}>
             <div className={`form-group field-${ordinal}-tincture-select`}>
               <label>{capitalizeFirstLetter(ordinal)} tincture</label>
-              <TinctureSelect
-                tinctureConfiguration={tinctureConfiguration}
-                tincture={tincture}
-                tinctureChange={(t) => updateTincture(t, i)}
-              />
+              <TinctureSelect tincture={tincture} tinctureChange={(t) => updateTincture(t, i)} />
             </div>
           </div>
         );

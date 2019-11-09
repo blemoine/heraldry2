@@ -5,14 +5,12 @@ import { Tincture } from '../../../model/tincture';
 import { SelectScalar } from '../../../common/SelectScalar';
 import { CountAndDisposition } from '../../../model/countAndDisposition';
 import { CountAndDispositionForm } from '../CountAndDispositionForm';
-import { TinctureConfiguration } from '../../../model/tincture-configuration';
 
 type Props = {
-  tinctureConfiguration: TinctureConfiguration;
   charge: Roundel;
   chargeChange: (roundel: Roundel) => void;
 };
-export const RoundelForm = ({ tinctureConfiguration, charge, chargeChange }: Props) => {
+export const RoundelForm = ({ charge, chargeChange }: Props) => {
   function chargeTinctureChange(tincture: Tincture) {
     chargeChange({ ...charge, tincture });
   }
@@ -31,11 +29,7 @@ export const RoundelForm = ({ tinctureConfiguration, charge, chargeChange }: Pro
         <div className="col">
           <div className="form-group">
             <label>Tincture of the charge</label>
-            <TinctureSelect
-              tinctureConfiguration={tinctureConfiguration}
-              tincture={charge.tincture}
-              tinctureChange={chargeTinctureChange}
-            />
+            <TinctureSelect tincture={charge.tincture} tinctureChange={chargeTinctureChange} />
           </div>
         </div>
         <div className="col">

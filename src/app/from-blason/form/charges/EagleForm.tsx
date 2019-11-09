@@ -5,11 +5,10 @@ import { Tincture } from '../../../model/tincture';
 import { SelectScalar } from '../../../common/SelectScalar';
 import { CountAndDisposition } from '../../../model/countAndDisposition';
 import { CountAndDispositionForm } from '../CountAndDispositionForm';
-import { TinctureConfiguration } from '../../../model/tincture-configuration';
 
-type Props = { tinctureConfiguration: TinctureConfiguration; charge: Eagle; chargeChange: (eagle: Eagle) => void };
+type Props = { charge: Eagle; chargeChange: (eagle: Eagle) => void };
 
-export const EagleForm = ({ tinctureConfiguration, charge, chargeChange }: Props) => {
+export const EagleForm = ({ charge, chargeChange }: Props) => {
   function chargeTinctureChange(tincture: Tincture) {
     chargeChange({ ...charge, tincture });
   }
@@ -32,21 +31,13 @@ export const EagleForm = ({ tinctureConfiguration, charge, chargeChange }: Props
         <div className="col">
           <div className="form-group">
             <label>Tincture of the charge</label>
-            <TinctureSelect
-              tinctureConfiguration={tinctureConfiguration}
-              tincture={charge.tincture}
-              tinctureChange={chargeTinctureChange}
-            />
+            <TinctureSelect tincture={charge.tincture} tinctureChange={chargeTinctureChange} />
           </div>
         </div>
         <div className="col">
           <div className="form-group">
             <label>Tincture of the beak and talons</label>
-            <TinctureSelect
-              tinctureConfiguration={tinctureConfiguration}
-              tincture={charge.beakedAndArmed}
-              tinctureChange={beakedArmedTinctureChange}
-            />
+            <TinctureSelect tincture={charge.beakedAndArmed} tinctureChange={beakedArmedTinctureChange} />
           </div>
         </div>
       </div>

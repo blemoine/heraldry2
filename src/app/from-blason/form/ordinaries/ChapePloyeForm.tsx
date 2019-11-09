@@ -3,7 +3,6 @@ import { ChapePloye, chapePloyeTincturesKind, ChaussePloye } from '../../../mode
 import { MetalsAndColours, or, Tincture } from '../../../model/tincture';
 import { LineSelect } from '../LineSelect';
 import { Line } from '../../../model/line';
-import { TinctureConfiguration } from '../../../model/tincture-configuration';
 import { TincturesConfiguration } from '../TincturesConfiguration';
 import { allDeclaredTincturesOfOrdinary } from '../../blason.helpers';
 import { cannotHappen } from '../../../../utils/cannot-happen';
@@ -12,11 +11,10 @@ import { MetalAndColoursSelect } from '../TinctureSelect';
 
 type SupportedOrdinary = ChapePloye | ChaussePloye;
 type Props = {
-  tinctureConfiguration: TinctureConfiguration;
   ordinary: SupportedOrdinary;
   ordinaryChange: (ordinary: SupportedOrdinary) => void;
 };
-export const ChapePloyeForm = ({ tinctureConfiguration, ordinary, ordinaryChange }: Props) => {
+export const ChapePloyeForm = ({ ordinary, ordinaryChange }: Props) => {
   function tincturesChanges(tinctures: Array<Tincture>) {
     if (ordinary.tinctures.kind === 'simple') {
       if (tinctures.length != 1) {
@@ -62,11 +60,7 @@ export const ChapePloyeForm = ({ tinctureConfiguration, ordinary, ordinaryChange
 
   return (
     <div className="row">
-      <TincturesConfiguration
-        tinctures={tinctures}
-        tincturesChanges={(tinctures) => tincturesChanges(tinctures)}
-        tinctureConfiguration={tinctureConfiguration}
-      />
+      <TincturesConfiguration tinctures={tinctures} tincturesChanges={(tinctures) => tincturesChanges(tinctures)} />
 
       <div className="col">
         <div className="form-group">
@@ -82,11 +76,7 @@ export const ChapePloyeForm = ({ tinctureConfiguration, ordinary, ordinaryChange
       </div>
       <div className="form-group">
         <label>Fimbriated</label>
-        <MetalAndColoursSelect
-          tinctureConfiguration={tinctureConfiguration}
-          tincture={ordinary.fimbriated}
-          tinctureChange={ordinaryFimbriatedChange}
-        />
+        <MetalAndColoursSelect tincture={ordinary.fimbriated} tinctureChange={ordinaryFimbriatedChange} />
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useContext, useRef, useState } from 'react';
 import {
   isErmine,
   isFur,
@@ -9,23 +10,17 @@ import {
   Tincture,
   tinctures,
 } from '../../model/tincture';
-import { TinctureConfiguration } from '../../model/tincture-configuration';
 import { Overlay, Popover } from 'react-bootstrap';
 import { ErminePatternDef } from '../coats-of-arms-parts/ErminePatternDef';
 import { VairPatternDef } from '../coats-of-arms-parts/VairPatternDef';
 import { PotentPatternDef } from '../coats-of-arms-parts/PotentPatternDef';
 import { cannotHappen } from '../../../utils/cannot-happen';
-import { useRef, useState } from 'react';
 import { uuid } from '../../../utils/uuid';
 import { stringifyTincture } from '../../model/stringify/stringify.helper';
+import { ConfigurationContext } from '../configuration/ConfigurationContext';
 
-const TinctureRenderer = ({
-  tincture,
-  tinctureConfiguration,
-}: {
-  tincture: Tincture;
-  tinctureConfiguration: TinctureConfiguration;
-}) => {
+const TinctureRenderer = ({ tincture }: { tincture: Tincture }) => {
+  const tinctureConfiguration = useContext(ConfigurationContext).tinctureConfiguration;
   const width = 30;
   const height = 30;
   const id = uuid();
@@ -85,14 +80,12 @@ const TinctureRenderer = ({
 };
 
 type AbstractProps<T extends Tincture | null> = {
-  tinctureConfiguration: TinctureConfiguration;
   tincture: T;
   tinctureChange: (t: T) => void;
   tinctureList: Array<T>;
 };
 
 const AbstractTinctureSelect = <T extends Tincture | null>({
-  tinctureConfiguration,
   tincture,
   tinctureChange,
   tinctureList,
@@ -117,7 +110,7 @@ const AbstractTinctureSelect = <T extends Tincture | null>({
       >
         {tincture ? (
           <>
-            <TinctureRenderer tincture={tincture as Tincture} tinctureConfiguration={tinctureConfiguration} />
+            <TinctureRenderer tincture={tincture as Tincture} />
             <div className="tincture-select-label" style={{ textAlign: 'center' }}>
               {stringifyTincture(tincture as Tincture)}
             </div>
@@ -175,7 +168,7 @@ const AbstractTinctureSelect = <T extends Tincture | null>({
                       title={stringifyTincture(tincture as Tincture)}
                       onClick={() => selectTincture(tincture)}
                     >
-                      <TinctureRenderer tincture={tincture as Tincture} tinctureConfiguration={tinctureConfiguration} />
+                      <TinctureRenderer tincture={tincture as Tincture} />
                       <div style={{ textAlign: 'center' }}>{stringifyTincture(tincture as Tincture)}</div>
                     </div>
                   );
@@ -190,36 +183,22 @@ const AbstractTinctureSelect = <T extends Tincture | null>({
 };
 
 type TinctureProps = {
-  tinctureConfiguration: TinctureConfiguration;
   tincture: Tincture;
   tinctureChange: (t: Tincture) => void;
 };
 
-export const TinctureSelect = ({ tinctureConfiguration, tincture, tinctureChange }: TinctureProps) => {
-  return (
-    <AbstractTinctureSelect
-      tinctureConfiguration={tinctureConfiguration}
-      tincture={tincture}
-      tinctureChange={tinctureChange}
-      tinctureList={tinctures}
-    />
-  );
+export const TinctureSelect = ({ tincture, tinctureChange }: TinctureProps) => {
+  return <AbstractTinctureSelect tincture={tincture} tinctureChange={tinctureChange} tinctureList={tinctures} />;
 };
 
 type MetalAndColoursProps = {
-  tinctureConfiguration: TinctureConfiguration;
   tincture: MetalsAndColours | null;
   tinctureChange: (t: MetalsAndColours | null) => void;
 };
 
 const metalAndColoursAndNull = [...metalAndColours, null];
-export const MetalAndColoursSelect = ({ tinctureConfiguration, tincture, tinctureChange }: MetalAndColoursProps) => {
+export const MetalAndColoursSelect = ({ tincture, tinctureChange }: MetalAndColoursProps) => {
   return (
-    <AbstractTinctureSelect
-      tinctureConfiguration={tinctureConfiguration}
-      tincture={tincture}
-      tinctureChange={tinctureChange}
-      tinctureList={metalAndColoursAndNull}
-    />
+    <AbstractTinctureSelect tincture={tincture} tinctureChange={tinctureChange} tinctureList={metalAndColoursAndNull} />
   );
 };

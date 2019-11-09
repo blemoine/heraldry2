@@ -3,16 +3,14 @@ import * as React from 'react';
 import { Ordinary } from '../../model/ordinary';
 import { areTinctureEquals, argent, MetalsAndColours, tinctures } from '../../model/tincture';
 import { OrdinaryDispatcherForm } from './ordinaries/OrdinaryDispatcherForm';
-import { TinctureConfiguration } from '../../model/tincture-configuration';
 import { Line } from '../../model/line';
 import { allDeclaredTincturesOfOrdinary } from '../blason.helpers';
 
 type Props = {
-  tinctureConfiguration: TinctureConfiguration;
   ordinary: Ordinary | null;
   ordinaryChange: (ordinary: Ordinary | null) => void;
 };
-export function OrdinaryForm({ tinctureConfiguration, ordinary, ordinaryChange }: Props) {
+export function OrdinaryForm({ ordinary, ordinaryChange }: Props) {
   function changeOrdinary(ordinaryName: Ordinary['name'] | null) {
     if (ordinaryName) {
       const tincture = ordinary ? allDeclaredTincturesOfOrdinary(ordinary)[0] : argent;
@@ -48,13 +46,7 @@ export function OrdinaryForm({ tinctureConfiguration, ordinary, ordinaryChange }
         </div>
       </div>
       <div className="col">
-        {ordinary && (
-          <OrdinaryDispatcherForm
-            tinctureConfiguration={tinctureConfiguration}
-            ordinary={ordinary}
-            ordinaryChange={ordinaryChange}
-          />
-        )}
+        {ordinary && <OrdinaryDispatcherForm ordinary={ordinary} ordinaryChange={ordinaryChange} />}
       </div>
     </div>
   );

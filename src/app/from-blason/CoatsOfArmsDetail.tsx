@@ -6,7 +6,6 @@ import { ResizableBox, ResizeCallbackData } from 'react-resizable';
 import 'react-resizable/css/styles.css';
 import { Dimension, scale } from '../model/dimension';
 import { BlasonForm } from './BlasonForm';
-import { Configuration } from '../model/configuration';
 import { BlasonPath } from '../model/blason-path';
 
 const resizeHandles = ['e' as const];
@@ -15,13 +14,11 @@ const maxConstraints: [number, number] = [480, 640];
 const coatsOfArmsStyle = { border: '1px solid #CCC', padding: '5%' };
 
 type Props = {
-  configuration: Configuration;
   blason: Blason;
   blasonChange: (blason: Blason) => void;
   selectBlasonPart: (path: BlasonPath) => void;
 };
 export const CoatsOfArmsDetail = React.memo(function CoatsOfArmsDetail({
-  configuration,
   blason,
   blasonChange,
   selectBlasonPart,
@@ -49,12 +46,7 @@ export const CoatsOfArmsDetail = React.memo(function CoatsOfArmsDetail({
         onResize={onResize}
       >
         <div style={coatsOfArmsStyle}>
-          <CoatsOfArmsDisplay
-            blason={blason}
-            dimension={scale(dimension, 0.9)}
-            configuration={configuration}
-            selectBlasonPart={selectBlasonPart}
-          />
+          <CoatsOfArmsDisplay blason={blason} dimension={scale(dimension, 0.9)} selectBlasonPart={selectBlasonPart} />
         </div>
       </ResizableBox>
     </div>

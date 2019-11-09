@@ -12,6 +12,7 @@ import { Route } from 'react-router-dom';
 import * as H from 'history';
 import { parseBlason } from './blason-parser/blasonParser';
 import { stringifyBlason } from './model/stringify/stringify.helper';
+import { ConfigurationContext } from './from-blason/configuration/ConfigurationContext';
 
 const baseDefaultBlason: Blason = { kind: 'simple', field: { kind: 'plain', tincture: gules } } as const;
 const configurationLocalStorageKey = 'configuration#1';
@@ -54,13 +55,14 @@ const InnerApp = ({ location, history }: Props) => {
     <>
       <Header pageState={pageState} toggleConfiguration={toggleConfiguration} />
       <div>
-        <FromBlason
-          pageState={pageState}
-          blason={blason}
-          configuration={configuration}
-          blasonChange={setBlason}
-          configurationChange={setConfiguration}
-        />
+        <ConfigurationContext.Provider value={configuration}>
+          <FromBlason
+            pageState={pageState}
+            blason={blason}
+            blasonChange={setBlason}
+            configurationChange={setConfiguration}
+          />
+        </ConfigurationContext.Provider>
       </div>
     </>
   );

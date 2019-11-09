@@ -4,15 +4,13 @@ import { MetalAndColoursSelect, TinctureSelect } from '../TinctureSelect';
 import { MetalsAndColours, Tincture } from '../../../model/tincture';
 import { LineSelect } from '../LineSelect';
 import { Line } from '../../../model/line';
-import { TinctureConfiguration } from '../../../model/tincture-configuration';
 
 type SupportedOrdinary = Exclude<Ordinary, Pale | ChapePloye | ChaussePloye>;
 type Props = {
-  tinctureConfiguration: TinctureConfiguration;
   ordinary: SupportedOrdinary;
   ordinaryChange: (ordinary: SupportedOrdinary) => void;
 };
-export const StandardOrdinaryForm = ({ tinctureConfiguration, ordinary, ordinaryChange }: Props) => {
+export const StandardOrdinaryForm = ({ ordinary, ordinaryChange }: Props) => {
   function ordinaryTinctureChange(tincture: Tincture) {
     ordinaryChange({ ...ordinary, tincture });
   }
@@ -30,11 +28,7 @@ export const StandardOrdinaryForm = ({ tinctureConfiguration, ordinary, ordinary
       <div className="col">
         <div className="form-group ordinary-tincture-select">
           <label>Tincture</label>
-          <TinctureSelect
-            tinctureConfiguration={tinctureConfiguration}
-            tincture={ordinary.tincture}
-            tinctureChange={ordinaryTinctureChange}
-          />
+          <TinctureSelect tincture={ordinary.tincture} tinctureChange={ordinaryTinctureChange} />
         </div>
       </div>
 
@@ -47,11 +41,7 @@ export const StandardOrdinaryForm = ({ tinctureConfiguration, ordinary, ordinary
 
       <div className="form-group">
         <label>Fimbriated</label>
-        <MetalAndColoursSelect
-          tinctureConfiguration={tinctureConfiguration}
-          tincture={ordinary.fimbriated}
-          tinctureChange={ordinaryFimbriatedChange}
-        />
+        <MetalAndColoursSelect tincture={ordinary.fimbriated} tinctureChange={ordinaryFimbriatedChange} />
       </div>
     </div>
   );

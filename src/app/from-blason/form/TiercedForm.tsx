@@ -3,17 +3,15 @@ import { TiercedField } from '../../model/field';
 import { SelectScalar } from '../../common/SelectScalar';
 import { LineSelect } from './LineSelect';
 import { Line } from '../../model/line';
-import { TinctureConfiguration } from '../../model/tincture-configuration';
 import { Tierced, tierceds } from '../../model/tierced';
 import { stringifyParty } from '../../model/stringify/stringify.helper';
 import { TincturesConfiguration } from './TincturesConfiguration';
 
 type Props = {
-  tinctureConfiguration: TinctureConfiguration;
   field: TiercedField;
   fieldChange: (field: TiercedField) => void;
 };
-export const TiercedForm = ({ tinctureConfiguration, field, fieldChange }: Props) => {
+export const TiercedForm = ({ field, fieldChange }: Props) => {
   const per = field.per;
 
   function tiercedChange(partyName: Tierced['name']) {
@@ -45,7 +43,6 @@ export const TiercedForm = ({ tinctureConfiguration, field, fieldChange }: Props
       <TincturesConfiguration
         tinctures={per.tinctures}
         tincturesChanges={(tinctures) => fieldChange({ kind: 'tierced', per: { ...per, tinctures } })}
-        tinctureConfiguration={tinctureConfiguration}
       />
     </div>
   );

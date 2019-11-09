@@ -1,18 +1,16 @@
 import * as React from 'react';
+import { useCallback } from 'react';
 import { gules, or, sable } from '../../model/tincture';
 import { Charge } from '../../model/charge';
 import { cannotHappen } from '../../../utils/cannot-happen';
 import { ChargeNameSelect } from './ChargeNameSelect';
 import { ChargeDetailForm } from './ChargeDetailForm';
-import { TinctureConfiguration } from '../../model/tincture-configuration';
-import { useCallback } from 'react';
 
 type Props = {
-  tinctureConfiguration: TinctureConfiguration;
   charge: Charge | null;
   chargeChange: (charge: Charge | null) => void;
 };
-export function ChargeForm({ tinctureConfiguration, charge, chargeChange }: Props) {
+export function ChargeForm({ charge, chargeChange }: Props) {
   const changeChargeType = useCallback(
     function(chargeName: Charge['name'] | null) {
       if (chargeName === 'lion') {
@@ -77,9 +75,7 @@ export function ChargeForm({ tinctureConfiguration, charge, chargeChange }: Prop
         <ChargeNameSelect charge={charge ? charge.name : null} chargeChange={changeChargeType} />
       </div>
 
-      {charge && (
-        <ChargeDetailForm tinctureConfiguration={tinctureConfiguration} charge={charge} chargeChange={chargeChange} />
-      )}
+      {charge && <ChargeDetailForm charge={charge} chargeChange={chargeChange} />}
     </>
   );
 }

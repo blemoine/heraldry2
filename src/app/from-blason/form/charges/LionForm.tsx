@@ -5,13 +5,12 @@ import { Tincture } from '../../../model/tincture';
 import { SelectScalar } from '../../../common/SelectScalar';
 import { CountAndDisposition } from '../../../model/countAndDisposition';
 import { CountAndDispositionForm } from '../CountAndDispositionForm';
-import { TinctureConfiguration } from '../../../model/tincture-configuration';
 
-type Props = { tinctureConfiguration: TinctureConfiguration; charge: Lion; chargeChange: (lion: Lion) => void };
+type Props = { charge: Lion; chargeChange: (lion: Lion) => void };
 
 const headPostures = ['None', ...lionHeads] as const;
 
-export const LionForm = ({ tinctureConfiguration, charge, chargeChange }: Props) => {
+export const LionForm = ({ charge, chargeChange }: Props) => {
   function chargeTinctureChange(tincture: Tincture) {
     chargeChange({ ...charge, tincture: tincture });
   }
@@ -43,21 +42,13 @@ export const LionForm = ({ tinctureConfiguration, charge, chargeChange }: Props)
         <div className="col">
           <div className="form-group charge-lion-tincture-select">
             <label>Tincture of the charge</label>
-            <TinctureSelect
-              tinctureConfiguration={tinctureConfiguration}
-              tincture={charge.tincture}
-              tinctureChange={chargeTinctureChange}
-            />
+            <TinctureSelect tincture={charge.tincture} tinctureChange={chargeTinctureChange} />
           </div>
         </div>
         <div className="col">
           <div className="form-group">
             <label>Tincture of the claws and tongue</label>
-            <TinctureSelect
-              tinctureConfiguration={tinctureConfiguration}
-              tincture={charge.armedAndLangued}
-              tinctureChange={armedLanguedTinctureChange}
-            />
+            <TinctureSelect tincture={charge.armedAndLangued} tinctureChange={armedLanguedTinctureChange} />
           </div>
         </div>
       </div>

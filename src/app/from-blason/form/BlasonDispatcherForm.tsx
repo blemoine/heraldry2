@@ -1,14 +1,12 @@
 import * as React from 'react';
-import { TinctureConfiguration } from '../../model/tincture-configuration';
+import { useCallback } from 'react';
 import { Blason, SimpleBlason } from '../../model/blason';
 import { cannotHappen } from '../../../utils/cannot-happen';
 import { SimpleBlasonForm } from './SimpleBlasonForm';
-import { useCallback } from 'react';
 import { Accordion, Card } from 'react-bootstrap';
 import { BlasonPath } from '../../model/blason-path';
 
 type Props = {
-  tinctureConfiguration: TinctureConfiguration;
   blason: Blason;
   blasonChange: (blason: Blason) => void;
   blasonPath: BlasonPath | null;
@@ -17,14 +15,12 @@ type Props = {
 export const BlasonDispatcherForm = React.memo(function BlasonForm({
   blason,
   blasonChange,
-  tinctureConfiguration,
   blasonPath,
   setBlasonPath,
 }: Props) {
   if (blason.kind === 'simple') {
     return (
       <SimpleBlasonForm
-        tinctureConfiguration={tinctureConfiguration}
         blason={blason}
         blasonChange={blasonChange}
         blasonPath={Array.isArray(blasonPath) ? null : blasonPath}
@@ -56,7 +52,6 @@ export const BlasonDispatcherForm = React.memo(function BlasonForm({
             <Accordion.Collapse eventKey="0">
               <Card.Body className="top-card-body">
                 <SimpleBlasonForm
-                  tinctureConfiguration={tinctureConfiguration}
                   blason={blason.blasons[0]}
                   blasonChange={quarterlyBlasonChange(0)}
                   blasonPath={Array.isArray(blasonPath) && blasonPath[0] === 0 ? blasonPath[1] : null}
@@ -71,7 +66,6 @@ export const BlasonDispatcherForm = React.memo(function BlasonForm({
             <Accordion.Collapse eventKey="1">
               <Card.Body className="top-card-body">
                 <SimpleBlasonForm
-                  tinctureConfiguration={tinctureConfiguration}
                   blason={blason.blasons[1]}
                   blasonChange={quarterlyBlasonChange(1)}
                   blasonPath={Array.isArray(blasonPath) && blasonPath[0] === 1 ? blasonPath[1] : null}
@@ -86,7 +80,6 @@ export const BlasonDispatcherForm = React.memo(function BlasonForm({
             <Accordion.Collapse eventKey="2">
               <Card.Body className="top-card-body">
                 <SimpleBlasonForm
-                  tinctureConfiguration={tinctureConfiguration}
                   blason={blason.blasons[2]}
                   blasonChange={quarterlyBlasonChange(2)}
                   blasonPath={Array.isArray(blasonPath) && blasonPath[0] === 2 ? blasonPath[1] : null}
@@ -101,7 +94,6 @@ export const BlasonDispatcherForm = React.memo(function BlasonForm({
             <Accordion.Collapse eventKey="3">
               <Card.Body className="top-card-body">
                 <SimpleBlasonForm
-                  tinctureConfiguration={tinctureConfiguration}
                   blason={blason.blasons[3]}
                   blasonChange={quarterlyBlasonChange(3)}
                   blasonPath={Array.isArray(blasonPath) && blasonPath[0] === 3 ? blasonPath[1] : null}

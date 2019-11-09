@@ -7,19 +7,19 @@ import { Dimension } from '../model/dimension';
 import { ErminePatternDef } from './coats-of-arms-parts/ErminePatternDef';
 import { VairPatternDef } from './coats-of-arms-parts/VairPatternDef';
 import { PotentPatternDef } from './coats-of-arms-parts/PotentPatternDef';
-import { Configuration } from '../model/configuration';
 import { EscutcheonDisplay } from './coats-of-arms-parts/escutcheon/EscutcheonDisplay';
 import { BlasonDisplay } from './coats-of-arms-parts/BlasonDisplay';
 import { BlasonPath } from '../model/blason-path';
+import { useContext } from 'react';
+import { ConfigurationContext } from './configuration/ConfigurationContext';
 
 type Props = {
   blason: Blason;
   dimension: Dimension;
-  configuration: Configuration;
   selectBlasonPart: (path: BlasonPath) => void;
 };
 export function CoatsOfArmsDisplay(props: Props) {
-  const configuration = props.configuration;
+  const configuration = useContext(ConfigurationContext);
   const tinctureConfiguration = configuration.tinctureConfiguration;
   const dimension = props.dimension;
   const { width, height } = dimension;

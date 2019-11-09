@@ -4,12 +4,11 @@ import { MetalAndColoursSelect, TinctureSelect } from '../TinctureSelect';
 import { MetalsAndColours, Tincture } from '../../../model/tincture';
 import { LineSelect } from '../LineSelect';
 import { Line } from '../../../model/line';
-import { TinctureConfiguration } from '../../../model/tincture-configuration';
 import { ButtonGroup } from '../../../common/ButtonGroup';
 
-type Props = { tinctureConfiguration: TinctureConfiguration; ordinary: Pale; ordinaryChange: (pale: Pale) => void };
+type Props = { ordinary: Pale; ordinaryChange: (pale: Pale) => void };
 const countOptions = [1, 2] as const;
-export const PaleForm = ({ tinctureConfiguration, ordinary, ordinaryChange }: Props) => {
+export const PaleForm = ({ ordinary, ordinaryChange }: Props) => {
   function ordinaryTinctureChange(tincture: Tincture) {
     ordinaryChange({ ...ordinary, tincture });
   }
@@ -29,11 +28,7 @@ export const PaleForm = ({ tinctureConfiguration, ordinary, ordinaryChange }: Pr
     <>
       <div className="form-group">
         <label>Tincture</label>
-        <TinctureSelect
-          tinctureConfiguration={tinctureConfiguration}
-          tincture={ordinary.tincture}
-          tinctureChange={ordinaryTinctureChange}
-        />
+        <TinctureSelect tincture={ordinary.tincture} tinctureChange={ordinaryTinctureChange} />
       </div>
       <div className="form-group">
         <label>Number of pale</label>
@@ -49,11 +44,7 @@ export const PaleForm = ({ tinctureConfiguration, ordinary, ordinaryChange }: Pr
 
       <div className="form-group">
         <label>Fimbriated</label>
-        <MetalAndColoursSelect
-          tinctureConfiguration={tinctureConfiguration}
-          tincture={ordinary.fimbriated}
-          tinctureChange={ordinaryFimbriatedChange}
-        />
+        <MetalAndColoursSelect tincture={ordinary.fimbriated} tinctureChange={ordinaryFimbriatedChange} />
       </div>
     </>
   );

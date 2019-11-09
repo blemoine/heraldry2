@@ -5,18 +5,16 @@ import { or } from '../../model/tincture';
 import { SelectScalar } from '../../common/SelectScalar';
 import { LineSelect } from './LineSelect';
 import { Line } from '../../model/line';
-import { TinctureConfiguration } from '../../model/tincture-configuration';
 import { stringifyParty } from '../../model/stringify/stringify.helper';
 import { TincturesConfiguration } from './TincturesConfiguration';
 
 const partiesOptions = parties;
 
 type Props = {
-  tinctureConfiguration: TinctureConfiguration;
   field: PartyField;
   fieldChange: (field: PartyField) => void;
 };
-export const PartyForm = ({ tinctureConfiguration, field, fieldChange }: Props) => {
+export const PartyForm = ({ field, fieldChange }: Props) => {
   const per = field.per;
 
   function partyChange(partyName: Party['name']) {
@@ -67,13 +65,11 @@ export const PartyForm = ({ tinctureConfiguration, field, fieldChange }: Props) 
         <TincturesConfiguration
           tinctures={per.tinctures}
           tincturesChanges={(tinctures) => fieldChange({ kind: 'party', per: { ...per, tinctures } })}
-          tinctureConfiguration={tinctureConfiguration}
         />
       ) : (
         <TincturesConfiguration
           tinctures={per.tinctures}
           tincturesChanges={(tinctures) => fieldChange({ kind: 'party', per: { ...per, tinctures } })}
-          tinctureConfiguration={tinctureConfiguration}
         />
       )}
     </div>

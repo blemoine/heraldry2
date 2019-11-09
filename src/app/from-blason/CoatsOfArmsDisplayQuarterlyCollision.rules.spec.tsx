@@ -4,8 +4,6 @@ import { Blason, QuarterlyBlason, SimpleBlason } from '../model/blason';
 import { azure, or } from '../model/tincture';
 import * as React from 'react';
 import { Dimension } from '../model/dimension';
-import { Configuration } from '../model/configuration';
-import { defaultTinctureConfiguration } from '../model/tincture-configuration';
 import { cleanup, render } from '@testing-library/react';
 import { CoatsOfArmsDisplay } from './CoatsOfArmsDisplay';
 import { range } from '../../utils/range';
@@ -33,18 +31,10 @@ function linkToBlason(blason: Blason): string {
 
 describe('CoatsOfArms quarterly collision rules', () => {
   const dimension: Dimension = { width: 360, height: 480 };
-  const configuration: Configuration = { shieldShape: 'heater', tinctureConfiguration: defaultTinctureConfiguration };
 
   function assertOnCoatsOfArms(blason: QuarterlyBlason) {
     cleanup();
-    render(
-      <CoatsOfArmsDisplay
-        blason={blason}
-        dimension={dimension}
-        configuration={configuration}
-        selectBlasonPart={() => {}}
-      />
-    );
+    render(<CoatsOfArmsDisplay blason={blason} dimension={dimension} selectBlasonPart={() => {}} />);
 
     const clipPathStr = document.querySelector('#plain-field-clip-path path')!.getAttribute('d');
     const clipPath = getPathSegments(clipPathStr);
