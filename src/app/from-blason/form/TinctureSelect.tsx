@@ -124,7 +124,7 @@ const AbstractTinctureSelect = <T extends Tincture | null>({
         )}
       </div>
       <Overlay
-        target={target && target.current ? target.current : undefined}
+        target={target?.current ?? undefined}
         show={showOverlay}
         placement="top"
         rootClose={true}

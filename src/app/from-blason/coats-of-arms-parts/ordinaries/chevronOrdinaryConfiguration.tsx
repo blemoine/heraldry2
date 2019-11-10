@@ -29,7 +29,7 @@ export const chevronOrdinaryConfiguration = (dimension: Dimension, ordinary: Che
     const bottomPoint = (((i + 1) * 2 + 1) * height) / (ordinary.count * 2 + 1);
 
     let pathBuilder: SvgPathBuilder;
-    if (ordinary.line === 'dancetty' && lineOptions && lineOptions.line === 'indented') {
+    if (ordinary.line === 'dancetty' && lineOptions?.line === 'indented') {
       let topFlatPartLeft: number;
       let topFlatPartRight: number;
       let bottomFlatPart: number;

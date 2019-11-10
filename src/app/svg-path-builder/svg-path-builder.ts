@@ -138,10 +138,10 @@ export class SvgPathBuilder {
     }
   ): SvgPathBuilder {
     const [x, y] = startingPoint;
-    const topOptions = sideOptions && sideOptions.top ? sideOptions.top : null;
-    const rightOptions = sideOptions && sideOptions.right ? sideOptions.right : null;
-    const bottomOptions = sideOptions && sideOptions.bottom ? sideOptions.bottom : null;
-    const leftOptions = sideOptions && sideOptions.left ? sideOptions.left : null;
+    const topOptions = sideOptions?.top || null;
+    const rightOptions = sideOptions?.right || null;
+    const bottomOptions = sideOptions?.bottom || null;
+    const leftOptions = sideOptions?.left || null;
 
     const topSideOption =
       topOptions && rightOptions && leftOptions

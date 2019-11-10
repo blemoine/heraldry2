@@ -11,11 +11,7 @@ export const chiefOrdinaryConfiguration = (dimension: Dimension, ordinary: Chief
 
   const computedHeight =
     chiefHeight +
-    (lineOptions && lineOptions.line === 'with-arc'
-      ? lineOptions.radius
-      : lineOptions && lineOptions.line === 'indented'
-      ? lineOptions.height
-      : 0);
+    (lineOptions?.line === 'with-arc' ? lineOptions.radius : lineOptions?.line === 'indented' ? lineOptions.height : 0);
 
   const pathBuilder = SvgPathBuilder.rectangle(
     [0, 0],
