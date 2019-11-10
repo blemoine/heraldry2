@@ -47,14 +47,16 @@ const TinctureRenderer = ({ tincture }: { tincture: Tincture }) => {
             <VairPatternDef
               vair={tincture}
               patternId={tincture.name + '-field-' + id}
-              dimension={dimension}
+              bellWidth={dimension.width / 5}
+              bellHeightRatio={2}
               tinctureConfiguration={tinctureConfiguration}
             />
           ) : isPotent(tincture) ? (
             <PotentPatternDef
               potent={tincture}
               patternId={tincture.name + '-field-' + id}
-              dimension={dimension}
+              bellWidth={dimension.width / 2.75}
+              bellHeightRatio={1}
               tinctureConfiguration={tinctureConfiguration}
             />
           ) : (

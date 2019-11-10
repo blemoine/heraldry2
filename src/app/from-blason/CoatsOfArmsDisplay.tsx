@@ -56,7 +56,8 @@ export function CoatsOfArmsDisplay(props: Props) {
               key={vair.name + i}
               vair={vair}
               patternId={furPatternId(vair, null)}
-              dimension={dimension}
+              bellWidth={dimension.width / 5}
+              bellHeightRatio={2}
               tinctureConfiguration={tinctureConfiguration}
             />
           );
@@ -67,7 +68,8 @@ export function CoatsOfArmsDisplay(props: Props) {
               key={potent.name + i}
               potent={potent}
               patternId={furPatternId(potent, null)}
-              dimension={dimension}
+              bellWidth={dimension.width / 2.75}
+              bellHeightRatio={1}
               tinctureConfiguration={tinctureConfiguration}
             />
           );

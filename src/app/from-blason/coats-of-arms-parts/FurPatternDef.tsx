@@ -5,22 +5,20 @@ import { ErminePatternDef } from './ErminePatternDef';
 import { ConfigurationContext, furPatternId } from '../configuration/ConfigurationContext';
 import { VairPatternDef } from './VairPatternDef';
 import { PotentPatternDef } from './PotentPatternDef';
-import { Dimension } from '../../model/dimension';
 import { Field } from '../../model/field';
 import { allDeclaredTincturesOfField } from '../blason.helpers';
 
-type FurConfiguration = {
+export type FurConfiguration = {
   ermine: { spotWidth: number; heightMarginScale: number; widthMarginScale: number };
-  vair: {};
-  potent: {};
+  vair: { bellWidth: number; bellHeightRatio: number };
+  potent: { bellWidth: number; bellHeightRatio: number };
 };
 type Props = {
   allTinctures: Array<Tincture>;
   postfixId: string;
-  dimension: Dimension;
   furConfiguration: FurConfiguration;
 };
-export const FurPatternDef = ({ allTinctures, postfixId, dimension, furConfiguration }: Props): ReactElement => {
+export const FurPatternDef = ({ allTinctures, postfixId, furConfiguration }: Props): ReactElement => {
   const { tinctureConfiguration } = useContext(ConfigurationContext);
   const { spotWidth, heightMarginScale, widthMarginScale } = furConfiguration.ermine;
   return (
@@ -44,7 +42,8 @@ export const FurPatternDef = ({ allTinctures, postfixId, dimension, furConfigura
             key={vair.name + i}
             vair={vair}
             patternId={furPatternId(vair, postfixId)}
-            dimension={dimension}
+            bellWidth={furConfiguration.vair.bellWidth}
+            bellHeightRatio={furConfiguration.vair.bellHeightRatio}
             tinctureConfiguration={tinctureConfiguration}
           />
         );
@@ -55,7 +54,8 @@ export const FurPatternDef = ({ allTinctures, postfixId, dimension, furConfigura
             key={potent.name + i}
             potent={potent}
             patternId={furPatternId(potent, postfixId)}
-            dimension={dimension}
+            bellWidth={furConfiguration.potent.bellWidth}
+            bellHeightRatio={furConfiguration.potent.bellHeightRatio}
             tinctureConfiguration={tinctureConfiguration}
           />
         );
@@ -66,20 +66,14 @@ export const FurPatternDef = ({ allTinctures, postfixId, dimension, furConfigura
 
 export const WithFurPatternDef: React.FunctionComponent<{
   field: Field;
-  dimension: Dimension;
   furConfiguration: FurConfiguration;
-}> = ({ field, dimension, furConfiguration, children }) => {
+}> = ({ field, furConfiguration, children }) => {
   const allTinctures = allDeclaredTincturesOfField(field);
   const postfixId = field.kind;
 
   return (
     <>
-      <FurPatternDef
-        allTinctures={allTinctures}
-        postfixId={postfixId}
-        dimension={dimension}
-        furConfiguration={furConfiguration}
-      />
+      <FurPatternDef allTinctures={allTinctures} postfixId={postfixId} furConfiguration={furConfiguration} />
       {children}
     </>
   );

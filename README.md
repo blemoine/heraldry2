@@ -49,7 +49,7 @@ Faire le "of the last"
 - Engrailed chaussé ployé est moche
 - Chaussé ployé per pale fimbriated devrait pas avoir le milieu fimbriated
 - Réecrire les bendy en s'inspirant de bendy per pale.
-
+- Fur symbol are repeated multiple times
 
 ## Feature to add
 

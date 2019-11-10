@@ -36,7 +36,7 @@ describe('CoatsOfArms', () => {
 
   snapshotTest('Bendy sinister vert and erminois');
   snapshotTest('Bendy wavy argent and sable');
-  //snapshotTest('Checky sable and ermine');
+  snapshotTest('Checky sable and ermine');
   //snapshotTest('Chevronelly azure and argent');
   //snapshotTest('Chevronelly erminois and pean');
   //snapshotTest('Chevronelly inverted gules and or');

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { range } from '../../../../utils/range';
 import { Dimension } from '../../../model/dimension';
 
-type Props = { fill: [string, string]; dimension: Dimension; rows: number; columns: number };
+type Props = { fill: readonly [string, string]; dimension: Dimension; rows: number; columns: number };
 export const AlternatingSquareDisplay: React.FunctionComponent<Props> = ({
   dimension: { width, height },
   fill,

@@ -277,30 +277,34 @@ exports[`CoatsOfArms should render 'Argent, three crosses potent vair' 1`] = `
     >
       <rect
         fill="#FFFFFF"
-        height="200px"
-        width="100px"
+        height="100%"
+        width="100%"
       />
-      <use
-        height={100}
-        href="#vair"
-        width={100}
-        x="0"
-        y="0"
-      />
-      <use
-        height={100}
-        href="#vair"
-        width={100}
-        x="-50"
-        y="100"
-      />
-      <use
-        height={100}
-        href="#vair"
-        width={100}
-        x="50"
-        y="100"
-      />
+      <g
+        transform="scale(1 1)"
+      >
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x="0"
+          y="0"
+        />
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x={-50}
+          y={100}
+        />
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x={50}
+          y={100}
+        />
+      </g>
     </pattern>
     <clipPath
       id="plain-field-clip-path"
@@ -1647,30 +1651,34 @@ exports[`CoatsOfArms should render 'Barry ermine and vair' 1`] = `
     >
       <rect
         fill="#FFFFFF"
-        height="200px"
-        width="100px"
+        height="100%"
+        width="100%"
       />
-      <use
-        height={100}
-        href="#vair"
-        width={100}
-        x="0"
-        y="0"
-      />
-      <use
-        height={100}
-        href="#vair"
-        width={100}
-        x="-50"
-        y="100"
-      />
-      <use
-        height={100}
-        href="#vair"
-        width={100}
-        x="50"
-        y="100"
-      />
+      <g
+        transform="scale(1 1)"
+      >
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x="0"
+          y="0"
+        />
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x={-50}
+          y={100}
+        />
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x={50}
+          y={100}
+        />
+      </g>
     </pattern>
     <clipPath
       id="plain-field-clip-path"
@@ -1853,33 +1861,37 @@ exports[`CoatsOfArms should render 'Barry pily counter ermine and potent en poin
     >
       <rect
         fill="#FFFFFF"
-        height="200px"
-        width="200px"
-      />
-      <use
-        height={100}
-        href="#potent-en-point"
-        width={150}
-        x="0"
-        y="0"
+        height="100%"
+        width="100%"
       />
       <g
-        transform="scale(1,-1) translate(0 -300)"
+        transform="scale(1 1)"
       >
         <use
           height={100}
           href="#potent-en-point"
           width={150}
-          x="100"
-          y="100"
+          x="0"
+          y="0"
         />
-        <use
-          height={100}
-          href="#potent-en-point"
-          width={150}
-          x="-100"
-          y="100"
-        />
+        <g
+          transform="scale(1,-1) translate(0 -300)"
+        >
+          <use
+            height={100}
+            href="#potent-en-point"
+            width={150}
+            x="100"
+            y="100"
+          />
+          <use
+            height={100}
+            href="#potent-en-point"
+            width={150}
+            x="-100"
+            y="100"
+          />
+        </g>
       </g>
     </pattern>
     <clipPath
@@ -4987,30 +4999,34 @@ exports[`CoatsOfArms should render 'Ermine, a bend invected vair' 1`] = `
     >
       <rect
         fill="#FFFFFF"
-        height="200px"
-        width="100px"
+        height="100%"
+        width="100%"
       />
-      <use
-        height={100}
-        href="#vair"
-        width={100}
-        x="0"
-        y="0"
-      />
-      <use
-        height={100}
-        href="#vair"
-        width={100}
-        x="-50"
-        y="100"
-      />
-      <use
-        height={100}
-        href="#vair"
-        width={100}
-        x="50"
-        y="100"
-      />
+      <g
+        transform="scale(1 1)"
+      >
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x="0"
+          y="0"
+        />
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x={-50}
+          y={100}
+        />
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x={50}
+          y={100}
+        />
+      </g>
     </pattern>
     <clipPath
       id="plain-field-clip-path"
@@ -5770,30 +5786,34 @@ exports[`CoatsOfArms should render 'Lozenge throughout vair and gules' 1`] = `
     >
       <rect
         fill="#FFFFFF"
-        height="200px"
-        width="100px"
+        height="100%"
+        width="100%"
       />
-      <use
-        height={100}
-        href="#vair"
-        width={100}
-        x="0"
-        y="0"
-      />
-      <use
-        height={100}
-        href="#vair"
-        width={100}
-        x="-50"
-        y="100"
-      />
-      <use
-        height={100}
-        href="#vair"
-        width={100}
-        x="50"
-        y="100"
-      />
+      <g
+        transform="scale(1 1)"
+      >
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x="0"
+          y="0"
+        />
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x={-50}
+          y={100}
+        />
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x={50}
+          y={100}
+        />
+      </g>
     </pattern>
     <clipPath
       id="plain-field-clip-path"
@@ -5885,30 +5905,34 @@ exports[`CoatsOfArms should render 'Or, a base engrailed vair' 1`] = `
     >
       <rect
         fill="#FFFFFF"
-        height="200px"
-        width="100px"
+        height="100%"
+        width="100%"
       />
-      <use
-        height={100}
-        href="#vair"
-        width={100}
-        x="0"
-        y="0"
-      />
-      <use
-        height={100}
-        href="#vair"
-        width={100}
-        x="-50"
-        y="100"
-      />
-      <use
-        height={100}
-        href="#vair"
-        width={100}
-        x="50"
-        y="100"
-      />
+      <g
+        transform="scale(1 1)"
+      >
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x="0"
+          y="0"
+        />
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x={-50}
+          y={100}
+        />
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x={50}
+          y={100}
+        />
+      </g>
     </pattern>
     <clipPath
       id="plain-field-clip-path"
@@ -6400,33 +6424,37 @@ exports[`CoatsOfArms should render 'Or, a fess vair en point' 1`] = `
     >
       <rect
         fill="#FFFFFF"
-        height="200px"
-        width="100px"
-      />
-      <use
-        height={100}
-        href="#vair-en-point"
-        width={100}
-        x="0"
-        y="0"
+        height="100%"
+        width="100%"
       />
       <g
-        transform="scale(1,-1) translate(0 -300)"
+        transform="scale(1 1)"
       >
         <use
           height={100}
           href="#vair-en-point"
           width={100}
-          x="50"
-          y="100"
+          x="0"
+          y="0"
         />
-        <use
-          height={100}
-          href="#vair-en-point"
-          width={100}
-          x="-50"
-          y="100"
-        />
+        <g
+          transform="scale(1,-1) translate(0 -300)"
+        >
+          <use
+            height={100}
+            href="#vair-en-point"
+            width={100}
+            x={50}
+            y={100}
+          />
+          <use
+            height={100}
+            href="#vair-en-point"
+            width={100}
+            x={-50}
+            y={100}
+          />
+        </g>
       </g>
     </pattern>
     <clipPath
@@ -7389,30 +7417,34 @@ exports[`CoatsOfArms should render 'Paly pily vair and pean' 1`] = `
     >
       <rect
         fill="#FFFFFF"
-        height="200px"
-        width="100px"
+        height="100%"
+        width="100%"
       />
-      <use
-        height={100}
-        href="#vair"
-        width={100}
-        x="0"
-        y="0"
-      />
-      <use
-        height={100}
-        href="#vair"
-        width={100}
-        x="-50"
-        y="100"
-      />
-      <use
-        height={100}
-        href="#vair"
-        width={100}
-        x="50"
-        y="100"
-      />
+      <g
+        transform="scale(1 1)"
+      >
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x="0"
+          y="0"
+        />
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x={-50}
+          y={100}
+        />
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x={50}
+          y={100}
+        />
+      </g>
     </pattern>
     <clipPath
       id="plain-field-clip-path"
@@ -8602,30 +8634,34 @@ exports[`CoatsOfArms should render 'Potent, a chief gules' 1`] = `
     >
       <rect
         fill="#FFFFFF"
-        height="200px"
-        width="200px"
+        height="100%"
+        width="100%"
       />
-      <use
-        height={100}
-        href="#potent"
-        width={150}
-        x="0"
-        y="0"
-      />
-      <use
-        height={100}
-        href="#potent"
-        width={150}
-        x="-100"
-        y="100"
-      />
-      <use
-        height={100}
-        href="#potent"
-        width={150}
-        x="100"
-        y="100"
-      />
+      <g
+        transform="scale(1 1)"
+      >
+        <use
+          height={100}
+          href="#potent"
+          width={150}
+          x="0"
+          y="0"
+        />
+        <use
+          height={100}
+          href="#potent"
+          width={150}
+          x="-100"
+          y="100"
+        />
+        <use
+          height={100}
+          href="#potent"
+          width={150}
+          x="100"
+          y="100"
+        />
+      </g>
     </pattern>
     <clipPath
       id="plain-field-clip-path"
@@ -8683,30 +8719,34 @@ exports[`CoatsOfArms should render 'Potent, a chief gules' 1`] = `
       >
         <rect
           fill="#FFFFFF"
-          height="200px"
-          width="200px"
+          height="100%"
+          width="100%"
         />
-        <use
-          height={100}
-          href="#potent"
-          width={150}
-          x="0"
-          y="0"
-        />
-        <use
-          height={100}
-          href="#potent"
-          width={150}
-          x="-100"
-          y="100"
-        />
-        <use
-          height={100}
-          href="#potent"
-          width={150}
-          x="100"
-          y="100"
-        />
+        <g
+          transform="scale(1 1)"
+        >
+          <use
+            height={100}
+            href="#potent"
+            width={150}
+            x="0"
+            y="0"
+          />
+          <use
+            height={100}
+            href="#potent"
+            width={150}
+            x="-100"
+            y="100"
+          />
+          <use
+            height={100}
+            href="#potent"
+            width={150}
+            x="100"
+            y="100"
+          />
+        </g>
       </pattern>
       <rect
         fill="url(#field-pattern-4-argent-plain)"
@@ -10654,30 +10694,34 @@ exports[`CoatsOfArms should render 'Vair, a gyron or' 1`] = `
     >
       <rect
         fill="#FFFFFF"
-        height="200px"
-        width="100px"
+        height="100%"
+        width="100%"
       />
-      <use
-        height={100}
-        href="#vair"
-        width={100}
-        x="0"
-        y="0"
-      />
-      <use
-        height={100}
-        href="#vair"
-        width={100}
-        x="-50"
-        y="100"
-      />
-      <use
-        height={100}
-        href="#vair"
-        width={100}
-        x="50"
-        y="100"
-      />
+      <g
+        transform="scale(1 1)"
+      >
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x="0"
+          y="0"
+        />
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x={-50}
+          y={100}
+        />
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x={50}
+          y={100}
+        />
+      </g>
     </pattern>
     <clipPath
       id="plain-field-clip-path"
@@ -10731,30 +10775,34 @@ exports[`CoatsOfArms should render 'Vair, a gyron or' 1`] = `
     >
       <rect
         fill="#FFFFFF"
-        height="200px"
-        width="100px"
+        height="100%"
+        width="100%"
       />
-      <use
-        height={100}
-        href="#vair"
-        width={100}
-        x="0"
-        y="0"
-      />
-      <use
-        height={100}
-        href="#vair"
-        width={100}
-        x="-50"
-        y="100"
-      />
-      <use
-        height={100}
-        href="#vair"
-        width={100}
-        x="50"
-        y="100"
-      />
+      <g
+        transform="scale(1 1)"
+      >
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x="0"
+          y="0"
+        />
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x={-50}
+          y={100}
+        />
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x={50}
+          y={100}
+        />
+      </g>
     </pattern>
     <rect
       fill="url(#field-pattern-0-argent-plain)"
@@ -10929,26 +10977,30 @@ exports[`CoatsOfArms should render 'Vert, two crosses hummetty counter potent' 1
     >
       <rect
         fill="#FFFFFF"
-        height="200px"
-        width="200px"
-      />
-      <use
-        height={100}
-        href="#counter-potent"
-        width={150}
-        x="0"
-        y="0"
+        height="100%"
+        width="100%"
       />
       <g
-        transform="scale(1,-1) translate(0 -300)"
+        transform="scale(1 1)"
       >
         <use
           height={100}
           href="#counter-potent"
           width={150}
           x="0"
-          y="100"
+          y="0"
         />
+        <g
+          transform="scale(1,-1) translate(0 -300)"
+        >
+          <use
+            height={100}
+            href="#counter-potent"
+            width={150}
+            x="0"
+            y="100"
+          />
+        </g>
       </g>
     </pattern>
     <clipPath
@@ -11261,30 +11313,34 @@ exports[`CoatsOfArms should render a party blason with some ordinary: Per bend v
     >
       <rect
         fill="#FFFFFF"
-        height="200px"
-        width="100px"
+        height="100%"
+        width="100%"
       />
-      <use
-        height={100}
-        href="#vair"
-        width={100}
-        x="0"
-        y="0"
-      />
-      <use
-        height={100}
-        href="#vair"
-        width={100}
-        x="-50"
-        y="100"
-      />
-      <use
-        height={100}
-        href="#vair"
-        width={100}
-        x="50"
-        y="100"
-      />
+      <g
+        transform="scale(1 1)"
+      >
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x="0"
+          y="0"
+        />
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x={-50}
+          y={100}
+        />
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x={50}
+          y={100}
+        />
+      </g>
     </pattern>
     <clipPath
       id="plain-field-clip-path"
@@ -11397,30 +11453,34 @@ exports[`CoatsOfArms should render a party blason: Per bend vair and azure 1`] =
     >
       <rect
         fill="#FFFFFF"
-        height="200px"
-        width="100px"
+        height="100%"
+        width="100%"
       />
-      <use
-        height={100}
-        href="#vair"
-        width={100}
-        x="0"
-        y="0"
-      />
-      <use
-        height={100}
-        href="#vair"
-        width={100}
-        x="-50"
-        y="100"
-      />
-      <use
-        height={100}
-        href="#vair"
-        width={100}
-        x="50"
-        y="100"
-      />
+      <g
+        transform="scale(1 1)"
+      >
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x="0"
+          y="0"
+        />
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x={-50}
+          y={100}
+        />
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x={50}
+          y={100}
+        />
+      </g>
     </pattern>
     <clipPath
       id="plain-field-clip-path"

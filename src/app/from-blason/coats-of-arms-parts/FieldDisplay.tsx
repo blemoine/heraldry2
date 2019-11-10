@@ -45,6 +45,9 @@ import { AlternatingSquareDisplay } from './fields/AlternatingSquareDisplay';
 import { BarryAndPerChevronThrougoutDisplay } from './fields/BarryAndPerChevronThrougoutDisplay';
 import { BendyAndPerBendSinisterDisplay } from './fields/BendyAndPerBendSinisterDisplay';
 import { BendyAndPerPaleDisplay } from './fields/BendyAndPerPaleDisplay';
+import { FurConfiguration, WithFurPatternDef } from './FurPatternDef';
+import { ConfigurationContext, fillFromConfiguration } from '../configuration/ConfigurationContext';
+import { useContext } from 'react';
 
 type Props = {
   dimension: Dimension;
@@ -53,6 +56,7 @@ type Props = {
   fillFromTincture: FillFromTincture;
 };
 export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Props) => {
+  const { tinctureConfiguration } = useContext(ConfigurationContext);
   const oldFillFronTincture = convertToOlfFillFronTincture(fillFromTincture);
   function fillFromTincturePair(arr: [Tincture, Tincture]): [string, string] {
     return [oldFillFronTincture(arr[0]), oldFillFronTincture(arr[1])];
@@ -177,12 +181,31 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
       return (
         <BarryDisplay field={field} fillFromTincture={fillFromTincture} number={field.number} dimension={dimension} />
       );
-    } else if (field.kind === 'barry-and-per-pale') {
-      const fill: [string, string] = fillFromTincturePair(field.tinctures);
-      return <AlternatingSquareDisplay fill={fill} dimension={dimension} columns={2} rows={6} />;
-    } else if (field.kind === 'chequy') {
-      const fill: [string, string] = fillFromTincturePair(field.tinctures);
-      return <AlternatingSquareDisplay fill={fill} dimension={dimension} rows={6} columns={6} />;
+    } else if (field.kind === 'barry-and-per-pale' || field.kind === 'chequy') {
+      const fill: [string, string] = [
+        fillFromConfiguration(tinctureConfiguration, field.tinctures[0], field.kind),
+        fillFromConfiguration(tinctureConfiguration, field.tinctures[1], field.kind),
+      ];
+
+      const furConfiguration: FurConfiguration = {
+        ermine: { spotWidth: dimension.width / 18, heightMarginScale: 0.23, widthMarginScale: 0 },
+        vair: { bellWidth: dimension.width / 12, bellHeightRatio: 1.78 },
+        potent: { bellWidth: dimension.width / 10.5, bellHeightRatio: 0.93 },
+      };
+      const rows = 6;
+      let columns: number;
+      if (field.kind === 'barry-and-per-pale') {
+        columns = 2;
+      } else if (field.kind === 'chequy') {
+        columns = 6;
+      } else {
+        cannotHappen(field);
+      }
+      return (
+        <WithFurPatternDef field={field} furConfiguration={furConfiguration}>
+          <AlternatingSquareDisplay fill={fill} dimension={dimension} columns={columns} rows={rows} />
+        </WithFurPatternDef>
+      );
     } else if (field.kind === 'barry-and-per-chevron-throughout') {
       const fill: [string, string] = fillFromTincturePair(field.tinctures);
       return <BarryAndPerChevronThrougoutDisplay fill={fill} dimension={dimension} rows={6} />;
