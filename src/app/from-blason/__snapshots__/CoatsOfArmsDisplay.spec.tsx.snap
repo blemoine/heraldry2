@@ -1709,16 +1709,120 @@ exports[`CoatsOfArms should render 'Barry ermine and vair' 1`] = `
       }
     }
   >
+    <symbol
+      id="ermined-argent-sable"
+      viewBox="0 0 200 240"
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <g
+        transform="translate(100, 240)"
+      >
+        <path
+          d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
+          fill="#000000"
+        />
+        <circle
+          cy={-226}
+          fill="#000000"
+          r="14"
+        />
+        <circle
+          cx={-32}
+          cy={-194}
+          fill="#000000"
+          r={14}
+        />
+        <circle
+          cx={32}
+          cy={-194}
+          fill="#000000"
+          r={14}
+        />
+      </g>
+    </symbol>
     <pattern
+      height={44.307692307692314}
       id="field-pattern-3-argent-sable-barry"
-      patternTransform="scale(0.6833333333333332)"
-      xlinkHref="#field-pattern-3-argent-sable"
-    />
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 30.76923076923077 44.307692307692314"
+      width={30.76923076923077}
+    >
+      <rect
+        fill="#FFFFFF"
+        height={44.307692307692314}
+        width={30.76923076923077}
+      />
+      <use
+        height={18.461538461538463}
+        href="#ermined-argent-sable"
+        width={15.384615384615385}
+        x={0}
+        y={1.8461538461538465}
+      />
+      <use
+        height={18.461538461538463}
+        href="#ermined-argent-sable"
+        width={15.384615384615385}
+        x={15.384615384615385}
+        y={24.000000000000004}
+      />
+    </pattern>
+    <symbol
+      id="vair"
+      viewBox="0 0 200 200"
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <path
+        d="M0 200 L200 200 L150 150 L150 50 L100 0 L50 50 L50 150 Z"
+        fill="#0000FF"
+      />
+    </symbol>
     <pattern
+      height={22.22222222222222}
       id="field-pattern-0-argent-barry"
-      patternTransform="scale(0.555)"
-      xlinkHref="#field-pattern-0-argent"
-    />
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 100 100"
+      width={22.22222222222222}
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <g
+        transform="scale(1 0.5)"
+      >
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x="0"
+          y="0"
+        />
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x={-50}
+          y={100}
+        />
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x={50}
+          y={100}
+        />
+      </g>
+    </pattern>
     <path
       d="M 0 -44.44444 H200 V44.44444 H0 Z"
       fill="url(#field-pattern-3-argent-sable-barry)"

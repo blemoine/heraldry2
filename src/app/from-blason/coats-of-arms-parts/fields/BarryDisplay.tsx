@@ -3,34 +3,24 @@ import { range } from '../../../../utils/range';
 import { Dimension } from '../../../model/dimension';
 import { BarryField } from '../../../model/field';
 import { FillFromTincture } from '../../fillFromTincture.helper';
-import { FurPatternDefinition } from '../FurPatternDefinition';
-import { buildFurTransformProperty, FurTransformProperty, getFill } from '../FurPattern.model';
+import { getFill } from '../FurPattern.model';
 import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { PathFromBuilder } from '../../../common/PathFromBuilder';
 import { computeLineOptions, invertLineOptionNullable, oneSideLineOption } from '../blasonDisplay.helper';
-import { allDeclaredTincturesOfField } from '../../blason.helpers';
+import { FurConfiguration, WithFurPatternDef } from '../FurPatternDef';
+import { cannotHappen } from '../../../../utils/cannot-happen';
 
 type Props = {
   field: BarryField;
   fillFromTincture: FillFromTincture;
   dimension: Dimension;
-  number: number;
+  number: 6 | 8 | 10;
 };
 
 const postfixId = 'barry';
 
 export const BarryDisplay: React.FunctionComponent<Props> = ({ field, fillFromTincture, dimension, number }) => {
   const { width, height } = dimension;
-  const scaleRatio = 0.75 / (width / height);
-  const transformProperties: FurTransformProperty = buildFurTransformProperty(
-    fillFromTincture,
-    allDeclaredTincturesOfField(field),
-    {
-      ermine: { kind: 'scale', value: (4.1 * scaleRatio) / number },
-      vair: { kind: 'scale', value: (3.33 * scaleRatio) / number },
-      potent: { kind: 'scale', value: (3.67 * scaleRatio) / number },
-    }
-  );
 
   const fills = field.tinctures.map((tincture) => getFill(fillFromTincture, tincture, postfixId));
   const lineOptions = computeLineOptions(field.line, dimension);
@@ -38,13 +28,32 @@ export const BarryDisplay: React.FunctionComponent<Props> = ({ field, fillFromTi
 
   const oneSideOnly = oneSideLineOption(lineOptions);
   const invertedOneSideOnly = field.line === 'dancetty' ? lineOptions : oneSideLineOption(invertLineOptions);
+
+  let furConfiguration: FurConfiguration;
+  if (number === 6) {
+    furConfiguration = {
+      potent: { bellHeightRatio: 0.82, bellWidth: width / 5.5 },
+      vair: { bellHeightRatio: 1, bellWidth: width / 9 },
+      ermine: { spotWidth: width / 13, widthMarginScale: 0, heightMarginScale: 0.4 },
+    };
+  } else if (number === 8) {
+    furConfiguration = {
+      potent: { bellHeightRatio: 0.92, bellWidth: width / 5.5 },
+      vair: { bellHeightRatio: 1.666, bellWidth: width / 10 },
+      ermine: { spotWidth: width / 17, widthMarginScale: 0, heightMarginScale: 0.37 },
+    };
+  } else if (number === 10) {
+    furConfiguration = {
+      potent: { bellHeightRatio: 0.735, bellWidth: width / 5.5 },
+      vair: { bellHeightRatio: 1.33, bellWidth: width / 10 },
+      ermine: { spotWidth: width / 18, widthMarginScale: 0, heightMarginScale: 0 },
+    };
+  } else {
+    cannotHappen(number);
+  }
+
   return (
-    <>
-      <FurPatternDefinition
-        tinctures={field.tinctures}
-        postfixId={postfixId}
-        transformProperties={transformProperties}
-      />
+    <WithFurPatternDef field={field} furConfiguration={furConfiguration}>
       {range(0, number).map((i) => {
         const barHeight = height / number;
 
@@ -62,6 +71,6 @@ export const BarryDisplay: React.FunctionComponent<Props> = ({ field, fillFromTi
 
         return <PathFromBuilder key={i} pathBuilder={pathBuilder} fill={fills[i % 2]} stroke="#333" />;
       })}
-    </>
+    </WithFurPatternDef>
   );
 };
