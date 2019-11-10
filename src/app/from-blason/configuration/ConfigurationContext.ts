@@ -27,7 +27,7 @@ function getPatternId(fur: Furs): string {
   return patternIds[fur.name];
 }
 
-function furPatternId(fur: Furs): string {
+export function furPatternId(fur: Furs): string {
   const patternId = getPatternId(fur);
   if (isErmine(fur)) {
     return `field-pattern-${patternId}-${fur.field.name}-${fur.spot.name}`;

@@ -2,8 +2,7 @@ import * as React from 'react';
 import { useContext } from 'react';
 import { Blason } from '../model/blason';
 import { allDeclaredTinctures } from './blason.helpers';
-import { uuid } from '../../utils/uuid';
-import { Furs, isErmine, isFur, isPotent, isVair, Tincture } from '../model/tincture';
+import { isErmine, isFur, isPotent, isVair, Tincture } from '../model/tincture';
 import { Dimension } from '../model/dimension';
 import { ErminePatternDef } from './coats-of-arms-parts/ErminePatternDef';
 import { VairPatternDef } from './coats-of-arms-parts/VairPatternDef';
@@ -11,7 +10,7 @@ import { PotentPatternDef } from './coats-of-arms-parts/PotentPatternDef';
 import { EscutcheonDisplay } from './coats-of-arms-parts/escutcheon/EscutcheonDisplay';
 import { BlasonDisplay } from './coats-of-arms-parts/BlasonDisplay';
 import { BlasonPath } from '../model/blason-path';
-import { ConfigurationContext } from './configuration/ConfigurationContext';
+import { ConfigurationContext, furPatternId } from './configuration/ConfigurationContext';
 
 type Props = {
   blason: Blason;
@@ -23,26 +22,6 @@ export function CoatsOfArmsDisplay(props: Props) {
   const tinctureConfiguration = configuration.tinctureConfiguration;
   const dimension = props.dimension;
   const { width, height } = dimension;
-
-  const patternIds: { [K in Furs['name']]: string } = {
-    vair: uuid(),
-    'vair-en-pale': uuid(),
-    'counter-vair': uuid(),
-    ermined: uuid(),
-    potent: uuid(),
-    'counter-potent': uuid(),
-    'potent-en-pale': uuid(),
-    'potent-en-point': uuid(),
-    'vair-en-point': uuid(),
-  };
-
-  function furPatternId(fur: Furs): string {
-    if (isErmine(fur)) {
-      return `field-pattern-${patternIds[fur.name]}-${fur.field.name}-${fur.spot.name}`;
-    } else {
-      return `field-pattern-${patternIds[fur.name]}-${fur.field.name}`;
-    }
-  }
 
   function fillFromTincture(tincture: Tincture): { color: string } | { id: string } {
     if (isFur(tincture)) {
