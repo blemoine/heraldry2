@@ -15,7 +15,7 @@ export type FurConfiguration = {
 };
 type Props = {
   allTinctures: Array<Tincture>;
-  postfixId: string;
+  postfixId: string | null;
   furConfiguration: FurConfiguration;
 };
 export const FurPatternDef = ({ allTinctures, postfixId, furConfiguration }: Props): ReactElement => {

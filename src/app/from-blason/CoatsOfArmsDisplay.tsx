@@ -2,15 +2,13 @@ import * as React from 'react';
 import { useContext } from 'react';
 import { Blason } from '../model/blason';
 import { allDeclaredTinctures } from './blason.helpers';
-import { isErmine, isFur, isPotent, isVair, Tincture } from '../model/tincture';
+import { isFur, Tincture } from '../model/tincture';
 import { Dimension } from '../model/dimension';
-import { ErminePatternDef } from './coats-of-arms-parts/ErminePatternDef';
-import { VairPatternDef } from './coats-of-arms-parts/VairPatternDef';
-import { PotentPatternDef } from './coats-of-arms-parts/PotentPatternDef';
 import { EscutcheonDisplay } from './coats-of-arms-parts/escutcheon/EscutcheonDisplay';
 import { BlasonDisplay } from './coats-of-arms-parts/BlasonDisplay';
 import { BlasonPath } from '../model/blason-path';
 import { ConfigurationContext, furPatternId } from './configuration/ConfigurationContext';
+import { FurConfiguration, FurPatternDef } from './coats-of-arms-parts/FurPatternDef';
 
 type Props = {
   blason: Blason;
@@ -34,46 +32,15 @@ export function CoatsOfArmsDisplay(props: Props) {
   const blason = props.blason;
 
   const allTinctures = allDeclaredTinctures(blason);
+  const furConfiguration: FurConfiguration = {
+    ermine: { spotWidth: width / 9, heightMarginScale: 0.45, widthMarginScale: 0 },
+    vair: { bellWidth: dimension.width / 5, bellHeightRatio: 2 },
+    potent: { bellWidth: dimension.width / 2.75, bellHeightRatio: 1 },
+  };
   return (
     <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} className="coats-of-arms-display">
       <defs>
-        {allTinctures.filter(isErmine).map((ermine, i) => {
-          return (
-            <ErminePatternDef
-              key={ermine.name + i}
-              ermine={ermine}
-              patternId={furPatternId(ermine, null)}
-              tinctureConfiguration={tinctureConfiguration}
-              spotWidth={width / 9}
-              heightMarginScale={0.45}
-              widthMarginScale={0}
-            />
-          );
-        })}
-        {allTinctures.filter(isVair).map((vair, i) => {
-          return (
-            <VairPatternDef
-              key={vair.name + i}
-              vair={vair}
-              patternId={furPatternId(vair, null)}
-              bellWidth={dimension.width / 5}
-              bellHeightRatio={2}
-              tinctureConfiguration={tinctureConfiguration}
-            />
-          );
-        })}
-        {allTinctures.filter(isPotent).map((potent, i) => {
-          return (
-            <PotentPatternDef
-              key={potent.name + i}
-              potent={potent}
-              patternId={furPatternId(potent, null)}
-              bellWidth={dimension.width / 2.75}
-              bellHeightRatio={1}
-              tinctureConfiguration={tinctureConfiguration}
-            />
-          );
-        })}
+        <FurPatternDef furConfiguration={furConfiguration} allTinctures={allTinctures} postfixId={null} />
 
         <clipPath id="plain-field-clip-path">
           <EscutcheonDisplay
