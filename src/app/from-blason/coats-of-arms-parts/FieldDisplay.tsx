@@ -1,6 +1,6 @@
 import { Field } from '../../model/field';
 import { cannotHappen } from '../../../utils/cannot-happen';
-import { Plain } from './fields/Plain';
+import { PlainDisplay } from './fields/Plain';
 import * as React from 'react';
 import { Tincture } from '../../model/tincture';
 import { PaleDisplay } from './fields/PaleDisplay';
@@ -62,7 +62,7 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
   }
 
   if (field.kind === 'plain') {
-    return <Plain fill={oldFillFronTincture(field.tincture)} dimension={dimension} />;
+    return <PlainDisplay field={field} dimension={dimension} />;
   } else {
     if (field.kind === 'party') {
       const line = field.per.line;

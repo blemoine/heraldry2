@@ -27,12 +27,12 @@ function getPatternId(fur: Furs): string {
   return patternIds[fur.name];
 }
 
-export function furPatternId(fur: Furs): string {
+export function furPatternId(fur: Furs, postfixId: string | null): string {
   const patternId = getPatternId(fur);
   if (isErmine(fur)) {
-    return `field-pattern-${patternId}-${fur.field.name}-${fur.spot.name}`;
+    return `field-pattern-${patternId}-${fur.field.name}-${fur.spot.name}` + (postfixId ? '-' + postfixId : '');
   } else {
-    return `field-pattern-${patternId}-${fur.field.name}`;
+    return `field-pattern-${patternId}-${fur.field.name}` + (postfixId ? '-' + postfixId : '');
   }
 }
 
@@ -42,7 +42,7 @@ export function fillFromConfiguration(
   postfixId: string | null
 ): string {
   if (isFur(tincture)) {
-    const newPatternDef = furPatternId(tincture) + (postfixId ? '-' + postfixId : '');
+    const newPatternDef = furPatternId(tincture, postfixId);
     return `url(#${newPatternDef})`;
   } else {
     return tinctureConfiguration[tincture.name];

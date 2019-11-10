@@ -25,7 +25,7 @@ export function CoatsOfArmsDisplay(props: Props) {
 
   function fillFromTincture(tincture: Tincture): { color: string } | { id: string } {
     if (isFur(tincture)) {
-      return { id: furPatternId(tincture) };
+      return { id: furPatternId(tincture, null) };
     } else {
       return { color: tinctureConfiguration[tincture.name] };
     }
@@ -42,7 +42,7 @@ export function CoatsOfArmsDisplay(props: Props) {
             <ErminePatternDef
               key={ermine.name + i}
               ermine={ermine}
-              patternId={furPatternId(ermine)}
+              patternId={furPatternId(ermine, null)}
               tinctureConfiguration={tinctureConfiguration}
               spotWidth={width / 9}
               heightMarginScale={0.45}
@@ -55,7 +55,7 @@ export function CoatsOfArmsDisplay(props: Props) {
             <VairPatternDef
               key={vair.name + i}
               vair={vair}
-              patternId={furPatternId(vair)}
+              patternId={furPatternId(vair, null)}
               dimension={dimension}
               tinctureConfiguration={tinctureConfiguration}
             />
@@ -66,7 +66,7 @@ export function CoatsOfArmsDisplay(props: Props) {
             <PotentPatternDef
               key={potent.name + i}
               potent={potent}
-              patternId={furPatternId(potent)}
+              patternId={furPatternId(potent, null)}
               dimension={dimension}
               tinctureConfiguration={tinctureConfiguration}
             />
