@@ -134,7 +134,13 @@ describe('SvgPathBuilder', () => {
   });
 
   it('should support cubic bezier', () => {
-    const result = SvgPathBuilder.start([0.1, 0.1]).cubicBezier([5, 6], [[1, 2], [3, 4]]);
+    const result = SvgPathBuilder.start([0.1, 0.1]).cubicBezier(
+      [5, 6],
+      [
+        [1, 2],
+        [3, 4],
+      ]
+    );
 
     expect(result.toPathAttribute()).toEqual('M 0.1 0.1 C 1 2 3 4 5 6');
   });
@@ -183,7 +189,13 @@ describe('SvgPathBuilder', () => {
 
   it('should support translation of bezier curves ', () => {
     const result = SvgPathBuilder.start([4, 12])
-      .cubicBezier([1, 2], [[6, 7], [8, 9]])
+      .cubicBezier(
+        [1, 2],
+        [
+          [6, 7],
+          [8, 9],
+        ]
+      )
       .quadraticBezier([10, 11], [12, 13])
       .translate([6, 12]);
 

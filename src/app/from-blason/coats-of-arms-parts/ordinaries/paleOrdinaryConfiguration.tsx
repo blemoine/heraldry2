@@ -26,9 +26,18 @@ export const paleOrdinaryConfiguration = (dimension: Dimension, ordinary: Pale) 
 
   const scaleRatio = height / 480;
   const transformPropertiesConfiguration = {
-    ermine: [{ kind: 'scale', value: 0.4 * scaleRatio }, { kind: 'translate', value: [0, 0] }],
-    vair: [{ kind: 'scale', value: 0.33 * scaleRatio }, { kind: 'translate', value: [0, 0] }],
-    potent: [{ kind: 'scale', value: 0.25 * scaleRatio }, { kind: 'translate', value: [25, 0] }],
+    ermine: [
+      { kind: 'scale', value: 0.4 * scaleRatio },
+      { kind: 'translate', value: [0, 0] },
+    ],
+    vair: [
+      { kind: 'scale', value: 0.33 * scaleRatio },
+      { kind: 'translate', value: [0, 0] },
+    ],
+    potent: [
+      { kind: 'scale', value: 0.25 * scaleRatio },
+      { kind: 'translate', value: [25, 0] },
+    ],
   } as const;
   return { pathBuilderAndTincture, transformPropertiesConfiguration };
 };

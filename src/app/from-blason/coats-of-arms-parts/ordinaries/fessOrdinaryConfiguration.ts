@@ -17,8 +17,14 @@ export const fessOrdinaryConfiguration = (dimension: Dimension, ordinary: Fess) 
 
   const scaleRatio = height / 480;
   const transformPropertiesConfiguration = {
-    ermine: [{ kind: 'scale', value: 0.66 * scaleRatio }, { kind: 'translate', value: [0, 10] }],
-    vair: [{ kind: 'scale', value: 0.56 * scaleRatio }, { kind: 'translate', value: [0, 70] }],
+    ermine: [
+      { kind: 'scale', value: 0.66 * scaleRatio },
+      { kind: 'translate', value: [0, 10] },
+    ],
+    vair: [
+      { kind: 'scale', value: 0.56 * scaleRatio },
+      { kind: 'translate', value: [0, 70] },
+    ],
     potent: [{ kind: 'scale', value: 0.815 * scaleRatio }],
   } as const;
   const pathBuilderAndTincture = [{ pathBuilder, tincture: ordinary.tincture }];

@@ -347,7 +347,10 @@ export class SvgPathBuilder {
 
     return this.cubicBezier(
       [relativeMoveX + currentPoint[0], relativeMoveY + currentPoint[1]],
-      [[c1[0] + currentPoint[0], c1[1] + currentPoint[1]], [c2[0] + currentPoint[0], c2[1] + currentPoint[1]]]
+      [
+        [c1[0] + currentPoint[0], c1[1] + currentPoint[1]],
+        [c2[0] + currentPoint[0], c2[1] + currentPoint[1]],
+      ]
     );
   }
 

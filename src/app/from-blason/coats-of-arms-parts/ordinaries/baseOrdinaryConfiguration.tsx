@@ -19,8 +19,14 @@ export const baseOrdinaryConfiguration = (dimension: Dimension, ordinary: Base) 
 
   const scaleRatio = height / 480;
   const transformPropertiesConfiguration: FurTransformPropertyConfiguration = {
-    ermine: [{ kind: 'scale', value: 0.65 * scaleRatio }, { kind: 'translate', value: [0, 30] }],
-    vair: [{ kind: 'scale', value: 0.55 * scaleRatio }, { kind: 'translate', value: [0, 5] }],
+    ermine: [
+      { kind: 'scale', value: 0.65 * scaleRatio },
+      { kind: 'translate', value: [0, 30] },
+    ],
+    vair: [
+      { kind: 'scale', value: 0.55 * scaleRatio },
+      { kind: 'translate', value: [0, 5] },
+    ],
     potent: [{ kind: 'scale', value: 0.92 * scaleRatio }],
   };
 

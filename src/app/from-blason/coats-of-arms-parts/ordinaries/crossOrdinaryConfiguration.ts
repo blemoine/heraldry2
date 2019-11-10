@@ -26,7 +26,10 @@ export const crossOrdinaryConfiguration = (dimension: Dimension, ordinary: Ordin
   const transformPropertiesConfiguration = {
     ermine: [{ kind: 'scale', value: 0.38 * scaleRatio }],
     vair: [{ kind: 'scale', value: 0.335 * scaleRatio }],
-    potent: [{ kind: 'scale', value: 0.3 * scaleRatio }, { kind: 'translate', value: [28, 0] }],
+    potent: [
+      { kind: 'scale', value: 0.3 * scaleRatio },
+      { kind: 'translate', value: [28, 0] },
+    ],
   } as const;
 
   const pathBuilderAndTincture = [{ pathBuilder, tincture: ordinary.tincture }];

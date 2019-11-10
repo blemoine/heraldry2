@@ -31,7 +31,7 @@ const NumberSextupletParser: P.Parser<[number, number, number, number, number, n
 );
 const ZeroOrOne: P.Parser<0 | 1> = P.alt(P.string('0').result(0), P.string('1').result(1));
 
-const ArcParamParser: P.Parser<[number, number, number, (0 | 1), (0 | 1), number, number]> = P.seq(
+const ArcParamParser: P.Parser<[number, number, number, 0 | 1, 0 | 1, number, number]> = P.seq(
   NumberParser.skip(P.optWhitespace),
   NumberParser.skip(P.optWhitespace),
   NumberParser.skip(P.optWhitespace),
@@ -107,10 +107,30 @@ const Path = function(pathBuilder: SvgPathBuilder): P.Parser<SvgPathBuilder> {
       )
     ),
     cParser.map((points) =>
-      points.reduce((acc, [x1, y1, x2, y2, x, y]) => acc.relativeCubicBezier([x, y], [[x1, y1], [x2, y2]]), pathBuilder)
+      points.reduce(
+        (acc, [x1, y1, x2, y2, x, y]) =>
+          acc.relativeCubicBezier(
+            [x, y],
+            [
+              [x1, y1],
+              [x2, y2],
+            ]
+          ),
+        pathBuilder
+      )
     ),
     CParser.map((points) =>
-      points.reduce((acc, [x1, y1, x2, y2, x, y]) => acc.cubicBezier([x, y], [[x1, y1], [x2, y2]]), pathBuilder)
+      points.reduce(
+        (acc, [x1, y1, x2, y2, x, y]) =>
+          acc.cubicBezier(
+            [x, y],
+            [
+              [x1, y1],
+              [x2, y2],
+            ]
+          ),
+        pathBuilder
+      )
     ),
     qParser.map((points) =>
       points.reduce((acc, [x1, y1, x, y]) => acc.relativeQuadraticBezier([x, y], [x1, y1]), pathBuilder)
