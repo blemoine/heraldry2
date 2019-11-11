@@ -42,7 +42,7 @@ export function OrdinaryForm({ ordinary, ordinaryChange }: Props) {
       <div className="col">
         <div className="form-group ordinary-type-select">
           <label>Ordinary</label>
-          <OrdinaryNameSelect ordinary={ordinary ? ordinary.name : null} ordinaryChange={changeOrdinary} />
+          <OrdinaryNameSelect ordinary={ordinary?.name || null} ordinaryChange={changeOrdinary} />
         </div>
       </div>
       <div className="col">
