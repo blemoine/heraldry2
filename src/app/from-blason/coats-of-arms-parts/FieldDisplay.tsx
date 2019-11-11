@@ -26,7 +26,6 @@ import { BendyPilySinisterDisplay } from './fields/BendyPilySinisterDisplay';
 import { GironnyDisplay } from './fields/GironnyDisplay';
 import { PallFieldDisplay } from './fields/PallFieldDisplay';
 import { FillFromTincture } from '../fillFromTincture.helper';
-import { QuarterlyOfNineDisplay } from './fields/QuarterlyOfNineDisplay';
 import { LozengyBendwiseDisplay } from './fields/LozengyBendwiseDisplay';
 import { FessTiercedDisplay } from './fields/FessTiercedDisplay';
 import { PaleTiercedDisplay } from './fields/PaleTiercedDisplay';
@@ -214,7 +213,7 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
       return (
         <BarryDisplay field={field} fillFromTincture={fillFromTincture} number={field.number} dimension={dimension} />
       );
-    } else if (field.kind === 'barry-and-per-pale' || field.kind === 'chequy') {
+    } else if (field.kind === 'barry-and-per-pale' || field.kind === 'chequy' || field.kind === 'quarterly-of-nine') {
       const fill = fillFromConfigurationPair(field.tinctures, patternId);
 
       const furConfiguration: FurConfiguration = {
@@ -222,12 +221,17 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
         vair: { bellWidth: dimension.width / 12, bellHeightRatio: 1.78 },
         potent: { bellWidth: dimension.width / 10.5, bellHeightRatio: 0.93 },
       };
-      const rows = 6;
+      let rows: number;
       let columns: number;
       if (field.kind === 'barry-and-per-pale') {
         columns = 2;
+        rows = 6;
       } else if (field.kind === 'chequy') {
         columns = 6;
+        rows = 6;
+      } else if (field.kind === 'quarterly-of-nine') {
+        columns = 3;
+        rows = 3;
       } else {
         cannotHappen(field);
       }
@@ -338,17 +342,6 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
     } else if (field.kind === 'gironny') {
       const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
       return <GironnyDisplay fill={fill} dimension={dimension} number={field.number} />;
-    } else if (field.kind === 'quarterly-of-nine') {
-      const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
-      let updatedDimension: Dimension;
-      if (shape === 'square' || shape === 'default') {
-        updatedDimension = dimension;
-      } else if (shape === 'leftCut' || shape === 'rightCut') {
-        updatedDimension = { width: dimension.width, height: dimension.height * 0.8 };
-      } else {
-        return cannotHappen(shape);
-      }
-      return <QuarterlyOfNineDisplay fill={fill} dimension={updatedDimension} />;
     } else {
       return cannotHappen(field);
     }

@@ -9418,50 +9418,139 @@ exports[`CoatsOfArms should render 'Quarterly, 1st and 2nd and 3rd and 4th quart
           }
         }
       >
-        <path
-          d="M 0 0 H33.33333 V44.44444 H0 Z"
+        <symbol
+          id="ermined-argent-sable"
+          viewBox="0 0 200 240"
+        >
+          <rect
+            fill="#FFFFFF"
+            height="100%"
+            width="100%"
+          />
+          <g
+            transform="translate(100, 240)"
+          >
+            <path
+              d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
+              fill="#000000"
+            />
+            <circle
+              cy={-226}
+              fill="#000000"
+              r="14"
+            />
+            <circle
+              cx={-32}
+              cy={-194}
+              fill="#000000"
+              r={14}
+            />
+            <circle
+              cx={32}
+              cy={-194}
+              fill="#000000"
+              r={14}
+            />
+          </g>
+        </symbol>
+        <pattern
+          height={14.866666666666665}
+          id="field-pattern-3-argent-sable-quarterly-of-nine"
+          patternUnits="userSpaceOnUse"
+          viewBox="0 0 11.11111111111111 14.866666666666665"
+          width={11.11111111111111}
+        >
+          <rect
+            fill="#FFFFFF"
+            height={14.866666666666665}
+            width={11.11111111111111}
+          />
+          <use
+            height={6.666666666666666}
+            href="#ermined-argent-sable"
+            width={5.555555555555555}
+            x={0}
+            y={0.3833333333333333}
+          />
+          <use
+            height={6.666666666666666}
+            href="#ermined-argent-sable"
+            width={5.555555555555555}
+            x={5.555555555555555}
+            y={7.816666666666666}
+          />
+        </pattern>
+        <rect
           fill="#008000"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={0}
+          y={0}
         />
-        <path
-          d="M 33.33333 0 L 66.66667 0 L 66.66667 44.44444 L 33.33333 44.44444 L 33.33333 0"
-          fill="url(#field-pattern-3-argent-sable)"
+        <rect
+          fill="url(#field-pattern-3-argent-sable-quarterly-of-nine)"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={0}
+          y={44.44444444444445}
         />
-        <path
-          d="M 66.66667 0 L 100 0 L 100 44.44444 L 66.66667 44.44444 L 66.66667 0"
+        <rect
           fill="#008000"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={0}
+          y={88.8888888888889}
         />
-        <path
-          d="M 0 44.44444 L 33.33333 44.44444 L 33.33333 88.88889 L 0 88.88889 L 0 44.44444"
-          fill="url(#field-pattern-3-argent-sable)"
+        <rect
+          fill="url(#field-pattern-3-argent-sable-quarterly-of-nine)"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={33.333333333333336}
+          y={0}
         />
-        <path
-          d="M 33.33333 44.44444 L 66.66667 44.44444 L 66.66667 88.88889 L 33.33333 88.88889 L 33.33333 44.44444"
+        <rect
           fill="#008000"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={33.333333333333336}
+          y={44.44444444444445}
         />
-        <path
-          d="M 66.66667 44.44444 L 100 44.44444 L 100 88.88889 L 66.66667 88.88889 L 66.66667 44.44444"
-          fill="url(#field-pattern-3-argent-sable)"
+        <rect
+          fill="url(#field-pattern-3-argent-sable-quarterly-of-nine)"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={33.333333333333336}
+          y={88.8888888888889}
         />
-        <path
-          d="M 0 88.88889 L 33.33333 88.88889 L 33.33333 177.77778 L 0 177.77778 L 0 88.88889"
+        <rect
           fill="#008000"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={66.66666666666667}
+          y={0}
         />
-        <path
-          d="M 33.33333 88.88889 L 66.66667 88.88889 L 66.66667 177.77778 L 33.33333 177.77778 L 33.33333 88.88889"
-          fill="url(#field-pattern-3-argent-sable)"
+        <rect
+          fill="url(#field-pattern-3-argent-sable-quarterly-of-nine)"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={66.66666666666667}
+          y={44.44444444444445}
         />
-        <path
-          d="M 66.66667 88.88889 L 100 88.88889 L 100 177.77778 L 66.66667 177.77778 L 66.66667 88.88889"
+        <rect
           fill="#008000"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={66.66666666666667}
+          y={88.8888888888889}
         />
       </g>
     </g>
@@ -9487,50 +9576,139 @@ exports[`CoatsOfArms should render 'Quarterly, 1st and 2nd and 3rd and 4th quart
           }
         }
       >
-        <path
-          d="M 0 0 H33.33333 V44.44444 H0 Z"
+        <symbol
+          id="ermined-argent-sable"
+          viewBox="0 0 200 240"
+        >
+          <rect
+            fill="#FFFFFF"
+            height="100%"
+            width="100%"
+          />
+          <g
+            transform="translate(100, 240)"
+          >
+            <path
+              d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
+              fill="#000000"
+            />
+            <circle
+              cy={-226}
+              fill="#000000"
+              r="14"
+            />
+            <circle
+              cx={-32}
+              cy={-194}
+              fill="#000000"
+              r={14}
+            />
+            <circle
+              cx={32}
+              cy={-194}
+              fill="#000000"
+              r={14}
+            />
+          </g>
+        </symbol>
+        <pattern
+          height={14.866666666666665}
+          id="field-pattern-3-argent-sable-quarterly-of-nine"
+          patternUnits="userSpaceOnUse"
+          viewBox="0 0 11.11111111111111 14.866666666666665"
+          width={11.11111111111111}
+        >
+          <rect
+            fill="#FFFFFF"
+            height={14.866666666666665}
+            width={11.11111111111111}
+          />
+          <use
+            height={6.666666666666666}
+            href="#ermined-argent-sable"
+            width={5.555555555555555}
+            x={0}
+            y={0.3833333333333333}
+          />
+          <use
+            height={6.666666666666666}
+            href="#ermined-argent-sable"
+            width={5.555555555555555}
+            x={5.555555555555555}
+            y={7.816666666666666}
+          />
+        </pattern>
+        <rect
           fill="#008000"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={0}
+          y={0}
         />
-        <path
-          d="M 33.33333 0 L 66.66667 0 L 66.66667 44.44444 L 33.33333 44.44444 L 33.33333 0"
-          fill="url(#field-pattern-3-argent-sable)"
+        <rect
+          fill="url(#field-pattern-3-argent-sable-quarterly-of-nine)"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={0}
+          y={44.44444444444445}
         />
-        <path
-          d="M 66.66667 0 L 100 0 L 100 44.44444 L 66.66667 44.44444 L 66.66667 0"
+        <rect
           fill="#008000"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={0}
+          y={88.8888888888889}
         />
-        <path
-          d="M 0 44.44444 L 33.33333 44.44444 L 33.33333 88.88889 L 0 88.88889 L 0 44.44444"
-          fill="url(#field-pattern-3-argent-sable)"
+        <rect
+          fill="url(#field-pattern-3-argent-sable-quarterly-of-nine)"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={33.333333333333336}
+          y={0}
         />
-        <path
-          d="M 33.33333 44.44444 L 66.66667 44.44444 L 66.66667 88.88889 L 33.33333 88.88889 L 33.33333 44.44444"
+        <rect
           fill="#008000"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={33.333333333333336}
+          y={44.44444444444445}
         />
-        <path
-          d="M 66.66667 44.44444 L 100 44.44444 L 100 88.88889 L 66.66667 88.88889 L 66.66667 44.44444"
-          fill="url(#field-pattern-3-argent-sable)"
+        <rect
+          fill="url(#field-pattern-3-argent-sable-quarterly-of-nine)"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={33.333333333333336}
+          y={88.8888888888889}
         />
-        <path
-          d="M 0 88.88889 L 33.33333 88.88889 L 33.33333 177.77778 L 0 177.77778 L 0 88.88889"
+        <rect
           fill="#008000"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={66.66666666666667}
+          y={0}
         />
-        <path
-          d="M 33.33333 88.88889 L 66.66667 88.88889 L 66.66667 177.77778 L 33.33333 177.77778 L 33.33333 88.88889"
-          fill="url(#field-pattern-3-argent-sable)"
+        <rect
+          fill="url(#field-pattern-3-argent-sable-quarterly-of-nine)"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={66.66666666666667}
+          y={44.44444444444445}
         />
-        <path
-          d="M 66.66667 88.88889 L 100 88.88889 L 100 177.77778 L 66.66667 177.77778 L 66.66667 88.88889"
+        <rect
           fill="#008000"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={66.66666666666667}
+          y={88.8888888888889}
         />
       </g>
     </g>
@@ -9556,50 +9734,139 @@ exports[`CoatsOfArms should render 'Quarterly, 1st and 2nd and 3rd and 4th quart
           }
         }
       >
-        <path
-          d="M 0 0 H33.33333 V35.55556 H0 Z"
+        <symbol
+          id="ermined-argent-sable"
+          viewBox="0 0 200 240"
+        >
+          <rect
+            fill="#FFFFFF"
+            height="100%"
+            width="100%"
+          />
+          <g
+            transform="translate(100, 240)"
+          >
+            <path
+              d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
+              fill="#000000"
+            />
+            <circle
+              cy={-226}
+              fill="#000000"
+              r="14"
+            />
+            <circle
+              cx={-32}
+              cy={-194}
+              fill="#000000"
+              r={14}
+            />
+            <circle
+              cx={32}
+              cy={-194}
+              fill="#000000"
+              r={14}
+            />
+          </g>
+        </symbol>
+        <pattern
+          height={14.866666666666665}
+          id="field-pattern-3-argent-sable-quarterly-of-nine"
+          patternUnits="userSpaceOnUse"
+          viewBox="0 0 11.11111111111111 14.866666666666665"
+          width={11.11111111111111}
+        >
+          <rect
+            fill="#FFFFFF"
+            height={14.866666666666665}
+            width={11.11111111111111}
+          />
+          <use
+            height={6.666666666666666}
+            href="#ermined-argent-sable"
+            width={5.555555555555555}
+            x={0}
+            y={0.3833333333333333}
+          />
+          <use
+            height={6.666666666666666}
+            href="#ermined-argent-sable"
+            width={5.555555555555555}
+            x={5.555555555555555}
+            y={7.816666666666666}
+          />
+        </pattern>
+        <rect
           fill="#008000"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={0}
+          y={0}
         />
-        <path
-          d="M 33.33333 0 L 66.66667 0 L 66.66667 35.55556 L 33.33333 35.55556 L 33.33333 0"
-          fill="url(#field-pattern-3-argent-sable)"
+        <rect
+          fill="url(#field-pattern-3-argent-sable-quarterly-of-nine)"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={0}
+          y={44.44444444444445}
         />
-        <path
-          d="M 66.66667 0 L 100 0 L 100 35.55556 L 66.66667 35.55556 L 66.66667 0"
+        <rect
           fill="#008000"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={0}
+          y={88.8888888888889}
         />
-        <path
-          d="M 0 35.55556 L 33.33333 35.55556 L 33.33333 71.11111 L 0 71.11111 L 0 35.55556"
-          fill="url(#field-pattern-3-argent-sable)"
+        <rect
+          fill="url(#field-pattern-3-argent-sable-quarterly-of-nine)"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={33.333333333333336}
+          y={0}
         />
-        <path
-          d="M 33.33333 35.55556 L 66.66667 35.55556 L 66.66667 71.11111 L 33.33333 71.11111 L 33.33333 35.55556"
+        <rect
           fill="#008000"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={33.333333333333336}
+          y={44.44444444444445}
         />
-        <path
-          d="M 66.66667 35.55556 L 100 35.55556 L 100 71.11111 L 66.66667 71.11111 L 66.66667 35.55556"
-          fill="url(#field-pattern-3-argent-sable)"
+        <rect
+          fill="url(#field-pattern-3-argent-sable-quarterly-of-nine)"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={33.333333333333336}
+          y={88.8888888888889}
         />
-        <path
-          d="M 0 71.11111 L 33.33333 71.11111 L 33.33333 142.22222 L 0 142.22222 L 0 71.11111"
+        <rect
           fill="#008000"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={66.66666666666667}
+          y={0}
         />
-        <path
-          d="M 33.33333 71.11111 L 66.66667 71.11111 L 66.66667 142.22222 L 33.33333 142.22222 L 33.33333 71.11111"
-          fill="url(#field-pattern-3-argent-sable)"
+        <rect
+          fill="url(#field-pattern-3-argent-sable-quarterly-of-nine)"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={66.66666666666667}
+          y={44.44444444444445}
         />
-        <path
-          d="M 66.66667 71.11111 L 100 71.11111 L 100 142.22222 L 66.66667 142.22222 L 66.66667 71.11111"
+        <rect
           fill="#008000"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={66.66666666666667}
+          y={88.8888888888889}
         />
       </g>
     </g>
@@ -9625,50 +9892,139 @@ exports[`CoatsOfArms should render 'Quarterly, 1st and 2nd and 3rd and 4th quart
           }
         }
       >
-        <path
-          d="M 0 0 H33.33333 V35.55556 H0 Z"
+        <symbol
+          id="ermined-argent-sable"
+          viewBox="0 0 200 240"
+        >
+          <rect
+            fill="#FFFFFF"
+            height="100%"
+            width="100%"
+          />
+          <g
+            transform="translate(100, 240)"
+          >
+            <path
+              d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
+              fill="#000000"
+            />
+            <circle
+              cy={-226}
+              fill="#000000"
+              r="14"
+            />
+            <circle
+              cx={-32}
+              cy={-194}
+              fill="#000000"
+              r={14}
+            />
+            <circle
+              cx={32}
+              cy={-194}
+              fill="#000000"
+              r={14}
+            />
+          </g>
+        </symbol>
+        <pattern
+          height={14.866666666666665}
+          id="field-pattern-3-argent-sable-quarterly-of-nine"
+          patternUnits="userSpaceOnUse"
+          viewBox="0 0 11.11111111111111 14.866666666666665"
+          width={11.11111111111111}
+        >
+          <rect
+            fill="#FFFFFF"
+            height={14.866666666666665}
+            width={11.11111111111111}
+          />
+          <use
+            height={6.666666666666666}
+            href="#ermined-argent-sable"
+            width={5.555555555555555}
+            x={0}
+            y={0.3833333333333333}
+          />
+          <use
+            height={6.666666666666666}
+            href="#ermined-argent-sable"
+            width={5.555555555555555}
+            x={5.555555555555555}
+            y={7.816666666666666}
+          />
+        </pattern>
+        <rect
           fill="#008000"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={0}
+          y={0}
         />
-        <path
-          d="M 33.33333 0 L 66.66667 0 L 66.66667 35.55556 L 33.33333 35.55556 L 33.33333 0"
-          fill="url(#field-pattern-3-argent-sable)"
+        <rect
+          fill="url(#field-pattern-3-argent-sable-quarterly-of-nine)"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={0}
+          y={44.44444444444445}
         />
-        <path
-          d="M 66.66667 0 L 100 0 L 100 35.55556 L 66.66667 35.55556 L 66.66667 0"
+        <rect
           fill="#008000"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={0}
+          y={88.8888888888889}
         />
-        <path
-          d="M 0 35.55556 L 33.33333 35.55556 L 33.33333 71.11111 L 0 71.11111 L 0 35.55556"
-          fill="url(#field-pattern-3-argent-sable)"
+        <rect
+          fill="url(#field-pattern-3-argent-sable-quarterly-of-nine)"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={33.333333333333336}
+          y={0}
         />
-        <path
-          d="M 33.33333 35.55556 L 66.66667 35.55556 L 66.66667 71.11111 L 33.33333 71.11111 L 33.33333 35.55556"
+        <rect
           fill="#008000"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={33.333333333333336}
+          y={44.44444444444445}
         />
-        <path
-          d="M 66.66667 35.55556 L 100 35.55556 L 100 71.11111 L 66.66667 71.11111 L 66.66667 35.55556"
-          fill="url(#field-pattern-3-argent-sable)"
+        <rect
+          fill="url(#field-pattern-3-argent-sable-quarterly-of-nine)"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={33.333333333333336}
+          y={88.8888888888889}
         />
-        <path
-          d="M 0 71.11111 L 33.33333 71.11111 L 33.33333 142.22222 L 0 142.22222 L 0 71.11111"
+        <rect
           fill="#008000"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={66.66666666666667}
+          y={0}
         />
-        <path
-          d="M 33.33333 71.11111 L 66.66667 71.11111 L 66.66667 142.22222 L 33.33333 142.22222 L 33.33333 71.11111"
-          fill="url(#field-pattern-3-argent-sable)"
+        <rect
+          fill="url(#field-pattern-3-argent-sable-quarterly-of-nine)"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={66.66666666666667}
+          y={44.44444444444445}
         />
-        <path
-          d="M 66.66667 71.11111 L 100 71.11111 L 100 142.22222 L 66.66667 142.22222 L 66.66667 71.11111"
+        <rect
           fill="#008000"
+          height={44.44444444444445}
           stroke="#333"
+          width={33.333333333333336}
+          x={66.66666666666667}
+          y={88.8888888888889}
         />
       </g>
     </g>
