@@ -64,12 +64,20 @@ export const FurPatternDef = ({ allTinctures, postfixId, furConfiguration }: Pro
   );
 };
 
+export function getPatternId(field: Field): string {
+  if (field.kind === 'party' || field.kind === 'tierced') {
+    return field.kind + '-' + field.per.name;
+  } else {
+    return field.kind;
+  }
+}
+
 export const WithFurPatternDef: React.FunctionComponent<{
   field: Field;
   furConfiguration: FurConfiguration;
 }> = ({ field, furConfiguration, children }) => {
   const allTinctures = allDeclaredTincturesOfField(field);
-  const postfixId = field.kind;
+  const postfixId = getPatternId(field);
 
   return (
     <>

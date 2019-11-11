@@ -2,6 +2,7 @@ import { Field } from '../../model/field';
 import { cannotHappen } from '../../../utils/cannot-happen';
 import { PlainDisplay } from './fields/Plain';
 import * as React from 'react';
+import { useContext } from 'react';
 import { Tincture } from '../../model/tincture';
 import { PaleDisplay } from './fields/PaleDisplay';
 import { FessDisplay } from './fields/FessDisplay';
@@ -24,7 +25,7 @@ import { BendyPilyDisplay } from './fields/BendyPilyDisplay';
 import { BendyPilySinisterDisplay } from './fields/BendyPilySinisterDisplay';
 import { GironnyDisplay } from './fields/GironnyDisplay';
 import { PallFieldDisplay } from './fields/PallFieldDisplay';
-import { convertToOlfFillFronTincture, FillFromTincture } from '../fillFromTincture.helper';
+import { FillFromTincture } from '../fillFromTincture.helper';
 import { QuarterlyOfNineDisplay } from './fields/QuarterlyOfNineDisplay';
 import { LozengyBendwiseDisplay } from './fields/LozengyBendwiseDisplay';
 import { FessTiercedDisplay } from './fields/FessTiercedDisplay';
@@ -45,9 +46,8 @@ import { AlternatingSquareDisplay } from './fields/AlternatingSquareDisplay';
 import { BarryAndPerChevronThrougoutDisplay } from './fields/BarryAndPerChevronThrougoutDisplay';
 import { BendyAndPerBendSinisterDisplay } from './fields/BendyAndPerBendSinisterDisplay';
 import { BendyAndPerPaleDisplay } from './fields/BendyAndPerPaleDisplay';
-import { FurConfiguration, WithFurPatternDef } from './FurPatternDef';
+import { FurConfiguration, getPatternId, WithFurPatternDef } from './FurPatternDef';
 import { ConfigurationContext, fillFromConfiguration } from '../configuration/ConfigurationContext';
-import { useContext } from 'react';
 
 type Props = {
   dimension: Dimension;
@@ -55,27 +55,50 @@ type Props = {
   shape: SimpleBlasonShape;
   fillFromTincture: FillFromTincture;
 };
+
 export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Props) => {
   const { tinctureConfiguration } = useContext(ConfigurationContext);
-  const oldFillFronTincture = convertToOlfFillFronTincture(fillFromTincture);
-  function fillFromTincturePair(arr: [Tincture, Tincture]): [string, string] {
-    return [oldFillFronTincture(arr[0]), oldFillFronTincture(arr[1])];
+
+  const patternId = getPatternId(field);
+  function fillFromConfigurationPair(tinctures: [Tincture, Tincture], patternId?: string): [string, string] {
+    return [
+      fillFromConfiguration(tinctureConfiguration, tinctures[0], patternId || null),
+      fillFromConfiguration(tinctureConfiguration, tinctures[1], patternId || null),
+    ];
   }
-  function fillFromTinctureTriplet(arr: [Tincture, Tincture, Tincture]): [string, string, string] {
-    return [oldFillFronTincture(arr[0]), oldFillFronTincture(arr[1]), oldFillFronTincture(arr[2])];
+  function fillFromConfigurationTriplet(
+    tinctures: [Tincture, Tincture, Tincture],
+    patternId?: string
+  ): [string, string, string] {
+    return [
+      fillFromConfiguration(tinctureConfiguration, tinctures[0], patternId || null),
+      fillFromConfiguration(tinctureConfiguration, tinctures[1], patternId || null),
+      fillFromConfiguration(tinctureConfiguration, tinctures[2], patternId || null),
+    ];
   }
 
   if (field.kind === 'plain') {
-    return <PlainDisplay field={field} dimension={dimension} />;
+    const furConfiguration: FurConfiguration = {
+      ermine: { spotWidth: dimension.width / 9, heightMarginScale: 0.45, widthMarginScale: 0 },
+      vair: { bellWidth: dimension.width / 5, bellHeightRatio: 2 },
+      potent: { bellWidth: dimension.width / 2.75, bellHeightRatio: 1 },
+    };
+
+    const fill = fillFromConfiguration(tinctureConfiguration, field.tincture, patternId);
+    return (
+      <WithFurPatternDef field={field} furConfiguration={furConfiguration}>
+        <PlainDisplay fill={fill} dimension={dimension} />
+      </WithFurPatternDef>
+    );
   } else {
     if (field.kind === 'party') {
       const line = field.per.line;
       if (field.per.name === 'pall') {
-        const fill: [string, string, string] = fillFromTinctureTriplet(field.per.tinctures);
+        const fill: [string, string, string] = fillFromConfigurationTriplet(field.per.tinctures);
         return <PallFieldDisplay fill={fill} dimension={dimension} line={line} />;
       } else {
         const partyName = field.per.name;
-        const fill: [string, string] = fillFromTincturePair(field.per.tinctures);
+        const fill = fillFromConfigurationPair(field.per.tinctures);
         if (partyName === 'bend') {
           return <BendDisplay fill={fill} dimension={dimension} line={line} />;
         } else if (partyName === 'bendSinister') {
@@ -126,7 +149,7 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
       }
     } else if (field.kind === 'tierced') {
       const partyName = field.per.name;
-      const fill: [string, string, string] = fillFromTinctureTriplet(field.per.tinctures);
+      const fill: [string, string, string] = fillFromConfigurationTriplet(field.per.tinctures);
       const line = field.per.line;
       if (partyName === 'fess') {
         return <FessTiercedDisplay fill={fill} dimension={dimension} line={line} />;
@@ -175,17 +198,24 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
         />
       );
     } else if (field.kind === 'paly') {
-      const fill: [string, string] = fillFromTincturePair(field.tinctures);
-      return <PalyDisplay fill={fill} dimension={dimension} />;
+      const furConfiguration: FurConfiguration = {
+        ermine: { spotWidth: dimension.width / 18, heightMarginScale: 0.45, widthMarginScale: 0 },
+        vair: { bellWidth: dimension.width / 12, bellHeightRatio: 2 },
+        potent: { bellWidth: dimension.width / 10.5, bellHeightRatio: 1 },
+      };
+
+      const fill = fillFromConfigurationPair(field.tinctures, patternId);
+      return (
+        <WithFurPatternDef field={field} furConfiguration={furConfiguration}>
+          <PalyDisplay fill={fill} dimension={dimension} />
+        </WithFurPatternDef>
+      );
     } else if (field.kind === 'barry') {
       return (
         <BarryDisplay field={field} fillFromTincture={fillFromTincture} number={field.number} dimension={dimension} />
       );
     } else if (field.kind === 'barry-and-per-pale' || field.kind === 'chequy') {
-      const fill: [string, string] = [
-        fillFromConfiguration(tinctureConfiguration, field.tinctures[0], field.kind),
-        fillFromConfiguration(tinctureConfiguration, field.tinctures[1], field.kind),
-      ];
+      const fill = fillFromConfigurationPair(field.tinctures, patternId);
 
       const furConfiguration: FurConfiguration = {
         ermine: { spotWidth: dimension.width / 18, heightMarginScale: 0.23, widthMarginScale: 0 },
@@ -207,7 +237,7 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
         </WithFurPatternDef>
       );
     } else if (field.kind === 'barry-and-per-chevron-throughout') {
-      const fill: [string, string] = fillFromTincturePair(field.tinctures);
+      const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
       return <BarryAndPerChevronThrougoutDisplay fill={fill} dimension={dimension} rows={6} />;
     } else if (field.kind === 'bendy-and-per-bend-sinister') {
       return (
@@ -234,25 +264,25 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
         <BendyAndPerPaleDisplay field={field} dimension={dimension} rows={10} fillFromTincture={fillFromTincture} />
       );
     } else if (field.kind === 'lozengy') {
-      const fill: [string, string] = fillFromTincturePair(field.tinctures);
+      const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
       return <LozengyDisplay fill={fill} dimension={dimension} />;
     } else if (field.kind === 'lozengy-bendwise') {
-      const fill: [string, string] = fillFromTincturePair(field.tinctures);
+      const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
       return <LozengyBendwiseDisplay fill={fill} dimension={dimension} />;
     } else if (field.kind === 'paly-pily') {
-      const fill: [string, string] = fillFromTincturePair(field.tinctures);
+      const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
       return <PalyPilyDisplay fill={fill} dimension={dimension} />;
     } else if (field.kind === 'barry-pily') {
-      const fill: [string, string] = fillFromTincturePair(field.tinctures);
+      const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
       return <BarryPilyDisplay fill={fill} dimension={dimension} />;
     } else if (field.kind === 'bendy-pily') {
-      const fill: [string, string] = fillFromTincturePair(field.tinctures);
+      const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
       return <BendyPilyDisplay fill={fill} dimension={dimension} />;
     } else if (field.kind === 'bendy-pily-sinister') {
-      const fill: [string, string] = fillFromTincturePair(field.tinctures);
+      const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
       return <BendyPilySinisterDisplay fill={fill} dimension={dimension} />;
     } else if (field.kind === 'chevronny') {
-      const fill: [string, string] = fillFromTincturePair(field.tinctures);
+      const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
       let updatedDimension: Dimension;
       if (shape === 'square' || shape === 'default') {
         updatedDimension = dimension;
@@ -264,7 +294,7 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
 
       return <ChevronnyDisplay fill={fill} dimension={updatedDimension} />;
     } else if (field.kind === 'chevronny-reversed') {
-      const fill: [string, string] = fillFromTincturePair(field.tinctures);
+      const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
       let updatedDimension: Dimension;
       if (shape === 'square' || shape === 'default') {
         updatedDimension = dimension;
@@ -275,13 +305,13 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
       }
       return <ChevronnyReversedDisplay fill={fill} dimension={updatedDimension} />;
     } else if (field.kind === 'embrassee-a-dexter') {
-      const fill: [string, string] = fillFromTincturePair(field.tinctures);
+      const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
       return <EmbrasseeDexterDisplay fill={fill} dimension={dimension} />;
     } else if (field.kind === 'embrassee-a-sinister') {
-      const fill: [string, string] = fillFromTincturePair(field.tinctures);
+      const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
       return <EmbrasseeSinisterDisplay fill={fill} dimension={dimension} />;
     } else if (field.kind === 'lozenge-throughout') {
-      const fill: [string, string] = fillFromTincturePair(field.tinctures);
+      const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
       let updatedDimension: Dimension;
       if (shape === 'square' || shape === 'default') {
         updatedDimension = dimension;
@@ -293,7 +323,7 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
 
       return <LozengeThroughoutDisplay fill={fill} dimension={updatedDimension} />;
     } else if (field.kind === 'lozenge-throughout-arched') {
-      const fill: [string, string] = fillFromTincturePair(field.tinctures);
+      const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
 
       let updatedDimension: Dimension;
       if (shape === 'square' || shape === 'default') {
@@ -306,10 +336,10 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
 
       return <LozengeThroughoutArchedDisplay fill={fill} dimension={updatedDimension} />;
     } else if (field.kind === 'gironny') {
-      const fill: [string, string] = fillFromTincturePair(field.tinctures);
+      const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
       return <GironnyDisplay fill={fill} dimension={dimension} number={field.number} />;
     } else if (field.kind === 'quarterly-of-nine') {
-      const fill: [string, string] = fillFromTincturePair(field.tinctures);
+      const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
       let updatedDimension: Dimension;
       if (shape === 'square' || shape === 'default') {
         updatedDimension = dimension;

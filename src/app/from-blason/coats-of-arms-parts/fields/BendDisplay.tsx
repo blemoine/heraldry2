@@ -5,7 +5,7 @@ import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { PathFromBuilder } from '../../../common/PathFromBuilder';
 import { computeLineOptions } from '../blasonDisplay.helper';
 
-type Props = { fill: [string, string]; dimension: Dimension; line: Line };
+type Props = { fill: readonly [string, string]; dimension: Dimension; line: Line };
 export const BendDisplay: React.FunctionComponent<Props> = ({ dimension, fill, line }) => {
   const { width, height } = dimension;
   const lineOptions = computeLineOptions(line, dimension);
