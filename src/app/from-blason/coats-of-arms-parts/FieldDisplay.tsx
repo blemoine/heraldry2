@@ -75,11 +75,13 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
     ];
   }
 
+  const width = dimension.width;
+  const height = dimension.height;
   if (field.kind === 'plain') {
     const furConfiguration: FurConfiguration = {
-      ermine: { spotWidth: dimension.width / 9, heightMarginScale: 0.45, widthMarginScale: 0 },
-      vair: { bellWidth: dimension.width / 5, bellHeightRatio: 2 },
-      potent: { bellWidth: dimension.width / 2.75, bellHeightRatio: 1 },
+      ermine: { spotWidth: width / 9, heightMarginScale: 0.45, widthMarginScale: 0 },
+      vair: { bellWidth: width / 5, bellHeightRatio: 2 },
+      potent: { bellWidth: width / 2.75, bellHeightRatio: 1 },
     };
 
     const fill = fillFromConfiguration(tinctureConfiguration, field.tincture, patternId);
@@ -118,7 +120,7 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
           if (shape === 'square' || shape === 'default') {
             updatedDimension = dimension;
           } else if (shape === 'leftCut' || shape === 'rightCut') {
-            updatedDimension = { width: dimension.width, height: dimension.height * 0.75 };
+            updatedDimension = { width: width, height: height * 0.75 };
           } else {
             return cannotHappen(shape);
           }
@@ -136,7 +138,7 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
           if (shape === 'square' || shape === 'default') {
             updatedDimension = dimension;
           } else if (shape === 'leftCut' || shape === 'rightCut') {
-            updatedDimension = { width: dimension.width, height: dimension.height * 0.75 };
+            updatedDimension = { width: width, height: height * 0.75 };
           } else {
             return cannotHappen(shape);
           }
@@ -161,20 +163,20 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
       if (shape === 'default') {
         updatedDimension = dimension;
       } else if (shape === 'square') {
-        updatedDimension = { width: dimension.width, height: dimension.height * 1.1 };
+        updatedDimension = { width, height: height * 1.1 };
       } else if (shape === 'rightCut') {
         if (field.kind === 'bendy') {
-          updatedDimension = { width: dimension.width, height: dimension.height * 1.1 };
+          updatedDimension = { width, height: height * 1.1 };
         } else if (field.kind === 'bendySinister') {
-          updatedDimension = { width: dimension.width, height: dimension.height * 0.9 };
+          updatedDimension = { width, height: height * 0.9 };
         } else {
           cannotHappen(field);
         }
       } else if (shape === 'leftCut') {
         if (field.kind === 'bendy') {
-          updatedDimension = { width: dimension.width, height: dimension.height * 0.9 };
+          updatedDimension = { width, height: height * 0.9 };
         } else if (field.kind === 'bendySinister') {
-          updatedDimension = { width: dimension.width, height: dimension.height * 1.1 };
+          updatedDimension = { width, height: height * 1.1 };
         } else {
           cannotHappen(field);
         }
@@ -185,21 +187,21 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
       let furConfiguration: FurConfiguration;
       if (field.number === 10) {
         furConfiguration = {
-          ermine: { spotWidth: dimension.width / 25, heightMarginScale: 0, widthMarginScale: 6 },
-          vair: { bellWidth: dimension.width / 12, bellHeightRatio: 2 },
-          potent: { bellWidth: dimension.width / 10, bellHeightRatio: 1 },
+          ermine: { spotWidth: width / 25, heightMarginScale: 0, widthMarginScale: 6 },
+          vair: { bellWidth: width / 12, bellHeightRatio: 2 },
+          potent: { bellWidth: width / 10, bellHeightRatio: 1 },
         };
       } else if (field.number === 8) {
         furConfiguration = {
-          ermine: { spotWidth: dimension.width / 20, heightMarginScale: 0, widthMarginScale: 4 },
-          vair: { bellWidth: dimension.width / 10, bellHeightRatio: 2 },
-          potent: { bellWidth: dimension.width / 8, bellHeightRatio: 1 },
+          ermine: { spotWidth: width / 20, heightMarginScale: 0, widthMarginScale: 4 },
+          vair: { bellWidth: width / 10, bellHeightRatio: 2 },
+          potent: { bellWidth: width / 8, bellHeightRatio: 1 },
         };
       } else if (field.number === 6) {
         furConfiguration = {
-          ermine: { spotWidth: dimension.width / 18, heightMarginScale: 0, widthMarginScale: 2.5 },
-          vair: { bellWidth: dimension.width / 10, bellHeightRatio: 2 },
-          potent: { bellWidth: dimension.width / 8, bellHeightRatio: 1 },
+          ermine: { spotWidth: width / 18, heightMarginScale: 0, widthMarginScale: 2.5 },
+          vair: { bellWidth: width / 10, bellHeightRatio: 2 },
+          potent: { bellWidth: width / 8, bellHeightRatio: 1 },
         };
       } else {
         return cannotHappen(field.number);
@@ -221,9 +223,9 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
       );
     } else if (field.kind === 'paly') {
       const furConfiguration: FurConfiguration = {
-        ermine: { spotWidth: dimension.width / 18, heightMarginScale: 0.45, widthMarginScale: 0 },
-        vair: { bellWidth: dimension.width / 12, bellHeightRatio: 2 },
-        potent: { bellWidth: dimension.width / 10.5, bellHeightRatio: 1 },
+        ermine: { spotWidth: width / 18, heightMarginScale: 0.45, widthMarginScale: 0 },
+        vair: { bellWidth: width / 12, bellHeightRatio: 2 },
+        potent: { bellWidth: width / 10.5, bellHeightRatio: 1 },
       };
 
       const fill = fillFromConfigurationPair(field.tinctures, patternId);
@@ -240,9 +242,9 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
       const fill = fillFromConfigurationPair(field.tinctures, patternId);
 
       const furConfiguration: FurConfiguration = {
-        ermine: { spotWidth: dimension.width / 18, heightMarginScale: 0.23, widthMarginScale: 0 },
-        vair: { bellWidth: dimension.width / 12, bellHeightRatio: 1.78 },
-        potent: { bellWidth: dimension.width / 10.5, bellHeightRatio: 0.93 },
+        ermine: { spotWidth: width / 18, heightMarginScale: 0.23, widthMarginScale: 0 },
+        vair: { bellWidth: width / 12, bellHeightRatio: 1.78 },
+        potent: { bellWidth: width / 10.5, bellHeightRatio: 0.93 },
       };
       let rows: number;
       let columns: number;
@@ -277,7 +279,7 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
       );
     } else if (field.kind === 'bendy-sinister-and-per-bend') {
       return (
-        <g transform={`scale(-1,1) translate(-${dimension.width} 0)`}>
+        <g transform={`scale(-1,1) translate(-${width} 0)`}>
           <BendyAndPerBendSinisterDisplay
             field={field}
             dimension={dimension}
@@ -314,7 +316,7 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
       if (shape === 'square' || shape === 'default') {
         updatedDimension = dimension;
       } else if (shape === 'leftCut' || shape === 'rightCut') {
-        updatedDimension = { width: dimension.width, height: dimension.height * 0.8 };
+        updatedDimension = { width: width, height: height * 0.8 };
       } else {
         return cannotHappen(shape);
       }
@@ -326,7 +328,7 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
       if (shape === 'square' || shape === 'default') {
         updatedDimension = dimension;
       } else if (shape === 'leftCut' || shape === 'rightCut') {
-        updatedDimension = { width: dimension.width, height: dimension.height * 0.8 };
+        updatedDimension = { width: width, height: height * 0.8 };
       } else {
         return cannotHappen(shape);
       }
@@ -343,7 +345,7 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
       if (shape === 'square' || shape === 'default') {
         updatedDimension = dimension;
       } else if (shape === 'leftCut' || shape === 'rightCut') {
-        updatedDimension = { width: dimension.width, height: dimension.height * 0.75 };
+        updatedDimension = { width: width, height: height * 0.75 };
       } else {
         return cannotHappen(shape);
       }
@@ -356,7 +358,7 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
       if (shape === 'square' || shape === 'default') {
         updatedDimension = dimension;
       } else if (shape === 'leftCut' || shape === 'rightCut') {
-        updatedDimension = { width: dimension.width, height: dimension.height * 0.75 };
+        updatedDimension = { width: width, height: height * 0.75 };
       } else {
         return cannotHappen(shape);
       }
