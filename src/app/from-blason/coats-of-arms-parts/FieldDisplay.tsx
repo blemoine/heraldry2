@@ -14,7 +14,6 @@ import { SaltireDisplay } from './fields/SaltireDisplay';
 import { BendyDisplay } from './fields/BendyDisplay';
 import { PalyDisplay } from './fields/PalyDisplay';
 import { BarryDisplay } from './fields/BarryDisplay';
-import { BendySinisterDisplay } from './fields/BendySinisterDisplay';
 import { Dimension } from '../../model/dimension';
 import { LozengyDisplay } from './fields/LozengyDisplay';
 import { PalyPilyDisplay } from './fields/PalyPilyDisplay';
@@ -157,44 +156,68 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
       } else {
         return cannotHappen(partyName);
       }
-    } else if (field.kind === 'bendy') {
+    } else if (field.kind === 'bendy' || field.kind === 'bendySinister') {
       let updatedDimension: Dimension;
       if (shape === 'default') {
         updatedDimension = dimension;
-      } else if (shape === 'square' || shape === 'rightCut') {
+      } else if (shape === 'square') {
         updatedDimension = { width: dimension.width, height: dimension.height * 1.1 };
+      } else if (shape === 'rightCut') {
+        if (field.kind === 'bendy') {
+          updatedDimension = { width: dimension.width, height: dimension.height * 1.1 };
+        } else if (field.kind === 'bendySinister') {
+          updatedDimension = { width: dimension.width, height: dimension.height * 0.9 };
+        } else {
+          cannotHappen(field);
+        }
       } else if (shape === 'leftCut') {
-        updatedDimension = { width: dimension.width, height: dimension.height * 0.9 };
+        if (field.kind === 'bendy') {
+          updatedDimension = { width: dimension.width, height: dimension.height * 0.9 };
+        } else if (field.kind === 'bendySinister') {
+          updatedDimension = { width: dimension.width, height: dimension.height * 1.1 };
+        } else {
+          cannotHappen(field);
+        }
       } else {
         return cannotHappen(shape);
       }
 
-      return (
-        <BendyDisplay
-          field={field}
-          fillFromTincture={fillFromTincture}
-          dimension={updatedDimension}
-          number={field.number}
-        />
-      );
-    } else if (field.kind === 'bendySinister') {
-      let updatedDimension: Dimension;
-      if (shape === 'default') {
-        updatedDimension = dimension;
-      } else if (shape === 'square' || shape === 'leftCut') {
-        updatedDimension = { width: dimension.width, height: dimension.height * 1.1 };
-      } else if (shape === 'rightCut') {
-        updatedDimension = { width: dimension.width, height: dimension.height * 0.9 };
+      let furConfiguration: FurConfiguration;
+      if (field.number === 10) {
+        furConfiguration = {
+          ermine: { spotWidth: dimension.width / 25, heightMarginScale: 0, widthMarginScale: 6 },
+          vair: { bellWidth: dimension.width / 12, bellHeightRatio: 2 },
+          potent: { bellWidth: dimension.width / 10, bellHeightRatio: 1 },
+        };
+      } else if (field.number === 8) {
+        furConfiguration = {
+          ermine: { spotWidth: dimension.width / 20, heightMarginScale: 0, widthMarginScale: 4 },
+          vair: { bellWidth: dimension.width / 10, bellHeightRatio: 2 },
+          potent: { bellWidth: dimension.width / 8, bellHeightRatio: 1 },
+        };
+      } else if (field.number === 6) {
+        furConfiguration = {
+          ermine: { spotWidth: dimension.width / 18, heightMarginScale: 0, widthMarginScale: 2.5 },
+          vair: { bellWidth: dimension.width / 10, bellHeightRatio: 2 },
+          potent: { bellWidth: dimension.width / 8, bellHeightRatio: 1 },
+        };
       } else {
-        return cannotHappen(shape);
+        return cannotHappen(field.number);
       }
+      const fill: [string, string] = fillFromConfigurationPair(field.tinctures, patternId);
+      const transform = field.kind === 'bendySinister' ? `scale(-1,1) translate(-${updatedDimension.width} 0)` : '';
       return (
-        <BendySinisterDisplay
-          field={field}
-          fillFromTincture={fillFromTincture}
-          dimension={updatedDimension}
-          number={field.number}
-        />
+        <WithFurPatternDef field={field} furConfiguration={furConfiguration}>
+          <g transform={`${transform}`}>
+            <BendyDisplay
+              fills={fill}
+              line={field.line}
+              fillFromTincture={fillFromTincture}
+              dimension={updatedDimension}
+              number={field.number}
+            />
+          </g>
+        </WithFurPatternDef>
       );
     } else if (field.kind === 'paly') {
       const furConfiguration: FurConfiguration = {

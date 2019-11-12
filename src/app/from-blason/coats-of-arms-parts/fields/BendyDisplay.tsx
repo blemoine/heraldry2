@@ -2,21 +2,15 @@ import * as React from 'react';
 import { Dimension } from '../../../model/dimension';
 import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { PathFromBuilder } from '../../../common/PathFromBuilder';
-import { BendyField, BendySinisterField } from '../../../model/field';
+import { BendyField } from '../../../model/field';
 import { range } from '../../../../utils/range';
-import { FurPatternDefinition } from '../FurPatternDefinition';
-import { buildFurTransformProperty, getFill } from '../FurPattern.model';
 import { FillFromTincture } from '../../fillFromTincture.helper';
-import { allDeclaredTincturesOfField } from '../../blason.helpers';
 import { computeLineOptions, invertLineOptionNullable, oneSideLineOption } from '../blasonDisplay.helper';
-
-const postfixId = 'bendy-field';
-const ermineScale = 0.66;
-const vairScale = 0.56;
-const potentScale = 0.35;
+import { Line } from '../../../model/line';
 
 type Props = {
-  field: BendyField | BendySinisterField;
+  fills: [string, string];
+  line: Line;
   dimension: Dimension;
   number: BendyField['number'];
   fillFromTincture: FillFromTincture;
@@ -28,32 +22,17 @@ export const BendyDisplay: React.FunctionComponent<Props> = (props) => {
 
   const bendHeight = height / (props.number - 1);
 
-  const field = props.field;
-  const lineOptions = computeLineOptions(field.line, dimension);
-  const invertLineOptions = field.line === 'dancetty' ? lineOptions : invertLineOptionNullable(lineOptions);
+  const lineOptions = computeLineOptions(props.line, dimension);
+  const invertLineOptions = props.line === 'dancetty' ? lineOptions : invertLineOptionNullable(lineOptions);
 
   const oneSideOnly = oneSideLineOption(lineOptions);
-  const invertedOneSideOnly = field.line === 'dancetty' ? lineOptions : oneSideLineOption(invertLineOptions);
+  const invertedOneSideOnly = props.line === 'dancetty' ? lineOptions : oneSideLineOption(invertLineOptions);
 
-  const fills = field.tinctures.map((tincture) => getFill(props.fillFromTincture, tincture, postfixId));
+  const fills = props.fills;
 
-  const scaleRatio = height / 480;
-  const transformProperties = buildFurTransformProperty(props.fillFromTincture, allDeclaredTincturesOfField(field), {
-    ermine: [
-      { kind: 'scale', value: [ermineScale * scaleRatio * 1.5, ermineScale * (3 / props.number - 0.05) * scaleRatio] },
-    ],
-    vair: [{ kind: 'scale', value: [vairScale * scaleRatio, vairScale * 0.6785 * scaleRatio] }],
-    potent: [{ kind: 'scale', value: [potentScale * scaleRatio, potentScale * 1.35 * scaleRatio] }],
-  });
-
-  const lineOffset = field.line === 'urdy' ? bendHeight : 0;
+  const lineOffset = props.line === 'urdy' ? bendHeight : 0;
   return (
     <>
-      <FurPatternDefinition
-        tinctures={field.tinctures}
-        postfixId={postfixId}
-        transformProperties={transformProperties}
-      />
       {range(0, props.number).map((i) => {
         const startOffset = i === 0 ? bendHeight : 0;
         const endOffset = i === props.number - 1 ? bendHeight * 2 : 0;
