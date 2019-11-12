@@ -293,8 +293,18 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
         <BendyAndPerPaleDisplay field={field} dimension={dimension} rows={10} fillFromTincture={fillFromTincture} />
       );
     } else if (field.kind === 'lozengy') {
-      const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
-      return <LozengyDisplay fill={fill} dimension={dimension} />;
+      const fill: [string, string] = fillFromConfigurationPair(field.tinctures, patternId);
+      const furConfiguration: FurConfiguration = {
+        ermine: { spotWidth: width / 29, heightMarginScale: 0, widthMarginScale: 0 },
+        vair: { bellWidth: width / 20, bellHeightRatio: 2 },
+        potent: { bellWidth: width / 15, bellHeightRatio: 1 },
+      };
+
+      return (
+        <WithFurPatternDef field={field} furConfiguration={furConfiguration}>
+          <LozengyDisplay fill={fill} dimension={dimension} />
+        </WithFurPatternDef>
+      );
     } else if (field.kind === 'lozengy-bendwise') {
       const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
       return <LozengyBendwiseDisplay fill={fill} dimension={dimension} />;
