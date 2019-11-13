@@ -77,16 +77,15 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
 
   const width = dimension.width;
   const height = dimension.height;
+  const defaultFurConfiguration = {
+    ermine: { spotWidth: width / 9, heightMarginScale: 0.45, widthMarginScale: 0 },
+    vair: { bellWidth: width / 5, bellHeightRatio: 2 },
+    potent: { bellWidth: width / 2.75, bellHeightRatio: 1 },
+  };
   if (field.kind === 'plain') {
-    const furConfiguration: FurConfiguration = {
-      ermine: { spotWidth: width / 9, heightMarginScale: 0.45, widthMarginScale: 0 },
-      vair: { bellWidth: width / 5, bellHeightRatio: 2 },
-      potent: { bellWidth: width / 2.75, bellHeightRatio: 1 },
-    };
-
     const fill = fillFromConfiguration(tinctureConfiguration, field.tincture, patternId);
     return (
-      <WithFurPatternDef field={field} furConfiguration={furConfiguration}>
+      <WithFurPatternDef field={field} furConfiguration={defaultFurConfiguration}>
         <PlainDisplay fill={fill} dimension={dimension} />
       </WithFurPatternDef>
     );
@@ -306,8 +305,18 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
         </WithFurPatternDef>
       );
     } else if (field.kind === 'lozengy-bendwise') {
-      const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
-      return <LozengyBendwiseDisplay fill={fill} dimension={dimension} />;
+      const fill: [string, string] = fillFromConfigurationPair(field.tinctures, patternId);
+      const furConfiguration: FurConfiguration = {
+        ermine: { spotWidth: width / 29, heightMarginScale: 0, widthMarginScale: 0 },
+        vair: { bellWidth: width / 20, bellHeightRatio: 2 },
+        potent: { bellWidth: width / 15, bellHeightRatio: 1 },
+      };
+
+      return (
+        <WithFurPatternDef field={field} furConfiguration={furConfiguration}>
+          <LozengyBendwiseDisplay fill={fill} dimension={dimension} />
+        </WithFurPatternDef>
+      );
     } else if (field.kind === 'paly-pily') {
       const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
       return <PalyPilyDisplay fill={fill} dimension={dimension} />;
@@ -375,8 +384,17 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
 
       return <LozengeThroughoutArchedDisplay fill={fill} dimension={updatedDimension} />;
     } else if (field.kind === 'gironny') {
-      const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
-      return <GironnyDisplay fill={fill} dimension={dimension} number={field.number} />;
+      const furConfiguration: FurConfiguration = {
+        ermine: { spotWidth: width / 15, heightMarginScale: 0, widthMarginScale: 0 },
+        vair: { bellWidth: width / 12, bellHeightRatio: 2 },
+        potent: { bellWidth: width / 9, bellHeightRatio: 1 },
+      };
+      const fill: [string, string] = fillFromConfigurationPair(field.tinctures, patternId);
+      return (
+        <WithFurPatternDef field={field} furConfiguration={furConfiguration}>
+          <GironnyDisplay fill={fill} dimension={dimension} number={field.number} />
+        </WithFurPatternDef>
+      );
     } else {
       return cannotHappen(field);
     }
