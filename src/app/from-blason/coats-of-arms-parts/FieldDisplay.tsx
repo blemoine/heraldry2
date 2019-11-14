@@ -77,10 +77,15 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
 
   const width = dimension.width;
   const height = dimension.height;
-  const defaultFurConfiguration = {
+  const defaultFurConfiguration: FurConfiguration = {
     ermine: { spotWidth: width / 9, heightMarginScale: 0.45, widthMarginScale: 0 },
     vair: { bellWidth: width / 5, bellHeightRatio: 2 },
     potent: { bellWidth: width / 2.75, bellHeightRatio: 1 },
+  };
+  const smallFurConfiguration: FurConfiguration = {
+    ermine: { spotWidth: width / 19, heightMarginScale: 0, widthMarginScale: 0 },
+    vair: { bellWidth: width / 12, bellHeightRatio: 2 },
+    potent: { bellWidth: width / 9, bellHeightRatio: 1 },
   };
   if (field.kind === 'plain') {
     const fill = fillFromConfiguration(tinctureConfiguration, field.tincture, patternId);
@@ -265,8 +270,12 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
         </WithFurPatternDef>
       );
     } else if (field.kind === 'barry-and-per-chevron-throughout') {
-      const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
-      return <BarryAndPerChevronThrougoutDisplay fill={fill} dimension={dimension} rows={6} />;
+      const fill: [string, string] = fillFromConfigurationPair(field.tinctures, patternId);
+      return (
+        <WithFurPatternDef field={field} furConfiguration={smallFurConfiguration}>
+          <BarryAndPerChevronThrougoutDisplay fill={fill} dimension={dimension} rows={6} />
+        </WithFurPatternDef>
+      );
     } else if (field.kind === 'bendy-and-per-bend-sinister') {
       return (
         <BendyAndPerBendSinisterDisplay
@@ -384,14 +393,9 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
 
       return <LozengeThroughoutArchedDisplay fill={fill} dimension={updatedDimension} />;
     } else if (field.kind === 'gironny') {
-      const furConfiguration: FurConfiguration = {
-        ermine: { spotWidth: width / 15, heightMarginScale: 0, widthMarginScale: 0 },
-        vair: { bellWidth: width / 12, bellHeightRatio: 2 },
-        potent: { bellWidth: width / 9, bellHeightRatio: 1 },
-      };
       const fill: [string, string] = fillFromConfigurationPair(field.tinctures, patternId);
       return (
-        <WithFurPatternDef field={field} furConfiguration={furConfiguration}>
+        <WithFurPatternDef field={field} furConfiguration={smallFurConfiguration}>
           <GironnyDisplay fill={fill} dimension={dimension} number={field.number} />
         </WithFurPatternDef>
       );
