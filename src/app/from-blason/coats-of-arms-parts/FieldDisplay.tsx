@@ -276,18 +276,11 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
           <BarryAndPerChevronThrougoutDisplay fill={fill} dimension={dimension} rows={6} />
         </WithFurPatternDef>
       );
-    } else if (field.kind === 'bendy-and-per-bend-sinister') {
+    } else if (field.kind === 'bendy-and-per-bend-sinister' || field.kind === 'bendy-sinister-and-per-bend') {
+      const transform: string =
+        field.kind === 'bendy-sinister-and-per-bend' ? `scale(-1,1) translate(-${width} 0)` : '';
       return (
-        <BendyAndPerBendSinisterDisplay
-          field={field}
-          dimension={dimension}
-          rows={10}
-          fillFromTincture={fillFromTincture}
-        />
-      );
-    } else if (field.kind === 'bendy-sinister-and-per-bend') {
-      return (
-        <g transform={`scale(-1,1) translate(-${width} 0)`}>
+        <g transform={transform}>
           <BendyAndPerBendSinisterDisplay
             field={field}
             dimension={dimension}
