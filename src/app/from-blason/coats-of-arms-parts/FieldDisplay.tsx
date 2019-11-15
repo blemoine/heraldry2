@@ -101,23 +101,24 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
       return <PallFieldDisplay fill={fill} dimension={dimension} line={line} />;
     } else {
       const partyName = field.per.name;
-      const fill = fillFromConfigurationPair(field.per.tinctures);
+      const fill = fillFromConfigurationPair(field.per.tinctures, patternId);
+      let fieldEl: ReactElement;
       if (partyName === 'bend') {
-        return <BendDisplay fill={fill} dimension={dimension} line={line} />;
+        fieldEl = <BendDisplay fill={fill} dimension={dimension} line={line} />;
       } else if (partyName === 'bendSinister') {
-        return <BendSinisterDisplay fill={fill} dimension={dimension} line={line} />;
+        fieldEl = <BendSinisterDisplay fill={fill} dimension={dimension} line={line} />;
       } else if (partyName === 'chevron') {
-        return <ChevronDisplay fill={fill} dimension={dimension} line={line} />;
+        fieldEl = <ChevronDisplay fill={fill} dimension={dimension} line={line} />;
       } else if (partyName === 'chevron-reversed') {
-        return <ChevronReversedDisplay fill={fill} dimension={dimension} line={line} />;
+        fieldEl = <ChevronReversedDisplay fill={fill} dimension={dimension} line={line} />;
       } else if (partyName === 'fess') {
-        return <FessDisplay fill={fill} dimension={dimension} line={line} />;
+        fieldEl = <FessDisplay fill={fill} dimension={dimension} line={line} />;
       } else if (partyName === 'pale') {
-        return <PaleDisplay fill={fill} dimension={dimension} line={line} />;
+        fieldEl = <PaleDisplay fill={fill} dimension={dimension} line={line} />;
       } else if (partyName === 'cross') {
-        return <CrossDisplay fill={fill} dimension={dimension} line={line} />;
+        fieldEl = <CrossDisplay fill={fill} dimension={dimension} line={line} />;
       } else if (partyName === 'saltire') {
-        return <SaltireDisplay fill={fill} dimension={dimension} line={line} />;
+        fieldEl = <SaltireDisplay fill={fill} dimension={dimension} line={line} />;
       } else if (partyName === 'pile') {
         let updatedDimension: Dimension;
         if (shape === 'square' || shape === 'default') {
@@ -127,15 +128,15 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
         } else {
           return cannotHappen(shape);
         }
-        return <PileDisplay fill={fill} dimension={updatedDimension} line={line} />;
+        fieldEl = <PileDisplay fill={fill} dimension={updatedDimension} line={line} />;
       } else if (partyName === 'pile-reversed') {
-        return <PileReversedDisplay fill={fill} dimension={dimension} line={line} />;
+        fieldEl = <PileReversedDisplay fill={fill} dimension={dimension} line={line} />;
       } else if (partyName === 'pile-reversed-arched') {
-        return <PileReversedArchedDisplay fill={fill} dimension={dimension} line={line} />;
+        fieldEl = <PileReversedArchedDisplay fill={fill} dimension={dimension} line={line} />;
       } else if (partyName === 'pile-bendwise') {
-        return <PileBendwiseDisplay fill={fill} dimension={dimension} line={line} />;
+        fieldEl = <PileBendwiseDisplay fill={fill} dimension={dimension} line={line} />;
       } else if (partyName === 'pile-bendwise-sinister') {
-        return <PileBendwiseSinisterDisplay fill={fill} dimension={dimension} line={line} />;
+        fieldEl = <PileBendwiseSinisterDisplay fill={fill} dimension={dimension} line={line} />;
       } else if (partyName === 'pile-arched') {
         let updatedDimension: Dimension;
         if (shape === 'square' || shape === 'default') {
@@ -145,10 +146,16 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
         } else {
           return cannotHappen(shape);
         }
-        return <PileArchedDisplay fill={fill} dimension={updatedDimension} line={line} />;
+        fieldEl = <PileArchedDisplay fill={fill} dimension={updatedDimension} line={line} />;
       } else {
         return cannotHappen(partyName);
       }
+
+      return (
+        <WithFurPatternDef field={field} furConfiguration={defaultFurConfiguration}>
+          {fieldEl}
+        </WithFurPatternDef>
+      );
     }
   } else if (field.kind === 'tierced') {
     const partyName = field.per.name;

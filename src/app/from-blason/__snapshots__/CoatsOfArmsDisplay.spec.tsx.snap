@@ -8391,8 +8391,70 @@ exports[`CoatsOfArms should render 'Per chevron ermine and gules, a shakefork or
       }
     }
   >
+    <symbol
+      id="ermined-argent-sable"
+      viewBox="0 0 200 240"
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <g
+        transform="translate(100, 240)"
+      >
+        <path
+          d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
+          fill="#000000"
+        />
+        <circle
+          cy={-226}
+          fill="#000000"
+          r="14"
+        />
+        <circle
+          cx={-32}
+          cy={-194}
+          fill="#000000"
+          r={14}
+        />
+        <circle
+          cx={32}
+          cy={-194}
+          fill="#000000"
+          r={14}
+        />
+      </g>
+    </symbol>
+    <pattern
+      height={65.33333333333333}
+      id="field-pattern-3-argent-sable-party-chevron"
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 44.44444444444444 65.33333333333333"
+      width={44.44444444444444}
+    >
+      <rect
+        fill="#FFFFFF"
+        height={65.33333333333333}
+        width={44.44444444444444}
+      />
+      <use
+        height={26.666666666666664}
+        href="#ermined-argent-sable"
+        width={22.22222222222222}
+        x={0}
+        y={3}
+      />
+      <use
+        height={26.666666666666664}
+        href="#ermined-argent-sable"
+        width={22.22222222222222}
+        x={22.22222222222222}
+        y={35.666666666666664}
+      />
+    </pattern>
     <rect
-      fill="url(#field-pattern-3-argent-sable)"
+      fill="url(#field-pattern-3-argent-sable-party-chevron)"
       height={266.6666666666667}
       stroke="#333"
       width={200}
@@ -8540,8 +8602,70 @@ exports[`CoatsOfArms should render 'Per chevron reversed invected ermine and gul
       }
     }
   >
+    <symbol
+      id="ermined-argent-sable"
+      viewBox="0 0 200 240"
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <g
+        transform="translate(100, 240)"
+      >
+        <path
+          d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
+          fill="#000000"
+        />
+        <circle
+          cy={-226}
+          fill="#000000"
+          r="14"
+        />
+        <circle
+          cx={-32}
+          cy={-194}
+          fill="#000000"
+          r={14}
+        />
+        <circle
+          cx={32}
+          cy={-194}
+          fill="#000000"
+          r={14}
+        />
+      </g>
+    </symbol>
+    <pattern
+      height={65.33333333333333}
+      id="field-pattern-3-argent-sable-party-chevron-reversed"
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 44.44444444444444 65.33333333333333"
+      width={44.44444444444444}
+    >
+      <rect
+        fill="#FFFFFF"
+        height={65.33333333333333}
+        width={44.44444444444444}
+      />
+      <use
+        height={26.666666666666664}
+        href="#ermined-argent-sable"
+        width={22.22222222222222}
+        x={0}
+        y={3}
+      />
+      <use
+        height={26.666666666666664}
+        href="#ermined-argent-sable"
+        width={22.22222222222222}
+        x={22.22222222222222}
+        y={35.666666666666664}
+      />
+    </pattern>
     <rect
-      fill="url(#field-pattern-3-argent-sable)"
+      fill="url(#field-pattern-3-argent-sable-party-chevron-reversed)"
       height={266.6666666666667}
       stroke="#333"
       width={200}
@@ -8748,6 +8872,68 @@ exports[`CoatsOfArms should render 'Per fess or and ermine, a bordure engrailed 
     <g
       transform="translate(10 8)"
     >
+      <symbol
+        id="ermined-argent-sable"
+        viewBox="0 0 200 240"
+      >
+        <rect
+          fill="#FFFFFF"
+          height="100%"
+          width="100%"
+        />
+        <g
+          transform="translate(100, 240)"
+        >
+          <path
+            d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
+            fill="#000000"
+          />
+          <circle
+            cy={-226}
+            fill="#000000"
+            r="14"
+          />
+          <circle
+            cx={-32}
+            cy={-194}
+            fill="#000000"
+            r={14}
+          />
+          <circle
+            cx={32}
+            cy={-194}
+            fill="#000000"
+            r={14}
+          />
+        </g>
+      </symbol>
+      <pattern
+        height={58.8}
+        id="field-pattern-3-argent-sable-party-fess"
+        patternUnits="userSpaceOnUse"
+        viewBox="0 0 40 58.8"
+        width={40}
+      >
+        <rect
+          fill="#FFFFFF"
+          height={58.8}
+          width={40}
+        />
+        <use
+          height={24}
+          href="#ermined-argent-sable"
+          width={20}
+          x={0}
+          y={2.7}
+        />
+        <use
+          height={24}
+          href="#ermined-argent-sable"
+          width={20}
+          x={20}
+          y={32.1}
+        />
+      </pattern>
       <path
         d="M 0 0 H180 V124 H0 Z"
         fill="#FFD700"
@@ -8755,7 +8941,7 @@ exports[`CoatsOfArms should render 'Per fess or and ermine, a bordure engrailed 
       />
       <path
         d="M 0 124 H180 V248 H0 Z"
-        fill="url(#field-pattern-3-argent-sable)"
+        fill="url(#field-pattern-3-argent-sable-party-fess)"
         stroke="#333"
       />
     </g>
@@ -8896,9 +9082,71 @@ exports[`CoatsOfArms should render 'Per pale invected ermine and or' 1`] = `
       }
     }
   >
+    <symbol
+      id="ermined-argent-sable"
+      viewBox="0 0 200 240"
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <g
+        transform="translate(100, 240)"
+      >
+        <path
+          d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
+          fill="#000000"
+        />
+        <circle
+          cy={-226}
+          fill="#000000"
+          r="14"
+        />
+        <circle
+          cx={-32}
+          cy={-194}
+          fill="#000000"
+          r={14}
+        />
+        <circle
+          cx={32}
+          cy={-194}
+          fill="#000000"
+          r={14}
+        />
+      </g>
+    </symbol>
+    <pattern
+      height={65.33333333333333}
+      id="field-pattern-3-argent-sable-party-pale"
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 44.44444444444444 65.33333333333333"
+      width={44.44444444444444}
+    >
+      <rect
+        fill="#FFFFFF"
+        height={65.33333333333333}
+        width={44.44444444444444}
+      />
+      <use
+        height={26.666666666666664}
+        href="#ermined-argent-sable"
+        width={22.22222222222222}
+        x={0}
+        y={3}
+      />
+      <use
+        height={26.666666666666664}
+        href="#ermined-argent-sable"
+        width={22.22222222222222}
+        x={22.22222222222222}
+        y={35.666666666666664}
+      />
+    </pattern>
     <path
       d="M 0 0 H100 Q 80 9.52381 100 19.04762 Q 80 28.57143 100 38.09524 Q 80 47.61905 100 57.14286 Q 80 66.66667 100 76.19048 Q 80 85.71429 100 95.2381 Q 80 104.7619 100 114.28571 Q 80 123.80952 100 133.33333 Q 80 142.85714 100 152.38095 Q 80 161.90476 100 171.42857 Q 80 180.95238 100 190.47619 Q 80 200 100 209.52381 Q 80 219.04762 100 228.57143 Q 80 238.09524 100 247.61905 Q 80 257.14286 100 266.66667 H0 Z"
-      fill="url(#field-pattern-3-argent-sable)"
+      fill="url(#field-pattern-3-argent-sable-party-pale)"
       stroke="#333"
     />
     <path
@@ -9443,8 +9691,70 @@ exports[`CoatsOfArms should render 'Quarterly, 1st Per pile reversed embattled e
           }
         }
       >
+        <symbol
+          id="ermined-argent-sable"
+          viewBox="0 0 200 240"
+        >
+          <rect
+            fill="#FFFFFF"
+            height="100%"
+            width="100%"
+          />
+          <g
+            transform="translate(100, 240)"
+          >
+            <path
+              d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
+              fill="#000000"
+            />
+            <circle
+              cy={-226}
+              fill="#000000"
+              r="14"
+            />
+            <circle
+              cx={-32}
+              cy={-194}
+              fill="#000000"
+              r={14}
+            />
+            <circle
+              cx={32}
+              cy={-194}
+              fill="#000000"
+              r={14}
+            />
+          </g>
+        </symbol>
+        <pattern
+          height={32.666666666666664}
+          id="field-pattern-3-argent-sable-party-pile-reversed"
+          patternUnits="userSpaceOnUse"
+          viewBox="0 0 22.22222222222222 32.666666666666664"
+          width={22.22222222222222}
+        >
+          <rect
+            fill="#FFFFFF"
+            height={32.666666666666664}
+            width={22.22222222222222}
+          />
+          <use
+            height={13.333333333333332}
+            href="#ermined-argent-sable"
+            width={11.11111111111111}
+            x={0}
+            y={1.5}
+          />
+          <use
+            height={13.333333333333332}
+            href="#ermined-argent-sable"
+            width={11.11111111111111}
+            x={11.11111111111111}
+            y={17.833333333333332}
+          />
+        </pattern>
         <rect
-          fill="url(#field-pattern-3-argent-sable)"
+          fill="url(#field-pattern-3-argent-sable-party-pile-reversed)"
           height={200}
           stroke="#333"
           width={100}
@@ -9480,8 +9790,70 @@ exports[`CoatsOfArms should render 'Quarterly, 1st Per pile reversed embattled e
           }
         }
       >
+        <symbol
+          id="ermined-argent-sable"
+          viewBox="0 0 200 240"
+        >
+          <rect
+            fill="#FFFFFF"
+            height="100%"
+            width="100%"
+          />
+          <g
+            transform="translate(100, 240)"
+          >
+            <path
+              d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
+              fill="#000000"
+            />
+            <circle
+              cy={-226}
+              fill="#000000"
+              r="14"
+            />
+            <circle
+              cx={-32}
+              cy={-194}
+              fill="#000000"
+              r={14}
+            />
+            <circle
+              cx={32}
+              cy={-194}
+              fill="#000000"
+              r={14}
+            />
+          </g>
+        </symbol>
+        <pattern
+          height={32.666666666666664}
+          id="field-pattern-3-argent-sable-party-pile-reversed"
+          patternUnits="userSpaceOnUse"
+          viewBox="0 0 22.22222222222222 32.666666666666664"
+          width={22.22222222222222}
+        >
+          <rect
+            fill="#FFFFFF"
+            height={32.666666666666664}
+            width={22.22222222222222}
+          />
+          <use
+            height={13.333333333333332}
+            href="#ermined-argent-sable"
+            width={11.11111111111111}
+            x={0}
+            y={1.5}
+          />
+          <use
+            height={13.333333333333332}
+            href="#ermined-argent-sable"
+            width={11.11111111111111}
+            x={11.11111111111111}
+            y={17.833333333333332}
+          />
+        </pattern>
         <rect
-          fill="url(#field-pattern-3-argent-sable)"
+          fill="url(#field-pattern-3-argent-sable-party-pile-reversed)"
           height={200}
           stroke="#333"
           width={100}
@@ -9517,8 +9889,70 @@ exports[`CoatsOfArms should render 'Quarterly, 1st Per pile reversed embattled e
           }
         }
       >
+        <symbol
+          id="ermined-argent-sable"
+          viewBox="0 0 200 240"
+        >
+          <rect
+            fill="#FFFFFF"
+            height="100%"
+            width="100%"
+          />
+          <g
+            transform="translate(100, 240)"
+          >
+            <path
+              d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
+              fill="#000000"
+            />
+            <circle
+              cy={-226}
+              fill="#000000"
+              r="14"
+            />
+            <circle
+              cx={-32}
+              cy={-194}
+              fill="#000000"
+              r={14}
+            />
+            <circle
+              cx={32}
+              cy={-194}
+              fill="#000000"
+              r={14}
+            />
+          </g>
+        </symbol>
+        <pattern
+          height={32.666666666666664}
+          id="field-pattern-3-argent-sable-party-pile-reversed"
+          patternUnits="userSpaceOnUse"
+          viewBox="0 0 22.22222222222222 32.666666666666664"
+          width={22.22222222222222}
+        >
+          <rect
+            fill="#FFFFFF"
+            height={32.666666666666664}
+            width={22.22222222222222}
+          />
+          <use
+            height={13.333333333333332}
+            href="#ermined-argent-sable"
+            width={11.11111111111111}
+            x={0}
+            y={1.5}
+          />
+          <use
+            height={13.333333333333332}
+            href="#ermined-argent-sable"
+            width={11.11111111111111}
+            x={11.11111111111111}
+            y={17.833333333333332}
+          />
+        </pattern>
         <rect
-          fill="url(#field-pattern-3-argent-sable)"
+          fill="url(#field-pattern-3-argent-sable-party-pile-reversed)"
           height={200}
           stroke="#333"
           width={100}
@@ -9554,8 +9988,70 @@ exports[`CoatsOfArms should render 'Quarterly, 1st Per pile reversed embattled e
           }
         }
       >
+        <symbol
+          id="ermined-argent-sable"
+          viewBox="0 0 200 240"
+        >
+          <rect
+            fill="#FFFFFF"
+            height="100%"
+            width="100%"
+          />
+          <g
+            transform="translate(100, 240)"
+          >
+            <path
+              d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
+              fill="#000000"
+            />
+            <circle
+              cy={-226}
+              fill="#000000"
+              r="14"
+            />
+            <circle
+              cx={-32}
+              cy={-194}
+              fill="#000000"
+              r={14}
+            />
+            <circle
+              cx={32}
+              cy={-194}
+              fill="#000000"
+              r={14}
+            />
+          </g>
+        </symbol>
+        <pattern
+          height={32.666666666666664}
+          id="field-pattern-3-argent-sable-party-pile-reversed"
+          patternUnits="userSpaceOnUse"
+          viewBox="0 0 22.22222222222222 32.666666666666664"
+          width={22.22222222222222}
+        >
+          <rect
+            fill="#FFFFFF"
+            height={32.666666666666664}
+            width={22.22222222222222}
+          />
+          <use
+            height={13.333333333333332}
+            href="#ermined-argent-sable"
+            width={11.11111111111111}
+            x={0}
+            y={1.5}
+          />
+          <use
+            height={13.333333333333332}
+            href="#ermined-argent-sable"
+            width={11.11111111111111}
+            x={11.11111111111111}
+            y={17.833333333333332}
+          />
+        </pattern>
         <rect
-          fill="url(#field-pattern-3-argent-sable)"
+          fill="url(#field-pattern-3-argent-sable-party-pile-reversed)"
           height={200}
           stroke="#333"
           width={100}
@@ -12143,9 +12639,61 @@ exports[`CoatsOfArms should render a party blason with some ordinary: Per bend v
     <g
       transform="translate(0 53.33333333333334)"
     >
+      <symbol
+        id="vair"
+        viewBox="0 0 200 200"
+      >
+        <rect
+          fill="#FFFFFF"
+          height="100%"
+          width="100%"
+        />
+        <path
+          d="M0 200 L200 200 L150 150 L150 50 L100 0 L50 50 L50 150 Z"
+          fill="#0000FF"
+        />
+      </symbol>
+      <pattern
+        height={80}
+        id="field-pattern-0-argent-party-bend"
+        patternUnits="userSpaceOnUse"
+        viewBox="0 0 100 200"
+        width={40}
+      >
+        <rect
+          fill="#FFFFFF"
+          height="100%"
+          width="100%"
+        />
+        <g
+          transform="scale(1 1)"
+        >
+          <use
+            height={100}
+            href="#vair"
+            width={100}
+            x="0"
+            y="0"
+          />
+          <use
+            height={100}
+            href="#vair"
+            width={100}
+            x={-50}
+            y={100}
+          />
+          <use
+            height={100}
+            href="#vair"
+            width={100}
+            x={50}
+            y={100}
+          />
+        </g>
+      </pattern>
       <path
         d="M 0 0 H200 V213.33333 Z"
-        fill="url(#field-pattern-0-argent)"
+        fill="url(#field-pattern-0-argent-party-bend)"
         stroke="#333"
       />
       <path
@@ -12280,9 +12828,61 @@ exports[`CoatsOfArms should render a party blason: Per bend vair and azure 1`] =
       }
     }
   >
+    <symbol
+      id="vair"
+      viewBox="0 0 200 200"
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <path
+        d="M0 200 L200 200 L150 150 L150 50 L100 0 L50 50 L50 150 Z"
+        fill="#0000FF"
+      />
+    </symbol>
+    <pattern
+      height={80}
+      id="field-pattern-0-argent-party-bend"
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 100 200"
+      width={40}
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <g
+        transform="scale(1 1)"
+      >
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x="0"
+          y="0"
+        />
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x={-50}
+          y={100}
+        />
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x={50}
+          y={100}
+        />
+      </g>
+    </pattern>
     <path
       d="M 0 0 H200 V266.66667 Z"
-      fill="url(#field-pattern-0-argent)"
+      fill="url(#field-pattern-0-argent-party-bend)"
       stroke="#333"
     />
     <path
