@@ -251,8 +251,33 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
       </WithFurPatternDef>
     );
   } else if (field.kind === 'barry') {
+    const fill = fillFromConfigurationPair(field.tinctures, patternId);
+    let furConfiguration: FurConfiguration;
+    if (field.number === 6) {
+      furConfiguration = {
+        potent: { bellHeightRatio: 0.82, bellWidth: width / 5.5 },
+        vair: { bellHeightRatio: 1, bellWidth: width / 9 },
+        ermine: { spotWidth: width / 13, widthMarginScale: 0, heightMarginScale: 0.4 },
+      };
+    } else if (field.number === 8) {
+      furConfiguration = {
+        potent: { bellHeightRatio: 0.92, bellWidth: width / 5.5 },
+        vair: { bellHeightRatio: 1.666, bellWidth: width / 10 },
+        ermine: { spotWidth: width / 17, widthMarginScale: 0, heightMarginScale: 0.37 },
+      };
+    } else if (field.number === 10) {
+      furConfiguration = {
+        potent: { bellHeightRatio: 0.735, bellWidth: width / 5.5 },
+        vair: { bellHeightRatio: 1.33, bellWidth: width / 10 },
+        ermine: { spotWidth: width / 18, widthMarginScale: 0, heightMarginScale: 0 },
+      };
+    } else {
+      cannotHappen(field.number);
+    }
     return (
-      <BarryDisplay field={field} fillFromTincture={fillFromTincture} number={field.number} dimension={dimension} />
+      <WithFurPatternDef field={field} furConfiguration={furConfiguration}>
+        <BarryDisplay fill={fill} line={field.line} number={field.number} dimension={dimension} />
+      </WithFurPatternDef>
     );
   } else if (field.kind === 'barry-and-per-pale' || field.kind === 'chequy' || field.kind === 'quarterly-of-nine') {
     const fill = fillFromConfigurationPair(field.tinctures, patternId);
