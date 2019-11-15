@@ -2,7 +2,7 @@ import { Field } from '../../model/field';
 import { cannotHappen } from '../../../utils/cannot-happen';
 import { PlainDisplay } from './fields/Plain';
 import * as React from 'react';
-import { useContext } from 'react';
+import { ReactElement, useContext } from 'react';
 import { Tincture } from '../../model/tincture';
 import { PaleDisplay } from './fields/PaleDisplay';
 import { FessDisplay } from './fields/FessDisplay';
@@ -152,15 +152,21 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
     }
   } else if (field.kind === 'tierced') {
     const partyName = field.per.name;
-    const fill: [string, string, string] = fillFromConfigurationTriplet(field.per.tinctures);
+    const fill: [string, string, string] = fillFromConfigurationTriplet(field.per.tinctures, patternId);
     const line = field.per.line;
+    let fieldEl: ReactElement;
     if (partyName === 'fess') {
-      return <FessTiercedDisplay fill={fill} dimension={dimension} line={line} />;
+      fieldEl = <FessTiercedDisplay fill={fill} dimension={dimension} line={line} />;
     } else if (partyName === 'pale') {
-      return <PaleTiercedDisplay fill={fill} dimension={dimension} line={line} />;
+      fieldEl = <PaleTiercedDisplay fill={fill} dimension={dimension} line={line} />;
     } else {
       return cannotHappen(partyName);
     }
+    return (
+      <WithFurPatternDef field={field} furConfiguration={smallFurConfiguration}>
+        {fieldEl}
+      </WithFurPatternDef>
+    );
   } else if (field.kind === 'bendy' || field.kind === 'bendySinister') {
     let updatedDimension: Dimension;
     if (shape === 'default') {
