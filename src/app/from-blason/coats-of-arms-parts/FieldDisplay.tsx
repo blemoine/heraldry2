@@ -320,17 +320,33 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
         </WithFurPatternDef>
       );
     } else if (field.kind === 'paly-pily') {
-      const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
-      return <PalyPilyDisplay fill={fill} dimension={dimension} />;
+      const fill: [string, string] = fillFromConfigurationPair(field.tinctures, patternId);
+      return (
+        <WithFurPatternDef field={field} furConfiguration={smallFurConfiguration}>
+          <PalyPilyDisplay fill={fill} dimension={dimension} />
+        </WithFurPatternDef>
+      );
     } else if (field.kind === 'barry-pily') {
-      const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
-      return <BarryPilyDisplay fill={fill} dimension={dimension} />;
+      const fill: [string, string] = fillFromConfigurationPair(field.tinctures, patternId);
+      return (
+        <WithFurPatternDef field={field} furConfiguration={smallFurConfiguration}>
+          <BarryPilyDisplay fill={fill} dimension={dimension} />
+        </WithFurPatternDef>
+      );
     } else if (field.kind === 'bendy-pily') {
-      const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
-      return <BendyPilyDisplay fill={fill} dimension={dimension} />;
+      const fill: [string, string] = fillFromConfigurationPair(field.tinctures, patternId);
+      return (
+        <WithFurPatternDef field={field} furConfiguration={smallFurConfiguration}>
+          <BendyPilyDisplay fill={fill} dimension={dimension} />
+        </WithFurPatternDef>
+      );
     } else if (field.kind === 'bendy-pily-sinister') {
-      const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
-      return <BendyPilySinisterDisplay fill={fill} dimension={dimension} />;
+      const fill: [string, string] = fillFromConfigurationPair(field.tinctures, patternId);
+      return (
+        <WithFurPatternDef field={field} furConfiguration={smallFurConfiguration}>
+          <BendyPilySinisterDisplay fill={fill} dimension={dimension} />
+        </WithFurPatternDef>
+      );
     } else if (field.kind === 'chevronny') {
       const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
       let updatedDimension: Dimension;

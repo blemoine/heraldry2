@@ -2027,8 +2027,127 @@ exports[`CoatsOfArms should render 'Barry pily counter ermine and potent en poin
       }
     }
   >
+    <symbol
+      id="ermined-sable-argent"
+      viewBox="0 0 200 240"
+    >
+      <rect
+        fill="#000000"
+        height="100%"
+        width="100%"
+      />
+      <g
+        transform="translate(100, 240)"
+      >
+        <path
+          d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
+          fill="#FFFFFF"
+        />
+        <circle
+          cy={-226}
+          fill="#FFFFFF"
+          r="14"
+        />
+        <circle
+          cx={-32}
+          cy={-194}
+          fill="#FFFFFF"
+          r={14}
+        />
+        <circle
+          cx={32}
+          cy={-194}
+          fill="#FFFFFF"
+          r={14}
+        />
+      </g>
+    </symbol>
+    <pattern
+      height={25.263157894736842}
+      id="field-pattern-3-sable-argent-barry-pily"
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 21.05263157894737 25.263157894736842"
+      width={21.05263157894737}
+    >
+      <rect
+        fill="#000000"
+        height={25.263157894736842}
+        width={21.05263157894737}
+      />
+      <use
+        height={12.631578947368421}
+        href="#ermined-sable-argent"
+        width={10.526315789473685}
+        x={0}
+        y={0}
+      />
+      <use
+        height={12.631578947368421}
+        href="#ermined-sable-argent"
+        width={10.526315789473685}
+        x={10.526315789473685}
+        y={12.631578947368421}
+      />
+    </pattern>
+    <symbol
+      id="potent-en-point"
+      viewBox="0 0 300 200"
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <path
+        d="M 0 0 H300 V100 H200 V200 H100 V100 H0 Z"
+        fill="#0000FF"
+        stroke="transparent"
+      />
+    </symbol>
+    <pattern
+      height={22.22222222222222}
+      id="field-pattern-7-argent-barry-pily"
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 200 200"
+      width={22.22222222222222}
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <g
+        transform="scale(1 1)"
+      >
+        <use
+          height={100}
+          href="#potent-en-point"
+          width={150}
+          x="0"
+          y="0"
+        />
+        <g
+          transform="scale(1,-1) translate(0 -300)"
+        >
+          <use
+            height={100}
+            href="#potent-en-point"
+            width={150}
+            x="100"
+            y="100"
+          />
+          <use
+            height={100}
+            href="#potent-en-point"
+            width={150}
+            x="-100"
+            y="100"
+          />
+        </g>
+      </g>
+    </pattern>
     <rect
-      fill="url(#field-pattern-7-argent)"
+      fill="url(#field-pattern-7-argent-barry-pily)"
       height={266.6666666666667}
       width={200}
       x={0}
@@ -2036,7 +2155,7 @@ exports[`CoatsOfArms should render 'Barry pily counter ermine and potent en poin
     />
     <path
       d="M 0 0 L 200 33.33333 L 0 66.66667 L 200 100 L 0 133.33333 L 200 166.66667 L 0 200 L 200 233.33333 L 0 266.66667 Z"
-      fill="url(#field-pattern-3-sable-argent)"
+      fill="url(#field-pattern-3-sable-argent-barry-pily)"
       stroke="#333"
     />
   </g>
@@ -7587,8 +7706,122 @@ exports[`CoatsOfArms should render 'Paly pily vair and pean' 1`] = `
       }
     }
   >
+    <symbol
+      id="ermined-sable-or"
+      viewBox="0 0 200 240"
+    >
+      <rect
+        fill="#000000"
+        height="100%"
+        width="100%"
+      />
+      <g
+        transform="translate(100, 240)"
+      >
+        <path
+          d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
+          fill="#FFD700"
+        />
+        <circle
+          cy={-226}
+          fill="#FFD700"
+          r="14"
+        />
+        <circle
+          cx={-32}
+          cy={-194}
+          fill="#FFD700"
+          r={14}
+        />
+        <circle
+          cx={32}
+          cy={-194}
+          fill="#FFD700"
+          r={14}
+        />
+      </g>
+    </symbol>
+    <pattern
+      height={25.263157894736842}
+      id="field-pattern-3-sable-or-paly-pily"
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 21.05263157894737 25.263157894736842"
+      width={21.05263157894737}
+    >
+      <rect
+        fill="#000000"
+        height={25.263157894736842}
+        width={21.05263157894737}
+      />
+      <use
+        height={12.631578947368421}
+        href="#ermined-sable-or"
+        width={10.526315789473685}
+        x={0}
+        y={0}
+      />
+      <use
+        height={12.631578947368421}
+        href="#ermined-sable-or"
+        width={10.526315789473685}
+        x={10.526315789473685}
+        y={12.631578947368421}
+      />
+    </pattern>
+    <symbol
+      id="vair"
+      viewBox="0 0 200 200"
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <path
+        d="M0 200 L200 200 L150 150 L150 50 L100 0 L50 50 L50 150 Z"
+        fill="#0000FF"
+      />
+    </symbol>
+    <pattern
+      height={33.333333333333336}
+      id="field-pattern-0-argent-paly-pily"
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 100 200"
+      width={16.666666666666668}
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <g
+        transform="scale(1 1)"
+      >
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x="0"
+          y="0"
+        />
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x={-50}
+          y={100}
+        />
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x={50}
+          y={100}
+        />
+      </g>
+    </pattern>
     <rect
-      fill="url(#field-pattern-3-sable-or)"
+      fill="url(#field-pattern-3-sable-or-paly-pily)"
       height={266.6666666666667}
       width={200}
       x={0}
@@ -7596,7 +7829,7 @@ exports[`CoatsOfArms should render 'Paly pily vair and pean' 1`] = `
     />
     <path
       d="M 0 0 L 25 213.33333 L 50 0 L 75 213.33333 L 100 0 L 125 213.33333 L 150 0 L 175 213.33333 L 200 0 Z"
-      fill="url(#field-pattern-0-argent)"
+      fill="url(#field-pattern-0-argent-paly-pily)"
       stroke="#333"
     />
   </g>
