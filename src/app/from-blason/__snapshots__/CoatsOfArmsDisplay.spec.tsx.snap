@@ -6075,8 +6075,60 @@ exports[`CoatsOfArms should render 'Lozenge throughout vair and gules' 1`] = `
       }
     }
   >
+    <symbol
+      id="vair"
+      viewBox="0 0 200 200"
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <path
+        d="M0 200 L200 200 L150 150 L150 50 L100 0 L50 50 L50 150 Z"
+        fill="#0000FF"
+      />
+    </symbol>
+    <pattern
+      height={33.333333333333336}
+      id="field-pattern-0-argent-lozenge-throughout"
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 100 200"
+      width={16.666666666666668}
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <g
+        transform="scale(1 1)"
+      >
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x="0"
+          y="0"
+        />
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x={-50}
+          y={100}
+        />
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x={50}
+          y={100}
+        />
+      </g>
+    </pattern>
     <rect
-      fill="url(#field-pattern-0-argent)"
+      fill="url(#field-pattern-0-argent-lozenge-throughout)"
       height={400}
       width={200}
       x={0}

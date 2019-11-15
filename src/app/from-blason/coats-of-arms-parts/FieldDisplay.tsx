@@ -369,13 +369,21 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
       cannotHappen(field);
     }
   } else if (field.kind === 'embrassee-a-dexter') {
-    const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
-    return <EmbrasseeDexterDisplay fill={fill} dimension={dimension} />;
+    const fill: [string, string] = fillFromConfigurationPair(field.tinctures, patternId);
+    return (
+      <WithFurPatternDef field={field} furConfiguration={smallFurConfiguration}>
+        <EmbrasseeDexterDisplay fill={fill} dimension={dimension} />
+      </WithFurPatternDef>
+    );
   } else if (field.kind === 'embrassee-a-sinister') {
-    const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
-    return <EmbrasseeSinisterDisplay fill={fill} dimension={dimension} />;
-  } else if (field.kind === 'lozenge-throughout') {
-    const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
+    const fill: [string, string] = fillFromConfigurationPair(field.tinctures, patternId);
+    return (
+      <WithFurPatternDef field={field} furConfiguration={smallFurConfiguration}>
+        <EmbrasseeSinisterDisplay fill={fill} dimension={dimension} />
+      </WithFurPatternDef>
+    );
+  } else if (field.kind === 'lozenge-throughout' || field.kind === 'lozenge-throughout-arched') {
+    const fill: [string, string] = fillFromConfigurationPair(field.tinctures, patternId);
     let updatedDimension: Dimension;
     if (shape === 'square' || shape === 'default') {
       updatedDimension = dimension;
@@ -384,21 +392,21 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
     } else {
       return cannotHappen(shape);
     }
-
-    return <LozengeThroughoutDisplay fill={fill} dimension={updatedDimension} />;
-  } else if (field.kind === 'lozenge-throughout-arched') {
-    const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
-
-    let updatedDimension: Dimension;
-    if (shape === 'square' || shape === 'default') {
-      updatedDimension = dimension;
-    } else if (shape === 'leftCut' || shape === 'rightCut') {
-      updatedDimension = { width: width, height: height * 0.75 };
+    if (field.kind === 'lozenge-throughout') {
+      return (
+        <WithFurPatternDef field={field} furConfiguration={smallFurConfiguration}>
+          <LozengeThroughoutDisplay fill={fill} dimension={updatedDimension} />
+        </WithFurPatternDef>
+      );
+    } else if (field.kind === 'lozenge-throughout-arched') {
+      return (
+        <WithFurPatternDef field={field} furConfiguration={smallFurConfiguration}>
+          <LozengeThroughoutArchedDisplay fill={fill} dimension={updatedDimension} />
+        </WithFurPatternDef>
+      );
     } else {
-      return cannotHappen(shape);
+      cannotHappen(field);
     }
-
-    return <LozengeThroughoutArchedDisplay fill={fill} dimension={updatedDimension} />;
   } else if (field.kind === 'gironny') {
     const fill: [string, string] = fillFromConfigurationPair(field.tinctures, patternId);
     return (
