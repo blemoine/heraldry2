@@ -2564,14 +2564,71 @@ exports[`CoatsOfArms should render 'Bendy sinister and per bend azure and ermine
       }
     }
   >
+    <symbol
+      id="ermined-argent-sable"
+      viewBox="0 0 200 240"
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <g
+        transform="translate(100, 240)"
+      >
+        <path
+          d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
+          fill="#000000"
+        />
+        <circle
+          cy={-226}
+          fill="#000000"
+          r="14"
+        />
+        <circle
+          cx={-32}
+          cy={-194}
+          fill="#000000"
+          r={14}
+        />
+        <circle
+          cx={32}
+          cy={-194}
+          fill="#000000"
+          r={14}
+        />
+      </g>
+    </symbol>
+    <pattern
+      height={16.551724137931032}
+      id="field-pattern-3-argent-sable-bendy-sinister-and-per-bend"
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 13.793103448275861 16.551724137931032"
+      width={13.793103448275861}
+    >
+      <rect
+        fill="#FFFFFF"
+        height={16.551724137931032}
+        width={13.793103448275861}
+      />
+      <use
+        height={8.275862068965516}
+        href="#ermined-argent-sable"
+        width={6.896551724137931}
+        x={0}
+        y={0}
+      />
+      <use
+        height={8.275862068965516}
+        href="#ermined-argent-sable"
+        width={6.896551724137931}
+        x={6.896551724137931}
+        y={8.275862068965516}
+      />
+    </pattern>
     <g
       transform="scale(-1,1) translate(-200 0)"
     >
-      <pattern
-        id="field-pattern-3-argent-sable-bendy-and-per-bend-sinister"
-        patternTransform="scale(0.3666666666666667,0.2016666666666667)"
-        xlinkHref="#field-pattern-3-argent-sable"
-      />
       <g>
         <path
           d="M -40.68044 -278.03425 L 219.04093 -18.31288 L 177.97826 22.74978 L -81.74311 -236.97158 L -40.68044 -278.03425"
@@ -2580,14 +2637,14 @@ exports[`CoatsOfArms should render 'Bendy sinister and per bend azure and ermine
         />
         <path
           d="M 219.04093 -18.31288 L 478.76229 241.40849 L 437.69963 282.47115 L 177.97826 22.74978 L 219.04093 -18.31288"
-          fill="url(#field-pattern-3-argent-sable-bendy-and-per-bend-sinister)"
+          fill="url(#field-pattern-3-argent-sable-bendy-sinister-and-per-bend)"
           stroke="#333"
         />
       </g>
       <g>
         <path
           d="M -81.74311 -236.97158 L 177.97826 22.74978 L 157.44693 43.28112 L -102.27444 -216.44025 L -81.74311 -236.97158"
-          fill="url(#field-pattern-3-argent-sable-bendy-and-per-bend-sinister)"
+          fill="url(#field-pattern-3-argent-sable-bendy-sinister-and-per-bend)"
           stroke="#333"
         />
         <path
@@ -2604,14 +2661,14 @@ exports[`CoatsOfArms should render 'Bendy sinister and per bend azure and ermine
         />
         <path
           d="M 157.44693 43.28112 L 417.16829 303.00249 L 396.63696 323.53382 L 136.91559 63.81245 L 157.44693 43.28112"
-          fill="url(#field-pattern-3-argent-sable-bendy-and-per-bend-sinister)"
+          fill="url(#field-pattern-3-argent-sable-bendy-sinister-and-per-bend)"
           stroke="#333"
         />
       </g>
       <g>
         <path
           d="M -122.80578 -195.90892 L 136.91559 63.81245 L 116.38426 84.34379 L -143.33711 -175.37758 L -122.80578 -195.90892"
-          fill="url(#field-pattern-3-argent-sable-bendy-and-per-bend-sinister)"
+          fill="url(#field-pattern-3-argent-sable-bendy-sinister-and-per-bend)"
           stroke="#333"
         />
         <path
@@ -2628,14 +2685,14 @@ exports[`CoatsOfArms should render 'Bendy sinister and per bend azure and ermine
         />
         <path
           d="M 116.38426 84.34379 L 376.10563 344.06515 L 355.57429 364.59649 L 95.85293 104.87512 L 116.38426 84.34379"
-          fill="url(#field-pattern-3-argent-sable-bendy-and-per-bend-sinister)"
+          fill="url(#field-pattern-3-argent-sable-bendy-sinister-and-per-bend)"
           stroke="#333"
         />
       </g>
       <g>
         <path
           d="M -163.86844 -154.84625 L 95.85293 104.87512 L 75.32159 125.40645 L -184.39978 -134.31492 L -163.86844 -154.84625"
-          fill="url(#field-pattern-3-argent-sable-bendy-and-per-bend-sinister)"
+          fill="url(#field-pattern-3-argent-sable-bendy-sinister-and-per-bend)"
           stroke="#333"
         />
         <path
@@ -2652,14 +2709,14 @@ exports[`CoatsOfArms should render 'Bendy sinister and per bend azure and ermine
         />
         <path
           d="M 75.32159 125.40645 L 335.04296 385.12782 L 314.51163 405.65915 L 54.79026 145.93779 L 75.32159 125.40645"
-          fill="url(#field-pattern-3-argent-sable-bendy-and-per-bend-sinister)"
+          fill="url(#field-pattern-3-argent-sable-bendy-sinister-and-per-bend)"
           stroke="#333"
         />
       </g>
       <g>
         <path
           d="M -204.93111 -113.78358 L 54.79026 145.93779 L 34.25893 166.46912 L -225.46244 -93.25225 L -204.93111 -113.78358"
-          fill="url(#field-pattern-3-argent-sable-bendy-and-per-bend-sinister)"
+          fill="url(#field-pattern-3-argent-sable-bendy-sinister-and-per-bend)"
           stroke="#333"
         />
         <path
@@ -2676,14 +2733,14 @@ exports[`CoatsOfArms should render 'Bendy sinister and per bend azure and ermine
         />
         <path
           d="M 34.25893 166.46912 L 293.98029 426.19049 L 273.44896 446.72182 L 13.72759 187.00045 L 34.25893 166.46912"
-          fill="url(#field-pattern-3-argent-sable-bendy-and-per-bend-sinister)"
+          fill="url(#field-pattern-3-argent-sable-bendy-sinister-and-per-bend)"
           stroke="#333"
         />
       </g>
       <g>
         <path
           d="M -245.99378 -72.72092 L 13.72759 187.00045 L -47.86641 248.59445 L -307.58778 -11.12692 L -245.99378 -72.72092"
-          fill="url(#field-pattern-3-argent-sable-bendy-and-per-bend-sinister)"
+          fill="url(#field-pattern-3-argent-sable-bendy-sinister-and-per-bend)"
           stroke="#333"
         />
         <path
