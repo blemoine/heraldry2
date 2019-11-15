@@ -347,8 +347,8 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
           <BendyPilySinisterDisplay fill={fill} dimension={dimension} />
         </WithFurPatternDef>
       );
-    } else if (field.kind === 'chevronny') {
-      const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
+    } else if (field.kind === 'chevronny' || field.kind === 'chevronny-reversed') {
+      const fill: [string, string] = fillFromConfigurationPair(field.tinctures, patternId);
       let updatedDimension: Dimension;
       if (shape === 'square' || shape === 'default') {
         updatedDimension = dimension;
@@ -357,19 +357,21 @@ export const FieldDisplay = ({ field, dimension, fillFromTincture, shape }: Prop
       } else {
         return cannotHappen(shape);
       }
-
-      return <ChevronnyDisplay fill={fill} dimension={updatedDimension} />;
-    } else if (field.kind === 'chevronny-reversed') {
-      const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
-      let updatedDimension: Dimension;
-      if (shape === 'square' || shape === 'default') {
-        updatedDimension = dimension;
-      } else if (shape === 'leftCut' || shape === 'rightCut') {
-        updatedDimension = { width: width, height: height * 0.8 };
+      if (field.kind === 'chevronny-reversed') {
+        return (
+          <WithFurPatternDef field={field} furConfiguration={smallFurConfiguration}>
+            <ChevronnyReversedDisplay fill={fill} dimension={updatedDimension} />
+          </WithFurPatternDef>
+        );
+      } else if (field.kind === 'chevronny') {
+        return (
+          <WithFurPatternDef field={field} furConfiguration={smallFurConfiguration}>
+            <ChevronnyDisplay fill={fill} dimension={updatedDimension} />
+          </WithFurPatternDef>
+        );
       } else {
-        return cannotHappen(shape);
+        cannotHappen(field);
       }
-      return <ChevronnyReversedDisplay fill={fill} dimension={updatedDimension} />;
     } else if (field.kind === 'embrassee-a-dexter') {
       const fill: [string, string] = fillFromConfigurationPair(field.tinctures);
       return <EmbrasseeDexterDisplay fill={fill} dimension={dimension} />;
