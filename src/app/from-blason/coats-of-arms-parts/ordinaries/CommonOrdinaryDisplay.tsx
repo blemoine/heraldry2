@@ -1,13 +1,12 @@
-import { FurPatternDefinition } from '../FurPatternDefinition';
 import { FocusablePathFromBuilder } from '../../../common/PathFromBuilder';
 import * as React from 'react';
 import { Tincture } from '../../../model/tincture';
-import { buildFurTransformProperty, FurTransformPropertyConfiguration, getFill } from '../FurPattern.model';
+import { getFill } from '../FurPattern.model';
 import { FillFromTincture } from '../../fillFromTincture.helper';
 import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
-import { allDeclaredTincturesOfOrdinary } from '../../blason.helpers';
 import { Dimension } from '../../../model/dimension';
 import { Ordinary } from '../../../model/ordinary';
+import { FurConfiguration, getPatternIdOfOrdinary, WithFurPatternForOrdinaryDef } from '../FurPatternDef';
 
 type Props<T extends Ordinary> = {
   ordinary: T;
@@ -20,7 +19,7 @@ type Props<T extends Ordinary> = {
     ordinary: T
   ) => {
     pathBuilderAndTincture: ReadonlyArray<{ pathBuilder: SvgPathBuilder; tincture: Tincture }>;
-    transformPropertiesConfiguration: FurTransformPropertyConfiguration;
+    furConfiguration: FurConfiguration;
   };
 };
 export const CommonOrdinaryDisplay = <T extends Ordinary>({
@@ -33,19 +32,12 @@ export const CommonOrdinaryDisplay = <T extends Ordinary>({
 }: Props<T>) => {
   const stroke = ordinary.fimbriated;
   const strokeWidth = baseStrokeWith || (stroke ? 3 : 1);
-  const postfixId = ordinary.name;
+  const postfixId = getPatternIdOfOrdinary(ordinary);
 
-  const { pathBuilderAndTincture, transformPropertiesConfiguration } = ordinaryConfiguration(dimension, ordinary);
-  const transformProperties = buildFurTransformProperty(
-    fillFromTincture,
-    allDeclaredTincturesOfOrdinary(ordinary),
-    transformPropertiesConfiguration
-  );
-  const tinctures = pathBuilderAndTincture.map(({ tincture }) => tincture);
+  const { pathBuilderAndTincture, furConfiguration } = ordinaryConfiguration(dimension, ordinary);
 
   return (
-    <>
-      <FurPatternDefinition tinctures={tinctures} postfixId={postfixId} transformProperties={transformProperties} />
+    <WithFurPatternForOrdinaryDef ordinary={ordinary} furConfiguration={furConfiguration}>
       {pathBuilderAndTincture.map(({ pathBuilder, tincture }, i) => {
         const strokeColor = stroke
           ? getFill(fillFromTincture, stroke, postfixId)
@@ -65,6 +57,6 @@ export const CommonOrdinaryDisplay = <T extends Ordinary>({
           />
         );
       })}
-    </>
+    </WithFurPatternForOrdinaryDef>
   );
 };

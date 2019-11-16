@@ -2,6 +2,7 @@ import { computeLineOptions, invertLineOptionNullable } from '../blasonDisplay.h
 import { LineOptions, SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { ChapePloye } from '../../../model/ordinary';
 import { Dimension } from '../../../model/dimension';
+import { FurConfiguration } from '../FurPatternDef';
 
 export const chapePloyeOrdinaryConfiguration = (dimension: Dimension, ordinary: ChapePloye) => {
   const { width, height } = dimension;
@@ -46,11 +47,10 @@ export const chapePloyeOrdinaryConfiguration = (dimension: Dimension, ordinary: 
           },
         ];
 
-  const scaleRatio = height / 480;
-  const transformPropertiesConfiguration = {
-    ermine: { kind: 'scale', value: 0.275 * scaleRatio },
-    vair: { kind: 'scale', value: 0.33 * scaleRatio },
-    potent: { kind: 'scale', value: 0.4 * scaleRatio },
-  } as const;
-  return { pathBuilderAndTincture, transformPropertiesConfiguration };
+  const furConfiguration: FurConfiguration = {
+    ermine: { spotWidth: width / 19, heightMarginScale: 0, widthMarginScale: 0 },
+    vair: { bellWidth: width / 12, bellHeightRatio: 2 },
+    potent: { bellWidth: width / 9, bellHeightRatio: 1 },
+  };
+  return { pathBuilderAndTincture, furConfiguration };
 };

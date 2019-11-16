@@ -2,10 +2,7 @@ import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { Dimension } from '../../../model/dimension';
 import { Saltire } from '../../../model/ordinary';
 import { computeLineOptions, oneSideLineOption } from '../blasonDisplay.helper';
-
-const ermineScale = 0.3;
-const vairScale = 0.23;
-const potentScale = 0.16;
+import { FurConfiguration } from '../FurPatternDef';
 
 export const saltireOrdinaryConfiguration = (dimension: Dimension, ordinary: Saltire) => {
   const { width, height } = dimension;
@@ -32,12 +29,11 @@ export const saltireOrdinaryConfiguration = (dimension: Dimension, ordinary: Sal
     .goTo([2 * w, -basePointH])
     .goToWithPartFlat([w, h - basePointH], lineOptions, 5);
 
-  const scaleRatio = height / 480;
-  const transformPropertiesConfiguration = {
-    ermine: [{ kind: 'scale', value: [ermineScale * scaleRatio, ermineScale * 0.75 * scaleRatio] }],
-    vair: [{ kind: 'scale', value: [vairScale * scaleRatio, vairScale * 0.6785 * scaleRatio] }],
-    potent: [{ kind: 'scale', value: [potentScale * scaleRatio, potentScale * 1.35 * scaleRatio] }],
-  } as const;
+  const furConfiguration: FurConfiguration = {
+    ermine: { spotWidth: width / 25, heightMarginScale: 0, widthMarginScale: -0.2 },
+    vair: { bellWidth: width / 24, bellHeightRatio: 2 },
+    potent: { bellWidth: width / 18, bellHeightRatio: 1 },
+  };
   const pathBuilderAndTincture = [{ pathBuilder, tincture: ordinary.tincture }];
-  return { pathBuilderAndTincture, transformPropertiesConfiguration };
+  return { pathBuilderAndTincture, furConfiguration };
 };

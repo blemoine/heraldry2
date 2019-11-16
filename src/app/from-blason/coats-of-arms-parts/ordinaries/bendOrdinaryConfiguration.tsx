@@ -3,23 +3,19 @@ import { Bend, BendSinister } from '../../../model/ordinary';
 import { computeLineOptions, invertLineOptionNullable, oneSideLineOption } from '../blasonDisplay.helper';
 import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { toDegree } from '../../../svg-path-builder/geometrical.helper';
-
-const ermineScale = 0.66;
-const vairScale = 0.56;
-const potentScale = 0.35;
+import { FurConfiguration } from '../FurPatternDef';
 
 export const bendOrdinaryConfiguration = (direction: 'dexter' | 'sinister') => (
   dimension: Dimension,
   ordinary: Bend | BendSinister
 ) => {
   const { width, height } = dimension;
-  const scaleRatio = height / 480;
 
-  const transformPropertiesConfiguration = {
-    ermine: [{ kind: 'scale', value: [ermineScale * scaleRatio, ermineScale * 0.75 * scaleRatio] }],
-    vair: [{ kind: 'scale', value: [vairScale * scaleRatio, vairScale * 0.6785 * scaleRatio] }],
-    potent: [{ kind: 'scale', value: [potentScale * scaleRatio, potentScale * 1.35 * scaleRatio] }],
-  } as const;
+  const furConfiguration: FurConfiguration = {
+    ermine: { spotWidth: width / 19, heightMarginScale: 0, widthMarginScale: 0 },
+    vair: { bellWidth: width / 12, bellHeightRatio: 2 },
+    potent: { bellWidth: width / 9, bellHeightRatio: 1 },
+  };
 
   const bendHeight = height / 4;
   const lineOptions = computeLineOptions(ordinary.line, dimension);
@@ -36,5 +32,5 @@ export const bendOrdinaryConfiguration = (direction: 'dexter' | 'sinister') => (
     .translate([(width - length) / 2, height / 2 - bendHeight / 2])
     .rotate([width / 2, height / 2], rotationDirection * toDegree(Math.atan2(height, width)));
   const pathBuilderAndTincture = [{ pathBuilder, tincture: ordinary.tincture }];
-  return { pathBuilderAndTincture, transformPropertiesConfiguration };
+  return { pathBuilderAndTincture, furConfiguration };
 };

@@ -4489,11 +4489,68 @@ exports[`CoatsOfArms should render 'Chequy gules and or, a chief engrailed ermin
     className="blason-ordinary"
     clipPath="url(#plain-field-clip-path)"
   >
+    <symbol
+      id="ermined-argent-sable"
+      viewBox="0 0 200 240"
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <g
+        transform="translate(100, 240)"
+      >
+        <path
+          d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
+          fill="#000000"
+        />
+        <circle
+          cy={-226}
+          fill="#000000"
+          r="14"
+        />
+        <circle
+          cx={-32}
+          cy={-194}
+          fill="#000000"
+          r={14}
+        />
+        <circle
+          cx={32}
+          cy={-194}
+          fill="#000000"
+          r={14}
+        />
+      </g>
+    </symbol>
     <pattern
+      height={25.263157894736842}
       id="field-pattern-3-argent-sable-chief"
-      patternTransform="scale(0.3055555555555556)"
-      xlinkHref="#field-pattern-3-argent-sable"
-    />
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 21.05263157894737 25.263157894736842"
+      width={21.05263157894737}
+    >
+      <rect
+        fill="#FFFFFF"
+        height={25.263157894736842}
+        width={21.05263157894737}
+      />
+      <use
+        height={12.631578947368421}
+        href="#ermined-argent-sable"
+        width={10.526315789473685}
+        x={0}
+        y={0}
+      />
+      <use
+        height={12.631578947368421}
+        href="#ermined-argent-sable"
+        width={10.526315789473685}
+        x={10.526315789473685}
+        y={12.631578947368421}
+      />
+    </pattern>
     <path
       d="M 0 0 H200 V73.33333 Q 190 53.33333 180 73.33333 Q 170 53.33333 160 73.33333 Q 150 53.33333 140 73.33333 Q 130 53.33333 120 73.33333 Q 110 53.33333 100 73.33333 Q 90 53.33333 80 73.33333 Q 70 53.33333 60 73.33333 Q 50 53.33333 40 73.33333 Q 30 53.33333 20 73.33333 Q 10 53.33333 0 73.33333 Z"
       fill="url(#field-pattern-3-argent-sable-chief)"
@@ -5363,11 +5420,58 @@ exports[`CoatsOfArms should render 'Ermine, a bend invected vair' 1`] = `
     className="blason-ordinary"
     clipPath="url(#plain-field-clip-path)"
   >
+    <symbol
+      id="vair"
+      viewBox="0 0 200 200"
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <path
+        d="M0 200 L200 200 L150 150 L150 50 L100 0 L50 50 L50 150 Z"
+        fill="#0000FF"
+      />
+    </symbol>
     <pattern
+      height={33.333333333333336}
       id="field-pattern-0-argent-bend"
-      patternTransform="scale(0.31111111111111117,0.2110888888888889)"
-      xlinkHref="#field-pattern-0-argent"
-    />
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 100 200"
+      width={16.666666666666668}
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <g
+        transform="scale(1 1)"
+      >
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x="0"
+          y="0"
+        />
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x={-50}
+          y={100}
+        />
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x={50}
+          y={100}
+        />
+      </g>
+    </pattern>
     <path
       d="M 26.66667 -20 Q 48.54902 -24.15686 38.43137 -4.31373 Q 60.31373 -8.47059 50.19608 11.37255 Q 72.07843 7.21569 61.96078 27.05882 Q 83.84314 22.90196 73.72549 42.7451 Q 95.60784 38.58824 85.4902 58.43137 Q 107.37255 54.27451 97.2549 74.11765 Q 119.13725 69.96078 109.01961 89.80392 Q 130.90196 85.64706 120.78431 105.4902 Q 142.66667 101.33333 132.54902 121.17647 Q 154.43137 117.01961 144.31373 136.86275 Q 166.19608 132.70588 156.07843 152.54902 Q 177.96078 148.39216 167.84314 168.23529 Q 189.72549 164.07843 179.60784 183.92157 Q 201.4902 179.76471 191.37255 199.60784 Q 213.2549 195.45098 203.13725 215.29412 Q 225.01961 211.13725 214.90196 230.98039 Q 236.78431 226.82353 226.66667 246.66667 L 173.33333 286.66667 Q 151.45098 290.82353 161.56863 270.98039 Q 139.68627 275.13725 149.80392 255.29412 Q 127.92157 259.45098 138.03922 239.60784 Q 116.15686 243.76471 126.27451 223.92157 Q 104.39216 228.07843 114.5098 208.23529 Q 92.62745 212.39216 102.7451 192.54902 Q 80.86275 196.70588 90.98039 176.86275 Q 69.09804 181.01961 79.21569 161.17647 Q 57.33333 165.33333 67.45098 145.4902 Q 45.56863 149.64706 55.68627 129.80392 Q 33.80392 133.96078 43.92157 114.11765 Q 22.03922 118.27451 32.15686 98.43137 Q 10.27451 102.58824 20.39216 82.7451 Q -1.4902 86.90196 8.62745 67.05882 Q -13.2549 71.21569 -3.13725 51.37255 Q -25.01961 55.52941 -14.90196 35.68627 Q -36.78431 39.84314 -26.66667 20 L 26.66667 -20"
       fill="url(#field-pattern-0-argent-bend)"
@@ -6259,11 +6363,58 @@ exports[`CoatsOfArms should render 'Or, a base engrailed vair' 1`] = `
     className="blason-ordinary"
     clipPath="url(#plain-field-clip-path)"
   >
+    <symbol
+      id="vair"
+      viewBox="0 0 200 200"
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <path
+        d="M0 200 L200 200 L150 150 L150 50 L100 0 L50 50 L50 150 Z"
+        fill="#0000FF"
+      />
+    </symbol>
     <pattern
+      height={33.333333333333336}
       id="field-pattern-0-argent-base"
-      patternTransform="scale(0.3055555555555556) translate(0,5)"
-      xlinkHref="#field-pattern-0-argent"
-    />
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 100 200"
+      width={16.666666666666668}
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <g
+        transform="scale(1 1)"
+      >
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x="0"
+          y="0"
+        />
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x={-50}
+          y={100}
+        />
+        <use
+          height={100}
+          href="#vair"
+          width={100}
+          x={50}
+          y={100}
+        />
+      </g>
+    </pattern>
     <path
       d="M 0 200 Q 10 220 20 200 Q 30 220 40 200 Q 50 220 60 200 Q 70 220 80 200 Q 90 220 100 200 Q 110 220 120 200 Q 130 220 140 200 Q 150 220 160 200 Q 170 220 180 200 Q 190 220 200 200 V266.66667 H0 Z"
       fill="url(#field-pattern-0-argent-base)"
@@ -6408,11 +6559,68 @@ exports[`CoatsOfArms should render 'Or, a bend sinister invected ermine' 1`] = `
     className="blason-ordinary"
     clipPath="url(#plain-field-clip-path)"
   >
+    <symbol
+      id="ermined-argent-sable"
+      viewBox="0 0 200 240"
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <g
+        transform="translate(100, 240)"
+      >
+        <path
+          d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
+          fill="#000000"
+        />
+        <circle
+          cy={-226}
+          fill="#000000"
+          r="14"
+        />
+        <circle
+          cx={-32}
+          cy={-194}
+          fill="#000000"
+          r={14}
+        />
+        <circle
+          cx={32}
+          cy={-194}
+          fill="#000000"
+          r={14}
+        />
+      </g>
+    </symbol>
     <pattern
+      height={25.263157894736842}
       id="field-pattern-3-argent-sable-bendSinister"
-      patternTransform="scale(0.3666666666666667,0.275)"
-      xlinkHref="#field-pattern-3-argent-sable"
-    />
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 21.05263157894737 25.263157894736842"
+      width={21.05263157894737}
+    >
+      <rect
+        fill="#FFFFFF"
+        height={25.263157894736842}
+        width={21.05263157894737}
+      />
+      <use
+        height={12.631578947368421}
+        href="#ermined-argent-sable"
+        width={10.526315789473685}
+        x={0}
+        y={0}
+      />
+      <use
+        height={12.631578947368421}
+        href="#ermined-argent-sable"
+        width={10.526315789473685}
+        x={10.526315789473685}
+        y={12.631578947368421}
+      />
+    </pattern>
     <path
       d="M -26.66667 246.66667 Q -36.78431 226.82353 -14.90196 230.98039 Q -25.01961 211.13725 -3.13725 215.29412 Q -13.2549 195.45098 8.62745 199.60784 Q -1.4902 179.76471 20.39216 183.92157 Q 10.27451 164.07843 32.15686 168.23529 Q 22.03922 148.39216 43.92157 152.54902 Q 33.80392 132.70588 55.68627 136.86275 Q 45.56863 117.01961 67.45098 121.17647 Q 57.33333 101.33333 79.21569 105.4902 Q 69.09804 85.64706 90.98039 89.80392 Q 80.86275 69.96078 102.7451 74.11765 Q 92.62745 54.27451 114.5098 58.43137 Q 104.39216 38.58824 126.27451 42.7451 Q 116.15686 22.90196 138.03922 27.05882 Q 127.92157 7.21569 149.80392 11.37255 Q 139.68627 -8.47059 161.56863 -4.31373 Q 151.45098 -24.15686 173.33333 -20 L 226.66667 20 Q 236.78431 39.84314 214.90196 35.68627 Q 225.01961 55.52941 203.13725 51.37255 Q 213.2549 71.21569 191.37255 67.05882 Q 201.4902 86.90196 179.60784 82.7451 Q 189.72549 102.58824 167.84314 98.43137 Q 177.96078 118.27451 156.07843 114.11765 Q 166.19608 133.96078 144.31373 129.80392 Q 154.43137 149.64706 132.54902 145.4902 Q 142.66667 165.33333 120.78431 161.17647 Q 130.90196 181.01961 109.01961 176.86275 Q 119.13725 196.70588 97.2549 192.54902 Q 107.37255 212.39216 85.4902 208.23529 Q 95.60784 228.07843 73.72549 223.92157 Q 83.84314 243.76471 61.96078 239.60784 Q 72.07843 259.45098 50.19608 255.29412 Q 60.31373 275.13725 38.43137 270.98039 Q 48.54902 290.82353 26.66667 286.66667 L -26.66667 246.66667"
       fill="url(#field-pattern-3-argent-sable-bendSinister)"
@@ -6557,11 +6765,68 @@ exports[`CoatsOfArms should render 'Or, a cross gules ermined argent' 1`] = `
     className="blason-ordinary"
     clipPath="url(#plain-field-clip-path)"
   >
+    <symbol
+      id="ermined-gules-argent"
+      viewBox="0 0 200 240"
+    >
+      <rect
+        fill="#FF0000"
+        height="100%"
+        width="100%"
+      />
+      <g
+        transform="translate(100, 240)"
+      >
+        <path
+          d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
+          fill="#FFFFFF"
+        />
+        <circle
+          cy={-226}
+          fill="#FFFFFF"
+          r="14"
+        />
+        <circle
+          cx={-32}
+          cy={-194}
+          fill="#FFFFFF"
+          r={14}
+        />
+        <circle
+          cx={32}
+          cy={-194}
+          fill="#FFFFFF"
+          r={14}
+        />
+      </g>
+    </symbol>
     <pattern
+      height={25.263157894736842}
       id="field-pattern-3-gules-argent-cross"
-      patternTransform="scale(0.2111111111111111)"
-      xlinkHref="#field-pattern-3-gules-argent"
-    />
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 21.05263157894737 25.263157894736842"
+      width={21.05263157894737}
+    >
+      <rect
+        fill="#FF0000"
+        height={25.263157894736842}
+        width={21.05263157894737}
+      />
+      <use
+        height={12.631578947368421}
+        href="#ermined-gules-argent"
+        width={10.526315789473685}
+        x={0}
+        y={0}
+      />
+      <use
+        height={12.631578947368421}
+        href="#ermined-gules-argent"
+        width={10.526315789473685}
+        x={10.526315789473685}
+        y={12.631578947368421}
+      />
+    </pattern>
     <path
       d="M 80 0 V106.66667 H0 V160 H80 V266.66667 H120 V160 H200 V106.66667 H120 V0 Z"
       fill="url(#field-pattern-3-gules-argent-cross)"
@@ -6782,11 +7047,62 @@ exports[`CoatsOfArms should render 'Or, a fess vair en point' 1`] = `
     className="blason-ordinary"
     clipPath="url(#plain-field-clip-path)"
   >
+    <symbol
+      id="vair-en-point"
+      viewBox="0 0 200 200"
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <path
+        d="M0 200 L200 200 L150 150 L150 50 L100 0 L50 50 L50 150 Z"
+        fill="#0000FF"
+      />
+    </symbol>
     <pattern
+      height={33.333333333333336}
       id="field-pattern-8-argent-fess"
-      patternTransform="scale(0.31111111111111117) translate(0,70)"
-      xlinkHref="#field-pattern-8-argent"
-    />
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 100 200"
+      width={16.666666666666668}
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <g
+        transform="scale(1 1)"
+      >
+        <use
+          height={100}
+          href="#vair-en-point"
+          width={100}
+          x="0"
+          y="0"
+        />
+        <g
+          transform="scale(1,-1) translate(0 -300)"
+        >
+          <use
+            height={100}
+            href="#vair-en-point"
+            width={100}
+            x={50}
+            y={100}
+          />
+          <use
+            height={100}
+            href="#vair-en-point"
+            width={100}
+            x={-50}
+            y={100}
+          />
+        </g>
+      </g>
+    </pattern>
     <path
       d="M 0 88.88889 H200 V177.77778 H0 Z"
       fill="url(#field-pattern-8-argent-fess)"

@@ -3,6 +3,7 @@ import { Dimension } from '../../../model/dimension';
 import { Pale } from '../../../model/ordinary';
 import { computeLineOptions, invertLineOptionNullable, oneSideLineOption } from '../blasonDisplay.helper';
 import { range } from '../../../../utils/range';
+import { FurConfiguration } from '../FurPatternDef';
 
 export const paleOrdinaryConfiguration = (dimension: Dimension, ordinary: Pale) => {
   const { width, height } = dimension;
@@ -24,20 +25,10 @@ export const paleOrdinaryConfiguration = (dimension: Dimension, ordinary: Pale) 
     };
   });
 
-  const scaleRatio = height / 480;
-  const transformPropertiesConfiguration = {
-    ermine: [
-      { kind: 'scale', value: 0.4 * scaleRatio },
-      { kind: 'translate', value: [0, 0] },
-    ],
-    vair: [
-      { kind: 'scale', value: 0.33 * scaleRatio },
-      { kind: 'translate', value: [0, 0] },
-    ],
-    potent: [
-      { kind: 'scale', value: 0.25 * scaleRatio },
-      { kind: 'translate', value: [25, 0] },
-    ],
-  } as const;
-  return { pathBuilderAndTincture, transformPropertiesConfiguration };
+  const furConfiguration: FurConfiguration = {
+    ermine: { spotWidth: width / 19, heightMarginScale: 0, widthMarginScale: 0 },
+    vair: { bellWidth: width / 12, bellHeightRatio: 2 },
+    potent: { bellWidth: width / 9, bellHeightRatio: 1 },
+  };
+  return { pathBuilderAndTincture, furConfiguration };
 };

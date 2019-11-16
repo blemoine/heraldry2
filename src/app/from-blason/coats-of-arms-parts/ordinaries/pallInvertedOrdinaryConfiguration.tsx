@@ -2,20 +2,16 @@ import { Dimension } from '../../../model/dimension';
 import { PallInverted } from '../../../model/ordinary';
 import { computeLineOptions, oneSideLineOption } from '../blasonDisplay.helper';
 import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
-
-const ermineScale = 0.3;
-const vairScale = 0.23;
-const potentScale = 0.16;
+import { FurConfiguration } from '../FurPatternDef';
 
 export const pallInvertedOrdinaryConfiguration = (dimension: Dimension, ordinary: PallInverted) => {
   const { width, height } = dimension;
-  const scaleRatio = height / 480;
 
-  const transformPropertiesConfiguration = {
-    ermine: [{ kind: 'scale', value: [ermineScale * scaleRatio, ermineScale * 0.75 * scaleRatio] }],
-    vair: [{ kind: 'scale', value: [vairScale * scaleRatio, vairScale * 0.6785 * scaleRatio] }],
-    potent: [{ kind: 'scale', value: [potentScale * scaleRatio, potentScale * 1.35 * scaleRatio] }],
-  } as const;
+  const furConfiguration: FurConfiguration = {
+    ermine: { spotWidth: width / 19, heightMarginScale: 0, widthMarginScale: 0 },
+    vair: { bellWidth: width / 12, bellHeightRatio: 2 },
+    potent: { bellWidth: width / 9, bellHeightRatio: 1 },
+  };
 
   const lineOptions = computeLineOptions(ordinary.line, dimension);
   const oneSideOnly = oneSideLineOption(lineOptions);
@@ -38,5 +34,5 @@ export const pallInvertedOrdinaryConfiguration = (dimension: Dimension, ordinary
     .rotate([width / 2, height / 2], 180);
   const pathBuilderAndTincture = [{ pathBuilder, tincture: ordinary.tincture }];
 
-  return { pathBuilderAndTincture, transformPropertiesConfiguration };
+  return { pathBuilderAndTincture, furConfiguration };
 };

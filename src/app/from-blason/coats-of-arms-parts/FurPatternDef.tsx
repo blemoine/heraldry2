@@ -6,7 +6,8 @@ import { ConfigurationContext, furPatternId } from '../configuration/Configurati
 import { VairPatternDef } from './VairPatternDef';
 import { PotentPatternDef } from './PotentPatternDef';
 import { Field } from '../../model/field';
-import { allDeclaredTincturesOfField } from '../blason.helpers';
+import { allDeclaredTincturesOfField, allDeclaredTincturesOfOrdinary } from '../blason.helpers';
+import { Ordinary } from '../../model/ordinary';
 
 export type FurConfiguration = {
   ermine: { spotWidth: number; heightMarginScale: number; widthMarginScale: number };
@@ -72,12 +73,31 @@ export function getPatternId(field: Field): string {
   }
 }
 
+export function getPatternIdOfOrdinary(ordinary: Ordinary): string {
+  return ordinary.name;
+}
+
 export const WithFurPatternDef: React.FunctionComponent<{
   field: Field;
   furConfiguration: FurConfiguration;
 }> = ({ field, furConfiguration, children }) => {
   const allTinctures = allDeclaredTincturesOfField(field);
   const postfixId = getPatternId(field);
+
+  return (
+    <>
+      <FurPatternDef allTinctures={allTinctures} postfixId={postfixId} furConfiguration={furConfiguration} />
+      {children}
+    </>
+  );
+};
+
+export const WithFurPatternForOrdinaryDef: React.FunctionComponent<{
+  ordinary: Ordinary;
+  furConfiguration: FurConfiguration;
+}> = ({ ordinary, furConfiguration, children }) => {
+  const allTinctures = allDeclaredTincturesOfOrdinary(ordinary);
+  const postfixId = getPatternIdOfOrdinary(ordinary);
 
   return (
     <>

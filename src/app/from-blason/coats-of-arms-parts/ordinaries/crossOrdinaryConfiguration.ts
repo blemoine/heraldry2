@@ -2,6 +2,7 @@ import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { Dimension } from '../../../model/dimension';
 import { OrdinaryCross } from '../../../model/ordinary';
 import { computeLineOptions, oneSideLineOption } from '../blasonDisplay.helper';
+import { FurConfiguration } from '../FurPatternDef';
 
 export const crossOrdinaryConfiguration = (dimension: Dimension, ordinary: OrdinaryCross) => {
   const { width, height } = dimension;
@@ -22,17 +23,13 @@ export const crossOrdinaryConfiguration = (dimension: Dimension, ordinary: Ordin
     .goToWithPartFlat([(3 * width) / 5, 0], oneSideOnly, 5, 'start')
     .goTo([(2 * width) / 5, 0]);
 
-  const scaleRatio = height / 480;
-  const transformPropertiesConfiguration = {
-    ermine: [{ kind: 'scale', value: 0.38 * scaleRatio }],
-    vair: [{ kind: 'scale', value: 0.335 * scaleRatio }],
-    potent: [
-      { kind: 'scale', value: 0.3 * scaleRatio },
-      { kind: 'translate', value: [28, 0] },
-    ],
-  } as const;
+  const furConfiguration: FurConfiguration = {
+    ermine: { spotWidth: width / 19, heightMarginScale: 0, widthMarginScale: 0 },
+    vair: { bellWidth: width / 12, bellHeightRatio: 2 },
+    potent: { bellWidth: width / 9, bellHeightRatio: 1 },
+  };
 
   const pathBuilderAndTincture = [{ pathBuilder, tincture: ordinary.tincture }];
 
-  return { pathBuilderAndTincture, transformPropertiesConfiguration };
+  return { pathBuilderAndTincture, furConfiguration };
 };

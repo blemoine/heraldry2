@@ -4,20 +4,16 @@ import { computeLineOptions, oneSideLineOption } from '../blasonDisplay.helper';
 import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { cannotHappen } from '../../../../utils/cannot-happen';
 import { range } from '../../../../utils/range';
-
-const ermineScale = 0.3;
-const vairScale = 0.23;
-const potentScale = 0.16;
+import { FurConfiguration } from '../FurPatternDef';
 
 export const chevronOrdinaryConfiguration = (dimension: Dimension, ordinary: Chevron | Chevronel) => {
   const { width, height } = dimension;
-  const scaleRatio = height / 480;
 
-  const transformPropertiesConfiguration = {
-    ermine: [{ kind: 'scale', value: [ermineScale * scaleRatio, ermineScale * 0.75 * scaleRatio] }],
-    vair: [{ kind: 'scale', value: [vairScale * scaleRatio, vairScale * 0.6785 * scaleRatio] }],
-    potent: [{ kind: 'scale', value: [potentScale * scaleRatio, potentScale * 1.35 * scaleRatio] }],
-  } as const;
+  const furConfiguration: FurConfiguration = {
+    ermine: { spotWidth: width / 27, heightMarginScale: 0, widthMarginScale: -1 },
+    vair: { bellWidth: width / 24, bellHeightRatio: 2 },
+    potent: { bellWidth: width / 18, bellHeightRatio: 1 },
+  };
 
   const lineOptions = computeLineOptions(ordinary.line, dimension);
   const oneSideOnly = oneSideLineOption(lineOptions);
@@ -96,5 +92,5 @@ export const chevronOrdinaryConfiguration = (dimension: Dimension, ordinary: Che
     };
   });
 
-  return { pathBuilderAndTincture, transformPropertiesConfiguration };
+  return { pathBuilderAndTincture, furConfiguration };
 };

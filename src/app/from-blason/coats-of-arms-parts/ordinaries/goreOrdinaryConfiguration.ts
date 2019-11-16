@@ -2,19 +2,15 @@ import { Dimension } from '../../../model/dimension';
 import { Gore } from '../../../model/ordinary';
 import { LineOptions, SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { computeLineOptions, invertLineOptionNullable } from '../blasonDisplay.helper';
+import { FurConfiguration } from '../FurPatternDef';
 
-const ermineScale = 0.3;
-const vairScale = 0.23;
-const potentScale = 0.16;
 export const goreOrdinaryConfiguration = (dimension: Dimension, ordinary: Gore) => {
   const { width, height } = dimension;
-  const scaleRatio = height / 480;
-
-  const transformPropertiesConfiguration = {
-    ermine: [{ kind: 'scale', value: [ermineScale * scaleRatio, ermineScale * 0.75 * scaleRatio] }],
-    vair: [{ kind: 'scale', value: [vairScale * scaleRatio, vairScale * 0.6785 * scaleRatio] }],
-    potent: [{ kind: 'scale', value: [potentScale * scaleRatio, potentScale * 1.35 * scaleRatio] }],
-  } as const;
+  const furConfiguration: FurConfiguration = {
+    ermine: { spotWidth: width / 19, heightMarginScale: 0, widthMarginScale: 0 },
+    vair: { bellWidth: width / 12, bellHeightRatio: 2 },
+    potent: { bellWidth: width / 9, bellHeightRatio: 1 },
+  };
 
   const lineOptions: LineOptions | null =
     ordinary.line === 'dancetty'
@@ -29,5 +25,5 @@ export const goreOrdinaryConfiguration = (dimension: Dimension, ordinary: Gore) 
     .close();
   const pathBuilderAndTincture = [{ pathBuilder, tincture: ordinary.tincture }];
 
-  return { pathBuilderAndTincture, transformPropertiesConfiguration };
+  return { pathBuilderAndTincture, furConfiguration };
 };

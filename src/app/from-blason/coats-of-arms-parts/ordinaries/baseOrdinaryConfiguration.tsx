@@ -2,7 +2,7 @@ import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { Dimension } from '../../../model/dimension';
 import { Base } from '../../../model/ordinary';
 import { computeLineOptions, invertLineOptionNullable } from '../blasonDisplay.helper';
-import { FurTransformPropertyConfiguration } from '../FurPattern.model';
+import { FurConfiguration } from '../FurPatternDef';
 
 export const baseOrdinaryConfiguration = (dimension: Dimension, ordinary: Base) => {
   const { width, height } = dimension;
@@ -17,18 +17,11 @@ export const baseOrdinaryConfiguration = (dimension: Dimension, ordinary: Base) 
   );
   const pathBuilderAndTincture = [{ pathBuilder, tincture: ordinary.tincture }];
 
-  const scaleRatio = height / 480;
-  const transformPropertiesConfiguration: FurTransformPropertyConfiguration = {
-    ermine: [
-      { kind: 'scale', value: 0.65 * scaleRatio },
-      { kind: 'translate', value: [0, 30] },
-    ],
-    vair: [
-      { kind: 'scale', value: 0.55 * scaleRatio },
-      { kind: 'translate', value: [0, 5] },
-    ],
-    potent: [{ kind: 'scale', value: 0.92 * scaleRatio }],
+  const furConfiguration: FurConfiguration = {
+    ermine: { spotWidth: width / 19, heightMarginScale: 0, widthMarginScale: 0 },
+    vair: { bellWidth: width / 12, bellHeightRatio: 2 },
+    potent: { bellWidth: width / 9, bellHeightRatio: 1 },
   };
 
-  return { pathBuilderAndTincture, transformPropertiesConfiguration };
+  return { pathBuilderAndTincture, furConfiguration };
 };

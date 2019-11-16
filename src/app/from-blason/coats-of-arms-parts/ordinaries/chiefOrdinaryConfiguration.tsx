@@ -2,6 +2,7 @@ import { chiefHeightRatio, computeLineOptions, invertLineOptionNullable } from '
 import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { Chief } from '../../../model/ordinary';
 import { Dimension } from '../../../model/dimension';
+import { FurConfiguration } from '../FurPatternDef';
 
 export const chiefOrdinaryConfiguration = (dimension: Dimension, ordinary: Chief) => {
   const { width, height } = dimension;
@@ -19,12 +20,11 @@ export const chiefOrdinaryConfiguration = (dimension: Dimension, ordinary: Chief
     { bottom: invertedLineOptions }
   );
 
-  const scaleRatio = height / 480;
-  const transformPropertiesConfiguration = {
-    ermine: { kind: 'scale', value: 0.55 * scaleRatio },
-    vair: { kind: 'scale', value: 0.66 * scaleRatio },
-    potent: { kind: 'scale', value: 0.8 * scaleRatio },
-  } as const;
+  const furConfiguration: FurConfiguration = {
+    ermine: { spotWidth: width / 19, heightMarginScale: 0, widthMarginScale: 0 },
+    vair: { bellWidth: width / 12, bellHeightRatio: 2 },
+    potent: { bellWidth: width / 9, bellHeightRatio: 1 },
+  };
   const pathBuilderAndTincture = [{ pathBuilder, tincture: ordinary.tincture }];
-  return { pathBuilderAndTincture, transformPropertiesConfiguration };
+  return { pathBuilderAndTincture, furConfiguration };
 };
