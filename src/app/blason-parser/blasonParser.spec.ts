@@ -355,6 +355,10 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
     const expected: Blason = { kind: 'simple', field: { kind: 'gironny', tinctures: [or, gules], number: 8 } };
     expect(parseBlason('Gironny or and gules')).toEqual(expected);
   });
+  it('should parse gyronny', () => {
+    const expected: Blason = { kind: 'simple', field: { kind: 'gironny', tinctures: [argent, azure], number: 8 } };
+    expect(parseBlason('gyronny argent and azure')).toEqual(expected);
+  });
   it('should parse gironny of 12', () => {
     const expected: Blason = { kind: 'simple', field: { kind: 'gironny', tinctures: [or, gules], number: 12 } };
     expect(parseBlason('Gironny of twelve or and gules')).toEqual(expected);

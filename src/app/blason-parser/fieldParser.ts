@@ -74,18 +74,23 @@ function tiercedParser(): P.Parser<Tierced> {
 
 export function fieldParser(): P.Parser<Field> {
   const numberedFieldParserGenerator = <A extends string, X extends StringifiableNumber>(
-    baseName: string,
+    baseNames: string | Array<string>,
     value: A,
     numbers: ReadonlyArray<X>,
     defaultValue: X
   ) => {
+    const allBaseNames = Array.isArray(baseNames) ? baseNames : [baseNames];
     return P.alt(
-      constStr(baseName + ' of')
-        .skip(P.whitespace)
-        .then(buildAltParser(numbers, stringifyNumber)),
-      constStr(baseName).result(defaultValue)
+      ...allBaseNames.map((baseName) =>
+        P.alt(
+          constStr(baseName + ' of')
+            .skip(P.whitespace)
+            .then(buildAltParser(numbers, stringifyNumber)),
+          constStr(baseName).result(defaultValue)
+        )
+      )
     )
-      .desc(baseName)
+      .desc(allBaseNames[0])
       .map((i) => [value, i] as const);
   };
 
@@ -108,7 +113,7 @@ export function fieldParser(): P.Parser<Field> {
   }));
 
   const gironnyParser: P.Parser<GironnyField> = P.seq(
-    numberedFieldParserGenerator('Gironny', 'gironny', [8, 12], 8),
+    numberedFieldParserGenerator(['Gironny', 'Gyronny'], 'gironny', [8, 12], 8),
 
     P.whitespace.then(tinctureParserFromName).skip(P.whitespace),
     P.regex(/and/i)

@@ -43,4 +43,12 @@ describe('CoatsOfArms', () => {
   //snapshotTest('Chevronelly inverted vert and or');
   //snapshotTest('Gules scaly or');
   //snapshotTest('Gules mailed or');
+
+  //snapshotTest('Gyronny arrondi argent voided sable and sable');
+  //snapshotTest('Gyronny arrondy of six gules and argent');
+  //snapshotTest('Gyronny arrondy Or and azure');
+  //snapshotTest('Gyronny azure and argent scaly sable');
+  snapshotTest('Gyronny erminois and pean');
+  //snapshotTest('Gyronny gules and lozengy azure and or');
+  //snapshotTest('Gyronny of ten ermine and vert');
 });
