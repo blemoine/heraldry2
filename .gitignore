@@ -2,6 +2,7 @@ node_modules
 dist
 .idea
 .cache
+.parcel-cache
 *.iml
 .DS_Store
 src/assets

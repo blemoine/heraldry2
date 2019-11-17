@@ -24,7 +24,7 @@ Faire le "of the last"
 - utiliser un context pour la configuration
 - Ajouter les formes de bouclier manquantes
 - etre plus lenient sur la syntaxe des quarterly (avec les : et les;)
-- faire le déploiement
+- faire le déploiement -> needs parcel 2 , probeleme de collision de hash!
 - gerer les erreurs provenant de l'URL
 - going to quarterly is a slow click (?)
 - Factoriser intelligemment le dessin des paths dans les charges (repetition du onClick et du cursor pointer)
