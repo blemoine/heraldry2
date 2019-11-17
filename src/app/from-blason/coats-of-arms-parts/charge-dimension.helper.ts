@@ -373,8 +373,8 @@ export function getChargeDimension(
     }
 
     if (bordureOrOrle && ordinaryLine !== 'straight') {
-      chargeVerticalOffset += 0.045;
-      chargeDimension.verticalScale = chargeDimension.verticalScale * 0.9;
+      chargeVerticalOffset += 0.05;
+      chargeDimension.verticalScale = chargeDimension.verticalScale * 0.88;
       chargeDimension.horizontalScale = chargeDimension.horizontalScale * 0.95;
     }
     if (bordureOrOrle && ordinaryLine === 'straight') {
@@ -385,8 +385,8 @@ export function getChargeDimension(
       ...chargeDimension,
       horizontalOffset:
         chargeWidthOffset +
-        (bordureOrOrle && shape === 'rightCut' ? 0.16 : 0) +
-        (bordureOrOrle && shape === 'leftCut' ? -0.14 : 0) +
+        (bordureOrOrle && shape === 'rightCut' ? 0.22 : 0) +
+        (bordureOrOrle && shape === 'leftCut' ? -0.12 : 0) +
         (!bordureOrOrle && shape === 'rightCut' ? 0.09 : 0) +
         (!bordureOrOrle && shape === 'leftCut' ? -0.09 : 0) +
         (shape === 'leftCut' ? 1.13 - horizontalFactor : 0) +

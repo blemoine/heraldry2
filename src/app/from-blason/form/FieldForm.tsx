@@ -13,7 +13,7 @@ import { LineSelect } from './LineSelect';
 import { allDeclaredTincturesOfField } from '../blason.helpers';
 
 const numberOfBars = [6, 8, 10] as const;
-const gironnyNumberAvailable = [8, 12] as const;
+const gironnyNumberAvailable = [8, 10, 12] as const;
 type Props = { field: Field; fieldChange: (field: Field) => void };
 export function FieldForm({ field, fieldChange }: Props) {
   function plainTinctureChange(tincture: Tincture) {

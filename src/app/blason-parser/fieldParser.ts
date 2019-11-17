@@ -113,7 +113,7 @@ export function fieldParser(): P.Parser<Field> {
   }));
 
   const gironnyParser: P.Parser<GironnyField> = P.seq(
-    numberedFieldParserGenerator(['Gironny', 'Gyronny'], 'gironny', [8, 12], 8),
+    numberedFieldParserGenerator(['Gironny', 'Gyronny'], 'gironny', [8, 10, 12], 8),
 
     P.whitespace.then(tinctureParserFromName).skip(P.whitespace),
     P.regex(/and/i)

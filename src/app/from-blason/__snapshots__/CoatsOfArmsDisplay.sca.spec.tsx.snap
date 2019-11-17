@@ -4008,23 +4008,234 @@ exports[`CoatsOfArms should render 'Gyronny erminois and pean' 1`] = `
       y={0}
     />
     <path
-      d="M 100 -133.33333 L 300 -133.33333 L 100 133.33333 L 100 -133.33333"
+      d="M 100 -133.33333 L 366.66667 -133.33333 L 100 133.33333 L 100 -133.33333"
       fill="url(#field-pattern-3-sable-or-gironny)"
       stroke="#333"
     />
     <path
-      d="M 300 133.33333 L 300 400 L 100 133.33333 L 300 133.33333"
+      d="M 366.66667 133.33333 L 366.66667 400 L 100 133.33333 L 366.66667 133.33333"
       fill="url(#field-pattern-3-sable-or-gironny)"
       stroke="#333"
     />
     <path
-      d="M 100 400 L -100 400 L 100 133.33333 L 100 400"
+      d="M 100 400 L -166.66667 400 L 100 133.33333 L 100 400"
       fill="url(#field-pattern-3-sable-or-gironny)"
       stroke="#333"
     />
     <path
-      d="M -100 133.33333 L -100 -133.33333 L 100 133.33333 L -100 133.33333"
+      d="M -166.66667 133.33333 L -166.66667 -133.33333 L 100 133.33333 L -166.66667 133.33333"
       fill="url(#field-pattern-3-sable-or-gironny)"
+      stroke="#333"
+    />
+  </g>
+  <path
+    d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
+    fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
+    stroke="#333"
+    strokeWidth={1}
+    style={
+      Object {
+        "cursor": "pointer",
+        "pointerEvents": "none",
+      }
+    }
+  />
+</svg>
+`;
+
+exports[`CoatsOfArms should render 'Gyronny of ten ermine and vert' 1`] = `
+<svg
+  className="coats-of-arms-display"
+  height={266.6666666666667}
+  viewBox="0 0 200 266.6666666666667"
+  width={200}
+>
+  <defs>
+    <symbol
+      id="ermined-argent-sable"
+      viewBox="0 0 200 240"
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <g
+        transform="translate(100, 240)"
+      >
+        <path
+          d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
+          fill="#000000"
+        />
+        <circle
+          cy={-226}
+          fill="#000000"
+          r="14"
+        />
+        <circle
+          cx={-32}
+          cy={-194}
+          fill="#000000"
+          r={14}
+        />
+        <circle
+          cx={32}
+          cy={-194}
+          fill="#000000"
+          r={14}
+        />
+      </g>
+    </symbol>
+    <pattern
+      height={65.33333333333333}
+      id="field-pattern-3-argent-sable"
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 44.44444444444444 65.33333333333333"
+      width={44.44444444444444}
+    >
+      <rect
+        fill="#FFFFFF"
+        height={65.33333333333333}
+        width={44.44444444444444}
+      />
+      <use
+        height={26.666666666666664}
+        href="#ermined-argent-sable"
+        width={22.22222222222222}
+        x={0}
+        y={3}
+      />
+      <use
+        height={26.666666666666664}
+        href="#ermined-argent-sable"
+        width={22.22222222222222}
+        x={22.22222222222222}
+        y={35.666666666666664}
+      />
+    </pattern>
+    <clipPath
+      id="plain-field-clip-path"
+    >
+      <path
+        d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
+        fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
+        stroke="#333"
+        strokeWidth={1}
+        style={
+          Object {
+            "cursor": "pointer",
+            "pointerEvents": "none",
+          }
+        }
+      />
+    </clipPath>
+  </defs>
+  <g
+    className="blason-field"
+    clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
+  >
+    <symbol
+      id="ermined-argent-sable"
+      viewBox="0 0 200 240"
+    >
+      <rect
+        fill="#FFFFFF"
+        height="100%"
+        width="100%"
+      />
+      <g
+        transform="translate(100, 240)"
+      >
+        <path
+          d="M0,-174 C -15,-30 -29,-35 -55,0 L -15,-28 0,0 15,-28 55,0 C 28,-35 15,-30 0,-174 Z"
+          fill="#000000"
+        />
+        <circle
+          cy={-226}
+          fill="#000000"
+          r="14"
+        />
+        <circle
+          cx={-32}
+          cy={-194}
+          fill="#000000"
+          r={14}
+        />
+        <circle
+          cx={32}
+          cy={-194}
+          fill="#000000"
+          r={14}
+        />
+      </g>
+    </symbol>
+    <pattern
+      height={25.263157894736842}
+      id="field-pattern-3-argent-sable-gironny"
+      patternUnits="userSpaceOnUse"
+      viewBox="0 0 21.05263157894737 25.263157894736842"
+      width={21.05263157894737}
+    >
+      <rect
+        fill="#FFFFFF"
+        height={25.263157894736842}
+        width={21.05263157894737}
+      />
+      <use
+        height={12.631578947368421}
+        href="#ermined-argent-sable"
+        width={10.526315789473685}
+        x={0}
+        y={0}
+      />
+      <use
+        height={12.631578947368421}
+        href="#ermined-argent-sable"
+        width={10.526315789473685}
+        x={10.526315789473685}
+        y={12.631578947368421}
+      />
+    </pattern>
+    <rect
+      fill="url(#field-pattern-3-argent-sable-gironny)"
+      height={266.6666666666667}
+      width={200}
+      x={0}
+      y={0}
+    />
+    <path
+      d="M 182.40453 -120.28174 L 366.66667 -60.41134 L 100 133.33333 L 182.40453 -120.28174"
+      fill="#008000"
+      stroke="#333"
+    />
+    <path
+      d="M 366.66667 133.33333 L 366.66667 327.07801 L 100 133.33333 L 366.66667 133.33333"
+      fill="#008000"
+      stroke="#333"
+    />
+    <path
+      d="M 182.40453 386.9484 L -1.8576 446.8188 L 100 133.33333 L 182.40453 386.9484"
+      fill="#008000"
+      stroke="#333"
+    />
+    <path
+      d="M -115.73787 290.07607 L -229.61813 133.33333 L 100 133.33333 L -115.73787 290.07607"
+      fill="#008000"
+      stroke="#333"
+    />
+    <path
+      d="M -115.73787 -23.4094 L -1.8576 -180.15213 L 100 133.33333 L -115.73787 -23.4094"
+      fill="#008000"
       stroke="#333"
     />
   </g>

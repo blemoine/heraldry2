@@ -83,7 +83,7 @@ export type ChevronnyReversedField = {
 
 export type GironnyField = {
   kind: 'gironny';
-  number: 8 | 12;
+  number: 8 | 10 | 12;
   tinctures: [Tincture, Tincture];
 };
 

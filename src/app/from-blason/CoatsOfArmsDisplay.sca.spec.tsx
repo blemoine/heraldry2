@@ -50,5 +50,5 @@ describe('CoatsOfArms', () => {
   //snapshotTest('Gyronny azure and argent scaly sable');
   snapshotTest('Gyronny erminois and pean');
   //snapshotTest('Gyronny gules and lozengy azure and or');
-  //snapshotTest('Gyronny of ten ermine and vert');
+  snapshotTest('Gyronny of ten ermine and vert');
 });
