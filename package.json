@@ -5,8 +5,8 @@
   "main": "",
   "scripts": {
     "clean": "rm -rf dist .cache node_modules coverage",
-    "deploy": "npm run clean && npm ci && npm run dist && gh-pages -d dist",
-    "dist": "parcel build src/index.html",
+    "deploy": "npm run clean && npm ci && npm run dist && touch dist/.nojekyll && gh-pages -t -d dist",
+    "dist": "parcel --public-url ./heraldry/ build src/index.html",
     "lint": "eslint './src/**/*.{ts,tsx}'",
     "start": "parcel src/index.html",
     "test": "npm run lint && npm run typecheck && jest",
