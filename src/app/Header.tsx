@@ -11,7 +11,7 @@ export function Header({ pageState, toggleConfiguration }: Props) {
   return (
     <header>
       <div className="navbar navbar-dark bg-dark shadow-sm">
-        <div className="container d-flex justify-content-between">
+        <div className="container d-flex justify-content-between" style={{ margin: '0 10px', minWidth: '100%' }}>
           <h1 className="navbar-brand d-flex align-items-center">Heraldry</h1>
           <span
             style={pageState.configurationOpened ? openedSpanStyle : spanStyle}

@@ -35,7 +35,6 @@ Faire le "of the last"
     * vu comme la composition d'un fond rectanglaire (et grand) + d'un truc par dessus ? 
 - Click on Escutcheon doesn't work. 
 - Couter embattled marche pas bien vs BRetessed
-- changeFieldKind -> peut etre mieux fait en extrayant les tinctures
 - Faire un formulaire pour ermined
 - Swiss Bordure/Orle mal affiché
 - A "pellet" est un "roundel sable"

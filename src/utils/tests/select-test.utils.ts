@@ -21,7 +21,7 @@ export function selectTincture(topSelector: string, tincture: Tincture): Promise
   });
 
   // Needs to be longer than the transition duration of the popover fade in/out
-  const timeoutDuration = 200;
+  const timeoutDuration = 500;
   return new Promise<void>((resolve) => {
     setTimeout(() => {
       resolve();
