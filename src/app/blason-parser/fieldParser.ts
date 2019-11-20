@@ -4,6 +4,7 @@ import {
   BendyField,
   BendySinisterField,
   Field,
+  GironnyArrondiField,
   GironnyField,
   PartyField,
   PlainField,
@@ -112,8 +113,16 @@ export function fieldParser(): P.Parser<Field> {
     line,
   }));
 
-  const gironnyParser: P.Parser<GironnyField> = P.seq(
-    numberedFieldParserGenerator(['Gironny', 'Gyronny'], 'gironny', [8, 10, 12], 8),
+  const gironnyParser: P.Parser<GironnyField | GironnyArrondiField> = P.seq(
+    P.alt(
+      numberedFieldParserGenerator(
+        ['Gironny arrondi', 'Gyronny arrondi', 'Gironny arrondy', 'Gyronny arrondy'],
+        'gironny-arrondi',
+        [8, 10, 12],
+        8
+      ),
+      numberedFieldParserGenerator(['Gironny', 'Gyronny'], 'gironny', [8, 10, 12], 8)
+    ),
 
     P.whitespace.then(tinctureParserFromName).skip(P.whitespace),
     P.regex(/and/i)

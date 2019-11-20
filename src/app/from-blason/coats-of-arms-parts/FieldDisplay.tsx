@@ -47,6 +47,7 @@ import { BendyAndPerPaleDisplay } from './fields/BendyAndPerPaleDisplay';
 import { getPatternId, WithFurPatternDef } from './FurPatternDef';
 import { ConfigurationContext, fillFromConfiguration } from '../configuration/ConfigurationContext';
 import { getFurConfiguration } from './field.helper';
+import { GironnyArrondiDisplay } from './fields/GironnyArrondiDisplay';
 
 type Props = {
   dimension: Dimension;
@@ -299,6 +300,9 @@ const FieldDisplayDispatch = ({ field, dimension, fillFromTincture, shape }: Pro
   } else if (field.kind === 'gironny') {
     const fill: [string, string] = fillFromConfigurationPair(field.tinctures, patternId);
     return <GironnyDisplay fill={fill} dimension={dimension} number={field.number} />;
+  } else if (field.kind === 'gironny-arrondi') {
+    const fill: [string, string] = fillFromConfigurationPair(field.tinctures, patternId);
+    return <GironnyArrondiDisplay fill={fill} dimension={dimension} number={field.number} />;
   } else {
     return cannotHappen(field);
   }

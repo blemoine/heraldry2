@@ -93,6 +93,7 @@ export function getFurConfiguration(field: Field, { width }: Dimension): FurConf
     field.kind === 'lozenge-throughout-arched' ||
     field.kind === 'barry-and-per-chevron-throughout' ||
     field.kind === 'gironny' ||
+    field.kind === 'gironny-arrondi' ||
     field.kind === 'tierced'
   ) {
     return {

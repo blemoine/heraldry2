@@ -70,7 +70,7 @@ export function FieldForm({ field, fieldChange }: Props) {
         fieldChange({ kind: newKind, tincture: firstTincture });
       } else if (newKind === 'barry' || newKind === 'bendy' || newKind === 'bendySinister') {
         fieldChange({ kind: newKind, number: 10, tinctures: [firstTincture, secondTincture], line: 'straight' });
-      } else if (newKind === 'gironny') {
+      } else if (newKind === 'gironny' || newKind === 'gironny-arrondi') {
         fieldChange({ kind: newKind, number: 8, tinctures: [firstTincture, secondTincture] });
       } else {
         cannotHappen(newKind);
@@ -123,6 +123,7 @@ export function FieldForm({ field, fieldChange }: Props) {
             field.kind === 'barry' ||
             field.kind === 'quarterly-of-nine' ||
             field.kind === 'gironny' ||
+            field.kind === 'gironny-arrondi' ||
             field.kind === 'lozengy-bendwise' ||
             field.kind === 'embrassee-a-dexter' ||
             field.kind === 'embrassee-a-sinister' ||
@@ -143,7 +144,7 @@ export function FieldForm({ field, fieldChange }: Props) {
         </div>
       )}
 
-      {field.kind === 'gironny' && (
+      {(field.kind === 'gironny' || field.kind === 'gironny-arrondi') && (
         <div className="form-group">
           <label>Number</label>
           <div>

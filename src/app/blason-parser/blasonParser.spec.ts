@@ -138,7 +138,7 @@ describe('parseBlason', () => {
 
 Expected one of the following: 
 
-Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barry pily, Bendy, Bendy Sinister, Bendy and per bend sinister, Bendy and per pale, Bendy pily, Bendy pily sinister, Bendy sinister and per bend, Chequy, Chevronny, Chevronny reversed, Counter ermine, Counter potent, Counter vair, Counter-ermine, Counter-potent, Counter-vair, Embrassee a dexter, Embrassee a sinister, Ermine, Erminois, Gironny, Gules, Lozenge throughout, Lozenge throughout arched, Lozengy, Lozengy bendwise, Murrey, Or, Paly, Paly pily, Pean, Per, Potent, Potent en pale, Potent en point, Potent-en-pale, Potent-en-point, Purpure, Quarterly, Quarterly of nine, Sable, Sanguine, Tenne, Tenné, Tierced per, Vair, Vair en pale, Vair en point, Vair-en-pale, Vair-en-point, Vert
+Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barry pily, Bendy, Bendy Sinister, Bendy and per bend sinister, Bendy and per pale, Bendy pily, Bendy pily sinister, Bendy sinister and per bend, Chequy, Chevronny, Chevronny reversed, Counter ermine, Counter potent, Counter vair, Counter-ermine, Counter-potent, Counter-vair, Embrassee a dexter, Embrassee a sinister, Ermine, Erminois, Gironny, Gironny arrondi, Gules, Lozenge throughout, Lozenge throughout arched, Lozengy, Lozengy bendwise, Murrey, Or, Paly, Paly pily, Pean, Per, Potent, Potent en pale, Potent en point, Potent-en-pale, Potent-en-point, Purpure, Quarterly, Quarterly of nine, Sable, Sanguine, Tenne, Tenné, Tierced per, Vair, Vair en pale, Vair en point, Vair-en-pale, Vair-en-point, Vert
 `,
     });
   });
@@ -357,7 +357,18 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
   });
   it('should parse gyronny', () => {
     const expected: Blason = { kind: 'simple', field: { kind: 'gironny', tinctures: [argent, azure], number: 8 } };
-    expect(parseBlason('gyronny argent and azure')).toEqual(expected);
+    expect(parseBlason('Gyronny argent and azure')).toEqual(expected);
+  });
+  it('should parse gyronny arrondi', () => {
+    const expected: Blason = {
+      kind: 'simple',
+      field: { kind: 'gironny-arrondi', tinctures: [argent, azure], number: 8 },
+    };
+    expect(parseBlason('Gyronny arrondi argent and azure')).toEqual(expected);
+  });
+  it('should parse gyronny arrondy', () => {
+    const expected: Blason = { kind: 'simple', field: { kind: 'gironny-arrondi', tinctures: [or, azure], number: 10 } };
+    expect(parseBlason('Gyronny arrondy of ten or and azure')).toEqual(expected);
   });
   it('should parse gironny of 12', () => {
     const expected: Blason = { kind: 'simple', field: { kind: 'gironny', tinctures: [or, gules], number: 12 } };

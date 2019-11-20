@@ -230,6 +230,8 @@ export function stringifyFieldKind(field: Field['kind']): string {
     return 'chevronny reversed';
   } else if (field === 'gironny') {
     return 'gironny';
+  } else if (field === 'gironny-arrondi') {
+    return 'gironny arrondi';
   } else if (field === 'quarterly-of-nine') {
     return 'quarterly of nine';
   } else if (field === 'lozengy-bendwise') {
@@ -322,7 +324,7 @@ function stringifyField(field: Field, shouldCapitalize: boolean): string {
         ('line' in field && field.line !== 'straight' ? ' ' + stringifyLine(field.line) : '') +
         ` ${stringifyTincture(field.tinctures[0])} and ${stringifyTincture(field.tinctures[1])}`
       );
-    } else if (field.kind === 'gironny') {
+    } else if (field.kind === 'gironny' || field.kind === 'gironny-arrondi') {
       return (
         fieldStr +
         (field.number !== 8 ? ` of ${stringifyNumber(field.number)}` : '') +
