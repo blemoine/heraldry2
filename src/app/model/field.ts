@@ -81,15 +81,17 @@ export type ChevronnyReversedField = {
   tinctures: [Tincture, Tincture];
 };
 
+export const gironnyNumberAvailable = [6, 8, 10, 12] as const;
+export type GironnyNumber = typeof gironnyNumberAvailable[number];
 export type GironnyField = {
   kind: 'gironny';
-  number: 8 | 10 | 12;
+  number: GironnyNumber;
   tinctures: [Tincture, Tincture];
 };
 
 export type GironnyArrondiField = {
   kind: 'gironny-arrondi';
-  number: 8 | 10 | 12;
+  number: GironnyNumber;
   tinctures: [Tincture, Tincture];
 };
 

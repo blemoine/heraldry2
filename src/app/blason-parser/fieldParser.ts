@@ -6,6 +6,7 @@ import {
   Field,
   GironnyArrondiField,
   GironnyField,
+  gironnyNumberAvailable,
   PartyField,
   PlainField,
 } from '../model/field';
@@ -118,10 +119,10 @@ export function fieldParser(): P.Parser<Field> {
       numberedFieldParserGenerator(
         ['Gironny arrondi', 'Gyronny arrondi', 'Gironny arrondy', 'Gyronny arrondy'],
         'gironny-arrondi',
-        [8, 10, 12],
+        gironnyNumberAvailable,
         8
       ),
-      numberedFieldParserGenerator(['Gironny', 'Gyronny'], 'gironny', [8, 10, 12], 8)
+      numberedFieldParserGenerator(['Gironny', 'Gyronny'], 'gironny', gironnyNumberAvailable, 8)
     ),
 
     P.whitespace.then(tinctureParserFromName).skip(P.whitespace),

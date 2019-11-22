@@ -13,11 +13,10 @@ export const GironnyArrondiDisplay = ({ dimension, fill, number }: Props) => {
 
   const angleBetweenPart = 360 / number;
 
-  const basePath = SvgPathBuilder.start([width / 2, 0])
+  const basePath = SvgPathBuilder.start([width / 2, -0.2 * height])
     .horizontalMove((height / 2) * Math.tan(toRadians(angleBetweenPart)))
     .arcTo(center, { radius: width * 1.5 })
-    .arcTo([width / 2, 0], { radius: width * 1.5, sweep: 1 })
-    .scale(center, 1, 1);
+    .arcTo([width / 2, -0.2 * height], { radius: width * 1.5, sweep: 1 });
 
   return (
     <>

@@ -3760,23 +3760,100 @@ exports[`CoatsOfArms should render 'Gyronny arrondy Or and azure' 1`] = `
       y={0}
     />
     <path
-      d="M 100 0 L 233.33333 0 A300 300 0 0 1 100 133.33333 A300 300 0 0 0 100 0"
+      d="M 100 -53.33333 L 233.33333 -53.33333 A300 300 0 0 0 100 133.33333 A300 300 0 0 1 100 -53.33333"
       fill="#0000FF"
       stroke="#333"
     />
     <path
-      d="M 233.33333 133.33333 L 233.33333 266.66667 A300 300 0 0 1 100 133.33333 A300 300 0 0 0 233.33333 133.33333"
+      d="M 286.66667 133.33333 L 286.66667 266.66667 A300 300 0 0 0 100 133.33333 A300 300 0 0 1 286.66667 133.33333"
       fill="#0000FF"
       stroke="#333"
     />
     <path
-      d="M 100 266.66667 L -33.33333 266.66667 A300 300 0 0 1 100 133.33333 A300 300 0 0 0 100 266.66667"
+      d="M 100 320 L -33.33333 320 A300 300 0 0 0 100 133.33333 A300 300 0 0 1 100 320"
       fill="#0000FF"
       stroke="#333"
     />
     <path
-      d="M -33.33333 133.33333 L -33.33333 0 A300 300 0 0 1 100 133.33333 A300 300 0 0 0 -33.33333 133.33333"
+      d="M -86.66667 133.33333 L -86.66667 0 A300 300 0 0 0 100 133.33333 A300 300 0 0 1 -86.66667 133.33333"
       fill="#0000FF"
+      stroke="#333"
+    />
+  </g>
+  <path
+    d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
+    fill="transparent"
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
+    stroke="#333"
+    strokeWidth={1}
+    style={
+      Object {
+        "cursor": "pointer",
+        "pointerEvents": "none",
+      }
+    }
+  />
+</svg>
+`;
+
+exports[`CoatsOfArms should render 'Gyronny arrondy of six gules and argent' 1`] = `
+<svg
+  className="coats-of-arms-display"
+  height={266.6666666666667}
+  viewBox="0 0 200 266.6666666666667"
+  width={200}
+>
+  <defs>
+    <clipPath
+      id="plain-field-clip-path"
+    >
+      <path
+        d="M 0 0 H10 H190 H200 V160 Q 200 213.33333 100 266.66667 Q 0 213.33333 0 160 Z"
+        fill="transparent"
+        onMouseDown={[Function]}
+        onMouseUp={[Function]}
+        stroke="#333"
+        strokeWidth={1}
+        style={
+          Object {
+            "cursor": "pointer",
+            "pointerEvents": "none",
+          }
+        }
+      />
+    </clipPath>
+  </defs>
+  <g
+    className="blason-field"
+    clipPath="url(#plain-field-clip-path)"
+    onClick={[Function]}
+    style={
+      Object {
+        "cursor": "pointer",
+      }
+    }
+  >
+    <rect
+      fill="#FF0000"
+      height={266.6666666666667}
+      width={200}
+      x={0}
+      y={0}
+    />
+    <path
+      d="M 193.33333 -28.32474 L 393.33333 87.14531 A300 300 0 0 0 100 133.33333 A300 300 0 0 1 193.33333 -28.32474"
+      fill="#FFFFFF"
+      stroke="#333"
+    />
+    <path
+      d="M 193.33333 294.99141 L -6.66667 410.46146 A300 300 0 0 0 100 133.33333 A300 300 0 0 1 193.33333 294.99141"
+      fill="#FFFFFF"
+      stroke="#333"
+    />
+    <path
+      d="M -86.66667 133.33333 L -86.66667 -97.60677 A300 300 0 0 0 100 133.33333 A300 300 0 0 1 -86.66667 133.33333"
+      fill="#FFFFFF"
       stroke="#333"
     />
   </g>

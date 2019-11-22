@@ -1,4 +1,4 @@
-import { Field, fieldKinds, PartyField, PlainField, TiercedField } from '../../model/field';
+import { Field, fieldKinds, gironnyNumberAvailable, PartyField, PlainField, TiercedField } from '../../model/field';
 import { TinctureSelect } from './TinctureSelect';
 import * as React from 'react';
 import { areTinctureEquals, Tincture, tinctures } from '../../model/tincture';
@@ -13,7 +13,6 @@ import { LineSelect } from './LineSelect';
 import { allDeclaredTincturesOfField } from '../blason.helpers';
 
 const numberOfBars = [6, 8, 10] as const;
-const gironnyNumberAvailable = [8, 10, 12] as const;
 type Props = { field: Field; fieldChange: (field: Field) => void };
 export function FieldForm({ field, fieldChange }: Props) {
   function plainTinctureChange(tincture: Tincture) {

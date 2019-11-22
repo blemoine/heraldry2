@@ -45,7 +45,7 @@ describe('CoatsOfArms', () => {
   //snapshotTest('Gules mailed or');
 
   //snapshotTest('Gyronny arrondi argent voided sable and sable');
-  //snapshotTest('Gyronny arrondy of six gules and argent');
+  snapshotTest('Gyronny arrondy of six gules and argent');
   snapshotTest('Gyronny arrondy Or and azure');
   //snapshotTest('Gyronny azure and argent scaly sable');
   snapshotTest('Gyronny erminois and pean');
