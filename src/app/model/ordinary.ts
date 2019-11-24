@@ -1,7 +1,14 @@
 import { MetalsAndColours, Tincture } from './tincture';
 import { Line } from './line';
+import { Charge } from './charge';
 
-export type Chief = { name: 'chief'; tincture: Tincture; line: Line; fimbriated: MetalsAndColours | null };
+export type Chief = {
+  name: 'chief';
+  tincture: Tincture;
+  line: Line;
+  fimbriated: MetalsAndColours | null;
+  charge: Charge | null;
+};
 export type Bend = { name: 'bend'; tincture: Tincture; line: Line; fimbriated: MetalsAndColours | null };
 export type Fess = { name: 'fess'; tincture: Tincture; line: Line; fimbriated: MetalsAndColours | null };
 export type BendSinister = {

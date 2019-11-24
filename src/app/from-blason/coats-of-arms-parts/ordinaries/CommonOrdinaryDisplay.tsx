@@ -7,6 +7,7 @@ import { SvgPathBuilder } from '../../../svg-path-builder/svg-path-builder';
 import { Dimension } from '../../../model/dimension';
 import { Ordinary } from '../../../model/ordinary';
 import { FurConfiguration, getPatternIdOfOrdinary, WithFurPatternForOrdinaryDef } from '../FurPatternDef';
+import { ChargeDisplay } from '../ChargeDisplay';
 
 type Props<T extends Ordinary> = {
   ordinary: T;
@@ -20,6 +21,7 @@ type Props<T extends Ordinary> = {
   ) => {
     pathBuilderAndTincture: ReadonlyArray<{ pathBuilder: SvgPathBuilder; tincture: Tincture }>;
     furConfiguration: FurConfiguration;
+    chargeConfiguration?: { dimension: Dimension };
   };
 };
 export const CommonOrdinaryDisplay = <T extends Ordinary>({
@@ -34,8 +36,9 @@ export const CommonOrdinaryDisplay = <T extends Ordinary>({
   const strokeWidth = baseStrokeWith || (stroke ? 3 : 1);
   const postfixId = getPatternIdOfOrdinary(ordinary);
 
-  const { pathBuilderAndTincture, furConfiguration } = ordinaryConfiguration(dimension, ordinary);
+  const { pathBuilderAndTincture, furConfiguration, chargeConfiguration } = ordinaryConfiguration(dimension, ordinary);
 
+  const genericOrdinary: Ordinary = ordinary;
   return (
     <WithFurPatternForOrdinaryDef ordinary={ordinary} furConfiguration={furConfiguration}>
       {pathBuilderAndTincture.map(({ pathBuilder, tincture }, i) => {
@@ -57,6 +60,15 @@ export const CommonOrdinaryDisplay = <T extends Ordinary>({
           />
         );
       })}
+      {'charge' in genericOrdinary && !!genericOrdinary.charge && (
+        <ChargeDisplay
+          charge={genericOrdinary.charge}
+          dimension={chargeConfiguration ? chargeConfiguration.dimension : dimension}
+          shape={'default'}
+          fillFromTincture={(tincture: Tincture) => getFill(fillFromTincture, tincture, postfixId)}
+          onClick={onClick}
+        />
+      )}
     </WithFurPatternForOrdinaryDef>
   );
 };

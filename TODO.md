@@ -42,6 +42,7 @@ Faire le "of the last"
 - Chaussé ployé per pale fimbriated devrait pas avoir le milieu fimbriated
 - Réecrire les bendy en s'inspirant de bendy per pale.
 - Fur symbol are repeated multiple times
+- On a chief with a charge is buggy on spanish shield
 
 ## Feature to add
 

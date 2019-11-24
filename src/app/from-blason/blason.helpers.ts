@@ -25,17 +25,18 @@ function allDeclaredTincturesOfCharge(charge: Charge): Array<Tincture> {
   }
 }
 export function allDeclaredTincturesOfOrdinary(ordinary: Ordinary): Array<Tincture> {
+  const chargeTinctures = 'charge' in ordinary && ordinary.charge ? allDeclaredTincturesOfCharge(ordinary.charge) : [];
   if (ordinary.name === 'chape-ploye' || ordinary.name === 'chausse-ploye') {
     const tinctures = ordinary.tinctures;
     if (tinctures.kind === 'party') {
-      return tinctures.tinctures;
+      return tinctures.tinctures.concat(chargeTinctures);
     } else if (tinctures.kind === 'simple') {
-      return [tinctures.tincture];
+      return [tinctures.tincture, ...chargeTinctures];
     } else {
       return cannotHappen(tinctures);
     }
   } else {
-    return [ordinary.tincture];
+    return [ordinary.tincture, ...chargeTinctures];
   }
 }
 export function allDeclaredTincturesOfField(field: Field): Array<Tincture> {

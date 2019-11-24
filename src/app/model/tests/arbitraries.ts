@@ -92,54 +92,6 @@ export const fieldArb: Arbitrary<Field> = fc.constantFrom(...fieldKinds).chain(
   }
 );
 
-export const ordinaryArb: Arbitrary<Ordinary> = fc
-  .record({
-    name: fc.constantFrom(...ordinaries),
-    tincture: tinctureArb,
-    line: lineArb,
-    fimbriated: fc.oneof(metalAndColoursArb, fc.constant(null)),
-  })
-  .chain(
-    (obj): Arbitrary<Ordinary> => {
-      if (obj.name === 'pale' || obj.name === 'chevron' || obj.name === 'chevronel') {
-        const countableOrdinary = {
-          name: obj.name,
-          tincture: obj.tincture,
-          line: obj.line,
-          fimbriated: obj.fimbriated,
-        } as const;
-        return fc.constantFrom(1 as const, 2 as const).map((count) => ({ ...countableOrdinary, count }));
-      } else if (obj.name === 'chape-ploye' || obj.name === 'chausse-ploye') {
-        const name = obj.name;
-
-        return fc.constantFrom(...chapePloyeTincturesKind).chain((kind) => {
-          if (kind === 'party') {
-            return tinctureArb.map((tincture2): ChapePloye | ChaussePloye => {
-              return {
-                name,
-                tinctures: { kind: 'party', per: 'pale', tinctures: [obj.tincture, tincture2] },
-                line: obj.line,
-                fimbriated: obj.fimbriated,
-              };
-            });
-          } else if (kind === 'simple') {
-            return fc.constant({
-              name,
-              tinctures: { kind: 'simple', tincture: obj.tincture },
-              line: obj.line,
-              fimbriated: obj.fimbriated,
-            });
-          } else {
-            return cannotHappen(kind);
-          }
-        });
-      } else {
-        const name = obj.name;
-        return fc.constant({ name, tincture: obj.tincture, line: obj.line, fimbriated: obj.fimbriated });
-      }
-    }
-  );
-
 function createChargeArb(tinctureArb: Arbitrary<Tincture>): Arbitrary<Charge> {
   return fc.constantFrom(...charges).chain((chargeName: Charge['name']) => {
     const countAndDistionArb: Arbitrary<CountAndDisposition> = fc
@@ -231,8 +183,65 @@ function createChargeArb(tinctureArb: Arbitrary<Tincture>): Arbitrary<Charge> {
   });
 }
 
-export const simplifiedChargeArb: Arbitrary<Charge> = createChargeArb(fc.constant(or));
 export const chargeArb: Arbitrary<Charge> = createChargeArb(tinctureArb);
+export const simplifiedChargeArb: Arbitrary<Charge> = createChargeArb(fc.constant(or));
+
+export const ordinaryArb: Arbitrary<Ordinary> = fc
+  .record({
+    name: fc.constantFrom(...ordinaries),
+    tincture: tinctureArb,
+    line: lineArb,
+    fimbriated: fc.oneof(metalAndColoursArb, fc.constant(null)),
+  })
+  .chain(
+    (obj): Arbitrary<Ordinary> => {
+      if (obj.name === 'pale' || obj.name === 'chevron' || obj.name === 'chevronel') {
+        const countableOrdinary = {
+          name: obj.name,
+          tincture: obj.tincture,
+          line: obj.line,
+          fimbriated: obj.fimbriated,
+        } as const;
+        return fc.constantFrom(1 as const, 2 as const).map((count) => ({ ...countableOrdinary, count }));
+      } else if (obj.name === 'chape-ploye' || obj.name === 'chausse-ploye') {
+        const name = obj.name;
+
+        return fc.constantFrom(...chapePloyeTincturesKind).chain((kind) => {
+          if (kind === 'party') {
+            return tinctureArb.map((tincture2): ChapePloye | ChaussePloye => {
+              return {
+                name,
+                tinctures: { kind: 'party', per: 'pale', tinctures: [obj.tincture, tincture2] },
+                line: obj.line,
+                fimbriated: obj.fimbriated,
+              };
+            });
+          } else if (kind === 'simple') {
+            return fc.constant({
+              name,
+              tinctures: { kind: 'simple', tincture: obj.tincture },
+              line: obj.line,
+              fimbriated: obj.fimbriated,
+            });
+          } else {
+            return cannotHappen(kind);
+          }
+        });
+      } else if (obj.name === 'chief') {
+        const name = obj.name;
+        return chargeArb.map((charge) => ({
+          name,
+          tincture: obj.tincture,
+          line: obj.line,
+          fimbriated: obj.fimbriated,
+          charge,
+        }));
+      } else {
+        const name = obj.name;
+        return fc.constant({ name, tincture: obj.tincture, line: obj.line, fimbriated: obj.fimbriated });
+      }
+    }
+  );
 
 const simpleBlasonArb: Arbitrary<SimpleBlason> = fc.tuple(fieldArb, ordinaryArb, chargeArb).map(
   ([field, ordinary, charge]): SimpleBlason => {

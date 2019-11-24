@@ -30,7 +30,7 @@ export function OrdinaryForm({ ordinary, ordinaryChange }: Props) {
           fimbriated,
         });
       } else {
-        ordinaryChange({ name: ordinaryName, tincture, line, fimbriated });
+        ordinaryChange({ name: ordinaryName, tincture, line, fimbriated, charge: null });
       }
     } else {
       ordinaryChange(null);

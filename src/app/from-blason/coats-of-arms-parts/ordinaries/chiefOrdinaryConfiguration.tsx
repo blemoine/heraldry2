@@ -26,5 +26,9 @@ export const chiefOrdinaryConfiguration = (dimension: Dimension, ordinary: Chief
     potent: { bellWidth: width / 9, bellHeightRatio: 1 },
   };
   const pathBuilderAndTincture = [{ pathBuilder, tincture: ordinary.tincture }];
-  return { pathBuilderAndTincture, furConfiguration };
+  return {
+    pathBuilderAndTincture,
+    furConfiguration,
+    chargeConfiguration: { dimension: { width, height: chiefHeight } },
+  };
 };

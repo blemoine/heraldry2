@@ -26,7 +26,7 @@ describe('stringifyBlason', () => {
       stringifyBlason({
         kind: 'simple',
         field: { kind: 'plain', tincture: or },
-        ordinary: { name: 'chief', tincture: argent, line: 'straight', fimbriated: null },
+        ordinary: { name: 'chief', tincture: argent, line: 'straight', fimbriated: null, charge: null },
       })
     ).toBe('Or, a chief argent');
   });
@@ -121,7 +121,7 @@ describe('stringifyBlason', () => {
       stringifyBlason({
         kind: 'simple',
         field: { kind: 'party', per: { name: 'pale', tinctures: [ermine, azure], line: 'straight' } },
-        ordinary: { name: 'chief', tincture: ermine, line: 'straight', fimbriated: null },
+        ordinary: { name: 'chief', tincture: ermine, line: 'straight', fimbriated: null, charge: null },
         charge: {
           name: 'lion',
           tincture: gules,
@@ -376,5 +376,21 @@ describe('stringifyBlason', () => {
         ordinary: { name: 'chausse', tincture: azure, line: 'straight', fimbriated: argent },
       })
     ).toBe('Or, chaussé azure fimbriated argent');
+  });
+
+  it('should stringify on a chief', () => {
+    expect(
+      stringifyBlason({
+        kind: 'simple',
+        field: { kind: 'plain', tincture: or },
+        ordinary: {
+          name: 'chief',
+          tincture: azure,
+          line: 'straight',
+          fimbriated: null,
+          charge: { name: 'fleurdelys', countAndDisposition: { count: 3, disposition: 'default' }, tincture: argent },
+        },
+      })
+    ).toBe('Or, on a chief azure three fleurs de lys argent');
   });
 });

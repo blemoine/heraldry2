@@ -23,8 +23,8 @@ import { Blason, QuarterlyBlason, SimpleBlason } from '../model/blason';
 import { Tierced, tierceds } from '../model/tierced';
 
 const FIELD_SIZE = 6;
-const ORDINARY_SIZE = 6;
 const CHARGE_SIZE = 8;
+const ORDINARY_SIZE = 7 + CHARGE_SIZE;
 const BLASON_SIZE = FIELD_SIZE + ORDINARY_SIZE + CHARGE_SIZE;
 
 function encodeFromList<A>(list: ReadonlyArray<A>, a: A): number {
@@ -218,77 +218,6 @@ export function decodeField(arr: Uint8Array): Result<Field> {
   }
 }
 
-export function encodeOrdinary(ordinary: Ordinary | null): Uint8Array {
-  const result = new Uint8Array(ORDINARY_SIZE);
-  if (!ordinary) {
-    return result;
-  }
-  result[0] = encodeOrdinaryName(ordinary.name);
-  result[1] = encodeLine(ordinary.line);
-  result[5] = ordinary.fimbriated ? encodeMetalAndColours(ordinary.fimbriated) : 0;
-  if (ordinary.name === 'chape-ploye' || ordinary.name === 'chausse-ploye') {
-    result[3] = encodeFromList(chapePloyeTincturesKind, ordinary.tinctures.kind);
-    if (ordinary.tinctures.kind === 'party') {
-      result[2] = encodeTincture(ordinary.tinctures.tinctures[0]);
-      result[4] = encodeTincture(ordinary.tinctures.tinctures[1]);
-    } else if (ordinary.tinctures.kind === 'simple') {
-      result[2] = encodeTincture(ordinary.tinctures.tincture);
-    } else {
-      return cannotHappen(ordinary.tinctures);
-    }
-  } else {
-    result[2] = encodeTincture(ordinary.tincture);
-    if (ordinary.name === 'pale' || ordinary.name === 'chevron' || ordinary.name === 'chevronel') {
-      result[3] = ordinary.count;
-    }
-  }
-
-  return result;
-}
-
-export function decodeOrdinary(arr: Uint8Array): Result<Ordinary | null> {
-  if (arr[0] === 0) {
-    return null;
-  }
-  const maybeName = decodeOrdinaryName(arr[0]);
-  const maybeLine = decodeLine(arr[1]);
-  const maybeTincture = decodeTincture(arr[2]);
-  const maybeFimbriated = arr[5] === 0 ? null : decodeMetalAndColours(arr[5]);
-
-  return flatMap(
-    zip4(maybeName, maybeLine, maybeTincture, maybeFimbriated),
-    ([name, line, tincture, fimbriated]): Result<Ordinary> => {
-      if (name === 'pale') {
-        const maybeCount: Result<1 | 2> = decodeNumber([1, 2], arr[3]);
-        return map(maybeCount, (count) => ({ name, line, tincture, count, fimbriated }));
-      } else if (name === 'chape-ploye' || name === 'chausse-ploye') {
-        return flatMap(
-          decodeFromList(chapePloyeTincturesKind, arr[3]),
-          (kind): Result<ChapePloye | ChaussePloye> => {
-            if (kind === 'simple') {
-              return { name, line, tinctures: { kind: 'simple', tincture }, fimbriated };
-            } else if (kind === 'party') {
-              return map(decodeTincture(arr[4]), (tincture2): ChapePloye | ChaussePloye => ({
-                name,
-                line,
-                tinctures: { kind: 'party', per: 'pale', tinctures: [tincture, tincture2] },
-                fimbriated,
-              }));
-            } else {
-              return cannotHappen(kind);
-            }
-          }
-        );
-      } else if (name === 'chevron' || name === 'chevronel') {
-        const maybeCount: Result<1 | 2 | 3> = decodeNumber([1, 2, 3], arr[3]);
-        return map(maybeCount, (count) => ({ name, line, tincture, count, fimbriated }));
-      } else {
-        return { name, line, tincture, fimbriated };
-      }
-    }
-  );
-}
-
 export function encodeCharge(charge: Charge | null): Uint8Array {
   const result = new Uint8Array(CHARGE_SIZE);
   if (!charge) {
@@ -324,6 +253,37 @@ export function encodeCharge(charge: Charge | null): Uint8Array {
   return result;
 }
 
+export function encodeOrdinary(ordinary: Ordinary | null): Uint8Array {
+  const result = new Uint8Array(ORDINARY_SIZE);
+  if (!ordinary) {
+    return result;
+  }
+  result[0] = encodeOrdinaryName(ordinary.name);
+  result[1] = encodeLine(ordinary.line);
+  result[5] = ordinary.fimbriated ? encodeMetalAndColours(ordinary.fimbriated) : 0;
+  if (ordinary.name === 'chape-ploye' || ordinary.name === 'chausse-ploye') {
+    result[3] = encodeFromList(chapePloyeTincturesKind, ordinary.tinctures.kind);
+    if (ordinary.tinctures.kind === 'party') {
+      result[2] = encodeTincture(ordinary.tinctures.tinctures[0]);
+      result[4] = encodeTincture(ordinary.tinctures.tinctures[1]);
+    } else if (ordinary.tinctures.kind === 'simple') {
+      result[2] = encodeTincture(ordinary.tinctures.tincture);
+    } else {
+      return cannotHappen(ordinary.tinctures);
+    }
+  } else {
+    result[2] = encodeTincture(ordinary.tincture);
+    if (ordinary.name === 'pale' || ordinary.name === 'chevron' || ordinary.name === 'chevronel') {
+      result[3] = ordinary.count;
+    }
+    if (ordinary.name === 'chief') {
+      const chargeArr = encodeCharge(ordinary.charge);
+      result.set(chargeArr, ORDINARY_SIZE - CHARGE_SIZE);
+    }
+  }
+
+  return result;
+}
 export function decodeCharge(arr: Uint8Array): Result<Charge | null> {
   if (arr[0] === 0) {
     return null;
@@ -386,6 +346,58 @@ export function decodeCharge(arr: Uint8Array): Result<Charge | null> {
         }));
       } else {
         return cannotHappen(name);
+      }
+    }
+  );
+}
+
+export function decodeOrdinary(arr: Uint8Array): Result<Ordinary | null> {
+  if (arr[0] === 0) {
+    return null;
+  }
+  const maybeName = decodeOrdinaryName(arr[0]);
+  const maybeLine = decodeLine(arr[1]);
+  const maybeTincture = decodeTincture(arr[2]);
+  const maybeFimbriated = arr[5] === 0 ? null : decodeMetalAndColours(arr[5]);
+
+  return flatMap(
+    zip4(maybeName, maybeLine, maybeTincture, maybeFimbriated),
+    ([name, line, tincture, fimbriated]): Result<Ordinary> => {
+      if (name === 'pale') {
+        const maybeCount: Result<1 | 2> = decodeNumber([1, 2], arr[3]);
+        return map(maybeCount, (count) => ({ name, line, tincture, count, fimbriated }));
+      } else if (name === 'chape-ploye' || name === 'chausse-ploye') {
+        return flatMap(
+          decodeFromList(chapePloyeTincturesKind, arr[3]),
+          (kind): Result<ChapePloye | ChaussePloye> => {
+            if (kind === 'simple') {
+              return { name, line, tinctures: { kind: 'simple', tincture }, fimbriated };
+            } else if (kind === 'party') {
+              return map(decodeTincture(arr[4]), (tincture2): ChapePloye | ChaussePloye => ({
+                name,
+                line,
+                tinctures: { kind: 'party', per: 'pale', tinctures: [tincture, tincture2] },
+                fimbriated,
+              }));
+            } else {
+              return cannotHappen(kind);
+            }
+          }
+        );
+      } else if (name === 'chevron' || name === 'chevronel') {
+        const maybeCount: Result<1 | 2 | 3> = decodeNumber([1, 2, 3], arr[3]);
+        return map(maybeCount, (count) => ({ name, line, tincture, count, fimbriated }));
+      } else if (name === 'chief') {
+        const maybeCharge = decodeCharge(arr.slice(ORDINARY_SIZE - CHARGE_SIZE));
+        return map(maybeCharge, (charge) => ({
+          name,
+          line,
+          tincture,
+          fimbriated,
+          charge,
+        }));
+      } else {
+        return { name, line, tincture, fimbriated };
       }
     }
   );

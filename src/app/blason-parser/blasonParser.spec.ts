@@ -63,7 +63,7 @@ describe('parseBlason', () => {
     const expected: Blason = {
       kind: 'simple',
       field: { kind: 'plain', tincture: or },
-      ordinary: { name: 'chief', tincture: argent, line: 'straight', fimbriated: null },
+      ordinary: { name: 'chief', tincture: argent, line: 'straight', fimbriated: null, charge: null },
     };
     expect(result).toEqual(expected);
   });
@@ -225,7 +225,7 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
     const expected: Blason = {
       kind: 'simple',
       field: { kind: 'plain', tincture: azure },
-      ordinary: { name: 'chief', line: 'engrailed', tincture: or, fimbriated: null },
+      ordinary: { name: 'chief', line: 'engrailed', tincture: or, fimbriated: null, charge: null },
     };
     expect(result).toEqual(expected);
   });
@@ -301,7 +301,7 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
     const expected: Blason = {
       kind: 'simple',
       field: { kind: 'paly', tinctures: [argent, gules] },
-      ordinary: { name: 'chief', line: 'engrailed', tincture: sable, fimbriated: null },
+      ordinary: { name: 'chief', line: 'engrailed', tincture: sable, fimbriated: null, charge: null },
       charge: {
         name: 'lozenge',
         tincture: azure,
@@ -318,7 +318,7 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
     const expected: Blason = {
       kind: 'simple',
       field: { kind: 'plain', tincture: potent },
-      ordinary: { name: 'chief', line: 'straight', tincture: gules, fimbriated: null },
+      ordinary: { name: 'chief', line: 'straight', tincture: gules, fimbriated: null, charge: null },
     };
     expect(parseBlason('Potent,  a chief gules')).toEqual(expected);
   });
@@ -626,6 +626,7 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
         line: 'wavy',
         tincture: argent,
         fimbriated: null,
+        charge: null,
       },
     };
 
@@ -988,5 +989,30 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
     };
 
     expect(parseBlason('Or, flaunches azure')).toEqual(expected);
+  });
+
+  it('should parse on a chief', () => {
+    const expected: SimpleBlason = {
+      kind: 'simple',
+      field: { kind: 'plain', tincture: or },
+      ordinary: {
+        name: 'chief',
+        line: 'straight',
+        tincture: azure,
+        fimbriated: null,
+        charge: {
+          name: 'mullet',
+          tincture: or,
+          countAndDisposition: {
+            count: 2,
+            disposition: 'default',
+          },
+          inside: 'nothing',
+          points: 5,
+        },
+      },
+    };
+
+    expect(parseBlason('Or, on a chief azure two mullets or')).toEqual(expected);
   });
 });

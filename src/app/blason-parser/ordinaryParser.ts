@@ -5,6 +5,7 @@ import {
   ChaussePloye,
   Chevron,
   Chevronel,
+  Chief,
   ordinaries,
   Ordinary,
   OrdinaryCross,
@@ -14,14 +15,15 @@ import { aParser, buildAltParser, constStr, lineParser, numberParser } from './p
 import { metalOrColourParserFromName, tinctureParserFromName } from './tinctureParser';
 import { stringifyOrdinaryName } from '../model/stringify/stringify.helper';
 import { MetalsAndColours } from '../model/tincture';
+import { chargeCrossParser, chargeParser } from './chargeParser';
 
 function isNotPaleOrChevronOrCross(
   o: Ordinary['name']
 ): o is Exclude<
   Ordinary['name'],
-  'pale' | 'chevron' | 'chevronel' | 'cross' | 'chape-ploye' | 'chausse' | 'chausse-ploye'
+  'pale' | 'chevron' | 'chevronel' | 'cross' | 'chape-ploye' | 'chausse' | 'chausse-ploye' | 'chief'
 > {
-  return !['pale', 'chevron', 'chevronel', 'cross', 'chape-ploye', 'chausse', 'chausse-ploye'].includes(o);
+  return !['pale', 'chevron', 'chevronel', 'cross', 'chape-ploye', 'chausse', 'chausse-ploye', 'chief'].includes(o);
 }
 
 const fimbriatedParser: P.Parser<MetalsAndColours | null> = P.whitespace
@@ -107,7 +109,7 @@ export function ordinaryParser(): P.Parser<Ordinary> {
 
   const ordinaryWithLineParser: P.Parser<Exclude<
     Ordinary,
-    Pale | Chevron | OrdinaryCross | ChapePloye | ChaussePloye | Chausse
+    Pale | Chevron | OrdinaryCross | ChapePloye | ChaussePloye | Chausse | Chief
   >> = P.seq(
     P.alt(
       aParser.then(buildAltParser(ordinaries.filter(isNotPaleOrChevronOrCross), stringifyOrdinaryName)),
@@ -118,5 +120,21 @@ export function ordinaryParser(): P.Parser<Ordinary> {
     fimbriatedParser
   ).map(([name, line, tincture, fimbriated]) => ({ name, line, tincture, fimbriated }));
 
-  return P.alt(paleParser, chevronParser, chapePloyerParser, chausseParser, ordinaryWithLineParser);
+  const chiefParser: P.Parser<Chief> = P.alt(
+    P.seq(
+      aParser.then(constStr('chief')).skip(P.whitespace),
+      lineOrStraightParser,
+      tinctureParserFromName,
+      fimbriatedParser
+    ).map(([name, line, tincture, fimbriated]) => ({ name, line, tincture, fimbriated, charge: null })),
+    P.seq(
+      constStr('chief', 'on a chief').skip(P.whitespace),
+      lineOrStraightParser,
+      tinctureParserFromName,
+      fimbriatedParser.skip(P.whitespace),
+      P.alt(chargeCrossParser(), chargeParser())
+    ).map(([name, line, tincture, fimbriated, charge]) => ({ name, line, tincture, fimbriated, charge }))
+  );
+
+  return P.alt(chiefParser, paleParser, chevronParser, chapePloyerParser, chausseParser, ordinaryWithLineParser);
 }

@@ -53,7 +53,7 @@ describe('CoatsOfArms Simple collision rules', () => {
         const blason: SimpleBlason = {
           kind: 'simple',
           field: { kind: 'plain', tincture: azure },
-          ordinary: { name: 'chief', line, tincture: or, fimbriated: null },
+          ordinary: { name: 'chief', line, tincture: or, fimbriated: null, charge: null },
           charge,
         };
 
