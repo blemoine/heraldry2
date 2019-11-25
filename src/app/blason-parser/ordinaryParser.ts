@@ -6,6 +6,7 @@ import {
   Chevron,
   Chevronel,
   Chief,
+  Fess,
   ordinaries,
   Ordinary,
   OrdinaryCross,
@@ -21,9 +22,19 @@ function isNotPaleOrChevronOrCross(
   o: Ordinary['name']
 ): o is Exclude<
   Ordinary['name'],
-  'pale' | 'chevron' | 'chevronel' | 'cross' | 'chape-ploye' | 'chausse' | 'chausse-ploye' | 'chief'
+  'pale' | 'fess' | 'chevron' | 'chevronel' | 'cross' | 'chape-ploye' | 'chausse' | 'chausse-ploye' | 'chief'
 > {
-  return !['pale', 'chevron', 'chevronel', 'cross', 'chape-ploye', 'chausse', 'chausse-ploye', 'chief'].includes(o);
+  return ![
+    'pale',
+    'fess',
+    'chevron',
+    'chevronel',
+    'cross',
+    'chape-ploye',
+    'chausse',
+    'chausse-ploye',
+    'chief',
+  ].includes(o);
 }
 
 const fimbriatedParser: P.Parser<MetalsAndColours | null> = P.whitespace
@@ -49,6 +60,22 @@ export function ordinaryParser(): P.Parser<Ordinary> {
     tinctureParserFromName,
     fimbriatedParser
   ).map(([{ name, count }, line, tincture, fimbriated]): Pale => ({ name, count, line, tincture, fimbriated }));
+
+  const fessParser: P.Parser<Fess> = P.seq(
+    P.alt(
+      aParser
+        .skip(P.regex(/fess/i))
+        .result({ name: 'fess', count: 1 } as const)
+        .skip(P.whitespace),
+      numberParser(2)
+        .skip(P.regexp(/bars/i))
+        .map((count) => ({ name: 'fess', count } as const))
+        .skip(P.whitespace)
+    ),
+    lineOrStraightParser,
+    tinctureParserFromName,
+    fimbriatedParser
+  ).map(([{ name, count }, line, tincture, fimbriated]): Fess => ({ name, count, line, tincture, fimbriated }));
 
   const chevronParser: P.Parser<Chevron | Chevronel> = P.seq(
     P.alt(aParser, numberParser(2), numberParser(3)),
@@ -109,7 +136,7 @@ export function ordinaryParser(): P.Parser<Ordinary> {
 
   const ordinaryWithLineParser: P.Parser<Exclude<
     Ordinary,
-    Pale | Chevron | OrdinaryCross | ChapePloye | ChaussePloye | Chausse | Chief
+    Pale | Fess | Chevron | OrdinaryCross | ChapePloye | ChaussePloye | Chausse | Chief
   >> = P.seq(
     P.alt(
       aParser.then(buildAltParser(ordinaries.filter(isNotPaleOrChevronOrCross), stringifyOrdinaryName)),
@@ -136,5 +163,13 @@ export function ordinaryParser(): P.Parser<Ordinary> {
     ).map(([name, line, tincture, fimbriated, charge]) => ({ name, line, tincture, fimbriated, charge }))
   );
 
-  return P.alt(chiefParser, paleParser, chevronParser, chapePloyerParser, chausseParser, ordinaryWithLineParser);
+  return P.alt(
+    chiefParser,
+    paleParser,
+    fessParser,
+    chevronParser,
+    chapePloyerParser,
+    chausseParser,
+    ordinaryWithLineParser
+  );
 }

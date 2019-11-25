@@ -19,7 +19,7 @@ describe('stringifyBlason', () => {
       stringifyBlason({
         kind: 'simple',
         field: { kind: 'plain', tincture: sable },
-        ordinary: { name: 'fess', tincture: gules, line: 'straight', fimbriated: null },
+        ordinary: { name: 'fess', tincture: gules, line: 'straight', fimbriated: null, count: 1 },
       })
     ).toBe('Sable, a fess gules');
     expect(
@@ -78,6 +78,16 @@ describe('stringifyBlason', () => {
         ordinary: { name: 'pale', tincture: purpure, count: 2, line: 'straight', fimbriated: null },
       })
     ).toBe('Vair, two pallets purpure');
+  });
+
+  it('should write multiple fess as bars', () => {
+    expect(
+      stringifyBlason({
+        kind: 'simple',
+        field: { kind: 'plain', tincture: vair },
+        ordinary: { name: 'fess', tincture: purpure, count: 2, line: 'straight', fimbriated: null },
+      })
+    ).toBe('Vair, two bars purpure');
   });
 
   it('should write a default lion correctly', () => {

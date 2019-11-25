@@ -165,6 +165,17 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
     expect(result).toEqual(expected);
   });
 
+  it('should parse bars', () => {
+    const result = parseBlason('Argent, two bars Sable ');
+    const expected: Blason = {
+      kind: 'simple',
+      field: { kind: 'plain', tincture: argent },
+      ordinary: { name: 'fess', tincture: sable, count: 2, line: 'straight', fimbriated: null },
+    };
+
+    expect(result).toEqual(expected);
+  });
+
   it('should parse the arms of Gwent', () => {
     const result = parseBlason('Per pale Azure and Sable, three Fleurs-de-Lis Or');
     const expected: Blason = {

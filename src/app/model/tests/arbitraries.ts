@@ -195,7 +195,7 @@ export const ordinaryArb: Arbitrary<Ordinary> = fc
   })
   .chain(
     (obj): Arbitrary<Ordinary> => {
-      if (obj.name === 'pale' || obj.name === 'chevron' || obj.name === 'chevronel') {
+      if (obj.name === 'pale' || obj.name === 'fess' || obj.name === 'chevron' || obj.name === 'chevronel') {
         const countableOrdinary = {
           name: obj.name,
           tincture: obj.tincture,

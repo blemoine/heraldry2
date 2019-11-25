@@ -10,7 +10,7 @@ export type Chief = {
   charge: Charge | null;
 };
 export type Bend = { name: 'bend'; tincture: Tincture; line: Line; fimbriated: MetalsAndColours | null };
-export type Fess = { name: 'fess'; tincture: Tincture; line: Line; fimbriated: MetalsAndColours | null };
+export type Fess = { name: 'fess'; tincture: Tincture; line: Line; fimbriated: MetalsAndColours | null; count: 1 | 2 };
 export type BendSinister = {
   name: 'bendSinister';
   tincture: Tincture;

@@ -236,13 +236,20 @@ function stringifyCharge(charge: Charge): string {
 }
 
 function stringifyOrdinary(ordinary: Ordinary): string {
-  if (ordinary.name === 'pale' || ordinary.name === 'chevron' || ordinary.name === 'chevronel') {
+  if (
+    ordinary.name === 'pale' ||
+    ordinary.name === 'fess' ||
+    ordinary.name === 'chevron' ||
+    ordinary.name === 'chevronel'
+  ) {
     let result = ordinary.count === 1 ? 'a' : stringifyNumber(ordinary.count);
     if (ordinary.count === 1) {
       result += ' ' + stringifyOrdinaryName(ordinary.name) + ' ';
     } else {
       if (ordinary.name === 'pale') {
         result += ' pallets ';
+      } else if (ordinary.name === 'fess') {
+        result += ' bars ';
       } else if (ordinary.name === 'chevron') {
         result += ' chevrons ';
       } else if (ordinary.name === 'chevronel') {

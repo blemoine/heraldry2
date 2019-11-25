@@ -273,7 +273,12 @@ export function encodeOrdinary(ordinary: Ordinary | null): Uint8Array {
     }
   } else {
     result[2] = encodeTincture(ordinary.tincture);
-    if (ordinary.name === 'pale' || ordinary.name === 'chevron' || ordinary.name === 'chevronel') {
+    if (
+      ordinary.name === 'pale' ||
+      ordinary.name === 'fess' ||
+      ordinary.name === 'chevron' ||
+      ordinary.name === 'chevronel'
+    ) {
       result[3] = ordinary.count;
     }
     if (ordinary.name === 'chief') {
@@ -363,7 +368,7 @@ export function decodeOrdinary(arr: Uint8Array): Result<Ordinary | null> {
   return flatMap(
     zip4(maybeName, maybeLine, maybeTincture, maybeFimbriated),
     ([name, line, tincture, fimbriated]): Result<Ordinary> => {
-      if (name === 'pale') {
+      if (name === 'pale' || name === 'fess') {
         const maybeCount: Result<1 | 2> = decodeNumber([1, 2], arr[3]);
         return map(maybeCount, (count) => ({ name, line, tincture, count, fimbriated }));
       } else if (name === 'chape-ploye' || name === 'chausse-ploye') {

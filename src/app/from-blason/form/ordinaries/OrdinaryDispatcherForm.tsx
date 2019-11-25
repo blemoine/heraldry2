@@ -10,7 +10,7 @@ type Props = {
   ordinaryChange: (ordinary: Ordinary) => void;
 };
 export const OrdinaryDispatcherForm = ({ ordinary, ordinaryChange }: Props) => {
-  if (ordinary.name === 'pale') {
+  if (ordinary.name === 'pale' || ordinary.name === 'fess') {
     return <PaleForm ordinary={ordinary} ordinaryChange={ordinaryChange} />;
   } else if (ordinary.name === 'chape-ploye' || ordinary.name === 'chausse-ploye') {
     return <ChapePloyeForm ordinary={ordinary} ordinaryChange={ordinaryChange} />;

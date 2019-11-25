@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { Pale } from '../../../model/ordinary';
+import { Fess, Pale } from '../../../model/ordinary';
 import { MetalAndColoursSelect, TinctureSelect } from '../TinctureSelect';
 import { MetalsAndColours, Tincture } from '../../../model/tincture';
 import { LineSelect } from '../LineSelect';
 import { Line } from '../../../model/line';
 import { ButtonGroup } from '../../../common/ButtonGroup';
 
-type Props = { ordinary: Pale; ordinaryChange: (pale: Pale) => void };
+type Props = { ordinary: Pale | Fess; ordinaryChange: (ordinary: Pale | Fess) => void };
 const countOptions = [1, 2] as const;
 export const PaleForm = ({ ordinary, ordinaryChange }: Props) => {
   function ordinaryTinctureChange(tincture: Tincture) {

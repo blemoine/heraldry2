@@ -43,10 +43,11 @@ Faire le "of the last"
 - Réecrire les bendy en s'inspirant de bendy per pale.
 - Fur symbol are repeated multiple times
 - On a chief with a charge is buggy on spanish shield
+- Form to select charge on a chief
 
 ## Feature to add
 
 - Quarterly per fess indented argent and gules (https://en.wikipedia.org/wiki/Fulk_FitzWarin)
 - https://en.wikipedia.org/wiki/Armorial_of_the_House_of_Plantagenet
 - per-fesse gu. and arg., six martlets, three, two, one, counterchanged
-- Arg., on a chief az. two mullets or
+

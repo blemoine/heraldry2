@@ -16,7 +16,12 @@ export function OrdinaryForm({ ordinary, ordinaryChange }: Props) {
       const tincture = ordinary ? allDeclaredTincturesOfOrdinary(ordinary)[0] : argent;
       const line: Line = ordinary ? ordinary.line : 'straight';
       const fimbriated: MetalsAndColours | null = ordinary ? ordinary.fimbriated : null;
-      if (ordinaryName === 'pale' || ordinaryName === 'chevron' || ordinaryName === 'chevronel') {
+      if (
+        ordinaryName === 'pale' ||
+        ordinaryName === 'fess' ||
+        ordinaryName === 'chevron' ||
+        ordinaryName === 'chevronel'
+      ) {
         ordinaryChange({ name: ordinaryName, tincture, count: 1, line, fimbriated });
       } else if (ordinaryName === 'chape-ploye' || ordinaryName === 'chausse-ploye') {
         const missingColor = tinctures.find((t) => !areTinctureEquals(t, tincture));
