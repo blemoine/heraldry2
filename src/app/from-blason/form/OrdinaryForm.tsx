@@ -43,16 +43,12 @@ export function OrdinaryForm({ ordinary, ordinaryChange }: Props) {
   }
 
   return (
-    <div className="row">
-      <div className="col">
-        <div className="form-group ordinary-type-select">
-          <label>Ordinary</label>
-          <OrdinaryNameSelect ordinary={ordinary?.name || null} ordinaryChange={changeOrdinary} />
-        </div>
+    <>
+      <div className="form-group ordinary-type-select">
+        <label>Ordinary</label>
+        <OrdinaryNameSelect ordinary={ordinary?.name || null} ordinaryChange={changeOrdinary} />
       </div>
-      <div className="col">
-        {ordinary && <OrdinaryDispatcherForm ordinary={ordinary} ordinaryChange={ordinaryChange} />}
-      </div>
-    </div>
+      <div>{ordinary && <OrdinaryDispatcherForm ordinary={ordinary} ordinaryChange={ordinaryChange} />}</div>
+    </>
   );
 }
