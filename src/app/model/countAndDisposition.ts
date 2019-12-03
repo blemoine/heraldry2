@@ -50,6 +50,6 @@ export const supportedNumbers: ReadonlyArray<SupportedNumber> = [
 export function isNotOne(i: SupportedNumber): i is Exclude<SupportedNumber, 1> {
   return i !== 1;
 }
-export const availableDispositions = ['default', 'pale', 'fess'] as const;
+export const availableDispositions = ['default', 'pale', 'fess', 'bend', 'bendSinister'] as const;
 export type Disposition = typeof availableDispositions[number];
 export type CountAndDisposition = { count: SupportedNumber; disposition: Disposition };

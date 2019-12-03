@@ -72,7 +72,7 @@ describe('getChargePositions', () => {
 
   it('should display the number of element in pale', () => {
     expect(getChargePositions(5, 'pale', 'default')).toEqual({
-      cellWidth: 1 / 3,
+      cellWidth: 1,
       cellHeight: 1 / 5,
       positions: [
         [0.5, 0.1],
@@ -93,6 +93,18 @@ describe('getChargePositions', () => {
         [7 / 18, 0.5],
         [11 / 18, 0.5],
         [15 / 18, 0.5],
+      ],
+    });
+  });
+  it('should display the number of element in bend', () => {
+    expect(getChargePositions(4, 'bend', 'default')).toEqual({
+      cellWidth: 1 / 4,
+      cellHeight: 1 / 4,
+      positions: [
+        [1 / 8, 1 / 8],
+        [3 / 8, 3 / 8],
+        [5 / 8, 5 / 8],
+        [7 / 8, 7 / 8],
       ],
     });
   });

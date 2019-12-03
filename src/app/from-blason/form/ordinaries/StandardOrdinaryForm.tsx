@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ChapePloye, ChaussePloye, Ordinary, Pale } from '../../../model/ordinary';
+import { ChapePloye, ChaussePloye, hasOrdinaryCharge, Ordinary, Pale } from '../../../model/ordinary';
 import { MetalAndColoursSelect, TinctureSelect } from '../TinctureSelect';
 import { MetalsAndColours, Tincture } from '../../../model/tincture';
 import { LineSelect } from '../LineSelect';
@@ -46,7 +46,7 @@ export const StandardOrdinaryForm = ({ ordinary, ordinaryChange }: Props) => {
           <MetalAndColoursSelect tincture={ordinary.fimbriated} tinctureChange={ordinaryFimbriatedChange} />
         </div>
       </div>
-      {ordinary.name === 'chief' && (
+      {hasOrdinaryCharge(ordinary) && (
         <ChargeForm charge={ordinary.charge} chargeChange={(charge) => ordinaryChange({ ...ordinary, charge })} />
       )}
     </>

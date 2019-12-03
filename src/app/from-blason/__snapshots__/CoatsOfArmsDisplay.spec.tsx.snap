@@ -487,10 +487,10 @@ exports[`CoatsOfArms should render 'Azure, a bordure urdy or, two crosses maltes
     clipPath="url(#plain-field-clip-path)"
   >
     <g
-      transform="translate(26 26.66666666666667)"
+      transform="translate(30 26.66666666666667)"
     >
       <path
-        d="M 71.18768 41.82768 L 57.12608 4.464 L 74 15.71328 L 90.87392 4.464 L 76.81232 41.82768 L 114.176 27.76608 L 102.92672 44.64 L 114.176 61.51392 L 76.81232 47.45232 L 90.87392 84.816 L 74 73.56672 L 57.12608 84.816 L 71.18768 47.45232 L 33.824 61.51392 L 45.07328 44.64 L 33.824 27.76608 L 71.18768 41.82768"
+        d="M 67.34392 39.50392 L 54.06352 4.216 L 70 14.84032 L 85.93648 4.216 L 72.65608 39.50392 L 107.944 26.22352 L 97.31968 42.16 L 107.944 58.09648 L 72.65608 44.81608 L 85.93648 80.104 L 70 69.47968 L 54.06352 80.104 L 67.34392 44.81608 L 32.056 58.09648 L 42.68032 42.16 L 32.056 26.22352 L 67.34392 39.50392"
         fill="#FFFFFF"
         onClick={[Function]}
         onMouseDown={[Function]}
@@ -504,7 +504,7 @@ exports[`CoatsOfArms should render 'Azure, a bordure urdy or, two crosses maltes
         }
       />
       <path
-        d="M 71.18768 131.10768 L 57.12608 93.744 L 74 104.99328 L 90.87392 93.744 L 76.81232 131.10768 L 114.176 117.04608 L 102.92672 133.92 L 114.176 150.79392 L 76.81232 136.73232 L 90.87392 174.096 L 74 162.84672 L 57.12608 174.096 L 71.18768 136.73232 L 33.824 150.79392 L 45.07328 133.92 L 33.824 117.04608 L 71.18768 131.10768"
+        d="M 67.34392 123.82392 L 54.06352 88.536 L 70 99.16032 L 85.93648 88.536 L 72.65608 123.82392 L 107.944 110.54352 L 97.31968 126.48 L 107.944 142.41648 L 72.65608 129.13608 L 85.93648 164.424 L 70 153.79968 L 54.06352 164.424 L 67.34392 129.13608 L 32.056 142.41648 L 42.68032 126.48 L 32.056 110.54352 L 67.34392 123.82392"
         fill="#FFFFFF"
         onClick={[Function]}
         onMouseDown={[Function]}
@@ -11276,7 +11276,7 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
         }
       >
         <g
-          transform="translate(10 10.666666666666668)"
+          transform="translate(10 9.333333333333336)"
         >
           <symbol
             id="ermined-argent-sable"
@@ -11629,7 +11629,7 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
         }
       >
         <g
-          transform="translate(10 10.666666666666668)"
+          transform="translate(10 9.333333333333336)"
         >
           <symbol
             id="ermined-argent-sable"
@@ -11805,7 +11805,7 @@ exports[`CoatsOfArms should render 'Quarterly, 1st: Bendy or and purpure, a bord
         }
       >
         <g
-          transform="translate(10 10.666666666666668)"
+          transform="translate(10 9.333333333333336)"
         >
           <g
             transform=""
@@ -11887,7 +11887,7 @@ exports[`CoatsOfArms should render 'Quarterly, 1st: Bendy or and purpure, a bord
         }
       >
         <g
-          transform="translate(10 10.666666666666668)"
+          transform="translate(10 9.333333333333336)"
         >
           <g
             transform=""
@@ -11979,7 +11979,7 @@ exports[`CoatsOfArms should render 'Quarterly, 1st: Bendy or and purpure, a bord
         }
       >
         <g
-          transform="translate(10 10.666666666666668)"
+          transform="translate(10 9.333333333333336)"
         >
           <g
             transform=""
@@ -12071,7 +12071,7 @@ exports[`CoatsOfArms should render 'Quarterly, 1st: Bendy or and purpure, a bord
         }
       >
         <g
-          transform="translate(10 10.666666666666668)"
+          transform="translate(10 9.333333333333336)"
         >
           <g
             transform=""

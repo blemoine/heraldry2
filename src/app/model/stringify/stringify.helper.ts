@@ -1,6 +1,6 @@
 import { areTinctureEquals, counterErmine, ermine, erminois, gules, isErmine, or, pean, Tincture } from '../tincture';
-import { stringifyNumber, SupportedNumber } from '../countAndDisposition';
-import { Ordinary } from '../ordinary';
+import { Disposition, stringifyNumber, SupportedNumber } from '../countAndDisposition';
+import { hasOrdinaryCharge, Ordinary } from '../ordinary';
 import { cannotHappen } from '../../../utils/cannot-happen';
 import { Party } from '../party';
 import { Field } from '../field';
@@ -98,6 +98,13 @@ export function stringifyOrdinaryName(name: Ordinary['name']): string {
     return name;
   }
 }
+export function stringifyDisposition(disposition: Disposition): string {
+  if (disposition === 'bendSinister') {
+    return 'bend sinister';
+  } else {
+    return disposition;
+  }
+}
 
 function stringifyCharge(charge: Charge): string {
   const count = charge.countAndDisposition.count;
@@ -109,7 +116,7 @@ function stringifyCharge(charge: Charge): string {
     result += ' ' + charge.attitude;
 
     if (charge.countAndDisposition.count !== 1 && charge.countAndDisposition.disposition !== 'default') {
-      result += ' in ' + charge.countAndDisposition.disposition;
+      result += ' in ' + stringifyDisposition(charge.countAndDisposition.disposition);
     }
 
     result += ' ' + stringifyTincture(charge.tincture);
@@ -123,7 +130,7 @@ function stringifyCharge(charge: Charge): string {
     result += charge.countAndDisposition.count === 1 ? ' fleur de lys ' : ' fleurs de lys ';
 
     if (charge.countAndDisposition.count !== 1 && charge.countAndDisposition.disposition !== 'default') {
-      result += ' in ' + charge.countAndDisposition.disposition + ' ';
+      result += ' in ' + stringifyDisposition(charge.countAndDisposition.disposition) + ' ';
     }
     result += stringifyTincture(charge.tincture);
 
@@ -131,7 +138,7 @@ function stringifyCharge(charge: Charge): string {
   } else if (charge.name === 'escutcheon') {
     let result = counterStr + ' ' + pluralize('escutcheon', count) + ' ';
     if (charge.countAndDisposition.count !== 1 && charge.countAndDisposition.disposition !== 'default') {
-      result += ' in ' + charge.countAndDisposition.disposition + ' ';
+      result += ' in ' + stringifyDisposition(charge.countAndDisposition.disposition) + ' ';
     }
     result += stringifyTincture(charge.tincture);
 
@@ -149,7 +156,7 @@ function stringifyCharge(charge: Charge): string {
       result += ' tail ' + charge.tail;
     }
     if (charge.countAndDisposition.count !== 1 && charge.countAndDisposition.disposition !== 'default') {
-      result += ' in ' + charge.countAndDisposition.disposition;
+      result += ' in ' + stringifyDisposition(charge.countAndDisposition.disposition);
     }
 
     result += ' ' + stringifyTincture(charge.tincture);
@@ -163,19 +170,19 @@ function stringifyCharge(charge: Charge): string {
     if (charge.inside === 'voided') {
       result += ' ' + pluralize('annulet', count);
       if (charge.countAndDisposition.count !== 1 && charge.countAndDisposition.disposition !== 'default') {
-        result += ' in ' + charge.countAndDisposition.disposition;
+        result += ' in ' + stringifyDisposition(charge.countAndDisposition.disposition);
       }
       result += ' ' + stringifyTincture(charge.tincture);
     } else if (charge.inside === 'nothing') {
       if (areTinctureEquals(charge.tincture, or)) {
         result += ' ' + pluralize('bezant', count);
         if (charge.countAndDisposition.count !== 1 && charge.countAndDisposition.disposition !== 'default') {
-          result += ' in ' + charge.countAndDisposition.disposition + ' ';
+          result += ' in ' + stringifyDisposition(charge.countAndDisposition.disposition) + ' ';
         }
       } else {
         result += ' ' + pluralize('roundel', count);
         if (charge.countAndDisposition.count !== 1 && charge.countAndDisposition.disposition !== 'default') {
-          result += ' in ' + charge.countAndDisposition.disposition;
+          result += ' in ' + stringifyDisposition(charge.countAndDisposition.disposition);
         }
         result += ' ' + stringifyTincture(charge.tincture);
       }
@@ -196,7 +203,7 @@ function stringifyCharge(charge: Charge): string {
       return cannotHappen(charge.inside);
     }
     if (charge.countAndDisposition.count !== 1 && charge.countAndDisposition.disposition !== 'default') {
-      result += ' in ' + charge.countAndDisposition.disposition + ' ';
+      result += ' in ' + stringifyDisposition(charge.countAndDisposition.disposition) + ' ';
     }
     result += stringifyTincture(charge.tincture);
 
@@ -207,7 +214,7 @@ function stringifyCharge(charge: Charge): string {
     result += charge.limbs + ' ';
 
     if (charge.countAndDisposition.count !== 1 && charge.countAndDisposition.disposition !== 'default') {
-      result += ' in ' + charge.countAndDisposition.disposition + ' ';
+      result += ' in ' + stringifyDisposition(charge.countAndDisposition.disposition) + ' ';
     }
 
     result += stringifyTincture(charge.tincture);
@@ -224,7 +231,7 @@ function stringifyCharge(charge: Charge): string {
     }
 
     if (charge.countAndDisposition.count !== 1 && charge.countAndDisposition.disposition !== 'default') {
-      result += ' in ' + charge.countAndDisposition.disposition;
+      result += ' in ' + stringifyDisposition(charge.countAndDisposition.disposition);
     }
 
     result += ' ' + stringifyTincture(charge.tincture);
@@ -301,7 +308,7 @@ function stringifyOrdinary(ordinary: Ordinary): string {
       article = 'an ';
     } else if (ordinary.name === 'flaunches') {
       article = '';
-    } else if (ordinary.name === 'chief' && !!ordinary.charge) {
+    } else if (hasOrdinaryCharge(ordinary) && !!ordinary.charge) {
       article = 'on a ';
     } else {
       article = 'a ';
@@ -316,7 +323,7 @@ function stringifyOrdinary(ordinary: Ordinary): string {
       result += ' fimbriated ' + stringifyTincture(ordinary.fimbriated);
     }
 
-    if (ordinary.name === 'chief' && !!ordinary.charge) {
+    if (hasOrdinaryCharge(ordinary) && !!ordinary.charge) {
       result += ' ' + stringifyCharge(ordinary.charge);
     }
 

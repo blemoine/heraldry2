@@ -9,14 +9,19 @@ export type Chief = {
   fimbriated: MetalsAndColours | null;
   charge: Charge | null;
 };
-export type Bend = { name: 'bend'; tincture: Tincture; line: Line; fimbriated: MetalsAndColours | null };
-export type Fess = { name: 'fess'; tincture: Tincture; line: Line; fimbriated: MetalsAndColours | null; count: 1 | 2 };
+export type Bend = {
+  name: 'bend';
+  tincture: Tincture;
+  line: Line;
+  fimbriated: MetalsAndColours | null;
+};
 export type BendSinister = {
   name: 'bendSinister';
   tincture: Tincture;
   line: Line;
   fimbriated: MetalsAndColours | null;
 };
+export type Fess = { name: 'fess'; tincture: Tincture; line: Line; fimbriated: MetalsAndColours | null; count: 1 | 2 };
 export type OrdinaryCross = { name: 'cross'; tincture: Tincture; line: Line; fimbriated: MetalsAndColours | null };
 export type Saltire = { name: 'saltire'; tincture: Tincture; line: Line; fimbriated: MetalsAndColours | null };
 export type Bordure = { name: 'bordure'; tincture: Tincture; line: Line; fimbriated: MetalsAndColours | null };
@@ -120,3 +125,9 @@ export const ordinaries: Array<Ordinary['name']> = [
   'saltire',
   ...subOrdinaries,
 ];
+
+export const withChargeOrdinaries = ['chief'] as const;
+type OrdinaryWithCharge = Chief;
+export function hasOrdinaryCharge(x: Ordinary): x is OrdinaryWithCharge {
+  return withChargeOrdinaries.includes(x.name as OrdinaryWithCharge['name']);
+}

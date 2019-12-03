@@ -27,8 +27,15 @@ import { identity } from '../../utils/identity';
 import { gules, MetalsAndColours, or } from '../model/tincture';
 import { cannotHappen } from '../../utils/cannot-happen';
 import { metalOrColourParserFromName, tinctureParserFromName } from './tinctureParser';
-import { CountAndDisposition, isNotOne, SupportedNumber, supportedNumbers } from '../model/countAndDisposition';
+import {
+  availableDispositions,
+  CountAndDisposition,
+  isNotOne,
+  SupportedNumber,
+  supportedNumbers,
+} from '../model/countAndDisposition';
 import { OrdinaryCross } from '../model/ordinary';
+import { stringifyDisposition } from '../model/stringify/stringify.helper';
 
 const countParser: P.Parser<SupportedNumber> = P.alt(aParser, ...supportedNumbers.filter(isNotOne).map(numberParser));
 
@@ -37,7 +44,12 @@ const countAndDispositionParser = (count: SupportedNumber): P.Parser<CountAndDis
     return P.of({ count, disposition: 'default' });
   } else {
     return P.whitespace
-      .then(P.alt(constStr('pale', 'in pale'), constStr('fess', 'in fess')))
+      .then(
+        buildAltParser(
+          availableDispositions.filter((x) => x !== 'default'),
+          (disposition) => 'in ' + stringifyDisposition(disposition)
+        )
+      )
       .fallback('default' as const)
       .map((disposition) => ({ count, disposition }));
   }

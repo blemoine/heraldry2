@@ -55,7 +55,7 @@ function getFieldVerticalOffsetAndScale(ordinary: Ordinary): { verticalOffset: n
     } else if (ordinary.line === 'wavy' || ordinary.line === 'dancetty' || ordinary.line === 'potenty') {
       return { verticalOffset: 6 / 100, verticalScale: 88 / 100 };
     } else {
-      return { verticalOffset: 8 / 100, verticalScale: 85 / 100 };
+      return { verticalOffset: 7 / 100, verticalScale: 85 / 100 };
     }
   } else if (ordinary.name === 'base') {
     if (ordinary.line === 'invected') {
