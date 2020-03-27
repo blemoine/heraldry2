@@ -7,11 +7,13 @@ export const ErmineDisplay = ({ width, height, fill, spot }: Props) => {
       <rect width="100%" height="100%" fill={fill} />
       <g transform={`translate(${width / 2}, ${height})`}>
         <path
-          d={`M0,${height * -0.725} C ${(width * -15) / 200},${(height * -30) / 240} ${(width * -29) / 200},${(height *
-            -35) /
-            240} ${(width * -55) / 200},0 L ${(width * -15) / 200},${(height * -28) / 240} 0,0 ${(width * 15) /
-            200},${(height * -28) / 240} ${(width * 55) / 200},0 C ${(width * 28) / 200},${(height * -35) /
-            240} ${(width * 15) / 200},${(height * -30) / 240} 0,${(height * -174) / 240} Z`}
+          d={`M0,${height * -0.725} C ${(width * -15) / 200},${(height * -30) / 240} ${(width * -29) / 200},${
+            (height * -35) / 240
+          } ${(width * -55) / 200},0 L ${(width * -15) / 200},${(height * -28) / 240} 0,0 ${(width * 15) / 200},${
+            (height * -28) / 240
+          } ${(width * 55) / 200},0 C ${(width * 28) / 200},${(height * -35) / 240} ${(width * 15) / 200},${
+            (height * -30) / 240
+          } 0,${(height * -174) / 240} Z`}
           fill={spot}
         />
         <circle cy={(height * -226) / 240} r="14" fill={spot} />

@@ -27,8 +27,9 @@ export const EscutcheonChargeDisplay = ({ charge, dimension, fillFromTincture, s
         return (
           <g
             key={i}
-            transform={`translate(${cx * width - computedDimension.width / 2} ${cy * height -
-              computedDimension.height / 2})`}
+            transform={`translate(${cx * width - computedDimension.width / 2} ${
+              cy * height - computedDimension.height / 2
+            })`}
           >
             <EscutcheonDisplay
               shieldShape="heater"

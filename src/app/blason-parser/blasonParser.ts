@@ -98,13 +98,7 @@ const language: Language = {
         return P.of({ kind: 'quarterly', blasons: [blason1, blason2, blason3, blason4] });
       }
     });
-    return P.alt(
-      constStr('quarterly')
-        .then(P.string(','))
-        .then(P.whitespace)
-        .then(quarterlyParser),
-      r.SimpleBlason
-    );
+    return P.alt(constStr('quarterly').then(P.string(',')).then(P.whitespace).then(quarterlyParser), r.SimpleBlason);
   },
 };
 

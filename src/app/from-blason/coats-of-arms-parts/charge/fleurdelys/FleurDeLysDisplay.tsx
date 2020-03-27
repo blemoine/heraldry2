@@ -27,8 +27,9 @@ export const FleurDeLysDisplay = ({ charge, dimension, fillFromTincture, shape, 
         return (
           <g
             key={i}
-            transform={`translate(${cx * width - computedDimension.width / 2} ${cy * height -
-              computedDimension.height / 2})`}
+            transform={`translate(${cx * width - computedDimension.width / 2} ${
+              cy * height - computedDimension.height / 2
+            })`}
           >
             <SvgFleurDeLys dimension={computedDimension} stroke={stroke} mainFill={fill} onClick={onClick} />;
           </g>

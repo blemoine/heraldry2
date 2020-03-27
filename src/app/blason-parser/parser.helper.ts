@@ -16,11 +16,7 @@ export function buildAltParser<A>(arr: ReadonlyArray<A>, stringifyFn: (a: A) => 
         }
       })
       .sort(([, a1], [, a2]) => a2.length - a1.length)
-      .map(([a, aStr]) =>
-        P.regex(new RegExp(aStr, 'i'))
-          .result(a)
-          .desc(aStr)
-      )
+      .map(([a, aStr]) => P.regex(new RegExp(aStr, 'i')).result(a).desc(aStr))
   );
 }
 
@@ -31,9 +27,7 @@ export function constStr<S extends string>(str: S, asStr?: string): P.Parser<S> 
 }
 
 export function numberParser<N extends StringifiableNumber>(n: N): P.Parser<N> {
-  return P.regex(new RegExp(numberToNameMap[n], 'i'))
-    .result(n)
-    .skip(P.whitespace);
+  return P.regex(new RegExp(numberToNameMap[n], 'i')).result(n).skip(P.whitespace);
 }
 
 export const aParser = P.regex(/an?/i)

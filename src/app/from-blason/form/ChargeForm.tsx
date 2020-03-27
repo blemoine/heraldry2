@@ -12,7 +12,7 @@ type Props = {
 };
 export function ChargeForm({ charge, chargeChange }: Props) {
   const changeChargeType = useCallback(
-    function(chargeName: Charge['name'] | null) {
+    function (chargeName: Charge['name'] | null) {
       if (chargeName === 'lion') {
         chargeChange({
           name: chargeName,

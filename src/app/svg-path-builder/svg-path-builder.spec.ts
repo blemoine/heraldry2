@@ -14,9 +14,7 @@ describe('SvgPathBuilder', () => {
   });
 
   it('should close the path', () => {
-    const result = SvgPathBuilder.start([10, 20])
-      .goTo([30, 30])
-      .close();
+    const result = SvgPathBuilder.start([10, 20]).goTo([30, 30]).close();
 
     expect(result.toPathAttribute()).toEqual('M 10 20 L 30 30 Z');
   });
@@ -63,9 +61,7 @@ describe('SvgPathBuilder', () => {
   });
 
   it('should optimize horizontal path after vertical path', () => {
-    const result = SvgPathBuilder.start([10, 20])
-      .goTo([60, 20])
-      .goTo([60, 80]);
+    const result = SvgPathBuilder.start([10, 20]).goTo([60, 20]).goTo([60, 80]);
 
     expect(result.toPathAttribute()).toEqual('M 10 20 H60 V80');
   });
@@ -91,9 +87,7 @@ describe('SvgPathBuilder', () => {
   });
 
   it('should do multiple moveTo', () => {
-    const result = SvgPathBuilder.start([10, 10])
-      .goTo([10, 70])
-      .moveTo([5, 5]);
+    const result = SvgPathBuilder.start([10, 10]).goTo([10, 70]).moveTo([5, 5]);
 
     expect(result.toPathAttribute()).toEqual('M 10 10 V70 M 5 5');
   });
@@ -126,9 +120,7 @@ describe('SvgPathBuilder', () => {
   });
 
   it('should be insensible to rounding error', () => {
-    const result = SvgPathBuilder.start([0.1, 0.1])
-      .verticalMove(0.2)
-      .horizontalMove(0.2);
+    const result = SvgPathBuilder.start([0.1, 0.1]).verticalMove(0.2).horizontalMove(0.2);
 
     expect(result.toPathAttribute()).toEqual('M 0.1 0.1 V0.3 H0.3');
   });
@@ -146,43 +138,31 @@ describe('SvgPathBuilder', () => {
   });
 
   it('should support rotation of line from center 0,0 ', () => {
-    const result = SvgPathBuilder.start([0, 0])
-      .goTo([4, -20])
-      .goTo([8, 0])
-      .rotate([0, 0], 90);
+    const result = SvgPathBuilder.start([0, 0]).goTo([4, -20]).goTo([8, 0]).rotate([0, 0], 90);
 
     expect(result.toPathAttribute()).toEqual('M 0 0 L 20 4 L 0 8');
   });
 
   it('should support rotation of arc from a given center 0,0 ', () => {
-    const result = SvgPathBuilder.start([4, 12])
-      .arcTo([8, 12], { radius: 9 })
-      .rotate([6, 12], 90);
+    const result = SvgPathBuilder.start([4, 12]).arcTo([8, 12], { radius: 9 }).rotate([6, 12], 90);
 
     expect(result.toPathAttribute()).toEqual('M 6 10 A9 9 0 0 0 6 14');
   });
 
   it('should support rotation of horizontal and vertical move ', () => {
-    const result = SvgPathBuilder.start([0, 0])
-      .horizontalMove(3)
-      .verticalMove(4)
-      .rotate([0, 0], 45);
+    const result = SvgPathBuilder.start([0, 0]).horizontalMove(3).verticalMove(4).rotate([0, 0], 45);
 
     expect(result.toPathAttribute()).toEqual('M 0 0 L 2.12132 2.12132 L -0.70711 4.94975');
   });
 
   it('should support translation of line ', () => {
-    const result = SvgPathBuilder.start([0, 0])
-      .goTo([4, -20])
-      .translate([5, 10]);
+    const result = SvgPathBuilder.start([0, 0]).goTo([4, -20]).translate([5, 10]);
 
     expect(result.toPathAttribute()).toEqual('M 5 10 L 9 -10');
   });
 
   it('should support translation of arc ', () => {
-    const result = SvgPathBuilder.start([4, 12])
-      .arcTo([8, 12], { radius: 9 })
-      .translate([6, 12]);
+    const result = SvgPathBuilder.start([4, 12]).arcTo([8, 12], { radius: 9 }).translate([6, 12]);
 
     expect(result.toPathAttribute()).toEqual('M 10 24 A9 9 0 0 0 14 24');
   });
@@ -203,18 +183,13 @@ describe('SvgPathBuilder', () => {
   });
 
   it('should support translation of horizontal and vertical move ', () => {
-    const result = SvgPathBuilder.start([0, 0])
-      .horizontalMove(3)
-      .verticalMove(4)
-      .translate([5, 6]);
+    const result = SvgPathBuilder.start([0, 0]).horizontalMove(3).verticalMove(4).translate([5, 6]);
 
     expect(result.toPathAttribute()).toEqual('M 5 6 L 8 6 L 8 10');
   });
 
   it('should support concatenation of path', () => {
-    const p1 = SvgPathBuilder.start([0, 0])
-      .horizontalMove(12)
-      .goTo([23, 34]);
+    const p1 = SvgPathBuilder.start([0, 0]).horizontalMove(12).goTo([23, 34]);
     const p2 = SvgPathBuilder.start([23, 34]).goTo([7, 8]);
     const result = p1.concat(p2);
 
@@ -222,9 +197,7 @@ describe('SvgPathBuilder', () => {
   });
 
   it('should optimize the goto', () => {
-    const result = SvgPathBuilder.start([12, 24])
-      .goTo([65, 78])
-      .goTo([12, 24]);
+    const result = SvgPathBuilder.start([12, 24]).goTo([65, 78]).goTo([12, 24]);
 
     expect((result as SvgPathBuilder).toPathAttribute()).toEqual('M 12 24 L 65 78 Z');
   });

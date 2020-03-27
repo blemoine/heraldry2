@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export const ButtonGroup = function<A extends string | number>({
+export const ButtonGroup = function <A extends string | number>({
   options,
   value,
   valueChange,

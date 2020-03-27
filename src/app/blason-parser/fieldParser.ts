@@ -32,19 +32,13 @@ function partyParser(): P.Parser<Party> {
       if (name === 'pall') {
         return P.seq(
           tinctureParserFromName,
-          P.string(',')
-            .then(P.optWhitespace)
-            .then(tinctureParserFromName),
-          P.regex(/and/i)
-            .trim(P.whitespace)
-            .then(tinctureParserFromName)
+          P.string(',').then(P.optWhitespace).then(tinctureParserFromName),
+          P.regex(/and/i).trim(P.whitespace).then(tinctureParserFromName)
         ).map((tinctures) => ({ name, tinctures, line }));
       } else {
         return P.seq(
           tinctureParserFromName,
-          P.regex(/and/i)
-            .trim(P.whitespace)
-            .then(tinctureParserFromName)
+          P.regex(/and/i).trim(P.whitespace).then(tinctureParserFromName)
         ).map((tinctures) => ({ name, tinctures, line }));
       }
     }
@@ -54,21 +48,14 @@ function partyParser(): P.Parser<Party> {
 const tiercedUnit: P.Parser<Tierced['name']> = buildAltParser(tierceds, stringifyParty);
 function tiercedParser(): P.Parser<Tierced> {
   return P.seq(
-    P.alt(constStr('tierced', 'Tierced per'))
-      .skip(P.whitespace)
-      .then(tiercedUnit)
-      .skip(P.whitespace),
+    P.alt(constStr('tierced', 'Tierced per')).skip(P.whitespace).then(tiercedUnit).skip(P.whitespace),
     lineParser.skip(P.whitespace).fallback('straight' as const)
   ).chain(
     ([name, line]): P.Parser<Tierced> => {
       return P.seq(
         tinctureParserFromName,
-        P.string(',')
-          .then(P.optWhitespace)
-          .then(tinctureParserFromName),
-        P.regex(/and/i)
-          .trim(P.whitespace)
-          .then(tinctureParserFromName)
+        P.string(',').then(P.optWhitespace).then(tinctureParserFromName),
+        P.regex(/and/i).trim(P.whitespace).then(tinctureParserFromName)
       ).map((tinctures) => ({ name, tinctures, line }));
     }
   );
@@ -104,9 +91,7 @@ export function fieldParser(): P.Parser<Field> {
     ),
     P.whitespace.then(lineParser).fallback('straight' as const),
     P.whitespace.then(tinctureParserFromName).skip(P.whitespace),
-    P.regex(/and/i)
-      .skip(P.whitespace)
-      .then(tinctureParserFromName)
+    P.regex(/and/i).skip(P.whitespace).then(tinctureParserFromName)
   ).map(([[kind, number], line, tincture1, tincture2]): BendyField | BendySinisterField => ({
     kind,
     number,
@@ -126,9 +111,7 @@ export function fieldParser(): P.Parser<Field> {
     ),
 
     P.whitespace.then(tinctureParserFromName).skip(P.whitespace),
-    P.regex(/and/i)
-      .skip(P.whitespace)
-      .then(tinctureParserFromName)
+    P.regex(/and/i).skip(P.whitespace).then(tinctureParserFromName)
   ).map(
     ([[kind, number], tincture1, tincture2]): GironnyField => ({
       kind,
@@ -165,9 +148,7 @@ export function fieldParser(): P.Parser<Field> {
       constStr('chevronny')
     ),
     P.whitespace.then(tinctureParserFromName).skip(P.whitespace),
-    P.regex(/and/i)
-      .skip(P.whitespace)
-      .then(tinctureParserFromName)
+    P.regex(/and/i).skip(P.whitespace).then(tinctureParserFromName)
   ).map(
     ([kind, tincture1, tincture2]): Exclude<Field, PlainField | PartyField | BarryField> => ({
       kind,

@@ -116,14 +116,8 @@ export function generateInRange(seed: string, range: ColorRange<HslColor>): HslC
 export function stringifyColor({ r, g, b }: RgbColor): string {
   return (
     '#' +
-    Math.floor(r)
-      .toString(16)
-      .padStart(2, '0') +
-    Math.floor(g)
-      .toString(16)
-      .padStart(2, '0') +
-    Math.floor(b)
-      .toString(16)
-      .padStart(2, '0')
+    Math.floor(r).toString(16).padStart(2, '0') +
+    Math.floor(g).toString(16).padStart(2, '0') +
+    Math.floor(b).toString(16).padStart(2, '0')
   );
 }

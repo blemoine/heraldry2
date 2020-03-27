@@ -196,21 +196,11 @@ function embattleLineTo(
   if (halfOffset) {
     const perpendicularToTier1 = getPerpendicularPointToCenter(from, middle, -height);
     const perpendicularToTier2 = getPerpendicularPointToCenter(middle, to, -height);
-    return path
-      .goTo(midTier1)
-      .goTo(perpendicularToTier1)
-      .goTo(perpendicularToTier2)
-      .goTo(midTier2)
-      .goTo(to);
+    return path.goTo(midTier1).goTo(perpendicularToTier1).goTo(perpendicularToTier2).goTo(midTier2).goTo(to);
   } else {
     const perpendicularToTier1 = getPerpendicularPointToCenter(from, middle, height);
     const perpendicularToTier2 = getPerpendicularPointToCenter(middle, to, height);
-    return path
-      .goTo(midTier1)
-      .goTo(perpendicularToTier1)
-      .goTo(perpendicularToTier2)
-      .goTo(midTier2)
-      .goTo(to);
+    return path.goTo(midTier1).goTo(perpendicularToTier1).goTo(perpendicularToTier2).goTo(midTier2).goTo(to);
   }
 }
 

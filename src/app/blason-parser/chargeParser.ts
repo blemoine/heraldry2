@@ -69,11 +69,7 @@ const lionParser = (count: SupportedNumber): P.Parser<Lion> => {
     lionNameParser,
     P.whitespace.then(attitudeParser).fallback('rampant' as const),
     P.whitespace.then(headParser).fallback(null),
-    P.whitespace
-      .then(P.regex(/tail/i))
-      .then(P.whitespace)
-      .then(tailParser)
-      .fallback(null),
+    P.whitespace.then(P.regex(/tail/i)).then(P.whitespace).then(tailParser).fallback(null),
     countAndDispositionParser(count),
     P.whitespace.then(tinctureParserFromName),
     P.whitespace

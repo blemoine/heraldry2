@@ -12,10 +12,7 @@ export const PallFieldDisplay = ({ fill, line, dimension: { width, height } }: P
   const lineOptions = computeLineOptions(line, { width, height });
   const invertedLineOptions = line === 'dancetty' ? lineOptions : invertLineOptionNullable(lineOptions);
 
-  const topPart = SvgPathBuilder.start([0, 0])
-    .goTo(middle, lineOptions)
-    .goTo([width, 0], lineOptions)
-    .close();
+  const topPart = SvgPathBuilder.start([0, 0]).goTo(middle, lineOptions).goTo([width, 0], lineOptions).close();
 
   const leftPart = SvgPathBuilder.start([0, 0])
     .goTo(middle, lineOptions)

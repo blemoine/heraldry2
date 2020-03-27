@@ -27,6 +27,7 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off', // false positive everywhere
     'react/prop-types': 'off',
-    'react/display-name': 'off', // false positive for React.memo
+    'react/display-name': 'off', // false positive for React.memo,
+    '@typescript-eslint/no-empty-function': 'off',
   },
 };

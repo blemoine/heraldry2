@@ -43,7 +43,7 @@ export const SimpleBlasonForm = React.memo(function SimpleBlasonForm({
   );
 
   const chargeChange = useCallback(
-    function(charge: Charge | null) {
+    function (charge: Charge | null) {
       if (charge) {
         blasonChange({ ...blason, charge });
       } else {

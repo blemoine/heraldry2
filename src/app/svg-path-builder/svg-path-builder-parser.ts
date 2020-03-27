@@ -77,7 +77,7 @@ const hParser: P.Parser<Array<number>> = svgPathParamParser('h', NumberParser);
 
 const zParser = P.alt(P.string('z'), P.string('Z'));
 
-const Path = function(pathBuilder: SvgPathBuilder): P.Parser<SvgPathBuilder> {
+const Path = function (pathBuilder: SvgPathBuilder): P.Parser<SvgPathBuilder> {
   return P.alt(
     MParser.map((points) => points.reduce((acc, point) => acc.moveTo(point), pathBuilder)),
     LParser.map((points) => points.reduce((acc, point) => acc.goTo(point), pathBuilder)),

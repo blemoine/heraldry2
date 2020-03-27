@@ -379,9 +379,7 @@ export class SvgPathBuilder {
     const firstPercentage = pointOnLine(current, point, percentage);
     const lastPercentage = pointOnLine(current, point, 100 - percentage);
     if (sides === 'both') {
-      return this.goTo(firstPercentage)
-        .goTo(lastPercentage, lineOptions)
-        .goTo(point);
+      return this.goTo(firstPercentage).goTo(lastPercentage, lineOptions).goTo(point);
     } else if (sides === 'start') {
       return this.goTo(firstPercentage).goTo(point, lineOptions);
     } else if (sides === 'end') {

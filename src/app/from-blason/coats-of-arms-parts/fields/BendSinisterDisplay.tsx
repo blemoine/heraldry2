@@ -10,10 +10,7 @@ export const BendSinisterDisplay: React.FunctionComponent<Props> = ({ dimension,
   const { width, height } = dimension;
   const lineOptions = computeLineOptions(line, dimension);
 
-  const pathBuilderTopRight = SvgPathBuilder.start([0, 0])
-    .goTo([width, 0])
-    .goTo([0, height], lineOptions)
-    .goTo([0, 0]);
+  const pathBuilderTopRight = SvgPathBuilder.start([0, 0]).goTo([width, 0]).goTo([0, height], lineOptions).goTo([0, 0]);
   const pathBuilderBottomLeft = SvgPathBuilder.start([0, height])
     .goTo([width, height])
     .goTo([width, 0])
