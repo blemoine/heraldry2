@@ -37,15 +37,15 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react": "^7.16.0",
     "fast-check": "^1.20.0",
-    "gh-pages": "^2.1.1",
+    "gh-pages": "^2.2.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.9.0",
     "parcel-bundler": "^1.12.4",
     "point-in-svg-polygon": "^1.0.25",
     "prettier": "^1.19.1",
     "react-test-renderer": "^16.11.0",
-    "ts-jest": "^24.2.0",
-    "typescript": "^3.7.2"
+    "ts-jest": "^25.2.1",
+    "typescript": "^3.8.3"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",
