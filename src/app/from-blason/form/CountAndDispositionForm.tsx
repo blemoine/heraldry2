@@ -14,6 +14,7 @@ type Props = {
 };
 export const CountAndDispositionForm = ({ countAndDisposition, countAndDispositionChange }: Props) => {
   function countChange(count: SupportedNumber) {
+    count = parseInt(count);
     countAndDispositionChange({ count, disposition: count === 1 ? 'default' : countAndDisposition.disposition });
   }
 
