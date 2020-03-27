@@ -6,7 +6,7 @@ type Props<A extends string | number> = {
   valueChange: (a: A) => void;
   formatValue?: (a: A) => string;
 };
-export function SelectScalar<A extends string | number>(props: Props<A>) {
+export function SelectScalar<A extends string>(props: Props<A>) {
   const options = Array.isArray(props.options) ? props.options : Object.values(props.options).flat();
 
   return (
@@ -23,6 +23,25 @@ export function SelectScalar<A extends string | number>(props: Props<A>) {
         })
       )}
     </select>
+  );
+}
+
+export function SelectNumberScalar<A extends number>(props: Props<A>) {
+  const options = Array.isArray(props.options)
+    ? props.options.map((i) => i.toString())
+    : Object.entries(props.options).reduce<{ [group: string]: Array<string> }>((acc, [key, values]) => {
+        acc[key] = values.map((i: A) => i.toString());
+
+        return acc;
+      }, {});
+  const formatValue = props.formatValue;
+  return (
+    <SelectScalar
+      options={options}
+      value={props.value.toString()}
+      valueChange={(str) => props.valueChange(parseFloat(str) as A)}
+      formatValue={formatValue ? (str) => formatValue(parseFloat(str) as A) : undefined}
+    />
   );
 }
 

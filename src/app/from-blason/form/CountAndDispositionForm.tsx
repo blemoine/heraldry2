@@ -5,7 +5,7 @@ import {
   SupportedNumber,
   supportedNumbers,
 } from '../../model/countAndDisposition';
-import { SelectScalar } from '../../common/SelectScalar';
+import { SelectNumberScalar, SelectScalar } from '../../common/SelectScalar';
 import * as React from 'react';
 
 type Props = {
@@ -26,7 +26,7 @@ export const CountAndDispositionForm = ({ countAndDisposition, countAndDispositi
       <div className="col">
         <div className="form-group">
           <label>Number</label>
-          <SelectScalar options={supportedNumbers} value={countAndDisposition.count} valueChange={countChange} />
+          <SelectNumberScalar options={supportedNumbers} value={countAndDisposition.count} valueChange={countChange} />
         </div>
       </div>
       <div className="col">
