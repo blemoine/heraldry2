@@ -10,6 +10,7 @@ import { RoundelDisplay } from './charge/roundel/RoundelDisplay';
 import { LozengeDisplay } from './charge/lozenge/LozengeDisplay';
 import { CrossDisplay } from './charge/cross/CrossDisplay';
 import { MulletDisplay } from './charge/mullet/MulletDisplay';
+import { CrownDisplay } from './charge/crown/CrownDisplay';
 import { SimpleBlasonShape } from './blasonDisplay.helper';
 import { EscutcheonChargeDisplay } from './charge/escutcheon/EscutcheonChargeDisplay';
 
@@ -94,6 +95,16 @@ export const ChargeDisplay = ({ charge, dimension, fillFromTincture, shape, onCl
   } else if (charge.name === 'mullet') {
     return (
       <MulletDisplay
+        charge={charge}
+        dimension={dimension}
+        fillFromTincture={fillFromTincture}
+        shape={shape}
+        onClick={onClick}
+      />
+    );
+  } else if (charge.name === 'crown') {
+    return (
+      <CrownDisplay
         charge={charge}
         dimension={dimension}
         fillFromTincture={fillFromTincture}

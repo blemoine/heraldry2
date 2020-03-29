@@ -59,6 +59,13 @@ export function ChargeForm({ charge, chargeChange }: Props) {
           inside: 'nothing',
           points: 5,
         });
+      } else if (chargeName === 'crown') {
+        chargeChange({
+          name: chargeName,
+          countAndDisposition: charge ? charge.countAndDisposition : { count: 1, disposition: 'default' },
+          tincture: charge ? charge.tincture : or,
+          type: 'embattled',
+        });
       } else if (!chargeName) {
         chargeChange(null);
       } else {
