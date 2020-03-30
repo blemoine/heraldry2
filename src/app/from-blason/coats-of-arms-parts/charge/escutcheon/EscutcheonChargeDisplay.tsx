@@ -5,6 +5,7 @@ import { Dimension, scale } from '../../../../model/dimension';
 import { getChargePositions } from '../charge.helper';
 import { SimpleBlasonShape } from '../../blasonDisplay.helper';
 import { EscutcheonDisplay } from '../../escutcheon/EscutcheonDisplay';
+import { getStrokeColor } from '../../../blason.helpers';
 
 type Props = {
   charge: Escutcheon;
@@ -15,7 +16,7 @@ type Props = {
 };
 export const EscutcheonChargeDisplay = ({ charge, dimension, fillFromTincture, shape, onClick }: Props) => {
   const { width, height } = dimension;
-  const stroke = charge.tincture.name === 'sable' ? '#777' : '#000';
+  const stroke = getStrokeColor(charge.tincture);
   const fill = fillFromTincture(charge.tincture);
 
   const { count, disposition } = charge.countAndDisposition;

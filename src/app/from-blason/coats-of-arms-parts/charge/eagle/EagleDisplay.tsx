@@ -5,6 +5,7 @@ import SvgEagleDisplayed from './SvgEagleDisplayed';
 import { Dimension, scale } from '../../../../model/dimension';
 import { getChargePositions } from '../charge.helper';
 import { SimpleBlasonShape } from '../../blasonDisplay.helper';
+import { getStrokeColor } from '../../../blason.helpers';
 
 type Props = {
   charge: Eagle;
@@ -15,7 +16,7 @@ type Props = {
 };
 export const EagleDisplay = (props: Props) => {
   const charge = props.charge;
-  const stroke = charge.tincture.name === 'sable' ? '#777' : '#000';
+  const stroke = getStrokeColor(charge.tincture);
 
   const mainFill = props.fillFromTincture(charge.tincture);
   const tongueFill = props.fillFromTincture(charge.beakedAndArmed);

@@ -14,6 +14,7 @@ import { getFill } from '../FurPattern.model';
 import { FillFromTincture } from '../../fillFromTincture.helper';
 import { MetalsAndColours, Tincture } from '../../../model/tincture';
 import { ConfigurationContext } from '../../configuration/ConfigurationContext';
+import { getStrokeColor } from '../../blason.helpers';
 
 const postfixId = 'bordure';
 
@@ -153,11 +154,7 @@ export const BordureDisplay = ({
     throw new Error(`Got ${JSON.stringify(pathBuilder)} error`);
   }
 
-  const strokeColor = stroke
-    ? getFill(fillFromTincture, stroke, postfixId)
-    : tincture.name === 'sable'
-    ? '#777'
-    : '#333';
+  const strokeColor = stroke ? getFill(fillFromTincture, stroke, postfixId) : getStrokeColor(tincture);
   const strokeWidth = stroke ? 3 : 1;
   const fill = getFill(fillFromTincture, tincture, postfixId);
   return (

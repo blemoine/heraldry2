@@ -10,6 +10,7 @@ import { SimpleBlasonShape } from '../../blasonDisplay.helper';
 import { toRadians } from '../../../../svg-path-builder/geometrical.helper';
 import { range } from '../../../../../utils/range';
 import { isError } from '../../../../../utils/result';
+import { getStrokeColor } from '../../../blason.helpers';
 
 type Props = {
   charge: Mullet;
@@ -19,7 +20,7 @@ type Props = {
   onClick: () => void;
 };
 export const MulletDisplay = ({ charge, dimension: { width, height }, fillFromTincture, shape, onClick }: Props) => {
-  const stroke = charge.tincture.name === 'sable' ? '#777' : '#000';
+  const stroke = getStrokeColor(charge.tincture);
   const fill = fillFromTincture(charge.tincture);
 
   const { count, disposition } = charge.countAndDisposition;

@@ -96,3 +96,7 @@ export function allDeclaredTinctures(blason: Blason): Array<Tincture> {
 export function isThereFur(blason: Blason, fur: Furs): boolean {
   return allDeclaredTinctures(blason).some((t) => areTinctureEquals(t, fur));
 }
+
+export function getStrokeColor(tincture: Tincture): string {
+  return tincture.name === 'sable' ? '#777' : '#000';
+}

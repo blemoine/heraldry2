@@ -7,6 +7,7 @@ import { SvgPathBuilder } from '../../../../svg-path-builder/svg-path-builder';
 import { FocusablePathFromBuilder } from '../../../../common/PathFromBuilder';
 import { cannotHappen } from '../../../../../utils/cannot-happen';
 import { SimpleBlasonShape } from '../../blasonDisplay.helper';
+import { getStrokeColor } from '../../../blason.helpers';
 
 type Props = {
   charge: Lozenge;
@@ -16,7 +17,7 @@ type Props = {
   onClick: () => void;
 };
 export const LozengeDisplay = ({ charge, dimension: { width, height }, fillFromTincture, shape, onClick }: Props) => {
-  const stroke = charge.tincture.name === 'sable' ? '#777' : '#000';
+  const stroke = getStrokeColor(charge.tincture);
   const fill = fillFromTincture(charge.tincture);
 
   const { count, disposition } = charge.countAndDisposition;

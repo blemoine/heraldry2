@@ -16,6 +16,7 @@ import SvgLionSejant from './SvgLionSejant';
 import SvgLionSejantErect from './SvgLionSejantErect';
 import { Dimension } from '../../../../model/dimension';
 import { useState } from 'react';
+import { getStrokeColor } from '../../../blason.helpers';
 
 type Props = {
   charge: Lion;
@@ -82,7 +83,7 @@ export const UnitLionDisplay = ({ charge, dimension, fillFromTincture, onClick }
 
   const armedAndLanguedFill = fillFromTincture(charge.armedAndLangued);
   const mainFill = fillFromTincture(charge.tincture);
-  const stroke = charge.tincture.name === 'sable' ? '#777' : '#000';
+  const stroke = getStrokeColor(charge.tincture);
   const head = lionHead(
     charge.head,
     armedAndLanguedFill,

@@ -138,7 +138,7 @@ exports[`CoatsOfArms should render 'Argent, a cross gules' 1`] = `
       onClick={[Function]}
       onMouseDown={[Function]}
       onMouseUp={[Function]}
-      stroke="#333"
+      stroke="#000"
       strokeWidth={1}
       style={
         Object {
@@ -220,7 +220,7 @@ exports[`CoatsOfArms should render 'Argent, a gore vert' 1`] = `
       onClick={[Function]}
       onMouseDown={[Function]}
       onMouseUp={[Function]}
-      stroke="#333"
+      stroke="#000"
       strokeWidth={1}
       style={
         Object {
@@ -473,7 +473,7 @@ exports[`CoatsOfArms should render 'Azure, a bordure urdy or, two crosses maltes
       onClick={[Function]}
       onMouseDown={[Function]}
       onMouseUp={[Function]}
-      stroke="#333"
+      stroke="#000"
       strokeWidth={1}
       style={
         Object {
@@ -4067,7 +4067,7 @@ exports[`CoatsOfArms should render 'Chequy gules and or, a chief engrailed azure
       onClick={[Function]}
       onMouseDown={[Function]}
       onMouseUp={[Function]}
-      stroke="#333"
+      stroke="#000"
       strokeWidth={1}
       style={
         Object {
@@ -4557,7 +4557,7 @@ exports[`CoatsOfArms should render 'Chequy gules and or, a chief engrailed ermin
       onClick={[Function]}
       onMouseDown={[Function]}
       onMouseUp={[Function]}
-      stroke="#333"
+      stroke="#000"
       strokeWidth={1}
       style={
         Object {
@@ -4919,7 +4919,7 @@ exports[`CoatsOfArms should render 'Chequy gules and or, a saltire argent, an ea
       onClick={[Function]}
       onMouseDown={[Function]}
       onMouseUp={[Function]}
-      stroke="#333"
+      stroke="#000"
       strokeWidth={1}
       style={
         Object {
@@ -5478,7 +5478,7 @@ exports[`CoatsOfArms should render 'Ermine, a bend invected vair' 1`] = `
       onClick={[Function]}
       onMouseDown={[Function]}
       onMouseUp={[Function]}
-      stroke="#333"
+      stroke="#000"
       strokeWidth={1}
       style={
         Object {
@@ -6421,7 +6421,7 @@ exports[`CoatsOfArms should render 'Or, a base engrailed vair' 1`] = `
       onClick={[Function]}
       onMouseDown={[Function]}
       onMouseUp={[Function]}
-      stroke="#333"
+      stroke="#000"
       strokeWidth={1}
       style={
         Object {
@@ -6627,7 +6627,7 @@ exports[`CoatsOfArms should render 'Or, a bend sinister invected ermine' 1`] = `
       onClick={[Function]}
       onMouseDown={[Function]}
       onMouseUp={[Function]}
-      stroke="#333"
+      stroke="#000"
       strokeWidth={1}
       style={
         Object {
@@ -6833,7 +6833,7 @@ exports[`CoatsOfArms should render 'Or, a cross gules ermined argent' 1`] = `
       onClick={[Function]}
       onMouseDown={[Function]}
       onMouseUp={[Function]}
-      stroke="#333"
+      stroke="#000"
       strokeWidth={1}
       style={
         Object {
@@ -6915,7 +6915,7 @@ exports[`CoatsOfArms should render 'Or, a fess murrey' 1`] = `
       onClick={[Function]}
       onMouseDown={[Function]}
       onMouseUp={[Function]}
-      stroke="#333"
+      stroke="#000"
       strokeWidth={1}
       style={
         Object {
@@ -7109,7 +7109,7 @@ exports[`CoatsOfArms should render 'Or, a fess vair en point' 1`] = `
       onClick={[Function]}
       onMouseDown={[Function]}
       onMouseUp={[Function]}
-      stroke="#333"
+      stroke="#000"
       strokeWidth={1}
       style={
         Object {
@@ -8280,7 +8280,7 @@ exports[`CoatsOfArms should render 'Per bend sinister wavy azure and or, a chief
       onClick={[Function]}
       onMouseDown={[Function]}
       onMouseUp={[Function]}
-      stroke="#333"
+      stroke="#000"
       strokeWidth={1}
       style={
         Object {
@@ -8793,7 +8793,7 @@ exports[`CoatsOfArms should render 'Per chevron ermine and gules, a shakefork or
       onClick={[Function]}
       onMouseDown={[Function]}
       onMouseUp={[Function]}
-      stroke="#333"
+      stroke="#000"
       strokeWidth={1}
       style={
         Object {
@@ -9273,7 +9273,7 @@ exports[`CoatsOfArms should render 'Per fess or and ermine, a bordure engrailed 
       onClick={[Function]}
       onMouseDown={[Function]}
       onMouseUp={[Function]}
-      stroke="#333"
+      stroke="#000"
       strokeWidth={1}
       style={
         Object {
@@ -9729,7 +9729,7 @@ exports[`CoatsOfArms should render 'Potent, a chief gules' 1`] = `
       onClick={[Function]}
       onMouseDown={[Function]}
       onMouseUp={[Function]}
-      stroke="#333"
+      stroke="#000"
       strokeWidth={1}
       style={
         Object {
@@ -11361,7 +11361,7 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
           onClick={[Function]}
           onMouseDown={[Function]}
           onMouseUp={[Function]}
-          stroke="#333"
+          stroke="#000"
           strokeWidth={1}
           style={
             Object {
@@ -11479,7 +11479,7 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
           onClick={[Function]}
           onMouseDown={[Function]}
           onMouseUp={[Function]}
-          stroke="#333"
+          stroke="#000"
           strokeWidth={1}
           style={
             Object {
@@ -11596,7 +11596,7 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
           onClick={[Function]}
           onMouseDown={[Function]}
           onMouseUp={[Function]}
-          stroke="#333"
+          stroke="#000"
           strokeWidth={1}
           style={
             Object {
@@ -11714,7 +11714,7 @@ exports[`CoatsOfArms should render 'Quarterly, 1st ermine, a bordure indented gu
           onClick={[Function]}
           onMouseDown={[Function]}
           onMouseUp={[Function]}
-          stroke="#333"
+          stroke="#000"
           strokeWidth={1}
           style={
             Object {
@@ -11854,7 +11854,7 @@ exports[`CoatsOfArms should render 'Quarterly, 1st: Bendy or and purpure, a bord
           onClick={[Function]}
           onMouseDown={[Function]}
           onMouseUp={[Function]}
-          stroke="#333"
+          stroke="#000"
           strokeWidth={1}
           style={
             Object {
@@ -11946,7 +11946,7 @@ exports[`CoatsOfArms should render 'Quarterly, 1st: Bendy or and purpure, a bord
           onClick={[Function]}
           onMouseDown={[Function]}
           onMouseUp={[Function]}
-          stroke="#333"
+          stroke="#000"
           strokeWidth={1}
           style={
             Object {
@@ -12038,7 +12038,7 @@ exports[`CoatsOfArms should render 'Quarterly, 1st: Bendy or and purpure, a bord
           onClick={[Function]}
           onMouseDown={[Function]}
           onMouseUp={[Function]}
-          stroke="#333"
+          stroke="#000"
           strokeWidth={1}
           style={
             Object {
@@ -12130,7 +12130,7 @@ exports[`CoatsOfArms should render 'Quarterly, 1st: Bendy or and purpure, a bord
           onClick={[Function]}
           onMouseDown={[Function]}
           onMouseUp={[Function]}
-          stroke="#333"
+          stroke="#000"
           strokeWidth={1}
           style={
             Object {
@@ -12404,7 +12404,7 @@ exports[`CoatsOfArms should render 'Vair, a gyron or' 1`] = `
       onClick={[Function]}
       onMouseDown={[Function]}
       onMouseUp={[Function]}
-      stroke="#333"
+      stroke="#000"
       strokeWidth={1}
       style={
         Object {
@@ -12486,7 +12486,7 @@ exports[`CoatsOfArms should render 'Vert, flaunches argent' 1`] = `
       onClick={[Function]}
       onMouseDown={[Function]}
       onMouseUp={[Function]}
-      stroke="#333"
+      stroke="#000"
       strokeWidth={1}
       style={
         Object {
@@ -12500,7 +12500,7 @@ exports[`CoatsOfArms should render 'Vert, flaunches argent' 1`] = `
       onClick={[Function]}
       onMouseDown={[Function]}
       onMouseUp={[Function]}
-      stroke="#333"
+      stroke="#000"
       strokeWidth={1}
       style={
         Object {
@@ -13029,7 +13029,7 @@ exports[`CoatsOfArms should render a party blason with some ordinary: Per bend v
       onClick={[Function]}
       onMouseDown={[Function]}
       onMouseUp={[Function]}
-      stroke="#333"
+      stroke="#000"
       strokeWidth={1}
       style={
         Object {

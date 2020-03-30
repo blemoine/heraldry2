@@ -14,6 +14,7 @@ import { CrossCrosselet } from './CrossCrosselet';
 import { CrossMaltese } from './CrossMaltese';
 import { CrossFlory } from './CrossFlory';
 import { SimpleBlasonShape } from '../../blasonDisplay.helper';
+import { getStrokeColor } from '../../../blason.helpers';
 
 type Props = {
   charge: Cross;
@@ -23,7 +24,7 @@ type Props = {
   onClick: () => void;
 };
 export const CrossDisplay = ({ charge, dimension: { width, height }, fillFromTincture, shape, onClick }: Props) => {
-  const stroke = charge.tincture.name === 'sable' ? '#777' : '#000';
+  const stroke = getStrokeColor(charge.tincture);
   const fill = fillFromTincture(charge.tincture);
 
   const { count, disposition } = charge.countAndDisposition;

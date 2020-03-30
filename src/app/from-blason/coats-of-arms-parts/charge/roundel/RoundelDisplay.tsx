@@ -7,6 +7,7 @@ import { FocusablePathFromBuilder } from '../../../../common/PathFromBuilder';
 import { SvgPathBuilder } from '../../../../svg-path-builder/svg-path-builder';
 import { cannotHappen } from '../../../../../utils/cannot-happen';
 import { SimpleBlasonShape } from '../../blasonDisplay.helper';
+import { getStrokeColor } from '../../../blason.helpers';
 
 type Props = {
   charge: Roundel;
@@ -17,7 +18,7 @@ type Props = {
 };
 export const RoundelDisplay = ({ charge, dimension, fillFromTincture, shape, onClick }: Props) => {
   const { width, height } = dimension;
-  const stroke = charge.tincture.name === 'sable' ? '#777' : '#000';
+  const stroke = getStrokeColor(charge.tincture);
   const fill = fillFromTincture(charge.tincture);
 
   const { count, disposition } = charge.countAndDisposition;

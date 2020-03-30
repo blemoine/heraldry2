@@ -5,6 +5,7 @@ import { Dimension, scale } from '../../../../model/dimension';
 import SvgFleurDeLys from './SvgFleurDeLys';
 import { getChargePositions } from '../charge.helper';
 import { SimpleBlasonShape } from '../../blasonDisplay.helper';
+import { getStrokeColor } from '../../../blason.helpers';
 
 type Props = {
   charge: FleurDeLys;
@@ -15,7 +16,7 @@ type Props = {
 };
 export const FleurDeLysDisplay = ({ charge, dimension, fillFromTincture, shape, onClick }: Props) => {
   const { width, height } = dimension;
-  const stroke = charge.tincture.name === 'sable' ? '#777' : '#000';
+  const stroke = getStrokeColor(charge.tincture);
   const fill = fillFromTincture(charge.tincture);
 
   const { count, disposition } = charge.countAndDisposition;

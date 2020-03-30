@@ -8,6 +8,7 @@ import { Dimension } from '../../../model/dimension';
 import { Ordinary } from '../../../model/ordinary';
 import { FurConfiguration, getPatternIdOfOrdinary, WithFurPatternForOrdinaryDef } from '../FurPatternDef';
 import { ChargeDisplay } from '../ChargeDisplay';
+import { getStrokeColor } from '../../blason.helpers';
 
 type Props<T extends Ordinary> = {
   ordinary: T;
@@ -42,11 +43,7 @@ export const CommonOrdinaryDisplay = <T extends Ordinary>({
   return (
     <WithFurPatternForOrdinaryDef ordinary={ordinary} furConfiguration={furConfiguration}>
       {pathBuilderAndTincture.map(({ pathBuilder, tincture }, i) => {
-        const strokeColor = stroke
-          ? getFill(fillFromTincture, stroke, postfixId)
-          : tincture.name === 'sable'
-          ? '#777'
-          : '#333';
+        const strokeColor = stroke ? getFill(fillFromTincture, stroke, postfixId) : getStrokeColor(tincture);
 
         const fill = getFill(fillFromTincture, tincture, postfixId);
         return (
