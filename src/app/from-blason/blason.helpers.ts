@@ -1,5 +1,5 @@
 import { Blason, SimpleBlason } from '../model/blason';
-import { areTinctureEquals, Furs, Tincture } from '../model/tincture';
+import { areTinctureEquals, Furs, isFur, Tincture } from '../model/tincture';
 import { cannotHappen } from '../../utils/cannot-happen';
 import { Charge } from '../model/charge';
 import { Field } from '../model/field';
@@ -98,5 +98,8 @@ export function isThereFur(blason: Blason, fur: Furs): boolean {
 }
 
 export function getStrokeColor(tincture: Tincture): string {
+  if (isFur(tincture)) {
+    return getStrokeColor(tincture.field);
+  }
   return tincture.name === 'sable' ? '#777' : '#000';
 }

@@ -1366,7 +1366,7 @@ exports[`CoatsOfArms should render 'Azure, two crosses moline counter ermine' 1`
         onClick={[Function]}
         onMouseDown={[Function]}
         onMouseUp={[Function]}
-        stroke="#000"
+        stroke="#777"
         strokeWidth={1}
         style={
           Object {
@@ -1380,7 +1380,7 @@ exports[`CoatsOfArms should render 'Azure, two crosses moline counter ermine' 1`
         onClick={[Function]}
         onMouseDown={[Function]}
         onMouseUp={[Function]}
-        stroke="#000"
+        stroke="#777"
         strokeWidth={1}
         style={
           Object {
