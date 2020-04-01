@@ -17,7 +17,8 @@ function allDeclaredTincturesOfCharge(charge: Charge): Array<Tincture> {
     charge.name === 'roundel' ||
     charge.name === 'lozenge' ||
     charge.name === 'cross' ||
-    charge.name === 'mullet'
+    charge.name === 'mullet' ||
+    charge.name === 'crown'
   ) {
     return [charge.tincture];
   } else {

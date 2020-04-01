@@ -4,6 +4,9 @@ import {
   charges,
   Cross,
   crossLimbs,
+  Crown,
+  CrownType,
+  crownTypes,
   Eagle,
   EagleAttitude,
   eagleAttitudes,
@@ -215,6 +218,26 @@ const mulletParser = (): P.Parser<Mullet> => {
   });
 };
 
+const crownParser = (count: SupportedNumber) => {
+  const crownNameParser = P.regex(/crowns?/i).desc('crown');
+  const crownTypeParser: P.Parser<CrownType> = buildAltParser(crownTypes, identity);
+
+  return P.seq(
+    crownNameParser.skip(P.whitespace).then(crownTypeParser),
+    countAndDispositionParser(count),
+    P.whitespace.then(tinctureParserFromName).fallback(or)
+  ).map(
+    ([type, countAndDisposition, tincture]): Crown => {
+      return {
+        name: 'crown',
+        countAndDisposition,
+        type,
+        tincture,
+      };
+    }
+  );
+};
+
 const fimbriatedParser: P.Parser<MetalsAndColours | null> = P.whitespace
   .then(P.string('fimbriated'))
   .then(P.whitespace)
@@ -288,6 +311,8 @@ export function chargeParser(): P.Parser<Exclude<Charge, Cross>> {
         return lozengeParser();
       } else if (charge === 'mullet') {
         return mulletParser();
+      } else if (charge === 'crown') {
+        return countParser.trim(P.optWhitespace).chain<Crown>((count) => crownParser(count));
       } else {
         return cannotHappen(charge);
       }

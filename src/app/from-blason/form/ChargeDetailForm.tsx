@@ -9,6 +9,7 @@ import { LozengeForm } from './charges/LozengeForm';
 import { CrossForm } from './charges/CrossForm';
 import { MulletForm } from './charges/MulletForm';
 import { EscutcheonForm } from './charges/EscutcheonForm';
+import { CrownForm } from './charges/CrownForm';
 
 type Props = { charge: Charge; chargeChange: (charge: Charge) => void };
 export function ChargeDetailForm({ charge, chargeChange }: Props) {
@@ -28,6 +29,8 @@ export function ChargeDetailForm({ charge, chargeChange }: Props) {
     return <CrossForm charge={charge} chargeChange={chargeChange} />;
   } else if (charge.name === 'mullet') {
     return <MulletForm charge={charge} chargeChange={chargeChange} />;
+  } else if (charge.name === 'crown') {
+    return <CrownForm charge={charge} chargeChange={chargeChange} />;
   } else {
     return cannotHappen(charge);
   }

@@ -237,6 +237,19 @@ function stringifyCharge(charge: Charge): string {
     result += ' ' + stringifyTincture(charge.tincture);
 
     return result;
+  } else if (charge.name === 'crown') {
+    let result = counterStr;
+    result += ' ' + pluralize('crown', count);
+
+    result += ' ' + charge.type;
+
+    if (charge.countAndDisposition.count !== 1 && charge.countAndDisposition.disposition !== 'default') {
+      result += ' in ' + stringifyDisposition(charge.countAndDisposition.disposition);
+    }
+
+    result += ' ' + stringifyTincture(charge.tincture);
+
+    return result;
   } else {
     return cannotHappen(charge);
   }

@@ -9,6 +9,7 @@ import {
   Charge,
   charges,
   crossLimbs,
+  crownTypes,
   eagleAttitudes,
   lionAttitudes,
   lionHeads,
@@ -247,6 +248,8 @@ export function encodeCharge(charge: Charge | null): Uint8Array {
   } else if (charge.name === 'mullet') {
     result[4] = encodeFromList(mulletInsides, charge.inside);
     result[5] = charge.points;
+  } else if (charge.name === 'crown') {
+    result[4] = encodeFromList(crownTypes, charge.type);
   } else {
     return cannotHappen(charge);
   }
@@ -348,6 +351,14 @@ export function decodeCharge(arr: Uint8Array): Result<Charge | null> {
           countAndDisposition,
           inside,
           points,
+        }));
+      } else if (name === 'crown') {
+        const maybeType = decodeFromList(crownTypes, arr[4]);
+        return map(maybeType, (type) => ({
+          name,
+          tincture,
+          countAndDisposition,
+          type,
         }));
       } else {
         return cannotHappen(name);

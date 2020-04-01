@@ -8,6 +8,8 @@ import {
   charges,
   Cross,
   crossLimbs,
+  Crown,
+  crownTypes,
   Eagle,
   eagleAttitudes,
   Escutcheon,
@@ -176,6 +178,13 @@ function createChargeArb(tinctureArb: Arbitrary<Tincture>): Arbitrary<Charge> {
         countAndDisposition: countAndDistionArb,
         inside: fc.constantFrom(...mulletInsides),
         points: fc.constantFrom(...mulletPoints),
+      });
+    } else if (chargeName === 'crown') {
+      return fc.record<Crown>({
+        name: fc.constant(chargeName),
+        tincture: tinctureArb,
+        countAndDisposition: countAndDistionArb,
+        type: fc.constantFrom(...crownTypes),
       });
     } else {
       return cannotHappen(chargeName);

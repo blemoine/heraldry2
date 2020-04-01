@@ -100,7 +100,16 @@ export type Escutcheon = {
   countAndDisposition: CountAndDisposition;
 };
 
-export type Charge = Lion | Eagle | FleurDeLys | Roundel | Lozenge | Cross | Mullet | Escutcheon;
+export const crownTypes = ['dovetailed', 'ducal', 'embattled'] as const;
+export type CrownType = typeof crownTypes[number];
+export type Crown = {
+  name: 'crown';
+  type: CrownType;
+  tincture: Tincture;
+  countAndDisposition: CountAndDisposition;
+};
+
+export type Charge = Lion | Eagle | FleurDeLys | Roundel | Lozenge | Cross | Mullet | Escutcheon | Crown;
 
 export const charges: Array<Charge['name']> = [
   'lion',
@@ -111,4 +120,5 @@ export const charges: Array<Charge['name']> = [
   'cross',
   'mullet',
   'escutcheon',
+  'crown',
 ];
