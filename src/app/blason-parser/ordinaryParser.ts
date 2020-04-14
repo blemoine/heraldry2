@@ -16,7 +16,7 @@ import { aParser, buildAltParser, constStr, lineParser, numberParser } from './p
 import { metalOrColourParserFromName, tinctureParserFromName } from './tinctureParser';
 import { stringifyOrdinaryName } from '../model/stringify/stringify.helper';
 import { MetalsAndColours } from '../model/tincture';
-import { chargeCrossParser, chargeParser } from './chargeParser';
+import { chargeParser } from './chargeParser';
 
 function isNotPaleOrChevronOrCross(
   o: Ordinary['name']
@@ -159,8 +159,25 @@ export function ordinaryParser(): P.Parser<Ordinary> {
       lineOrStraightParser,
       tinctureParserFromName,
       fimbriatedParser.skip(P.whitespace),
-      P.alt(chargeCrossParser(), chargeParser())
+      P.alt(chargeParser())
     ).map(([name, line, tincture, fimbriated, charge]) => ({ name, line, tincture, fimbriated, charge }))
+  );
+
+  const crossParser: P.Parser<OrdinaryCross> = P.alt(
+    P.seq(
+      aParser.then(constStr('cross', 'cross potenty')).skip(P.whitespace),
+      tinctureParserFromName,
+      fimbriatedParser
+    ).map(([name, tincture, fimbriated]): OrdinaryCross => ({ name, tincture, line: 'potenty', fimbriated })),
+    P.seq(aParser.then(constStr('cross')).skip(P.whitespace), tinctureParserFromName, fimbriatedParser).map(
+      ([name, tincture, fimbriated]): OrdinaryCross => ({ name, tincture, line: 'straight', fimbriated })
+    ),
+    P.seq(
+      aParser.then(constStr('cross')).skip(P.whitespace),
+      lineParser.skip(P.whitespace),
+      tinctureParserFromName,
+      fimbriatedParser
+    ).map(([name, line, tincture, fimbriated]): OrdinaryCross => ({ name, tincture, line, fimbriated }))
   );
 
   return P.alt(
@@ -170,6 +187,7 @@ export function ordinaryParser(): P.Parser<Ordinary> {
     chevronParser,
     chapePloyerParser,
     chausseParser,
-    ordinaryWithLineParser
+    ordinaryWithLineParser,
+    crossParser
   );
 }

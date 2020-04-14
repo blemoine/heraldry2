@@ -17,9 +17,7 @@ import { stringifyBlason } from '../model/stringify/stringify.helper';
 const numRuns = process.env.GENERATOR_CASE_COUNT ? parseFloat(process.env.GENERATOR_CASE_COUNT) : 40;
 
 // I don't have an explanation, but the dormant lion has strange coordinate, not refleted in the way it is drawn
-const chargeArbFiltered = simplifiedChargeArb.filter(
-  (t) => t.name !== 'lion' || (t.attitude !== 'dormant' && t.attitude !== 'statant' && t.attitude !== 'couchant')
-);
+const chargeArbFiltered = simplifiedChargeArb;
 
 function isInRect([x, y]: PathAbsolutePoint, rect: { x: number; y: number; width: number; height: number }): boolean {
   return x > rect.x && x < rect.x + rect.width && y > rect.y && y < rect.y + rect.height;
@@ -213,29 +211,7 @@ describe('CoatsOfArms quarterly collision rules', () => {
   });
 
   it('should ensure that charges are always inside a bordure', () => {
-    const chargeArbFiltered = simplifiedChargeArb.filter((t) => {
-      if (t.name === 'lion') {
-        const attitude = t.attitude;
-        if (attitude === 'dormant' || attitude === 'statant') {
-          return false;
-        } else {
-          const count = t.countAndDisposition.count;
-          if (attitude === 'rampant') {
-            return count !== 7 && count !== 10 && count !== 11 && count !== 17 && count !== 19;
-          } else if (attitude === 'passant') {
-            return count !== 1;
-          } else if (attitude === 'couchant') {
-            return count !== 16 && count !== 2;
-          } else if (attitude === 'sejant-erect') {
-            return count !== 2;
-          } else {
-            return true;
-          }
-        }
-      } else {
-        return true;
-      }
-    });
+    const chargeArbFiltered = simplifiedChargeArb;
     fc.assert(
       fc.property(chargeArbFiltered, lineArb, (charge, line) => {
         const baseBlason: SimpleBlason = {

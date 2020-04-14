@@ -17,6 +17,13 @@ import {
   vert,
 } from '../model/tincture';
 import { Blason, QuarterlyBlason, SimpleBlason } from '../model/blason';
+import { Cross } from '~/plugins/charges/cross/cross';
+import { Escutcheon } from '~/plugins/charges/escutcheon/escutcheon';
+import { FleurDeLys } from '~/plugins/charges/fleurdelys/fleurdelys';
+import { Lion } from '~/plugins/charges/lion/lion';
+import { Lozenge } from '~/plugins/charges/lozenge/lozenge';
+import { Mullet } from '~/plugins/charges/mullet/mullet';
+import { Roundel } from '~/plugins/charges/roundel/roundel';
 
 describe('parseBlason', () => {
   it('should parse a plain blason', () => {
@@ -73,15 +80,14 @@ describe('parseBlason', () => {
     const expected: Blason = {
       kind: 'simple',
       field: { kind: 'plain', tincture: gules },
-      charge: {
-        name: 'lion',
+      charge: new Lion({
         countAndDisposition: { count: 1, disposition: 'default' },
         attitude: 'rampant',
         head: null,
         tail: null,
         tincture: sable,
         armedAndLangued: azure,
-      },
+      }),
     };
 
     expect(result).toEqual(expected);
@@ -92,15 +98,14 @@ describe('parseBlason', () => {
     const expected: Blason = {
       kind: 'simple',
       field: { kind: 'plain', tincture: gules },
-      charge: {
-        name: 'lion',
+      charge: new Lion({
         tincture: or,
         armedAndLangued: azure,
         attitude: 'passant',
         tail: null,
         head: 'guardant',
         countAndDisposition: { count: 3, disposition: 'pale' },
-      },
+      }),
     };
 
     expect(result).toEqual(expected);
@@ -181,7 +186,7 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
     const expected: Blason = {
       kind: 'simple',
       field: { kind: 'party', per: { name: 'pale', tinctures: [azure, sable], line: 'straight' } },
-      charge: { name: 'fleurdelys', countAndDisposition: { count: 3, disposition: 'default' }, tincture: or },
+      charge: new FleurDeLys({ countAndDisposition: { count: 3, disposition: 'default' }, tincture: or }),
     };
 
     expect(result).toEqual(expected);
@@ -193,15 +198,14 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
     const expected: Blason = {
       kind: 'simple',
       field: { kind: 'plain', tincture: gules },
-      charge: {
-        name: 'lion',
+      charge: new Lion({
         attitude: 'rampant',
         tincture: or,
         head: null,
         tail: null,
         armedAndLangued: gules,
         countAndDisposition: { count: 1, disposition: 'default' },
-      },
+      }),
       ordinary: {
         line: 'engrailed',
         name: 'bordure',
@@ -218,15 +222,14 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
     const expected: Blason = {
       kind: 'simple',
       field: { kind: 'plain', tincture: or },
-      charge: {
-        name: 'lion',
+      charge: new Lion({
         attitude: 'rampant',
         tincture: gules,
         head: null,
         tail: null,
         armedAndLangued: azure,
         countAndDisposition: { count: 1, disposition: 'default' },
-      },
+      }),
     };
     expect(result).toEqual(expected);
   });
@@ -275,12 +278,11 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
     const expected: Blason = {
       kind: 'simple',
       field: { kind: 'plain', tincture: argent },
-      charge: {
-        name: 'roundel',
+      charge: new Roundel({
         tincture: argent,
         countAndDisposition: { count: 18, disposition: 'default' },
         inside: 'nothing',
-      },
+      }),
     };
     expect(parseBlason('Argent, eighteen roundels argent')).toEqual(expected);
   });
@@ -289,12 +291,11 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
     const expected: Blason = {
       kind: 'simple',
       field: { kind: 'plain', tincture: azure },
-      charge: {
-        name: 'roundel',
+      charge: new Roundel({
         tincture: sable,
         countAndDisposition: { count: 17, disposition: 'default' },
         inside: 'voided',
-      },
+      }),
     };
     expect(parseBlason('Azure, seventeen annulets sable')).toEqual(expected);
   });
@@ -303,7 +304,7 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
     const expected: Blason = {
       kind: 'simple',
       field: { kind: 'plain', tincture: azure },
-      charge: { name: 'fleurdelys', tincture: or, countAndDisposition: { count: 12, disposition: 'pale' } },
+      charge: new FleurDeLys({ tincture: or, countAndDisposition: { count: 12, disposition: 'pale' } }),
     };
     expect(parseBlason('Azure, twelve fleur de lys in pale or')).toEqual(expected);
   });
@@ -313,12 +314,11 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
       kind: 'simple',
       field: { kind: 'paly', tinctures: [argent, gules] },
       ordinary: { name: 'chief', line: 'engrailed', tincture: sable, fimbriated: null, charge: null },
-      charge: {
-        name: 'lozenge',
+      charge: new Lozenge({
         tincture: azure,
         countAndDisposition: { count: 4, disposition: 'fess' },
         inside: 'nothing',
-      },
+      }),
     };
     expect(parseBlason('Paly argent and gules, a chief engrailed sable, four lozenges in fess azure')).toEqual(
       expected
@@ -390,12 +390,11 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
     const expected: Blason = {
       kind: 'simple',
       field: { kind: 'plain', tincture: gules },
-      charge: {
-        name: 'cross',
+      charge: new Cross({
         limbs: 'hummetty',
         tincture: or,
         countAndDisposition: { count: 3, disposition: 'pale' },
-      },
+      }),
     };
     expect(parseBlason('Gules, three crosses hummetty in pale or ')).toEqual(expected);
   });
@@ -404,12 +403,11 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
     const expected: Blason = {
       kind: 'simple',
       field: { kind: 'plain', tincture: gules },
-      charge: {
-        name: 'cross',
+      charge: new Cross({
         limbs: 'potent',
         tincture: argent,
         countAndDisposition: { count: 1, disposition: 'default' },
-      },
+      }),
     };
     expect(parseBlason('Gules, a cross potent argent')).toEqual(expected);
   });
@@ -429,15 +427,14 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
     const expected: Blason = {
       kind: 'simple',
       field: { kind: 'plain', tincture: gules },
-      charge: {
-        name: 'lion',
+      charge: new Lion({
         attitude: 'passant',
         tincture: or,
         head: 'guardant',
         tail: null,
         armedAndLangued: gules,
         countAndDisposition: { count: 1, disposition: 'default' },
-      },
+      }),
     };
     expect(parseBlason('Gules, a lion passant gardant or')).toEqual(expected);
   });
@@ -508,30 +505,28 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
         {
           kind: 'simple',
           field: { kind: 'plain', tincture: or },
-          charge: {
-            name: 'lion',
+          charge: new Lion({
             attitude: 'passant',
             tincture: gules,
             armedAndLangued: gules,
             countAndDisposition: { count: 2, disposition: 'default' },
             head: null,
             tail: null,
-          },
+          }),
         },
         { kind: 'simple', field: { kind: 'chequy', tinctures: [or, gules] } },
         { kind: 'simple', field: { kind: 'bendy', number: 10, tinctures: [or, gules], line: 'straight' } },
         {
           kind: 'simple',
           field: { kind: 'plain', tincture: or },
-          charge: {
-            name: 'lion',
+          charge: new Lion({
             attitude: 'rampant',
             tincture: azure,
             armedAndLangued: gules,
             countAndDisposition: { count: 3, disposition: 'default' },
             head: null,
             tail: null,
-          },
+          }),
         },
       ],
     };
@@ -570,13 +565,12 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
     const expected: SimpleBlason = {
       kind: 'simple',
       field: { kind: 'plain', tincture: or },
-      charge: {
-        name: 'mullet',
+      charge: new Mullet({
         points: 5,
         countAndDisposition: { count: 1, disposition: 'default' },
         tincture: argent,
         inside: 'nothing',
-      },
+      }),
     };
 
     expect(parseBlason('Or, a mullet argent ')).toEqual(expected);
@@ -586,13 +580,12 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
     const expected: SimpleBlason = {
       kind: 'simple',
       field: { kind: 'plain', tincture: or },
-      charge: {
-        name: 'mullet',
+      charge: new Mullet({
         points: 8,
         countAndDisposition: { count: 2, disposition: 'pale' },
         tincture: gules,
         inside: 'nothing',
-      },
+      }),
     };
 
     expect(parseBlason('Or, two mullets of eight points in pale gules ')).toEqual(expected);
@@ -601,13 +594,12 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
     const expected: SimpleBlason = {
       kind: 'simple',
       field: { kind: 'plain', tincture: or },
-      charge: {
-        name: 'mullet',
+      charge: new Mullet({
         points: 5,
         countAndDisposition: { count: 1, disposition: 'default' },
         tincture: gules,
         inside: 'pierced',
-      },
+      }),
     };
 
     expect(parseBlason('Or, a mullet pierced gules ')).toEqual(expected);
@@ -616,13 +608,12 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
     const expected: SimpleBlason = {
       kind: 'simple',
       field: { kind: 'plain', tincture: or },
-      charge: {
-        name: 'mullet',
+      charge: new Mullet({
         points: 6,
         countAndDisposition: { count: 3, disposition: 'default' },
         tincture: gules,
         inside: 'pierced',
-      },
+      }),
     };
 
     expect(parseBlason('Or, three mullets of six points pierced gules ')).toEqual(expected);
@@ -812,11 +803,10 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
     const expected: SimpleBlason = {
       kind: 'simple',
       field: { kind: 'plain', tincture: argent },
-      charge: {
+      charge: new Escutcheon({
         countAndDisposition: { disposition: 'default', count: 3 },
-        name: 'escutcheon',
         tincture: gules,
-      },
+      }),
     };
 
     expect(parseBlason(' Argent, three escutcheons gules')).toEqual(expected);
@@ -1011,8 +1001,7 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
         line: 'straight',
         tincture: azure,
         fimbriated: null,
-        charge: {
-          name: 'mullet',
+        charge: new Mullet({
           tincture: or,
           countAndDisposition: {
             count: 2,
@@ -1020,7 +1009,7 @@ Argent, Azure, Barry, Barry and per chevron throughout, Barry and per pale, Barr
           },
           inside: 'nothing',
           points: 5,
-        },
+        }),
       },
     };
 

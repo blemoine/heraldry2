@@ -5,6 +5,7 @@ import { Blason } from '../model/blason';
 import { azure, ermine, gules, or, purpure, vair } from '../model/tincture';
 import { Dimension } from '../model/dimension';
 import { snapshotTest } from './tests/CoatsOfArms.render';
+import { Lion } from '~/plugins/charges/lion/lion';
 
 let value = 1;
 jest.mock('../../utils/uuid', () => {
@@ -65,15 +66,14 @@ describe('CoatsOfArms', () => {
     const blason: Blason = {
       kind: 'simple',
       field: { kind: 'plain', tincture: gules },
-      charge: {
-        name: 'lion',
+      charge: new Lion({
         tincture: or,
         armedAndLangued: azure,
         attitude: 'passant',
         tail: null,
         head: 'guardant',
         countAndDisposition: { count: 3, disposition: 'pale' },
-      },
+      }),
     };
     const component = renderer.create(
       <CoatsOfArmsDisplay blason={blason} dimension={dimension} selectBlasonPart={() => {}} />

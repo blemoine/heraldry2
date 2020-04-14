@@ -5,19 +5,8 @@ import { Line, lines } from '../model/line';
 import { parties, Party } from '../model/party';
 import { flatMap, isError, map, raise, Result, zip, zip3, zip4 } from '../../utils/result';
 import { ChapePloye, chapePloyeTincturesKind, ChaussePloye, ordinaries, Ordinary } from '../model/ordinary';
-import {
-  Charge,
-  charges,
-  crossLimbs,
-  eagleAttitudes,
-  lionAttitudes,
-  lionHeads,
-  lionTails,
-  lozengeInsides,
-  mulletInsides,
-  mulletPoints,
-  roundelInsides,
-} from '../model/charge';
+import { Charge } from '../model/charge';
+import { ChargeName, chargeNames, getChargeClassByName } from '../model/charge-all';
 import { availableDispositions, CountAndDisposition, supportedNumbers } from '../model/countAndDisposition';
 import { Blason, QuarterlyBlason, SimpleBlason } from '../model/blason';
 import { Tierced, tierceds } from '../model/tierced';
@@ -135,11 +124,11 @@ function decodeOrdinaryName(i: number): Result<Ordinary['name']> {
   return decodeFromList(ordinaries, i);
 }
 
-function encodeChargeName(name: Charge['name']): number {
-  return encodeFromList(charges, name);
+function encodeChargeName(name: ChargeName): number {
+  return encodeFromList(chargeNames, name);
 }
-function decodeChargeName(i: number): Result<Charge['name']> {
-  return decodeFromList(charges, i);
+function decodeChargeName(i: number): Result<ChargeName> {
+  return decodeFromList(chargeNames, i);
 }
 
 function encodeCountAndDisposition(countAndDisposition: CountAndDisposition): [number, number] {
@@ -223,33 +212,11 @@ export function encodeCharge(charge: Charge | null): Uint8Array {
   if (!charge) {
     return result;
   }
-  result[0] = encodeChargeName(charge.name);
+  result[0] = encodeChargeName(charge.getName());
   result[1] = encodeTincture(charge.tincture);
   const [count, disposition] = encodeCountAndDisposition(charge.countAndDisposition);
   result[2] = count;
   result[3] = disposition;
-  if (charge.name === 'lion') {
-    result[4] = encodeFromList(lionAttitudes, charge.attitude);
-    result[5] = encodeFromList([...lionHeads, null], charge.head);
-    result[6] = encodeFromList([...lionTails, null], charge.tail);
-    result[7] = encodeTincture(charge.armedAndLangued);
-  } else if (charge.name === 'eagle') {
-    result[4] = encodeFromList(eagleAttitudes, charge.attitude);
-    result[5] = encodeTincture(charge.beakedAndArmed);
-  } else if (charge.name === 'lozenge') {
-    result[4] = encodeFromList(lozengeInsides, charge.inside);
-  } else if (charge.name === 'roundel') {
-    result[4] = encodeFromList(roundelInsides, charge.inside);
-  } else if (charge.name === 'fleurdelys' || charge.name === 'escutcheon') {
-    // nothing to do for now
-  } else if (charge.name === 'cross') {
-    result[4] = encodeFromList(crossLimbs, charge.limbs);
-  } else if (charge.name === 'mullet') {
-    result[4] = encodeFromList(mulletInsides, charge.inside);
-    result[5] = charge.points;
-  } else {
-    return cannotHappen(charge);
-  }
   return result;
 }
 
@@ -300,58 +267,8 @@ export function decodeCharge(arr: Uint8Array): Result<Charge | null> {
   return flatMap(
     zip3(maybeName, maybeTincture, maybeCountAndDisposition),
     ([name, tincture, countAndDisposition]): Result<Charge> => {
-      if (name === 'lion') {
-        const maybeAttitude = decodeFromList(lionAttitudes, arr[4]);
-        const maybeHead = decodeFromList([...lionHeads, null], arr[5]);
-        const maybeTail = decodeFromList([...lionTails, null], arr[6]);
-        const maybeArmedAndLangued = decodeTincture(arr[7]);
-
-        return map(
-          zip4(maybeAttitude, maybeHead, maybeTail, maybeArmedAndLangued),
-          ([attitude, head, tail, armedAndLangued]) => ({
-            name,
-            tincture,
-            countAndDisposition,
-            attitude,
-            head,
-            tail,
-            armedAndLangued,
-          })
-        );
-      } else if (name === 'eagle') {
-        const maybeAttitude = decodeFromList(eagleAttitudes, arr[4]);
-        const maybeBeakedAndArmed = decodeTincture(arr[5]);
-        return map(zip(maybeAttitude, maybeBeakedAndArmed), ([attitude, beakedAndArmed]) => ({
-          name,
-          tincture,
-          countAndDisposition,
-          attitude,
-          beakedAndArmed,
-        }));
-      } else if (name === 'lozenge') {
-        const maybeInside = decodeFromList(lozengeInsides, arr[4]);
-        return map(maybeInside, (inside) => ({ name, tincture, countAndDisposition, inside }));
-      } else if (name === 'roundel') {
-        const maybeInside = decodeFromList(roundelInsides, arr[4]);
-        return map(maybeInside, (inside) => ({ name, tincture, countAndDisposition, inside }));
-      } else if (name === 'fleurdelys' || name === 'escutcheon') {
-        return { name, tincture, countAndDisposition };
-      } else if (name === 'cross') {
-        const maybeLimbs = decodeFromList(crossLimbs, arr[4]);
-        return map(maybeLimbs, (limbs) => ({ name, tincture, countAndDisposition, limbs }));
-      } else if (name === 'mullet') {
-        const maybeInside = decodeFromList(mulletInsides, arr[4]);
-        const maybePoints = decodeNumber(mulletPoints, arr[5]);
-        return map(zip(maybeInside, maybePoints), ([inside, points]) => ({
-          name,
-          tincture,
-          countAndDisposition,
-          inside,
-          points,
-        }));
-      } else {
-        return cannotHappen(name);
-      }
+      const chargeClass = getChargeClassByName(name);
+      return new chargeClass({ tincture, countAndDisposition });
     }
   );
 }

@@ -1,5 +1,10 @@
 import { argent, azure, ermine, gules, or, purpure, sable, vair, vert } from '../tincture';
 import { stringifyBlason } from './stringify.helper';
+import { Eagle } from '~/plugins/charges/eagle/eagle';
+import { FleurDeLys } from '~/plugins/charges/fleurdelys/fleurdelys';
+import { Lion } from '~/plugins/charges/lion/lion';
+import { Lozenge } from '~/plugins/charges/lozenge/lozenge';
+import { Roundel } from '~/plugins/charges/roundel/roundel';
 
 describe('stringifyBlason', () => {
   it('should write a plain field first', () => {
@@ -95,15 +100,14 @@ describe('stringifyBlason', () => {
       stringifyBlason({
         kind: 'simple',
         field: { kind: 'plain', tincture: azure },
-        charge: {
-          name: 'lion',
+        charge: new Lion({
           tincture: or,
           armedAndLangued: gules,
           attitude: 'rampant',
           tail: null,
           head: null,
           countAndDisposition: { count: 1, disposition: 'default' },
-        },
+        }),
       })
     ).toBe('Azure, a lion rampant or');
   });
@@ -113,15 +117,14 @@ describe('stringifyBlason', () => {
       stringifyBlason({
         kind: 'simple',
         field: { kind: 'plain', tincture: gules },
-        charge: {
-          name: 'lion',
+        charge: new Lion({
           tincture: sable,
           armedAndLangued: azure,
           attitude: 'rampant',
           tail: null,
           head: null,
           countAndDisposition: { count: 1, disposition: 'default' },
-        },
+        }),
       })
     ).toBe('Gules, a lion rampant sable armed and langued azure');
   });
@@ -132,15 +135,14 @@ describe('stringifyBlason', () => {
         kind: 'simple',
         field: { kind: 'party', per: { name: 'pale', tinctures: [ermine, azure], line: 'straight' } },
         ordinary: { name: 'chief', tincture: ermine, line: 'straight', fimbriated: null, charge: null },
-        charge: {
-          name: 'lion',
+        charge: new Lion({
           tincture: gules,
           armedAndLangued: sable,
           attitude: 'passant',
           tail: 'nowed',
           head: 'guardant',
           countAndDisposition: { count: 1, disposition: 'default' },
-        },
+        }),
       })
     ).toBe(
       'Per pale ermine and azure, a chief ermine, a lion passant guardant tail nowed gules armed and langued sable'
@@ -152,15 +154,14 @@ describe('stringifyBlason', () => {
       stringifyBlason({
         kind: 'simple',
         field: { kind: 'plain', tincture: gules },
-        charge: {
-          name: 'lion',
+        charge: new Lion({
           tincture: or,
           armedAndLangued: azure,
           attitude: 'passant',
           tail: null,
           head: 'guardant',
           countAndDisposition: { count: 3, disposition: 'pale' },
-        },
+        }),
       })
     ).toBe('Gules, three lions passant guardant in pale or armed and langued azure');
   });
@@ -230,13 +231,12 @@ describe('stringifyBlason', () => {
       stringifyBlason({
         kind: 'simple',
         field: { kind: 'plain', tincture: or },
-        charge: {
-          name: 'eagle',
+        charge: new Eagle({
           attitude: 'displayed',
           tincture: sable,
           beakedAndArmed: sable,
           countAndDisposition: { count: 1, disposition: 'default' },
-        },
+        }),
       })
     ).toBe('Or, an eagle displayed sable');
   });
@@ -261,12 +261,11 @@ describe('stringifyBlason', () => {
       stringifyBlason({
         kind: 'simple',
         field: { kind: 'plain', tincture: purpure },
-        charge: {
-          name: 'roundel',
+        charge: new Roundel({
           tincture: or,
           countAndDisposition: { count: 3, disposition: 'default' },
           inside: 'nothing',
-        },
+        }),
       })
     ).toBe('Purpure, three bezants');
   });
@@ -276,12 +275,11 @@ describe('stringifyBlason', () => {
       stringifyBlason({
         kind: 'simple',
         field: { kind: 'plain', tincture: purpure },
-        charge: {
-          name: 'roundel',
+        charge: new Roundel({
           tincture: or,
           countAndDisposition: { count: 3, disposition: 'default' },
           inside: 'voided',
-        },
+        }),
       })
     ).toBe('Purpure, three annulets or');
   });
@@ -291,12 +289,11 @@ describe('stringifyBlason', () => {
       stringifyBlason({
         kind: 'simple',
         field: { kind: 'plain', tincture: purpure },
-        charge: {
-          name: 'lozenge',
+        charge: new Lozenge({
           tincture: or,
           countAndDisposition: { count: 3, disposition: 'default' },
           inside: 'voided',
-        },
+        }),
       })
     ).toBe('Purpure, three mascles or');
   });
@@ -320,12 +317,11 @@ describe('stringifyBlason', () => {
       stringifyBlason({
         kind: 'simple',
         field: { kind: 'plain', tincture: or },
-        charge: {
-          name: 'roundel',
+        charge: new Roundel({
           inside: 'voided',
           tincture: gules,
           countAndDisposition: { count: 3, disposition: 'pale' },
-        },
+        }),
       })
     ).toEqual('Or, three annulets in pale gules');
   });
@@ -398,7 +394,7 @@ describe('stringifyBlason', () => {
           tincture: azure,
           line: 'straight',
           fimbriated: null,
-          charge: { name: 'fleurdelys', countAndDisposition: { count: 3, disposition: 'default' }, tincture: argent },
+          charge: new FleurDeLys({ countAndDisposition: { count: 3, disposition: 'default' }, tincture: argent }),
         },
       })
     ).toBe('Or, on a chief azure three fleurs de lys argent');

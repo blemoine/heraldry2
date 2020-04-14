@@ -1,5 +1,6 @@
 import { isThereFur } from './blason.helpers';
 import { argent, azure, ermine, gules, vair } from '../model/tincture';
+import { Lion } from '~/plugins/charges/lion/lion';
 
 describe('isThereFur', () => {
   it('should return true if the field is vair and the fur search is vair', () => {
@@ -62,15 +63,14 @@ describe('isThereFur', () => {
           kind: 'simple',
           field: { kind: 'plain', tincture: gules },
           ordinary: { name: 'bend', tincture: azure, line: 'straight', fimbriated: null },
-          charge: {
-            name: 'lion',
+          charge: new Lion({
             head: null,
             armedAndLangued: ermine,
             tincture: azure,
             attitude: 'rampant',
             tail: null,
             countAndDisposition: { count: 1, disposition: 'default' },
-          },
+          }),
         },
         ermine
       )
@@ -84,15 +84,14 @@ describe('isThereFur', () => {
           kind: 'simple',
           field: { kind: 'plain', tincture: gules },
           ordinary: { name: 'bend', tincture: azure, line: 'straight', fimbriated: null },
-          charge: {
-            name: 'lion',
+          charge: new Lion({
             head: null,
             armedAndLangued: azure,
             tincture: vair,
             attitude: 'rampant',
             tail: null,
             countAndDisposition: { count: 1, disposition: 'default' },
-          },
+          }),
         },
         vair
       )

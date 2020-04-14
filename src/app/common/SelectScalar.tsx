@@ -14,13 +14,15 @@ export function SelectScalar<A extends string>(props: Props<A>) {
       {Array.isArray(props.options) ? (
         <Options options={options} formatValue={props.formatValue} />
       ) : (
-        Object.entries(props.options).map(([group, opts], i) => {
-          return (
-            <optgroup key={i} label={group}>
-              <Options options={opts} formatValue={props.formatValue} />
-            </optgroup>
-          );
-        })
+        Object.entries(props.options)
+          .sort()
+          .map(([group, opts], i) => {
+            return (
+              <optgroup key={i} label={group}>
+                <Options options={opts} formatValue={props.formatValue} />
+              </optgroup>
+            );
+          })
       )}
     </select>
   );

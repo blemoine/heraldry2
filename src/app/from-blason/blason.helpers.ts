@@ -1,31 +1,12 @@
 import { Blason, SimpleBlason } from '../model/blason';
 import { areTinctureEquals, Furs, isFur, Tincture } from '../model/tincture';
 import { cannotHappen } from '../../utils/cannot-happen';
-import { Charge } from '../model/charge';
 import { Field } from '../model/field';
 import { Ordinary } from '../model/ordinary';
 import { uniq } from 'lodash';
 
-function allDeclaredTincturesOfCharge(charge: Charge): Array<Tincture> {
-  if (charge.name === 'lion') {
-    return [charge.tincture, charge.armedAndLangued];
-  } else if (charge.name === 'eagle') {
-    return [charge.tincture, charge.beakedAndArmed];
-  } else if (
-    charge.name === 'fleurdelys' ||
-    charge.name === 'escutcheon' ||
-    charge.name === 'roundel' ||
-    charge.name === 'lozenge' ||
-    charge.name === 'cross' ||
-    charge.name === 'mullet'
-  ) {
-    return [charge.tincture];
-  } else {
-    return cannotHappen(charge);
-  }
-}
 export function allDeclaredTincturesOfOrdinary(ordinary: Ordinary): Array<Tincture> {
-  const chargeTinctures = 'charge' in ordinary && ordinary.charge ? allDeclaredTincturesOfCharge(ordinary.charge) : [];
+  const chargeTinctures = 'charge' in ordinary && ordinary.charge ? ordinary.charge.allTinctures : [];
   if (ordinary.name === 'chape-ploye' || ordinary.name === 'chausse-ploye') {
     const tinctures = ordinary.tinctures;
     if (tinctures.kind === 'party') {
@@ -80,7 +61,7 @@ function allDeclaredTincturesOfSimpleBlason(blason: SimpleBlason): Array<Tinctur
   return uniq([
     ...allDeclaredTincturesOfField(blason.field),
     ...(blason.ordinary ? allDeclaredTincturesOfOrdinary(blason.ordinary) : []),
-    ...(blason.charge ? allDeclaredTincturesOfCharge(blason.charge) : []),
+    ...(blason.charge ? blason.charge.allTinctures : []),
   ]);
 }
 export function allDeclaredTinctures(blason: Blason): Array<Tincture> {
