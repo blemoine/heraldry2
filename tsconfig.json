@@ -11,6 +11,10 @@
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true,
     "jsx": "react",
-    "lib": ["esnext", "dom"]
+    "lib": ["esnext", "dom"],
+    "baseUrl": "src",
+    "paths": {
+      "~*": ["./*"],
+    },
   }
 }
