@@ -3,27 +3,8 @@ import { metalAndColours, MetalsAndColours, or, Tincture, tinctures } from '../t
 import { Field, fieldKinds, PartyField, TiercedField } from '../field';
 import { PallParty, parties, Party } from '../party';
 import { ChapePloye, chapePloyeTincturesKind, ChaussePloye, ordinaries, Ordinary } from '../ordinary';
-import {
-  Charge,
-  charges,
-  Cross,
-  crossLimbs,
-  Eagle,
-  eagleAttitudes,
-  Escutcheon,
-  FleurDeLys,
-  Lion,
-  lionAttitudes,
-  lionHeads,
-  lionTails,
-  Lozenge,
-  lozengeInsides,
-  Mullet,
-  mulletInsides,
-  mulletPoints,
-  Roundel,
-  roundelInsides,
-} from '../charge';
+import { Charge } from '../charge';
+import { ChargeName, chargeNames, getChargeClassByName } from '../charge-all';
 import { cannotHappen } from '../../../utils/cannot-happen';
 import { availableDivisions, Blason, QuarterlyBlason, SimpleBlason } from '../blason';
 import { Line, lines } from '../line';
@@ -93,93 +74,17 @@ export const fieldArb: Arbitrary<Field> = fc.constantFrom(...fieldKinds).chain(
 );
 
 function createChargeArb(tinctureArb: Arbitrary<Tincture>): Arbitrary<Charge> {
-  return fc.constantFrom(...charges).chain((chargeName: Charge['name']) => {
+  return fc.constantFrom(...chargeNames).chain((chargeName: ChargeName) => {
     const countAndDistionArb: Arbitrary<CountAndDisposition> = fc
       .tuple(fc.constantFrom(...supportedNumbers), fc.constantFrom(...availableDispositions))
       .map(([count, disposition]) => ({ count, disposition: count === 1 ? 'default' : disposition }));
-    if (chargeName === 'lion') {
-      return fc
-        .tuple(
-          fc.constantFrom(...lionAttitudes),
-          fc.option(fc.constantFrom(...lionHeads)),
-          fc.option(fc.constantFrom(...lionTails)),
-          tinctureArb,
-          tinctureArb,
-          countAndDistionArb
-        )
-        .map(
-          ([attitude, head, tail, tincture, armedAndLangued, countAndDisposition]): Lion => {
-            return {
-              name: chargeName,
-              attitude,
-              head,
-              tail,
-              tincture,
-              armedAndLangued,
-              countAndDisposition,
-            };
-          }
-        )
-        .map((i): Charge => i);
-    } else if (chargeName === 'eagle') {
-      return fc
-        .tuple(fc.constantFrom(...eagleAttitudes), tinctureArb, tinctureArb, countAndDistionArb)
-        .map(
-          ([attitude, tincture, beakedAndArmed, countAndDisposition]): Eagle => {
-            return {
-              name: chargeName,
-              attitude,
-              tincture,
-              beakedAndArmed,
-              countAndDisposition,
-            };
-          }
-        )
-        .map((i): Charge => i);
-    } else if (chargeName === 'fleurdelys') {
-      return fc.record<FleurDeLys>({
-        name: fc.constant(chargeName),
+    const chargeClass = getChargeClassByName(chargeName);
+    return fc.record<Charge>(
+      new chargeClass({
         tincture: tinctureArb,
         countAndDisposition: countAndDistionArb,
-      });
-    } else if (chargeName === 'escutcheon') {
-      return fc.record<Escutcheon>({
-        name: fc.constant(chargeName),
-        tincture: tinctureArb,
-        countAndDisposition: countAndDistionArb,
-      });
-    } else if (chargeName === 'lozenge') {
-      return fc.record<Lozenge>({
-        name: fc.constant(chargeName),
-        tincture: tinctureArb,
-        countAndDisposition: countAndDistionArb,
-        inside: fc.constantFrom(...lozengeInsides),
-      });
-    } else if (chargeName === 'roundel') {
-      return fc.record<Roundel>({
-        name: fc.constant(chargeName),
-        tincture: tinctureArb,
-        countAndDisposition: countAndDistionArb,
-        inside: fc.constantFrom(...roundelInsides),
-      });
-    } else if (chargeName === 'cross') {
-      return fc.record<Cross>({
-        name: fc.constant(chargeName),
-        tincture: tinctureArb,
-        countAndDisposition: countAndDistionArb,
-        limbs: fc.constantFrom(...crossLimbs),
-      });
-    } else if (chargeName === 'mullet') {
-      return fc.record<Mullet>({
-        name: fc.constant(chargeName),
-        tincture: tinctureArb,
-        countAndDisposition: countAndDistionArb,
-        inside: fc.constantFrom(...mulletInsides),
-        points: fc.constantFrom(...mulletPoints),
-      });
-    } else {
-      return cannotHappen(chargeName);
-    }
+      })
+    );
   });
 }
 

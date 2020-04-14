@@ -1,9 +1,9 @@
 import * as P from 'parsimmon';
 import { Blason, QuarterlyBlason, SimpleBlason } from '../model/blason';
 import { Ordinary, OrdinaryCross } from '../model/ordinary';
-import { Charge, Cross } from '../model/charge';
+import { Charge } from '../model/charge';
 import { ordinaryParser } from './ordinaryParser';
-import { chargeParser, crossParser } from './chargeParser';
+import { chargeParser } from './chargeParser';
 import { fieldParser } from './fieldParser';
 import { constStr } from './parser.helper';
 
@@ -15,16 +15,6 @@ type AppliedLanguage = { [K in keyof Language]: ReturnType<Language[K]> };
 
 const language: Language = {
   SimpleBlason(): P.Parser<SimpleBlason> {
-    // a cross depending on different thing, can be either and ordinary or chager
-    const crossParserToObj: P.Parser<{ charge: Cross } | { ordinary: OrdinaryCross }> = crossParser().map(
-      (crossPartial) => {
-        if ('limbs' in crossPartial) {
-          return { charge: crossPartial };
-        } else {
-          return { ordinary: crossPartial };
-        }
-      }
-    );
     const ordinaryToObj = ordinaryParser().map((ordinary) => ({ ordinary }));
     const chargeToObj = chargeParser().map((charge) => ({ charge }));
 
@@ -34,14 +24,10 @@ const language: Language = {
         .trim(P.optWhitespace)
         .chain(() =>
           P.sepBy(
-            P.alt(crossParserToObj, ordinaryToObj, chargeToObj).fallback({}),
+            P.alt(chargeToObj, ordinaryToObj).fallback({}),
             P.string(',').trim(P.optWhitespace)
-          ).map(
-            (
-              arr: Array<
-                { charge: Cross } | { ordinary: OrdinaryCross } | { ordinary?: Ordinary } | { charge?: Charge }
-              >
-            ) => arr.reduce((acc, obj): { ordinary?: Ordinary; charge?: Charge } => ({ ...acc, ...obj }), {})
+          ).map((arr: Array<{ ordinary: OrdinaryCross } | { ordinary?: Ordinary } | { charge?: Charge }>) =>
+            arr.reduce((acc, obj): { ordinary?: Ordinary; charge?: Charge } => ({ ...acc, ...obj }), {})
           )
         )
         .fallback({})

@@ -1,14 +1,25 @@
 import * as React from 'react';
-import { Charge, charges } from '../../model/charge';
+import { ChargeName, chargeNames, getChargeClassByName } from '../../model/charge-all';
 import { SelectScalar } from '../../common/SelectScalar';
 import { useCallback } from 'react';
 
-type Props = { charge: Charge['name'] | null; chargeChange: (t: Charge['name'] | null) => void };
+type Props = { charge: ChargeName | null; chargeChange: (t: ChargeName | null) => void };
+type ChargeNameOrNone = ChargeName | 'None';
 
-const chargesWithNone = ['None', ...charges] as const;
+const options: { [category: string]: Array<ChargeNameOrNone> } = {
+  None: ['None'],
+};
+for (const name of chargeNames) {
+  const category = getChargeClassByName(name).category;
+  if (!options.hasOwnProperty(category)) {
+    options[category] = [];
+  }
+  options[category].push(name);
+}
+
 export function ChargeNameSelect({ charge, chargeChange }: Props) {
   const chargeTypeChange = useCallback(
-    (name: Charge['name'] | 'None') => {
+    (name: ChargeName | 'None') => {
       if (name === 'None') {
         chargeChange(null);
       } else {
@@ -20,5 +31,5 @@ export function ChargeNameSelect({ charge, chargeChange }: Props) {
 
   const searchedCharge = charge || 'None';
 
-  return <SelectScalar options={chargesWithNone} value={searchedCharge} valueChange={chargeTypeChange} />;
+  return <SelectScalar options={options} value={searchedCharge} valueChange={chargeTypeChange} />;
 }

@@ -1,68 +1,27 @@
 import * as React from 'react';
 import { useCallback } from 'react';
-import { gules, or, sable } from '../../model/tincture';
 import { Charge } from '../../model/charge';
-import { cannotHappen } from '../../../utils/cannot-happen';
+import { ChargeName, getChargeClassByName } from '../../model/charge-all';
 import { ChargeNameSelect } from './ChargeNameSelect';
 import { ChargeDetailForm } from './ChargeDetailForm';
 
-type Props = {
-  charge: Charge | null;
-  chargeChange: (charge: Charge | null) => void;
+type ChargeOrNullFormParameters<T extends Charge> = {
+  charge: T | null;
+  chargeChange: (charge: T | null) => void;
 };
-export function ChargeForm({ charge, chargeChange }: Props) {
+export type ChargeFormParameters<T extends Charge> = {
+  charge: T;
+  chargeChange: (charge: T) => void;
+};
+export function ChargeForm({ charge, chargeChange }: ChargeOrNullFormParameters<Charge>) {
   const changeChargeType = useCallback(
-    function (chargeName: Charge['name'] | null) {
-      if (chargeName === 'lion') {
-        chargeChange({
-          name: chargeName,
-          armedAndLangued: gules,
-          attitude: 'rampant',
-          head: null,
-          tail: null,
-          tincture: charge ? charge.tincture : or,
-          countAndDisposition: charge ? charge.countAndDisposition : { count: 1, disposition: 'default' },
-        });
-      } else if (chargeName === 'eagle') {
-        chargeChange({
-          name: chargeName,
-          attitude: 'displayed',
-          tincture: charge ? charge.tincture : sable,
-          beakedAndArmed: or,
-          countAndDisposition: charge ? charge.countAndDisposition : { count: 1, disposition: 'default' },
-        });
-      } else if (chargeName === 'fleurdelys' || chargeName === 'escutcheon') {
-        chargeChange({
-          name: chargeName,
-          countAndDisposition: charge ? charge.countAndDisposition : { count: 3, disposition: 'default' },
-          tincture: charge ? charge.tincture : or,
-        });
-      } else if (chargeName === 'roundel' || chargeName === 'lozenge') {
-        chargeChange({
-          name: chargeName,
-          countAndDisposition: charge ? charge.countAndDisposition : { count: 3, disposition: 'default' },
-          tincture: charge ? charge.tincture : or,
-          inside: 'nothing',
-        });
-      } else if (chargeName === 'cross') {
-        chargeChange({
-          name: chargeName,
-          countAndDisposition: charge ? charge.countAndDisposition : { count: 1, disposition: 'default' },
-          tincture: charge ? charge.tincture : or,
-          limbs: 'hummetty',
-        });
-      } else if (chargeName === 'mullet') {
-        chargeChange({
-          name: chargeName,
-          countAndDisposition: charge ? charge.countAndDisposition : { count: 1, disposition: 'default' },
-          tincture: charge ? charge.tincture : or,
-          inside: 'nothing',
-          points: 5,
-        });
-      } else if (!chargeName) {
+    function (chargeName: ChargeName | null) {
+      if (!chargeName) {
         chargeChange(null);
       } else {
-        cannotHappen(chargeName);
+        const chargeClass = getChargeClassByName(chargeName);
+        const params = charge ? { countAndDisposition: charge.countAndDisposition, tincture: charge.tincture } : {};
+        chargeChange(new chargeClass(params));
       }
     },
     [chargeChange]
@@ -72,7 +31,7 @@ export function ChargeForm({ charge, chargeChange }: Props) {
     <>
       <div className="form-group charge-type-select">
         <label>Select your charge</label>
-        <ChargeNameSelect charge={charge ? charge.name : null} chargeChange={changeChargeType} />
+        <ChargeNameSelect charge={charge ? charge.getName() : null} chargeChange={changeChargeType} />
       </div>
 
       {charge && <ChargeDetailForm charge={charge} chargeChange={chargeChange} />}
